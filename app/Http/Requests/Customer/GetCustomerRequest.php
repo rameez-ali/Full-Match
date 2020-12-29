@@ -1,0 +1,41 @@
+<?php
+
+namespace App\Http\Requests\Customer;
+use App\User;
+use App\customer;
+use Illuminate\Foundation\Http\FormRequest;
+
+class GetCustomerRequest extends FormRequest
+{
+    /**
+     * Determine if the user is authorized to make this request.
+     *
+     * @return bool
+     */
+    public function authorize()
+    {
+        return true;
+    }
+
+    /**
+     * Get the validation rules that apply to the request.
+     *
+     * @return array
+     */
+    public function rules()
+    {
+        return [
+            //
+        ];
+    }
+    public function handle(){
+
+        $customer = Customer::with('user')->findOrNew($this->id);
+
+        if(is_null($customer->user)){
+            $customer->user = new User;
+        }
+
+        return $customer;
+    }
+}
