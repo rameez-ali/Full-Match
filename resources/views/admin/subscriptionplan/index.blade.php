@@ -16,11 +16,21 @@
                                     <span aria-hidden="true">×</span>
                                 </button>
                             </div>
-                        @elseif($usereditsuccess = Session::get('usereditsuccess'))
+                        @elseif($planeditsuccess = Session::get('planeditsuccess'))
                             <div class="card-alert card gradient-45deg-green-teal">
                                 <div class="card-content white-text">
                                     <p>
-                                        <i class="material-icons">check</i>{{ $usereditsuccess }}</p>
+                                        <i class="material-icons">check</i>{{ $planeditsuccess }}</p>
+                                </div>
+                                <button type="button" class="close white-text" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">×</span>
+                                </button>
+                            </div>
+                        @elseif($plandeletesuccess = Session::get('plandeletesuccess'))
+                            <div class="card-alert card gradient-45deg-green-teal">
+                                <div class="card-content white-text">
+                                    <p>
+                                        <i class="material-icons">check</i>{{ $plandeletesuccess }}</p>
                                 </div>
                                 <button type="button" class="close white-text" data-dismiss="alert" aria-label="Close">
                                     <span aria-hidden="true">×</span>
