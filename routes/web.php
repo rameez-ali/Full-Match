@@ -27,6 +27,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::resource('league-form','ProjectLeagueViewController');
     Route::get('league/{id}','ProjectLeagueViewController@destroy1');
     Route::resource('video-form','ProjectVideoViewController');
+    Route::resource('subscriptionplans','SubsPlanController');
 });
 Route::get('/home', 'HomeController@index')->name('home');
 

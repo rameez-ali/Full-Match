@@ -107,7 +107,7 @@
     </div>
 @endsection
 @section('scripts')
-    <script src="app-assets/vendors/jquery-validation/jquery.validate.min.js"></script>
+    <script src={{ asset('app-assets/vendors/jquery-validation/jquery.validate.min.js') }}></script>
 <script>
     /*
  * Form Validation

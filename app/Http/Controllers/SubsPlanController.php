@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Subsplans\CreateSubsPlanRequest;
+use App\Http\Requests\Subsplans\GetAllSubsPlanRequest;
+use App\Http\Requests\Subsplans\GetSubsPlanRequest;
 use Illuminate\Http\Request;
 
 class SubsPlanController extends Controller
@@ -11,9 +14,11 @@ class SubsPlanController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(GetAllSubsPlanRequest $request)
     {
-        //
+        $response = $request->handle();
+
+        return view('admin.subscriptionplan.index',['subscriptionplans' => $response] );
     }
 
     /**
@@ -21,9 +26,15 @@ class SubsPlanController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(GetSubsPlanRequest $request)
     {
-        //
+        $request->id = 0;
+
+        $response = $request->handle();
+
+        $route = url('subscriptionplans');
+
+        return view('admin.subscriptionplan.form',['subscriptionplan' => $response, 'route' => $route, 'edit' => false ]);
     }
 
     /**
@@ -32,9 +43,11 @@ class SubsPlanController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CreateSubsPlanRequest $request)
     {
-        //
+        $response = $request->handle();
+
+        return redirect()->route('subscriptionplans.index')->with('planaddsuccess','Plan add Successfully');
     }
 
     /**

@@ -99,7 +99,7 @@
                     {
                         extend: 'excel',
                         text: '{{ __("customer.excel") }}',
-                        className: 'waves-effect waves-light btn-small',
+                        className: 'waves-effect waves-light btn gradient-45deg-purple-deep-orange gradient-shadow',
                         filename : '{{ __("customer.excel") }}' ,
                         exportOptions: {
                             columns: [ 0,1,2,3,4,5 ]
@@ -108,7 +108,7 @@
                     {
                         extend: 'csv',
                         text: '{{ __("customer.csv") }}',
-                        className: 'waves-effect waves-light btn-small',
+                        className: 'waves-effect waves-light btn gradient-45deg-purple-deep-orange gradient-shadow',
                         filename : '{{ __("customer.csv") }}' ,
                         exportOptions: {
                             columns: [ 0,1,2,3,4,5 ]
