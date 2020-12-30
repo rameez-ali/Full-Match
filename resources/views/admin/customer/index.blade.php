@@ -53,7 +53,7 @@
                                                         <td>{{ $customer->id }}</td>
                                                         <td>{{ $customer->name }}</td>
                                                         <td>{{ $customer->email }}</td>
-                                                        <td>@if(isset($customer->user->phone)) {{ $customer->user->phone }} @endif</td>
+                                                        <td>{{ $customer->phone }}</td>
                                                         <td>plan</td>
                                                         <td><a href="#">Rset Password</a></td>
                                                         <td>

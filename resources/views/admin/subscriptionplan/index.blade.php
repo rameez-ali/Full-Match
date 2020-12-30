@@ -45,7 +45,7 @@
                                                 <th>{{ __('customer.subsplan.subsplan_start') }}</th>
                                                 <th>{{ __('customer.subsplan.subsplan_end') }}</th>
                                                 <th>{{ __('customer.subsplan.subsplan_sort') }}</th>
-                                                <th>{{ __('customer.subsplan.subsplan_lang') }}</th>
+{{--                                                <th>{{ __('customer.subsplan.subsplan_lang') }}</th>--}}
                                                 <th>{{ __('customer.action') }}</th>
                                             </tr>
                                             </thead>
@@ -59,10 +59,10 @@
                                                     <td>{{ $subscriptionplan->start_date }}</td>
                                                     <td>{{ $subscriptionplan->end_date }}</td>
                                                     <td>{{ $subscriptionplan->sort_by }}</td>
-                                                    <td>{{ $subscriptionplan->lang }}</td>
+{{--                                                    <td>{{ $subscriptionplan->lang }}</td>--}}
                                                     <td>
                                                         <a href="{{ route('subscriptionplans.edit',[ 'subscriptionplan' => $subscriptionplan->id ]) }}">{{ __('customer.customer.edit') }}</a>
-                                                        <a onclick="deleteCustomer({{ $subscriptionplan->id }})" href="#">{{ __('customer.delete') }}</a>
+                                                        <a onclick="deletePlan({{ $subscriptionplan->id }})" href="#">{{ __('customer.delete') }}</a>
                                                     </td>
                                                 </tr>
                                             @endforeach
@@ -76,7 +76,7 @@
                                                 <th>{{ __('customer.subsplan.subsplan_start') }}</th>
                                                 <th>{{ __('customer.subsplan.subsplan_end') }}</th>
                                                 <th>{{ __('customer.subsplan.subsplan_sort') }}</th>
-                                                <th>{{ __('customer.subsplan.subsplan_lang') }}</th>
+{{--                                                <th>{{ __('customer.subsplan.subsplan_lang') }}</th>--}}
                                                 <th>{{ __('customer.action') }}</th>
                                             </tr>
                                             </tfoot>
@@ -116,11 +116,11 @@
 
     </style>
     <script type="text/javascript">
-        function deleteCustomer(id){
+        function deletePlan(id){
             let confirmBox = confirm('{{ __("customer.delete_message") }}');
 
             if(confirmBox){
-                let path = `{{ url('customer/${id}') }}`;
+                let path = `{{ url('subscriptionplans/${id}') }}`;
                 $('#delete-form').attr('action',path);
                 $('#delete-form').submit();
             }

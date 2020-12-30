@@ -36,7 +36,7 @@
                                                         @enderror
 
                                                     <div class="input-field col s12">
-                                                        <textarea id="subp_desc" name="subp_desc" value="{{ old('subp_desc',$subscriptionplan->plan_Description) }}" class="materialize-textarea validate" data-error=".errorTxt2" required>{{ old('subp_title',$subscriptionplan->email) }}</textarea>
+                                                        <textarea id="subp_desc" name="subp_desc" value="{{ old('subp_desc',$subscriptionplan->plan_Description) }}"  class="materialize-textarea validate" data-error=".errorTxt2" required>{{ old('subp_title',$subscriptionplan->plan_Description) }}</textarea>
                                                         <label for="subp_desc">{{ __('customer.subsplan.subsplan_decs') }}*</label>
                                                         <small class="errorTxt2"></small>
                                                     </div>
@@ -61,8 +61,8 @@
 
                                                     <div class="input-field col s12">
                                                         <label for="subp_sort">{{ __('customer.subsplan.subsplan_sort') }}*</label>
-                                                        <input id="subp_sort" type="number" name="subp_sort" value="{{ old('subp_sort',$subscriptionplan->sort_by) }} min="1" data-error=".errorTxt3" required>
-                                                        <small class="errorTxt3"></small>
+                                                        <input id="subp_sort" type="number" name="subp_sort" value="{{ old('subp_sort',$subscriptionplan->sort_by) }}" min="1" data-error=".errorTxt6" required>
+                                                        <small class="errorTxt6"></small>
                                                     </div>
 
                                                     <div class="col s12">
@@ -74,7 +74,7 @@
                                                             </label>
                                                         </p>
                                                         <div class="input-field">
-                                                            <small class="errorTxt6"></small>
+                                                            <small class="errorTxt7"></small>
                                                         </div>
                                                     </div>
                                                     <div class="input-field col s12">

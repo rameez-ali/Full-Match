@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\Subsplans\CreateSubsPlanRequest;
+use App\Http\Requests\Subsplans\DeleteSubsPlanRequest;
 use App\Http\Requests\Subsplans\GetAllSubsPlanRequest;
 use App\Http\Requests\Subsplans\GetSubsPlanRequest;
+use App\Http\Requests\Subsplans\UpdateSubsPlanRequest;
 use Illuminate\Http\Request;
 
 class SubsPlanController extends Controller
@@ -69,7 +71,15 @@ class SubsPlanController extends Controller
      */
     public function edit($id)
     {
-        //
+        $request = new GetSubsPlanRequest();
+
+        $request->id = $id;
+
+        $response = $request->handle();
+
+        $route = route('subscriptionplans.update', ['subscriptionplan' => $response->id]);
+
+        return view('admin.subscriptionplan.form',['subscriptionplan' => $response, 'route' => $route , 'edit' => true ]);
     }
 
     /**
@@ -79,9 +89,13 @@ class SubsPlanController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UpdateSubsPlanRequest $request, $id)
     {
-        //
+        $request->id = $id;
+
+        $response = $request->handle();
+
+        return redirect()->route('subscriptionplans.index')->with('planeditsuccess','Plan Edit Successfully');
     }
 
     /**
@@ -92,6 +106,12 @@ class SubsPlanController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $request = new DeleteSubsPlanRequest();
+
+        $request->id = $id;
+
+        $response = $request->handle();
+
+        return redirect()->route('subscriptionplans.index')->with('plandeletesuccess','Plan Delete Successfully');
     }
 }

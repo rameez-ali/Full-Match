@@ -31,8 +31,6 @@ class DeleteCustomerRequest extends FormRequest
 
     public function handle(){
 
-        $params = $this->all();
-
         $User = User::find($this->id);
 
         $User->delete();

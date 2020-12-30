@@ -113,6 +113,6 @@ class CustomerController extends Controller
 
         $response = $request->handle();
 
-        return redirect()->route('customer.index');
+        return redirect()->route('customer.index')->with('userdeletesuccess','User Delete Successfully');
     }
 }

@@ -31,10 +31,8 @@ class GetAllCustomerRequest extends FormRequest
     }
 
     public function handle(){
-        return DB::table('customers')
-            ->Join('users', 'customers.user_id' , '=' ,'users.id')
-            ->Where('users.deleted_at', null)
-            ->get();
+
+        return Customer::with('user')->get();
 
     }
 }
