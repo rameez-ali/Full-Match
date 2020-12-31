@@ -29,6 +29,13 @@ Route::group(['middleware' => ['auth']], function () {
     Route::resource('video-form','ProjectVideoViewController');
     Route::resource('subscriptionplans','SubsPlanController');
     Route::resource('page', 'PageController')->only(['index','edit','update']);
+    Route::get('videoclub/{id}','ProjectVideoViewController@destroy1');
+    Route::get('videoplayer/{id}','ProjectVideoViewController@destroy2');
+    Route::resource('slider-form','ProjectSliderViewController');
+    Route::get('slider/{id}','ProjectSliderViewController@destroy1');
+    Route::resource('my-form','SeasonPartSortingController');
+    Route::get("addmore","SeasonPartSortingController@addMore");
+    Route::post("addmore","SeasonPartSortingController@addMorePost");
 });
 Route::get('/home', 'HomeController@index')->name('home');
 

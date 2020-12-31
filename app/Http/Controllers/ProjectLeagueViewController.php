@@ -40,44 +40,78 @@ class ProjectLeagueViewController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'Project_Name'     => 'required',
-            'Project_Category'     => 'required',
-            'Project_Details'     => 'required',
-            'filename'         =>  'required',
-            'league_banner'    => 'required',
-            'league_promo_video' => 'required',
-            'league_profile_image' => 'required'
+       
+         $request->validate([
+            'league_name'     => 'required',
+            'filename1'     => 'required',
+            'filename2'     => 'required',
+            'filename3'         =>  'required',
+            'league_description'    => 'required',
+            'filename4' => 'required',
+            'filename5' => 'required'
         ]);
-        
-        $Project_Category = $request->Project_Category;
-        $Category_id = DB::table('project_categories')->where('category_name', $Project_Category)->value('ID');
-        
+
+        //filename1 insertion
+        $image1 = $request->file('filename1');
+        $new_name1 = rand() . '.' . $image1->getClientOriginalExtension();
+        $image1->move(public_path('images'), $new_name1);
+
+        $image2 = $request->file('filename2');
+        $new_name2 = rand() . '.' . $image2->getClientOriginalExtension();
+        $image2->move(public_path('images'), $new_name2);
+
+        $image3 = $request->file('filename3');
+        $new_name3 = rand() . '.' . $image3->getClientOriginalExtension();
+        $image3->move(public_path('images'), $new_name3);
+
         $form_data1 = array(
-             'League_Name'     =>   $request->Project_Name,
-             'League_Description'  =>   $request->Project_Details,
-             'league_banner'  =>   $request->league_banner,
-             'league_promo_video'  =>   $request->league_promo_video,
-             'league_profile_image'  =>   $request->league_profile_image,
-             'Category_id'     =>    $Category_id
+             'league_name'     =>   $request->league_name,
+             'league_banner'  =>   $new_name1,
+             'league_promo_video'  =>   $new_name2,
+             'league_profile_image'  =>   $new_name3,
+             'league_description'  =>   $request->league_description
         );
 
         league::create($form_data1);
 
-        $image = $request->file('filename');
-        foreach($image as $image){
-        $new_name = rand() . '.' . $image->getClientOriginalExtension();
-        $image->move(public_path('images'), $new_name);
+        //Season Table Insertion Started 
+        
+        $image4 = $request->file('filename4');
+        foreach($image4 as $image4){
+        $new_name4 = rand() . '.' . $image4->getClientOriginalExtension();
+        $image4->move(public_path('images'), $new_name4);
         $id = DB::table('leagues')->orderBy('ID', 'DESC')->value('ID');
         $seasons="season1";
         $form_data2 = array(
             'Project_id'     =>    $id,
             'Seasons'   =>  $seasons, 
-            'Video'     =>   $new_name
+            'Video'     =>   $new_name4
         );
 
         Season::create($form_data2);
         }
+
+        $image5 = $request->file('filename5');
+        foreach($image5 as $image5){
+        $new_name5 = rand() . '.' . $image5->getClientOriginalExtension();
+        $image5->move(public_path('images'), $new_name5);
+        $id = DB::table('leagues')->orderBy('ID', 'DESC')->value('ID');
+        $seasons="season2";
+        $form_data2 = array(
+            'Project_id'     =>    $id,
+            'Seasons'   =>  $seasons, 
+            'Video'     =>   $new_name5
+        );
+
+        Season::create($form_data2);
+        }
+
+        return redirect('league-form')->with('success', 'Data is successfully Added');
+        
+        
+
+
+        
     }
 
     /**
@@ -122,10 +156,11 @@ class ProjectLeagueViewController extends Controller
      */
     public function destroy($id)
     {
-        $data = Project::find($ID);
-        $data->delete();
+        Season::where('Project_id', $id)->delete();
 
-        return redirect('project-view')->with('success', 'Data is successfully deleted');
+        $data = League::findOrFail($id);
+        $data->delete();
+        return redirect('league-form')->with('success', 'Data is successfully deleted');
     }
 
     public function destroy1($id)

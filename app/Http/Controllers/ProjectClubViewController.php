@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\ProjectCategory;
+use App\Model\Videoclub;
 use App\Model\Club;
 
 class ProjectClubViewController extends Controller
@@ -63,7 +64,7 @@ class ProjectClubViewController extends Controller
 
         Club::create($form_data2);
 
-        return redirect('admin.club.index')->with('success', 'Data is successfully Added');
+        return redirect('club-form')->with('success', 'Data is successfully Added');
         
        
     }
@@ -87,7 +88,8 @@ class ProjectClubViewController extends Controller
      */
     public function edit($id)
     {
-        //
+        $club=Club::find($id);
+        return view('admin.club.edit',compact('club'));
     }
 
     /**
@@ -99,7 +101,17 @@ class ProjectClubViewController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $club = Club::find($request->input('id'));
+        $club->club_name = $request->input('club_name');
+        $club->club_description = $request->input('club_description');
+        
+        if($request->hasFile('club_banner')){
+            $club->club_banner = $request->input('club_banner');
+        }
+dd($request->hasFile('club_banner'),$club);
+        $club->club_logo = $request->input('club_logo');
+        $club->save();
+        return redirect('club-form')->with('info','Employee Updated Successfully');
     }
 
     /**
@@ -110,9 +122,12 @@ class ProjectClubViewController extends Controller
      */
     public function destroy($id)
     {
-        $data = ProjectCategory::findOrFail($id);
+
+        Videoclub::where('Club_id', $id)->delete();
+
+        $data = Club::findOrFail($id);
         $data->delete();
-        return redirect('project-category-view')->with('success', 'Data is successfully deleted');
+        return redirect('club-form')->with('success', 'Data is successfully deleted');
 
 
     }
