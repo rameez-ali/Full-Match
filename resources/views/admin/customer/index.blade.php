@@ -26,6 +26,16 @@
                                         <span aria-hidden="true">×</span>
                                     </button>
                                 </div>
+                            @elseif($userdeletesuccess = Session::get('userdeletesuccess'))
+                                <div class="card-alert card gradient-45deg-green-teal">
+                                    <div class="card-content white-text">
+                                        <p>
+                                            <i class="material-icons">check</i>{{ $userdeletesuccess }}</p>
+                                    </div>
+                                    <button type="button" class="close white-text" data-dismiss="alert" aria-label="Close">
+                                        <span aria-hidden="true">×</span>
+                                    </button>
+                                </div>
                             @endif
                             <div class="card animate fadeUp">
                                 <div class="card-content">
@@ -49,6 +59,7 @@
                                                 </thead>
                                                 <tbody>
                                                 @foreach($customers as $customer)
+
                                                     <tr>
                                                         <td>{{ $customer->id }}</td>
                                                         <td>{{ $customer->name }}</td>

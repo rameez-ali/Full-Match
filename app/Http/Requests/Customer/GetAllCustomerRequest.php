@@ -1,9 +1,7 @@
 <?php
 
 namespace App\Http\Requests\Customer;
-use App\User;
 use App\customer;
-use DB;
 use Illuminate\Foundation\Http\FormRequest;
 
 class GetAllCustomerRequest extends FormRequest
@@ -32,7 +30,11 @@ class GetAllCustomerRequest extends FormRequest
 
     public function handle(){
 
-        return Customer::with('user')->get();
+        return Customer::select('customers.id','customers.name','users.phone','customers.email','customers.user_id')
+            ->join('users','customers.user_id' , '=' ,'users.id')
+            ->where('users.deleted_at',null)
+            ->orderBy('customers.id', 'desc')
+            ->get();
 
     }
 }

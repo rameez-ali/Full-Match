@@ -49,6 +49,13 @@ return [
         'subsplan_notify' => 'Notify Users',
         'subsplan_lang' => 'Lang',
     ],
+    'cmspage' => [
+        'cmspage_section' => 'CMS Page Section',
+        'edit_cmspage' => 'Edit CMS Page',
+    ],
+    'name' => 'Name',
+    'slug' => 'Slug',
+    'decs' => 'Description',
     'id' => 'ID',
     'action' => 'Action',
     'delete' => 'Delete',
