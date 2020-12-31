@@ -9,61 +9,101 @@
                             <div class="card animate fadeUp">
                                 <div class="card-content">
                                     <h4 class="header mt-0">
-                                        ADD LEAGUE
+                                        ADD VIDEO
                                         <a class="waves-effect waves-light btn gradient-45deg-purple-deep-orange gradient-shadow right">ADD</a>
                                     </h4>
                                     <div class="row">
                                         <div class="col s12">
                                             <h2></h2>
-                                            <form method="post" action="{{ route('league-form.store') }}" enctype="multipart/form-data">
-              @csrf
-                <div class="card-body">
-                <div class="form-group">
-                   <label for="exampleInputEmail1">Enter League</label>
-                   <input type="text" name="Project_Name" class="form-control input-lg"></textarea>
-                </div>
-                   <br/>
-                <div class="form-group">
-                   <label for="exampleInputEmail1">Enter Project Category</label>
-                   <input type="text" name="Project_Category" class="form-control input-lg" />
-                </div>
-                    <br/>
-                <div class="form-group">
-                   <label for="exampleInputEmail1">Insert League Description</label>
-                   <input type="text" name="Project_Details" class="form-control input-lg" />
-                </div>
-                   <br/>
-                   <div class="form-group">
-                   <label for="exampleInputEmail1">Insert League Banner</label>
-                   <input type="text" name="league_banner" class="form-control input-lg" />
-                </div>
-                   <br/>
-                   <div class="form-group">
-                   <label for="exampleInputEmail1">Insert Promo Video</label>
-                   <input type="text" name="league_promo_video" class="form-control input-lg" />
-                </div>
-                   <br/>
-                   <div class="form-group">
-                   <label for="exampleInputEmail1">Select Profile Image</label>
-                   <input type="text" name="league_profile_image" class="form-control input-lg" />
-                </div>
-                <div class="form-group">
-                    <label for="exampleInputFile">Select Image</label>
+                                            <form method="post" action="{{route('video-form.store')}}" enctype="multipart/form-data">
+                            @csrf
+                            
+                            
+                            <div class="form-group">
+                             <label for="exampleInputEmail1">Enter Video Title</label>
+                             <input type="text" name="video_title" class="form-control input-lg" />
+                            </div>
+
+                            <div class="form-group">
+                             <label for="exampleInputEmail1">Enter Description </label>
+                             <input type="text" name="video_description" class="form-control input-lg" />  
+                            </div>
+
+                            <div class="form-group">
+                            <label for="exampleInputEmail1">Enter link </label>
+                            <input type="text" name="video_link" class="form-control input-lg" />
+                            </div>
+
+                            <div class="form-group">
+                            <label for="exampleInputEmail1">Enter duration </label>
+                            <input type="text" name="video_duration" class="form-control input-lg" />
+                            </div>
+
+                            <div class="form-group">
+                            <label for="exampleInputEmail1">Notify user </label>
+                            <input type="text" name="notify_user" class="form-control input-lg" />
+                            </div>
+
+
+                  <div class="form-group">
+                   <label for="exampleInputFile">Select Banner Image</label>
                     <div class="input-group">
-                      <div class="custom-file">
-                        <input type="file" name=filename[] multiple id="exampleInputFile">
-                        <label class="custom-file-label" for="exampleInputFile">Select Image</label>
-                      </div>
+                    <div class="custom-file">
+                    <input type="file" name="video_banner_img" id="exampleInputFile">
+                    <label class="custom-file-label" for="exampleInputFile">Select Image</label>
                     </div>
-               </div>
-             </div>
-                <br />
-             <div class="card-footer">
-                    <input type="submit" name="add" class="btn btn-primary input-lg" value="Add" />
-             </div>
+                    </div>
+                   </div>
+
+                   <div class="form-group">
+                   <label for="exampleInputFile1">Select  Image</label>
+                    <div class="input-group">
+                    <div class="custom-file">
+                    <input type="file" name="video_img" id="exampleInputFile1">
+                    <label class="custom-file-label" for="exampleInputFile1">Select Image</label>
+                    </div>
+                    </div>
+                   </div>
+
+                              <div class="form-group">
+                              <label for="exampleInputEmail1">Select Category</label>
+                              <select  class="browser-default custom-select" name="Category_id">
+                              <option selected> Select Category </option>
+                              @foreach($category as $category)
+                              <option value="{{$category->id}}">{{$category->category_name}}</option>
+                              @endforeach
+                              </div>
+
+                              <div class="form-group">
+                              <label for="exampleInputEmail2"></label>
+                              <select  class="browser-default custom-select" name="">
+                              <option selected></option>
+                              </div>
+
+                            <div class="form-group">
+                              <label><strong>Select Club </strong></label><br/>
+                              <select class="selectpicker" multiple data-live-search="true" name="club[]">
+                              @foreach($club as $club )
+                              <option value="{{$club->id}}">{{$club->club_name}}</option>
+                              @endforeach
+                              </select>
+                            </div>
+
+                            <div class="form-group">
+                              <label><strong>Select Player </strong></label><br/>
+                              <select class="selectpicker" multiple data-live-search="true" name="player[]">
+                              @foreach($player as $player)
+                              <option value="{{$player->id}}">{{$player->player_name}}</option>
+                              @endforeach
+                              </select>
+                            </div>
 
 
-</form>
+                            
+                            <div class="text-center" style="margin-top: 10px;">
+                                <button type="submit" class="btn btn-success">Save</button>
+                            </div>
+                        </form>
                                             
                                         </div>
                                     </div>

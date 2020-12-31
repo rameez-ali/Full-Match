@@ -5,11 +5,11 @@ namespace App\Model;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Player extends Model
+class Slidervideo extends Model
 {
 	use SoftDeletes;
     protected $fillable = [
-        'player_name','player_banner','player_profile_image','player_description',
+        'Video_id','Slider_id',
     ];
     protected $dates = ['deleted_at'];
 }

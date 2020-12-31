@@ -3,12 +3,12 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\ProjectCategory;
+use App\Model\ProjectCategory;
 use App\Model\Video;
-use App\Club;
-use App\player;
-use App\Videoclub;
-use App\Videoplayer;
+use App\Model\Club;
+use App\Model\player;
+use App\Model\Video_club;
+use App\Model\Video_player;
 use DB;
 
 
@@ -84,7 +84,7 @@ class ProjectVideoViewController extends Controller
             'Video_id'     =>  $id
              );
 
-            Videoclub::create($form_data3);
+            Video_club::create($form_data3);
             }
 
 
@@ -95,7 +95,7 @@ class ProjectVideoViewController extends Controller
             'Video_id'     =>  $id
              );
 
-            Videoplayer::create($form_data4);
+            Video_player::create($form_data4);
             }
 
 
@@ -145,10 +145,43 @@ class ProjectVideoViewController extends Controller
      */
     public function destroy($id)
     {
-        $data = ProjectCategory::findOrFail($id);
+        Video_player::where('Video_id', $id)->delete();
+        Video_club::where('Video_id', $id)->delete();
+
+        $data = Video::findOrFail($id);
         $data->delete();
-        return redirect('project-category-view')->with('success', 'Data is successfully deleted');
+        return redirect('video-form')->with('success', 'Data is successfully deleted');
 
 
     }
+
+    public function destroy1($id)
+    {
+
+        $Video_id=$id;
+       
+
+
+      $video_clubs = DB::table('video_clubs');
+      $clubs =  DB::table('clubs')
+        ->where('Video_id', '=', $Video_id)
+        ->join('video_clubs', 'video_clubs.Club_id', '=', 'clubs.id')
+        ->select('clubs.*', 'clubs.club_name')
+        ->get(); 
+
+            return view('admin.video.display_club', compact('video_clubs','clubs'))
+            ->with('i', (request()->input('page', 1) - 1) * 5);
+
+    }
+
+
+    public function destroy2($id)
+    {
+
+        $Video_id=$id;
+        $data3 = Video_player::latest()->paginate(5);
+        return view('admin.video.display_player', compact('Video_id','data3','data4'));
+
+    }
+
 }

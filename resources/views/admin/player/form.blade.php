@@ -19,7 +19,7 @@
                                             @csrf
                                             <div class="card-body">
                                             <div class="form-group">
-                                            <label for="exampleInputEmail1">Enter Club Name</label>
+                                            <label for="exampleInputEmail1">Enter Player Name</label>
                                             <input type="text" name="player_name" class="form-control input-lg" />
                                             </div>
 
@@ -29,7 +29,7 @@
                                             </div>
  
                                             <div class="form-group">
-                                            <label for="exampleInputFile">Select Category Image</label>
+                                            <label for="exampleInputFile">Select Player Banner</label>
                                             <div class="input-group">
                                             <div class="custom-file">
                                             <input type="file" name="player_banner" id="exampleInputFile">
@@ -39,7 +39,7 @@
                                             </div>
                  
                                              <div class="form-group">
-                                             <label for="exampleInputFile1">Select Category Image</label>
+                                             <label for="exampleInputFile1">Select Profile Image</label>
                                              <div class="input-group">
                                              <div class="custom-file">
                                              <input type="file" name="player_profile_image" id="exampleInputFile1">

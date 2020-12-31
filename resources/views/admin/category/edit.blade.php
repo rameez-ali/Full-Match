@@ -9,50 +9,33 @@
                             <div class="card animate fadeUp">
                                 <div class="card-content">
                                     <h4 class="header mt-0">
-                                        ADD CLUB
+                                        Edit Category
                                         <a class="waves-effect waves-light btn gradient-45deg-purple-deep-orange gradient-shadow right">Details</a>
                                     </h4>
                                     <div class="row">
                                         <div class="col s12">
                                             <h2></h2>
-                                            <form method="post" action="{{ route('club-form.store') }}" enctype="multipart/form-data">
-                                            @csrf
-                                            <div class="card-body">
-                                            <div class="form-group">
-                                            <label for="exampleInputEmail1">Enter Club Name</label>
-                                            <input type="text" name="club_name" class="form-control input-lg" />
-                                            </div>
-
-                                            <div class="form-group">
-                                            <label for="exampleInputEmail1">Enter Description</label>
-                                            <input type="text" name="club_description" class="form-control input-lg" />
-                                            </div>
- 
-                                            <div class="form-group">
-                                            <label for="exampleInputFile">Select Player Banner</label>
-                                            <div class="input-group">
-                                            <div class="custom-file">
-                                            <input type="file" name="club_banner" id="exampleInputFile">
-                                            <label class="custom-file-label" for="exampleInputFile">Select Image</label>
-                                            </div>
-                                            </div>
-                                            </div>
-                 
-                                             <div class="form-group">
-                                             <label for="exampleInputFile1">Select Club Logo</label>
-                                             <div class="input-group">
-                                             <div class="custom-file">
-                                             <input type="file" name="club_logo" id="exampleInputFile1">
-                                             <label class="custom-file-label1" for="exampleInputFile1">Select Image</label>
-                                             </div>
-                                             </div>
-                                            </div>
-                 
-                
-                                             <div class="card-footer">
-                                             <input type="submit" name="add" class="btn btn-primary input-lg" value="Add" />
-                                             </div>
-                                             </form>
+                                        <form method="post" action="{{ route('category-form.update', $category->id) }}" enctype="multipart/form-data">
+                                        @csrf
+                                        @method('PATCH')
+                                       <div class="form-group">
+                                       <label class="col-md-4 text-right">Add Category Name</label>
+                                       <div class="col-md-8">
+                                       <input type="text" name="category_name" value="{{ $category->category_name }}" class="form-control input-lg" />
+                                       </div>
+                                       </div>
+                                       <div class="form-group">
+                                       <label class="col-md-4 text-right">Select Profile Image</label>
+                                       <div class="col-md-8">
+                                       <input type="file" name="featured_image" />
+                                       <input type="hidden" name="hidden_image" value="{{ $category->featured_image }}" />
+                                       </div>
+                                       </div>
+                                       <br /><br />
+                                       <div class="form-group text-center">
+                                       <input type="submit" name="edit" class="btn btn-primary input-lg" value="Edit" />
+                                       </div>
+                                       </form>
                                         </div>
                                     </div>
                                 </div>

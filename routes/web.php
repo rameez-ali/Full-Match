@@ -27,7 +27,15 @@ Route::group(['middleware' => ['auth']], function () {
     Route::resource('league-form','ProjectLeagueViewController');
     Route::get('league/{id}','ProjectLeagueViewController@destroy1');
     Route::resource('video-form','ProjectVideoViewController');
-    Route::resource('subscriptionplans','SubsPlanController');
+    Route::get('videoclub/{id}','ProjectVideoViewController@destroy1');
+    Route::get('videoplayer/{id}','ProjectVideoViewController@destroy2');
+    Route::resource('slider-form','ProjectSliderViewController');
+    Route::get('slider/{id}','ProjectSliderViewController@destroy1');
+
+    Route::resource('my-form','SeasonPartSortingController');
+
+    Route::get("addmore","SeasonPartSortingController@addMore");
+Route::post("addmore","SeasonPartSortingController@addMorePost");
 });
 Route::get('/home', 'HomeController@index')->name('home');
 

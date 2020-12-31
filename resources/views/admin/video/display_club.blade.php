@@ -9,8 +9,8 @@
                             <div class="card animate fadeUp">
                                 <div class="card-content">
                                     <h4 class="header mt-0">
-                                        LEAGUE
-                                        <a href="{{ URL::route('league-form.create') }}" class="waves-effect waves-light btn gradient-45deg-purple-deep-orange gradient-shadow right">Add League</a>
+                                        Clubs of Video
+                                        <a href="{{ URL::route('club-form.create') }}" class="waves-effect waves-light btn gradient-45deg-purple-deep-orange gradient-shadow right">Add Club</a>
                                     </h4>
                                     <div class="row">
                                         <div class="col s12">
@@ -18,36 +18,30 @@
                                             <table id="page-length-option" class="display">
                                                 <thead>
                                                 <tr>
-                                                 <th width="15%">League Name</th>
-                                                 <th width="15%">League Description</th>
-                                                 <th width="15%">League Banner</th>
-                                                 <th width="20%">League Promo Video</th>
-                                                 <th width="20%">League Profile Image</th>
-                                                 <th width="20%">See Details</th>
-                                                 <th width="5%">Action</th>
+                                                <th width="27%">Clubs </th>
                                                  </tr>
                                                 </thead>
                                                  <tbody>
-                                                 @foreach($project as $project)
-                                                 <tr>
-                                                <td>{{ $project->league_name   }}</td>
-                                                <td>{{ $project->league_description }}</td>
-                                                <td><img src="/images/{{  $project->league_banner}}" style="width:50px;height:50px;" /></td>
-                                                <td><img src="/images/{{  $project->league_promo_video}}" style="width:50px;height:50px;" /></td>
-                                                <td><img src="/images/{{  $project->league_profile_image}}" style="width:50px;height:50px;" /></td>
-
-                                                <td><a href="{{ url('league/'.$project->id)}}" class="btn btn-default">See details </a><td>
-                                                <td>
-                                                <form action="{{ route('league-form.destroy', $project->id)}}" method="post">
-                                                {{ csrf_field() }}
-                                                @method('DELETE')
-                                                <button class="btn btn-danger" type="submit">Delete</button>
-                                                </form>
-                                                </td>
-                                                </tr>
-                                                @endforeach             
+                                                  
+                                                  @foreach($clubs as $club)
+                                                  <tr>
+                                                  <td>{{ $club->club_name}}</td>
+                                                  </tr>
+                                                  @endforeach
+                                                             
                                                  </tbody>
-                                                
+                                                <tfoot>
+                                                <tr>
+{{--                                                    <th>{{ __('order.email') }}</th>--}}
+                                                    <th>a</th>
+                                                    <th>a</th>
+                                                    <th>a</th>
+                                                    <th>a</th>
+                                                    <th>a</th>
+                                                    <th>a</th>
+                                                    <th>a</th>
+                                                </tr>
+                                                </tfoot>
                                             </table>
                                         </div>
                                     </div>
@@ -61,9 +55,6 @@
     </div>
 @endsection
 @section('scripts')
-    <script src="app-assets/vendors/data-tables/js/jquery.dataTables.min.js"></script>
-    <script src="app-assets/vendors/data-tables/extensions/responsive/js/dataTables.responsive.min.js"></script>
-    <script src="app-assets/vendors/data-tables/js/dataTables.select.min.js"></script>
     <script type="text/javascript" src="https://cdn.datatables.net/buttons/1.6.1/js/dataTables.buttons.min.js"></script>
     <script type="text/javascript" src="https://cdn.datatables.net/buttons/1.6.1/js/buttons.flash.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>

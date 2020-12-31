@@ -97,6 +97,12 @@ class ProjectCategoryViewController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Video::where('Category_id', $id)->delete();
+
+        $data = ProjectCategory::findOrFail($id);
+        $data->delete();
+        return redirect('category-form')->with('success', 'Data is successfully deleted');
+
+
     }
 }

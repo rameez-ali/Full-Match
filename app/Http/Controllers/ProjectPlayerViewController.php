@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\ProjectCategory;
 use App\Model\Player;
+use App\Model\Video_player;
 
 class ProjectPlayerViewController extends Controller
 {
@@ -110,7 +111,9 @@ class ProjectPlayerViewController extends Controller
      */
     public function destroy($id)
     {
-        $data = ProjectCategory::findOrFail($id);
+        Video_player::where('Player_id', $id)->delete();
+
+        $data = Player::findOrFail($id);
         $data->delete();
         return redirect('player-form')->with('success', 'Data is successfully deleted');
 

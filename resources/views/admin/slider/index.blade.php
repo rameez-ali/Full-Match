@@ -9,8 +9,8 @@
                             <div class="card animate fadeUp">
                                 <div class="card-content">
                                     <h4 class="header mt-0">
-                                        LEAGUE
-                                        <a href="{{ URL::route('league-form.create') }}" class="waves-effect waves-light btn gradient-45deg-purple-deep-orange gradient-shadow right">Add League</a>
+                                        Slider
+                                        <a href="{{ URL::route('slider-form.create') }}" class="waves-effect waves-light btn gradient-45deg-purple-deep-orange gradient-shadow right">Add Slider</a>
                                     </h4>
                                     <div class="row">
                                         <div class="col s12">
@@ -18,34 +18,25 @@
                                             <table id="page-length-option" class="display">
                                                 <thead>
                                                 <tr>
-                                                 <th width="15%">League Name</th>
-                                                 <th width="15%">League Description</th>
-                                                 <th width="15%">League Banner</th>
-                                                 <th width="20%">League Promo Video</th>
-                                                 <th width="20%">League Profile Image</th>
-                                                 <th width="20%">See Details</th>
-                                                 <th width="5%">Action</th>
+                                                  <th width="27%">Slider Name</th>
+                                                  <th>See Details</th>
+                                                  <th width="30%">Action</th>
                                                  </tr>
                                                 </thead>
                                                  <tbody>
-                                                 @foreach($project as $project)
-                                                 <tr>
-                                                <td>{{ $project->league_name   }}</td>
-                                                <td>{{ $project->league_description }}</td>
-                                                <td><img src="/images/{{  $project->league_banner}}" style="width:50px;height:50px;" /></td>
-                                                <td><img src="/images/{{  $project->league_promo_video}}" style="width:50px;height:50px;" /></td>
-                                                <td><img src="/images/{{  $project->league_profile_image}}" style="width:50px;height:50px;" /></td>
-
-                                                <td><a href="{{ url('league/'.$project->id)}}" class="btn btn-default">See details </a><td>
-                                                <td>
-                                                <form action="{{ route('league-form.destroy', $project->id)}}" method="post">
-                                                {{ csrf_field() }}
-                                                @method('DELETE')
-                                                <button class="btn btn-danger" type="submit">Delete</button>
-                                                </form>
-                                                </td>
-                                                </tr>
-                                                @endforeach             
+                                                  @foreach($slidercategory as $slidercategory)
+                                                  <tr>
+                                                  <td>{{$slidercategory->slider_name}}</td>
+                                                  <td><a href="{{ url('slider/'.$slidercategory->id)}}" class="btn btn-default">See details </a>
+                                                  <td>
+                                                  <form action="{{ route('slider-form.destroy', $slidercategory->id)}}" method="post">
+                                                  {{ csrf_field() }}
+                                                  @method('DELETE')
+                                                  <button class="btn btn-danger" type="submit">Delete</button>
+                                                  </form>
+                                                  </td>
+                                                  </tr>
+                                                  @endforeach          
                                                  </tbody>
                                                 
                                             </table>
@@ -93,7 +84,7 @@
                         className: 'waves-effect waves-light btn-small',
                         filename : '{{ __("customer.excel") }}' ,
                         exportOptions: {
-                            columns: [ 0,1,2,3,4,5 ]
+                            columns: [ 0,1,2 ]
                         },
                     },
                     {
@@ -102,7 +93,7 @@
                         className: 'waves-effect waves-light btn-small',
                         filename : '{{ __("customer.csv") }}' ,
                         exportOptions: {
-                            columns: [ 0,1,2,3,4,5 ]
+                            columns: [ 0,1,2 ]
                         },
                     }
                 ],

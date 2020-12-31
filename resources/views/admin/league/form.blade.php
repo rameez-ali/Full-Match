@@ -14,48 +14,82 @@
                                     </h4>
                                     <div class="row">
                                         <div class="col s12">
-                                            <h2></h2>
-                                            <form method="post" action="{{ route('league-form.store') }}" enctype="multipart/form-data">
-              @csrf
-                <div class="card-body">
-                <div class="form-group">
-                   <label for="exampleInputEmail1">Enter League</label>
-                   <input type="text" name="Project_Name" class="form-control input-lg"></textarea>
-                </div>
-                   <br/>
-                <div class="form-group">
-                   <label for="exampleInputEmail1">Enter Project Category</label>
-                   <input type="text" name="Project_Category" class="form-control input-lg" />
-                </div>
-                    <br/>
-                <div class="form-group">
-                   <label for="exampleInputEmail1">Insert League Description</label>
-                   <input type="text" name="Project_Details" class="form-control input-lg" />
-                </div>
-                   <br/>
-                   <div class="form-group">
-                   <label for="exampleInputEmail1">Insert League Banner</label>
-                   <input type="text" name="league_banner" class="form-control input-lg" />
-                </div>
-                   <br/>
-                   <div class="form-group">
-                   <label for="exampleInputEmail1">Insert Promo Video</label>
-                   <input type="text" name="league_promo_video" class="form-control input-lg" />
-                </div>
-                   <br/>
-                   <div class="form-group">
-                   <label for="exampleInputEmail1">Select Profile Image</label>
-                   <input type="text" name="league_profile_image" class="form-control input-lg" />
-                </div>
-                <div class="form-group">
-                    <label for="exampleInputFile">Select Image</label>
-                    <div class="input-group">
-                      <div class="custom-file">
-                        <input type="file" name=filename[] multiple id="exampleInputFile">
-                        <label class="custom-file-label" for="exampleInputFile">Select Image</label>
-                      </div>
-                    </div>
-               </div>
+                                       <h2></h2>
+                                       <form method="post" action="{{ route('league-form.store') }}" enctype="multipart/form-data">
+                                       @csrf
+                                       <div class="card-body">
+                                       <div class="form-group">
+                                       <label for="exampleInputEmail1">Enter League Name</label>
+                                       <input type="text" name="league_name" class="form-control input-lg"></textarea>
+                                       </div>
+                                       <br/>
+                
+                                      
+                
+                                        <div class="form-group">
+                                        <label for="exampleInputFile">Insert League Banner</label>
+                                        <div class="input-group">
+                                        <div class="custom-file">
+                                        <input type="file" name="filename1" multiple id="exampleInputFile">
+                                        <label class="custom-file-label" for="exampleInputFile">Select Image</label>
+                                        </div>
+                                        </div>
+                                        </div>
+                                         <br/>
+
+                                         <div class="form-group">
+                                        <label for="exampleInputFile">Insert League Promovideo</label>
+                                        <div class="input-group">
+                                        <div class="custom-file">
+                                        <input type="file" name="filename2" multiple id="exampleInputFile">
+                                        <label class="custom-file-label" for="exampleInputFile">Select Image</label>
+                                        </div>
+                                        </div>
+                                        </div>
+                                         <br/>
+
+                                         <div class="form-group">
+                                        <label for="exampleInputFile">Insert Profile Image</label>
+                                        <div class="input-group">
+                                        <div class="custom-file">
+                                        <input type="file" name="filename3" multiple id="exampleInputFile">
+                                        <label class="custom-file-label" for="exampleInputFile">Select Image</label>
+                                        </div>
+                                        </div>
+                                        </div>
+                                         <br/>
+
+                                         
+
+                                        <div class="card-body">
+                                       <div class="form-group">
+                                       <label for="exampleInputEmail1">Enter Description </label>
+                                       <input type="text" name="league_description" class="form-control input-lg"></textarea>
+                                       </div>
+                                       <br/>
+
+                  
+                                        <div class="form-group">
+                                        <label for="exampleInputFile">Insert Season 1 Videos </label>
+                                        <div class="input-group">
+                                        <div class="custom-file">
+                                        <input type="file" name=filename4[] multiple id="exampleInputFile10">
+                                        <label class="custom-file-label10" for="exampleInputFile10">Select Image</label>
+                                        </div>
+                                        </div>
+                                        </div>
+                                         <br/>
+
+                                          <div class="form-group">
+                                        <label for="exampleInputFile">Insert Season 2 Videos </label>
+                                        <div class="input-group">
+                                        <div class="custom-file">
+                                        <input type="file" name=filename5[] multiple id="exampleInputFile">
+                                        <label class="custom-file-label" for="exampleInputFile">Select Image</label>
+                                        </div>
+                                        </div>
+                                        </div>
+                                         <br/>
              </div>
                 <br />
              <div class="card-footer">

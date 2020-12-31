@@ -9,50 +9,38 @@
                             <div class="card animate fadeUp">
                                 <div class="card-content">
                                     <h4 class="header mt-0">
-                                        ADD CLUB
+                                        Edit Club
                                         <a class="waves-effect waves-light btn gradient-45deg-purple-deep-orange gradient-shadow right">Details</a>
                                     </h4>
                                     <div class="row">
                                         <div class="col s12">
                                             <h2></h2>
-                                            <form method="post" action="{{ route('club-form.store') }}" enctype="multipart/form-data">
-                                            @csrf
-                                            <div class="card-body">
-                                            <div class="form-group">
-                                            <label for="exampleInputEmail1">Enter Club Name</label>
-                                            <input type="text" name="club_name" class="form-control input-lg" />
-                                            </div>
+                                        <form method="post" action="{{ route('slider-form.update', $slider->id) }}" enctype="multipart/form-data">
+                                        @csrf
+                                        @method('PATCH')
+                                       <div class="form-group">
+                                       <label class="col-md-4 text-right">Add Player Name</label>
+                                       <div class="col-md-8">
+                                       <input type="text" name="slider_name" value="{{ $slider->slider_name }}" class="form-control input-lg" />
+                                       </div>
+                                       </div>
 
-                                            <div class="form-group">
-                                            <label for="exampleInputEmail1">Enter Description</label>
-                                            <input type="text" name="club_description" class="form-control input-lg" />
-                                            </div>
- 
-                                            <div class="form-group">
-                                            <label for="exampleInputFile">Select Player Banner</label>
-                                            <div class="input-group">
-                                            <div class="custom-file">
-                                            <input type="file" name="club_banner" id="exampleInputFile">
-                                            <label class="custom-file-label" for="exampleInputFile">Select Image</label>
-                                            </div>
-                                            </div>
-                                            </div>
-                 
-                                             <div class="form-group">
-                                             <label for="exampleInputFile1">Select Club Logo</label>
-                                             <div class="input-group">
-                                             <div class="custom-file">
-                                             <input type="file" name="club_logo" id="exampleInputFile1">
-                                             <label class="custom-file-label1" for="exampleInputFile1">Select Image</label>
-                                             </div>
-                                             </div>
-                                            </div>
-                 
-                
-                                             <div class="card-footer">
-                                             <input type="submit" name="add" class="btn btn-primary input-lg" value="Add" />
-                                             </div>
-                                             </form>
+                                       <div name="hidden-panel1" id="hidden-panel1">
+                             <label><strong>Select Videos </strong></label><br/>
+                              <select class="selectpicker" multiple data-live-search="true" name="video[]">
+                              @foreach($video as $video )
+                              <option value="{{$video->video_title}}"></option>
+                              @endforeach
+                              </select>
+                             </div>
+
+
+                                       
+                                       <br /><br />
+                                       <div class="form-group text-center">
+                                       <input type="submit" name="edit" class="btn btn-primary input-lg" value="Edit" />
+                                       </div>
+                                       </form>
                                         </div>
                                     </div>
                                 </div>
@@ -132,5 +120,24 @@
             }
         });
     });
+
+$(document).ready(function() {
+        $("#travel").change(function() {
+            if ($("#travel").val() == 1) {
+                $("#hidden-panel1").hide()
+                $("#hidden-panel").show()
+            } 
+            else if ($("#travel").val() == 2) {
+                $("#hidden-panel").hide()
+                $("#hidden-panel1").show()
+            } 
+            else if ($("#travel").val() == 0){
+                $("#hidden-panel").hide()
+                $("#hidden-panel1").hide()
+            }
+        })
+    }); 
+
+
 </script>
 @endsection

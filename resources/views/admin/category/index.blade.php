@@ -14,11 +14,9 @@
                                     </h4>
                                     <div class="row">
                                         <div class="col s12">
-                                            <h2></h2>
                                             <table id="page-length-option" class="display">
                                                 <thead>
                                                 <tr>
-                                                 <th width="27%">Category Id</th>
                                                  <th width="27%">Category Name</th>
                                                  <th width="27%">Category Image</th>
                                                  <th width="30%">Action</th>
@@ -27,36 +25,21 @@
                                                 <tbody>
                                                 @foreach($category as $category)
                                                <tr>
-                                               <td>{{ $category->id }}</td>
                                                 <td>{{ $category->category_name }}</td>
-                                                <td><img src="{{ URL::to('/') }}/images/{{ $category->featured_image }}"  class="img-thumbnail" width="75" /></td>
+                                                <td><img src="/images/{{  $category->featured_image}}" style="width:50px;height:50px;" /></td>
                                                 <td>
-                                                <form action="{{ route('category-form.destroy', $category->id)}}" method="post">
-                                                {{ csrf_field() }}
-                                                @method('DELETE')
-                                                </form>
                                                 <form action="{{ route('category-form.destroy', $category->id)}}" method="post">
                                                 {{ csrf_field() }}
                                                 @method('DELETE')
                                                 <button class="btn btn-danger" type="submit">Delete</button>
                                                 </form>
                                                 </td>
+                                                <td><a href="{{ route('category-form.edit',$category->id)}}" class="btn btn-primary">Edit</a></td>
                                                 </tr>
                                                 @endforeach
                                                 </tbody>                                              
-                                                </tbody>
-                                                <tfoot>
-                                                <tr>
-{{--                                                    <th>{{ __('order.email') }}</th>--}}
-                                                    <th>a</th>
-                                                    <th>a</th>
-                                                    <th>a</th>
-                                                    <th>a</th>
-                                                    <th>a</th>
-                                                    <th>a</th>
-                                                    <th>a</th>
-                                                </tr>
-                                                </tfoot>
+                                                
+                                              
                                             </table>
                                         </div>
                                     </div>
@@ -70,6 +53,9 @@
     </div>
 @endsection
 @section('scripts')
+   <script src="app-assets/vendors/data-tables/js/jquery.dataTables.min.js"></script>
+    <script src="app-assets/vendors/data-tables/extensions/responsive/js/dataTables.responsive.min.js"></script>
+    <script src="app-assets/vendors/data-tables/js/dataTables.select.min.js"></script>
     <script type="text/javascript" src="https://cdn.datatables.net/buttons/1.6.1/js/dataTables.buttons.min.js"></script>
     <script type="text/javascript" src="https://cdn.datatables.net/buttons/1.6.1/js/buttons.flash.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
@@ -99,7 +85,7 @@
                         className: 'waves-effect waves-light btn-small',
                         filename : '{{ __("customer.excel") }}' ,
                         exportOptions: {
-                            columns: [ 0,1,2,3,4,5 ]
+                            columns: [ 0,1, ]
                         },
                     },
                     {
@@ -108,7 +94,7 @@
                         className: 'waves-effect waves-light btn-small',
                         filename : '{{ __("customer.csv") }}' ,
                         exportOptions: {
-                            columns: [ 0,1,2,3,4,5 ]
+                            columns: [ 0,1 ]
                         },
                     }
                 ],
