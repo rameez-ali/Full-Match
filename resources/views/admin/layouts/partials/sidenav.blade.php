@@ -11,7 +11,10 @@
         <li class="bold"><a class="waves-effect waves-cyan " href="{{ route('subscriptionplans.index') }}"><i class="material-icons">person_outline</i><span class="menu-title" data-i18n="User Profile">{{ __('customer.subsplan.subsplan_head') }}</span></a>
         </li>
 
-        <li class="bold"><a class="waves-effect waves-cyan " href="{{ route('page.index') }}"><i class="material-icons">person_outline</i><span class="menu-title" data-i18n="User Profile">{{ __('customer.cmspage.cmspage_section') }}</span></a>
+        <li class="bold"><a class="waves-effect waves-cyan " href="{{ route('page.index') }}"><i class="material-icons">person_outline</i><span class="menu-title" data-i18n="User Profile">{{ __('customer.cmspage.cmspage') }}</span></a>
+        </li>
+
+        <li class="bold"><a class="waves-effect waves-cyan " href="{{ route('order.all') }}"><i class="material-icons">person_outline</i><span class="menu-title" data-i18n="User Profile">{{ __('customer.order.orders') }}</span></a>
         </li>
 
         <li class="bold"><a class="waves-effect waves-cyan " href="{{ route('category-form.index') }}"><i class="material-icons">person_outline</i><span class="menu-title" data-i18n="User Profile">Categories</span></a>

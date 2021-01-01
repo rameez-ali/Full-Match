@@ -36,6 +36,8 @@ Route::group(['middleware' => ['auth']], function () {
     Route::resource('my-form','SeasonPartSortingController');
     Route::get("addmore","SeasonPartSortingController@addMore");
     Route::post("addmore","SeasonPartSortingController@addMorePost");
+    Route::get("order","OrderController@index")->name('order.all');
+    Route::get("order/{id}","OrderController@show")->name('order.show');
 });
 Route::get('/home', 'HomeController@index')->name('home');
 
