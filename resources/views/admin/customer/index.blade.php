@@ -26,6 +26,16 @@
                                         <span aria-hidden="true">×</span>
                                     </button>
                                 </div>
+                            @elseif($userdeletesuccess = Session::get('userdeletesuccess'))
+                                <div class="card-alert card gradient-45deg-green-teal">
+                                    <div class="card-content white-text">
+                                        <p>
+                                            <i class="material-icons">check</i>{{ $userdeletesuccess }}</p>
+                                    </div>
+                                    <button type="button" class="close white-text" data-dismiss="alert" aria-label="Close">
+                                        <span aria-hidden="true">×</span>
+                                    </button>
+                                </div>
                             @endif
                             <div class="card animate fadeUp">
                                 <div class="card-content">
@@ -49,17 +59,18 @@
                                                 </thead>
                                                 <tbody>
                                                 @foreach($customers as $customer)
+
                                                     <tr>
                                                         <td>{{ $customer->id }}</td>
                                                         <td>{{ $customer->name }}</td>
                                                         <td>{{ $customer->email }}</td>
                                                         <td>{{ $customer->phone }}</td>
                                                         <td>plan</td>
-                                                        <td><a href="#">Rset Password</a></td>
+                                                        <td><a class="mb-6 btn waves-effect waves-light gradient-45deg-red-pink" href="#">Reset Link</a></td>
                                                         <td>
-                                                            <a href="{{ route('customer.edit',[ 'customer' => $customer->id ]) }}">{{ __('customer.customer.edit') }}</a>
-                                                            <a href="#">{{ __('customer.customer.view_billing') }}</a>
-                                                            <a onclick="deleteCustomer({{ $customer->user_id }})" href="#">{{ __('customer.customer.delete') }}</a>
+                                                            <a class="mb-5 btn waves-effect waves-light gradient-45deg-light-blue-cyan" href="#">{{ __('customer.customer.view_billing') }}</a> <br>
+                                                            <a class="mb-5 mr-2 btn waves-effect waves-light gradient-45deg-purple-deep-orange" href="{{ route('customer.edit',[ 'customer' => $customer->id ]) }}">{{ __('customer.customer.edit') }}</a>
+                                                            <a class="mb-5 btn waves-effect waves-light gradient-45deg-amber-amber" onclick="deleteCustomer({{ $customer->user_id }})" href="#">{{ __('customer.customer.delete') }}</a>
                                                         </td>
                                                     </tr>
                                                 @endforeach

@@ -72,11 +72,12 @@ class CustomerController extends Controller
      */
     public function edit($id)
     {
+
         $request = new GetCustomerRequest();
 
         $request->id = $id;
 
-        $response = $request->handle();
+        $response = $request->handle_edit();
 
         $route = route('customer.update', ['customer' => $response->id]);
 

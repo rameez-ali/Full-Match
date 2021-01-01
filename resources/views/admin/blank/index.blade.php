@@ -57,6 +57,18 @@
                                                 </tr>
                                                 </tfoot>
                                             </table>
+
+                                            <div class="input-field">
+                                                <select class="select2 browser-default" multiple="multiple">
+                                                    <option value="square">Square</option>
+                                                    <option value="rectangle" selected>Rectangle</option>
+                                                    <option value="rombo">Rombo</option>
+                                                    <option value="romboid">Romboid</option>
+                                                    <option value="trapeze">Trapeze</option>
+                                                    <option value="traible" selected>Triangle</option>
+                                                    <option value="polygon">Polygon</option>
+                                                </select>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -69,6 +81,8 @@
     </div>
 @endsection
 @section('scripts')
+    <script src="app-assets/vendors/select2/select2.full.min.js"></script>
+    <script src="app-assets/js/scripts/form-select2.js"></script>
 
     <script src="app-assets/vendors/data-tables/js/jquery.dataTables.min.js"></script>
     <script src="app-assets/vendors/data-tables/extensions/responsive/js/dataTables.responsive.min.js"></script>

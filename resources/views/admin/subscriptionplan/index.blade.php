@@ -71,8 +71,8 @@
                                                     <td>{{ $subscriptionplan->sort_by }}</td>
 {{--                                                    <td>{{ $subscriptionplan->lang }}</td>--}}
                                                     <td>
-                                                        <a href="{{ route('subscriptionplans.edit',[ 'subscriptionplan' => $subscriptionplan->id ]) }}">{{ __('customer.customer.edit') }}</a>
-                                                        <a onclick="deletePlan({{ $subscriptionplan->id }})" href="#">{{ __('customer.delete') }}</a>
+                                                        <a class="mb-5 btn waves-effect waves-light gradient-45deg-purple-deep-orange" href="{{ route('subscriptionplans.edit',[ 'subscriptionplan' => $subscriptionplan->id ]) }}">{{ __('customer.customer.edit') }}</a>
+                                                        <a class="mb-5 btn waves-effect waves-light gradient-45deg-amber-amber" onclick="deletePlan({{ $subscriptionplan->id }})" href="#">{{ __('customer.delete') }}</a>
                                                     </td>
                                                 </tr>
                                             @endforeach

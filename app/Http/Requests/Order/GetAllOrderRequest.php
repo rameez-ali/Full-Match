@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Requests\Customer;
-use App\User;
-use App\customer;
+namespace App\Http\Requests\Order;
+
+use App\Model\Order;
 use Illuminate\Foundation\Http\FormRequest;
 
-class GetCustomerRequest extends FormRequest
+class GetAllOrderRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -29,18 +29,6 @@ class GetCustomerRequest extends FormRequest
         ];
     }
     public function handle(){
-
-        $customer = Customer::with('user')->findOrNew($this->id);
-
-        if(is_null($customer->user)){
-            $customer->user = new User;
-        }
-
-        return $customer;
-    }
-    public function handle_edit(){
-
-        return Customer::with('user')->where('id',$this->id)->First();
-
+        return Order::all();
     }
 }
