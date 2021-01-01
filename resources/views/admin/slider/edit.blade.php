@@ -26,13 +26,13 @@
                                        </div>
 
                                        <div name="hidden-panel1" id="hidden-panel1">
-                             <label><strong>Select Videos </strong></label><br/>
-                              <select class="selectpicker" multiple data-live-search="true" name="video[]">
-                              @foreach($video as $video )
-                              <option value="{{$video->video_title}}"></option>
-                              @endforeach
-                              </select>
-                             </div>
+                                       <label><strong>Select Videos </strong></label><br/>
+                                       <select class="selectpicker" multiple data-live-search="true" name="video[]">
+                                       @foreach($video as $video )
+                                       <option value="{{$video->id}}" {{in_array($video->id, $selected_ids) ? 'selected' : ''}} >{{$video->video_title}}</option>
+                                       @endforeach
+                                       </select>
+                                       </div>
 
 
                                        

@@ -122,7 +122,43 @@ class ProjectVideoViewController extends Controller
      */
     public function edit($id)
     {
-        //
+        $video=Video::find($id);
+        $category=ProjectCategory::all();
+        $club=Club::all();
+        $player=Player::all();
+
+     
+       ///Getting Selected Clubs id
+       $clubs =  DB::table('clubs')
+        ->where('Video_id', '=', $id)
+        ->join('video_clubs', 'video_clubs.Club_id', '=', 'clubs.id')
+        ->select('clubs.id')
+        ->get();
+       
+       $selected_ids = [];
+       foreach ($clubs as $key => $clb) {
+           array_push($selected_ids, $clb->id);
+       }
+        $club=club::select('id','club_name')->get();
+
+        
+        ///Getting Selected Player id
+        $players =  DB::table('players')
+        ->where('Video_id', '=', $id)
+        ->join('video_players', 'video_players.Player_id', '=', 'players.id')
+        ->select('players.id')
+        ->get();
+       
+       $selected_ids1 = [];
+       foreach ($players as $key => $ply) {
+           array_push($selected_ids1, $ply->id);
+       }
+        $player=player::select('id','player_name')->get();
+
+
+
+        
+        return view('admin.video.edit',compact('category','clubs','club','players','player','video','selected_ids','selected_ids1'));
     }
 
     /**
@@ -134,7 +170,7 @@ class ProjectVideoViewController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        
     }
 
     /**
@@ -158,9 +194,34 @@ class ProjectVideoViewController extends Controller
     public function destroy1($id)
     {
 
-        $Video_id=$id;
-       
+      $Video_id=$id;
+      $video_clubs = DB::table('video_clubs');
+      $clubs =  DB::table('clubs')
+        ->where('Video_id', '=', $Video_id)
+        ->join('video_clubs', 'video_clubs.Club_id', '=', 'clubs.id')
+        ->select('clubs.*', 'clubs.club_name')
+        ->get(); 
 
+     $video_players = Video_player::latest();;
+        $players =  DB::table('players')
+        ->where('Video_id', '=', $Video_id)
+        ->join('video_players', 'video_players.Player_id', '=', 'players.id')
+        ->select('players.*', 'players.player_name')
+        ->get(); 
+
+
+        return view('admin.video.display_club', compact('video_clubs','clubs','video_players','players'))
+            ->with('i', (request()->input('page', 1) - 1) * 5);
+
+    }
+
+
+    public function video_details($id)
+    {
+      $Video_id=$id;
+      $video = Video::latest()
+               ->where('id', '=', $Video_id)
+               ->get();
 
       $video_clubs = DB::table('video_clubs');
       $clubs =  DB::table('clubs')
@@ -169,18 +230,16 @@ class ProjectVideoViewController extends Controller
         ->select('clubs.*', 'clubs.club_name')
         ->get(); 
 
-            return view('admin.video.display_club', compact('video_clubs','clubs'))
+     $video_players = Video_player::latest();;
+        $players =  DB::table('players')
+        ->where('Video_id', '=', $Video_id)
+        ->join('video_players', 'video_players.Player_id', '=', 'players.id')
+        ->select('players.*', 'players.player_name')
+        ->get(); 
+
+
+        return view('admin.video.display_player', compact('video_clubs','clubs','video_players','players','video'))
             ->with('i', (request()->input('page', 1) - 1) * 5);
-
-    }
-
-
-    public function destroy2($id)
-    {
-
-        $Video_id=$id;
-        $data3 = Video_player::latest()->paginate(5);
-        return view('admin.video.display_player', compact('Video_id','data3','data4'));
 
     }
 

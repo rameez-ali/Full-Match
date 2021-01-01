@@ -21,6 +21,7 @@ Route::get('/', function () {
 Route::group(['middleware' => ['auth']], function () {
     Route::get('dashboard', 'DashboardController@dash')->name('dashboard');
     Route::resource('customer', 'CustomerController');
+    Route::resource('subscriptionplans','SubsPlanController');
     Route::resource('category-form','ProjectCategoryViewController');
     Route::resource('player-form','ProjectPlayerViewController');
     Route::resource('club-form','ProjectClubViewController');
@@ -28,7 +29,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('league/{id}','ProjectLeagueViewController@destroy1');
     Route::resource('video-form','ProjectVideoViewController');
     Route::get('videoclub/{id}','ProjectVideoViewController@destroy1');
-    Route::get('videoplayer/{id}','ProjectVideoViewController@destroy2');
+    Route::get('videodetails/{id}','ProjectVideoViewController@video_details');
     Route::resource('slider-form','ProjectSliderViewController');
     Route::get('slider/{id}','ProjectSliderViewController@destroy1');
 
@@ -36,6 +37,9 @@ Route::group(['middleware' => ['auth']], function () {
 
     Route::get("addmore","SeasonPartSortingController@addMore");
 Route::post("addmore","SeasonPartSortingController@addMorePost");
+
+Route::get('dropdownlist','DataController@getCountries');
+Route::get('dropdownlist/getstates/{id}','DataController@getStates');
 });
 Route::get('/home', 'HomeController@index')->name('home');
 

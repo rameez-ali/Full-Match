@@ -46,9 +46,7 @@ class ProjectLeagueViewController extends Controller
             'filename1'     => 'required',
             'filename2'     => 'required',
             'filename3'         =>  'required',
-            'league_description'    => 'required',
-            'filename4' => 'required',
-            'filename5' => 'required'
+            'league_description'    => 'required'
         ]);
 
         //filename1 insertion
@@ -72,45 +70,22 @@ class ProjectLeagueViewController extends Controller
              'league_description'  =>   $request->league_description
         );
 
+        // Insert League Array
         league::create($form_data1);
-
-        //Season Table Insertion Started 
         
-        $image4 = $request->file('filename4');
-        foreach($image4 as $image4){
-        $new_name4 = rand() . '.' . $image4->getClientOriginalExtension();
-        $image4->move(public_path('images'), $new_name4);
+        // Id of Last Inserted League
         $id = DB::table('leagues')->orderBy('ID', 'DESC')->value('ID');
-        $seasons="season1";
-        $form_data2 = array(
-            'Project_id'     =>    $id,
-            'Seasons'   =>  $seasons, 
-            'Video'     =>   $new_name4
-        );
 
-        Season::create($form_data2);
-        }
-
-        $image5 = $request->file('filename5');
-        foreach($image5 as $image5){
-        $new_name5 = rand() . '.' . $image5->getClientOriginalExtension();
-        $image5->move(public_path('images'), $new_name5);
-        $id = DB::table('leagues')->orderBy('ID', 'DESC')->value('ID');
-        $seasons="season2";
-        $form_data2 = array(
-            'Project_id'     =>    $id,
-            'Seasons'   =>  $seasons, 
-            'Video'     =>   $new_name5
-        );
-
-        Season::create($form_data2);
-        }
-
-        return redirect('league-form')->with('success', 'Data is successfully Added');
+        $season_name="season";
         
-        
-
-
+        //Insert Season Array
+        foreach($request->seasons as $season){
+            $newSeason = new Season();
+            $newSeason->Project_id=$id;
+            $newSeason->Seasons=$season_name;
+            $newSeason->Video = $season;
+            $newSeason->save();
+        }
         
     }
 

@@ -28,13 +28,8 @@
                                                   <tr>
                                                   <td>{{$slidercategory->slider_name}}</td>
                                                   <td><a href="{{ url('slider/'.$slidercategory->id)}}" class="btn btn-default">See details </a>
-                                                  <td>
-                                                  <form action="{{ route('slider-form.destroy', $slidercategory->id)}}" method="post">
-                                                  {{ csrf_field() }}
-                                                  @method('DELETE')
-                                                  <button class="btn btn-danger" type="submit">Delete</button>
-                                                  </form>
-                                                  </td>
+                                                  <td><a href="{{ route('slider-form.edit',$slidercategory->id)}}" class="btn btn-primary">Edit</a></td>
+                                                  <td><a href="{{ route('slider-form.destroy',$slidercategory->id)}}" class="btn btn-primary">Delete</a></td>
                                                   </tr>
                                                   @endforeach          
                                                  </tbody>

@@ -16,9 +16,8 @@ class ProjectPlayerViewController extends Controller
      */
     public function index()
     {
-        $player = Player::latest()->paginate(5);
-            return view('admin.player.index', compact('player'))
-            ->with('i', (request()->input('page', 1) - 1) * 5);
+        $player = Player::all();
+            return view('admin.player.index', compact('player'));
     }
 
     /**
@@ -88,7 +87,8 @@ class ProjectPlayerViewController extends Controller
      */
     public function edit($id)
     {
-        //
+        $player=Player::find($id);
+        return view('admin.player.edit',compact('player'));
     }
 
     /**

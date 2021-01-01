@@ -44,7 +44,7 @@
 
                              <div name="hidden-panel1" id="hidden-panel1">
                              <label><strong>Select Videos </strong></label><br/>
-                              <select class="selectpicker" multiple data-live-search="true" name="video[]">
+                              <select name="hello" multiple >
                               @foreach($video as $video )
                               <option value="{{$video->id}}">{{$video->video_title}}</option>
                               @endforeach
