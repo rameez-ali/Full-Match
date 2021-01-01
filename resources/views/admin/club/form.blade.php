@@ -83,7 +83,7 @@
 
         $("#formValidate").validate({
             rules: {
-                uname: {
+                club_name: {
                     required: true,
                     minlength: 5
                 },

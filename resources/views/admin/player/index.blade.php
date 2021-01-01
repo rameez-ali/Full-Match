@@ -9,20 +9,19 @@
                             <div class="card animate fadeUp">
                                 <div class="card-content">
                                     <h4 class="header mt-0">
-                                        Player
+                                        Players
                                         <a href="{{ URL::route('player-form.create') }}" class="waves-effect waves-light btn gradient-45deg-purple-deep-orange gradient-shadow right">Add Player</a>
                                     </h4>
                                     <div class="row">
                                         <div class="col s12">
-                                            <h2></h2>
                                             <table id="page-length-option" class="display">
                                                 <thead>
                                                 <tr>
-                                                 <th width="27%">Player Name</th>
-                                                 <th width="27%">Player Banner</th>
-                                                 <th width="27%">Player Profile Image</th>
-                                                 <th width="27%">Player Description</th>
-                                                 <th width="30%">Action</th>
+                                                 <th width="18%">Player Name</th>
+                                                 <th width="18%">Player Banner</th>
+                                                 <th width="18%">Player Profile Image</th>
+                                                 <th width="18%">Player Description</th>
+                                                 <th width="50%">Action</th>
                                                  </tr>
                                                 </thead>
                                                  <tbody>
@@ -32,33 +31,12 @@
                                                  <td><img src="/images/{{ $player->player_banner }}"  class="img-thumbnail" width="75" /></td>
                                                  <td><img src="/images/{{ $player->player_profile_image}}"  class="img-thumbnail" width="75" /></td>
                                                  <td>{{ $player->player_description }}</td>
-                                                 <td>
-                                                 <form action="{{ route('player-form.destroy', $player->id)}}" method="post">
-                                                 {{ csrf_field() }}
-                                                 @method('DELETE')
-                                                 </form>
-                                                 <form action="{{ route('player-form.destroy', $player->id)}}" method="post">
-                                                 {{ csrf_field() }}
-                                                 @method('DELETE')
-                                                 <button class="btn btn-danger" type="submit">Delete</button>
-                                                 </form>
-                                                 </td>
+                                                 <td><a href="{{ route('player-form.edit',$player->id)}}" class="btn btn-primary">Edit</a>
+                                                     <a href="{{ route('player-form.destroy',$player->id)}}" class="btn btn-primary">Delete</a></td>
                                                  </tr>
                                                  @endforeach
                                                  </tbody>                                     
-                                                 </tbody>
-                                                <tfoot>
-                                                <tr>
-{{--                                                    <th>{{ __('order.email') }}</th>--}}
-                                                    <th>a</th>
-                                                    <th>a</th>
-                                                    <th>a</th>
-                                                    <th>a</th>
-                                                    <th>a</th>
-                                                    <th>a</th>
-                                                    <th>a</th>
-                                                </tr>
-                                                </tfoot>
+
                                             </table>
                                         </div>
                                     </div>
@@ -68,7 +46,7 @@
                     </div>
             </div>
         </div>
-        <div class="content-overlay"></div>
+        
     </div>
 @endsection
 @section('scripts')
@@ -94,8 +72,8 @@
             $('#page-length-option').DataTable({
                 "responsive": true,
                 "lengthMenu": [
-                    [10, 25, 50, -1],
-                    [10, 25, 50, "All"]
+                    [10, 25, 50, 75, 100, -1],
+                    [10, 25, 50, 75, 100, "All"]
                 ],
                 buttons: [
                     {

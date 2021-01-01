@@ -19,9 +19,10 @@
                                         @csrf
                                         <div class="card-body">
                                         <div class="form-group">
-                                        <label for="exampleInputEmail1">Enter Category Name</label>
+                                        <label for="category_name">Enter Category Name</label>
                                         <input type="text" name="category_name" class="form-control input-lg" />
                                         </div>
+                                        
                                         <br/>
                                         <div class="form-group">
                                          <label for="exampleInputFile">Select Category Image</label>
@@ -68,7 +69,7 @@
 
         $("#formValidate").validate({
             rules: {
-                uname: {
+                category_name: {
                     required: true,
                     minlength: 5
                 },

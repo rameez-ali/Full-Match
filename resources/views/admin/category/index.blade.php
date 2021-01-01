@@ -9,7 +9,7 @@
                             <div class="card animate fadeUp">
                                 <div class="card-content">
                                     <h4 class="header mt-0">
-                                        Project Category
+                                        SLIDER CATEGORY
                                         <a href="{{ URL::route('category-form.create') }}" class="waves-effect waves-light btn gradient-45deg-purple-deep-orange gradient-shadow right">Add Category</a>
                                     </h4>
                                     <div class="row">
@@ -27,14 +27,8 @@
                                                <tr>
                                                 <td>{{ $category->category_name }}</td>
                                                 <td><img src="/images/{{  $category->featured_image}}" style="width:50px;height:50px;" /></td>
-                                                <td>
-                                                <form action="{{ route('category-form.destroy', $category->id)}}" method="post">
-                                                {{ csrf_field() }}
-                                                @method('DELETE')
-                                                <button class="btn btn-danger" type="submit">Delete</button>
-                                                </form>
-                                                </td>
-                                                <td><a href="{{ route('category-form.edit',$category->id)}}" class="btn btn-primary">Edit</a></td>
+                                                <td><a href="{{ route('category-form.edit',$category->id)}}" class="btn btn-primary">Edit</a>
+                                                <a href="{{ route('category-form.destroy',$category->id)}}" class="btn btn-primary">Delete</a></td>
                                                 </tr>
                                                 @endforeach
                                                 </tbody>                                              
@@ -85,7 +79,7 @@
                         className: 'waves-effect waves-light btn-small',
                         filename : '{{ __("customer.excel") }}' ,
                         exportOptions: {
-                            columns: [ 0,1, ]
+                            columns: [ 0,1,2,3 ]
                         },
                     },
                     {
@@ -94,7 +88,7 @@
                         className: 'waves-effect waves-light btn-small',
                         filename : '{{ __("customer.csv") }}' ,
                         exportOptions: {
-                            columns: [ 0,1 ]
+                            columns: [ 0,1,2,3 ]
                         },
                     }
                 ],
