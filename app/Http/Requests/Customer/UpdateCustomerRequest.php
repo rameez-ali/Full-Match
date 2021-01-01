@@ -26,7 +26,7 @@ class UpdateCustomerRequest extends FormRequest
     {
         return [
             'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email'],
+//            'email' => ['required', 'string', 'email'],
             'phone' => ['integer', 'min:8'],
         ];
     }
@@ -39,7 +39,7 @@ class UpdateCustomerRequest extends FormRequest
         $customer = Customer::find($this->id);
 
         $customer->name = $params['name'];
-        $customer->email = $params['email'];
+//        $customer->email = $params['email'];
 
         $customer->save();
 
@@ -47,7 +47,7 @@ class UpdateCustomerRequest extends FormRequest
 
         $user->name = $params['name'];
         $user->phone = $params['phone'];
-        $user->email = $params['email'];
+//        $user->email = $params['email'];
         $user->status =isset($params['status']) ? 1  : 2; //status 1 for block by admin , 2 for unblock ,or active .
 
         //$user->password = Hash::make($params['password']);

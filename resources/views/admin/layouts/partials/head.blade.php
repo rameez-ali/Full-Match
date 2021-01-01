@@ -26,8 +26,13 @@
     <!-- BEGIN: Custom CSS-->
     <link rel="stylesheet" type="text/css" href={{ asset('app-assets/css/custom/custom.css') }}>
     <!-- END: Custom CSS-->
+<<<<<<< HEAD
     <link rel="stylesheet" href={{ asset('app-assets/vendors/select2/select2.min.css" type="text/css') }}>
     <link rel="stylesheet" href={{ asset('app-assets/vendors/select2/select2-materialize.css" type="text/css') }}>
+=======
+    <link rel="stylesheet" href={{ asset('app-assets/vendors/select2/select2.min.css') }} type="text/css">
+    <link rel="stylesheet" href={{ asset('app-assets/vendors/select2/select2-materialize.css') }} type="text/css">
+>>>>>>> b2c075cf36adab33bdb30f0690c4baf183790ec3
 
 </head>
 <!-- END: Head-->

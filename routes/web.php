@@ -28,18 +28,24 @@ Route::group(['middleware' => ['auth']], function () {
     Route::resource('league-form','ProjectLeagueViewController');
     Route::get('league/{id}','ProjectLeagueViewController@destroy1');
     Route::resource('video-form','ProjectVideoViewController');
+    Route::resource('subscriptionplans','SubsPlanController');
+    Route::resource('page', 'PageController')->only(['index','edit','update']);
     Route::get('videoclub/{id}','ProjectVideoViewController@destroy1');
     Route::get('videodetails/{id}','ProjectVideoViewController@video_details');
     Route::resource('slider-form','ProjectSliderViewController');
     Route::get('slider/{id}','ProjectSliderViewController@destroy1');
-
     Route::resource('my-form','SeasonPartSortingController');
-
     Route::get("addmore","SeasonPartSortingController@addMore");
+<<<<<<< HEAD
 Route::post("addmore","SeasonPartSortingController@addMorePost");
 
 Route::get('dropdownlist','DataController@getCountries');
 Route::get('dropdownlist/getstates/{id}','DataController@getStates');
+=======
+    Route::post("addmore","SeasonPartSortingController@addMorePost");
+    Route::get("order","OrderController@index")->name('order.all');
+    Route::get("order/{id}","OrderController@show")->name('order.show');
+>>>>>>> b2c075cf36adab33bdb30f0690c4baf183790ec3
 });
 Route::get('/home', 'HomeController@index')->name('home');
 
