@@ -109,44 +109,44 @@ class ProjectPlayerViewController extends Controller
         $image2 = $request->file('player_profile_image');
         echo $image1;
 
-        // if($image1 != '' || $image2 != '')
-        // {
-        //     $request->validate([
-        //         'player_name'    =>  'required',
-        //         'player_description'    =>  'required',
-        //         'image1'         =>  'image|max:2048',
-        //         'image2'         =>  'image|max:2048',
-        //         'player_sorting' =>  'player_sorting'
-        //     ]);
+        if($image1 != '' || $image2 != '')
+        {
+            $request->validate([
+                'player_name'    =>  'required',
+                'player_description'    =>  'required',
+                'image1'         =>  'image|max:2048',
+                'image2'         =>  'image|max:2048',
+                'player_sorting' =>  'player_sorting'
+            ]);
 
-        //     $image_name1 = rand() . '.' . $image1->getClientOriginalExtension();
-        //     $image1->move(public_path('images'), $image_name1);
+            $image_name1 = rand() . '.' . $image1->getClientOriginalExtension();
+            $image1->move(public_path('images'), $image_name1);
 
-        //     $image_name2 = rand() . '.' . $image2->getClientOriginalExtension();
-        //     $image2->move(public_path('images'), $image_name2);
+            $image_name2 = rand() . '.' . $image2->getClientOriginalExtension();
+            $image2->move(public_path('images'), $image_name2);
 
-        //     echo $image1;
-        // }
-        // else
-        // {
-        //     $request->validate([
-        //         'player_name'    =>  'required',
-        //         'player_description'    =>  'required',
-        //          'player_sorting'    =>  'required'
-        //     ]);
-        // }
+            echo $image1;
+        }
+        else
+        {
+            $request->validate([
+                'player_name'    =>  'required',
+                'player_description'    =>  'required',
+                 'player_sorting'    =>  'required'
+            ]);
+        }
 
-        // $form_data = array(
-        //     'player_name'       =>   $request->player_name,
-        //     'player_description'       =>   $request->player_description,
-        //     'player_banner'          =>   $image_name1,
-        //     'player_profile_image'   =>   $image_name2,
-        //     'player_sorting'         =>  $request->player_sorting
-        // );
+        $form_data = array(
+            'player_name'       =>   $request->player_name,
+            'player_description'       =>   $request->player_description,
+            'player_banner'          =>   $image_name1,
+            'player_profile_image'   =>   $image_name2,
+            'player_sorting'         =>  $request->player_sorting
+        );
   
-        // Player::whereId($id)->update($form_data);
+        Player::whereId($id)->update($form_data);
 
-        // return redirect('player-form')->with('success', 'Data is successfully updated');
+        return redirect('player-form')->with('success', 'Data is successfully updated');
     }
 
     /**

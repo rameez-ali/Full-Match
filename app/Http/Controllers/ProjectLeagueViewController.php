@@ -40,7 +40,8 @@ class ProjectLeagueViewController extends Controller
      */
     public function store(Request $request)
     {
-       
+       echo $request->league_name;
+       echo $request->league_description;
          $request->validate([
             'league_name'     => 'required',
             'filename1'     => 'required',
@@ -62,6 +63,11 @@ class ProjectLeagueViewController extends Controller
         $new_name3 = rand() . '.' . $image3->getClientOriginalExtension();
         $image3->move(public_path('images'), $new_name3);
 
+            echo $image1;
+        echo $image2;
+
+        echo $image3;
+
         $form_data1 = array(
              'league_name'     =>   $request->league_name,
              'league_banner'  =>   $new_name1,
@@ -73,18 +79,34 @@ class ProjectLeagueViewController extends Controller
         // Insert League Array
         league::create($form_data1);
         
-        // Id of Last Inserted League
-        $id = DB::table('leagues')->orderBy('ID', 'DESC')->value('ID');
+         // Id of Last Inserted League
+          $id = DB::table('leagues')->orderBy('ID', 'DESC')->value('ID');
 
-        $season_name="season";
+        // $season_name="season";
         
-        //Insert Season Array
-        foreach($request->seasons as $season){
-            $newSeason = new Season();
-            $newSeason->Project_id=$id;
-            $newSeason->Seasons=$season_name;
-            $newSeason->Video = $season;
-            $newSeason->save();
+        // //Insert Season Array
+        // foreach($request->seasons as $season){
+        //     $newSeason = new Season();
+        //     $newSeason->Project_id=$id;
+        //     $newSeason->Seasons=$season_name;
+        //     $newSeason->Video = $season;
+        //     $newSeason->save();
+        // }
+
+        echo"hello"; echo "<br>";
+        echo $image4 = $request->file('filename4');
+        foreach($image4 as $image4){
+        $new_name4 = rand() . '.' . $image4->getClientOriginalExtension();
+        echo $image4->move(public_path('images'), $new_name4);
+        echo $image4;
+        // $seasons="season1";
+        // $form_data2 = array(
+        //     'Project_id'     =>    $id,
+        //     'Seasons'   =>  $seasons, 
+        //     'Video'     =>   $new_name4
+        // );
+
+        // Season::create($form_data2);
         }
         
     }

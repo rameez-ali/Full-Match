@@ -104,7 +104,7 @@ class ProjectClubViewController extends Controller
      */
     public function update(Request $request, $id)
     {
-         $image_name1 = $request->hidden_image1;
+        $image_name1 = $request->hidden_image1;
         $image_name2 = $request->hidden_image2;
 
         $image1 = $request->file('club_banner');

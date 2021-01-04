@@ -59,18 +59,18 @@
 
                                         <div class="card-body">
                                         <div class="form-group">
-                                        <input type="text" name="league_description" palceholder="Description" class="form-control input-lg"></textarea>
+                                        <input type="text" name="league_description" placeholder="Description" class="form-control input-lg"></textarea>
                                         </div>
 
                                             <div class="answer-section"> 
                                                  <div class="answer-section">
-                                                            <div class="input-field col s8">
-                                                                <input value="" name="seasons[]" id="customer-answer" type="file" class="validate" required >
-                                                            </div>  
-                                                            <div class="input-field col s2">  
-                                                                <button class="btn waves-effect waves-light btn-small remove-button" type="button" name="action">{{ __('remove') }}</button>         
-                                                            </div>
-                                                        </div>
+                                                    <div class="input-field col s8">
+                                                            <input type="file" name="filename4" id="exampleInputFile" >
+                                                    </div>  
+                                                      <div class="input-field col s2">  
+                                                            <button class="btn waves-effect waves-light btn-small remove-button" type="button" name="action">{{ __('remove') }}</button>         
+                                                      </div>
+                                                    </div>
                                                     
                                                 
                                             </div>
@@ -106,7 +106,7 @@ function addAnswer(element)
     let ans = $(element).parent().siblings('.answer-section').find('.answer-section-1').length ;
     const answer = `<div class="answer-section-1">
         <div class="input-field col s8">
-            <input value="{{ old('answer') }}" name="seasons[]" id="customer-answer" type="file" class="validate">
+            <input type="file" name="filename4" id="exampleInputFile" >
         </div>
         
         <div class="input-field col s2">
