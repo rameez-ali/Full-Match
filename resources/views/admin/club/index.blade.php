@@ -18,11 +18,12 @@
                                             <table id="page-length-option" class="display">
                                                 <thead>
                                                 <tr>
-                                                 <th width="18%">Club Name</th>
-                                                 <th width="18%">Club Logo </th>
-                                                 <th width="18%">Club Banner</th>
-                                                 <th width="18%">Club Description</th>
-                                                 <th width="50%">Action</th>
+                                                 <th width="10%">Club Name</th>
+                                                 <th width="10%">Club Logo </th>
+                                                 <th width="10%">Club Banner</th>
+                                                 <th width="10%">Club Description</th>
+                                                 <th width="10%">Club Sorting</th>
+                                                 <th width="15%">Action</th>
                                                  </tr>
                                                 </thead>
                                                 <tbody>
@@ -32,9 +33,13 @@
                                                 <td><img src="/images/{{  $club->club_banner}}" style="width:50px;height:50px;" /></td>
                                                 <td><img src="/images/{{  $club->club_logo}}" style="width:50px;height:50px;" /></td>
                                                 <td>{{ $club->club_description }}</td>
-                                                <td><a href="{{ route('club-form.edit',$club->id)}}" class="btn btn-primary">Edit</a>
-                                                <a href="{{ route('club-form.destroy',$club->id)}}" class="btn btn-primary">Delete</a></td>
-                                                </tr>
+                                                <td>{{ $club->club_sorting }}</td>
+                                                <td><form action="{{ route('club-form.destroy', $club->id)}}" method="post">
+                                                    <a href="{{ route('club-form.edit',$club->id)}}" class="btn btn-primary">Edit</a>
+                                                {{ csrf_field() }}
+                                                @method('DELETE')
+                                                <button class="btn btn-danger" type="submit">Delete</button>
+                                                </form></td>
                                                 @endforeach
                                                 </tbody>                                              
                                                 

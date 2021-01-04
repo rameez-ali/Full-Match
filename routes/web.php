@@ -28,22 +28,28 @@ Route::group(['middleware' => ['auth']], function () {
     Route::resource('league-form','ProjectLeagueViewController');
     Route::get('league/{id}','ProjectLeagueViewController@destroy1');
     Route::resource('video-form','ProjectVideoViewController');
+    Route::get('getstates/{id}','ProjectVideoViewController@getStates');
     Route::resource('subscriptionplans','SubsPlanController');
     Route::resource('page', 'PageController')->only(['index','edit','update']);
     Route::get('videoclub/{id}','ProjectVideoViewController@destroy1');
     Route::get('videodetails/{id}','ProjectVideoViewController@video_details');
+    
     Route::resource('slider-form','ProjectSliderViewController');
+    Route::get('slider-form/create/getstates/{id}','ProjectSliderViewController@getStates');
     Route::get('slider/{id}','ProjectSliderViewController@destroy1');
+    
     Route::resource('my-form','SeasonPartSortingController');
     Route::get("addmore","SeasonPartSortingController@addMore");
-Route::post("addmore","SeasonPartSortingController@addMorePost");
+    Route::post("addmore","SeasonPartSortingController@addMorePost");
 
-Route::get('dropdownlist','DataController@getCountries');
-Route::get('dropdownlist/getstates/{id}','DataController@getStates');
 
     Route::post("addmore","SeasonPartSortingController@addMorePost");
     Route::get("order","OrderController@index")->name('order.all');
     Route::get("order/{id}","OrderController@show")->name('order.show');
+
+
+// Route::get('dropdownlist','DataController@getCountries');
+// Route::get('dropdownlist/getstates/{id}','DataController@getStates');
 });
 Route::get('/home', 'HomeController@index')->name('home');
 

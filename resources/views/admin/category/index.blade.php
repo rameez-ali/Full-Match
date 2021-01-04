@@ -9,26 +9,32 @@
                             <div class="card animate fadeUp">
                                 <div class="card-content">
                                     <h4 class="header mt-0">
-                                        SLIDER CATEGORY
-                                        <a href="{{ URL::route('category-form.create') }}" class="waves-effect waves-light btn gradient-45deg-purple-deep-orange gradient-shadow right">Add Category</a>
+                                        Category 
+                                        <a href="{{ URL::route('category-form.create') }}" class="waves-effect waves-light btn gradient-45deg-purple-deep-orange gradient-shadow right">Add</a>
                                     </h4>
                                     <div class="row">
                                         <div class="col s12">
                                             <table id="page-length-option" class="display">
                                                 <thead>
                                                 <tr>
-                                                 <th width="27%">Category Name</th>
-                                                 <th width="27%">Category Image</th>
-                                                 <th width="30%">Action</th>
+                                                 <th width="15%">Category Name</th>
+                                                 <th width="15%">Category Image</th>
+                                                 <th width="15%">Category Sorting</th>
+                                                 <th width="15%">Action</th>
                                                  </tr>
                                                 </thead>
                                                 <tbody>
                                                 @foreach($category as $category)
                                                <tr>
                                                 <td>{{ $category->category_name }}</td>
-                                                <td><img src="/images/{{  $category->featured_image}}" style="width:50px;height:50px;" /></td>
-                                                <td><a href="{{ route('category-form.edit',$category->id)}}" class="btn btn-primary">Edit</a>
-                                                <a href="{{ route('category-form.destroy',$category->id)}}" class="btn btn-primary">Delete</a></td>
+                                                <td><img src="/images/{{  $category->category_image}}" style="width:50px;height:50px;" /></td>
+                                                <td>{{ $category->category_sorting }}</td>
+                                                <td><form action="{{ route('category-form.destroy', $category->id)}}" method="post">
+                                                    <a href="{{ route('category-form.edit',$category->id)}}" class="btn btn-primary">Edit</a>
+                                                {{ csrf_field() }}
+                                                @method('DELETE')
+                                                <button class="btn btn-danger" type="submit">Delete</button>
+                                                </form></td>
                                                 </tr>
                                                 @endforeach
                                                 </tbody>                                              
@@ -79,7 +85,7 @@
                         className: 'waves-effect waves-light btn-small',
                         filename : '{{ __("customer.excel") }}' ,
                         exportOptions: {
-                            columns: [ 0,1,2,3 ]
+                            columns: [ 0,1,2,3,4 ]
                         },
                     },
                     {
@@ -88,7 +94,7 @@
                         className: 'waves-effect waves-light btn-small',
                         filename : '{{ __("customer.csv") }}' ,
                         exportOptions: {
-                            columns: [ 0,1,2,3 ]
+                            columns: [ 0,1,2,3,4 ]
                         },
                     }
                 ],

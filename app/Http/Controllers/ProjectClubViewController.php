@@ -43,7 +43,9 @@ class ProjectClubViewController extends Controller
             'club_name'     => 'required',
             'club_banner'         =>  'required|image|max:2048',
             'club_logo'         =>  'required|image|max:2048',
-            'club_description'     => 'required'
+            'club_description'     => 'required',
+            'club_sorting'     => 'required'
+
         ]);
 
         $image = $request->file('club_banner');
@@ -58,7 +60,8 @@ class ProjectClubViewController extends Controller
             'club_name'     =>   $request->club_name,
             'club_banner'     =>   $new_name,
             'club_logo'     =>   $new_name1,
-            'club_description'     =>   $request->club_description
+            'club_description'     =>   $request->club_description,
+            'club_sorting'     =>   $request->club_sorting
         );
 
 
@@ -101,17 +104,46 @@ class ProjectClubViewController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $club = Club::find($request->input('id'));
-        $club->club_name = $request->input('club_name');
-        $club->club_description = $request->input('club_description');
-        
-        if($request->hasFile('club_banner')){
-            $club->club_banner = $request->input('club_banner');
+         $image_name1 = $request->hidden_image1;
+        $image_name2 = $request->hidden_image2;
+
+        $image1 = $request->file('club_banner');
+        $image2 = $request->file('club_logo');
+
+        if($image1 != '' || $image2 != '')
+        {
+            $request->validate([
+                'club_name'    =>  'required',
+                'club_description'    =>  'required',
+                'image1'         =>  'image|max:2048',
+                'image2'         =>  'image|max:2048'
+            ]);
+
+            $image_name1 = rand() . '.' . $image1->getClientOriginalExtension();
+            $image1->move(public_path('images'), $image_name1);
+
+            $image_name2 = rand() . '.' . $image2->getClientOriginalExtension();
+            $image2->move(public_path('images'), $image_name2);
+            echo $image2;
         }
-dd($request->hasFile('club_banner'),$club);
-        $club->club_logo = $request->input('club_logo');
-        $club->save();
-        return redirect('club-form')->with('info','Employee Updated Successfully');
+        else
+        {
+            $request->validate([
+                'club_name'    =>  'required',
+                'club_description'    =>  'required'
+            ]);
+        }
+
+        // $form_data = array(
+        //     'club_name'       =>   $request->club_name,
+        //     'club_description'       =>   $request->club_description,
+        //     'club_banner'            =>   $image_name1,
+        //     'club_logo'            =>   $image_name2
+        // );
+  
+        // Club::whereId($id)->update($form_data);
+
+        // return redirect('club-form')->with('success', 'Data is successfully updated');
     }
 
     /**

@@ -17,7 +17,7 @@
         <li class="bold"><a class="waves-effect waves-cyan " href="{{ route('order.all') }}"><i class="material-icons">person_outline</i><span class="menu-title" data-i18n="User Profile">{{ __('customer.order.orders') }}</span></a>
         </li>
 
-        <li class="bold"><a class="waves-effect waves-cyan " href="{{ route('category-form.index') }}"><i class="material-icons">person_outline</i><span class="menu-title" data-i18n="User Profile">Categories</span></a>
+        <li class="bold"><a class="waves-effect waves-cyan " href="{{ route('category-form.index') }}"><i class="material-icons">person_outline</i><span class="menu-title" data-i18n="User Profile">Category</span></a>
         </li>
 
         <li class="bold"><a class="waves-effect waves-cyan " href="{{ route('player-form.index') }}"><i class="material-icons">person_outline</i><span class="menu-title" data-i18n="User Profile">Players</span></a>

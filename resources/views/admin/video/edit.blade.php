@@ -20,49 +20,50 @@
                                         @method('PATCH')
                                          <div class="form-group">
                                          <label for="exampleInputEmail1">Enter Video Title</label>
-                                         <input type="text" name="video_title" value="" class="form-control input-lg" />
+                                         <input type="text" name="video_title" value="{{$video->video_title}}" class="form-control input-lg" />
                                          </div>
 
                             <div class="form-group">
                              <label for="exampleInputEmail1">Enter Description </label>
-                             <input type="text" name="video_description" class="form-control input-lg" />  
+                             <input type="text" name="video_description" value="{{$video->video_description}}" class="form-control input-lg" />  
                             </div>
 
                             <div class="form-group">
                             <label for="exampleInputEmail1">Enter link </label>
-                            <input type="text" name="video_link" class="form-control input-lg" />
+                            <input type="text" name="video_link" value="{{$video->video_link}}" class="form-control input-lg" />
                             </div>
 
                             <div class="form-group">
                             <label for="exampleInputEmail1">Enter duration </label>
-                            <input type="text" name="video_duration" class="form-control input-lg" />
+                            <input type="text" name="video_duration" value="{{$video->video_duration}}" class="form-control input-lg" />
                             </div>
 
                             <div class="form-group">
                             <label for="exampleInputEmail1">Notify user </label>
-                            <input type="text" name="notify_user" class="form-control input-lg" />
+                            <input type="text" name="notify_user" value="{{$video->notify_user}}" class="form-control input-lg" />
+                            </div>
+
+                             <div class="form-group">
+                            <label for="exampleInputEmail1">Video Sorting </label>
+                            <input type="text" name="video_sorting" value="{{$video->video_sorting}}" class="form-control input-lg" />
                             </div>
 
 
                                         <div class="form-group">
-                                        <label for="exampleInputFile">Select Banner Image</label>
-                                        <div class="input-group">
-                                        <div class="custom-file">
-                                        <input type="file" name="video_banner_img" value="{{ $video->video_banner }}" id="exampleInputFile">
-                                        <label class="custom-file-label" for="exampleInputFile">Select Image</label>
-                                        </div>
-                                        </div>
-                                        </div>
+                                       <label class="col-md-4 text-right">Select Player Banner</label>
+                                       <div class="col-md-8">
+                                       <input type="file" name="video_banner_img" />
+                                       <input type="hidden" name="hidden_image1" value="{{ $video->video_banner_img }}" />
+                                       </div>
+                                       </div>
 
                                          <div class="form-group">
-                                         <label for="exampleInputFile1">Select  Image</label>
-                                         <div class="input-group">
-                                         <div class="custom-file">
-                                         <input type="file" name="video_img" value="{{ $video->video_image }}" id="exampleInputFile1">
-                                         <label class="custom-file-label" for="exampleInputFile1">Select Image</label>
-                                         </div>
-                                         </div>
-                                         </div>
+                                       <label class="col-md-4 text-right">Select Player Banner</label>
+                                       <div class="col-md-8">
+                                       <input type="file" name="video_img" />
+                                       <input type="hidden" name="hidden_image2" value="{{ $video->video_img }}" />
+                                       </div>
+                                       </div>
 
                                         <div name="hidden-panel1" id="hidden-panel1">
                                         <label><strong>Select club </strong></label><br/>
@@ -91,16 +92,7 @@
                                        </select>
                                        </div>
 
-                                           <div class="form-group">
-                                         <label for="exampleInputFile1">Select  Image</label>
-                                         <div class="input-group">
-                                         <div class="custom-file">
-                                         <input type="file" name="video_img" value="{{ $video->video_image }}" id="exampleInputFile1">
-                                         <label class="custom-file-label" for="exampleInputFile1">Select Image</label>
-                                         </div>
-                                         </div>
-                                         </div>
-
+                                           
 
                                        
                                        <br /><br />

@@ -19,10 +19,12 @@ class ProjectSliderViewController extends Controller
      */
     public function index()
     {
+         
         $slidercategory = Slidercategory1::latest()->paginate(5);
-            return view('admin.slider.index', compact('slidercategory'))
-            ->with('i', (request()->input('page', 1) - 1) * 5);
+            return view('admin.slider.index', compact('counries','slidercategory'));
     }
+
+
 
     /**
      * Show the form for creating a new resource.
@@ -31,9 +33,17 @@ class ProjectSliderViewController extends Controller
      */
     public function create()
     {
+
+        $countries = DB::table('countries')->pluck("name","id");
         $video=Video::all();
         $club=Club::all();
-        return view('admin.slider.form',compact('video','club'));
+        return view('admin.video.dropdown',compact('video','club','countries'));
+    }
+
+    public function getStates($id) 
+    {
+        $states = DB::table("states")->where("countries_id",$id)->pluck("name","id");
+        return json_encode($states);
     }
 
     /**

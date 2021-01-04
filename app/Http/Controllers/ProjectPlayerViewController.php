@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\ProjectCategory;
 use App\Model\Player;
-use App\Model\Video_player;
+use App\Model\Videoplayer;
 
 class ProjectPlayerViewController extends Controller
 {
@@ -42,7 +42,8 @@ class ProjectPlayerViewController extends Controller
             'player_name'     => 'required',
             'player_banner'         =>  'required|image|max:2048',
             'player_profile_image'  =>  'required|image|max:2048',
-            'player_description'     => 'required'
+            'player_description'     => 'required',
+            'player_sorting'         => 'required'
         ]);
 
         $image = $request->file('player_banner');
@@ -57,7 +58,8 @@ class ProjectPlayerViewController extends Controller
             'player_name'     =>   $request->player_name,
             'player_banner'     =>   $new_name,
             'player_profile_image'     =>   $new_name1,
-            'player_description'     =>   $request->player_description
+            'player_description'     =>   $request->player_description,
+            'player_sorting'     =>   $request->player_sorting
         );
 
 
@@ -100,7 +102,51 @@ class ProjectPlayerViewController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $image_name1 = $request->hidden_image1;
+        $image_name2 = $request->hidden_image2;
+
+        $image1 = $request->file('player_banner');
+        $image2 = $request->file('player_profile_image');
+        echo $image1;
+
+        // if($image1 != '' || $image2 != '')
+        // {
+        //     $request->validate([
+        //         'player_name'    =>  'required',
+        //         'player_description'    =>  'required',
+        //         'image1'         =>  'image|max:2048',
+        //         'image2'         =>  'image|max:2048',
+        //         'player_sorting' =>  'player_sorting'
+        //     ]);
+
+        //     $image_name1 = rand() . '.' . $image1->getClientOriginalExtension();
+        //     $image1->move(public_path('images'), $image_name1);
+
+        //     $image_name2 = rand() . '.' . $image2->getClientOriginalExtension();
+        //     $image2->move(public_path('images'), $image_name2);
+
+        //     echo $image1;
+        // }
+        // else
+        // {
+        //     $request->validate([
+        //         'player_name'    =>  'required',
+        //         'player_description'    =>  'required',
+        //          'player_sorting'    =>  'required'
+        //     ]);
+        // }
+
+        // $form_data = array(
+        //     'player_name'       =>   $request->player_name,
+        //     'player_description'       =>   $request->player_description,
+        //     'player_banner'          =>   $image_name1,
+        //     'player_profile_image'   =>   $image_name2,
+        //     'player_sorting'         =>  $request->player_sorting
+        // );
+  
+        // Player::whereId($id)->update($form_data);
+
+        // return redirect('player-form')->with('success', 'Data is successfully updated');
     }
 
     /**
@@ -111,7 +157,7 @@ class ProjectPlayerViewController extends Controller
      */
     public function destroy($id)
     {
-        Video_player::where('Player_id', $id)->delete();
+        Videoplayer::where('Player_id', $id)->delete();
 
         $data = Player::findOrFail($id);
         $data->delete();

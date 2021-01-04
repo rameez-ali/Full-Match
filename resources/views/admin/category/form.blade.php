@@ -10,34 +10,58 @@
                                 <div class="card-content">
                                     <h4 class="header mt-0">
                                         ADD Category
-                                        <a class="waves-effect waves-light btn gradient-45deg-purple-deep-orange gradient-shadow right">Details</a>
+                                        
                                     </h4>
                                     <div class="row">
                                         <div class="col s12">
                                             <h2></h2>
+
+                                            
                                         <form method="post" action="{{ route('category-form.store') }}" enctype="multipart/form-data">
                                         @csrf
                                         <div class="card-body">
                                         <div class="form-group">
-                                        <label for="category_name">Enter Category Name</label>
-                                        <input type="text" name="category_name" class="form-control input-lg" />
+                                        <label for="category_name"></label>
+                                        <input type="text" name="category_name" id="category_name"  Placeholder="Category Name *" class="form-control input-lg" data-error=".errorTxt1" />
+                                        <small class="errorTxt1"></small>
+                                        @error('category_name')
+                                        <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                        </span>
+                                        @enderror
                                         </div>
                                         
                                         <br/>
-                                        <div class="form-group">
-                                         <label for="exampleInputFile">Select Category Image</label>
+                                       <div class="form-group">
                                         <div class="input-group">
                                         <div class="custom-file">
-                                        <input type="file" name="featured_image" id="exampleInputFile">
-                                        <label class="custom-file-label" for="exampleInputFile">Select Image</label>
+                                        <label for="category_image">Category Image * </label>    
+                                        <input type="file" name="category_image" Placeholder="Category Image *" id="exampleInputFile">
+                                        </div>
+                                        <small class="errorTxt1"></small>
+                                        @error('category_image')
+                                        <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                        </span>
+                                        @enderror
                                         </div>
                                         </div>
                                         </div>
-                                         </div>
+                                         <br/>
+
+                                         
+
+                                        <div class="card-body">
+                                        <div class="form-group">
+                                        <label for="category_name"></label>
+                                        <input type="text" name="category_sorting" Placeholder="Category Sorting" class="form-control input-lg"  />
+                                        </div>
                 
-                 <div class="card-footer">
-                    <input type="submit" name="add" class="btn btn-primary input-lg" value="Add" />
-                 </div>
+                                        <div class="input-field col s12">
+                                                <button class="btn waves-effect waves-light right submit" type="submit" name="action">Submit
+                                                    <i class="material-icons right">send</i>
+                                                </button>
+                                        </div>
               </form>
                                         </div>
                                     </div>
@@ -101,7 +125,7 @@
             },
             //For custom messages
             messages: {
-                uname: {
+                category_name: {
                     required: "Enter a username",
                     minlength: "Enter at least 5 characters"
                 },

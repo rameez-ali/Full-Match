@@ -22,41 +22,36 @@
                                         <div class="question-section" data-id="0">
                                             <div class="card-body">
                                        <div class="form-group">
-                                       <label for="exampleInputEmail1">Enter League Name</label>
-                                       <input type="text" name="league_name" class="form-control input-lg"></textarea>
+                                       <input type="text" name="league_name" Placeholder="League Name *" class="form-control input-lg"></textarea>
                                        </div>
                                        <br/>
-                
-                                      
+                                       
                 
                                         <div class="form-group">
-                                        <label for="exampleInputFile">Insert League Banner</label>
                                         <div class="input-group">
                                         <div class="custom-file">
+                                        <label>League Banner</label>
                                         <input type="file" name="filename1" multiple id="exampleInputFile">
-                                        <label class="custom-file-label" for="exampleInputFile">Select Image</label>
                                         </div>
                                         </div>
                                         </div>
                                          <br/>
 
                                          <div class="form-group">
-                                        <label for="exampleInputFile">Insert League Promovideo</label>
                                         <div class="input-group">
                                         <div class="custom-file">
+                                        <label>Promo Video *</label>
                                         <input type="file" name="filename2" multiple id="exampleInputFile">
-                                        <label class="custom-file-label" for="exampleInputFile">Select Image</label>
                                         </div>
                                         </div>
                                         </div>
                                          <br/>
 
                                          <div class="form-group">
-                                        <label for="exampleInputFile">Insert Profile Image</label>
                                         <div class="input-group">
                                         <div class="custom-file">
+                                        <label>Profile Image*</label>
                                         <input type="file" name="filename3" multiple id="exampleInputFile">
-                                        <label class="custom-file-label" for="exampleInputFile">Select Image</label>
                                         </div>
                                         </div>
                                         </div>
@@ -64,16 +59,13 @@
 
                                         <div class="card-body">
                                         <div class="form-group">
-                                        <label for="exampleInputEmail1">Enter Description </label>
-                                        <input type="text" name="league_description" class="form-control input-lg"></textarea>
+                                        <input type="text" name="league_description" palceholder="Description" class="form-control input-lg"></textarea>
                                         </div>
 
                                             <div class="answer-section"> 
                                                  <div class="answer-section">
                                                             <div class="input-field col s8">
-                                                                <label for="exampleInputEmail1">Add Season </label>
-                                                                <input value="" name="seasons[]" id="customer-answer" type="text" class="validate" required >
-                                                                <label for="customer-answer" class="active">{{ __('Season1') }}</label>
+                                                                <input value="" name="seasons[]" id="customer-answer" type="file" class="validate" required >
                                                             </div>  
                                                             <div class="input-field col s2">  
                                                                 <button class="btn waves-effect waves-light btn-small remove-button" type="button" name="action">{{ __('remove') }}</button>         
@@ -114,8 +106,7 @@ function addAnswer(element)
     let ans = $(element).parent().siblings('.answer-section').find('.answer-section-1').length ;
     const answer = `<div class="answer-section-1">
         <div class="input-field col s8">
-            <input value="{{ old('answer') }}" name="seasons[]" id="customer-answer" type="text" class="validate">
-            <label for="customer-answer" class="active">{{ __('Season') }} </label>
+            <input value="{{ old('answer') }}" name="seasons[]" id="customer-answer" type="file" class="validate">
         </div>
         
         <div class="input-field col s2">

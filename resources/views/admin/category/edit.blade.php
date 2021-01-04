@@ -9,7 +9,7 @@
                             <div class="card animate fadeUp">
                                 <div class="card-content">
                                     <h4 class="header mt-0">
-                                        Edit Category
+                                        Edit Category Sliders
                                         <a class="waves-effect waves-light btn gradient-45deg-purple-deep-orange gradient-shadow right">Details</a>
                                     </h4>
                                     <div class="row">
@@ -27,14 +27,21 @@
                                        <div class="form-group">
                                        <label class="col-md-4 text-right">Select Profile Image</label>
                                        <div class="col-md-8">
-                                       <input type="file" name="featured_image" />
-                                       <input type="hidden" name="hidden_image" value="{{ $category->featured_image }}" />
+                                       <input type="file" name="category_image"  />
+                                       <input type="hidden" name="hidden_image" value="{{ $category->category_image }}" />
                                        </div>
                                        </div>
                                        <br /><br />
-                                       <div class="form-group text-center">
-                                       <input type="submit" name="edit" class="btn btn-primary input-lg" value="Edit" />
-                                       </div>
+                                       <div class="card-body">
+                                        <div class="form-group">
+                                        <label for="category_name"></label>
+                                        <input type="text" name="category_sorting" value="{{ $category->category_sorting }}"  class="form-control input-lg" />
+                                        </div>
+                                       <div class="input-field col s12">
+                                                <button class="btn waves-effect waves-light right submit" type="submit" name="action">Submit
+                                                    <i class="material-icons right">send</i>
+                                                </button>
+                                        </div>
                                        </form>
                                         </div>
                                     </div>

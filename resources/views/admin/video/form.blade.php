@@ -10,7 +10,7 @@
                                 <div class="card-content">
                                     <h4 class="header mt-0">
                                         ADD VIDEO
-                                        <a class="waves-effect waves-light btn gradient-45deg-purple-deep-orange gradient-shadow right">ADD</a>
+                                         
                                     </h4>
                                     <div class="row">
                                         <div class="col s12">
@@ -19,55 +19,85 @@
                             @csrf
                             
                             
+                             <div class="form-group">
+                                            <input type="text" name="video_title" Placeholder="Video Title *" class="form-control input-lg" />
+                                            <small class="errorTxt1"></small>
+                                            @error('video_title')
+                                            <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                            </span>
+                                            @enderror
+                                            </div>
+
                             <div class="form-group">
-                             <label for="exampleInputEmail1">Enter Video Title</label>
-                             <input type="text" name="video_title" class="form-control input-lg" />
+                             <input type="text" name="video_description" Placeholder="Video Description" class="form-control input-lg" />  
+
                             </div>
 
                             <div class="form-group">
-                             <label for="exampleInputEmail1">Enter Description </label>
-                             <input type="text" name="video_description" class="form-control input-lg" />  
+                            <input type="text" name="video_link" Placeholder="Video Link *" class="form-control input-lg" />
+                            <small class="errorTxt1"></small>
+                                @error('video_link')
+                                <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                                </span>
+                                @enderror
                             </div>
 
                             <div class="form-group">
-                            <label for="exampleInputEmail1">Enter link </label>
-                            <input type="text" name="video_link" class="form-control input-lg" />
+                            <input type="text" name="video_duration" Placeholder="Duration *" class="form-control input-lg" />
+                             <small class="errorTxt1"></small>
+                      @error('video_duration')
+                      <span class="invalid-feedback" role="alert">
+                      <strong>{{ $message }}</strong>
+                      </span>
+                      @enderror
                             </div>
 
-                            <div class="form-group">
-                            <label for="exampleInputEmail1">Enter duration </label>
-                            <input type="text" name="video_duration" class="form-control input-lg" />
-                            </div>
+                            
+                            <div class="input-field col s6">
+                              <label>
+                                <input type="checkbox" name="notify_user" id="customer-status" />
+                                <span for="customer-status" >Notify User</span>
+                              </label>
+                            </div><br><br><br>
 
                             <div class="form-group">
-                            <label for="exampleInputEmail1">Notify user </label>
-                            <input type="text" name="notify_user" class="form-control input-lg" />
-                            </div>
+                            <input type="text" name="video_sorting" Placeholder="Video Sorting" class="form-control input-lg" />
+                            </div><br>
+
+
+                            <br>
 
 
                   <div class="form-group">
-                   <label for="exampleInputFile">Select Banner Image</label>
                     <div class="input-group">
                     <div class="custom-file">
+                    <label>Video Banner Image  </label>
                     <input type="file" name="video_banner_img" id="exampleInputFile">
-                    <label class="custom-file-label" for="exampleInputFile">Select Image</label>
                     </div>
                     </div>
-                   </div>
+                   </div><br>
 
                    <div class="form-group">
-                   <label for="exampleInputFile1">Select  Image</label>
                     <div class="input-group">
                     <div class="custom-file">
+                    <label>Video Image * </label>
                     <input type="file" name="video_img" id="exampleInputFile1">
-                    <label class="custom-file-label" for="exampleInputFile1">Select Image</label>
+                    <small class="errorTxt1"></small>
+                      @error('video_img')
+                      <span class="invalid-feedback" role="alert">
+                      <strong>{{ $message }}</strong>
+                      </span>
+                      @enderror
                     </div>
                     </div>
-                   </div>
+                   </div><br>
 
                               <div class="form-group">
                               <label for="exampleInputEmail1">Select Category</label>
                               <select  class="browser-default custom-select" name="Category_id">
+                                
                               <option selected> Select Category </option>
                               @foreach($category as $category)
                               <option value="{{$category->id}}">{{$category->category_name}}</option>

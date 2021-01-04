@@ -9,8 +9,7 @@
                             <div class="card animate fadeUp">
                                 <div class="card-content">
                                     <h4 class="header mt-0">
-                                        Edit Club
-                                        <a class="waves-effect waves-light btn gradient-45deg-purple-deep-orange gradient-shadow right">Details</a>
+                                        Edit Player
                                     </h4>
                                     <div class="row">
                                         <div class="col s12">
@@ -19,34 +18,35 @@
                                         @csrf
                                         @method('PATCH')
                                        <div class="form-group">
-                                       <label class="col-md-4 text-right">Add Player Name</label>
                                        <div class="col-md-8">
-                                       <input type="text" name="player_name" value="{{ $player->player_name }}" class="form-control input-lg" />
+                                       <input type="text" name="player_name" Placeholder="Player Name" value="{{ $player->player_name }}" class="form-control input-lg" />
                                        </div>
                                        </div>
                                        <div class="form-group">
-                                       <label class="col-md-4 text-right">Enter Description </label>
                                        <div class="col-md-8">
-                                       <input type="text" name="player_description" value="{{ $player->player_description }}" class="form-control input-lg" />
-                                       </div>
+                                       <input type="text" name="player_description" Placeholder="Description" value="{{ $player->player_description }}" class="form-control input-lg" />
+                                       </div><br>
                                        </div>
                                        <div class="form-group">
-                                       <label class="col-md-4 text-right">Select Player Banner</label>
                                        <div class="col-md-8">
                                        <input type="file" name="player_banner" />
                                        <input type="hidden" name="hidden_image1" value="{{ $player->player_banner }}" />
-                                       </div>
+                                       </div><br>
                                        </div>
                                        <div class="form-group">
-                                       <label class="col-md-4 text-right">Select Player Profile </label>
                                        <div class="col-md-8">
                                        <input type="file" name="player_profile_image" />
-                                       <input type="hidden" name="hidden_image2" value="{{ $player->player_profile_image }}" />
+                                       <input type="hidden" name="hidden_image2" value="{{ $player->player_profile_image }}" Placeholder="Player Profile Image" value="{{ $player->player_profile_image }}" />
+                                       </div><br>
+                                       </div>
+                                       <div class="form-group">
+                                       <div class="col-md-8">
+                                       <input type="text" name="player_sorting" Placeholder="Player sorting" value="{{ $player->player_sorting }}" class="form-control input-lg" />
                                        </div>
                                        </div>
                                        <br /><br />
                                        <div class="form-group text-center">
-                                       <input type="submit" name="edit" class="btn btn-primary input-lg" value="Edit" />
+                                       <input type="submit" name="edit" class="btn btn-primary input-lg" value="Submit" />
                                        </div>
                                        </form>
                                         </div>

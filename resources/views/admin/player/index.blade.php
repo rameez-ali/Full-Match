@@ -10,18 +10,19 @@
                                 <div class="card-content">
                                     <h4 class="header mt-0">
                                         Players
-                                        <a href="{{ URL::route('player-form.create') }}" class="waves-effect waves-light btn gradient-45deg-purple-deep-orange gradient-shadow right">Add Player</a>
+                                        <a href="{{ URL::route('player-form.create') }}" class="waves-effect waves-light btn gradient-45deg-purple-deep-orange gradient-shadow right">Add </a>
                                     </h4>
                                     <div class="row">
                                         <div class="col s12">
                                             <table id="page-length-option" class="display">
                                                 <thead>
                                                 <tr>
-                                                 <th width="18%">Player Name</th>
-                                                 <th width="18%">Player Banner</th>
-                                                 <th width="18%">Player Profile Image</th>
-                                                 <th width="18%">Player Description</th>
-                                                 <th width="50%">Action</th>
+                                                 <th width="10%">Player Name</th>
+                                                 <th width="10%">Player Banner</th>
+                                                 <th width="10%">Player Profile Image</th>
+                                                 <th width="10%">Player Description</th>
+                                                 <th width="10%">Player Sorting</th>
+                                                 <th width="15%">Action</th>
                                                  </tr>
                                                 </thead>
                                                  <tbody>
@@ -31,9 +32,13 @@
                                                  <td><img src="/images/{{ $player->player_banner }}"  class="img-thumbnail" width="75" /></td>
                                                  <td><img src="/images/{{ $player->player_profile_image}}"  class="img-thumbnail" width="75" /></td>
                                                  <td>{{ $player->player_description }}</td>
-                                                 <td><a href="{{ route('player-form.edit',$player->id)}}" class="btn btn-primary">Edit</a>
-                                                     <a href="{{ route('player-form.destroy',$player->id)}}" class="btn btn-primary">Delete</a></td>
-                                                 </tr>
+                                                 <td>{{ $player->player_sorting }}</td>
+                                                 <td><form action="{{ route('player-form.destroy', $player->id)}}" method="post">
+                                                    <a href="{{ route('player-form.edit',$player->id)}}" class="btn btn-primary">Edit</a>
+                                                {{ csrf_field() }}
+                                                @method('DELETE')
+                                                <button class="btn btn-danger" type="submit">Delete</button>
+                                                </form></td>
                                                  @endforeach
                                                  </tbody>                                     
 

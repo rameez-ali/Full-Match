@@ -10,7 +10,7 @@
                                 <div class="card-content">
                                     <h4 class="header mt-0">
                                         Videos
-                                        <a href="{{ URL::route('video-form.create') }}" class="waves-effect waves-light btn gradient-45deg-purple-deep-orange gradient-shadow right">Add Player</a>
+                                        <a href="{{ URL::route('video-form.create') }}" class="waves-effect waves-light btn gradient-45deg-purple-deep-orange gradient-shadow right">Add</a>
                                     </h4>
                                     <div class="row">
                                         <div class="col s14">
@@ -23,7 +23,7 @@
                                                   <th width="8%">Video Image</th>
                                                   <th width="8%">Video Description</th>
                                                   <th width="10%">Video Link</th>
-                                                  <th width="10%">Video Duration</th>
+                                                  <th width="10%">Video Sorting</th>
                                                    <th width="80%">Action</th>
                                                  </tr>
                                                 </thead>
@@ -35,7 +35,7 @@
                                                <td><img src="/images/{{ $video->video_img}}"  class="img-thumbnail" width="75" /></td>
                                                <td>{{ $video->video_description }}</td>
                                                <td>{{ $video->video_link }}</td>
-                                               <td>{{ $video->video_duration }}</td>
+                                               <td>{{ $video->video_sorting }}</td>
                                                <td><a href="{{ url('videodetails/'.$video->id)}}" class="btn btn-primary btn-sm" >Details</a>  
                                                    <a href="{{ route('video-form.edit',$video->id)}}" class="btn btn-primary">Edit</a>
                                                    <a href="{{ route('video-form.destroy',$video->id)}}" class="btn btn-primary">Delete</a>
