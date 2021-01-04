@@ -9,24 +9,22 @@
                             <div class="card animate fadeUp">
                                 <div class="card-content">
                                     <h4 class="header mt-0">
-                                        Player
-                                        <a href="{{ URL::route('player-form.create') }}" class="waves-effect waves-light btn gradient-45deg-purple-deep-orange gradient-shadow right">Add Player</a>
+                                        Videos
+                                        <a href="{{ URL::route('video-form.create') }}" class="waves-effect waves-light btn gradient-45deg-purple-deep-orange gradient-shadow right">Add</a>
                                     </h4>
                                     <div class="row">
-                                        <div class="col s12">
+                                        <div class="col s14">
                                             <h2></h2>
                                             <table id="page-length-option" class="display">
                                                 <thead>
                                                 <tr>
-                                                 <th width="10%">Video Title</th>
-                                                  <th width="10%">Video Banner</th>
-                                                  <th width="10%">Video Image</th>
-                                                  <th width="10%">Video Description</th>
+                                                 <th width="8%">Video Title</th>
+                                                  <th width="8%">Video Banner</th>
+                                                  <th width="8%">Video Image</th>
+                                                  <th width="8%">Video Description</th>
                                                   <th width="10%">Video Link</th>
-                                                  <th width="10%">Video Duration</th>
-                                                   <th width="10%">Action</th>
-                                                   <th width="10%">Action</th>
-                                                   <th width="10%">Action</th>
+                                                  <th width="10%">Video Sorting</th>
+                                                   <th width="80%">Action</th>
                                                  </tr>
                                                 </thead>
                                                  <tbody>
@@ -37,31 +35,16 @@
                                                <td><img src="/images/{{ $video->video_img}}"  class="img-thumbnail" width="75" /></td>
                                                <td>{{ $video->video_description }}</td>
                                                <td>{{ $video->video_link }}</td>
-                                               <td>{{ $video->video_duration }}</td>
-                                               <td><a href="{{ url('videoclub/'.$video->id)}}" class="btn btn-small" >Club details </a></td>
-                                               <td><a href="{{ url('videoplayer/'.$video->id)}}" class="btn btn-small" >Player details </a></td>  
-                                               <td><form action="{{ route('video-form.destroy', $video->id)}}" method="post">
-                                                {{ csrf_field() }}
-                                                @method('DELETE')
-                                                <button class="btn btn-small" type="submit">Delete</button>
-                                                </form></td>
-                                                </td>
+                                               <td>{{ $video->video_sorting }}</td>
+                                               <td><a href="{{ url('videodetails/'.$video->id)}}" class="btn btn-primary btn-sm" >Details</a>  
+                                                   <a href="{{ route('video-form.edit',$video->id)}}" class="btn btn-primary">Edit</a>
+                                                   <a href="{{ route('video-form.destroy',$video->id)}}" class="btn btn-primary">Delete</a>
+                                              </td>
+                                                
                                                 </tr>
                                                  @endforeach
                                                  </tbody>                                     
-                                                 </tbody>
-                                                <tfoot>
-                                                <tr>
-{{--                                                    <th>{{ __('order.email') }}</th>--}}
-                                                    <th>a</th>
-                                                    <th>a</th>
-                                                    <th>a</th>
-                                                    <th>a</th>
-                                                    <th>a</th>
-                                                    <th>a</th>
-                                                    <th>a</th>
-                                                </tr>
-                                                </tfoot>
+                                                 </tbody>          
                                             </table>
                                         </div>
                                     </div>
@@ -107,7 +90,7 @@
                         className: 'waves-effect waves-light btn-small',
                         filename : '{{ __("customer.excel") }}' ,
                         exportOptions: {
-                            columns: [ 0,1,2,3,4,5,6,7 ]
+                            columns: [ 0,1,2,3,4,5 ]
                         },
                     },
                     {

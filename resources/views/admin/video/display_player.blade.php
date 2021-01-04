@@ -9,12 +9,36 @@
                             <div class="card animate fadeUp">
                                 <div class="card-content">
                                     <h4 class="header mt-0">
-                                        Players of Video
-                                        <a href="{{ URL::route('club-form.create') }}" class="waves-effect waves-light btn gradient-45deg-purple-deep-orange gradient-shadow right">Add Club</a>
+                                        Video Details
                                     </h4>
                                     <div class="row">
                                         <div class="col s12">
                                             <h2></h2>
+                                             <table id="page-length-option" class="display">
+                                                <thead>
+                                                <tr>
+                                                 <th width="8%">Video Title</th>
+                                                  <th width="8%">Video Banner</th>
+                                                  <th width="8%">Video Image</th>
+                                                  <th width="8%">Video Description</th>
+                                                  <th width="10%">Video Link</th>
+                                                  <th width="10%">Video Duration</th>
+                                                 </tr>
+                                                </thead>
+                                                 <tbody>
+                                                 @foreach($video as $video)
+                                                 <tr>
+                                               <td>{{ $video->video_title }}</td>
+                                               <td><img src="/images/{{ $video->video_banner_img }}"  class="img-thumbnail" width="75" /></td>
+                                               <td><img src="/images/{{ $video->video_img}}"  class="img-thumbnail" width="75" /></td>
+                                               <td>{{ $video->video_description }}</td>
+                                               <td>{{ $video->video_link }}</td>
+                                               <td>{{ $video->video_duration }}</td>
+                                                </tr>
+                                                 @endforeach
+                                                 </tbody>                                     
+                                                 </tbody>
+                                            </table>
                                             <table id="page-length-option" class="display">
                                                 <thead>
                                                 <tr>
@@ -22,26 +46,29 @@
                                                  </tr>
                                                 </thead>
                                                  <tbody>
-                                                  @if($data3->count())
-                                                  @foreach($data3->where('Video_id', $Video_id) as $data3)
+                                                  @foreach($clubs as $club)
                                                   <tr>
-                                                  <td>{{ $data3->Player_id }}</td>
+                                                  <td>{{ $club->club_name}}</td>
                                                   </tr>
-                                                  @endforeach
-                                                  @endif             
+                                                  @endforeach            
                                                  </tbody>
-                                                <tfoot>
+                                                
+                                            </table>
+
+                                            <table id="page-length-option" class="display">
+                                                <thead>
                                                 <tr>
-{{--                                                    <th>{{ __('order.email') }}</th>--}}
-                                                    <th>a</th>
-                                                    <th>a</th>
-                                                    <th>a</th>
-                                                    <th>a</th>
-                                                    <th>a</th>
-                                                    <th>a</th>
-                                                    <th>a</th>
-                                                </tr>
-                                                </tfoot>
+                                                <th width="27%">Players</th>
+                                                 </tr>
+                                                </thead>
+                                                 <tbody>
+                                                  @foreach($players as $player)
+                                                  <tr>
+                                                  <td>{{ $player->player_name}}</td>
+                                                  </tr>
+                                                  @endforeach            
+                                                 </tbody>
+                                                
                                             </table>
                                         </div>
                                     </div>

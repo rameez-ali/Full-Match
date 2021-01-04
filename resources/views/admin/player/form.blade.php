@@ -10,7 +10,6 @@
                                 <div class="card-content">
                                     <h4 class="header mt-0">
                                         ADD PLAYER
-                                        <a class="waves-effect waves-light btn gradient-45deg-purple-deep-orange gradient-shadow right">Details</a>
                                     </h4>
                                     <div class="row">
                                         <div class="col s12">
@@ -18,35 +17,60 @@
                                             <form method="post" action="{{ route('player-form.store') }}" enctype="multipart/form-data">
                                             @csrf
                                             <div class="card-body">
+                                            
                                             <div class="form-group">
-                                            <label for="exampleInputEmail1">Enter Player Name</label>
-                                            <input type="text" name="player_name" class="form-control input-lg" />
+                                            <input type="text" name="player_name" Placeholder="Player Name *" class="form-control input-lg" />
+                                            <small class="errorTxt1"></small>
+                                            @error('player_name')
+                                            <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                            </span>
+                                            @enderror
                                             </div>
 
                                             <div class="form-group">
-                                            <label for="exampleInputEmail1">Enter Description</label>
-                                            <input type="text" name="player_description" class="form-control input-lg" />
-                                            </div>
+                                            <input type="text" name="player_description" Placeholder="Description * " class="form-control input-lg" />
+                                            <small class="errorTxt1"></small>
+                                            @error('player_description')
+                                            <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                            </span>
+                                            @enderror
+                                            </div><br>
  
                                             <div class="form-group">
-                                            <label for="exampleInputFile">Select Player Banner</label>
                                             <div class="input-group">
                                             <div class="custom-file">
-                                            <input type="file" name="player_banner" id="exampleInputFile">
-                                            <label class="custom-file-label" for="exampleInputFile">Select Image</label>
+                                            <label>Player Banner * </label>
+                                            <input type="file" name="player_banner" Placeholder="Player Banner *" id="exampleInputFile">
+                                            <small class="errorTxt1"></small>
+                                            @error('player_banner')
+                                            <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                            </span>
+                                            @enderror
                                             </div>
                                             </div>
-                                            </div>
+                                            </div><br>
                  
                                              <div class="form-group">
-                                             <label for="exampleInputFile1">Select Profile Image</label>
                                              <div class="input-group">
                                              <div class="custom-file">
-                                             <input type="file" name="player_profile_image" id="exampleInputFile1">
-                                             <label class="custom-file-label1" for="exampleInputFile1">Select Image</label>
+                                            <label>Player Profile Image * </label>
+                                             <input type="file" name="player_profile_image" Placeholder="Player Profile Image" id="exampleInputFile1">
+                                             <small class="errorTxt1"></small>
+                                            @error('player_profile_image')
+                                            <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                            </span>
+                                            @enderror
                                              </div>
                                              </div>
-                                            </div>
+                                            </div><br>
+
+                                            <div class="form-group">
+                                            <input type="text" name="player_sorting" Placeholder="Player Sorting" class="form-control input-lg" />
+                                            </div><br>
                  
                 
                                              <div class="card-footer">

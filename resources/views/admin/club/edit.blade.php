@@ -10,7 +10,6 @@
                                 <div class="card-content">
                                     <h4 class="header mt-0">
                                         Edit Club
-                                        <a class="waves-effect waves-light btn gradient-45deg-purple-deep-orange gradient-shadow right">Details</a>
                                     </h4>
                                     <div class="row">
                                         <div class="col s12">
@@ -44,9 +43,15 @@
                                        <input type="hidden" name="hidden_image2" value="{{ $club->club_logo }}" />
                                        </div>
                                        </div>
+                                       <div class="form-group">
+                                       <label class="col-md-4 text-right">Add Category Sorting</label>
+                                       <div class="col-md-8">
+                                       <input type="text" name="club_name" value="{{ $club->club_sorting }}" class="form-control input-lg" />
+                                       </div>
+                                       </div>
                                        <br /><br />
                                        <div class="form-group text-center">
-                                       <input type="submit" name="edit" class="btn btn-primary input-lg" value="Edit" />
+                                       <input type="submit" name="edit" class="btn btn-primary input-lg" value="Submit" />
                                        </div>
                                        </form>
                                         </div>

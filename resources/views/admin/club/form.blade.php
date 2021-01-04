@@ -10,7 +10,6 @@
                                 <div class="card-content">
                                     <h4 class="header mt-0">
                                         ADD CLUB
-                                        <a class="waves-effect waves-light btn gradient-45deg-purple-deep-orange gradient-shadow right">Details</a>
                                     </h4>
                                     <div class="row">
                                         <div class="col s12">
@@ -18,35 +17,61 @@
                                             <form method="post" action="{{ route('club-form.store') }}" enctype="multipart/form-data">
                                             @csrf
                                             <div class="card-body">
+                                            
                                             <div class="form-group">
-                                            <label for="exampleInputEmail1">Enter Club Name</label>
-                                            <input type="text" name="club_name" class="form-control input-lg" />
+                                            <input type="text" name="club_name" Placeholder="Club Name* " class="form-control input-lg" />
+                                            <small class="errorTxt1"></small>
+                                            @error('club_name')
+                                            <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                            </span>
+                                            @enderror
                                             </div>
 
                                             <div class="form-group">
-                                            <label for="exampleInputEmail1">Enter Description</label>
-                                            <input type="text" name="club_description" class="form-control input-lg" />
-                                            </div>
+                                            <input type="text" name="club_description" Placeholder="Description * " class="form-control input-lg" />
+                                            <small class="errorTxt1"></small>
+                                            @error('club_description')
+                                            <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                            </span>
+                                            @enderror
+                                            </div><br>
  
                                             <div class="form-group">
-                                            <label for="exampleInputFile">Select Player Banner</label>
                                             <div class="input-group">
                                             <div class="custom-file">
-                                            <input type="file" name="club_banner" id="exampleInputFile">
-                                            <label class="custom-file-label" for="exampleInputFile">Select Image</label>
+                                            <label>Club Banner * </label>
+                                            <input type="file" name="club_banner" Placeholder="Club Banner" id="exampleInputFile">
+                                            <small class="errorTxt1"></small>
+                                           @error('club_banner')
+                                           <span class="invalid-feedback" role="alert">
+                                           <strong>{{ $message }}</strong>
+                                           </span>
+                                           @enderror
                                             </div>
                                             </div>
-                                            </div>
+                                            </div><br>
                  
                                              <div class="form-group">
-                                             <label for="exampleInputFile1">Select Club Logo</label>
                                              <div class="input-group">
                                              <div class="custom-file">
-                                             <input type="file" name="club_logo" id="exampleInputFile1">
-                                             <label class="custom-file-label1" for="exampleInputFile1">Select Image</label>
+                                             <label>Club Logo * </label>
+                                             <input type="file" name="club_logo" Placeholder="Club Logo" id="exampleInputFile1">
+                                             <small class="errorTxt1"></small>
+                                             @error('club_logo')
+                                             <span class="invalid-feedback" role="alert">
+                                             <strong>{{ $message }}</strong>
+                                             </span>
+                                           @enderror
                                              </div>
                                              </div>
+                                            </div><br>
+
+                                            <div class="form-group">
+                                            <input type="text" Placeholder="Club Sorting"name="club_sorting" class="form-control input-lg" />
                                             </div>
+
                  
                 
                                              <div class="card-footer">
@@ -83,7 +108,7 @@
 
         $("#formValidate").validate({
             rules: {
-                uname: {
+                club_name: {
                     required: true,
                     minlength: 5
                 },
