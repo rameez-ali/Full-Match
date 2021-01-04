@@ -40,7 +40,11 @@ class UpdateCustomerRequest extends FormRequest
 
         $customer->name = $params['name'];
 //        $customer->email = $params['email'];
+        if($this->has('avatar')){
 
+            $customer->user_image = $this->file('avatar')->store('avatarDp');
+
+        }
         $customer->save();
 
         $user = User::find($customer->user_id);

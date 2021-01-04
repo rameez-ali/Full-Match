@@ -25,7 +25,7 @@ class CreateSubsPlanRequest extends FormRequest
     public function rules()
     {
         return [
-        //
+            'subsplan_value' => ['integer', 'min:1'],
         ];
     }
 
@@ -41,8 +41,11 @@ class CreateSubsPlanRequest extends FormRequest
         $sub_plan->plan_Description = $params['subp_desc'];
         $sub_plan->plan_price = $params['subp_price'];
         $sub_plan->lang = "en";
-        $sub_plan->start_date = date('Y-m-d H:i:s',strtotime($params['subp_start_date']));
-        $sub_plan->end_date = date('Y-m-d H:i:s',strtotime($params['subp_end_date']));
+//        $sub_plan->start_date = date('Y-m-d H:i:s',strtotime($params['subp_start_date']));
+//        $sub_plan->end_date = date('Y-m-d H:i:s',strtotime($params['subp_end_date']));
+        $sub_plan->duration_type = $params['subsplan_duration'];
+        $sub_plan->duration_value = $params['subsplan_value'];
+
         $sub_plan->sort_by = $params['subp_sort'];
 //        $sub_plan->notify = $params['title'];
 

@@ -48,14 +48,34 @@
                                                     </div>
 
                                                     <div class="input-field col s12">
-                                                        <label for="subp_start_date">{{ __('customer.subsplan.subsplan_start') }}*</label>
-                                                        <input id="subp_start_date" type="text" name="subp_start_date" value="{{ old('subp_start_date',$subscriptionplan->start_date) }}" class="datepicker" data-error=".errorTxt4"required>
+
+                                                        <p class="mb-1"> <label>{{ __('customer.subsplan.subsplan_duration') }}*</label></p>
+
+                                                        <p class="mb-1">
+                                                            <label>
+                                                                <input name="subsplan_duration" value="day" {{ $subscriptionplan->duration_type == 'day' ? 'checked' : '' }}  @if(!$edit) checked="checked" @endif type="radio" />
+                                                                <span>{{ __('customer.days') }}</span>
+                                                            </label>
+                                                        </p>
+
+                                                        <p class="mb-1">
+                                                            <label>
+                                                                <input name="subsplan_duration" value="week" {{ $subscriptionplan->duration_type == 'week' ? 'checked' : '' }} type="radio" />
+                                                                <span>{{ __('customer.weeks') }}</span>
+                                                            </label>
+                                                        </p>
+
+                                                        <p class="mb-1">
+                                                            <label>
+                                                                <input name="subsplan_duration" value="month" {{ $subscriptionplan->duration_type == 'month' ? 'checked' : '' }} type="radio" />
+                                                                <span>{{ __('customer.months') }}</span>
+                                                            </label>
+                                                        </p>
                                                         <small class="errorTxt4"></small>
                                                     </div>
-
                                                     <div class="input-field col s12">
-                                                        <label for="subp_end_date">{{ __('customer.subsplan.subsplan_end') }}*</label>
-                                                        <input id="subp_end_date" type="text" name="subp_end_date" value="{{ old('subp_end_date',$subscriptionplan->end_date) }}" class="datepicker" data-error=".errorTxt5" required>
+                                                        <label for="subsplan_value">{{ __('customer.subsplan.subsplan_value') }}*</label>
+                                                        <input id="subsplan_value" type="number" value="{{ old('subsplan_value',$subscriptionplan->duration_value) }}" name="subsplan_value" min="1" data-error=".errorTxt5" required>
                                                         <small class="errorTxt5"></small>
                                                     </div>
 
@@ -97,6 +117,7 @@
 @endsection
 @section('scripts')
     <script src={{ asset('app-assets/vendors/jquery-validation/jquery.validate.min.js') }}></script>
+    <script src={{ asset('app-assets/js/scripts/form-elements.js') }}></script>
 <script>
     /*
  * Form Validation

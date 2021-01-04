@@ -18,7 +18,7 @@
                                     </h4>
                                     <div class="row">
                                         <div class="col s12">
-                                            <form class="formValidate" id="formValidate" method="POST" action="{{ $route }}">
+                                            <form class="formValidate" id="formValidate" method="POST" action="{{ $route }}" enctype="multipart/form-data">
                                                 @csrf
                                                 @if($edit)
                                                     @method('PUT')
@@ -55,6 +55,19 @@
                                                         <small class="errorTxt5"></small>
 
                                                             @error('uphone')
+                                                            <span class="invalid-feedback" role="alert">
+                                                                    <strong>{{ $message }}</strong>
+                                                                </span>
+                                                            @enderror
+
+                                                    </div>
+
+                                                    <div class="input-field col s12">
+                                                        <p for="avatar">avatar</p>
+                                                        <input type="file" name="avatar" id="avatar" class="dropify mt-3" data-default-file="{{ $customer->user_image ? url($customer->user_image) : '' }}" data-max-file-size="10M" data-allowed-file-extensions="png jpg jpeg" required />
+                                                        <small class="errorTxt5"></small>
+
+                                                            @error('avatar')
                                                             <span class="invalid-feedback" role="alert">
                                                                     <strong>{{ $message }}</strong>
                                                                 </span>
@@ -109,6 +122,8 @@
 @endsection
 @section('scripts')
     <script src={{ asset('app-assets/vendors/jquery-validation/jquery.validate.min.js') }}></script>
+    <script src={{ asset('app-assets/js/scripts/form-file-uploads.js') }}></script>
+    <script src={{ asset('app-assets/vendors/dropify/js/dropify.min.js') }}></script>
     <script>
         /*
      * Form Validation

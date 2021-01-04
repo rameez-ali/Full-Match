@@ -8,4 +8,8 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class subs_plan extends Model
 {
     use SoftDeletes;
+
+    protected $fillable = [
+       'duration_type', 'duration_value',
+    ];
 }

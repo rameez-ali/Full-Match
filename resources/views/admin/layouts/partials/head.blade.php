@@ -26,12 +26,10 @@
     <!-- BEGIN: Custom CSS-->
     <link rel="stylesheet" type="text/css" href={{ asset('app-assets/css/custom/custom.css') }}>
     <!-- END: Custom CSS-->
-    <link rel="stylesheet" href={{ asset('app-assets/vendors/select2/select2.min.css" type="text/css') }}>
-    <link rel="stylesheet" href={{ asset('app-assets/vendors/select2/select2-materialize.css" type="text/css') }}>
+    <link rel="stylesheet" href={{ asset('app-assets/vendors/select2/select2.min.css') }} type="text/css">
+    <link rel="stylesheet" href={{ asset('app-assets/vendors/select2/select2-materialize.css') }} type="text/css">
+    <link rel="stylesheet" type="text/css" href={{ asset('app-assets/vendors/dropify/css/dropify.min.css') }}>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
-
-    
-
 
 
 </head>
