@@ -103,7 +103,7 @@
                         className: 'waves-effect waves-light btn gradient-45deg-purple-deep-orange gradient-shadow',
                         filename : '{{ __("customer.excel") }}' ,
                         exportOptions: {
-                            columns: [ 0,1,2,3,4,5,6,7 ]
+                            columns: [ 0,1,2,3,4,5,6 ]
                         },
                     },
                     {
@@ -112,7 +112,7 @@
                         className: 'waves-effect waves-light btn gradient-45deg-purple-deep-orange gradient-shadow',
                         filename : '{{ __("customer.csv") }}' ,
                         exportOptions: {
-                            columns: [ 0,1,2,3,4,5,6,7 ]
+                            columns: [ 0,1,2,3,4,5,6 ]
                         },
                     }
                 ],

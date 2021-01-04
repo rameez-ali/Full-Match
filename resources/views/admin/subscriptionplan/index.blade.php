@@ -52,8 +52,8 @@
                                                 <th>{{ __('customer.subsplan.subsplan_title') }}</th>
                                                 <th>{{ __('customer.subsplan.subsplan_decs') }}</th>
                                                 <th>{{ __('customer.subsplan.subsplan_price') }}</th>
-                                                <th>{{ __('customer.subsplan.subsplan_start') }}</th>
-                                                <th>{{ __('customer.subsplan.subsplan_end') }}</th>
+                                                <th>{{ __('customer.duration') }}</th>
+                                                <th>{{ __('customer.value') }}</th>
                                                 <th>{{ __('customer.subsplan.subsplan_sort') }}</th>
 {{--                                                <th>{{ __('customer.subsplan.subsplan_lang') }}</th>--}}
                                                 <th>{{ __('customer.action') }}</th>
@@ -66,8 +66,8 @@
                                                     <td>{{ $subscriptionplan->plan_title }}</td>
                                                     <td>{{ $subscriptionplan->plan_Description }}</td>
                                                     <td>{{ $subscriptionplan->plan_price }}</td>
-                                                    <td>{{ $subscriptionplan->start_date }}</td>
-                                                    <td>{{ $subscriptionplan->end_date }}</td>
+                                                    <td>{{ $subscriptionplan->duration_type }}</td>
+                                                    <td>{{ $subscriptionplan->duration_value }}</td>
                                                     <td>{{ $subscriptionplan->sort_by }}</td>
 {{--                                                    <td>{{ $subscriptionplan->lang }}</td>--}}
                                                     <td>
@@ -83,8 +83,8 @@
                                                 <th>{{ __('customer.subsplan.subsplan_title') }}</th>
                                                 <th>{{ __('customer.subsplan.subsplan_decs') }}</th>
                                                 <th>{{ __('customer.subsplan.subsplan_price') }}</th>
-                                                <th>{{ __('customer.subsplan.subsplan_start') }}</th>
-                                                <th>{{ __('customer.subsplan.subsplan_end') }}</th>
+                                                <th>{{ __('customer.duration') }}</th>
+                                                <th>{{ __('customer.value') }}</th>
                                                 <th>{{ __('customer.subsplan.subsplan_sort') }}</th>
 {{--                                                <th>{{ __('customer.subsplan.subsplan_lang') }}</th>--}}
                                                 <th>{{ __('customer.action') }}</th>
@@ -151,7 +151,7 @@
                         className: 'waves-effect waves-light btn gradient-45deg-purple-deep-orange gradient-shadow',
                         filename : '{{ __("customer.excel") }}' ,
                         exportOptions: {
-                            columns: [ 0,1,2,3,4,5,6,7 ]
+                            columns: [ 0,1,2,3,4,5,6 ]
                         },
                     },
                     {
@@ -160,7 +160,7 @@
                         className: 'waves-effect waves-light btn gradient-45deg-purple-deep-orange gradient-shadow',
                         filename : '{{ __("customer.csv") }}' ,
                         exportOptions: {
-                            columns: [ 0,1,2,3,4,5,6,7 ]
+                            columns: [ 0,1,2,3,4,5,6 ]
                         },
                     }
                 ],

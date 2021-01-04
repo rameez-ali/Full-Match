@@ -5,16 +5,16 @@
         <h1 class="logo-wrapper"><a class="brand-logo darken-1" href="{{ route('dashboard') }}"><img class="hide-on-med-and-down " src={{ asset('app-assets/images/logo/materialize-logo.png') }} alt="materializelogo" /><img class="show-on-medium-and-down hide-on-med-and-up" src={{ asset('app-assets/images/logo/materialize-logo-color.png') }} alt="materializelogo" /><span class="logo-text hide-on-med-and-down">Full Match</span></a><a class="navbar-toggler" href="#"><i class="material-icons">radio_button_checked</i></a></h1>
     </div>
     <ul class="sidenav sidenav-collapsible leftside-navigation collapsible sidenav-fixed menu-shadow" id="slide-out" data-menu="menu-navigation" data-collapsible="menu-accordion">
-        <li class="bold"><a class="waves-effect waves-cyan " href="{{ route('customer.index') }}"><i class="material-icons">person_outline</i><span class="menu-title" data-i18n="User Profile">{{ __('customer.customer.customer_head') }}</span></a>
+        <li class="bold"><a class="waves-effect waves-cyan " href="{{ route('customer.index') }}"><i class="material-icons dp48">people</i><span class="menu-title" data-i18n="User Profile">{{ __('customer.customer.customer_head') }}</span></a>
         </li>
 
-        <li class="bold"><a class="waves-effect waves-cyan " href="{{ route('subscriptionplans.index') }}"><i class="material-icons">person_outline</i><span class="menu-title" data-i18n="User Profile">{{ __('customer.subsplan.subsplan_head') }}</span></a>
+        <li class="bold"><a class="waves-effect waves-cyan " href="{{ route('subscriptionplans.index') }}"><i class="material-icons dp48">subscriptions</i><span class="menu-title" data-i18n="User Profile">{{ __('customer.subsplan.subsplan_head') }}</span></a>
         </li>
 
-        <li class="bold"><a class="waves-effect waves-cyan " href="{{ route('page.index') }}"><i class="material-icons">person_outline</i><span class="menu-title" data-i18n="User Profile">{{ __('customer.cmspage.cmspage') }}</span></a>
+        <li class="bold"><a class="waves-effect waves-cyan " href="{{ route('page.index') }}"><i class="material-icons dp48">settings</i><span class="menu-title" data-i18n="User Profile">{{ __('customer.cmspage.cmspage') }}</span></a>
         </li>
 
-        <li class="bold"><a class="waves-effect waves-cyan " href="{{ route('order.all') }}"><i class="material-icons">person_outline</i><span class="menu-title" data-i18n="User Profile">{{ __('customer.order.orders') }}</span></a>
+        <li class="bold"><a class="waves-effect waves-cyan " href="{{ route('order.all') }}"><i class="material-icons dp48">shopping_cart</i><span class="menu-title" data-i18n="User Profile">{{ __('customer.order.orders') }}</span></a>
         </li>
 
         <li class="bold"><a class="waves-effect waves-cyan " href="{{ route('category-form.index') }}"><i class="material-icons">person_outline</i><span class="menu-title" data-i18n="User Profile">Categories</span></a>

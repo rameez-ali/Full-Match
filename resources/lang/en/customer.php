@@ -45,6 +45,8 @@ return [
         'subsplan_price' => 'Price',
         'subsplan_start' => 'Start Date',
         'subsplan_end' => 'End Date',
+        'subsplan_duration' => 'Select Duration',
+        'subsplan_value' => 'Select Value',
         'subsplan_sort' => 'Plan Sorting',
         'subsplan_notify' => 'Notify Users',
         'subsplan_lang' => 'Lang',
@@ -77,6 +79,11 @@ return [
     'update' => 'Update',
     'csv' => 'CSV',
     'excel' => 'Excel',
+    'days' => 'Days',
+    'weeks' => 'Weeks',
+    'months' => 'Months',
+    'duration' => 'Duration',
+    'value' => 'Value',
     'sent' => 'We have emailed your password reset link!',
 
 ];
