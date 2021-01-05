@@ -33,7 +33,6 @@ class GetAllCustomerRequest extends FormRequest
         return Customer::select('customers.id','customers.name','users.phone','customers.email','customers.user_id')
             ->join('users','customers.user_id' , '=' ,'users.id')
             ->where('users.deleted_at',null)
-            ->orderBy('customers.id', 'desc')
             ->get();
 
     }

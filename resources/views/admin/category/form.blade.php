@@ -10,59 +10,56 @@
                                 <div class="card-content">
                                     <h4 class="header mt-0">
                                         ADD Category
-                                        
+
                                     </h4>
                                     <div class="row">
                                         <div class="col s12">
                                             <h2></h2>
 
-                                            
-                                        <form method="post" action="{{ route('category-form.store') }}" enctype="multipart/form-data">
+
+                                        <form method="post" class="formValidate" id="formValidate" action="{{ route('category-form.store') }}" enctype="multipart/form-data">
                                         @csrf
-                                        <div class="card-body">
-                                        <div class="form-group">
-                                        <label for="category_name"></label>
-                                        <input type="text" name="category_name" id="category_name"  Placeholder="Category Name *" class="form-control input-lg" data-error=".errorTxt1" />
-                                        <small class="errorTxt1"></small>
-                                        @error('category_name')
-                                        <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                        </span>
-                                        @enderror
-                                        </div>
-                                        
-                                        <br/>
-                                       <div class="form-group">
-                                        <div class="input-group">
-                                        <div class="custom-file">
-                                        <label for="category_image">Category Image * </label>    
-                                        <input type="file" name="category_image" Placeholder="Category Image *" id="exampleInputFile">
-                                        </div>
-                                        <small class="errorTxt1"></small>
-                                        @error('category_image')
-                                        <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                        </span>
-                                        @enderror
-                                        </div>
-                                        </div>
-                                        </div>
-                                         <br/>
+                                            <div class="row">
+                                                <div class="input-field col s12">
+                                                    <label for="category_name">Add Category Name</label>
+                                                    <input id="category_name" name="category_name" type="text"  data-error=".errorTxt1">
+                                                    <small class="errorTxt1"></small>
+                                                    @error('category_name')
+                                                    <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
+                                                    @enderror
+                                                </div>
 
-                                         
+                                                <div class="input-field col s12">
+                                                    <p for="category_image">Category Image * </p>
+                                                    <input type="file" name="category_image" id="category_image" class="dropify mt-3" data-default-file="" data-max-file-size="10M" data-allowed-file-extensions="png jpg jpeg" required data-error=".errorTxt2" />
+                                                    <small class="errorTxt2"></small>
+                                                    @error('category_image')
+                                                    <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
+                                                    @enderror
+                                                </div>
 
-                                        <div class="card-body">
-                                        <div class="form-group">
-                                        <label for="category_name"></label>
-                                        <input type="text" name="category_sorting" Placeholder="Category Sorting" class="form-control input-lg"  />
-                                        </div>
-                
-                                        <div class="input-field col s12">
-                                                <button class="btn waves-effect waves-light right submit" type="submit" name="action">Submit
-                                                    <i class="material-icons right">send</i>
-                                                </button>
-                                        </div>
-              </form>
+                                                <div class="input-field col s12">
+                                                    <label for="category_sorting">Category Sorting</label>
+                                                    <input id="category_sorting" name="category_sorting" type="number" min="1" required data-error=".errorTxt3">
+                                                    <small class="errorTxt3"></small>
+                                                    @error('category_sorting')
+                                                    <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
+                                                    @enderror
+                                                </div>
+
+                                                <div class="input-field col s12">
+                                                    <button class="btn waves-effect waves-light right submit" type="submit" name="action">Submit
+                                                        <i class="material-icons right">send</i>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </form>
                                         </div>
                                     </div>
                                 </div>
@@ -75,7 +72,9 @@
     </div>
 @endsection
 @section('scripts')
-    <script src="app-assets/vendors/jquery-validation/jquery.validate.min.js"></script>
+    <script src={{ asset('app-assets/vendors/jquery-validation/jquery.validate.min.js') }}></script>
+    <script src={{ asset('app-assets/js/scripts/form-file-uploads.js') }}></script>
+    <script src={{ asset('app-assets/vendors/dropify/js/dropify.min.js') }}></script>
 <script>
     /*
  * Form Validation
@@ -95,38 +94,20 @@
             rules: {
                 category_name: {
                     required: true,
-                    minlength: 5
+                    minlength: 5 ,
                 },
-                cemail: {
-                    required: true,
-                    email: true
-                },
-                password: {
-                    required: true,
-                    minlength: 5
-                },
-                cpassword: {
-                    required: true,
-                    minlength: 5,
-                    equalTo: "#password"
-                },
-                crole: {
+                category_image: {
                     required: true,
                 },
-                curl: {
+                category_sorting: {
                     required: true,
-                    url: true
-                },
-                ccomment: {
-                    required: true,
-                    minlength: 15
                 },
                 tnc_select: "required",
             },
             //For custom messages
             messages: {
                 category_name: {
-                    required: "Enter a username",
+                    required: "Enter Category Name",
                     minlength: "Enter at least 5 characters"
                 },
                 curl: "Enter your website",
