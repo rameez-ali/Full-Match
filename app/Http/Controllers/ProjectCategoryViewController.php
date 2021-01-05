@@ -53,7 +53,7 @@ class ProjectCategoryViewController extends Controller
         );
 
         ProjectCategory::create($form_data);
-       return redirect('category-form')->with('success', 'Data is successfully Added');
+        return redirect('category-form')->with('cataddsuccess','Category Added Successfully');
     }
 
     /**
@@ -64,7 +64,7 @@ class ProjectCategoryViewController extends Controller
      */
     public function show($id)
     {
-        
+      //  
     }
 
     /**

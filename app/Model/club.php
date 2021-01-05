@@ -5,7 +5,7 @@ namespace App\Model;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class club extends Model
+class Club extends Model
 {
 	use SoftDeletes;
     protected $fillable = [

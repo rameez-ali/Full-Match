@@ -22,21 +22,26 @@
                                           </div>
 
                                           <div class="form-group">
-                                            <label for="country">Select Country:</label>
+                                            <label for="country">Select Type:</label>
                                             <select name="country" id="country" class="form-control" style="width:250px">
-                                            <option value="">--- Select Country ---</option>
-                                            @foreach ($countries as $key => $value)
-                                            <option value="{{ $key }}">{{ $value }}</option>
+                                            <option value="">--- Select Categories ---</option>
+                                            <option value="0"> Home </option>
+                                            @foreach ($video as $video)
+                                            <option value="{{$video->id}}">{{ $video->category_name }}</option>
                                             @endforeach
                                             </select>
                                             </div>
                                         
                                         <div class="form-group">
-                                           <label for="state">Select State:</label>
-                                           <select name="state" class="select2 browser-default" multiple style="width:250px">
+                                           <label for="state">Select Videos</label>
+                                           <select name="state[]" class="select2 browser-default" multiple style="width:250px">
                                            </select>
                                         </div>
 
+                                         <div class="text-center" style="margin-top: 10px;">
+                                          <button type="submit" class="btn btn-success">Save</button>
+                                          </div>
+                                        </form>
                                     </div>
                                 </div>
                             </div>
@@ -52,25 +57,38 @@
     {
             jQuery('select[name="country"]').on('change',function(){
                var countryID = jQuery(this).val();
-               if(countryID)
+               console.log(countryID);
+               if(countryID == '0')
                {
                   jQuery.ajax({
-                     url : 'dropdownlist/getstates/' +countryID,
+                     url : 'allvideos/' +countryID,
                      type : "GET",
                      dataType : "json",
                      success:function(data)
                      {
                         console.log(data);
-                        jQuery('select[name="state"]').empty();
+                        jQuery('select[name="state[]"]').empty();
                         jQuery.each(data, function(key,value){
-                           $('select[name="state"]').append('<option value="'+ key +'">'+ value +'</option>');
+                           $('select[name="state[]"]').append('<option value="'+ key +'">'+ value +'</option>');
                         });
                      }
                   });
                }
-               else
-               {
-                  $('select[name="state"]').empty();
+               else 
+               {              
+                  jQuery.ajax({
+                     url : 'videos/' +countryID,
+                     type : "GET",
+                     dataType : "json",
+                     success:function(data)
+                     {
+                        console.log(data);
+                        jQuery('select[name="state[]"]').empty();
+                        jQuery.each(data, function(key,value){
+                           $('select[name="state[]"]').append('<option value="'+ key +'">'+ value +'</option>');
+                        });
+                     }
+                  });
                }
             });
     });

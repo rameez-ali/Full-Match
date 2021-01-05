@@ -70,7 +70,19 @@
                }
                else
                {
-                  $('select[name="state"]').empty();
+                  jQuery.ajax({
+                     url : 'getstates/' +countryID,
+                     type : "GET",
+                     dataType : "json",
+                     success:function(data)
+                     {
+                        console.log(data);
+                        jQuery('select[name="state"]').empty();
+                        jQuery.each(data, function(key,value){
+                           $('select[name="state"]').append('<option value="'+ key +'">'+ value +'</option>');
+                        });
+                     }
+                  });
                }
             });
     });

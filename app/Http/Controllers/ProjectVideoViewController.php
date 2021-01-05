@@ -55,7 +55,8 @@ class ProjectVideoViewController extends Controller
      */
     public function store(Request $request)
     {
-         
+       
+      dd($request->player);   
      $request->validate([
            'video_title'     => 'required',
             'video_duration'         => 'required',

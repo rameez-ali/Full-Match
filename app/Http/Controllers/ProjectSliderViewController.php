@@ -21,7 +21,7 @@ class ProjectSliderViewController extends Controller
     {
          
         $slidercategory = Slidercategory1::latest()->paginate(5);
-            return view('admin.slider.index', compact('counries','slidercategory'));
+            return view('admin.slider.index', compact('slidercategory'));
     }
 
 
@@ -34,16 +34,23 @@ class ProjectSliderViewController extends Controller
     public function create()
     {
 
-        $countries = DB::table('countries')->pluck("name","id");
-        $video=Video::all();
+        $video=ProjectCategory::all();
         $club=Club::all();
-        return view('admin.video.dropdown',compact('video','club','countries'));
+        return view('admin.slider.form',compact('club','video'));
     }
 
-    public function getStates($id) 
+    public function getallvideos($id) 
     {
-        $states = DB::table("states")->where("countries_id",$id)->pluck("name","id");
+        //$states = DB::table("videos")->pluck("video_title","id");
+        $states = DB::table("videos")->pluck("video_title","id","category");;
         return json_encode($states);
+        //return json_encode($states);
+    }
+
+    public function getvideos($id) 
+    {
+        $states1 = DB::table("videos")->where("Category_id",$id)->pluck("video_title","id");
+        return json_encode($states1);
     }
 
     /**
@@ -54,22 +61,28 @@ class ProjectSliderViewController extends Controller
      */
     public function store(Request $request)
     {
-
+        
+        
+        if($request->country!=null)
+        {
         $form_data2 = array(
-            'slider_name'    =>   $request->slider_name,
+            'Category_id'    => $request->country > 0 ? $request->country : null,
+            'slider_name'    =>   $request->slider_name
         );        
-
          Slidercategory1::create($form_data2);
-         
-         foreach($request->video as $video){
-            $id = DB::table('slidercategory1s')->orderBy('id', 'DESC')->value('id');
+        }
+
+
+        $id = DB::table('slidercategory1s')->orderBy('id', 'DESC')->value('id');
+
+        foreach($request->state as $state){
             $form_data3 = array(
-            'Video_id'     =>   $video,
-            'Slider_id'     =>  $id
+            'Video_id'     =>  $state,
+            'Slider_id'     =>   $id,
              );
 
             Slidervideo::create($form_data3);
-            }          
+        }       
      
     }
 

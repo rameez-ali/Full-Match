@@ -14,6 +14,17 @@
                                     </h4>
                                     <div class="row">
                                         <div class="col s12">
+                                            @if ($cataddsuccess = Session::get('cataddsuccess'))
+                                            <div class="card-alert card gradient-45deg-green-teal">
+                                    <div class="card-content white-text">
+                                        <p>
+                                            <i class="material-icons">check</i>{{ $cataddsuccess }}</p>
+                                    </div>
+                                    <button type="button" class="close white-text" data-dismiss="alert" aria-label="Close">
+                                        <span aria-hidden="true">×</span>
+                                    </button>
+                                </div>
+                                            @endif
                                             <table id="page-length-option" class="display">
                                                 <thead>
                                                 <tr>
@@ -78,6 +89,7 @@
                     [10, 25, 50, -1],
                     [10, 25, 50, "All"]
                 ],
+                "order":[[2,"asc"]],
                 buttons: [
                     {
                         extend: 'excel',

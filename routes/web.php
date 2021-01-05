@@ -36,9 +36,14 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('videodetails/{id}','ProjectVideoViewController@video_details');
     
     Route::resource('slider-form','ProjectSliderViewController');
-    Route::get('slider-form/getstates/{id}','ProjectSliderViewController@getStates');
-    Route::get('slider-form/getstates1/{id}','ProjectSliderViewController@getStates1');
+    Route::get('slider-form/allvideos/{id}','ProjectSliderViewController@getallvideos');
+    Route::get('slider-form/videos/{id}','ProjectSliderViewController@getvideos');
     Route::get('slider/{id}','ProjectSliderViewController@destroy1');
+
+    Route::resource('banner-form','AdvertisementBannerController');
+    Route::get('banner-form/allvideos/{id}','AdvertisementBannerController@getallvideos');
+    Route::get('banner-form/videos/{id}','AdvertisementBannerController@getvideos');
+    Route::get('banner/{id}','AdvertisementBannerController@destroy1');
     
     Route::resource('my-form','SeasonPartSortingController');
     Route::get("addmore","SeasonPartSortingController@addMore");
