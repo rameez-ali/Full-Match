@@ -14,57 +14,52 @@
                                         <a class="waves-effect waves-light btn gradient-45deg-purple-deep-orange gradient-shadow right">Details</a>
                                     </h4>
                             <div class="row">
-                             <form method="post" action="{{ route('league-form.store') }}" enctype="multipart/form-data">
-                              @csrf
-
+                             <form method="post" action="{{ route('league-form.update', $league->id) }}" enctype="multipart/form-data">
+                             @csrf
+                             @method('PATCH')
                                 <div class="col s12">
                                     <div id="question-section" >
                                         <div class="question-section" data-id="0">
                                             <div class="card-body">
                                        <div class="form-group">
-                                       <input type="text" name="league_name" Placeholder="League Name *" class="form-control input-lg"></textarea>
+                                       <input type="text" name="league_name" Placeholder="League Name *" value="{{ $league->league_name }}" class="form-control input-lg"></textarea>
                                        </div>
                                        <br/>
 
 
                                         <div class="form-group">
-                                        <div class="input-group">
-                                        <div class="custom-file">
-                                        <label>League Banner</label>
-                                        <input type="file" name="filename1" multiple id="exampleInputFile">
-                                        </div>
-                                        </div>
-                                        </div>
-                                         <br/>
+                                       <label class="col-md-4 text-right">Select League Banner</label>
+                                       <div class="col-md-8">
+                                       <input type="file" name="league_banner" />
+                                       <input type="hidden" name="hidden_image1" value="{{ $league->league_banner }}" />
+                                       </div>
+                                       </div>
+
+                                       <div class="form-group">
+                                       <label class="col-md-4 text-right">Select Promo Video</label>
+                                       <div class="col-md-8">
+                                       <input type="file" name="league_promo_video" />
+                                       <input type="hidden" name="hidden_image2" value="{{ $league->league_promo_video }}" />
+                                       </div>
+                                       </div>
+
+                                            <div class="form-group">
+                                                <label class="col-md-4 text-right">Select Profile Image</label>
+                                                <div class="col-md-8">
+                                                    <input type="file" name="league_profile_image" />
+                                                    <input type="hidden" name="hidden_image3" value="{{ $league->league_profile_image }}" />
+                                                </div>
+                                            </div><br>
 
                                          <div class="form-group">
-                                        <div class="input-group">
-                                        <div class="custom-file">
-                                        <label>Promo Video *</label>
-                                        <input type="file" name="filename2" multiple id="exampleInputFile">
-                                        </div>
-                                        </div>
-                                        </div>
-                                         <br/>
-
-                                         <div class="form-group">
-                                        <div class="input-group">
-                                        <div class="custom-file">
-                                        <label>Profile Image*</label>
-                                        <input type="file" name=filename3 multiple id="exampleInputFile">
-                                        </div>
-                                        </div>
-                                        </div>
-                                         <br/>
+                                               <label class="col-md-4 text-right">Add League Sorting</label>
+                                               <div class="col-md-8">
+                                               <input type="text" name="league_sorting" value="{{ $league->league_sorting }}" class="form-control input-lg" />
+                                            </div><br>
 
                                         <div class="card-body">
                                         <div class="form-group">
-                                        <input type="text" name="league_description" placeholder="Description" class="form-control input-lg"></textarea>
-                                        </div>
-
-                                         <div class="card-body">
-                                        <div class="form-group">
-                                        <input type="text" name="league_sorting" placeholder="Description" class="form-control input-lg"></textarea>
+                                        <input type="text" name="league_description" value="{{ $league->league_description }}" placeholder="Description" class="form-control input-lg"></textarea>
                                         </div>
 
                                             <div class="answer-section">
