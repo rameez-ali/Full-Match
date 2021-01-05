@@ -1,0 +1,5 @@
+db name => linekw_fullmatch
+
+user name =>linekw_fullmatch
+
+password => _PpnI+=VBHR; 
