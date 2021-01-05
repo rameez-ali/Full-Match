@@ -55,7 +55,7 @@ class ProjectClubViewController extends Controller
         $image1 = $request->file('club_logo');
         $new_name1 = rand() . '.' . $image1->getClientOriginalExtension();
         $image1->move(public_path('images'), $new_name1);
-       
+
         $form_data2 = array(
             'club_name'     =>   $request->club_name,
             'club_banner'     =>   $new_name,
@@ -68,8 +68,8 @@ class ProjectClubViewController extends Controller
         Club::create($form_data2);
 
         return redirect('club-form')->with('success', 'Data is successfully Added');
-        
-       
+
+
     }
 
     /**
@@ -104,7 +104,7 @@ class ProjectClubViewController extends Controller
      */
     public function update(Request $request, $id)
     {
-         $image_name1 = $request->hidden_image1;
+        $image_name1 = $request->hidden_image1;
         $image_name2 = $request->hidden_image2;
 
         $image1 = $request->file('club_banner');
@@ -134,16 +134,16 @@ class ProjectClubViewController extends Controller
             ]);
         }
 
-        // $form_data = array(
-        //     'club_name'       =>   $request->club_name,
-        //     'club_description'       =>   $request->club_description,
-        //     'club_banner'            =>   $image_name1,
-        //     'club_logo'            =>   $image_name2
-        // );
-  
-        // Club::whereId($id)->update($form_data);
+         $form_data = array(
+             'club_name'       =>   $request->club_name,
+             'club_description'       =>   $request->club_description,
+             'club_banner'            =>   $image_name1,
+             'club_logo'            =>   $image_name2
+         );
 
-        // return redirect('club-form')->with('success', 'Data is successfully updated');
+         Club::whereId($id)->update($form_data);
+
+         return redirect('club-form')->with('success', 'Data is successfully updated');
     }
 
     /**

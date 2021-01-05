@@ -24,18 +24,20 @@ Route::group(['middleware' => ['auth']], function () {
     Route::resource('subscriptionplans','SubsPlanController');
     Route::resource('category-form','ProjectCategoryViewController');
     Route::resource('player-form','ProjectPlayerViewController');
+    Route::resource('contact-form','ProjectContactViewController');
     Route::resource('club-form','ProjectClubViewController');
     Route::resource('league-form','ProjectLeagueViewController');
     Route::get('league/{id}','ProjectLeagueViewController@destroy1');
     Route::resource('video-form','ProjectVideoViewController');
-    Route::get('getstates/{id}','ProjectVideoViewController@getStates');
+    
     Route::resource('subscriptionplans','SubsPlanController');
     Route::resource('page', 'PageController')->only(['index','edit','update']);
     Route::get('videoclub/{id}','ProjectVideoViewController@destroy1');
     Route::get('videodetails/{id}','ProjectVideoViewController@video_details');
     
     Route::resource('slider-form','ProjectSliderViewController');
-    Route::get('slider-form/create/getstates/{id}','ProjectSliderViewController@getStates');
+    Route::get('slider-form/getstates/{id}','ProjectSliderViewController@getStates');
+    Route::get('slider-form/getstates1/{id}','ProjectSliderViewController@getStates1');
     Route::get('slider/{id}','ProjectSliderViewController@destroy1');
     
     Route::resource('my-form','SeasonPartSortingController');
