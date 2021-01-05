@@ -31,7 +31,7 @@
                                             @endforeach
                                             </select>
                                             </div>
-                                        
+
                                         <div class="form-group">
                                            <label for="state">Select Videos</label>
                                            <select name="state[]" class="select2 browser-default" multiple style="width:250px">
@@ -51,6 +51,7 @@
         </div>
         <div class="content-overlay"></div>
     </div>
+  </div>
 
 <script type="text/javascript">
     jQuery(document).ready(function ()
@@ -74,8 +75,8 @@
                      }
                   });
                }
-               else 
-               {              
+               else
+               {
                   jQuery.ajax({
                      url : 'videos/' +countryID,
                      type : "GET",
@@ -100,7 +101,7 @@
 @section('scripts')
      <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
       <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" />
-    
-      
-    
+
+
+
 @endsection

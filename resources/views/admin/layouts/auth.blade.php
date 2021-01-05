@@ -10,21 +10,21 @@
     <meta name="keywords" content="dashboard">
     <meta name="author" content="ThemeSelect">
     <title>Admin Login</title>
-    <link rel="apple-touch-icon" href="../../../app-assets/images/favicon/apple-touch-icon-152x152.png">
-    <link rel="shortcut icon" type="image/x-icon" href="../../../app-assets/images/favicon/favicon-32x32.png">
+    <link rel="apple-touch-icon" href={{ asset('app-assets/images/favicon/apple-touch-icon-152x152.png') }}>
+    <link rel="shortcut icon" type="image/x-icon" href={{ asset('app-assets/images/favicon/favicon-32x32.png') }}>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <!-- BEGIN: VENDOR CSS-->
-    <link rel="stylesheet" type="text/css" href="../../../app-assets/vendors/vendors.min.css">
+    <link rel="stylesheet" type="text/css" href={{ asset('app-assets/vendors/vendors.min.css') }}>
     <!-- END: VENDOR CSS-->
     <!-- BEGIN: Page Level CSS-->
-    <link rel="stylesheet" type="text/css" href="../../../app-assets/css/themes/vertical-gradient-menu-template/materialize.css">
-    <link rel="stylesheet" type="text/css" href="../../../app-assets/css/themes/vertical-gradient-menu-template/style.css">
-    <link rel="stylesheet" type="text/css" href="../../../app-assets/css/pages/login.css">
-    <link rel="stylesheet" type="text/css" href="../../../app-assets/css/pages/register.css">
-    <link rel="stylesheet" type="text/css" href="../../../app-assets/css/pages/forgot.css">
+    <link rel="stylesheet" type="text/css" href={{ asset('app-assets/css/themes/vertical-gradient-menu-template/materialize.css') }}>
+    <link rel="stylesheet" type="text/css" href={{ asset('app-assets/css/themes/vertical-gradient-menu-template/style.css') }}>
+    <link rel="stylesheet" type="text/css" href={{ asset('app-assets/css/pages/login.css') }}>
+    <link rel="stylesheet" type="text/css" href={{ asset('app-assets/css/pages/register.css') }}>
+    <link rel="stylesheet" type="text/css" href={{ asset('app-assets/css/pages/forgot.css') }}>
     <!-- END: Page Level CSS-->
     <!-- BEGIN: Custom CSS-->
-    <link rel="stylesheet" type="text/css" href="../../../app-assets/css/custom/custom.css">
+    <link rel="stylesheet" type="text/css" href={{ asset('app-assets/css/custom/custom.css') }}>
     <!-- END: Custom CSS-->
 </head>
 <!-- END: Head-->
@@ -35,14 +35,14 @@
 </div>
 
 <!-- BEGIN VENDOR JS-->
-<script src="../../../app-assets/js/vendors.min.js"></script>
+<script src={{ asset('app-assets/js/vendors.min.js') }}></script>
 <!-- BEGIN VENDOR JS-->
 <!-- BEGIN PAGE VENDOR JS-->
 <!-- END PAGE VENDOR JS-->
 <!-- BEGIN THEME  JS-->
-<script src="../../../app-assets/js/plugins.js"></script>
-<script src="../../../app-assets/js/search.js"></script>
-<script src="../../../app-assets/js/custom/custom-script.js"></script>
+<script src={{ asset('app-assets/js/plugins.js') }}></script>
+<script src={{ asset('app-assets/js/search.js') }}></script>
+<script src={{ asset('app-assets/js/custom/custom-script.js') }}></script>
 <!-- END THEME  JS-->
 <!-- BEGIN PAGE LEVEL JS-->
 <!-- END PAGE LEVEL JS-->
