@@ -2,7 +2,7 @@
 
 namespace App\Http\Requests\Subsplans;
 
-use App\Model\subs_plan;
+use App\Model\Subs_plan;
 use Illuminate\Foundation\Http\FormRequest;
 
 class GetSubsPlanRequest extends FormRequest
@@ -31,7 +31,7 @@ class GetSubsPlanRequest extends FormRequest
 
     public function handle(){
 
-        return subs_plan::findOrNew($this->id);
+        return Subs_plan::findOrNew($this->id);
 
     }
 }

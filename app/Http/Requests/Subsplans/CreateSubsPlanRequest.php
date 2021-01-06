@@ -2,7 +2,7 @@
 
 namespace App\Http\Requests\Subsplans;
 
-use App\Model\subs_plan;
+use App\Model\Subs_plan;
 use Illuminate\Foundation\Http\FormRequest;
 
 class CreateSubsPlanRequest extends FormRequest
@@ -35,7 +35,7 @@ class CreateSubsPlanRequest extends FormRequest
 
         $params = $this->all();
 
-        $sub_plan = new subs_plan();
+        $sub_plan = new Subs_plan();
 
         $sub_plan->plan_title = $params['subp_title'];
         $sub_plan->plan_Description = $params['subp_desc'];

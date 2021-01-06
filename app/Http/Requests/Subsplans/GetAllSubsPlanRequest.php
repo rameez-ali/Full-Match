@@ -2,7 +2,7 @@
 
 namespace App\Http\Requests\Subsplans;
 
-use App\Model\subs_plan;
+use App\Model\Subs_plan;
 use Illuminate\Foundation\Http\FormRequest;
 
 class GetAllSubsPlanRequest extends FormRequest
@@ -29,6 +29,6 @@ class GetAllSubsPlanRequest extends FormRequest
         ];
     }
     public function handle(){
-        return subs_plan::all();
+        return Subs_plan::all();
     }
 }
