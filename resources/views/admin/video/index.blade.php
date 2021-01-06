@@ -36,15 +36,15 @@
                                                <td>{{ $video->video_description }}</td>
                                                <td>{{ $video->video_link }}</td>
                                                <td>{{ $video->video_sorting }}</td>
-                                               <td><a href="{{ url('videodetails/'.$video->id)}}" class="btn btn-primary btn-sm" >Details</a>  
+                                               <td><a href="{{ url('videodetails/'.$video->id)}}" class="btn btn-primary btn-sm" >Details</a>
                                                    <a href="{{ route('video-form.edit',$video->id)}}" class="btn btn-primary">Edit</a>
                                                    <a href="{{ route('video-form.destroy',$video->id)}}" class="btn btn-primary">Delete</a>
                                               </td>
-                                                
+
                                                 </tr>
                                                  @endforeach
-                                                 </tbody>                                     
-                                                 </tbody>          
+                                                 </tbody>
+                                                 </tbody>
                                             </table>
                                         </div>
                                     </div>
@@ -58,9 +58,9 @@
     </div>
 @endsection
 @section('scripts')
-      <script src="app-assets/vendors/data-tables/js/jquery.dataTables.min.js"></script>
-    <script src="app-assets/vendors/data-tables/extensions/responsive/js/dataTables.responsive.min.js"></script>
-    <script src="app-assets/vendors/data-tables/js/dataTables.select.min.js"></script>
+    <script src={{ asset('app-assets/vendors/data-tables/js/jquery.dataTables.min.js') }}></script>
+    <script src={{ asset('app-assets/vendors/data-tables/extensions/responsive/js/dataTables.responsive.min.js') }}></script>
+    <script src={{ asset('app-assets/vendors/data-tables/js/dataTables.select.min.js') }}></script>
     <script type="text/javascript" src="https://cdn.datatables.net/buttons/1.6.1/js/dataTables.buttons.min.js"></script>
     <script type="text/javascript" src="https://cdn.datatables.net/buttons/1.6.1/js/buttons.flash.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
