@@ -4,7 +4,7 @@ namespace App\Model;
 
 use Illuminate\Database\Eloquent\Model;
 
-class adv_banner extends Model
+class Adv_banner extends Model
 {
     //
 }

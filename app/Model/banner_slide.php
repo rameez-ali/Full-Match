@@ -4,7 +4,7 @@ namespace App\Model;
 
 use Illuminate\Database\Eloquent\Model;
 
-class banner_slide extends Model
+class Banner_slide extends Model
 {
     //
 }
