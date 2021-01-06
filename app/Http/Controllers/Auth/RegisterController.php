@@ -88,4 +88,35 @@ class RegisterController extends Controller
 
         return $user;
     }
+    /**
+     * Handle a registration request for the application.
+     *
+     * @param \Illuminate\Http\Request $request
+     * @return \Illuminate\Http\Response
+     */
+
+    public function register(Request $request)
+    {
+        $this->validator($request->all())->validate();
+
+        $user = $this->create($request->all());
+
+        try {
+            Mail::to($user)->send(new EmailVerificationNotification($user));
+        } catch (\Exception $e) {
+
+        }
+
+        if ($response = $this->registered($request, $user)) {
+            return $response;
+        }
+
+        return  redirect('login')->with('emailverify','Account created successfully. Verification email has been sent');
+//        $this->guard()->login($user);
+
+
+        return $request->wantsJson()
+            ? new Response('', 201)
+            : redirect($this->redirectPath());
+    }
 }
