@@ -5,7 +5,7 @@ namespace App\Model;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Slidercategory1 extends Model
+class Advertisementbanner  extends Model
 {
 	use SoftDeletes;
     protected $fillable = [
