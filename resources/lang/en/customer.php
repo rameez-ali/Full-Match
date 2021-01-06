@@ -66,6 +66,13 @@ return [
         'order_date' => 'Order Date',
         'status' => 'Status',
     ],
+    'discount' => [
+        'discount_section' => 'Discount Page Section',
+        'add_discount' => 'Add Discount',
+        'edit_discount' => 'Edit Discount',
+        'discount' => 'Discount',
+        'discount_type' => 'Discount Type',
+    ],
     'name' => 'Name',
     'slug' => 'Slug',
     'decs' => 'Description',
@@ -84,6 +91,11 @@ return [
     'months' => 'Months',
     'duration' => 'Duration',
     'value' => 'Value',
+    'title' => 'Title',
+    'code' => 'Code',
+    'start_date' => 'Start Date',
+    'end_date' => 'End Date',
+    'status' => 'Status',
     'sent' => 'We have emailed your password reset link!',
 
 ];
