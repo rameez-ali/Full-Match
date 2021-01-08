@@ -48,45 +48,45 @@
                                         <table id="page-length-option" class="display">
                                             <thead>
                                             <tr>
-                                                <th>{{ __('customer.subsplan.subsplan_id') }}</th>
-                                                <th>{{ __('customer.subsplan.subsplan_title') }}</th>
-                                                <th>{{ __('customer.subsplan.subsplan_decs') }}</th>
-                                                <th>{{ __('customer.subsplan.subsplan_price') }}</th>
-                                                <th>{{ __('customer.duration') }}</th>
+                                                <th>{{ __('customer.id') }}</th>
+                                                <th>{{ __('customer.title') }}</th>
+                                                <th>{{ __('customer.discount.discount_type') }}</th>
+                                                <th>{{ __('customer.code') }}</th>
                                                 <th>{{ __('customer.value') }}</th>
-                                                <th>{{ __('customer.subsplan.subsplan_sort') }}</th>
-{{--                                                <th>{{ __('customer.subsplan.subsplan_lang') }}</th>--}}
+                                                <th>{{ __('customer.start_date') }}</th>
+                                                <th>{{ __('customer.end_date') }}</th>
+                                                <th>{{ __('customer.status') }}</th>
                                                 <th>{{ __('customer.action') }}</th>
                                             </tr>
                                             </thead>
                                             <tbody>
-                                            @foreach($subscriptionplans as $subscriptionplan)
+                                            @foreach($discounts as $discount)
                                                 <tr>
-                                                    <td>{{ $subscriptionplan->id }}</td>
-                                                    <td>{{ $subscriptionplan->plan_title }}</td>
-                                                    <td>{{ $subscriptionplan->plan_Description }}</td>
-                                                    <td>{{ $subscriptionplan->plan_price }}</td>
-                                                    <td>{{ $subscriptionplan->duration_type }}</td>
-                                                    <td>{{ $subscriptionplan->duration_value }}</td>
-                                                    <td>{{ $subscriptionplan->sort_by }}</td>
-{{--                                                    <td>{{ $subscriptionplan->lang }}</td>--}}
+                                                    <td>{{ $discount->id }}</td>
+                                                    <td>{{ $discount->title }}</td>
+                                                    <td>{{ $discount->type }}</td>
+                                                    <td>{{ $discount->code }}</td>
+                                                    <td>{{ $discount->value }}</td>
+                                                    <td>{{ $discount->start_date }}</td>
+                                                    <td>{{ $discount->end_date }}</td>
+                                                    <td>{{ $discount->status }}</td>
                                                     <td>
-                                                        <a class="mb-5 btn waves-effect waves-light gradient-45deg-purple-deep-orange" href="{{ route('subscriptionplans.edit',[ 'subscriptionplan' => $subscriptionplan->id ]) }}">{{ __('customer.customer.edit') }}</a>
-                                                        <a class="mb-5 btn waves-effect waves-light gradient-45deg-amber-amber" onclick="deletePlan({{ $subscriptionplan->id }})" href="#">{{ __('customer.delete') }}</a>
+                                                        <a class="mb-5 btn waves-effect waves-light gradient-45deg-purple-deep-orange" href="{{ route('discount.edit',[ 'discount' => $discount->id ]) }}">{{ __('customer.customer.edit') }}</a>
+                                                        <a class="mb-5 btn waves-effect waves-light gradient-45deg-amber-amber" onclick="deletePlan({{ $discount->id }})" href="#">{{ __('customer.delete') }}</a>
                                                     </td>
                                                 </tr>
                                             @endforeach
                                             </tbody>
                                             <tfoot>
                                             <tr>
-                                                <th>{{ __('customer.subsplan.subsplan_id') }}</th>
-                                                <th>{{ __('customer.subsplan.subsplan_title') }}</th>
-                                                <th>{{ __('customer.subsplan.subsplan_decs') }}</th>
-                                                <th>{{ __('customer.subsplan.subsplan_price') }}</th>
-                                                <th>{{ __('customer.duration') }}</th>
+                                                <th>{{ __('customer.id') }}</th>
+                                                <th>{{ __('customer.title') }}</th>
+                                                <th>{{ __('customer.discount.discount_type') }}</th>
+                                                <th>{{ __('customer.code') }}</th>
                                                 <th>{{ __('customer.value') }}</th>
-                                                <th>{{ __('customer.subsplan.subsplan_sort') }}</th>
-{{--                                                <th>{{ __('customer.subsplan.subsplan_lang') }}</th>--}}
+                                                <th>{{ __('customer.start_date') }}</th>
+                                                <th>{{ __('customer.end_date') }}</th>
+                                                <th>{{ __('customer.status') }}</th>
                                                 <th>{{ __('customer.action') }}</th>
                                             </tr>
                                             </tfoot>

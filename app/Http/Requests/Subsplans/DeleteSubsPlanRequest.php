@@ -2,7 +2,7 @@
 
 namespace App\Http\Requests\Subsplans;
 
-use App\Model\subs_plan;
+use App\Model\Subs_plan;
 use Illuminate\Foundation\Http\FormRequest;
 
 class DeleteSubsPlanRequest extends FormRequest
@@ -31,7 +31,7 @@ class DeleteSubsPlanRequest extends FormRequest
 
     public function handle(){
 
-        $plan = subs_plan::find($this->id);
+        $plan = Subs_plan::find($this->id);
 
         $plan->delete();
 

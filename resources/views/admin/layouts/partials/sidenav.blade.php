@@ -17,6 +17,9 @@
         <li class="bold"><a class="waves-effect waves-cyan " href="{{ route('order.all') }}"><i class="material-icons dp48">shopping_cart</i><span class="menu-title" data-i18n="User Profile">{{ __('customer.order.orders') }}</span></a>
         </li>
 
+        <li class="bold"><a class="waves-effect waves-cyan " href="{{ route('discount.index') }}"><i class="material-icons dp48">local_offer</i><span class="menu-title" data-i18n="User Profile">{{ __('customer.discount.discount') }}</span></a>
+        </li>
+
         <li class="bold"><a class="waves-effect waves-cyan " href="{{ route('contact-form.index') }}"><i class="material-icons">person_outline</i><span class="menu-title" data-i18n="User Profile">Contact Us</span></a>
         </li>
 

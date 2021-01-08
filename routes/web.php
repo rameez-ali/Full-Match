@@ -22,16 +22,17 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('dashboard', 'DashboardController@dash')->name('dashboard');
     Route::resource('customer', 'CustomerController');
     Route::resource('subscriptionplans','SubsPlanController');
+    Route::resource('discount','PromoCodeController');
     Route::resource('category-form','ProjectCategoryViewController');
     Route::resource('genre-form','ProjectCategoryGenreViewController');
 
     Route::resource('player-form','ProjectPlayerViewController');
     Route::resource('contact-form','ProjectContactViewController');
     Route::resource('club-form','ProjectClubViewController');
-    
+
     Route::resource('league-form','ProjectLeagueViewController');
     Route::get('league/{id}','ProjectLeagueViewController@destroy1');
-    
+
 
     Route::resource('video-form','ProjectVideoViewController');
     Route::get('video-form/videos/{id}','ProjectVideoViewController@getseasons');
@@ -44,7 +45,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::resource('page', 'PageController')->only(['index','edit','update']);
     Route::get('videoclub/{id}','ProjectVideoViewController@destroy1');
     Route::get('videodetails/{id}','ProjectVideoViewController@video_details');
-    
+
     Route::resource('slider-form','ProjectSliderViewController');
     Route::get('slider-form/allvideos/{id}','ProjectSliderViewController@getallvideos');
     Route::get('slider-form/videos/{id}','ProjectSliderViewController@getvideos');
@@ -55,7 +56,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('banner-form/allvideos/{id}','ProjectAdvertisementController@getallvideos');
     Route::get('banner-form/videos/{id}','ProjectAdvertisementController@getvideos');
     Route::get('adv_banner/{id}','ProjectAdvertisementController@destroy1');
-    
+
     Route::resource('my-form','SeasonPartSortingController');
     Route::get("addmore","SeasonPartSortingController@addMore");
     Route::post("addmore","SeasonPartSortingController@addMorePost");

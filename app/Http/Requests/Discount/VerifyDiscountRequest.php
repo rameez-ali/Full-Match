@@ -1,11 +1,10 @@
 <?php
 
-namespace App\Http\Requests\Subsplans;
+namespace App\Http\Requests\Discount;
 
-use App\Model\Subs_plan;
 use Illuminate\Foundation\Http\FormRequest;
 
-class GetSubsPlanRequest extends FormRequest
+class VerifyDiscountRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -14,7 +13,7 @@ class GetSubsPlanRequest extends FormRequest
      */
     public function authorize()
     {
-        return true;
+        return false;
     }
 
     /**
@@ -27,11 +26,5 @@ class GetSubsPlanRequest extends FormRequest
         return [
             //
         ];
-    }
-
-    public function handle(){
-
-        return Subs_plan::findOrNew($this->id);
-
     }
 }

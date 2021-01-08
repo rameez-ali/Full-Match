@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Requests\Subsplans;
-use App\Model\subs_plan;
+use App\Model\Subs_plan;
 use Illuminate\Foundation\Http\FormRequest;
 
 class UpdateSubsPlanRequest extends FormRequest
@@ -35,7 +35,7 @@ class UpdateSubsPlanRequest extends FormRequest
 
         $params = $this->all();
 
-        $subsplan = subs_plan::find($this->id);
+        $subsplan = Subs_plan::find($this->id);
 
         $subsplan->plan_title = $params['subp_title'];
         $subsplan->plan_Description = $params['subp_desc'];
