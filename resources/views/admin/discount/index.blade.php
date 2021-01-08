@@ -6,31 +6,31 @@
             <div class="section">
                 <div class="row">
                     <div class="col s12 m12 l12">
-                        @if ($planaddsuccess = Session::get('planaddsuccess'))
+                        @if ($discountaddsuccess = Session::get('discountaddsuccess'))
                             <div class="card-alert card gradient-45deg-green-teal">
                                 <div class="card-content white-text">
                                     <p>
-                                        <i class="material-icons">check</i>{{ $planaddsuccess }}</p>
+                                        <i class="material-icons">check</i>{{ $discountaddsuccess }}</p>
                                 </div>
                                 <button type="button" class="close white-text" data-dismiss="alert" aria-label="Close">
                                     <span aria-hidden="true">×</span>
                                 </button>
                             </div>
-                        @elseif($planeditsuccess = Session::get('planeditsuccess'))
+                        @elseif($discounteditsuccess = Session::get('discounteditsuccess'))
                             <div class="card-alert card gradient-45deg-green-teal">
                                 <div class="card-content white-text">
                                     <p>
-                                        <i class="material-icons">check</i>{{ $planeditsuccess }}</p>
+                                        <i class="material-icons">check</i>{{ $discounteditsuccess }}</p>
                                 </div>
                                 <button type="button" class="close white-text" data-dismiss="alert" aria-label="Close">
                                     <span aria-hidden="true">×</span>
                                 </button>
                             </div>
-                        @elseif($plandeletesuccess = Session::get('plandeletesuccess'))
+                        @elseif($discountdeletesuccess = Session::get('discountdeletesuccess'))
                             <div class="card-alert card gradient-45deg-green-teal">
                                 <div class="card-content white-text">
                                     <p>
-                                        <i class="material-icons">check</i>{{ $plandeletesuccess }}</p>
+                                        <i class="material-icons">check</i>{{ $discountdeletesuccess }}</p>
                                 </div>
                                 <button type="button" class="close white-text" data-dismiss="alert" aria-label="Close">
                                     <span aria-hidden="true">×</span>
@@ -40,8 +40,8 @@
                         <div class="card animate fadeUp">
                             <div class="card-content">
                                 <h4 class="header mt-0">
-                                    {{ __('customer.subsplan.subsplan_section') }}
-                                    <a href="{{ route('subscriptionplans.create') }}" class="waves-effect waves-light btn gradient-45deg-purple-deep-orange gradient-shadow right"> {{ __('customer.add') }}</a>
+                                    {{ __('customer.discount.discount_section') }}
+                                    <a href="{{ route('discount.create') }}" class="waves-effect waves-light btn gradient-45deg-purple-deep-orange gradient-shadow right"> {{ __('customer.add') }}</a>
                                 </h4>
                                 <div class="row">
                                     <div class="col s12">
@@ -130,7 +130,7 @@
             let confirmBox = confirm('{{ __("customer.delete_message") }}');
 
             if(confirmBox){
-                let path = `{{ url('subscriptionplans/${id}') }}`;
+                let path = `{{ url('discount/${id}') }}`;
                 $('#delete-form').attr('action',path);
                 $('#delete-form').submit();
             }
