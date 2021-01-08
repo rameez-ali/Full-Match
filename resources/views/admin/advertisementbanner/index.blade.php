@@ -10,7 +10,7 @@
                                 <div class="card-content">
                                     <h4 class="header mt-0">
                                         Advertisement Banner
-                                        <a href="{{ URL::route('banner-form.create') }}" class="waves-effect waves-light btn gradient-45deg-purple-deep-orange gradient-shadow right">Add Slider</a>
+                                        <a href="{{ URL::route('banner-form.create') }}" class="waves-effect waves-light btn gradient-45deg-purple-deep-orange gradient-shadow right">Add Banner</a>
                                     </h4>
                                     <div class="row">
                                         <div class="col s12">
@@ -18,22 +18,30 @@
                                             <table id="page-length-option" class="display">
                                                 <thead>
                                                 <tr>
-                                                  <th width="27%">Slider Name</th>
-                                                  <th>See Details</th>
-                                                  <th width="30%">Action</th>
+                                                  <th width="15%">Video Title</th>
+                                                  <th width="15%">Video Banner</th>
+                                                  <th width="25%">Video Link</th>
+                                                  <th width="50%">Action</th>
                                                  </tr>
                                                 </thead>
                                                  <tbody>
-                                                  @foreach($slidercategory as $slidercategory)
+                                                  @foreach($Adv_banner as $adv_banner)
                                                   <tr>
-                                                  <td>{{$slidercategory->slider_name}}</td>
-                                                  <td><a href="{{ url('slider/'.$slidercategory->id)}}" class="btn btn-default">See details </a>
-                                                  <td><a href="{{ route('slider-form.edit',$slidercategory->id)}}" class="btn btn-primary">Edit</a></td>
-                                                  <td><a href="{{ route('slider-form.destroy',$slidercategory->id)}}" class="btn btn-primary">Delete</a></td>
+                                                  <td>{{$adv_banner->video_title}}</td>
+                                                  <td><img src="/images/{{  $adv_banner->video_banner}}" style="width:50px;height:50px;" /></td>
+                                                  <td>{{$adv_banner->video_link}}</td>
+                                                   <td><form action="{{ route('banner-form.destroy', $adv_banner->id)}}" method="post">
+                                                    <a href="{{ url('adv_banner/'.$adv_banner->id)}}" class="btn btn-primary">Details</a>
+                                                    <a href="{{ route('banner-form.edit',$adv_banner->id)}}" class="btn btn-primary">Edit</a>
+                                                     {{ csrf_field() }}
+                                                     @method('DELETE')
+                                                     <button class="btn btn-danger" type="submit">Delete</button>
+                                                     </form>
+                                                 </td>
                                                   </tr>
-                                                  @endforeach          
+                                                  @endforeach
                                                  </tbody>
-                                                
+
                                             </table>
                                         </div>
                                     </div>

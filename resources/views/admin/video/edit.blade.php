@@ -10,7 +10,6 @@
                                 <div class="card-content">
                                     <h4 class="header mt-0">
                                         Edit Video
-                                        <a class="waves-effect waves-light btn gradient-45deg-purple-deep-orange gradient-shadow right">Details</a>
                                     </h4>
                                     <div class="row">
                                         <div class="col s12">
@@ -74,6 +73,16 @@
                                         </select>
                                         </div>
 
+                                        <div name="hidden-panel1" id="hidden-panel1">
+                                       <label><strong>Select Genre </strong></label><br/>
+                                       <select class="selectpicker" multiple data-live-search="true" name="genre[]">
+                                       @foreach($video_genres as $videogenre )
+                                       <option value="{{$videogenre->id}}" {{in_array($videogenre->id, $selected_ids3) ? 'selected' : ''}} >{{$videogenre->genre_name}}</option>
+                                       @endforeach
+                                       </select>
+                                       </div>
+
+
                                          <div name="hidden-panel1" id="hidden-panel1">
                                        <label><strong>Select club </strong></label><br/>
                                        <select class="selectpicker" multiple data-live-search="true" name="club[]">
@@ -96,9 +105,11 @@
 
                                        
                                        <br /><br />
-                                       <div class="form-group text-center">
-                                       <input type="submit" name="edit" class="btn btn-primary input-lg" value="Edit" />
-                                       </div>
+                                       <div class="input-field col s12">
+                                            <button class="btn waves-effect waves-light right submit" type="submit" name="action">Submit
+                                                <i class="material-icons right">send</i>
+                                            </button>
+                                        </div>
                                        </form>
                                         </div>
                                     </div>

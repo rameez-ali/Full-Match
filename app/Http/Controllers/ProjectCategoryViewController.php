@@ -15,7 +15,7 @@ class ProjectCategoryViewController extends Controller
     public function index()
     {
           $category = ProjectCategory::all();
-            return view('admin.category.index', compact('category'));
+          return view('admin.category.index', compact('category'));
     }
 
     /**

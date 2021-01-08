@@ -22,7 +22,7 @@
                                                  <th width="15%">League Description</th>
                                                  <th width="10%">League Banner</th>
                                                  <th width="10%">League Promo Video</th>
-                                                 <th width="15%">League Profile Image</th>
+                                                 <th width="10%">League Profile Image</th>
                                                  <th width="50%">Action</th>
                                                  </tr>
                                                 </thead>
@@ -32,17 +32,20 @@
                                                 <td>{{ $project->league_name   }}</td>
                                                 <td>{{ $project->league_description }}</td>
                                                 <td><img src="/images/{{  $project->league_banner}}" style="width:50px;height:50px;" /></td>
-                                                <td><img src="/images/{{  $project->league_promo_video}}" style="width:50px;height:50px;" /></td>
+                                                <td>{{ $project->league_promo_video }}</td>
                                                 <td><img src="/images/{{  $project->league_profile_image}}" style="width:50px;height:50px;" /></td>
-
-                                                <td><a href="{{ url('league/'.$project->id)}}" class="btn btn-primary">See details </a>
-                                                     <a href="{{ route('league-form.edit',$project->id)}}" class="btn btn-primary">Edit</a>
-                                                     <a href="{{ route('league-form.destroy',$project->id)}}" class="btn btn-primary">Delete</a>
-                                                </td>
+                                                 <td><form action="{{ route('league-form.destroy', $project->id)}}" method="post">
+                                                    <a href="{{ url('league/'.$project->id)}}" class="btn btn-primary">Details</a>
+                                                    <a href="{{ route('league-form.edit',$project->id)}}" class="btn btn-primary">Edit</a>
+                                                     {{ csrf_field() }}
+                                                     @method('DELETE')
+                                                     <button class="btn btn-danger" type="submit">Delete</button>
+                                                     </form>
+                                                 </td>
                                                 </tr>
-                                                @endforeach             
+                                                @endforeach
                                                  </tbody>
-                                                
+
                                             </table>
                                         </div>
                                     </div>
@@ -88,7 +91,7 @@
                         className: 'waves-effect waves-light btn-small',
                         filename : '{{ __("customer.excel") }}' ,
                         exportOptions: {
-                            columns: [ 0,1,2,3,4,5,6,7 ]
+                            columns: [ 0,1,2,3,4 ]
                         },
                     },
                     {
@@ -97,7 +100,7 @@
                         className: 'waves-effect waves-light btn-small',
                         filename : '{{ __("customer.csv") }}' ,
                         exportOptions: {
-                            columns: [ 0,1,2,3,4,5,6,7 ]
+                            columns: [ 0,1,2,3,4 ]
                         },
                     }
                 ],

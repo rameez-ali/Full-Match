@@ -22,7 +22,13 @@
                                         <div class="question-section" data-id="0">
                                             <div class="card-body">
                                        <div class="form-group">
-                                       <input type="text" name="league_name" Placeholder="League Name *" class="form-control input-lg"></textarea>
+                                       <input type="text" name="league_name" Placeholder="League Name *" class="form-control input-lg" required data-error=".errorTxt1"></textarea>
+                                       <small class="errorTxt1"></small>
+                                        @error('league_name')
+                                        <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                        </span>
+                                        @enderror
                                        </div>
                                        <br/>
 
@@ -38,20 +44,27 @@
                                          <br/>
 
                                          <div class="form-group">
-                                        <div class="input-group">
-                                        <div class="custom-file">
-                                        <label>Promo Video *</label>
-                                        <input type="file" name="filename2" multiple id="exampleInputFile">
-                                        </div>
-                                        </div>
-                                        </div>
-                                         <br/>
+                                       <input type="text" name="filename2" Placeholder="League Promo Video URL *" class="form-control input-lg" required data-error=".errorTxt2"></textarea>
+                                       <small class="errorTxt2"></small>
+                                        @error('filename2')
+                                        <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                        </span>
+                                        @enderror
+                                       </div>
+                                       <br/>
 
                                          <div class="form-group">
                                         <div class="input-group">
                                         <div class="custom-file">
-                                        <label>Profile Image*</label>
-                                        <input type="file" name=filename3 multiple id="exampleInputFile">
+                                        <label>Profile Image *</label>
+                                        <input type="file" name=filename3 multiple id="exampleInputFile" required data-error=".errorTxt3">
+                                        <small class="errorTxt3"></small>
+                                        @error('filename3')
+                                        <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                        </span>
+                                        @enderror
                                         </div>
                                         </div>
                                         </div>
@@ -59,18 +72,25 @@
 
                                         <div class="card-body">
                                         <div class="form-group">
-                                        <input type="text" name="league_description" placeholder="Description" class="form-control input-lg"></textarea>
+                                        <input type="text" name="league_description" placeholder="League Description  * " class="form-control input-lg" required data-error=".errorTxt4"></textarea>
+                                        <small class="errorTxt4"></small>
+                                        @error('league_description')
+                                        <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                        </span>
+                                        @enderror
+                                        </div>
                                         </div>
 
                                          <div class="card-body">
                                         <div class="form-group">
-                                        <input type="text" name="league_sorting" placeholder="Description" class="form-control input-lg"></textarea>
+                                        <input type="text" name="league_sorting" placeholder="League Sorting" class="form-control input-lg"></textarea>
                                         </div>
 
                                             <div class="answer-section">
                                                  <div class="answer-section">
                                                     <div class="input-field col s8">
-                                                            <input type="file" name=filename4[] id="exampleInputFile" >
+                                                            <input type="text" placeholder="Promo Video URL for Season 1"  name="filename4[]" id="exampleInputFile" >
                                                     </div>
                                                       <div class="input-field col s2">
                                                             <button class="btn waves-effect waves-light btn-small remove-button" type="button" name="action">{{ __('remove') }}</button>
@@ -88,8 +108,10 @@
                                     </div>
 
                                 </div></div></div>
-                                <div class="card-footer">
-                                     <input type="submit" name="add" class="btn btn-primary input-lg" value="Submit" />
+                                <div class="input-field col s12">
+                                        <button class="btn waves-effect waves-light right submit" type="submit" name="action">Submit
+                                                <i class="material-icons right">send</i>
+                                        </button>
                                 </div>
                             </form>
                         </div>
@@ -105,17 +127,16 @@
 function addAnswer(element)
 {
     var counter = 1;
-
     let sections = $('.question-section').length;
     let number = $(element).parent().parent().data('id');
     let ans = $(element).parent().siblings('.answer-section').find('.answer-section-1').length ;
     const answer = `<div class="answer-section-1">
         <div class="input-field col s8">
-            <input type="file" name=filename4[] id="exampleInputFile" >
+            <input type="text" name="filename4[]" placeholder="Promo Video URL for Season".$+counter+ id="exampleInputFile" >
         </div>
 
         <div class="input-field col s2">
-            <button class="btn waves-effect waves-light btn-small remove-button" type="button" name="action">{{ __('exam.remove') }}</button>
+            <button class="btn waves-effect waves-light btn-small remove-button"  type="button" name="action">{{ __('Remove') }}</button>
         </div>
     </div>`;
     $(element).parent().siblings('.answer-section').append(answer);

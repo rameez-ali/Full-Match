@@ -45,9 +45,11 @@
                                        </div>
                                        </div>
                                        <br /><br />
-                                       <div class="form-group text-center">
-                                       <input type="submit" name="edit" class="btn btn-primary input-lg" value="Submit" />
-                                       </div>
+                                      <div class="input-field col s12">
+                                              <button class="btn waves-effect waves-light right submit" type="submit" name="action">Submit
+                                                        <i class="material-icons right">send</i>
+                                                </button>
+                                      </div>
                                        </form>
                                         </div>
                                     </div>

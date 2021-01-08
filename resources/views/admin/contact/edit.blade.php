@@ -10,7 +10,6 @@
                                 <div class="card-content">
                                     <h4 class="header mt-0">
                                         Respond To Query
-                                        <a class="waves-effect waves-light btn gradient-45deg-purple-deep-orange gradient-shadow right">Details</a>
                                     </h4>
                                     <div class="row">
                                         <div class="col s12">
@@ -18,6 +17,28 @@
                                         <form method="post" action="{{ route('contact-form.update', $contact->id) }}" enctype="multipart/form-data">
                                         @csrf
                                         @method('PATCH')
+
+                                        <div class="form-group">
+                                       <label class="col-md-4 text-right">Name</label>
+                                       <div class="col-md-8">
+                                       <input type="text" name="category_name" value="{{ $contact->name }}" class="form-control input-lg" readonly/>
+                                       </div>
+                                       </div>
+
+                                       <div class="form-group">
+                                       <label class="col-md-4 text-right">Email</label>
+                                       <div class="col-md-8">
+                                       <input type="text" name="category_name" value="{{ $contact->email }}" class="form-control input-lg" readonly/>
+                                       </div>
+                                       </div>
+
+                                       <div class="form-group">
+                                       <label class="col-md-4 text-right">Message</label>
+                                       <div class="col-md-8">
+                                       <input type="text" name="category_name" value="{{ $contact->message }}" class="form-control input-lg" readonly/>
+                                       </div>
+                                       </div>
+
                                        <div class="form-group">
                                        <label class="col-md-4 text-right">Response</label>
                                        <div class="col-md-8">
@@ -25,9 +46,12 @@
                                        </div>
                                        </div>
                                        
-                                       <div class="form-group text-center">
-                                       <input type="submit" name="edit" class="btn btn-primary input-lg" value="Edit" />
+                                       <div class="input-field col s12">
+                                                    <button class="btn waves-effect waves-light right submit" type="submit" name="action">Send
+                                                        <i class="material-icons right">send</i>
+                                                    </button>
                                        </div>
+
                                        </form>
                                         </div>
                                     </div>

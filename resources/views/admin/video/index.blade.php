@@ -22,8 +22,8 @@
                                                   <th width="8%">Video Banner</th>
                                                   <th width="8%">Video Image</th>
                                                   <th width="8%">Video Description</th>
-                                                  <th width="10%">Video Link</th>
-                                                  <th width="10%">Video Sorting</th>
+                                                  <th width="8%">Video Link</th>
+                                                  <th width="8%">Video Sorting</th>
                                                    <th width="80%">Action</th>
                                                  </tr>
                                                 </thead>
@@ -36,10 +36,14 @@
                                                <td>{{ $video->video_description }}</td>
                                                <td>{{ $video->video_link }}</td>
                                                <td>{{ $video->video_sorting }}</td>
-                                               <td><a href="{{ url('videodetails/'.$video->id)}}" class="btn btn-primary btn-sm" >Details</a>  
-                                                   <a href="{{ route('video-form.edit',$video->id)}}" class="btn btn-primary">Edit</a>
-                                                   <a href="{{ route('video-form.destroy',$video->id)}}" class="btn btn-primary">Delete</a>
-                                              </td>
+                                              <td><form action="{{ route('video-form.destroy', $video->id)}}" method="post">
+                                                    <a href="{{ url('videodetails/'.$video->id)}}" class="btn btn-primary">Details</a>
+                                                    <a href="{{ route('video-form.edit',$video->id)}}" class="btn btn-primary">Edit</a>
+                                                     {{ csrf_field() }}
+                                                     @method('DELETE')
+                                                     <button class="btn btn-danger" type="submit">Delete</button>
+                                                     </form>
+                                                 </td>
                                                 
                                                 </tr>
                                                  @endforeach

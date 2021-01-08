@@ -10,7 +10,6 @@
                                 <div class="card-content">
                                     <h4 class="header mt-0">
                                         ADD SLIDER
-                                        <a class="waves-effect waves-light btn gradient-45deg-purple-deep-orange gradient-shadow right">ADD</a>
                                     </h4>
                                      <div class="row">
                                         <div class="col s12">
@@ -32,15 +31,28 @@
                                             </select>
                                             </div>
 
+                                            
+
                                         <div class="form-group">
                                            <label for="state">Select Videos</label>
                                            <select name="state[]" class="select2 browser-default" multiple style="width:250px">
                                            </select>
                                         </div>
 
-                                         <div class="text-center" style="margin-top: 10px;">
-                                          <button type="submit" class="btn btn-success">Save</button>
+                                        
+
+
+                                        <div class="form-group">
+                                          <label for="exampleInputEmail1">Enter Slider Sorting</label>
+                                          <input type="text" name="slider_sorting" class="form-control input-lg" />
                                           </div>
+
+
+                                        <div class="input-field col s12">
+                                                    <button class="btn waves-effect waves-light right submit" type="submit" name="action">Submit
+                                                        <i class="material-icons right">send</i>
+                                                    </button>
+                                        </div>
                                         </form>
                                     </div>
                                 </div>

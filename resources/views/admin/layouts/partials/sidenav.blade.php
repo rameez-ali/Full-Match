@@ -22,6 +22,9 @@
 
         <li class="bold"><a class="waves-effect waves-cyan " href="{{ route('category-form.index') }}"><i class="material-icons">person_outline</i><span class="menu-title" data-i18n="User Profile">Category</span></a>
         </li>
+       
+        <li class="bold"><a class="waves-effect waves-cyan " href="{{ route('genre-form.index') }}"><i class="material-icons">person_outline</i><span class="menu-title" data-i18n="User Profile">Genre</span></a>
+        </li>
 
         <li class="bold"><a class="waves-effect waves-cyan " href="{{ route('player-form.index') }}"><i class="material-icons">person_outline</i><span class="menu-title" data-i18n="User Profile">Players</span></a>
         </li>
@@ -35,11 +38,19 @@
         <li class="bold"><a class="waves-effect waves-cyan " href="{{ route('video-form.index') }}"><i class="material-icons">person_outline</i><span class="menu-title" data-i18n="User Profile">Videos</span></a>
         </li>
 
-        <li class="bold"><a class="waves-effect waves-cyan " href="{{ route('slider-form.index') }}"><i class="material-icons">person_outline</i><span class="menu-title" data-i18n="User Profile">Slider</span></a>
+        <li class="bold"><a class="waves-effect waves-cyan " href="{{ route('slider-form.index') }}"><i class="material-icons">person_outline</i><span class="menu-title" data-i18n="User Profile">Category Slider</span></a>
+        </li>
+
+        <li class="bold"><a class="waves-effect waves-cyan " href="{{ route('banner-form.index') }}"><i class="material-icons">person_outline</i><span class="menu-title" data-i18n="User Profile">Advertisement Banner</span></a>
+        </li>
+
+        <li class="bold"><a class="waves-effect waves-cyan " href="{{ route('seasonpart-form.index') }}"><i class="material-icons">person_outline</i><span class="menu-title" data-i18n="User Profile">Season Part Sorting</span></a>
         </li>
 
         <li class="navigation-header"><a class="navigation-header-text">Charts</a><i class="navigation-header-icon material-icons">more_horiz</i>
         </li>
+
+
 
     </ul>
 

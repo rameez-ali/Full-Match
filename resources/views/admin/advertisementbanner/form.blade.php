@@ -10,7 +10,6 @@
                                 <div class="card-content">
                                     <h4 class="header mt-0">
                                         ADD ADVERTISEMENT BANNER
-                                        <a class="waves-effect waves-light btn gradient-45deg-purple-deep-orange gradient-shadow right">ADD</a>
                                     </h4>
                                      <div class="row">
                                         <div class="col s12">
@@ -21,36 +20,67 @@
                                           <input type="text" name="video_title" class="form-control input-lg" />
                                           </div>
 
-                                          <div class="form-group">
-                                          <label for="exampleInputEmail1">Enter Video Banner</label>
-                                          <input type="text" name="video_banner" class="form-control input-lg" />
-                                          </div>
 
-                                          <div class="form-group">
+
+                                           <div class="form-group">
+                                            <div class="input-group">
+                                            <div class="custom-file">
+                                            <label>Video Banner </label>
+                                            <input type="file" name="video_banner" Placeholder="Video Banner" id="exampleInputFile">
+                                            <small class="errorTxt1"></small>
+                                           @error('club_banner')
+                                           <span class="invalid-feedback" role="alert">
+                                           <strong>{{ $message }}</strong>
+                                           </span>
+                                           @enderror
+                                            </div>
+                                            </div>
+                                            </div><br>
+
+                                            <div class="form-group">
                                           <label for="exampleInputEmail1">Enter Video Link</label>
                                           <input type="text" name="video_link" class="form-control input-lg" />
                                           </div>
+
 
                                           <div class="form-group">
                                             <label for="country">Select Type:</label>
                                             <select name="country" id="country" class="form-control" style="width:250px">
                                             <option value="">--- Select Categories ---</option>
-                                            <option value="0"> Home </option>
                                             @foreach ($video as $video)
                                             <option value="{{$video->id}}">{{ $video->category_name }}</option>
                                             @endforeach
                                             </select>
                                             </div>
-                                        
+
+                                        <div class="form-group">
+                                            <label for="country">Select Genre</label>
+                                            <select name="genre" class="form-control" style="width:250px">
+                                            @foreach ($videogenre as $videogenre)
+                                            <option value="{{$videogenre->id}}">{{ $videogenre->genre_name }}</option>
+                                            @endforeach
+                                            </select>
+                                            </div>
+
                                         <div class="form-group">
                                            <label for="state">Select Videos</label>
                                            <select name="state[]" class="select2 browser-default" multiple style="width:250px">
                                            </select>
                                         </div>
 
-                                         <div class="text-center" style="margin-top: 10px;">
-                                          <button type="submit" class="btn btn-success">Save</button>
-                                          </div>
+                                        <div class="form-group">
+                                            <label for="country">Homepage</label>
+                                            <select name="homepage" id="country" class="form-control" style="width:250px">
+                                            <option value="1">Yes</option>
+                                            <option value="0">No</option>
+                                            </select>
+                                            </div>
+
+                                         <div class="input-field col s12">
+                                              <button class="btn waves-effect waves-light right submit" type="submit" name="action">Submit
+                                                  <i class="material-icons right">send</i>
+                                              </button>
+                                        </div>
                                         </form>
                                     </div>
                                 </div>
@@ -84,8 +114,8 @@
                      }
                   });
                }
-               else 
-               {              
+               else
+               {
                   jQuery.ajax({
                      url : 'videos/' +countryID,
                      type : "GET",
@@ -110,7 +140,7 @@
 @section('scripts')
      <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
       <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" />
-    
-      
-    
+
+
+
 @endsection

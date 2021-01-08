@@ -36,12 +36,15 @@
                                        </div>
 
                                        <div class="form-group">
-                                       <label class="col-md-4 text-right">Select Promo Video</label>
-                                       <div class="col-md-8">
-                                       <input type="file" name="league_promo_video" />
-                                       <input type="hidden" name="hidden_image2" value="{{ $league->league_promo_video }}" />
+                                       <input type="text" name="league_promo_video" Placeholder="League Promo Video URL *" value="{{ $league->league_promo_video }}" class="form-control input-lg" required data-error=".errorTxt2"></textarea>
+                                       <small class="errorTxt2"></small>
+                                        @error('filename2')
+                                        <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                        </span>
+                                        @enderror
                                        </div>
-                                       </div>
+                                       <br/>
 
                                             <div class="form-group">
                                                 <label class="col-md-4 text-right">Select Profile Image</label>
@@ -65,7 +68,7 @@
                                             <div class="answer-section">
                                                  <div class="answer-section">
                                                     <div class="input-field col s8">
-                                                            <input type="file" name=filename4[] id="exampleInputFile" >
+                                                            <input type="text" placeholder="Promo Video URL for Season 1"  name="filename4[]" id="exampleInputFile" >
                                                     </div>
                                                       <div class="input-field col s2">
                                                             <button class="btn waves-effect waves-light btn-small remove-button" type="button" name="action">{{ __('remove') }}</button>
@@ -83,8 +86,10 @@
                                     </div>
 
                                 </div></div></div>
-                                <div class="card-footer">
-                                     <input type="submit" name="add" class="btn btn-primary input-lg" value="Submit" />
+                                <div class="input-field col s12">
+                                                    <button class="btn waves-effect waves-light right submit" type="submit" name="action">Submit
+                                                        <i class="material-icons right">send</i>
+                                                    </button>
                                 </div>
                             </form>
                         </div>
@@ -106,11 +111,11 @@ function addAnswer(element)
     let ans = $(element).parent().siblings('.answer-section').find('.answer-section-1').length ;
     const answer = `<div class="answer-section-1">
         <div class="input-field col s8">
-            <input type="file" name=filename4[] id="exampleInputFile" >
+            <input type="text" name="filename4[]" placeholder="Promo Video URL for Season" id="exampleInputFile" >
         </div>
 
         <div class="input-field col s2">
-            <button class="btn waves-effect waves-light btn-small remove-button" type="button" name="action">{{ __('exam.remove') }}</button>
+            <button class="btn waves-effect waves-light btn-small remove-button" type="button" name="action">{{ __('Remove') }}</button>
         </div>
     </div>`;
     $(element).parent().siblings('.answer-section').append(answer);
