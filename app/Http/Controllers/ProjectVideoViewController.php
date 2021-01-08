@@ -9,7 +9,7 @@ use App\Model\League;
 use App\Model\Video_genre;
 use App\Model\Videogenre;
 use App\Model\Club;
-use App\Model\player;
+use App\Model\Player;
 use App\Model\Videoclub;
 use App\Model\Videoplayer;
 use DB;
