@@ -28,7 +28,7 @@
                                        <div name="hidden-panel1" id="hidden-panel1">
                                        <label><strong>Select Videos </strong></label><br/>
                                        <select class="selectpicker" multiple data-live-search="true" name="video[]">
-                                       @foreach($video as $video )
+                                       @foreach($video1 as $video )
                                        <option value="{{$video->id}}" {{in_array($video->id, $selected_ids) ? 'selected' : ''}} >{{$video->video_title}}</option>
                                        @endforeach
                                        </select>
@@ -37,8 +37,10 @@
 
                                        
                                        <br /><br />
-                                       <div class="form-group text-center">
-                                       <input type="submit" name="edit" class="btn btn-primary input-lg" value="Edit" />
+                                       <div class="input-field col s12">
+                                                    <button class="btn waves-effect waves-light right submit" type="submit" name="action">Submit
+                                                        <i class="material-icons right">send</i>
+                                                    </button>
                                        </div>
                                        </form>
                                         </div>

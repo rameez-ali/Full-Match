@@ -46,12 +46,14 @@
                                        <div class="form-group">
                                        <label class="col-md-4 text-right">Add Category Sorting</label>
                                        <div class="col-md-8">
-                                       <input type="text" name="club_name" value="{{ $club->club_sorting }}" class="form-control input-lg" />
+                                       <input type="text" name="club_sorting" value="{{ $club->club_sorting }}" class="form-control input-lg" />
                                        </div>
                                        </div>
                                        <br /><br />
-                                       <div class="form-group text-center">
-                                       <input type="submit" name="edit" class="btn btn-primary input-lg" value="Submit" />
+                                       <div class="input-field col s12">
+                                                    <button class="btn waves-effect waves-light right submit" type="submit" name="action">Submit
+                                                        <i class="material-icons right">send</i>
+                                                    </button>
                                        </div>
                                        </form>
                                         </div>

@@ -9,8 +9,7 @@
                             <div class="card animate fadeUp">
                                 <div class="card-content">
                                     <h4 class="header mt-0">
-                                        Club
-                                        <a href="{{ URL::route('club-form.create') }}" class="waves-effect waves-light btn gradient-45deg-purple-deep-orange gradient-shadow right">Add Club</a>
+                                        League Details
                                     </h4>
                                     <div class="row">
                                         <div class="col s12">
@@ -18,8 +17,8 @@
                                             <table id="page-length-option" class="display">
                                                 <thead>
                                                 <tr>
-                                                <th width="27%">League Seasons</th>
-                                                <th width="27%">League Videos</th>
+                                                <th width="27%">Seasons</th>
+                                                <th width="27%">Promo Video URL of Season</th>
                                                  </tr>
                                                 </thead>
                                                  <tbody>
@@ -27,23 +26,12 @@
                                                   @foreach($data3->where('Project_id', $Image_id) as $data3)
                                                   <tr>
                                                   <td>{{$data3->Seasons}}</td>
-                                                  <td><img src="images/{{ $data3->Video }}"</td>
+                                                  <td>{{$data3->Video}}</td>
                                                   </tr>
                                                   @endforeach
                                                   @endif
                                                  </tbody>
-                                                <tfoot>
-                                                <tr>
-{{--                                                    <th>{{ __('order.email') }}</th>--}}
-                                                    <th>a</th>
-                                                    <th>a</th>
-                                                    <th>a</th>
-                                                    <th>a</th>
-                                                    <th>a</th>
-                                                    <th>a</th>
-                                                    <th>a</th>
-                                                </tr>
-                                                </tfoot>
+                                               
                                             </table>
                                         </div>
                                     </div>

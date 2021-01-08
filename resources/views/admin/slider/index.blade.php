@@ -9,7 +9,7 @@
                             <div class="card animate fadeUp">
                                 <div class="card-content">
                                     <h4 class="header mt-0">
-                                        Slider
+                                        Category Slider
                                         <a href="{{ URL::route('slider-form.create') }}" class="waves-effect waves-light btn gradient-45deg-purple-deep-orange gradient-shadow right">Add Slider</a>
                                     </h4>
                                     <div class="row">
@@ -19,7 +19,7 @@
                                                 <thead>
                                                 <tr>
                                                   <th width="27%">Slider Name</th>
-                                                  <th>See Details</th>
+                                                  <th width="27%">Slider Sorting</th>
                                                   <th width="30%">Action</th>
                                                  </tr>
                                                 </thead>
@@ -27,9 +27,15 @@
                                                   @foreach($slidercategory as $slidercategory)
                                                   <tr>
                                                   <td>{{$slidercategory->slider_name}}</td>
-                                                  <td><a href="{{ url('slider/'.$slidercategory->id)}}" class="btn btn-default">See details </a>
-                                                  <td><a href="{{ route('slider-form.edit',$slidercategory->id)}}" class="btn btn-primary">Edit</a></td>
-                                                  <td><a href="{{ route('slider-form.destroy',$slidercategory->id)}}" class="btn btn-primary">Delete</a></td>
+                                                  <td>{{$slidercategory->slider_sorting}}</td>
+                                                  <td><form action="{{ route('slider-form.destroy', $slidercategory->id)}}" method="post">
+                                                    <a href="{{ url('slider/'.$slidercategory->id)}}" class="btn btn-primary">Details</a>
+                                                    <a href="{{ route('slider-form.edit',$slidercategory->id)}}" class="btn btn-primary">Edit</a>
+                                                     {{ csrf_field() }}
+                                                     @method('DELETE')
+                                                     <button class="btn btn-danger" type="submit">Delete</button>
+                                                     </form>
+                                                 </td>
                                                   </tr>
                                                   @endforeach
                                                  </tbody>

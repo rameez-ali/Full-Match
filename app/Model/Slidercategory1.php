@@ -9,7 +9,7 @@ class Slidercategory1 extends Model
 {
 	use SoftDeletes;
     protected $fillable = [
-        'id','Category_id','slider_name',
+        'id','Category_id','slider_name','slider_sorting',
     ];
     protected $dates = ['deleted_at'];
 }

@@ -42,7 +42,7 @@
                                             <table id="page-length-option" class="display">
                                                 <thead>
                                                 <tr>
-                                                <th width="27%">Players</th>
+                                                <th width="27%">Clubs</th>
                                                  </tr>
                                                 </thead>
                                                  <tbody>
@@ -65,6 +65,22 @@
                                                   @foreach($players as $player)
                                                   <tr>
                                                   <td>{{ $player->player_name}}</td>
+                                                  </tr>
+                                                  @endforeach            
+                                                 </tbody>
+                                                
+                                            </table>
+
+                                             <table id="page-length-option" class="display">
+                                                <thead>
+                                                <tr>
+                                                <th width="27%">Video Genres</th>
+                                                 </tr>
+                                                </thead>
+                                                 <tbody>
+                                                  @foreach($video_genres as $video_genre)
+                                                  <tr>
+                                                  <td>{{ $video_genre->genre_name}}</td>
                                                   </tr>
                                                   @endforeach            
                                                  </tbody>

@@ -72,11 +72,12 @@
                                             <input type="text" Placeholder="Club Sorting"name="club_sorting" class="form-control input-lg" />
                                             </div>
 
-                 
-                
-                                             <div class="card-footer">
-                                             <input type="submit" name="add" class="btn btn-primary input-lg" value="Add" />
-                                             </div>
+                                               <div class="input-field col s12">
+                                                    <button class="btn waves-effect waves-light right submit" type="submit" name="action">Submit
+                                                        <i class="material-icons right">send</i>
+                                                    </button>
+                                                </div>
+                                                
                                              </form>
                                         </div>
                                     </div>

@@ -21,8 +21,8 @@
                                         @csrf
                                             <div class="row">
                                                 <div class="input-field col s12">
-                                                    <label for="category_name">Add Category Name</label>
-                                                    <input id="category_name" name="category_name" type="text"  data-error=".errorTxt1">
+                                                    <label for="category_name">Add Category Name * </label>
+                                                    <input id="category_name" name="category_name" type="text"  required data-error=".errorTxt1">
                                                     <small class="errorTxt1"></small>
                                                     @error('category_name')
                                                     <span class="invalid-feedback" role="alert">
@@ -44,13 +44,7 @@
 
                                                 <div class="input-field col s12">
                                                     <label for="category_sorting">Category Sorting</label>
-                                                    <input id="category_sorting" name="category_sorting" type="number" min="1" required data-error=".errorTxt3">
-                                                    <small class="errorTxt3"></small>
-                                                    @error('category_sorting')
-                                                    <span class="invalid-feedback" role="alert">
-                                                    <strong>{{ $message }}</strong>
-                                                </span>
-                                                    @enderror
+                                                    <input id="category_sorting" name="category_sorting" type="number" min="1" >
                                                 </div>
 
                                                 <div class="input-field col s12">
@@ -97,9 +91,6 @@
                     minlength: 5 ,
                 },
                 category_image: {
-                    required: true,
-                },
-                category_sorting: {
                     required: true,
                 },
                 tnc_select: "required",

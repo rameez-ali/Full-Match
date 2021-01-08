@@ -116,7 +116,8 @@ class ProjectClubViewController extends Controller
                 'club_name'    =>  'required',
                 'club_description'    =>  'required',
                 'image1'         =>  'image|max:2048',
-                'image2'         =>  'image|max:2048'
+                'image2'         =>  'image|max:2048',
+                'club_sorting'      => 'required'
             ]);
 
             $image_name1 = rand() . '.' . $image1->getClientOriginalExtension();
@@ -130,7 +131,8 @@ class ProjectClubViewController extends Controller
         {
             $request->validate([
                 'club_name'    =>  'required',
-                'club_description'    =>  'required'
+                'club_description'    =>  'required',
+                'club_sorting'      => 'required'
             ]);
         }
 
@@ -138,7 +140,8 @@ class ProjectClubViewController extends Controller
              'club_name'       =>   $request->club_name,
              'club_description'       =>   $request->club_description,
              'club_banner'            =>   $image_name1,
-             'club_logo'            =>   $image_name2
+             'club_logo'            =>   $image_name2,
+             'club_sorting'      => $request->club_sorting
          );
 
          Club::whereId($id)->update($form_data);

@@ -97,7 +97,7 @@
                         className: 'waves-effect waves-light btn-small',
                         filename : '{{ __("customer.excel") }}' ,
                         exportOptions: {
-                            columns: [ 0,1,2,3,4 ]
+                            columns: [ 0,1,2 ]
                         },
                     },
                     {
@@ -106,7 +106,7 @@
                         className: 'waves-effect waves-light btn-small',
                         filename : '{{ __("customer.csv") }}' ,
                         exportOptions: {
-                            columns: [ 0,1,2,3,4 ]
+                            columns: [ 0,1,2 ]
                         },
                     }
                 ],

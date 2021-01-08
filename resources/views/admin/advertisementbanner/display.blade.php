@@ -9,7 +9,7 @@
                             <div class="card animate fadeUp">
                                 <div class="card-content">
                                     <h4 class="header mt-0">
-                                        Videos of Slider
+                                        Videos 
                                         <a href="{{ URL::route('club-form.create') }}" class="waves-effect waves-light btn gradient-45deg-purple-deep-orange gradient-shadow right">Add Club</a>
                                     </h4>
                                     <div class="row">
@@ -18,11 +18,11 @@
                                             <table id="page-length-option" class="display">
                                                 <thead>
                                                 <tr>
-                                                <th width="27%">Slider Videos</th>
+                                                <th width="27%">Videos</th>
                                                  </tr>
                                                 </thead>
                                                  <tbody>
-                                                  @if($slidervideos->count())
+                                                  @if($adv_banner_videos->count())
                                                   @foreach($videos as $videos)
                                                   <tr>
                                                  <td>{{$videos->video_title}}</td>
@@ -30,18 +30,7 @@
                                                   @endforeach
                                                   @endif             
                                                  </tbody>
-                                                <tfoot>
-                                                <tr>
-{{--                                                    <th>{{ __('order.email') }}</th>--}}
-                                                    <th>a</th>
-                                                    <th>a</th>
-                                                    <th>a</th>
-                                                    <th>a</th>
-                                                    <th>a</th>
-                                                    <th>a</th>
-                                                    <th>a</th>
-                                                </tr>
-                                                </tfoot>
+                                               
                                             </table>
                                         </div>
                                     </div>

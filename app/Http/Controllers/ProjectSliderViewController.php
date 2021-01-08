@@ -67,7 +67,8 @@ class ProjectSliderViewController extends Controller
         {
         $form_data2 = array(
             'Category_id'    => $request->country > 0 ? $request->country : null,
-            'slider_name'    =>   $request->slider_name
+            'slider_name'    =>   $request->slider_name,
+            'slider_sorting'    =>   $request->slider_sorting
         );        
          Slidercategory1::create($form_data2);
         }
@@ -105,7 +106,7 @@ class ProjectSliderViewController extends Controller
      */
     public function edit($id)
     {
-        $slider_id=$id;
+       $slider_id=$id;
       $slidervideos = DB::table('slidervideos');
       $videos =  DB::table('videos')
         ->where('Slider_id', '=', $slider_id)
@@ -117,18 +118,24 @@ class ProjectSliderViewController extends Controller
        foreach ($videos as $key => $vid) {
            array_push($selected_ids, $vid->id);
        }
-       // dd($selected_ids);
+       
 
-       // dd($videos);
-        $video=video::select('id','video_title')->get();
+       $videos2 =  DB::table('slidercategory1s')
+        ->where('id', '=', $slider_id)
+        ->select('slidercategory1s.Category_id')
+        ->get();
 
-       //$video=Video::all();
+     $videos1=json_decode($videos2, true);
+
+      $video1 =  DB::table('videos')
+        ->where('Category_id', '=', $videos1)
+        ->select('videos.id','videos.video_title')
+        ->get();
+
        $slider=Slidercategory1::find($id);
 
        
-              
-       
-       return view('admin.slider.edit', compact('videos','video','selected_ids','slider'))
+       return view('admin.slider.edit', compact('selected_ids','video1','slider'))
             ->with('i', (request()->input('page', 1) - 1) * 5);
         
 
@@ -177,7 +184,7 @@ class ProjectSliderViewController extends Controller
     
      public function destroy1($id)
     {
-      
+        $slidercategory = Slidercategory1::latest()->paginate(5);
       $slider_id=$id;
 
       $slidervideos = DB::table('slidervideos');
@@ -187,7 +194,7 @@ class ProjectSliderViewController extends Controller
         ->select('videos.*', 'videos.video_title')
         ->get(); 
 
-            return view('admin.slider.display', compact('videos','slidervideos'))
+            return view('admin.slider.display', compact('videos','slidervideos','slidercategory'))
             ->with('i', (request()->input('page', 1) - 1) * 5);
 
 
