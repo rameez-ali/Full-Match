@@ -55,7 +55,7 @@
 
                                                     <div class="input-field col s12">
                                                         <label for="discount_value">{{ __('customer.value') }}*</label>
-                                                        <input id="discount_value" type="number" value="{{ old('discount_value',$discount->value) }}" name="discount_value" min="0.1" step=".001" data-error=".errorTxt2" required>
+                                                        <input id="discount_value" type="number" value="{{ old('discount_value',$discount->value) }}" name="discount_value" min="1" step=".001" data-error=".errorTxt2" required>
                                                         <small class="errorTxt2"></small>
                                                         @error('discount_value')
                                                         <span class="invalid-feedback" role="alert">
@@ -175,7 +175,6 @@
                 },
                 discount_value: {
                     required: true,
-                    min: 0.1,
                 } ,
                 usage_limit: {
                     required: true,
