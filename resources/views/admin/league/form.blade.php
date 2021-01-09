@@ -87,32 +87,28 @@
                                         <input type="text" name="league_sorting" placeholder="League Sorting" class="form-control input-lg"></textarea>
                                         </div>
 
-                                            <div class="answer-section">
-                                                 <div class="answer-section">
-                                                    <div class="input-field col s8">
-                                                            <input type="text" placeholder="Promo Video URL for Season 1"  name="filename4[]" id="exampleInputFile" >
-                                                    </div>
-                                                      <div class="input-field col s2">
-                                                            <button class="btn waves-effect waves-light btn-small remove-button" type="button" name="action">{{ __('remove') }}</button>
-                                                      </div>
-                                                    </div>
+                                         
 
+                                      <table class="table table-bordered" id="dynamicTable">  
+                                       <tr>
+                                       <th>Season</th>
+                                       <th>Video</th>
+                                       <th>Remove</th>
+                                       </tr>
+                                     
+                                      <tr>  
+                                      <td><input type="text" name="addmore[0][name]" Value="Season1" class="form-control" /></td>  
+                                      <td><input type="text" name="addmore[0][qty]" placeholder="Enter Season URL" class="form-control" /></td>  
+                                      <td><button type="button" name="add" id="add" class="btn btn-success">Add More Season</button></td>  
+                                      </tr>  
+                                      </table>
 
-                                            </div>
-                                            <div class="input-field col s12">
-                                                <button class="btn waves-effect waves-light btn-small" type="button" name="action" onclick="addAnswer(this)" >
-                                                    {{ __('Add Another Season') }}
-                                                </button>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                </div></div></div>
-                                <div class="input-field col s12">
-                                        <button class="btn waves-effect waves-light right submit" type="submit" name="action">Submit
+                                      <div class="input-field col s12">
+                                            <button class="btn waves-effect waves-light right submit" type="submit" name="action">Submit
                                                 <i class="material-icons right">send</i>
-                                        </button>
-                                </div>
+                                            </button>
+                                      </div>
+
                             </form>
                         </div>
                     </div>
@@ -121,31 +117,21 @@
         </div>
     </div>
 </div>
-@endsection
-@section('scripts')
-<script type="text/javascript">
-function addAnswer(element)
-{
-    var counter = 1;
-    let sections = $('.question-section').length;
-    let number = $(element).parent().parent().data('id');
-    let ans = $(element).parent().siblings('.answer-section').find('.answer-section-1').length ;
-    const answer = `<div class="answer-section-1">
-        <div class="input-field col s8">
-            <input type="text" name="filename4[]" placeholder="Promo Video URL for Season".$+counter+ id="exampleInputFile" >
-        </div>
 
-        <div class="input-field col s2">
-            <button class="btn waves-effect waves-light btn-small remove-button"  type="button" name="action">{{ __('Remove') }}</button>
-        </div>
-    </div>`;
-    $(element).parent().siblings('.answer-section').append(answer);
-    counter = counter + 1;
-}
-$(function(){
-    $(document).on('click','.remove-button',function(){
-        $(this).parent().parent().remove();
-    })
-})
+<script type="text/javascript">
+   var i = 1;
+    $("#add").click(function(){
+        i++;
+        $("#dynamicTable").append('<tr><td><input type="text" value="Season'+i+'" name="addmore['+i+'][name]" placeholder="Enter Ss['+i+']" class="form-control" /></td><td><input type="text" name="addmore['+i+'][qty]" placeholder="Enter Season URL" class="form-control" /></td><td><button type="button" class="btn btn-danger remove-tr">Remove</button></td></tr>');
+
+    });
+    $(document).on('click', '.remove-tr', function(){  
+
+         $(this).parents('tr').remove();
+
+    });  
 </script>
+
+
 @endsection
+

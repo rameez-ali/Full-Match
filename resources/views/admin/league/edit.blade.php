@@ -55,7 +55,7 @@
                                             </div><br>
 
                                          <div class="form-group">
-                                               <label class="col-md-4 text-right">Add League Sorting</label>
+                                               <label class="col-md-4 text-right">Add League1 Sorting</label>
                                                <div class="col-md-8">
                                                <input type="text" name="league_sorting" value="{{ $league->league_sorting }}" class="form-control input-lg" />
                                             </div><br>
@@ -65,32 +65,39 @@
                                         <input type="text" name="league_description" value="{{ $league->league_description }}" placeholder="Description" class="form-control input-lg"></textarea>
                                         </div>
 
-                                            <div class="answer-section">
-                                                 <div class="answer-section">
-                                                    <div class="input-field col s8">
-                                                            <input type="text" placeholder="Promo Video URL for Season 1"  name="filename4[]" id="exampleInputFile" >
-                                                    </div>
-                                                      <div class="input-field col s2">
-                                                            <button class="btn waves-effect waves-light btn-small remove-button" type="button" name="action">{{ __('remove') }}</button>
-                                                      </div>
-                                                    </div>
+                                   
+                                        
+                                        
+                                         <table class="table table-bordered" id="dynamicTable">  
+                                       <?php $i = 1; ?>
+                                        @foreach($season as $season)
+                                        
+                                      <tr> 
+                                      <td><input type="text" name="addmore[{{$i}}][name]" Value="{{$season->Seasons}}" class="form-control" /></td>  
+                                      <td><input type="text" name="addmore[{{$i}}][qty]" Value="{{$season->Video}}" class="form-control" /></td> 
 
+                                      <!-- <td><input type="text" name="addmore[2]['name']" Value="{{$season->Seasons}}" class="form-control" /></td>  
+                                      <td><input type="text" name="addmore[2]['qty']" Value="{{$season->Video}}" class="form-control" /></td>  -->
 
-                                            </div>
+                                      <td><button type="button" class="btn btn-danger remove-tr">Remove</button></td> 
+                                      </tr>
+                                      <?php $i++; ?>
+                                        @endforeach
+
+                                         
+                                        
+                                        </table>
+
+                                        <td><button type="button" name="add" id="add" class="btn btn-success">Add More Season</button></td>  
+ 
+                                         
+                                     
+
                                             <div class="input-field col s12">
-                                                <button class="btn waves-effect waves-light btn-small" type="button" name="action" onclick="addAnswer(this)" >
-                                                    {{ __('Add Another Season') }}
-                                                </button>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                </div></div></div>
-                                <div class="input-field col s12">
                                                     <button class="btn waves-effect waves-light right submit" type="submit" name="action">Submit
                                                         <i class="material-icons right">send</i>
                                                     </button>
-                                </div>
+                                           </div>
                             </form>
                         </div>
                     </div>
@@ -99,32 +106,20 @@
         </div>
     </div>
 </div>
-@endsection
-@section('scripts')
+
 <script type="text/javascript">
-function addAnswer(element)
-{
-    var counter = 1;
+   var table = document.getElementById("dynamicTable");
+   var i = table.tBodies[0].rows.length;
+    $("#add").click(function(){
+        i++;
+        $("#dynamicTable").append('<tr><td><input type="text" value="Season'+i+'" name="addmore['+i+'][name]" placeholder="Enter Ss['+i+']" class="form-control" /></td><td><input type="text" name="addmore['+i+'][qty]" placeholder="Enter Season URL" class="form-control" /></td><td><button type="button" class="btn btn-danger remove-tr">Remove</button></td></tr>');
 
-    let sections = $('.question-section').length;
-    let number = $(element).parent().parent().data('id');
-    let ans = $(element).parent().siblings('.answer-section').find('.answer-section-1').length ;
-    const answer = `<div class="answer-section-1">
-        <div class="input-field col s8">
-            <input type="text" name="filename4[]" placeholder="Promo Video URL for Season" id="exampleInputFile" >
-        </div>
+    });
+    $(document).on('click', '.remove-tr', function(){  
 
-        <div class="input-field col s2">
-            <button class="btn waves-effect waves-light btn-small remove-button" type="button" name="action">{{ __('Remove') }}</button>
-        </div>
-    </div>`;
-    $(element).parent().siblings('.answer-section').append(answer);
-    counter = counter + 1;
-}
-$(function(){
-    $(document).on('click','.remove-button',function(){
-        $(this).parent().parent().remove();
-    })
-})
+         $(this).parents('tr').remove();
+
+    });  
 </script>
+
 @endsection

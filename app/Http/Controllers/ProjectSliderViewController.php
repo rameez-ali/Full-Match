@@ -42,15 +42,17 @@ class ProjectSliderViewController extends Controller
     public function getallvideos($id) 
     {
         //$states = DB::table("videos")->pluck("video_title","id");
-        $states = DB::table("videos")->pluck("video_title","id","category");;
+       //$states = DB::table("videos")->pluck("video_title","id","category");
+       $states=Video::pluck('video_title','id','category');
         return json_encode($states);
         //return json_encode($states);
     }
 
     public function getvideos($id) 
     {
-        $states1 = DB::table("videos")->where("Category_id",$id)->pluck("video_title","id");
-        return json_encode($states1);
+        // $states1 = DB::table("videos")->where("Category_id",$id)->whereNull('deleted_at')->pluck("video_title","id");
+          $states1=Video::select('video_title','id')->where("Category_id",$id)->pluck("video_title","id");
+         return json_encode($states1);
     }
 
     /**

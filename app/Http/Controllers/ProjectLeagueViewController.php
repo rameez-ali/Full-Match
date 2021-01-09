@@ -42,68 +42,54 @@ class ProjectLeagueViewController extends Controller
      */
     public function store(Request $request)
     {
-       
-         $request->validate([
-            'league_name'     => 'required',
-            'filename1'     => 'required',
-            'filename2'     => 'required',
-            'filename3'         =>  'required',
-             'filename4'         =>  'required',
-            'league_description'    => 'required',
-            'league_sorting'    => 'required'
-        ]);
-
-        //filename1 insertion
-        $image1 = $request->file('filename1');
-        $new_name1 = rand() . '.' . $image1->getClientOriginalExtension();
-        $image1->move(public_path('images'), $new_name1);
+           dd($request->addmore);
+         // dd($request->addmore);
+        //$filename1 insertion
+        // $image1 = $request->file('filename1');
+        // $new_name1 = rand() . '.' . $image1->getClientOriginalExtension();
+        // $image1->move(public_path('images'), $new_name1);
 
 
-        $image3 = $request->file('filename3');
-        $new_name3 = rand() . '.' . $image3->getClientOriginalExtension();
-        $image3->move(public_path('images'), $new_name3);
+        // $image3 = $request->file('filename3');
+        // $new_name3 = rand() . '.' . $image3->getClientOriginalExtension();
+        // $image3->move(public_path('images'), $new_name3);
 
-        $form_data1 = array(
-             'league_name'     =>   $request->league_name,
-             'league_banner'  =>   $new_name1,
-             'league_promo_video'  =>   $request->filename2,
-             'league_profile_image'  =>   $new_name3,
-             'league_description'  =>   $request->league_description,
-             'league_sorting'  =>   $request->league_sorting
-        );
+        // $form_data1 = array(
+        //      'league_name'     =>   $request->league_name,
+        //      'league_banner'  =>   $new_name1,
+        //      'league_promo_video'  =>   $request->filename2,
+        //      'league_profile_image'  =>   $new_name3,
+        //      'league_description'  =>   $request->league_description,
+        //      'league_sorting'  =>   $request->league_sorting
+        // );
 
-        // Insert League Array
-        league::create($form_data1);
+        // // Insert League Array
+        // league::create($form_data1);
 
-         // Id of Last Inserted League
-          $id = DB::table('leagues')->orderBy('ID', 'DESC')->value('ID');
+        //  // Id of Last Inserted League
+        //   $id = DB::table('leagues')->orderBy('ID', 'DESC')->value('ID');
 
-//         $season_name="season";
-//
-//         //Insert Season Array
-//         foreach($request->filename4 as $season){
-//             $newSeason = new Season();
-//             $newSeason->Project_id=$id;
-//             $newSeason->Seasons=$season_name;
-//             $newSeason->Video = $season;
-//             $newSeason->save();
-//         }
+        // //Insert Season Array
+        // foreach($request->addmore as $addmore){
+        //     $newSeason = new Season();
+        //     $newSeason->Project_id=$id;
+        //     $newSeason->Seasons=$addmore['name'];
+        //     $newSeason->Video = $addmore['qty'];
+        //     $newSeason->save();
+        // }
 
 
         
-        $i=1;
-        foreach($request->filename4 as $filename4){
-        $seasons="season".$i;
+        // foreach($request->addmore as $addmore){
 
-         $form_data2 = array(
-             'Project_id'     =>    $id,
-             'Seasons'   =>  $seasons,
-             'Video'     =>   $filename4
-         );
+        //  $form_data2 = array(
+        //      'Project_id'     =>    $id,
+        //      'Seasons'   =>  $addmore['name'],
+        //      'Video'     =>   $addmore['qty']
+        //  );
 
-         Season::create($form_data2);
-         $i++;
-        }
+        //  Season::create($form_data2);
+        // }
 
     }
 
@@ -126,8 +112,12 @@ class ProjectLeagueViewController extends Controller
      */
     public function edit($id)
     {
-        $league=League::find($id);
-        return view('admin.league.edit',compact('league'));
+
+
+         $league=League::find($id);
+         $season= Season::orderBy('id', 'ASC')->where('Project_id', $id)->get(); 
+         
+          return view('admin.league.edit',compact('league','season'));
     }
 
     /**
@@ -139,6 +129,7 @@ class ProjectLeagueViewController extends Controller
      */
     public function update(Request $request, $id)
     {
+           // dd($request->addmore);
         $image_name1 = $request->hidden_image1;
         $image_name3 = $request->hidden_image3;
 
@@ -187,24 +178,16 @@ class ProjectLeagueViewController extends Controller
     
             Season::where('Project_id', $id)->forceDelete();
 
-            $i=1;
-            foreach ($request->filename4 as $filename4) {
-                $seasons = "season".$i;
+               foreach($request->addmore as $addmore){
+               $newSeason = new Season();
+               $newSeason->Project_id=$id;
+               $newSeason->Seasons=$addmore['name'];
+               $newSeason->Video = $addmore['qty'];
+               $newSeason->save();
+       
+               }
 
-                $form_data2 = array(
-                    'Project_id' => $id,
-                    'Seasons' => $seasons,
-                    'Video' => $filename4
-                );
-
-                Season::create($form_data2);
-                $i++;
-            }
-            
-
-        
-
-        return redirect('league-form')->with('success', 'Data is successfully updated');
+        // return redirect('league-form')->with('success', 'Data is successfully updated');
     }
 
     /**
