@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\Discount;
 
+use App\Model\Promo_code;
 use Illuminate\Foundation\Http\FormRequest;
 
 class DeleteDiscountRequest extends FormRequest
@@ -13,7 +14,7 @@ class DeleteDiscountRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -26,5 +27,13 @@ class DeleteDiscountRequest extends FormRequest
         return [
             //
         ];
+    }
+    public function handle(){
+
+        $plan = Promo_code::find($this->id);
+
+        $plan->delete();
+
+        return true;
     }
 }

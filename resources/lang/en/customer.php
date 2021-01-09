@@ -72,6 +72,9 @@ return [
         'edit_discount' => 'Edit Discount',
         'discount' => 'Discount',
         'discount_type' => 'Discount Type',
+        'usage_limit' => 'Number of Limit',
+        'usage_peruser' => 'Number of Use For Each User',
+        'for_specific_user' => 'Select Specific User',
     ],
     'name' => 'Name',
     'slug' => 'Slug',
@@ -96,6 +99,10 @@ return [
     'start_date' => 'Start Date',
     'end_date' => 'End Date',
     'status' => 'Status',
+    'discount_fixed' => 'Fixed',
+    'discount_percentage' => 'Percentage',
+    'generate' => 'Generate Code',
+    'delete_message' => 'Are you sure you want to delete?',
     'sent' => 'We have emailed your password reset link!',
 
 ];

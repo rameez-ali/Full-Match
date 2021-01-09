@@ -2,8 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Customer\GetAllCustomerRequest;
+use App\Http\Requests\Discount\CreateDiscountRequest;
+use App\Http\Requests\Discount\DeleteDiscountRequest;
 use App\Http\Requests\Discount\GetAllDiscountRequest;
 use App\Http\Requests\Discount\GetDiscountRequest;
+use App\Http\Requests\Discount\UpdateDiscountRequest;
 use Illuminate\Http\Request;
 
 class PromoCodeController extends Controller
@@ -32,8 +36,12 @@ class PromoCodeController extends Controller
         $response = $request->handle();
 
         $route = url('discount');
-dd($response);
-        return view('admin.discount.form',['discount' => $response, 'route' => $route, 'edit' => false ]);
+
+        $request = new GetAllCustomerRequest();
+
+        $customers = $request->handle();
+
+        return view('admin.discount.form',['discount' => $response, 'route' => $route, 'customers' => $customers, 'edit' => false ]);
     }
 
     /**
@@ -42,9 +50,11 @@ dd($response);
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CreateDiscountRequest $request)
     {
-        //
+        $response = $request->handle();
+
+        return redirect()->route('discount.index')->with('discountaddsuccess','Discount add Successfully');
     }
 
     /**
@@ -66,7 +76,19 @@ dd($response);
      */
     public function edit($id)
     {
-        //
+        $request = new GetDiscountRequest();
+
+        $request->id = $id;
+
+        $response = $request->handle();
+
+        $route = route('discount.update', ['discount' => $response->id]);
+
+        $request = new GetAllCustomerRequest();
+
+        $customers = $request->handle();
+
+        return view('admin.discount.form',['discount' => $response, 'route' => $route , 'customers' => $customers, 'edit' => true ]);
     }
 
     /**
@@ -76,9 +98,13 @@ dd($response);
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UpdateDiscountRequest $request, $id)
     {
-        //
+        $request->id = $id;
+
+        $response = $request->handle();
+
+        return redirect()->route('discount.index')->with('discounteditsuccess','Discount Edit Successfully');
     }
 
     /**
@@ -89,6 +115,12 @@ dd($response);
      */
     public function destroy($id)
     {
-        //
+        $request = new DeleteDiscountRequest();
+
+        $request->id = $id;
+
+        $response = $request->handle();
+
+        return redirect()->route('discount.index')->with('discountdeletesuccess','Discount Delete Successfully');
     }
 }
