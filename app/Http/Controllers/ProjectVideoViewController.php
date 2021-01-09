@@ -48,7 +48,7 @@ class ProjectVideoViewController extends Controller
     public function getallseasons($id)
     {
         //$states = DB::table("videos")->pluck("video_title","id");
-        $states = DB::table("seasons")->pluck("Seasons","id");;
+        $states=Season::pluck('Seasons','id');
         return json_encode($states);
         //return json_encode($states);
     }
@@ -56,7 +56,7 @@ class ProjectVideoViewController extends Controller
 
     public function getseasons($id)
     {
-        $states1 = DB::table("seasons")->where("project_id",$id)->pluck("Seasons","id");
+        $states1=Season::select('Seasons','id')->where("Project_id",$id)->pluck("Seasons","id");
         return json_encode($states1);
     }
 
