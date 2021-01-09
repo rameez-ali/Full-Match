@@ -2,8 +2,8 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\http\Controllers\Api\CustomerController;
-use App\http\Controllers\Api\SubsPlanController;
+use App\Http\Controllers\Api\CustomerController;
+use App\Http\Controllers\Api\SubsPlanController;
 
 /*
 |--------------------------------------------------------------------------
