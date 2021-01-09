@@ -38,17 +38,21 @@ class ProjectAdvertisementController extends Controller
         return view('admin.advertisementbanner.form',compact('video','videogenre'));
     }
 
-    public function getallvideos($id) 
+    public function getallvideos($id)
     {
         //$states = DB::table("videos")->pluck("video_title","id");
-        $states = DB::table("videos")->pluck("video_title","id","category");;
+        //$states = DB::table("videos")->pluck("video_title","id","category");;
+        $states=Video::pluck('video_title','id','category');
+
         return json_encode($states);
         //return json_encode($states);
     }
 
-    public function getvideos($id) 
+    public function getvideos($id)
     {
-        $states1 = DB::table("videos")->where("Category_id",$id)->pluck("video_title","id");
+        //$states1 = DB::table("videos")->where("Category_id",$id)->pluck("video_title","id");
+        $states1=Video::select('video_title','id')->where("Category_id",$id)->pluck("video_title","id");
+
         return json_encode($states1);
     }
 
@@ -71,7 +75,7 @@ class ProjectAdvertisementController extends Controller
             'category_id'    =>   $request->country,
             'genre_id'    =>   $request->genre,
             'homepage'    =>   $request->homepage
-        );        
+        );
           Adv_banner::create($form_data2);
 
 
@@ -84,8 +88,8 @@ class ProjectAdvertisementController extends Controller
              );
 
             Adv_banner_video::create($form_data3);
-        }       
-     
+        }
+
     }
 
     /**
@@ -129,7 +133,7 @@ class ProjectAdvertisementController extends Controller
        $videogenre=Video_genre::select('id','genre_name')->get();
        //$video=video::select('id','video_title')->get();
 
-       
+
 
           $videos2 =  DB::table('adv_banners')
              ->where('id', '=', $banner_id)
@@ -153,7 +157,7 @@ class ProjectAdvertisementController extends Controller
 
         return view('admin.advertisementbanner.edit', compact('videos','video1','selected_ids','select_category_id','select_genre_id','slider','category','videogenre'))
             ->with('i', (request()->input('page', 1) - 1) * 5);
-        
+
 
     }
 
@@ -194,12 +198,12 @@ class ProjectAdvertisementController extends Controller
             'genre_id'    =>   $request->genre,
             'homepage'    =>   $request->homepage
         );
-  
+
         Adv_banner::whereId($id)->update($form_data2);
 
         Adv_banner_video::where('banner_id', $id)->forceDelete();
 
-                  
+
          foreach($request->video as $video){
             $form_data3 = array(
             'video_id'     =>   $video,
@@ -207,11 +211,12 @@ class ProjectAdvertisementController extends Controller
              );
 
             Adv_banner_video::create($form_data3);
-            }     
+            }
+        return redirect('banner-form')->with('success', 'Data is successfully Added');
+            }
 
-            }               
 
-    
+
 
     /**
      * Remove the specified resource from storage.
@@ -219,10 +224,10 @@ class ProjectAdvertisementController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    
+
      public function destroy1($id)
     {
-      
+
       $banner_id=$id;
 
       $adv_banner_videos = DB::table('Adv_banner_videos');
@@ -230,7 +235,7 @@ class ProjectAdvertisementController extends Controller
         ->where('banner_id', '=', $banner_id)
         ->join('Adv_banner_videos', 'Adv_banner_videos.video_id', '=', 'videos.id')
         ->select('videos.*', 'videos.video_title')
-        ->get(); 
+        ->get();
 
             return view('admin.advertisementbanner.display', compact('videos','adv_banner_videos'))
             ->with('i', (request()->input('page', 1) - 1) * 5);
