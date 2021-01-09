@@ -42,8 +42,8 @@ class ProjectLeagueViewController extends Controller
      */
     public function store(Request $request)
     {
- 
-         dd($request->addmore);
+           dd($request->addmore);
+         // dd($request->addmore);
         //$filename1 insertion
         // $image1 = $request->file('filename1');
         // $new_name1 = rand() . '.' . $image1->getClientOriginalExtension();
@@ -129,69 +129,63 @@ class ProjectLeagueViewController extends Controller
      */
     public function update(Request $request, $id)
     {
+           // dd($request->addmore);
+        $image_name1 = $request->hidden_image1;
+        $image_name3 = $request->hidden_image3;
 
-            dd($request->addmore);
-        // $image_name1 = $request->hidden_image1;
-        // $image_name3 = $request->hidden_image3;
+        $image1 = $request->file('league_banner');
+        $image3 = $request->file('league_profile_image');
 
-        // $image1 = $request->file('league_banner');
-        // $image3 = $request->file('league_profile_image');
+        if($image1 != '' || $image3 != '')
+        {
+            $request->validate([
+                'league_name'    =>  'required',
+                'league_description'    =>  'required',
+                'league_sorting'    =>  'required',
+                'image1'         =>  'image|max:2048',
+                'image2'         =>  'image|max:2048',
+                'image3'         =>  'image|max:2048'
+            ]);
 
-        // if($image1 != '' || $image3 != '')
-        // {
-        //     $request->validate([
-        //         'league_name'    =>  'required',
-        //         'league_description'    =>  'required',
-        //         'league_sorting'    =>  'required',
-        //         'image1'         =>  'image|max:2048',
-        //         'image2'         =>  'image|max:2048',
-        //         'image3'         =>  'image|max:2048'
-        //     ]);
+            $image_name1 = rand() . '.' . $image1->getClientOriginalExtension();
+            $image1->move(public_path('images'), $image_name1);
 
-        //     $image_name1 = rand() . '.' . $image1->getClientOriginalExtension();
-        //     $image1->move(public_path('images'), $image_name1);
-
-        //     $image_name3 = rand() . '.' . $image3->getClientOriginalExtension();
-        //     $image3->move(public_path('images'), $image_name3);
-        // }
-        // else
-        // {
-        //     $request->validate([
-        //         'league_name'    =>  'required',
-        //         'league_description'    =>  'required',
-        //         'league_promo_video'    =>  'required',
-        //         'league_sorting'    =>  'required'
-        //     ]);
-        // }
+            $image_name3 = rand() . '.' . $image3->getClientOriginalExtension();
+            $image3->move(public_path('images'), $image_name3);
+        }
+        else
+        {
+            $request->validate([
+                'league_name'    =>  'required',
+                'league_description'    =>  'required',
+                'league_promo_video'    =>  'required',
+                'league_sorting'    =>  'required'
+            ]);
+        }
 
 
-        // $form_data = array(
-        //     'league_name'       =>   $request->league_name,
-        //     'league_description'       =>   $request->league_description,
-        //     'league_sorting'       =>   $request->league_sorting,
-        //     'league_banner'            =>   $image_name1,
-        //     'league_promo_video'            =>   $request->league_promo_video,
-        //     'league_profile_image'            =>   $image_name3
-        // );
+        $form_data = array(
+            'league_name'       =>   $request->league_name,
+            'league_description'       =>   $request->league_description,
+            'league_sorting'       =>   $request->league_sorting,
+            'league_banner'            =>   $image_name1,
+            'league_promo_video'            =>   $request->league_promo_video,
+            'league_profile_image'            =>   $image_name3
+        );
 
-        // League::whereId($id)->update($form_data);
+        League::whereId($id)->update($form_data);
 
     
-        //     Season::where('Project_id', $id)->forceDelete();
+            Season::where('Project_id', $id)->forceDelete();
 
-        //        foreach($request->addmorename as $addmorename){
-        //        $newSeason = new Season();
-        //        $newSeason->Project_id=$id;
-        //        $newSeason->Seasons=$addmorename;
-        //        $newSeason->Video = "hello";
-        //        $newSeason->save();
+               foreach($request->addmore as $addmore){
+               $newSeason = new Season();
+               $newSeason->Project_id=$id;
+               $newSeason->Seasons=$addmore['name'];
+               $newSeason->Video = $addmore['qty'];
+               $newSeason->save();
        
-        //        }
-
-
-            
-
-        
+               }
 
         // return redirect('league-form')->with('success', 'Data is successfully updated');
     }
