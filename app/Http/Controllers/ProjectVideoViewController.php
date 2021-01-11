@@ -12,6 +12,7 @@ use App\Model\Club;
 use App\Model\Player;
 use App\Model\Videoclub;
 use App\Model\Videoplayer;
+use App\Model\Season;
 use DB;
 
 
@@ -83,11 +84,11 @@ class ProjectVideoViewController extends Controller
 
         $image = $request->file('video_banner_img');
         $new_name = rand() . '.' . $image->getClientOriginalExtension();
-        $image->move(public_path('images'), $new_name);
+        $image->move(public_path('app-assets/images/video'), $new_name);
 
         $image1 = $request->file('video_img');
         $new_name1 = rand() . '.' . $image1->getClientOriginalExtension();
-        $image1->move(public_path('images'), $new_name1);
+        $image1->move(public_path('app-assets/images/video'), $new_name1);
 
         $image = $request->file('video_banner_img');
 
@@ -250,21 +251,21 @@ class ProjectVideoViewController extends Controller
         {
 
             $image_name1 = rand() . '.' . $image1->getClientOriginalExtension();
-            $image1->move(public_path('images'), $image_name1);
+            $image1->move(public_path('app-assets/images/video'), $image_name1);
 
             $image_name2 = rand() . '.' . $image2->getClientOriginalExtension();
-            $image2->move(public_path('images'), $image_name2);
+            $image2->move(public_path('app-assets/images/video'), $image_name2);
 
         }
         else
         {
-            $request->validate([
-                'video_title'    =>  'required',
-                'video_description'    =>  'required',
-                 'video_link'    =>  'required',
-                 'video_duration'    =>  'required',
-                 'video_sorting'    =>  'required'
-            ]);
+            // $request->validate([
+            //     'video_title'    =>  'required',
+            //     'video_description'    =>  'required',
+            //      'video_link'    =>  'required',
+            //      'video_duration'    =>  'required',
+            //      'video_sorting'    =>  'required'
+            // ]);
         }
 
 

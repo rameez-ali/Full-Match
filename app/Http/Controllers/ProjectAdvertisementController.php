@@ -43,15 +43,16 @@ class ProjectAdvertisementController extends Controller
         //$states = DB::table("videos")->pluck("video_title","id");
         //$states = DB::table("videos")->pluck("video_title","id","category");;
         $states=Video::pluck('video_title','id','category');
+       // echo $states;
 
-        return json_encode($states);
+         return json_encode($states);
         //return json_encode($states);
     }
 
     public function getvideos($id)
     {
         //$states1 = DB::table("videos")->where("Category_id",$id)->pluck("video_title","id");
-        $states1=Video::select('video_title','id')->where("Category_id",$id)->pluck("video_title","id");
+       $states1=Video::select('video_title','id')->where("Category_id",$id)->pluck("video_title","id");
 
         return json_encode($states1);
     }
@@ -66,7 +67,7 @@ class ProjectAdvertisementController extends Controller
     {
         $image = $request->file('video_banner');
         $new_name = rand() . '.' . $image->getClientOriginalExtension();
-        $image->move(public_path('images'), $new_name);
+        $image->move(public_path('app-assets/images/banner'), $new_name);
 
         $form_data2 = array(
             'video_title'    =>   $request->video_title,
@@ -89,6 +90,9 @@ class ProjectAdvertisementController extends Controller
 
             Adv_banner_video::create($form_data3);
         }
+
+        return redirect('banner-form')->with('success', 'Data is successfully Added');
+
 
     }
 
@@ -212,7 +216,7 @@ class ProjectAdvertisementController extends Controller
 
             Adv_banner_video::create($form_data3);
             }
-        return redirect('banner-form')->with('success', 'Data is successfully Added');
+              return redirect('banner-form')->with('success', 'Data is successfully Added');
             }
 
 

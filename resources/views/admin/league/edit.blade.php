@@ -17,87 +17,87 @@
                              <form method="post" action="{{ route('league-form.update', $league->id) }}" enctype="multipart/form-data">
                              @csrf
                              @method('PATCH')
-                                <div class="col s12">
-                                    <div id="question-section" >
-                                        <div class="question-section" data-id="0">
-                                            <div class="card-body">
-                                       <div class="form-group">
-                                       <input type="text" name="league_name" Placeholder="League Name *" value="{{ $league->league_name }}" class="form-control input-lg"></textarea>
-                                       </div>
-                                       <br/>
+                                   
+                                   <div class="row">          
+                                         <div class="input-field col s12">
+                                          <p for="category_image">Add League Name * </p>
+                                          <input type="text" name="league_name" value="{{ $league->league_name }}" class="form-control input-lg" required data-error=".errorTxt1" />
+                                          <small class="errorTxt1"></small>
+                                          @error('league_name')
+                                          <span class="invalid-feedback" role="alert">
+                                          <strong>{{ $message }}</strong>
+                                          </span>
+                                          @enderror
+                                          </div>
 
 
-                                        <div class="form-group">
-                                       <label class="col-md-4 text-right">Select League Banner</label>
-                                       <div class="col-md-8">
-                                       <input type="file" name="league_banner" />
-                                       <input type="hidden" name="hidden_image1" value="{{ $league->league_banner }}" />
-                                       </div>
-                                       </div>
+                                          <div class="input-field col s12">
+                                          <p for="league_banner"> Add League Banner </p>
+                                          <input type="file" name="league_banner" class="dropify mt-3" data-default-file="{{ asset('app-assets/images/league/'.$league->league_banner)}}" data-max-file-size="10M" data-allowed-file-extensions="png jpg jpeg" />
+                                          <input type="hidden" name="hidden_image1" value="{{ $league->league_banner }}" />
+                                          </div>
 
-                                       <div class="form-group">
-                                       <input type="text" name="league_promo_video" Placeholder="League Promo Video URL *" value="{{ $league->league_promo_video }}" class="form-control input-lg" required data-error=".errorTxt2"></textarea>
-                                       <small class="errorTxt2"></small>
-                                        @error('filename2')
-                                        <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                        </span>
-                                        @enderror
-                                       </div>
-                                       <br/>
+                                          <div class="input-field col s12">
+                                          <p for="league_promo_video">Add League Promo Video URL * </p>
+                                          <input type="text" name="league_promo_video" value="{{ $league->league_promo_video }}" class="form-control input-lg" required data-error=".errorTxt2"/>
+                                          <small class="errorTxt2"></small>
+                                          @error('league_promo_video')
+                                          <span class="invalid-feedback" role="alert">
+                                          <strong>{{ $message }}</strong>
+                                          </span>
+                                          @enderror
+                                          </div>
 
-                                            <div class="form-group">
-                                                <label class="col-md-4 text-right">Select Profile Image</label>
-                                                <div class="col-md-8">
-                                                    <input type="file" name="league_profile_image" />
-                                                    <input type="hidden" name="hidden_image3" value="{{ $league->league_profile_image }}" />
-                                                </div>
-                                            </div><br>
+                                          <div class="input-field col s12">
+                                          <p for="league_profile_image"> Add League Profile Image * </p>
+                                          <input type="file" name="league_profile_image" class="dropify mt-3" data-default-file="{{ asset('app-assets/images/league/'.$league->league_profile_image)}}" data-max-file-size="10M" data-allowed-file-extensions="png jpg jpeg" />
+                                          <input type="hidden" name="hidden_image3" value="{{ $league->league_profile_image }}" />
+                                          <!-- <small class="errorTxt3"></small>
+                                          @error('league_profile_image')
+                                          <span class="invalid-feedback" role="alert">
+                                          <strong>{{ $message }}</strong>
+                                          </span>
+                                          @enderror -->
+                                          </div>
 
-                                         <div class="form-group">
-                                               <label class="col-md-4 text-right">Add League1 Sorting</label>
-                                               <div class="col-md-8">
-                                               <input type="text" name="league_sorting" value="{{ $league->league_sorting }}" class="form-control input-lg" />
-                                            </div><br>
+                                          <div class="input-field col s12">
+                                          <p for="league_sorting">Add League Sorting  </p>
+                                          <input type="text" name="league_sorting" value="{{ $league->league_sorting }}" class="form-control input-lg" />
+                                          </div>
 
-                                        <div class="card-body">
-                                        <div class="form-group">
-                                        <input type="text" name="league_description" value="{{ $league->league_description }}" placeholder="Description" class="form-control input-lg"></textarea>
+                                         <div class="input-field col s12">
+                                          <p for="league_description">Add League Description * </p>
+                                          <input type="text" name="league_description" value="{{ $league->league_description}}" class="form-control input-lg" required data-error=".errorTxt4" />
+                                          <small class="errorTxt4"></small>
+                                          @error('league_description')
+                                          <span class="invalid-feedback" role="alert">
+                                          <strong>{{ $message }}</strong>
+                                          </span>
+                                          @enderror
+                                          </div>
+
+                                         <div class="input-field col s12">
+                                         <table class="table table-bordered" id="dynamicTable">  
+                                         <?php $i = 1; ?>
+                                         @foreach($season as $season)       
+                                         <tr> 
+                                         <td><input type="text" name="addmore[{{$i}}][name]" Value="{{$season->Seasons}}" class="form-control" /></td>  
+                                         <td><input type="text" name="addmore[{{$i}}][qty]" Value="{{$season->Video}}" class="form-control" /></td> 
+                                         <td><button type="button" class="btn btn-danger remove-tr">Remove</button></td> 
+                                         </tr>
+                                         <?php $i++; ?>
+                                         @endforeach                                  
+                                         </table>
                                         </div>
 
-                                   
-                                        
-                                        
-                                         <table class="table table-bordered" id="dynamicTable">  
-                                       <?php $i = 1; ?>
-                                        @foreach($season as $season)
-                                        
-                                      <tr> 
-                                      <td><input type="text" name="addmore[{{$i}}][name]" Value="{{$season->Seasons}}" class="form-control" /></td>  
-                                      <td><input type="text" name="addmore[{{$i}}][qty]" Value="{{$season->Video}}" class="form-control" /></td> 
-
-                                      <!-- <td><input type="text" name="addmore[2]['name']" Value="{{$season->Seasons}}" class="form-control" /></td>  
-                                      <td><input type="text" name="addmore[2]['qty']" Value="{{$season->Video}}" class="form-control" /></td>  -->
-
-                                      <td><button type="button" class="btn btn-danger remove-tr">Remove</button></td> 
-                                      </tr>
-                                      <?php $i++; ?>
-                                        @endforeach
-
-                                         
-                                        
-                                        </table>
-
-                                        <td><button type="button" name="add" id="add" class="btn btn-success">Add More Season</button></td>  
- 
-                                         
-                                     
-
+                                         <td><button type="button" name="add" id="add" class="btn btn-success">Add More Season</button></td>  
                                             <div class="input-field col s12">
                                                     <button class="btn waves-effect waves-light right submit" type="submit" name="action">Submit
                                                         <i class="material-icons right">send</i>
                                                     </button>
                                            </div>
+
+                                    </div>
                             </form>
                         </div>
                     </div>
@@ -106,6 +106,12 @@
         </div>
     </div>
 </div>
+@endsection
+@section('scripts')
+   <script src={{ asset('app-assets/vendors/jquery-validation/jquery.validate.min.js') }}></script>
+    <script src={{ asset('app-assets/js/scripts/form-file-uploads.js') }}></script>
+    <script src={{ asset('app-assets/vendors/dropify/js/dropify.min.js') }}></script>
+
 
 <script type="text/javascript">
    var table = document.getElementById("dynamicTable");
@@ -121,5 +127,4 @@
 
     });  
 </script>
-
 @endsection

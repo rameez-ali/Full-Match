@@ -21,7 +21,7 @@
                                         @csrf
                                             <div class="row">
                                                 <div class="input-field col s12">
-                                                    <label for="category_name">Add Category Name * </label>
+                                                    <p for="category_name">Add Category Name * </p>
                                                     <input id="category_name" name="category_name" type="text"  required data-error=".errorTxt1">
                                                     <small class="errorTxt1"></small>
                                                     @error('category_name')
@@ -32,7 +32,7 @@
                                                 </div>
 
                                                 <div class="input-field col s12">
-                                                    <p for="category_image">Category Image * </p>
+                                                    <p for="category_image"> Add Category Image * </p>
                                                     <input type="file" name="category_image" id="category_image" class="dropify mt-3" data-default-file="" data-max-file-size="10M" data-allowed-file-extensions="png jpg jpeg" required data-error=".errorTxt2" />
                                                     <small class="errorTxt2"></small>
                                                     @error('category_image')
@@ -43,7 +43,7 @@
                                                 </div>
 
                                                 <div class="input-field col s12">
-                                                    <label for="category_sorting">Category Sorting</label>
+                                                    <label for="category_sorting">Add Category Sorting</label>
                                                     <input id="category_sorting" name="category_sorting" type="number" min="1" >
                                                 </div>
 

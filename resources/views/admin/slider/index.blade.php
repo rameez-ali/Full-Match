@@ -10,7 +10,7 @@
                                 <div class="card-content">
                                     <h4 class="header mt-0">
                                         Category Slider
-                                        <a href="{{ URL::route('slider-form.create') }}" class="waves-effect waves-light btn gradient-45deg-purple-deep-orange gradient-shadow right">Add Slider</a>
+                                        <a href="{{ URL::route('slider-form.create') }}" class="waves-effect waves-light btn gradient-45deg-purple-deep-orange gradient-shadow right">Add </a>
                                     </h4>
                                     <div class="row">
                                         <div class="col s12">
@@ -82,7 +82,7 @@
                     {
                         extend: 'excel',
                         text: '{{ __("customer.excel") }}',
-                        className: 'waves-effect waves-light btn-small',
+                        className: 'waves-effect waves-light btn gradient-45deg-purple-deep-orange gradient-shadow',
                         filename : '{{ __("customer.excel") }}' ,
                         exportOptions: {
                             columns: [ 0,1,2 ]
@@ -91,7 +91,7 @@
                     {
                         extend: 'csv',
                         text: '{{ __("customer.csv") }}',
-                        className: 'waves-effect waves-light btn-small',
+                        className: 'waves-effect waves-light btn gradient-45deg-purple-deep-orange gradient-shadow',
                         filename : '{{ __("customer.csv") }}' ,
                         exportOptions: {
                             columns: [ 0,1,2 ]

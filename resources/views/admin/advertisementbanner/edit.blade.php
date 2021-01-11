@@ -18,71 +18,68 @@
                                         @csrf
                                         @method('PATCH')
                                        
-                                       <div class="form-group">
-                                       <label class="col-md-4 text-right">Add Video Title</label>
-                                       <div class="col-md-8">
-                                       <input type="text" name="video_title" value="{{ $slider->video_title }}" class="form-control input-lg" />
-                                       </div>
-                                       </div>
+                                        <div class="row">  
+                                            <div class="input-field col s12">
+                                            <p for="category_image">Add Banner Video * </p>
+                                            <input type="text" name="video_title" value="{{ $slider->video_title }}" class="form-control input-lg" />
+                                            </div>
 
-                                       <div class="form-group">
-                                       <label class="col-md-4 text-right">Add Video Banner</label>
-                                       <div class="col-md-8">
-                                       <input type="file" name="video_banner"  />
-                                       <input type="hidden" name="hidden_image" value="{{ $slider->video_banner }}" />
-                                       </div>
-                                       </div>
+                                            <div class="form-group">
+                                            <label class="col-md-4 text-right">Add Video Banner</label>
+                                            <div class="col-md-8">
+                                            <input type="file" name="video_banner" class="dropify mt-3"  data-default-file="{{ asset('app-assets/images/video/'.$slider->video_banner)}}" data-max-file-size="10M" data-allowed-file-extensions="png jpg jpeg"/>
+                                            <input type="hidden" name="hidden_image" value="{{ $slider->video_banner }}" />
+                                            </div>
+                                             </div>
 
-                                       <div class="form-group">
-                                       <label class="col-md-4 text-right">Add Video Link</label>
-                                       <div class="col-md-8">
-                                       <input type="text" name="video_link" value="{{ $slider->video_link }}" class="form-control input-lg" />
-                                       </div>
-                                       </div>
-                                       <div name="hidden-panel1" id="hidden-panel1">
-                                       <label><strong>Select Category </strong></label><br/>
-                                       <select name="category">
-                                       @foreach($category as $category )
-                                       <option value="{{$category->id}}" {{$category->id == $select_category_id->category_id ? 'selected' : ''}} >{{$category->category_name}}</option>
-                                       @endforeach
-                                       </select>
-                                       </div>
-
-                                       <div name="hidden-panel1" id="hidden-panel1">
-                                       <label><strong>Select Genre </strong></label><br/>
-                                       <select name="genre">
-                                       @foreach($videogenre as $videogenre )
-                                       <option value="{{$videogenre->id}}" {{$videogenre->id == $select_genre_id->genre_id ? 'selected' : ''}} >{{$videogenre->genre_name}}</option>
-                                       @endforeach
-                                       </select>
-                                       </div>
-
-                                       <div name="hidden-panel1" id="hidden-panel1">
-                                       <label><strong>Select Videos </strong></label><br/>
-                                       <select class="selectpicker" multiple data-live-search="true" name="video[]">
-                                       @foreach($video1 as $video )
-                                       <option value="{{$video->id}}" {{in_array($video->id, $selected_ids) ? 'selected' : ''}} >{{$video->video_title}}</option>
-                                       @endforeach
-                                       </select>
-                                       </div>
-
-                                       <div class="form-group">
-                                            <label for="country">Homepage</label>
-                                            <select name="homepage" id="country" class="form-control" style="width:250px">
-                                            <option value="1">Yes</option>
-                                            <option value="0">No</option>
-                                            </select>
+                                            <div class="input-field col s12">
+                                            <p for="category_image">Add Video Link * </p>
+                                            <input type="text" name="video_link" value="{{ $slider->video_link}}" class="form-control input-lg" />
                                             </div>
 
 
-                                       
-                                       <br /><br />
-                                       <div class="input-field col s12">
-                                            <button class="btn waves-effect waves-light right submit" type="submit" name="action">Submit
+                                           <div name="hidden-panel1" id="hidden-panel1">
+                                           <label><strong>Select Category </strong></label><br/>
+                                           <select name="category">
+                                           @foreach($category as $category )
+                                           <option value="{{$category->id}}" {{$category->id == $select_category_id->category_id ? 'selected' : ''}} >{{$category->category_name}}</option>
+                                           @endforeach
+                                           </select>
+                                           </div>
+
+                                          <div name="hidden-panel1" id="hidden-panel1">
+                                          <label><strong>Select Genre </strong></label><br/>
+                                          <select name="genre">
+                                          @foreach($videogenre as $videogenre )
+                                          <option value="{{$videogenre->id}}" {{$videogenre->id == $select_genre_id->genre_id ? 'selected' : ''}} >{{$videogenre->genre_name}}</option>
+                                          @endforeach
+                                          </select>
+                                          </div>
+
+                                          <div name="hidden-panel1" id="hidden-panel1">
+                                          <label><strong>Select Videos </strong></label><br/>
+                                          <select class="selectpicker" multiple data-live-search="true" name="video[]">
+                                          @foreach($video1 as $video )
+                                          <option value="{{$video->id}}" {{in_array($video->id, $selected_ids) ? 'selected' : ''}} >{{$video->video_title}}</option>
+                                          @endforeach
+                                          </select>
+                                          </div>
+
+                                          <div class="input-field col s12">
+                                          <p for="category_image">Homepage * </p>
+                                          <select name="homepage" id="country" class="form-control" style="width:250px">
+                                          <option value="1">Yes</option>
+                                          <option value="0">No</option>
+                                          </select>
+                                          </div>
+
+                                          <div class="input-field col s12">
+                                              <button class="btn waves-effect waves-light right submit" type="submit" name="action">Submit
                                                         <i class="material-icons right">send</i>
-                                            </button>
-                                        </div>
-                                       </form>
+                                             </button>
+                                          </div>
+                                       </div>   
+                                  </form>
                                         </div>
                                     </div>
                                 </div>

@@ -10,7 +10,7 @@
                                 <div class="card-content">
                                     <h4 class="header mt-0">
                                         LEAGUES
-                                        <a href="{{ URL::route('league-form.create') }}" class="waves-effect waves-light btn gradient-45deg-purple-deep-orange gradient-shadow right">Add League</a>
+                                        <a href="{{ URL::route('league-form.create') }}" class="waves-effect waves-light btn gradient-45deg-purple-deep-orange gradient-shadow right">Add</a>
                                     </h4>
                                     <div class="row">
                                         <div class="col s12">
@@ -31,15 +31,15 @@
                                                 <tr>
                                                 <td>{{ $project->league_name   }}</td>
                                                 <td>{{ $project->league_description }}</td>
-                                                <td><img src="/images/{{  $project->league_banner}}" style="width:50px;height:50px;" /></td>
+                                                <td><img src="{{ asset('app-assets/images/league/'.$project->league_banner)}}" style="width:50px;height:50px;" /></td>
                                                 <td>{{ $project->league_promo_video }}</td>
-                                                <td><img src="/images/{{  $project->league_profile_image}}" style="width:50px;height:50px;" /></td>
+                                                <td><img src="{{ asset('app-assets/images/league/'.$project->league_profile_image)}}" style="width:50px;height:50px;" /></td>
                                                  <td><form action="{{ route('league-form.destroy', $project->id)}}" method="post">
-                                                    <a href="{{ url('league/'.$project->id)}}" class="btn btn-primary">Details</a>
-                                                    <a href="{{ route('league-form.edit',$project->id)}}" class="btn btn-primary">Edit</a>
+                                                    <a href="{{ url('league/'.$project->id)}}" class="dt-button buttons-excel buttons-html5 waves-effect waves-light btn gradient-45deg-purple-deep-orange gradient-shadow">Details</a>
+                                                    <a href="{{ route('league-form.edit',$project->id)}}" class="dt-button buttons-excel buttons-html5 waves-effect waves-light btn gradient-45deg-purple-deep-orange gradient-shadow">Edit</a>
                                                      {{ csrf_field() }}
                                                      @method('DELETE')
-                                                     <button class="btn btn-danger" type="submit">Delete</button>
+                                                     <button class="dt-button buttons-excel buttons-html5 waves-effect waves-light btn gradient-45deg-purple-deep-orange gradient-shadow" type="submit">Delete</button>
                                                      </form>
                                                  </td>
                                                 </tr>
@@ -88,7 +88,7 @@
                     {
                         extend: 'excel',
                         text: '{{ __("customer.excel") }}',
-                        className: 'waves-effect waves-light btn-small',
+                        className: 'waves-effect waves-light btn gradient-45deg-purple-deep-orange gradient-shadow',
                         filename : '{{ __("customer.excel") }}' ,
                         exportOptions: {
                             columns: [ 0,1,2,3,4 ]
@@ -97,7 +97,7 @@
                     {
                         extend: 'csv',
                         text: '{{ __("customer.csv") }}',
-                        className: 'waves-effect waves-light btn-small',
+                        className: 'waves-effect waves-light btn gradient-45deg-purple-deep-orange gradient-shadow',
                         filename : '{{ __("customer.csv") }}' ,
                         exportOptions: {
                             columns: [ 0,1,2,3,4 ]

@@ -17,100 +17,118 @@
                                         <form method="post" action="{{ route('video-form.update', $video->id) }}" enctype="multipart/form-data">
                                         @csrf
                                         @method('PATCH')
-                                         <div class="form-group">
-                                         <label for="exampleInputEmail1">Enter Video Title</label>
-                                         <input type="text" name="video_title" value="{{$video->video_title}}" class="form-control input-lg" />
+                                        <div class="row">
+                                           <div class="input-field col s12">
+                                           <p for="category_image">Add League Name * </p>
+                                           <input type="text" name="video_title" value="{{ $video->video_title }}" class="form-control input-lg" required data-error=".errorTxt1" />
+                                           <small class="errorTxt1"></small>
+                                           @error('video_title')
+                                           <span class="invalid-feedback" role="alert">
+                                           <strong>{{ $message }}</strong>
+                                           </span>
+                                           @enderror
+                                           </div>
+
+                                           <div class="input-field col s12">
+                                           <p for="category_image">Add Video Description * </p>
+                                           <input type="text" name="video_description" value="{{ $video->video_description }}" class="form-control input-lg" />
+                                           </div>
+
+                                           <div class="input-field col s12">
+                                           <p for="video_link">Add Video Link * </p>
+                                           <input type="text" name="video_link" value="{{ $video->video_link }}" class="form-control input-lg" required data-error=".errorTxt2" />
+                                           <small class="errorTxt2"></small>
+                                           @error('video_link')
+                                           <span class="invalid-feedback" role="alert">
+                                           <strong>{{ $message }}</strong>
+                                           </span>
+                                           @enderror
+                                           </div>
+
+                                           <div class="input-field col s12">
+                                           <p for="video_duration">Add Video Duration * </p>
+                                           <input type="time" name="video_duration" value="{{ $video->video_duration }}" class="form-control input-lg" required data-error=".errorTxt3" />
+                                           <small class="errorTxt3"></small>
+                                           @error('video_duration')
+                                           <span class="invalid-feedback" role="alert">
+                                           <strong>{{ $message }}</strong>
+                                           </span>
+                                           @enderror
+                                           </div>
+
+                                           <div class="input-field col s12">
+                                           <p for="category_image"> Notify user * </p>
+                                           <input type="text" name="notify_user" value="{{$video->notify_user}}" class="form-control input-lg" />
+                                           </div>
+                                          
+                                           <div class="input-field col s12">
+                                           <p for="category_image"> Add Video Sorting * </p>
+                                           <input type="text" name="video_sorting" value="{{$video->video_sorting}}" class="form-control input-lg" />
+                                           </div>
+
+
+                                          <div class="input-field col s12">
+                                          <p for="category_image"> Add Video Banner * </p>
+                                          <input type="file" name="video_banner_img" class="dropify mt-3" data-default-file="{{ asset('app-assets/images/video/'.$video->video_banner_img)}}" data-max-file-size="10M" data-allowed-file-extensions="png jpg jpeg" />
+                                          <input type="hidden" name="hidden_image1" value="{{ $video->video_banner_img }}" />
+                                          </div>
+                                        
+                                          <div class="input-field col s12">
+                                          <p for="category_image"> Add Video Image * </p>
+                                          <input type="file" name="video_img" class="dropify mt-3" data-default-file="{{ asset('app-assets/images/video/'.$video->video_img)}}" data-max-file-size="10M" data-allowed-file-extensions="png jpg jpeg" />
+                                          <input type="hidden" name="hidden_image2" value="{{ $video->video_img }}" />
+                                          <!-- <small class="errorTxt4"></small>
+                                          @error('video_img')
+                                          <span class="invalid-feedback" role="alert">
+                                          <strong>{{ $message }}</strong>
+                                          </span>
+                                          @enderror -->
+                                          </div>
+
+                                          <div name="hidden-panel1" id="hidden-panel1">
+                                          <label><strong>Select club </strong></label><br/>
+                                          <select class="browser-default custom-select" name="Category_id">
+                                          @foreach($category as $category )
+                                          <option value="{{$category->id}}">{{$category->category_name}}</option>
+                                          @endforeach
+                                         </select>
                                          </div>
 
-                            <div class="form-group">
-                             <label for="exampleInputEmail1">Enter Description </label>
-                             <input type="text" name="video_description" value="{{$video->video_description}}" class="form-control input-lg" />  
-                            </div>
-
-                            <div class="form-group">
-                            <label for="exampleInputEmail1">Enter link </label>
-                            <input type="text" name="video_link" value="{{$video->video_link}}" class="form-control input-lg" />
-                            </div>
-
-                            <div class="form-group">
-                            <label for="exampleInputEmail1">Enter duration </label>
-                            <input type="text" name="video_duration" value="{{$video->video_duration}}" class="form-control input-lg" />
-                            </div>
-
-                            <div class="form-group">
-                            <label for="exampleInputEmail1">Notify user </label>
-                            <input type="text" name="notify_user" value="{{$video->notify_user}}" class="form-control input-lg" />
-                            </div>
-
-                             <div class="form-group">
-                            <label for="exampleInputEmail1">Video Sorting </label>
-                            <input type="text" name="video_sorting" value="{{$video->video_sorting}}" class="form-control input-lg" />
-                            </div>
-
-
-                                        <div class="form-group">
-                                       <label class="col-md-4 text-right">Select Player Banner</label>
-                                       <div class="col-md-8">
-                                       <input type="file" name="video_banner_img" />
-                                       <input type="hidden" name="hidden_image1" value="{{ $video->video_banner_img }}" />
-                                       </div>
-                                       </div>
-
-                                         <div class="form-group">
-                                       <label class="col-md-4 text-right">Select Player Banner</label>
-                                       <div class="col-md-8">
-                                       <input type="file" name="video_img" />
-                                       <input type="hidden" name="hidden_image2" value="{{ $video->video_img }}" />
-                                       </div>
-                                       </div>
-
-                                        <div name="hidden-panel1" id="hidden-panel1">
-                                        <label><strong>Select club </strong></label><br/>
-                                        <select class="browser-default custom-select" name="Category_id">
-                                        @foreach($category as $category )
-                                        <option value="{{$category->id}}">{{$category->category_name}}</option>
-                                        @endforeach
-                                        </select>
-                                        </div>
-
-                                        <div name="hidden-panel1" id="hidden-panel1">
-                                       <label><strong>Select Genre </strong></label><br/>
-                                       <select class="selectpicker" multiple data-live-search="true" name="genre[]">
-                                       @foreach($video_genres as $videogenre )
-                                       <option value="{{$videogenre->id}}" {{in_array($videogenre->id, $selected_ids3) ? 'selected' : ''}} >{{$videogenre->genre_name}}</option>
-                                       @endforeach
-                                       </select>
-                                       </div>
+                                         <div name="hidden-panel1" id="hidden-panel1">
+                                         <label><strong>Select Genre </strong></label><br/>
+                                         <select class="selectpicker" multiple data-live-search="true" name="genre[]">
+                                         @foreach($video_genres as $videogenre )
+                                         <option value="{{$videogenre->id}}" {{in_array($videogenre->id, $selected_ids3) ? 'selected' : ''}} >{{$videogenre->genre_name}}</option>
+                                         @endforeach
+                                         </select>
+                                         </div>
 
 
                                          <div name="hidden-panel1" id="hidden-panel1">
-                                       <label><strong>Select club </strong></label><br/>
-                                       <select class="selectpicker" multiple data-live-search="true" name="club[]">
-                                       @foreach($club as $club )
-                                       <option value="{{$club->id}}" {{in_array($club->id, $selected_ids) ? 'selected' : ''}} >{{$club->club_name}}</option>
-                                       @endforeach
-                                       </select>
-                                       </div>
+                                         <label><strong>Select club </strong></label><br/>
+                                         <select class="selectpicker" multiple data-live-search="true" name="club[]">
+                                         @foreach($club as $club )
+                                         <option value="{{$club->id}}" {{in_array($club->id, $selected_ids) ? 'selected' : ''}} >{{$club->club_name}}</option>
+                                         @endforeach
+                                         </select>
+                                         </div>
 
-                                       <div name="hidden-panel1" id="hidden-panel1">
-                                       <label><strong>Select Player </strong></label><br/>
-                                       <select class="selectpicker" multiple data-live-search="true" name="player[]">
-                                       @foreach($player as $player )
-                                       <option value="{{$player->id}}" {{in_array($player->id, $selected_ids1) ? 'selected' : ''}} >{{$player->player_name}}</option>
-                                       @endforeach
-                                       </select>
-                                       </div>
+                                         <div name="hidden-panel1" id="hidden-panel1">
+                                         <label><strong>Select Player </strong></label><br/>
+                                         <select class="selectpicker" multiple data-live-search="true" name="player[]">
+                                         @foreach($player as $player )
+                                         <option value="{{$player->id}}" {{in_array($player->id, $selected_ids1) ? 'selected' : ''}} >{{$player->player_name}}</option>
+                                         @endforeach
+                                         </select>
+                                         </div>
 
-                                           
-
-                                       
-                                       <br /><br />
-                                       <div class="input-field col s12">
-                                            <button class="btn waves-effect waves-light right submit" type="submit" name="action">Submit
+                                         <div class="input-field col s12">
+                                             <button class="btn waves-effect waves-light right submit" type="submit" name="action">Submit
                                                 <i class="material-icons right">send</i>
-                                            </button>
-                                        </div>
-                                       </form>
+                                             </button>
+                                          </div>
+                                       </div>
+                                    </form>
                                         </div>
                                     </div>
                                 </div>
@@ -123,7 +141,9 @@
     </div>
 @endsection
 @section('scripts')
-    <script src="app-assets/vendors/jquery-validation/jquery.validate.min.js"></script>
+    <script src={{ asset('app-assets/vendors/jquery-validation/jquery.validate.min.js') }}></script>
+    <script src={{ asset('app-assets/js/scripts/form-file-uploads.js') }}></script>
+    <script src={{ asset('app-assets/vendors/dropify/js/dropify.min.js') }}></script>
 <script>
     /*
  * Form Validation

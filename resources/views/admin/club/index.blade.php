@@ -10,7 +10,7 @@
                                 <div class="card-content">
                                     <h4 class="header mt-0">
                                         Club
-                                        <a href="{{ URL::route('club-form.create') }}" class="waves-effect waves-light btn gradient-45deg-purple-deep-orange gradient-shadow right">Add Club</a>
+                                        <a href="{{ URL::route('club-form.create') }}" class="waves-effect waves-light btn gradient-45deg-purple-deep-orange gradient-shadow right">Add</a>
                                     </h4>
                                     <div class="row">
                                         <div class="col s12">
@@ -30,15 +30,15 @@
                                                 @foreach($club as $club)
                                                 <tr>
                                                 <td>{{ $club->club_name }}</td>
-                                                <td><img src="/images/{{  $club->club_banner}}" style="width:50px;height:50px;" /></td>
-                                                <td><img src="/images/{{  $club->club_logo}}" style="width:50px;height:50px;" /></td>
+                                                <td><img src="{{ asset('app-assets/images/club/'.$club->club_banner)}}" style="width:50px;height:50px;" /></td>
+                                                <td><img src="{{ asset('app-assets/images/club/'.$club->club_logo)}}" style="width:50px;height:50px;" /></td>
                                                 <td>{{ $club->club_description }}</td>
                                                 <td>{{ $club->club_sorting }}</td>
                                                 <td><form action="{{ route('club-form.destroy', $club->id)}}" method="post">
-                                                    <a href="{{ route('club-form.edit',$club->id)}}" class="btn btn-primary">Edit</a>
+                                                    <a href="{{ route('club-form.edit',$club->id)}}" class="dt-button buttons-excel buttons-html5 waves-effect waves-light btn gradient-45deg-purple-deep-orange gradient-shadow">Edit</a>
                                                 {{ csrf_field() }}
                                                 @method('DELETE')
-                                                <button class="btn btn-danger" type="submit">Delete</button>
+                                                <button class="dt-button buttons-excel buttons-html5 waves-effect waves-light btn gradient-45deg-purple-deep-orange gradient-shadow" type="submit">Delete</button>
                                                 </form></td>
                                                 @endforeach
                                                 </tbody>
@@ -87,7 +87,7 @@
                     {
                         extend: 'excel',
                         text: '{{ __("customer.excel") }}',
-                        className: 'waves-effect waves-light btn-small',
+                        className: 'waves-effect waves-light btn gradient-45deg-purple-deep-orange gradient-shadow',
                         filename : '{{ __("customer.excel") }}' ,
                         exportOptions: {
                             columns: [ 0,1,2,3,4,5 ]
@@ -96,7 +96,7 @@
                     {
                         extend: 'csv',
                         text: '{{ __("customer.csv") }}',
-                        className: 'waves-effect waves-light btn-small',
+                        className: 'waves-effect waves-light btn gradient-45deg-purple-deep-orange gradient-shadow',
                         filename : '{{ __("customer.csv") }}' ,
                         exportOptions: {
                             columns: [ 0,1,2,3,4,5 ]

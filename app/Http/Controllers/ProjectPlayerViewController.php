@@ -48,11 +48,11 @@ class ProjectPlayerViewController extends Controller
 
         $image = $request->file('player_banner');
         $new_name = rand() . '.' . $image->getClientOriginalExtension();
-        $image->move(public_path('images'), $new_name);
+        $image->move(public_path('app-assets/images/player'), $new_name);
 
         $image1 = $request->file('player_profile_image');
         $new_name1 = rand() . '.' . $image1->getClientOriginalExtension();
-        $image1->move(public_path('images'), $new_name1);
+        $image1->move(public_path('app-assets/images/player'), $new_name1);
        
         $form_data2 = array(
             'player_name'     =>   $request->player_name,
@@ -116,14 +116,14 @@ class ProjectPlayerViewController extends Controller
                 'player_description'    =>  'required',
                 'image1'         =>  'image|max:2048',
                 'image2'         =>  'image|max:2048',
-                'player_sorting' =>  'player_sorting'
+                'player_sorting' =>  'required'
             ]);
 
             $image_name1 = rand() . '.' . $image1->getClientOriginalExtension();
-            $image1->move(public_path('images'), $image_name1);
+            $image1->move(public_path('app-assets/images/player'), $image_name1);
 
             $image_name2 = rand() . '.' . $image2->getClientOriginalExtension();
-            $image2->move(public_path('images'), $image_name2);
+            $image2->move(public_path('app-assets/images/player'), $image_name2);
 
             echo $image1;
         }

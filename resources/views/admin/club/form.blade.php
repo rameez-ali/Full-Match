@@ -16,68 +16,63 @@
                                             <h2></h2>
                                             <form method="post" action="{{ route('club-form.store') }}" enctype="multipart/form-data">
                                             @csrf
-                                            <div class="card-body">
+                                              <div class="row">
                                             
-                                            <div class="form-group">
-                                            <input type="text" name="club_name" Placeholder="Club Name* " class="form-control input-lg" />
-                                            <small class="errorTxt1"></small>
-                                            @error('club_name')
-                                            <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                            </span>
-                                            @enderror
-                                            </div>
+                                                    <div class="input-field col s12">
+                                                    <p for="club_name">Add Club Name * </p>
+                                                    <input id="club_name" name="club_name" type="text"  required data-error=".errorTxt1">
+                                                    <small class="errorTxt1"></small>
+                                                    @error('club_name')
+                                                    <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                    </span>
+                                                    @enderror
+                                                    </div>
 
-                                            <div class="form-group">
-                                            <input type="text" name="club_description" Placeholder="Description * " class="form-control input-lg" />
-                                            <small class="errorTxt1"></small>
-                                            @error('club_description')
-                                            <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                            </span>
-                                            @enderror
-                                            </div><br>
+                                                    <div class="input-field col s12">
+                                                    <p for="club_description">Add Club Description * </p>
+                                                    <input id="club_description" name="club_description" type="text"  required data-error=".errorTxt2">
+                                                    <small class="errorTxt2"></small>
+                                                    @error('club_description')
+                                                    <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                    </span>
+                                                    @enderror
+                                                    </div>
  
-                                            <div class="form-group">
-                                            <div class="input-group">
-                                            <div class="custom-file">
-                                            <label>Club Banner * </label>
-                                            <input type="file" name="club_banner" Placeholder="Club Banner" id="exampleInputFile">
-                                            <small class="errorTxt1"></small>
-                                           @error('club_banner')
-                                           <span class="invalid-feedback" role="alert">
-                                           <strong>{{ $message }}</strong>
-                                           </span>
-                                           @enderror
-                                            </div>
-                                            </div>
-                                            </div><br>
+                                                    <div class="input-field col s12">
+                                                    <p for="club_banner"> Add Club Banner * </p>
+                                                    <input type="file" name="club_banner" id="club_banner" class="dropify mt-3" data-default-file="" data-max-file-size="10M" data-allowed-file-extensions="png jpg jpeg" required data-error=".errorTxt3" />
+                                                    <small class="errorTxt3"></small>
+                                                    @error('club_banner')
+                                                    <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                    </span>
+                                                    @enderror
+                                                    </div>
                  
-                                             <div class="form-group">
-                                             <div class="input-group">
-                                             <div class="custom-file">
-                                             <label>Club Logo * </label>
-                                             <input type="file" name="club_logo" Placeholder="Club Logo" id="exampleInputFile1">
-                                             <small class="errorTxt1"></small>
-                                             @error('club_logo')
-                                             <span class="invalid-feedback" role="alert">
-                                             <strong>{{ $message }}</strong>
-                                             </span>
-                                           @enderror
-                                             </div>
-                                             </div>
-                                            </div><br>
+                                                    <div class="input-field col s12">
+                                                    <p for="club_logo"> Add Club Logo * </p>
+                                                    <input type="file" name="club_logo" id="club_logo" class="dropify mt-3" data-default-file="" data-max-file-size="10M" data-allowed-file-extensions="png jpg jpeg" required data-error=".errorTxt4" />
+                                                    <small class="errorTxt4"></small>
+                                                    @error('club_logo')
+                                                    <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                     </span>
+                                                    @enderror
+                                                     </div>
 
-                                            <div class="form-group">
-                                            <input type="text" Placeholder="Club Sorting"name="club_sorting" class="form-control input-lg" />
-                                            </div>
+                                                   <div class="input-field col s12">
+                                                    <p for="club_sorting">Add Club Sorting * </p>
+                                                    <input id="club_sorting" name="club_sorting" type="text" >
+                                                    </div>
 
-                                               <div class="input-field col s12">
-                                                    <button class="btn waves-effect waves-light right submit" type="submit" name="action">Submit
-                                                        <i class="material-icons right">send</i>
-                                                    </button>
-                                                </div>
-                                                
+                                                   <div class="input-field col s12">
+                                                       <button class="btn waves-effect waves-light right submit" type="submit" name="action">Submit
+                                                          <i class="material-icons right">send</i>
+                                                       </button>
+                                                   </div>
+                                              </div> 
                                              </form>
                                         </div>
                                     </div>
@@ -91,7 +86,9 @@
     </div>
 @endsection
 @section('scripts')
-    <script src="app-assets/vendors/jquery-validation/jquery.validate.min.js"></script>
+    <script src={{ asset('app-assets/vendors/jquery-validation/jquery.validate.min.js') }}></script>
+    <script src={{ asset('app-assets/js/scripts/form-file-uploads.js') }}></script>
+    <script src={{ asset('app-assets/vendors/dropify/js/dropify.min.js') }}></script>
 <script>
     /*
  * Form Validation
@@ -113,29 +110,17 @@
                     required: true,
                     minlength: 5
                 },
-                cemail: {
+                club_description: {
                     required: true,
                     email: true
                 },
-                password: {
+                club_logo: {
                     required: true,
                     minlength: 5
                 },
-                cpassword: {
+                club_banner: {
                     required: true,
                     minlength: 5,
-                    equalTo: "#password"
-                },
-                crole: {
-                    required: true,
-                },
-                curl: {
-                    required: true,
-                    url: true
-                },
-                ccomment: {
-                    required: true,
-                    minlength: 15
                 },
                 tnc_select: "required",
             },

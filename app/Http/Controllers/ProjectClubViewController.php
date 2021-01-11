@@ -50,11 +50,11 @@ class ProjectClubViewController extends Controller
 
         $image = $request->file('club_banner');
         $new_name = rand() . '.' . $image->getClientOriginalExtension();
-        $image->move(public_path('images'), $new_name);
+        $image->move(public_path('app-assets/images/club'), $new_name);
 
         $image1 = $request->file('club_logo');
         $new_name1 = rand() . '.' . $image1->getClientOriginalExtension();
-        $image1->move(public_path('images'), $new_name1);
+        $image1->move(public_path('app-assets/images/club'), $new_name1);
 
         $form_data2 = array(
             'club_name'     =>   $request->club_name,
@@ -121,10 +121,10 @@ class ProjectClubViewController extends Controller
             ]);
 
             $image_name1 = rand() . '.' . $image1->getClientOriginalExtension();
-            $image1->move(public_path('images'), $image_name1);
+            $image1->move(public_path('app-assets/images/club'), $image_name1);
 
             $image_name2 = rand() . '.' . $image2->getClientOriginalExtension();
-            $image2->move(public_path('images'), $image_name2);
+            $image2->move(public_path('app-assets/images/club'), $image_name2);
             echo $image2;
         }
         else

@@ -31,17 +31,17 @@
                                                  @foreach($video as $video)
                                                  <tr>
                                                <td>{{ $video->video_title }}</td>
-                                               <td><img src="/images/{{ $video->video_banner_img }}"  class="img-thumbnail" width="75" /></td>
-                                               <td><img src="/images/{{ $video->video_img}}"  class="img-thumbnail" width="75" /></td>
+                                               <td><img src="{{ asset('app-assets/images/video/'.$video->video_banner_img)}}"  class="img-thumbnail" width="75" /></td>
+                                               <td><img src="{{ asset('app-assets/images/video/'.$video->video_img)}}"  class="img-thumbnail" width="75" /></td>
                                                <td>{{ $video->video_description }}</td>
                                                <td>{{ $video->video_link }}</td>
                                                <td>{{ $video->video_sorting }}</td>
                                               <td><form action="{{ route('video-form.destroy', $video->id)}}" method="post">
-                                                    <a href="{{ url('videodetails/'.$video->id)}}" class="btn btn-primary">Details</a>
-                                                    <a href="{{ route('video-form.edit',$video->id)}}" class="btn btn-primary">Edit</a>
+                                                    <a href="{{ url('videodetails/'.$video->id)}}" class="dt-button buttons-excel buttons-html5 waves-effect waves-light btn gradient-45deg-purple-deep-orange gradient-shadow">Details</a>
+                                                    <a href="{{ route('video-form.edit',$video->id)}}" class="dt-button buttons-excel buttons-html5 waves-effect waves-light btn gradient-45deg-purple-deep-orange gradient-shadow">Edit</a>
                                                      {{ csrf_field() }}
                                                      @method('DELETE')
-                                                     <button class="btn btn-danger" type="submit">Delete</button>
+                                                     <button class="dt-button buttons-excel buttons-html5 waves-effect waves-light btn gradient-45deg-purple-deep-orange gradient-shadow" type="submit">Delete</button>
                                                      </form>
                                                  </td>
 
@@ -91,7 +91,7 @@
                     {
                         extend: 'excel',
                         text: '{{ __("customer.excel") }}',
-                        className: 'waves-effect waves-light btn-small',
+                        className: 'waves-effect waves-light btn gradient-45deg-purple-deep-orange gradient-shadow',
                         filename : '{{ __("customer.excel") }}' ,
                         exportOptions: {
                             columns: [ 0,1,2,3,4,5 ]
@@ -100,7 +100,7 @@
                     {
                         extend: 'csv',
                         text: '{{ __("customer.csv") }}',
-                        className: 'waves-effect waves-light btn-small',
+                        className: 'waves-effect waves-light btn gradient-45deg-purple-deep-orange gradient-shadow',
                         filename : '{{ __("customer.csv") }}' ,
                         exportOptions: {
                             columns: [ 0,1,2,3,4,5 ]

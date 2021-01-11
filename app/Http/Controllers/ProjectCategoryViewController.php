@@ -45,7 +45,7 @@ class ProjectCategoryViewController extends Controller
         $image = $request->file('category_image');
 
         $new_name = rand() . '.' . $image->getClientOriginalExtension();
-        $image->move(public_path('images'), $new_name);
+        $image->move(public_path('app-assets/images/category'), $new_name);
         $form_data = array(
             'category_name'      =>   $request->category_name,
             'category_image'     =>   $new_name,
@@ -99,7 +99,7 @@ class ProjectCategoryViewController extends Controller
             ]);
 
             $image_name = rand() . '.' . $image->getClientOriginalExtension();
-            $image->move(public_path('images'), $image_name);
+            $image->move(public_path('app-assets/images/category'), $image_name);
         }
         else
         {

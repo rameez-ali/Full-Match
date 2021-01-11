@@ -74,7 +74,7 @@ class ProjectCategoryGenreViewController extends Controller
      */
     public function edit($id)
     {
-        $genre = DB::table("video_genres")->first();
+        $genre=video_genre::find($id);
 
         return view('admin.genre.edit',compact('genre'));
     }
