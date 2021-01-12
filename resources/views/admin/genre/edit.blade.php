@@ -9,8 +9,7 @@
                             <div class="card animate fadeUp">
                                 <div class="card-content">
                                     <h4 class="header mt-0">
-                                        Edit Category Sliders
-                                        <a class="waves-effect waves-light btn gradient-45deg-purple-deep-orange gradient-shadow right">Details</a>
+                                        Edit Video Genre
                                     </h4>
                                     <div class="row">
                                         <div class="col s12">
@@ -18,24 +17,30 @@
                                         <form method="post" action="{{ route('genre-form.update', $genre->id) }}" enctype="multipart/form-data">
                                         @csrf
                                         @method('PATCH')
-                                       <div class="form-group">
-                                       <label class="col-md-4 text-right">Add Genre Name</label>
-                                       <div class="col-md-8">
-                                       <input type="text" name="genre_name" value="{{ $genre->genre_name }}" class="form-control input-lg" />
-                                       </div>
-                                       </div>
                                        
-                                       <br /><br />
-                                       <div class="card-body">
-                                        <div class="form-group">
-                                        <label for="category_name"></label>
-                                        <input type="text" name="genre_sorting" value="{{ $genre->genre_sorting }}"  class="form-control input-lg" />
-                                        </div>
-                                       <div class="input-field col s12">
+                                        <div class="row">
+                                          <div class="input-field col s12">
+                                          <label for="category_name">Add Category Name * </label>
+                                          <input type="text" name="genre_name" value="{{ $genre->genre_name }}" class="form-control input-lg" data-error=".errorTxt1" />
+                                          <small class="errorTxt1"></small>
+                                          @error('genre_name')
+                                         <span class="invalid-feedback" role="alert">
+                                         <strong>{{ $message }}</strong>
+                                         </span>
+                                         @enderror
+                                          </div>
+                                       
+                                           <div class="input-field col s12">
+                                           <label for="category_name">Add Genre Sorting </label>
+                                           <input type="text" name="genre_sorting" value="{{ $genre->genre_sorting }}"  class="form-control input-lg" />
+                                            </div>
+                                       
+                                            <div class="input-field col s12">
                                                 <button class="btn waves-effect waves-light right submit" type="submit" name="action">Submit
                                                     <i class="material-icons right">send</i>
                                                 </button>
-                                        </div>
+                                           </div>
+                                      </div>
                                        </form>
                                         </div>
                                     </div>

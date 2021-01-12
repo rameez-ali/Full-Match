@@ -28,10 +28,13 @@ class DropdownController extends Controller
         {
             
 
-            $cities=Video::select('video_title','id','video_sorting')->where("leagues_id",$request->state_id)->pluck("video_title","id","video_sorting");
+            // $cities=Video::select('video_title','id','video_sorting')->where("leagues_id",$request->state_id)->pluck("video_title","id","video_sorting");
 
-
+             $cities=Video::select('video_title','id','video_sorting')->where("leagues_id",$request->state_id)->get();
             return response()->json($cities);
+
+
+            // return response()->json($cities);
         }
 
 
@@ -49,5 +52,8 @@ class DropdownController extends Controller
         );
 
         Video::whereId($id)->update($form_data);
+
+        return redirect('seasonpart-form')->with('success', 'Data is successfully Added');
+
         }
 }

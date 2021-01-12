@@ -85,7 +85,10 @@ class ProjectSliderViewController extends Controller
              );
 
             Slidervideo::create($form_data3);
-        }       
+        } 
+
+        return redirect('slider-form')->with('success', 'Data is successfully deleted');
+      
      
     }
 
@@ -172,6 +175,8 @@ class ProjectSliderViewController extends Controller
 
             Slidervideo::create($form_data3);
             }     
+            
+               return redirect('slider-form')->with('success', 'Data is successfully deleted');
 
             }               
 

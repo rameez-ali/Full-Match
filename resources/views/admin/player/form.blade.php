@@ -16,68 +16,67 @@
                                             <h2></h2>
                                             <form method="post" action="{{ route('player-form.store') }}" enctype="multipart/form-data">
                                             @csrf
-                                            <div class="card-body">
+                                              <div class="row">
                                             
-                                            <div class="form-group">
-                                            <input type="text" name="player_name" Placeholder="Player Name *" class="form-control input-lg" />
-                                            <small class="errorTxt1"></small>
-                                            @error('player_name')
-                                            <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                            </span>
-                                            @enderror
-                                            </div>
+                                                    <div class="input-field col s12">
+                                                    <p for="player_name">Add Player Name * </p>
+                                                    <input id="player_name" name="player_name" type="text"  required data-error=".errorTxt1">
+                                                    <small class="errorTxt1"></small>
+                                                    @error('player_name')
+                                                    <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                    </span>
+                                                    @enderror
+                                                    </div>
 
-                                            <div class="form-group">
-                                            <input type="text" name="player_description" Placeholder="Description * " class="form-control input-lg" />
-                                            <small class="errorTxt1"></small>
-                                            @error('player_description')
-                                            <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                            </span>
-                                            @enderror
-                                            </div><br>
+
+                                                    <div class="input-field col s12">
+                                                    <p for="player_description">Add Player Description * </p>
+                                                    <input id="player_description" name="player_description" type="text"  required data-error=".errorTxt2">
+                                                    <small class="errorTxt2"></small>
+                                                    @error('player_description')
+                                                    <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                    </span>
+                                                    @enderror
+                                                    </div>
+
  
-                                            <div class="form-group">
-                                            <div class="input-group">
-                                            <div class="custom-file">
-                                            <label>Player Banner * </label>
-                                            <input type="file" name="player_banner" Placeholder="Player Banner *" id="exampleInputFile">
-                                            <small class="errorTxt1"></small>
-                                            @error('player_banner')
-                                            <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                            </span>
-                                            @enderror
-                                            </div>
-                                            </div>
-                                            </div><br>
+                                                    <div class="input-field col s12">
+                                                    <p for="player_banner"> Add Player Banner * </p>
+                                                    <input type="file" name="player_banner" id="player_banner" class="dropify mt-3" data-default-file="" data-max-file-size="10M" data-allowed-file-extensions="png jpg jpeg" required data-error=".errorTxt3" />
+                                                    <small class="errorTxt3"></small>
+                                                    @error('player_banner')
+                                                    <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                    </span>
+                                                    @enderror
+                                                    </div>
                  
-                                             <div class="form-group">
-                                             <div class="input-group">
-                                             <div class="custom-file">
-                                            <label>Player Profile Image * </label>
-                                             <input type="file" name="player_profile_image" Placeholder="Player Profile Image" id="exampleInputFile1">
-                                             <small class="errorTxt1"></small>
-                                            @error('player_profile_image')
-                                            <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                            </span>
-                                            @enderror
-                                             </div>
-                                             </div>
-                                            </div><br>
+                                             
+                                                    <div class="input-field col s12">
+                                                    <p for="player_profile_image"> Add Player Profile Image * </p>
+                                                    <input type="file" name="player_profile_image" id="player_profile_image" class="dropify mt-3" data-default-file="" data-max-file-size="10M" data-allowed-file-extensions="png jpg jpeg" required data-error=".errorTxt4" />
+                                                    <small class="errorTxt4"></small>
+                                                    @error('player_profile_image')
+                                                    <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                    </span>
+                                                    @enderror
+                                                    </div>
 
-                                            <div class="form-group">
-                                            <input type="text" name="player_sorting" Placeholder="Player Sorting" class="form-control input-lg" />
-                                            </div><br>
+                                                    <div class="input-field col s12">
+                                                    <p for="player_sorting">Add Player Sorting * </p>
+                                                    <input id="player_sorting" name="player_sorting" type="text" >
+                                                    </div>
                  
                 
-                                             <div class="input-field col s12">
-                                                    <button class="btn waves-effect waves-light right submit" type="submit" name="action">Submit
-                                                        <i class="material-icons right">send</i>
-                                                    </button>
-                                             </div>
+                                                    <div class="input-field col s12">
+                                                       <button class="btn waves-effect waves-light right submit" type="submit" name="action">Submit
+                                                          <i class="material-icons right">send</i>
+                                                       </button>
+                                                    </div>
+                                               </div>
                                              </form>
                                         </div>
                                     </div>
@@ -91,7 +90,9 @@
     </div>
 @endsection
 @section('scripts')
-    <script src="app-assets/vendors/jquery-validation/jquery.validate.min.js"></script>
+    <script src={{ asset('app-assets/vendors/jquery-validation/jquery.validate.min.js') }}></script>
+    <script src={{ asset('app-assets/js/scripts/form-file-uploads.js') }}></script>
+    <script src={{ asset('app-assets/vendors/dropify/js/dropify.min.js') }}></script>
 <script>
     /*
  * Form Validation
@@ -109,33 +110,24 @@
 
         $("#formValidate").validate({
             rules: {
-                uname: {
+                player_name: {
                     required: true,
                     minlength: 5
                 },
-                cemail: {
+                player_description: {
                     required: true,
                     email: true
                 },
-                password: {
+                player_banner: {
                     required: true,
                     minlength: 5
                 },
-                cpassword: {
+                player_profile_image: {
                     required: true,
-                    minlength: 5,
-                    equalTo: "#password"
+                    minlength: 5
                 },
-                crole: {
+                player_sorting: {
                     required: true,
-                },
-                curl: {
-                    required: true,
-                    url: true
-                },
-                ccomment: {
-                    required: true,
-                    minlength: 15
                 },
                 tnc_select: "required",
             },

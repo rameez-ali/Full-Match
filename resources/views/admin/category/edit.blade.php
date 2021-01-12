@@ -10,7 +10,6 @@
                                 <div class="card-content">
                                     <h4 class="header mt-0">
                                         Edit Category Sliders
-                                        <a class="waves-effect waves-light btn gradient-45deg-purple-deep-orange gradient-shadow right">Details</a>
                                     </h4>
                                     <div class="row">
                                         <div class="col s12">
@@ -18,30 +17,44 @@
                                         <form method="post" action="{{ route('category-form.update', $category->id) }}" enctype="multipart/form-data">
                                         @csrf
                                         @method('PATCH')
-                                       <div class="form-group">
-                                       <label class="col-md-4 text-right">Add Category Name</label>
-                                       <div class="col-md-8">
-                                       <input type="text" name="category_name" value="{{ $category->category_name }}" class="form-control input-lg" />
-                                       </div>
-                                       </div>
-                                       <div class="form-group">
-                                       <label class="col-md-4 text-right">Select Profile Image</label>
-                                       <div class="col-md-8">
-                                       <input type="file" name="category_image"  />
-                                       <input type="hidden" name="hidden_image" value="{{ $category->category_image }}" />
-                                       </div>
-                                       </div>
-                                       <br /><br />
-                                       <div class="card-body">
-                                        <div class="form-group">
-                                        <label for="category_name"></label>
-                                        <input type="text" name="category_sorting" value="{{ $category->category_sorting }}"  class="form-control input-lg" />
-                                        </div>
-                                       <div class="input-field col s12">
+                                       
+                                       <div class="row">
+                                          <div class="input-field col s12">
+                                          <label for="category_name">Add Category Name * </label>
+                                          <input type="text" name="category_name" value="{{ $category->category_name }}" class="form-control input-lg" required data-error=".errorTxt1"/>
+                                          <small class="errorTxt1"></small>
+                                          @error('category_name')
+                                          <span class="invalid-feedback" role="alert">
+                                          <strong>{{ $message }}</strong>
+                                          </span>
+                                          @enderror
+                                          </div>
+                                       
+                                       
+                                          <div class="input-field col s12">
+                                          <p for="category_image"> Add Category Image * </p>
+                                          <input type="file" name="category_image"  id="category_image" class="dropify mt-3" data-default-file="{{ asset('app-assets/images/category/'.$category->category_image)}}" data-max-file-size="10M" data-allowed-file-extensions="png jpg jpeg"  />
+                                          <input type="hidden" name="hidden_image" value="{{ $category->category_image }}" />
+                                         <!--  <small class="errorTxt2"></small>
+                                          @error('category_image')
+                                          <span class="invalid-feedback" role="alert">
+                                          <strong>{{ $message }}</strong>
+                                          </span>
+                                          @enderror -->
+                                          </div>
+                                       
+                                     
+                                         <div class="input-field col s12">
+                                         <label for="category_name">Add Category Sorting </label>
+                                         <input type="text" name="category_sorting" value="{{ $category->category_sorting }}"  class="form-control input-lg" />
+                                         </div>
+                                       
+                                          <div class="input-field col s12">
                                                 <button class="btn waves-effect waves-light right submit" type="submit" name="action">Submit
                                                     <i class="material-icons right">send</i>
                                                 </button>
                                         </div>
+                                    </div>
                                        </form>
                                         </div>
                                     </div>
@@ -55,7 +68,9 @@
     </div>
 @endsection
 @section('scripts')
-    <script src="app-assets/vendors/jquery-validation/jquery.validate.min.js"></script>
+    <script src={{ asset('app-assets/vendors/jquery-validation/jquery.validate.min.js') }}></script>
+    <script src={{ asset('app-assets/js/scripts/form-file-uploads.js') }}></script>
+    <script src={{ asset('app-assets/vendors/dropify/js/dropify.min.js') }}></script>
 <script>
     /*
  * Form Validation

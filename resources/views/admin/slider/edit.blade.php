@@ -18,30 +18,28 @@
                                         <form method="post" action="{{ route('slider-form.update', $slider->id) }}" enctype="multipart/form-data">
                                         @csrf
                                         @method('PATCH')
-                                       <div class="form-group">
-                                       <label class="col-md-4 text-right">Add Slider Name</label>
-                                       <div class="col-md-8">
-                                       <input type="text" name="slider_name" value="{{ $slider->slider_name }}" class="form-control input-lg" />
-                                       </div>
-                                       </div>
-
-                                       <div name="hidden-panel1" id="hidden-panel1">
-                                       <label><strong>Select Videos </strong></label><br/>
-                                       <select class="selectpicker" multiple data-live-search="true" name="video[]">
-                                       @foreach($video1 as $video )
-                                       <option value="{{$video->id}}" {{in_array($video->id, $selected_ids) ? 'selected' : ''}} >{{$video->video_title}}</option>
-                                       @endforeach
-                                       </select>
-                                       </div>
-
-
+                                       <div class="row">
                                        
-                                       <br /><br />
-                                       <div class="input-field col s12">
+                                           <div class="input-field col s12">
+                                           <p for="category_image">Add Slider Name * </p>
+                                           <input type="text" name="slidr_name" value="{{ $slider->slider_name}}" class="form-control input-lg" />
+                                           </div>
+
+                                           <div name="hidden-panel1" id="hidden-panel1">
+                                           <label><strong>Select Videos </strong></label><br/>
+                                           <select class="selectpicker" multiple data-live-search="true" name="video[]">
+                                           @foreach($video1 as $video )
+                                           <option value="{{$video->id}}" {{in_array($video->id, $selected_ids) ? 'selected' : ''}} >{{$video->video_title}}</option>
+                                           @endforeach
+                                           </select>
+                                           </div>
+
+                                            <div class="input-field col s12">
                                                     <button class="btn waves-effect waves-light right submit" type="submit" name="action">Submit
                                                         <i class="material-icons right">send</i>
                                                     </button>
-                                       </div>
+                                            </div>
+                                         </div>   
                                        </form>
                                         </div>
                                     </div>

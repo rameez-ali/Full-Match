@@ -15,52 +15,38 @@
                                         <div class="col s12">
                                           <form method="post" action="{{route('banner-form.store')}}" enctype="multipart/form-data">
                                           @csrf
-                                          <div class="form-group">
-                                          <label for="exampleInputEmail1">Enter Video Title</label>
-                                          <input type="text" name="video_title" class="form-control input-lg" />
-                                          </div>
+                                          
+                                          <div class="row">
+                                             
+                                             <div class="input-field col s12">
+                                             <p for="video_title">Add Video Title </p>
+                                             <input id="video_title" name="video_title" type="text">
+                                             </div>
 
+                                              <div class="input-field col s12">
+                                              <p for="video_banner"> Add Video Banner * </p>
+                                              <input type="file" name="video_banner" id="video_banner" class="dropify mt-3" data-default-file="" data-max-file-size="10M" data-allowed-file-extensions="png jpg jpeg"  />        
+                                              </div>
 
+                                             <div class="input-field col s12">
+                                             <p for="video_link">Add Video Link </p>
+                                             <input id="video_link" name="video_link" type="text">
+                                             </div>
 
-                                           <div class="form-group">
-                                            <div class="input-group">
-                                            <div class="custom-file">
-                                            <label>Video Banner </label>
-                                            <input type="file" name="video_banner" Placeholder="Video Banner" id="exampleInputFile">
-                                            <small class="errorTxt1"></small>
-                                           @error('club_banner')
-                                           <span class="invalid-feedback" role="alert">
-                                           <strong>{{ $message }}</strong>
-                                           </span>
-                                           @enderror
-                                            </div>
-                                            </div>
-                                            </div><br>
+                                            
 
                                             <div class="form-group">
-                                          <label for="exampleInputEmail1">Enter Video Link</label>
-                                          <input type="text" name="video_link" class="form-control input-lg" />
-                                          </div>
-
-
-                                          <div class="form-group">
                                             <label for="country">Select Type:</label>
                                             <select name="country" id="country" class="form-control" style="width:250px">
                                             <option value="">--- Select Categories ---</option>
+                                            
                                             @foreach ($video as $video)
                                             <option value="{{$video->id}}">{{ $video->category_name }}</option>
                                             @endforeach
                                             </select>
                                             </div>
 
-                                        <div class="form-group">
-                                            <label for="country">Select Genre</label>
-                                            <select name="genre" class="form-control" style="width:250px">
-                                            @foreach ($videogenre as $videogenre)
-                                            <option value="{{$videogenre->id}}">{{ $videogenre->genre_name }}</option>
-                                            @endforeach
-                                            </select>
-                                            </div>
+                                            
 
                                         <div class="form-group">
                                            <label for="state">Select Videos</label>
@@ -68,19 +54,32 @@
                                            </select>
                                         </div>
 
-                                        <div class="form-group">
-                                            <label for="country">Homepage</label>
+                                            <div class="input-field col s12">
+                                            <p for="genre">Add Video Genre </p>
+                                            <select name="genre" class="form-control" style="width:250px">
+                                            @foreach ($videogenre as $videogenre)
+                                            <option value="{{$videogenre->id}}">{{ $videogenre->genre_name }}</option>
+                                            @endforeach
+                                            </select>
+                                            </div>
+
+                                          
+
+                                        
+                                             <div class="input-field col s12">
+                                             <p for="homepage">Home Page </p>
                                             <select name="homepage" id="country" class="form-control" style="width:250px">
                                             <option value="1">Yes</option>
                                             <option value="0">No</option>
                                             </select>
                                             </div>
 
-                                         <div class="input-field col s12">
+                                             <div class="input-field col s12">
                                               <button class="btn waves-effect waves-light right submit" type="submit" name="action">Submit
                                                   <i class="material-icons right">send</i>
                                               </button>
-                                        </div>
+                                             </div>
+                                         </div>
                                         </form>
                                     </div>
                                 </div>
@@ -91,6 +90,15 @@
         </div>
         <div class="content-overlay"></div>
     </div>
+
+@endsection
+@section('scripts')
+    <script src={{ asset('app-assets/vendors/jquery-validation/jquery.validate.min.js') }}></script>
+    <script src={{ asset('app-assets/js/scripts/form-file-uploads.js') }}></script>
+    <script src={{ asset('app-assets/vendors/dropify/js/dropify.min.js') }}></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" />
+   
 
 <script type="text/javascript">
     jQuery(document).ready(function ()
@@ -135,12 +143,4 @@
      </script>
   </body>
 </html>
-
-@endsection
-@section('scripts')
-     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
-      <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" />
-
-
-
 @endsection

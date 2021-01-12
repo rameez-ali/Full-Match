@@ -42,8 +42,7 @@ class ProjectCategoryGenreViewController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'genre_name'     => 'required',
-            'genre_sorting'  =>  'required'
+            'genre_name'     => 'required'
         ]);
 
         $form_data = array(
@@ -74,7 +73,7 @@ class ProjectCategoryGenreViewController extends Controller
      */
     public function edit($id)
     {
-        $genre = DB::table("video_genres")->first();
+        $genre=video_genre::find($id);
 
         return view('admin.genre.edit',compact('genre'));
     }
@@ -90,8 +89,7 @@ class ProjectCategoryGenreViewController extends Controller
     {
 
         $form_data = array(
-            'genre_name'       =>   $request->genre_name,
-            'genre_sorting'            =>  $request->genre_sorting
+            'genre_name'       =>   $request->genre_name
         );
 
         Video_genre::whereId($id)->update($form_data);

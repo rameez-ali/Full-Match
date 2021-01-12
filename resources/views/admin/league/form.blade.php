@@ -11,84 +11,69 @@
                                 <div class="card-content">
                                     <h4 class="header mt-0">
                                         ADD LEAGUE
-                                        <a class="waves-effect waves-light btn gradient-45deg-purple-deep-orange gradient-shadow right">Details</a>
                                     </h4>
                             <div class="row">
                              <form method="post" action="{{ route('league-form.store') }}" enctype="multipart/form-data">
                               @csrf
 
-                                <div class="col s12">
-                                    <div id="question-section" >
-                                        <div class="question-section" data-id="0">
-                                            <div class="card-body">
-                                       <div class="form-group">
-                                       <input type="text" name="league_name" Placeholder="League Name *" class="form-control input-lg" required data-error=".errorTxt1"></textarea>
-                                       <small class="errorTxt1"></small>
-                                        @error('league_name')
-                                        <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                        </span>
-                                        @enderror
-                                       </div>
-                                       <br/>
+                                <div class="row">
 
+                                      <div class="input-field col s12">
+                                      <p for="league_name">Add League Name * </p>
+                                      <input id="league_name" name="league_name" type="text"  required data-error=".errorTxt1">
+                                      <small class="errorTxt1"></small>
+                                      @error('league_name')
+                                      <span class="invalid-feedback" role="alert">
+                                      <strong>{{ $message }}</strong>
+                                      </span>
+                                      @enderror
+                                      </div>
 
-                                        <div class="form-group">
-                                        <div class="input-group">
-                                        <div class="custom-file">
-                                        <label>League Banner</label>
-                                        <input type="file" name="filename1" multiple id="exampleInputFile">
-                                        </div>
-                                        </div>
-                                        </div>
-                                         <br/>
+                                      <div class="input-field col s12">
+                                      <p for="filename1"> Add League Banner </p>
+                                      <input type="file" name="filename1" id="filename1" class="dropify mt-3" data-default-file="" data-max-file-size="10M" data-allowed-file-extensions="png jpg jpeg" />
+                                      </div>
 
-                                         <div class="form-group">
-                                       <input type="text" name="filename2" Placeholder="League Promo Video URL *" class="form-control input-lg" required data-error=".errorTxt2"></textarea>
-                                       <small class="errorTxt2"></small>
-                                        @error('filename2')
-                                        <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                        </span>
-                                        @enderror
-                                       </div>
-                                       <br/>
+                                      <div class="input-field col s12">
+                                      <p for="filename2">Add League Promo Video URL * </p>
+                                      <input id="filename2" name="filename2" type="text"  required data-error=".errorTxt2">
+                                      <small class="errorTxt2"></small>
+                                      @error('filename2')
+                                      <span class="invalid-feedback" role="alert">
+                                      <strong>{{ $message }}</strong>
+                                      </span>
+                                      @enderror
+                                      </div>
+                                     
+                                     <div class="input-field col s12">
+                                     <p for="filename3"> Add League Profile Image * </p>
+                                     <input type="file" name="filename3" id="filename3" class="dropify mt-3" data-default-file="" data-max-file-size="10M" data-allowed-file-extensions="png jpg jpeg" required data-error=".errorTxt3" />
+                                     <small class="errorTxt3"></small>
+                                     @error('filename3')
+                                     <span class="invalid-feedback" role="alert">
+                                     <strong>{{ $message }}</strong>
+                                     </span>
+                                     @enderror
+                                      </div>
 
-                                         <div class="form-group">
-                                        <div class="input-group">
-                                        <div class="custom-file">
-                                        <label>Profile Image *</label>
-                                        <input type="file" name=filename3 multiple id="exampleInputFile" required data-error=".errorTxt3">
-                                        <small class="errorTxt3"></small>
-                                        @error('filename3')
-                                        <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                        </span>
-                                        @enderror
-                                        </div>
-                                        </div>
-                                        </div>
-                                         <br/>
+                                      <div class="input-field col s12">
+                                      <p for="league_description">Add League Description * </p>
+                                      <input id="league_description" name="league_description" type="text"  required data-error=".errorTxt4">
+                                      <small class="errorTxt4"></small>
+                                      @error('league_description')
+                                      <span class="invalid-feedback" role="alert">
+                                      <strong>{{ $message }}</strong>
+                                      </span>
+                                      @enderror
+                                      </div>
 
-                                        <div class="card-body">
-                                        <div class="form-group">
-                                        <input type="text" name="league_description" placeholder="League Description  * " class="form-control input-lg" required data-error=".errorTxt4"></textarea>
-                                        <small class="errorTxt4"></small>
-                                        @error('league_description')
-                                        <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                        </span>
-                                        @enderror
-                                        </div>
-                                        </div>
-
-                                         <div class="card-body">
-                                        <div class="form-group">
-                                        <input type="text" name="league_sorting" placeholder="League Sorting" class="form-control input-lg"></textarea>
-                                        </div>
+                                      <div class="input-field col s12">
+                                      <p for="league_description">Add League Sorting</p>
+                                      <input type="text" name="league_sorting" placeholder="League Sorting" class="form-control input-lg"></textarea>
+                                      </div>
 
                                          
-
+                                      <div class="input-field col s12">
                                       <table class="table table-bordered" id="dynamicTable">  
                                        <tr>
                                        <th>Season</th>
@@ -102,13 +87,14 @@
                                       <td><button type="button" name="add" id="add" class="btn btn-success">Add More Season</button></td>  
                                       </tr>  
                                       </table>
+                                     </div>
 
                                       <div class="input-field col s12">
                                             <button class="btn waves-effect waves-light right submit" type="submit" name="action">Submit
                                                 <i class="material-icons right">send</i>
                                             </button>
                                       </div>
-
+                               </div>
                             </form>
                         </div>
                     </div>
@@ -117,6 +103,12 @@
         </div>
     </div>
 </div>
+
+@endsection
+@section('scripts')
+<script src={{ asset('app-assets/vendors/jquery-validation/jquery.validate.min.js') }}></script>
+    <script src={{ asset('app-assets/js/scripts/form-file-uploads.js') }}></script>
+    <script src={{ asset('app-assets/vendors/dropify/js/dropify.min.js') }}></script>
 
 <script type="text/javascript">
    var i = 1;

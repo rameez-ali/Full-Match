@@ -10,7 +10,7 @@
                                 <div class="card-content">
                                     <h4 class="header mt-0">
                                         Advertisement Banner
-                                        <a href="{{ URL::route('banner-form.create') }}" class="waves-effect waves-light btn gradient-45deg-purple-deep-orange gradient-shadow right">Add Banner</a>
+                                        <a href="{{ URL::route('banner-form.create') }}" class="waves-effect waves-light btn gradient-45deg-purple-deep-orange gradient-shadow right">Add</a>
                                     </h4>
                                     <div class="row">
                                         <div class="col s12">
@@ -28,11 +28,11 @@
                                                   @foreach($Adv_banner as $adv_banner)
                                                   <tr>
                                                   <td>{{$adv_banner->video_title}}</td>
-                                                  <td><img src="/images/{{  $adv_banner->video_banner}}" style="width:50px;height:50px;" /></td>
+                                                  <td><img src="{{ asset('app-assets/images/banner/'.$adv_banner->video_banner)}}" style="width:50px;height:50px;" /></td>
                                                   <td>{{$adv_banner->video_link}}</td>
                                                    <td><form action="{{ route('banner-form.destroy', $adv_banner->id)}}" method="post">
-                                                    <a href="{{ url('adv_banner/'.$adv_banner->id)}}" class="btn btn-primary">Details</a>
-                                                    <a href="{{ route('banner-form.edit',$adv_banner->id)}}" class="btn btn-primary">Edit</a>
+                                                    <a href="{{ url('adv_banner/'.$adv_banner->id)}}" class="dt-button buttons-excel buttons-html5 waves-effect waves-light btn gradient-45deg-purple-deep-orange gradient-shadow">Details</a>
+                                                    <a href="{{ route('banner-form.edit',$adv_banner->id)}}" class="dt-button buttons-excel buttons-html5 waves-effect waves-light btn gradient-45deg-purple-deep-orange gradient-shadow">Edit</a>
                                                      {{ csrf_field() }}
                                                      @method('DELETE')
                                                      <button class="btn btn-danger" type="submit">Delete</button>
@@ -84,7 +84,7 @@
                     {
                         extend: 'excel',
                         text: '{{ __("customer.excel") }}',
-                        className: 'waves-effect waves-light btn-small',
+                        className: 'waves-effect waves-light btn gradient-45deg-purple-deep-orange gradient-shadow',
                         filename : '{{ __("customer.excel") }}' ,
                         exportOptions: {
                             columns: [ 0,1,2 ]
@@ -93,7 +93,7 @@
                     {
                         extend: 'csv',
                         text: '{{ __("customer.csv") }}',
-                        className: 'waves-effect waves-light btn-small',
+                        className: 'waves-effect waves-light btn gradient-45deg-purple-deep-orange gradient-shadow',
                         filename : '{{ __("customer.csv") }}' ,
                         exportOptions: {
                             columns: [ 0,1,2 ]

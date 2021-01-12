@@ -29,15 +29,15 @@
                                                  @foreach($player as $player)
                                                  <tr>
                                                  <td>{{ $player->player_name }}</td>
-                                                 <td><img src="/images/{{ $player->player_banner }}"  class="img-thumbnail" width="75" /></td>
-                                                 <td><img src="/images/{{ $player->player_profile_image}}"  class="img-thumbnail" width="75" /></td>
+                                                 <td><img src="{{ asset('app-assets/images/player/'.$player->player_banner)}}"  class="img-thumbnail" width="75" /></td>
+                                                 <td><img src="{{ asset('app-assets/images/player/'.$player->player_profile_image)}}"  class="img-thumbnail" width="75" /></td>
                                                  <td>{{ $player->player_description }}</td>
                                                  <td>{{ $player->player_sorting }}</td>
                                                  <td><form action="{{ route('player-form.destroy', $player->id)}}" method="post">
-                                                    <a href="{{ route('player-form.edit',$player->id)}}" class="btn btn-primary">Edit</a>
+                                                    <a href="{{ route('player-form.edit',$player->id)}}" class="dt-button buttons-excel buttons-html5 waves-effect waves-light btn gradient-45deg-purple-deep-orange gradient-shadow">Edit</a>
                                                 {{ csrf_field() }}
                                                 @method('DELETE')
-                                                <button class="btn btn-danger" type="submit">Delete</button>
+                                                <button class="dt-button buttons-excel buttons-html5 waves-effect waves-light btn gradient-45deg-purple-deep-orange gradient-shadow" type="submit">Delete</button>
                                                 </form></td>
                                                  @endforeach
                                                  </tbody>
@@ -85,7 +85,7 @@
                     {
                         extend: 'excel',
                         text: '{{ __("customer.excel") }}',
-                        className: 'waves-effect waves-light btn-small',
+                        className: 'waves-effect waves-light btn gradient-45deg-purple-deep-orange gradient-shadow',
                         filename : '{{ __("customer.excel") }}' ,
                         exportOptions: {
                             columns: [ 0,1,2,3,4,5 ]
@@ -94,7 +94,7 @@
                     {
                         extend: 'csv',
                         text: '{{ __("customer.csv") }}',
-                        className: 'waves-effect waves-light btn-small',
+                        className: 'waves-effect waves-light btn gradient-45deg-purple-deep-orange gradient-shadow',
                         filename : '{{ __("customer.csv") }}' ,
                         exportOptions: {
                             columns: [ 0,1,2,3,4,5 ]
