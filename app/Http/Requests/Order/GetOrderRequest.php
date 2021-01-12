@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\Order;
 
+use App\Model\Order;
 use Illuminate\Foundation\Http\FormRequest;
 
 class GetOrderRequest extends FormRequest
@@ -13,7 +14,7 @@ class GetOrderRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -26,5 +27,10 @@ class GetOrderRequest extends FormRequest
         return [
             //
         ];
+    }
+    public function handle(){
+
+        return Order::findOrNew($this->id);
+
     }
 }

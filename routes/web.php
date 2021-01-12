@@ -63,8 +63,8 @@ Route::group(['middleware' => ['auth']], function () {
 
 
     Route::post("addmore","SeasonPartSortingController@addMorePost");
-    Route::get("order","OrderController@index")->name('order.all');
-    Route::get("order/{id}","OrderController@show")->name('order.show');
+    Route::resource("order","OrderController");
+    Route::post('discount/promo/verify','DiscountController@verify')->name('discount.promo.verify');
 
 
 // Route::get('dropdownlist','DataController@getCountries');

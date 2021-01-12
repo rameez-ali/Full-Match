@@ -102,6 +102,10 @@ return [
     'discount_fixed' => 'Fixed',
     'discount_percentage' => 'Percentage',
     'generate' => 'Generate Code',
+    'verify_code' => 'Verify Code',
+    'sub_total' => 'Sub Total',
+    'grand_total' => 'Grand Total',
+    'discounted_value' => 'Discounted Value',
     'delete_message' => 'Are you sure you want to delete?',
     'sent' => 'We have emailed your password reset link!',
 
