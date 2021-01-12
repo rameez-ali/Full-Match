@@ -21,6 +21,7 @@
                                                  <th width="27%">Message</th>
                                                  <th width="27%">Status</th>
                                                  <th width="27%">Response</th>
+                                                 <th width="27%">Response Message</th>
                                                  <th width="30%">Action</th>
                                                  </tr>
                                                 </thead>
@@ -44,6 +45,7 @@
                                                      Responded
                                                 @endif
                                                 </td>
+                                                <td>{{ $contact->response_message }}</td>
                                                 <td><a href="{{ route('contact-form.edit',$contact->id)}}" class="dt-button buttons-excel buttons-html5 waves-effect waves-light btn gradient-45deg-purple-deep-orange gradient-shadow">Response</a></td>
                                                 </tr>
                                                 @endforeach
@@ -95,7 +97,7 @@
                         className: 'waves-effect waves-light btn gradient-45deg-purple-deep-orange gradient-shadow',
                         filename : '{{ __("customer.excel") }}' ,
                         exportOptions: {
-                            columns: [ 0,1 ]
+                            columns: [ 0,1,2,5 ]
                         },
                     },
                     {
@@ -104,7 +106,7 @@
                         className: 'waves-effect waves-light btn gradient-45deg-purple-deep-orange gradient-shadow',
                         filename : '{{ __("customer.csv") }}' ,
                         exportOptions: {
-                            columns: [ 0,1 ]
+                            columns: [ 0,1,2,5 ]
                         },
                     }
                 ],

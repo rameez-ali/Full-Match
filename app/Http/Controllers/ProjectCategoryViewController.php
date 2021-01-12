@@ -38,8 +38,7 @@ class ProjectCategoryViewController extends Controller
     {
         $request->validate([
             'category_name'     => 'required',
-            'category_image'     =>  'required|image|max:2048',
-            'category_sorting'   =>  'required'
+            'category_image'     =>  'required|image|max:2048'
         ]);
 
         $image = $request->file('category_image');
@@ -94,7 +93,6 @@ class ProjectCategoryViewController extends Controller
         {
             $request->validate([
                 'category_name'    =>  'required',
-                'category_sorting'   =>  'required',
                 'image'         =>  'image|max:2048'
             ]);
 
@@ -104,8 +102,7 @@ class ProjectCategoryViewController extends Controller
         else
         {
             $request->validate([
-                'category_name'    =>  'required',
-                'category_sorting'   =>  'required'
+                'category_name'    =>  'required'
             ]);
         }
 

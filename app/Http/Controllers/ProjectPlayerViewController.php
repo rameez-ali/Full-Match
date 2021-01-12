@@ -42,9 +42,8 @@ class ProjectPlayerViewController extends Controller
             'player_name'     => 'required',
             'player_banner'         =>  'required|image|max:2048',
             'player_profile_image'  =>  'required|image|max:2048',
-            'player_description'     => 'required',
-            'player_sorting'         => 'required'
-        ]);
+            'player_description'     => 'required'        
+            ]);
 
         $image = $request->file('player_banner');
         $new_name = rand() . '.' . $image->getClientOriginalExtension();
@@ -115,8 +114,7 @@ class ProjectPlayerViewController extends Controller
                 'player_name'    =>  'required',
                 'player_description'    =>  'required',
                 'image1'         =>  'image|max:2048',
-                'image2'         =>  'image|max:2048',
-                'player_sorting' =>  'required'
+                'image2'         =>  'image|max:2048'
             ]);
 
             $image_name1 = rand() . '.' . $image1->getClientOriginalExtension();
@@ -131,8 +129,7 @@ class ProjectPlayerViewController extends Controller
         {
             $request->validate([
                 'player_name'    =>  'required',
-                'player_description'    =>  'required',
-                 'player_sorting'    =>  'required'
+                'player_description'    =>  'required'
             ]);
         }
 

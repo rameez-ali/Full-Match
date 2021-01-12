@@ -1,4 +1,4 @@
-<?php
+  <?php
 
 namespace App\Http\Controllers;
 
@@ -55,11 +55,9 @@ class ProjectLeagueViewController extends Controller
 
         $form_data1 = array(
              'league_name'     =>   $request->league_name,
-             'league_banner'  =>   $new_name1,
              'league_promo_video'  =>   $request->filename2,
              'league_profile_image'  =>   $new_name3,
-             'league_description'  =>   $request->league_description,
-             'league_sorting'  =>   $request->league_sorting
+             'league_description'  =>   $request->league_description
         );
 
         // Insert League Array
