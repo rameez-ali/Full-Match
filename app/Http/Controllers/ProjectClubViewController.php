@@ -16,9 +16,8 @@ class ProjectClubViewController extends Controller
      */
     public function index()
     {
-        $club = Club::latest()->paginate(5);
-            return view('admin.club.index', compact('club'))
-            ->with('i', (request()->input('page', 1) - 1) * 5);
+        $club = Club::all();
+            return view('admin.club.index', compact('club'));
     }
 
     /**
@@ -137,7 +136,8 @@ class ProjectClubViewController extends Controller
              'club_name'       =>   $request->club_name,
              'club_description'       =>   $request->club_description,
              'club_banner'            =>   $image_name1,
-             'club_logo'            =>   $image_name2         
+             'club_logo'            =>   $image_name2,
+             'club_sorting'            =>   $request->club_sorting           
              );
 
          Club::whereId($id)->update($form_data);

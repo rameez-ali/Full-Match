@@ -138,6 +138,9 @@ class ProjectVideoViewController extends Controller
                 Videogenre::create($form_data5);
             }
 
+              return redirect('video-form')->with('success', 'Data is successfully deleted');
+
+
         }
         
         else if ($request->file('video_banner_img')!=null)
@@ -207,7 +210,12 @@ class ProjectVideoViewController extends Controller
 
                 Videogenre::create($form_data5);
             }
+
+            return redirect('video-form')->with('success', 'Data is successfully deleted');
+
         }
+
+
         
 
     }
@@ -391,6 +399,8 @@ class ProjectVideoViewController extends Controller
                 Videogenre::create($form_data5);
             }
           }
+          return redirect('video-form')->with('success', 'Data is successfully deleted');
+
         
     }
 

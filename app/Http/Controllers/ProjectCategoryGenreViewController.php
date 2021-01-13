@@ -19,8 +19,7 @@ class ProjectCategoryGenreViewController extends Controller
     public function index()
     {
             $video_genre=Video_genre::all();
-            return view('admin.genre.index', compact('video_genre'))
-            ->with('i', (request()->input('page', 1) - 1) * 5);
+            return view('admin.genre.index', compact('video_genre'));
     }
 
     /**

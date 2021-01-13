@@ -78,7 +78,6 @@
                                        <tr>
                                        <th>Season</th>
                                        <th>Video</th>
-                                       <th>Remove</th>
                                        </tr>
                                      
                                       <tr>  
@@ -120,6 +119,7 @@
     $(document).on('click', '.remove-tr', function(){  
 
          $(this).parents('tr').remove();
+         i--;
 
     });  
 </script>
