@@ -10,6 +10,7 @@
                             <div class="card-content">
                                 <h4 class="header mt-0">
                                     {{ __('customer.order.orderpage_section') }}
+{{--                                    <a href="{{ route('order.create') }}" class="waves-effect waves-light btn gradient-45deg-purple-deep-orange gradient-shadow right"> {{ __('customer.add') }}</a>--}}
                                 </h4>
                                 <div class="row">
                                     <div class="col s12">

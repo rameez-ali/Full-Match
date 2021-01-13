@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Customer\GetAllCustomerRequest;
 use App\Http\Requests\Order\CreateOrderRequest;
 use App\Http\Requests\Order\GetAllOrderRequest;
 use App\Http\Requests\Order\GetOrderRequest;
+use App\Http\Requests\Subsplans\GetAllSubsPlanRequest;
 use Illuminate\Http\Request;
 
 class OrderController extends Controller
@@ -27,9 +29,22 @@ class OrderController extends Controller
 
         $response = $request->handle();
 
-        $route = url('subscriptionplans');
+        $route = url('order');
 
-        return view('admin.subscriptionplan.form',['subscriptionplan' => $response, 'route' => $route, 'edit' => false ]);
+        $request = new GetAllCustomerRequest();
+
+        $allcusts = $request->handle();
+
+        $request = new GetAllSubsPlanRequest();
+
+        $allsubplans = $request->handle();
+
+        return view('admin.order.form',
+            [   'order' => $response,
+                'allcusts' => $allcusts,
+                'allsubplans' => $allsubplans,
+                'route' => $route,
+                'edit' => false ]);
     }
 
     /**
