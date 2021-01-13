@@ -59,11 +59,11 @@
                                                </div>
 
                             
-                                              <div class="input-field col 6s">
+                                              <div class="input-field col s12">
                                               <label>
                                               <input type="checkbox" name="notify_user" id="customer-status" />
                                                <span for="customer-status" >Notify User</span>
-                                               </label>
+                                               </label><br><br>
                                                </div>
 
                                               <div class="input-field col s12">

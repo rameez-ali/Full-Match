@@ -30,7 +30,7 @@
                                            </div>
 
                                            <div class="input-field col s12">
-                                           <p for="category_image">Add Video Description * </p>
+                                           <p for="category_image">Add Video Description </p>
                                            <input type="text" name="video_description" value="{{ $video->video_description }}" class="form-control input-lg" />
                                            </div>
 
