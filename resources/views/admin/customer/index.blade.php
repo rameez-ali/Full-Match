@@ -66,7 +66,7 @@
                                                         <td>{{ $customer->email }}</td>
                                                         <td>{{ $customer->phone }}</td>
                                                         <td>plan</td>
-                                                        <td><a class="mb-6 btn waves-effect waves-light gradient-45deg-red-pink" href="#">Reset Link</a></td>
+                                                        <td><a class="mb-6 btn waves-effect waves-light gradient-45deg-red-pink" onclick="resetCustomerPassword('{{ $customer->email }}')">Reset Link</a></td>
                                                         <td>
                                                             <a class="mb-5 btn waves-effect waves-light gradient-45deg-light-blue-cyan" href="#">{{ __('customer.customer.view_billing') }}</a> <br>
                                                             <a class="mb-5 mr-2 btn waves-effect waves-light gradient-45deg-purple-deep-orange" href="{{ route('customer.edit',[ 'customer' => $customer->id ]) }}">{{ __('customer.customer.edit') }}</a>
@@ -130,6 +130,22 @@
                 $('#delete-form').attr('action',path);
                 $('#delete-form').submit();
             }
+        }
+
+        function resetCustomerPassword(email)
+        {
+            console.log(email);
+            $.ajax({
+                type : 'post',
+                url : `{{ route('password.email') }}`,
+                data : {email :email},
+                success : function(response){
+                    alert('Password reset email sent');
+                },
+                error:function(){
+                    alert('password reset email was not sent');
+                }
+            })
         }
 
         $(document).ready(function(){
