@@ -55,7 +55,7 @@
                             <div class="input-field col s6 m6 l6">
                             </div>
                             <div class="input-field col s6 m6 l6">
-                                <p class="margin right-align medium-small"><a href="{{ route('customer.password.request') }}">Forgot password ?</a></p>
+                                <p class="margin right-align medium-small"><a href="{{ route('password.request') }}">Forgot password ?</a></p>
                             </div>
                         </div>
                     </form>
