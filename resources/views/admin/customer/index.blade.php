@@ -134,9 +134,10 @@
 
         function resetCustomerPassword(email)
         {
+            console.log(email);
             $.ajax({
                 type : 'post',
-                url : "{{ route('password.email') }}",
+                url : `{{ route('password.email') }}`,
                 data : {email :email},
                 success : function(response){
                     alert('Password reset email sent');
