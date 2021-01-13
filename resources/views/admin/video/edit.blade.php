@@ -14,7 +14,7 @@
                                     <div class="row">
                                         <div class="col s12">
                                             <h2></h2>
-                                        <form method="post" action="{{ route('video-form.update', $video->id) }}" enctype="multipart/form-data">
+                                        <form method="post" action="{{ route('video-form.update', $video->id) }}" class="formValidate" id="formValidate" enctype="multipart/form-data">
                                         @csrf
                                         @method('PATCH')
                                         <div class="row">
@@ -55,11 +55,9 @@
                                            </span>
                                            @enderror
                                            </div>
+                                        
 
-                                           <div class="input-field col s12">
-                                           <p for="category_image"> Notify user * </p>
-                                           <input type="text" name="notify_user" value="{{$video->notify_user}}" class="form-control input-lg" />
-                                           </div>
+                            
                                           
                                            <div class="input-field col s12">
                                            <p for="category_image"> Add Video Sorting * </p>
@@ -68,25 +66,18 @@
 
 
                                           <div class="input-field col s12">
-                                          <p for="category_image"> Add Video Banner * </p>
-                                          <input type="file" name="video_banner_img" class="dropify mt-3" data-default-file="{{ asset('app-assets/images/video/'.$video->video_banner_img)}}" data-max-file-size="10M" data-allowed-file-extensions="png jpg jpeg" />
-                                          <input type="hidden" name="hidden_image1" value="{{ $video->video_banner_img }}" />
+                                          <p for="category_image"> Add Video Banner </p>
+                                          <input type="file" name="video_banner_img" value="{{ $video->video_banner_img }}" class="dropify mt-3"  data-default-file="" data-max-file-size="10M" data-allowed-file-extensions="png jpg jpeg" />
+
                                           </div>
                                         
                                           <div class="input-field col s12">
                                           <p for="category_image"> Add Video Image * </p>
-                                          <input type="file" name="video_img" class="dropify mt-3" data-default-file="{{ asset('app-assets/images/video/'.$video->video_img)}}" data-max-file-size="10M" data-allowed-file-extensions="png jpg jpeg" />
-                                          <input type="hidden" name="hidden_image2" value="{{ $video->video_img }}" />
-                                          <!-- <small class="errorTxt4"></small>
-                                          @error('video_img')
-                                          <span class="invalid-feedback" role="alert">
-                                          <strong>{{ $message }}</strong>
-                                          </span>
-                                          @enderror -->
+                                          <input type="file" name="video_img" value="{{ $video->video_img }}" class="dropify mt-3" data-default-file="" data-max-file-size="10M" data-allowed-file-extensions="png jpg jpeg" required/>
                                           </div>
 
                                           <div name="hidden-panel1" id="hidden-panel1">
-                                          <label><strong>Select club </strong></label><br/>
+                                          <label><strong>Select Category </strong></label><br/>
                                           <select class="browser-default custom-select" name="Category_id">
                                           @foreach($category as $category )
                                           <option value="{{$category->id}}">{{$category->category_name}}</option>
@@ -161,33 +152,9 @@
 
         $("#formValidate").validate({
             rules: {
-                uname: {
+                video_img: {
                     required: true,
                     minlength: 5
-                },
-                cemail: {
-                    required: true,
-                    email: true
-                },
-                password: {
-                    required: true,
-                    minlength: 5
-                },
-                cpassword: {
-                    required: true,
-                    minlength: 5,
-                    equalTo: "#password"
-                },
-                crole: {
-                    required: true,
-                },
-                curl: {
-                    required: true,
-                    url: true
-                },
-                ccomment: {
-                    required: true,
-                    minlength: 15
                 },
                 tnc_select: "required",
             },
@@ -210,24 +177,6 @@
             }
         });
     });
-
-$(document).ready(function() {
-        $("#travel").change(function() {
-            if ($("#travel").val() == 1) {
-                $("#hidden-panel1").hide()
-                $("#hidden-panel").show()
-            } 
-            else if ($("#travel").val() == 2) {
-                $("#hidden-panel").hide()
-                $("#hidden-panel1").show()
-            } 
-            else if ($("#travel").val() == 0){
-                $("#hidden-panel").hide()
-                $("#hidden-panel1").hide()
-            }
-        })
-    }); 
-
 
 </script>
 @endsection

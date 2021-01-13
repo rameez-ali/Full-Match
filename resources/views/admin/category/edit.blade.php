@@ -14,7 +14,7 @@
                                     <div class="row">
                                         <div class="col s12">
                                             <h2></h2>
-                                        <form method="post" action="{{ route('category-form.update', $category->id) }}" enctype="multipart/form-data">
+                                        <form method="post" class="formValidate" id="formValidate" action="{{ route('category-form.update', $category->id) }}" enctype="multipart/form-data">
                                         @csrf
                                         @method('PATCH')
                                        
@@ -33,8 +33,7 @@
                                        
                                           <div class="input-field col s12">
                                           <p for="category_image"> Add Category Image * </p>
-                                          <input type="file" name="category_image"  id="category_image" class="dropify mt-3" data-default-file="{{ asset('app-assets/images/category/'.$category->category_image)}}" data-max-file-size="10M" data-allowed-file-extensions="png jpg jpeg"  />
-                                          <input type="hidden" name="hidden_image" value="{{ $category->category_image }}" />
+                                          <input type="file" name="category_image"  id="category_image" class="dropify mt-3" data-default-file="" data-max-file-size="10M" data-allowed-file-extensions="png jpg jpeg"  />
                                          <!--  <small class="errorTxt2"></small>
                                           @error('category_image')
                                           <span class="invalid-feedback" role="alert">
@@ -88,33 +87,12 @@
 
         $("#formValidate").validate({
             rules: {
-                uname: {
+                category_name: {
                     required: true,
-                    minlength: 5
+                    minlength: 5 ,
                 },
-                cemail: {
+                category_image: {
                     required: true,
-                    email: true
-                },
-                password: {
-                    required: true,
-                    minlength: 5
-                },
-                cpassword: {
-                    required: true,
-                    minlength: 5,
-                    equalTo: "#password"
-                },
-                crole: {
-                    required: true,
-                },
-                curl: {
-                    required: true,
-                    url: true
-                },
-                ccomment: {
-                    required: true,
-                    minlength: 15
                 },
                 tnc_select: "required",
             },

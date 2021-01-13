@@ -22,7 +22,7 @@
                                             <div class="row">
                                                 <div class="input-field col s12">
                                                     <p for="category_name">Add Category Name * </p>
-                                                    <input id="category_name" name="category_name" type="text"  required data-error=".errorTxt1">
+                                                    <input id="category_name" name="category_name" type="text" data-error=".errorTxt1">
                                                     <small class="errorTxt1"></small>
                                                     @error('category_name')
                                                     <span class="invalid-feedback" role="alert">

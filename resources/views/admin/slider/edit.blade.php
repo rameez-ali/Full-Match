@@ -10,7 +10,6 @@
                                 <div class="card-content">
                                     <h4 class="header mt-0">
                                         Edit Slider
-                                        <a class="waves-effect waves-light btn gradient-45deg-purple-deep-orange gradient-shadow right">Details</a>
                                     </h4>
                                     <div class="row">
                                         <div class="col s12">
@@ -18,28 +17,54 @@
                                         <form method="post" action="{{ route('slider-form.update', $slider->id) }}" enctype="multipart/form-data">
                                         @csrf
                                         @method('PATCH')
-                                       <div class="row">
+                                       <div class="form-group">
+                                       <label class="col-md-4 text-right">Add Slider Name</label>
+                                       <div class="col-md-8">
+                                       <input type="text" name="slider_name" value="{{ $slider->slider_name }}" class="form-control input-lg"  required data-error=".errorTxt1" />
+                                       <small class="errorTxt1"></small>
+                                       @error('slider_name')
+                                       <span class="invalid-feedback" role="alert">
+                                       <strong>{{ $message }}</strong>
+                                       </span>
+                                        @enderror
+                                       </div>
+                                       </div>
+
+                                       <div name="hidden-panel1" id="hidden-panel1">
+                                       <label><strong>Select Videos </strong></label><br/>
+                                       <select class="selectpicker" multiple data-live-search="true" name="video[]" data-error=".errorTxt2">
+                                       @foreach($video1 as $video )
+                                       <option value="{{$video->id}}" {{in_array($video->id, $selected_ids) ? 'selected' : ''}} >{{$video->video_title}}</option>
+                                       @endforeach
+                                       <small class="errorTxt2"></small>
+                                       @error('video')
+                                       <span class="invalid-feedback" role="alert">
+                                       <strong>{{ $message }}</strong>
+                                       </span>
+                                        @enderror
+                                       </select>
+                                       </div>
+
+                                       <div class="form-group">
+                                       <label class="col-md-4 text-right">Add Slider Sorting</label>
+                                       <div class="col-md-8">
+                                       <input type="text" name="slider_sorting" value="{{ $slider->slider_sorting }}" class="form-control input-lg"  required data-error=".errorTxt3"/>
+                                       <small class="errorTxt3"></small>
+                                       @error('slider_sorting')
+                                       <span class="invalid-feedback" role="alert">
+                                       <strong>{{ $message }}</strong>
+                                       </span>
+                                       @enderror
+                                       </div>
+                                       </div>
+
+
                                        
-                                           <div class="input-field col s12">
-                                           <p for="category_image">Add Slider Name * </p>
-                                           <input type="text" name="slidr_name" value="{{ $slider->slider_name}}" class="form-control input-lg" />
-                                           </div>
-
-                                           <div name="hidden-panel1" id="hidden-panel1">
-                                           <label><strong>Select Videos </strong></label><br/>
-                                           <select class="selectpicker" multiple data-live-search="true" name="video[]">
-                                           @foreach($video1 as $video )
-                                           <option value="{{$video->id}}" {{in_array($video->id, $selected_ids) ? 'selected' : ''}} >{{$video->video_title}}</option>
-                                           @endforeach
-                                           </select>
-                                           </div>
-
-                                            <div class="input-field col s12">
-                                                    <button class="btn waves-effect waves-light right submit" type="submit" name="action">Submit
-                                                        <i class="material-icons right">send</i>
-                                                    </button>
-                                            </div>
-                                         </div>   
+                                       <div class="input-field col s12">
+                                             <button class="btn waves-effect waves-light right submit" type="submit" name="action">Submit
+                                                <i class="material-icons right">send</i>
+                                             </button>
+                                          </div>
                                        </form>
                                         </div>
                                     </div>
@@ -54,6 +79,7 @@
 @endsection
 @section('scripts')
     <script src="app-assets/vendors/jquery-validation/jquery.validate.min.js"></script>
+
 <script>
     /*
  * Form Validation
