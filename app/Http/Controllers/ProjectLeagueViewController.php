@@ -1,4 +1,4 @@
-  <?php
+<?php
 
 namespace App\Http\Controllers;
 
@@ -42,12 +42,10 @@ class ProjectLeagueViewController extends Controller
      */
     public function store(Request $request)
     {
-          // dd($request->addmore);
-         // dd($request->addmore);
-        $image1 = $request->file('filename1');
-        $new_name1 = rand() . '.' . $image1->getClientOriginalExtension();
-        $image1->move(public_path('app-assets/images/league'), $new_name1);
-
+         
+         
+        if ($request->file('filename1')==null)
+        {
 
         $image3 = $request->file('filename3');
         $new_name3 = rand() . '.' . $image3->getClientOriginalExtension();
@@ -63,10 +61,11 @@ class ProjectLeagueViewController extends Controller
         // Insert League Array
         league::create($form_data1);
 
-         // Id of Last Inserted League
-          $id = DB::table('leagues')->orderBy('ID', 'DESC')->value('ID');
+        // Id of Last Inserted League
+        $id = DB::table('leagues')->orderBy('ID', 'DESC')->value('ID');
 
         //Insert Season Array
+         
         foreach($request->addmore as $addmore){
             $newSeason = new Season();
             $newSeason->Project_id=$id;
@@ -74,22 +73,51 @@ class ProjectLeagueViewController extends Controller
             $newSeason->Video = $addmore['qty'];
             $newSeason->save();
         }
+      
 
        return redirect('league-form')->with('success', 'Data is successfully updated');
+      }
 
-        
-        // foreach($request->addmore as $addmore){
+      else if($request->file('filename1')!=null){
+         $image1 = $request->file('filename1');
+         $new_name1 = rand() . '.' . $image1->getClientOriginalExtension();
+         $image1->move(public_path('app-assets/images/league'), $new_name1);
 
-        //  $form_data2 = array(
-        //      'Project_id'     =>    $id,
-        //      'Seasons'   =>  $addmore['name'],
-        //      'Video'     =>   $addmore['qty']
-        //  );
+        $image3 = $request->file('filename3');
+        $new_name3 = rand() . '.' . $image3->getClientOriginalExtension();
+        $image3->move(public_path('app-assets/images/league'), $new_name3);
 
-        //  Season::create($form_data2);
-        // }
+        $form_data1 = array(
+             'league_name'     =>   $request->league_name,
+             'league_promo_video'  =>   $request->filename2,
+             'league_banner'  =>   $new_name1,
+             'league_profile_image'  =>   $new_name3,
+             'league_description'  =>   $request->league_description
+        );
 
-    }
+        // Insert League Array
+        league::create($form_data1);
+
+         // Id of Last Inserted League
+          $id = DB::table('leagues')->orderBy('ID', 'DESC')->value('ID');
+
+        //Insert Season Array
+          
+        foreach($request->addmore as $addmore){
+            $newSeason = new Season();
+            $newSeason->Project_id=$id;
+            $newSeason->Seasons=$addmore['name'];
+            $newSeason->Video = $addmore['qty'];
+            $newSeason->save();
+        }
+      
+
+      return redirect('league-form')->with('success', 'Data is successfully updated');
+
+   }
+
+
+}
 
     /**
      * Display the specified resource.
@@ -128,64 +156,59 @@ class ProjectLeagueViewController extends Controller
     public function update(Request $request, $id)
     {
            // dd($request->addmore);
-        $image_name1 = $request->hidden_image1;
-        $image_name3 = $request->hidden_image3;
-
-        $image1 = $request->file('league_banner');
-        $image3 = $request->file('league_profile_image');
-
-        if($image1 != '' || $image3 != '')
+        
+        if($request->filename1!=null)
         {
-            $request->validate([
-                'league_name'    =>  'required',
-                'league_description'    =>  'required',
-                'league_sorting'    =>  'required',
-                'image1'         =>  'image|max:2048',
-                'image2'         =>  'image|max:2048',
-                'image3'         =>  'image|max:2048'
-            ]);
+            $image=$request->file('filename1');
+            $new_name = rand() . '.' . $image->getClientOriginalExtension();
+            $image->move(public_path('app-assets/images/league'), $new_name);
 
-            $image_name1 = rand() . '.' . $image1->getClientOriginalExtension();
-            $image1->move(public_path('app-assets/images/league'), $image_name1);
+            $form_data2 = array(
+                'league_banner'     =>   $new_name
+            );
 
-            $image_name3 = rand() . '.' . $image3->getClientOriginalExtension();
-            $image3->move(public_path('app-assets/images/league'), $image_name3);
-        }
-        else
-        {
-            $request->validate([
-                'league_name'    =>  'required',
-                'league_description'    =>  'required',
-                'league_promo_video'    =>  'required',
-                'league_sorting'    =>  'required'
-            ]);
+              League::whereId($id)->update($form_data2);
         }
 
+        if($request->filename3!=null)
+        {
+            $image1=$request->file('filename3');
+            $new_name1 = rand() . '.' . $image1->getClientOriginalExtension();
+            $image1->move(public_path('app-assets/images/league'), $new_name1);
 
+            $form_data2 = array(
+                'league_profile_image'     =>   $new_name1
+            );
+
+              League::whereId($id)->update($form_data2);
+        }
+
+       
         $form_data = array(
             'league_name'       =>   $request->league_name,
             'league_description'       =>   $request->league_description,
             'league_sorting'       =>   $request->league_sorting,
-            'league_banner'            =>   $image_name1,
-            'league_promo_video'            =>   $request->league_promo_video,
-            'league_profile_image'            =>   $image_name3
+            'league_promo_video'            =>   $request->league_promo_video
         );
 
         League::whereId($id)->update($form_data);
 
     
-            Season::where('Project_id', $id)->forceDelete();
-
-               foreach($request->addmore as $addmore){
+        Season::where('Project_id', $id)->forceDelete();
+        
+           foreach($request->addmore as $addmore){
                $newSeason = new Season();
                $newSeason->Project_id=$id;
                $newSeason->Seasons=$addmore['name'];
                $newSeason->Video = $addmore['qty'];
                $newSeason->save();
-       
                }
+           
+               return redirect('league-form')->with('success', 'Data is successfully updated');
 
-         return redirect('league-form')->with('success', 'Data is successfully updated');
+        
+
+
     }
 
     /**

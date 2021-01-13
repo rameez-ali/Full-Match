@@ -17,17 +17,29 @@
                                           @csrf
                                           <div class="form-group">
                                           <label for="exampleInputEmail1">Enter Slider Name</label>
-                                          <input type="text" name="slider_name" class="form-control input-lg" />
+                                          <input type="text" name="slider_name" class="form-control input-lg" required/>
+                                          <small class="errorTxt1"></small>
+                                          @error('slider_name')
+                                          <span class="invalid-feedback" role="alert">
+                                          <strong>{{ $message }}</strong>
+                                          </span>
+                                          @enderror
                                           </div>
 
                                           <div class="form-group">
-                                            <label for="country">Select Type:</label>
-                                            <select name="country" id="country" class="form-control" style="width:250px">
-                                            <option value="">--- Select Categories ---</option>
+                                            <label for="country">Select Slider Type:</label>
+                                            <select name="country" id="country" class="browser-default custom-select" style="width:250px" required data-error=".errorTxt5">
+                                            <option selected> </option>
                                             <option value="0"> Home </option>
                                             @foreach ($video as $video)
                                             <option value="{{$video->id}}">{{ $video->category_name }}</option>
                                             @endforeach
+                                            <small class="errorTxt5"></small>
+                                            @error('video_img')
+                                            <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                            </span>
+                                            @enderror
                                             </select>
                                             </div>
 
@@ -44,7 +56,13 @@
 
                                         <div class="form-group">
                                           <label for="exampleInputEmail1">Enter Slider Sorting</label>
-                                          <input type="text" name="slider_sorting" class="form-control input-lg" />
+                                          <input type="text" name="slider_sorting" class="form-control input-lg" required/>
+                                          <small class="errorTxt1"></small>
+                                          @error('slider_sorting')
+                                          <span class="invalid-feedback" role="alert">
+                                          <strong>{{ $message }}</strong>
+                                          </span>
+                                          @enderror
                                           </div>
 
 

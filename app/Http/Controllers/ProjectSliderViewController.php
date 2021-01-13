@@ -130,18 +130,29 @@ class ProjectSliderViewController extends Controller
         ->select('slidercategory1s.Category_id')
         ->get();
 
-     $videos1=json_decode($videos2, true);
 
-      $video1 =  DB::table('videos')
-        ->where('Category_id', '=', $videos1)
-        ->select('videos.id','videos.video_title')
-        ->get();
+      $videos1=json_decode($videos2, true);
 
+      foreach($videos1 as $videos1)
+      {
+        if($videos1['Category_id']==null)
+        {
+            $video1 =  DB::table('videos')
+            ->select('videos.id','videos.video_title')
+            ->get();
+        }
+        else{
+          $video1 =  DB::table('videos')
+          ->where('Category_id', '=', $videos1)
+          ->select('videos.id','videos.video_title')
+          ->get();
+        }
+      }
+
+  
        $slider=Slidercategory1::find($id);
 
-       
-       return view('admin.slider.edit', compact('selected_ids','video1','slider'))
-            ->with('i', (request()->input('page', 1) - 1) * 5);
+       return view('admin.slider.edit', compact('selected_ids','video1','slider'));
         
 
     }
@@ -156,8 +167,13 @@ class ProjectSliderViewController extends Controller
     public function update(Request $request, $id)
     {
 
+       $request->validate([
+            'video'     => 'required'
+        ]);
+
         $form_data2 = array(
-            'slider_name'    =>   $request->slider_name
+            'slider_name'    =>   $request->slider_name,
+            'slider_sorting'    =>   $request->slider_sorting
         );        
 
          Slidercategory1::whereId($id)->update($form_data2);

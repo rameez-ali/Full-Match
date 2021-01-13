@@ -18,12 +18,12 @@
                                             <table id="page-length-option" class="display">
                                                 <thead>
                                                 <tr>
-                                                 <th width="8%">Video Title</th>
-                                                  <th width="8%">Video Banner</th>
-                                                  <th width="8%">Video Image</th>
-                                                  <th width="8%">Video Description</th>
-                                                  <th width="8%">Video Link</th>
-                                                  <th width="8%">Video Sorting</th>
+                                                 <th width="5%">Video Title</th>
+                                                  <th width="5%">Video Banner</th>
+                                                  <th width="5%">Video Image</th>
+                                                  <th width="5%">Video Description</th>
+                                                  <th width="5%">Video Link</th>
+                                                  <th width="5%">Video Sorting</th>
                                                    <th width="80%">Action</th>
                                                  </tr>
                                                 </thead>

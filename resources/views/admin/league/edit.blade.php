@@ -11,7 +11,6 @@
                                 <div class="card-content">
                                     <h4 class="header mt-0">
                                         ADD LEAGUE
-                                        <a class="waves-effect waves-light btn gradient-45deg-purple-deep-orange gradient-shadow right">Details</a>
                                     </h4>
                             <div class="row">
                              <form method="post" action="{{ route('league-form.update', $league->id) }}" enctype="multipart/form-data">
@@ -33,8 +32,7 @@
 
                                           <div class="input-field col s12">
                                           <p for="league_banner"> Add League Banner </p>
-                                          <input type="file" name="league_banner" class="dropify mt-3" data-default-file="{{ asset('app-assets/images/league/'.$league->league_banner)}}" data-max-file-size="10M" data-allowed-file-extensions="png jpg jpeg" />
-                                          <input type="hidden" name="hidden_image1" value="{{ $league->league_banner }}" />
+                                          <input type="file" name="filename1" value="{{ $league->league_banner }}" class="dropify mt-3" data-default-file="" data-max-file-size="10M" data-allowed-file-extensions="png jpg jpeg" />
                                           </div>
 
                                           <div class="input-field col s12">
@@ -50,8 +48,7 @@
 
                                           <div class="input-field col s12">
                                           <p for="league_profile_image"> Add League Profile Image * </p>
-                                          <input type="file" name="league_profile_image" class="dropify mt-3" data-default-file="{{ asset('app-assets/images/league/'.$league->league_profile_image)}}" data-max-file-size="10M" data-allowed-file-extensions="png jpg jpeg" />
-                                          <input type="hidden" name="hidden_image3" value="{{ $league->league_profile_image }}" />
+                                          <input type="file" name="filename3" value="{{ $league->league_profile_image }}" class="dropify mt-3" data-default-file="" data-max-file-size="10M" data-allowed-file-extensions="png jpg jpeg" required />
                                           <!-- <small class="errorTxt3"></small>
                                           @error('league_profile_image')
                                           <span class="invalid-feedback" role="alert">
@@ -83,12 +80,17 @@
                                          <tr> 
                                          <td><input type="text" name="addmore[{{$i}}][name]" Value="{{$season->Seasons}}" class="form-control" /></td>  
                                          <td><input type="text" name="addmore[{{$i}}][qty]" Value="{{$season->Video}}" class="form-control" /></td> 
+                                         @if($i==1) @else
                                          <td><button type="button" class="btn btn-danger remove-tr">Remove</button></td> 
+                                          
+                                         @endif
                                          </tr>
                                          <?php $i++; ?>
                                          @endforeach                                  
                                          </table>
                                         </div>
+
+                                        
 
                                          <td><button type="button" name="add" id="add" class="btn btn-success">Add More Season</button></td>  
                                             <div class="input-field col s12">
@@ -116,14 +118,17 @@
 <script type="text/javascript">
    var table = document.getElementById("dynamicTable");
    var i = table.tBodies[0].rows.length;
-    $("#add").click(function(){
-        i++;
+      i++;
+    $("#add").click(function(){      
         $("#dynamicTable").append('<tr><td><input type="text" value="Season'+i+'" name="addmore['+i+'][name]" placeholder="Enter Ss['+i+']" class="form-control" /></td><td><input type="text" name="addmore['+i+'][qty]" placeholder="Enter Season URL" class="form-control" /></td><td><button type="button" class="btn btn-danger remove-tr">Remove</button></td></tr>');
+         i++;
 
     });
     $(document).on('click', '.remove-tr', function(){  
 
          $(this).parents('tr').remove();
+
+         i--;
 
     });  
 </script>

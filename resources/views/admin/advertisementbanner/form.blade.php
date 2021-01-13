@@ -24,7 +24,7 @@
                                              </div>
 
                                               <div class="input-field col s12">
-                                              <p for="video_banner"> Add Video Banner * </p>
+                                              <p for="video_banner"> Add Video Banner </p>
                                               <input type="file" name="video_banner" id="video_banner" class="dropify mt-3" data-default-file="" data-max-file-size="10M" data-allowed-file-extensions="png jpg jpeg"  />        
                                               </div>
 
@@ -35,11 +35,10 @@
 
                                             
 
-                                            <div class="form-group">
-                                            <label for="country">Select Type:</label>
+                                            <div class="input-field col s12">
+                                            <p for="country">Select Category:</p>
                                             <select name="country" id="country" class="form-control" style="width:250px">
-                                            <option value="">--- Select Categories ---</option>
-                                            
+                                            <option selected> </option>
                                             @foreach ($video as $video)
                                             <option value="{{$video->id}}">{{ $video->category_name }}</option>
                                             @endforeach
@@ -48,7 +47,7 @@
 
                                             
 
-                                        <div class="form-group">
+                                        <div class="input-field col s12">
                                            <label for="state">Select Videos</label>
                                            <select name="state[]" class="select2 browser-default" multiple style="width:250px">
                                            </select>
@@ -57,6 +56,7 @@
                                             <div class="input-field col s12">
                                             <p for="genre">Add Video Genre </p>
                                             <select name="genre" class="form-control" style="width:250px">
+                                            <option selected> </option>
                                             @foreach ($videogenre as $videogenre)
                                             <option value="{{$videogenre->id}}">{{ $videogenre->genre_name }}</option>
                                             @endforeach

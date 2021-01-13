@@ -13,6 +13,8 @@ use App\Model\Player;
 use App\Model\Videoclub;
 use App\Model\Videoplayer;
 use App\Model\Season;
+use App\Model\Notify_user;
+use App\Model\Popular_search;
 use DB;
 
 
@@ -70,90 +72,143 @@ class ProjectVideoViewController extends Controller
     public function store(Request $request)
     {
 
+        $request->validate([
+            'genre'     => 'required'
+        ]);
 
-     // $request->validate([
-     //       'video_title'     => 'required',
-     //        'video_duration'         => 'required',
-     //        'video_link'     => 'required',
-     //        'player_sorting'         => 'required',
-     //        'video_Category'         => 'required',
-     //        'video_banner_img' =>  'required|image|max:2048',
-     //        'video_img'  =>  'required|image|max:2048'
+        if($request->file('video_banner_img')==null) {
+            $image1 = $request->file('video_img');
+            $new_name1 = rand() . '.' . $image1->getClientOriginalExtension();
+            $image1->move(public_path('app-assets/images/video'), $new_name1);
 
-     //    ]);
+           if(isset($request->notify_user)){
+                $set="1";
+            }else{
+                $set="0";
+            }
 
-        $image = $request->file('video_banner_img');
-        $new_name = rand() . '.' . $image->getClientOriginalExtension();
-        $image->move(public_path('app-assets/images/video'), $new_name);
+            $form_data2 = array(
+                'Category_id'    =>   $request->Category_id,
+                'leagues_id'     =>   $request->state,
+                'video_title'    =>   $request->video_title,
+                'video_img'     =>   $new_name1,
+                'video_description'     =>   $request->video_description,
+                'video_link'     =>   $request->video_link,
+                'video_duration'     =>   $request->video_duration,
+                'notify_user'       => $set,
+                'video_sorting'       => $request->video_sorting,
+                'popular_searches'       => $request->popularsearches,
+                'video_promo'       => $request->video_promo
 
-        $image1 = $request->file('video_img');
-        $new_name1 = rand() . '.' . $image1->getClientOriginalExtension();
-        $image1->move(public_path('app-assets/images/video'), $new_name1);
-
-        $image = $request->file('video_banner_img');
-
-         // $notify_user=$request->isset($params['notify_user']) ? 1  : 0; //status 1 for block by admin , 2 for unblock ,or active .
-        if(isset($request->notify_user)){
-            $set="1";
-        }else{
-            $set="0";
-        }
-
-        $form_data2 = array(
-            'Category_id'    =>   $request->Category_id,
-            'leagues_id'     =>   $request->state,
-            'video_title'    =>   $request->video_title,
-            'video_banner_img'     =>   $new_name,
-            'video_img'     =>   $new_name1,
-            'video_description'     =>   $request->video_description,
-            'video_link'     =>   $request->video_link,
-            'video_duration'     =>   $request->video_duration,
-            'notify_user'       => $set,
-            'video_sorting'       => $request->video_sorting,
-            'popular_searches'       => $request->popularsearches,
-            'video_promo'       => $request->video_promo
-
-        );
-        // dd($form_data2);
-
+            );
 
             Video::create($form_data2);
 
+            if($request->club!=null){
             foreach($request->club as $club){
-            $id = DB::table('videos')->orderBy('id', 'DESC')->value('id');
-            $form_data3 = array(
-            'Club_id'     =>   $club,
-            'Video_id'     =>  $id
-             );
+                $id = DB::table('videos')->orderBy('id', 'DESC')->value('id');
+                $form_data3 = array(
+                    'Club_id'     =>   $club,
+                    'Video_id'     =>  $id
+                );
 
-            Videoclub::create($form_data3);
+                Videoclub::create($form_data3);
+            }
             }
 
-
+            if($request->player!=null){
             foreach($request->player as $player){
-            $id = DB::table('videos')->orderBy('id', 'DESC')->value('id');
-            $form_data4 = array(
-            'Player_id'     =>   $player,
-            'Video_id'     =>  $id
-             );
+                $id = DB::table('videos')->orderBy('id', 'DESC')->value('id');
+                $form_data4 = array(
+                    'Player_id'     =>   $player,
+                    'Video_id'     =>  $id
+                );
 
-            Videoplayer::create($form_data4);
+                Videoplayer::create($form_data4);
             }
+           }
 
             foreach($request->genre as $genre){
-            $id = DB::table('videos')->orderBy('id', 'DESC')->value('id');
-            $form_data5 = array(
-            'video_id'     =>  $id,
-            'genre_id'     =>   $genre
-             );
+                $id = DB::table('videos')->orderBy('id', 'DESC')->value('id');
+                $form_data5 = array(
+                    'video_id'     =>  $id,
+                    'genre_id'     =>   $genre
+                );
 
-            Videogenre::create($form_data5);
+                Videogenre::create($form_data5);
             }
 
-            // return redirect('video-form');
+        }
+        
+        else if ($request->file('video_banner_img')!=null)
+        {
+            $image1 = $request->file('video_img');
+            $new_name1 = rand() . '.' . $image1->getClientOriginalExtension();
+            $image1->move(public_path('app-assets/images/video'), $new_name1);
 
-        return redirect('video-form')->with('success', 'Data is successfully Added');
+            $image2 = $request->file('video_banner_img');
+            $new_name2 = rand() . '.' . $image2->getClientOriginalExtension();
+            $image2->move(public_path('app-assets/images/video'), $new_name2);
 
+           if(isset($request->notify_user)){
+                $set="1";
+            }else{
+                $set="0";
+            }
+
+            $form_data2 = array(
+                'Category_id'    =>   $request->Category_id,
+                'leagues_id'     =>   $request->state,
+                'video_title'    =>   $request->video_title,
+                'video_img'     =>   $new_name1,
+                'video_banner_img'     =>   $new_name2,
+                'video_description'     =>   $request->video_description,
+                'video_link'     =>   $request->video_link,
+                'video_duration'     =>   $request->video_duration,
+                'notify_user'       => $set,
+                'video_sorting'       => $request->video_sorting,
+                'popular_searches'       => $request->popularsearches,
+                'video_promo'       => $request->video_promo
+
+            );
+
+            Video::create($form_data2);
+
+            if($request->club!=null){
+            foreach($request->club as $club){
+                $id = DB::table('videos')->orderBy('id', 'DESC')->value('id');
+                $form_data3 = array(
+                    'Club_id'     =>   $club,
+                    'Video_id'     =>  $id
+                );
+
+                Videoclub::create($form_data3);
+            }
+            }
+
+            if($request->player!=null){
+            foreach($request->player as $player){
+                $id = DB::table('videos')->orderBy('id', 'DESC')->value('id');
+                $form_data4 = array(
+                    'Player_id'     =>   $player,
+                    'Video_id'     =>  $id
+                );
+
+                Videoplayer::create($form_data4);
+            }
+           }
+
+            foreach($request->genre as $genre){
+                $id = DB::table('videos')->orderBy('id', 'DESC')->value('id');
+                $form_data5 = array(
+                    'video_id'     =>  $id,
+                    'genre_id'     =>   $genre
+                );
+
+                Videogenre::create($form_data5);
+            }
+        }
+        
 
     }
 
@@ -180,6 +235,10 @@ class ProjectVideoViewController extends Controller
         $category=ProjectCategory::all();
         $club=Club::all();
         $player=Player::all();
+
+        
+
+
 
 
        ///Getting Selected Clubs id
@@ -238,89 +297,101 @@ class ProjectVideoViewController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $image_name1 = $request->hidden_image1;
-        $image_name2 = $request->hidden_image2;
 
-       $image1 = $request->file('video_banner_img');
-       $image2 = $request->file('video_img');
+       $request->validate([
+            'genre'     => 'required'
+        ]);
 
-
-        // echo $request->notify_user;
-
-        if($image1 != '' || $image2 != '')
+        //when both field are empty       
+        if($request->video_banner_img!=null)
         {
+            $image1=$request->file('video_banner_img');
+            $new_name1 = rand() . '.' . $image1->getClientOriginalExtension();
+            $image1->move(public_path('app-assets/images/video'), $new_name1);
 
-            $image_name1 = rand() . '.' . $image1->getClientOriginalExtension();
-            $image1->move(public_path('app-assets/images/video'), $image_name1);
+            $form_data2 = array(
+                'video_banner_img'     =>   $new_name1
+            );
 
-            $image_name2 = rand() . '.' . $image2->getClientOriginalExtension();
-            $image2->move(public_path('app-assets/images/video'), $image_name2);
-
-        }
-        else
-        {
-            // $request->validate([
-            //     'video_title'    =>  'required',
-            //     'video_description'    =>  'required',
-            //      'video_link'    =>  'required',
-            //      'video_duration'    =>  'required',
-            //      'video_sorting'    =>  'required'
-            // ]);
+              Video::whereId($id)->update($form_data2);
         }
 
+        if($request->video_img!=null)
+        {
+            $image2=$request->file('video_img');
+            $new_name2 = rand() . '.' . $image2->getClientOriginalExtension();
+            $image2->move(public_path('app-assets/images/video'), $new_name2);
 
-        $form_data = array(
-            'video_title'       =>   $request->video_title,
-            'video_description'       =>   $request->video_description,
-            'video_link'       =>   $request->video_link,
-            'video_duration'       =>   $request->video_duration,
-            'video_banner_img'          =>   $image_name1,
-            'video_img'   =>   $image_name2,
-            'video_sorting'         =>  $request->video_sorting
-        );
+             $form_data2 = array(
+                'video_img'     =>   $new_name2
+            );
 
-        Video::whereId($id)->update($form_data);
+              Video::whereId($id)->update($form_data2);
+        }
 
-        Videoclub::where('Video_id', $id)->forceDelete();
-        Videoplayer::where('Video_id', $id)->forceDelete();
-        Videogenre::where('Video_id', $id)->forceDelete();
+        if(isset($request->notify_user)){
+                $set="1";
+            }else{
+                $set="0";
+            }
 
-
-        foreach($request->club as $club){
-            $id = DB::table('videos')->orderBy('id', 'DESC')->value('id');
             $form_data3 = array(
-            'Club_id'     =>   $club,
-            'Video_id'     =>  $id
-             );
+                'Category_id'    =>   $request->Category_id,
+                'leagues_id'     =>   $request->state,
+                'video_title'    =>   $request->video_title,
+                'video_description'     =>   $request->video_description,
+                'video_link'     =>   $request->video_link,
+                'video_duration'     =>   $request->video_duration,
+                'notify_user'       => $set,
+                'video_sorting'       => $request->video_sorting,
+                'popular_searches'       => $request->popularsearches,
+                'video_promo'       => $request->video_promo
 
-            Videoclub::create($form_data3);
+            );
+
+            Video::whereId($id)->update($form_data3);
+           
+           Videoclub::where('Video_id', $id)->forceDelete();
+           Videoplayer::where('Video_id', $id)->forceDelete();
+           Videogenre::where('Video_id', $id)->forceDelete();
+            
+
+            if($request->club!=null){
+            foreach($request->club as $club){
+                $id = DB::table('videos')->orderBy('id', 'DESC')->value('id');
+                $form_data3 = array(
+                    'Club_id'     =>   $club,
+                    'Video_id'     =>  $id
+                );
+
+                Videoclub::create($form_data3);
             }
+          }
 
-
+            if($request->player!=null){
             foreach($request->player as $player){
-            $id = DB::table('videos')->orderBy('id', 'DESC')->value('id');
-            $form_data4 = array(
-            'Player_id'     =>   $player,
-            'Video_id'     =>  $id
-             );
+                $id = DB::table('videos')->orderBy('id', 'DESC')->value('id');
+                $form_data4 = array(
+                    'Player_id'     =>   $player,
+                    'Video_id'     =>  $id
+                );
 
-            Videoplayer::create($form_data4);;
+                Videoplayer::create($form_data4);
             }
+          }
 
+            if($request->genre!=null){
             foreach($request->genre as $genre){
-            $id = DB::table('videos')->orderBy('id', 'DESC')->value('id');
-            $form_data5 = array(
-            'video_id'     =>  $id,
-            'genre_id'     =>   $genre
-             );
+                $id = DB::table('videos')->orderBy('id', 'DESC')->value('id');
+                $form_data5 = array(
+                    'video_id'     =>  $id,
+                    'genre_id'     =>   $genre
+                );
 
-            Videogenre::create($form_data5);;
+                Videogenre::create($form_data5);
             }
-
-
-            return redirect('video-form');
-
-        // return redirect('player-form')->with('success', 'Data is successfully updated');
+          }
+        
     }
 
     /**

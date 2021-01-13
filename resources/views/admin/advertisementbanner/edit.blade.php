@@ -20,20 +20,19 @@
                                        
                                         <div class="row">  
                                             <div class="input-field col s12">
-                                            <p for="category_image">Add Banner Video * </p>
+                                            <p for="category_image">Add Banner Video  </p>
                                             <input type="text" name="video_title" value="{{ $slider->video_title }}" class="form-control input-lg" />
                                             </div>
 
                                             <div class="form-group">
                                             <label class="col-md-4 text-right">Add Video Banner</label>
                                             <div class="col-md-8">
-                                            <input type="file" name="video_banner" class="dropify mt-3"  data-default-file="{{ asset('app-assets/images/video/'.$slider->video_banner)}}" data-max-file-size="10M" data-allowed-file-extensions="png jpg jpeg"/>
-                                            <input type="hidden" name="hidden_image" value="{{ $slider->video_banner }}" />
+                                            <input type="file" name="video_banner" class="dropify mt-3"  value="{{ $slider->video_banner }}"  data-default-file="" data-max-file-size="10M" data-allowed-file-extensions="png jpg jpeg"/>
                                             </div>
                                              </div>
 
                                             <div class="input-field col s12">
-                                            <p for="category_image">Add Video Link * </p>
+                                            <p for="category_image">Add Video Link  </p>
                                             <input type="text" name="video_link" value="{{ $slider->video_link}}" class="form-control input-lg" />
                                             </div>
 
@@ -41,6 +40,7 @@
                                            <div name="hidden-panel1" id="hidden-panel1">
                                            <label><strong>Select Category </strong></label><br/>
                                            <select name="category">
+                                           <option selected> </option>
                                            @foreach($category as $category )
                                            <option value="{{$category->id}}" {{$category->id == $select_category_id->category_id ? 'selected' : ''}} >{{$category->category_name}}</option>
                                            @endforeach
@@ -50,6 +50,7 @@
                                           <div name="hidden-panel1" id="hidden-panel1">
                                           <label><strong>Select Genre </strong></label><br/>
                                           <select name="genre">
+                                          <option selected> </option> 
                                           @foreach($videogenre as $videogenre )
                                           <option value="{{$videogenre->id}}" {{$videogenre->id == $select_genre_id->genre_id ? 'selected' : ''}} >{{$videogenre->genre_name}}</option>
                                           @endforeach
@@ -93,6 +94,8 @@
 @endsection
 @section('scripts')
     <script src="app-assets/vendors/jquery-validation/jquery.validate.min.js"></script>
+    <script src={{ asset('app-assets/js/scripts/form-file-uploads.js') }}></script>
+    <script src={{ asset('app-assets/vendors/dropify/js/dropify.min.js') }}></script>
 <script>
     /*
  * Form Validation

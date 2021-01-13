@@ -65,13 +65,10 @@ class ProjectAdvertisementController extends Controller
      */
     public function store(Request $request)
     {
-        $image = $request->file('video_banner');
-        $new_name = rand() . '.' . $image->getClientOriginalExtension();
-        $image->move(public_path('app-assets/images/banner'), $new_name);
-
+              
+       if($request->file('video_banner')==null){
         $form_data2 = array(
             'video_title'    =>   $request->video_title,
-            'video_banner'   =>   $new_name,
             'video_link'    =>   $request->video_link,
             'category_id'    =>   $request->country,
             'genre_id'    =>   $request->genre,
@@ -79,9 +76,27 @@ class ProjectAdvertisementController extends Controller
         );
           Adv_banner::create($form_data2);
 
+       }  
+       else{
+          $image = $request->file('video_banner');
+          $new_name = rand() . '.' . $image->getClientOriginalExtension();
+          $image->move(public_path('app-assets/images/banner'), $new_name);
 
+           $form_data2 = array(
+            'video_title'    =>   $request->video_title,
+            'video_link'    =>   $request->video_link,
+            'video_banner'    =>   $image,
+            'category_id'    =>   $request->country,
+            'genre_id'    =>   $request->genre,
+            'homepage'    =>   $request->homepage
+        );
+          Adv_banner::create($form_data2);
+
+       }
+        
         $id = DB::table('adv_banners')->orderBy('id', 'DESC')->value('id');
 
+        if($request->state!=null){
         foreach($request->state as $state){
             $form_data3 = array(
             'banner_id'     =>   $id,
@@ -90,6 +105,7 @@ class ProjectAdvertisementController extends Controller
 
             Adv_banner_video::create($form_data3);
         }
+      }
 
         return redirect('banner-form')->with('success', 'Data is successfully Added');
 
@@ -175,52 +191,50 @@ class ProjectAdvertisementController extends Controller
     public function update(Request $request, $id)
     {
 
-        $image_name = $request->hidden_image;
-        $image = $request->file('video_banner');
-        if($image != '')
-        {
-
-            $image_name = rand() . '.' . $image->getClientOriginalExtension();
-            $image->move(public_path('images'), $image_name);
-        }
-        else
-        {
-            // $request->validate([
-            //     'video_title'    =>  'required',
-            //     'video_link'   =>  'required',
-            //     'category_id'    =>  'required',
-            //     'genre_id'   =>  'required',
-            //     'homepage'   =>  'required'
-            // ]);
-        }
-
+        if($request->file('video_banner')==null){
         $form_data2 = array(
             'video_title'    =>   $request->video_title,
-            'video_banner'   =>   $image_name,
             'video_link'    =>   $request->video_link,
-            'category_id'    =>   $request->category,
+            'category_id'    =>   $request->country,
             'genre_id'    =>   $request->genre,
             'homepage'    =>   $request->homepage
         );
+          Adv_banner::whereId($id)->update($form_data2);
 
-        Adv_banner::whereId($id)->update($form_data2);
+       }  
+       else{
+          $image = $request->file('video_banner');
+          $new_name = rand() . '.' . $image->getClientOriginalExtension();
+          $image->move(public_path('app-assets/images/banner'), $new_name);
 
-        Adv_banner_video::where('banner_id', $id)->forceDelete();
+           $form_data2 = array(
+            'video_title'    =>   $request->video_title,
+            'video_link'    =>   $request->video_link,
+            'video_banner'    =>   $image,
+            'category_id'    =>   $request->country,
+            'genre_id'    =>   $request->genre,
+            'homepage'    =>   $request->homepage
+        );
+          Adv_banner::whereId($id)->update($form_data2);
 
+       }
+        
+        $id = DB::table('adv_banners')->orderBy('id', 'DESC')->value('id');
 
-         foreach($request->video as $video){
+        if($request->state!=null){
+        foreach($request->state as $state){
             $form_data3 = array(
-            'video_id'     =>   $video,
-            'banner_id'     =>  $id
+            'banner_id'     =>   $id,
+            'video_id'     =>  $state,
              );
 
             Adv_banner_video::create($form_data3);
-            }
-              return redirect('banner-form')->with('success', 'Data is successfully Added');
-            }
+        }
+      }
 
+        return redirect('banner-form')->with('success', 'Data is successfully Added');
 
-
+}
 
     /**
      * Remove the specified resource from storage.

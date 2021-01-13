@@ -74,7 +74,7 @@
 
 
                                               <div class="input-field col s12">
-                                              <p for="video_banner_img"> Add Video Banner Image * </p>
+                                              <p for="video_banner_img"> Add Video Banner Image </p>
                                               <input type="file" name="video_banner_img" id="video_banner_img" class="dropify mt-3" data-default-file="" data-max-file-size="10M" data-allowed-file-extensions="png jpg jpeg" />
                                               </div>
 
@@ -91,12 +91,18 @@
                                                </div>
 
                                               <div class="input-field col s12">
-                                              <p for="Category_id"> Select Category </p>
+                                              <p for="Category_id"> Select Category * </p>
                                               <select  class="browser-default custom-select" name="Category_id" required data-error=".errorTxt5">                                
-                                              <option selected> Select Category </option>
+                                              <option selected> </option>
                                               @foreach($category as $category)
                                               <option value="{{$category->id}}">{{$category->category_name}}</option>
                                               @endforeach
+                                              <small class="errorTxt5"></small>
+                                              @error('video_img')
+                                              <span class="invalid-feedback" role="alert">
+                                               <strong>{{ $message }}</strong>
+                                               </span>
+                                               @enderror
                                               </select>
                                               </div>
 
@@ -118,11 +124,17 @@
                                               </div>
                            
                                               <div class="input-field col s12">
-                                              <p for="genre"> Select Video Genre </p>
-                                              <select class="selectpicker" multiple data-live-search="true" name="genre[]">
+                                              <p for="genre"> Select Video Genre *</p>
+                                              <select class="selectpicker" multiple data-live-search="true" name="genre[]" >
                                               @foreach($videogenres as $videogenre )
                                               <option value="{{$videogenre->id}}">{{$videogenre->genre_name}}</option>
                                               @endforeach
+                                              <small class="errorTxt6"></small>
+                                              @error('genre[]')
+                                              <span class="invalid-feedback" role="alert">
+                                               <strong>{{ $message }}</strong>
+                                               </span>
+                                               @enderror
                                               </select>
                                                </div>
                             
@@ -216,6 +228,18 @@
                }
             });
     });
-     </script>   
+     </script> 
+
+     <script>
+     $(function () {
+    $('#mySuperCoolForm').validate({
+        rules:{
+            things:{
+                required:true
+            }
+        }
+    });
+});
+</script>  
 @endsection
 
