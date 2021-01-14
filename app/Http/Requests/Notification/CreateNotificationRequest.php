@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\Notification;
 
+use App\Model\Notification;
 use Illuminate\Foundation\Http\FormRequest;
 
 class CreateNotificationRequest extends FormRequest
@@ -13,7 +14,7 @@ class CreateNotificationRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +25,24 @@ class CreateNotificationRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'notify_title' => ['string', 'required'],
         ];
+    }
+    public function handle()
+    {
+
+        $this->validated();
+
+        $params = $this->all();
+
+        $notif = new Notification();
+        $notif->notify_title = $params['notify_title'];
+        $notif->notify_text = $params['subp_desc'];
+        $notif->notify_type = $params['notify_type'];
+        $notif->lang = 'en';
+
+        $notif->save();
+
+        return true;
     }
 }

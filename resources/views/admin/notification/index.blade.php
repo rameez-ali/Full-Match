@@ -6,31 +6,31 @@
             <div class="section">
                 <div class="row">
                     <div class="col s12 m12 l12">
-                        @if ($planaddsuccess = Session::get('planaddsuccess'))
+                        @if ($notifiyaddsuccess = Session::get('notifiyaddsuccess'))
                             <div class="card-alert card gradient-45deg-green-teal">
                                 <div class="card-content white-text">
                                     <p>
-                                        <i class="material-icons">check</i>{{ $planaddsuccess }}</p>
+                                        <i class="material-icons">check</i>{{ $notifiyaddsuccess }}</p>
                                 </div>
                                 <button type="button" class="close white-text" data-dismiss="alert" aria-label="Close">
                                     <span aria-hidden="true">×</span>
                                 </button>
                             </div>
-                        @elseif($planeditsuccess = Session::get('planeditsuccess'))
+                        @elseif($notifiyeditsuccess = Session::get('notifiyeditsuccess'))
                             <div class="card-alert card gradient-45deg-green-teal">
                                 <div class="card-content white-text">
                                     <p>
-                                        <i class="material-icons">check</i>{{ $planeditsuccess }}</p>
+                                        <i class="material-icons">check</i>{{ $notifiyeditsuccess }}</p>
                                 </div>
                                 <button type="button" class="close white-text" data-dismiss="alert" aria-label="Close">
                                     <span aria-hidden="true">×</span>
                                 </button>
                             </div>
-                        @elseif($plandeletesuccess = Session::get('plandeletesuccess'))
+                        @elseif($notifiydeletesuccess = Session::get('notifiydeletesuccess'))
                             <div class="card-alert card gradient-45deg-green-teal">
                                 <div class="card-content white-text">
                                     <p>
-                                        <i class="material-icons">check</i>{{ $plandeletesuccess }}</p>
+                                        <i class="material-icons">check</i>{{ $notifiydeletesuccess }}</p>
                                 </div>
                                 <button type="button" class="close white-text" data-dismiss="alert" aria-label="Close">
                                     <span aria-hidden="true">×</span>
@@ -72,7 +72,6 @@
                                                     <td>
                                                         <a class="mb-5 btn waves-effect waves-light gradient-45deg-purple-deep-orange" href="{{ route('notification.edit',[ 'notification' => $notification->id ]) }}">{{ __('customer.customer.edit') }}</a>
                                                         <a class="mb-5 btn waves-effect waves-light gradient-45deg-purple-deep-orange" href="#">{{ __('customer.notification.send_notifi') }}</a>
-
                                                     </td>
                                                 </tr>
                                             @endforeach

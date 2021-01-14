@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\Notification;
 
+use App\Model\Notification;
 use Illuminate\Foundation\Http\FormRequest;
 
 class GetNotificationRequest extends FormRequest
@@ -13,7 +14,7 @@ class GetNotificationRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -26,5 +27,10 @@ class GetNotificationRequest extends FormRequest
         return [
             //
         ];
+    }
+    public function handle(){
+
+        return Notification::findOrNew($this->id);
+
     }
 }

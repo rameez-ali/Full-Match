@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Notification\CreateNotificationRequest;
 use App\Http\Requests\Notification\GetAllNotificationsRequest;
+use App\Http\Requests\Notification\GetNotificationRequest;
 use App\Http\Requests\Subsplans\GetAllSubsPlanRequest;
 use Illuminate\Http\Request;
 
@@ -25,9 +27,15 @@ class NotificationController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(GetNotificationRequest $request)
     {
-        //
+        $request->id = 0;
+
+        $response = $request->handle();
+
+        $route = url('notification');
+
+        return view('admin.notification.form',['notification' => $response, 'route' => $route, 'edit' => false ]);
     }
 
     /**
@@ -36,9 +44,11 @@ class NotificationController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CreateNotificationRequest $request)
     {
-        //
+        $response = $request->handle();
+
+        return redirect()->route('notification.index')->with('notifiyaddsuccess','Notification add Successfully');
     }
 
     /**
