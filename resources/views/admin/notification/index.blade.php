@@ -71,7 +71,7 @@
 
                                                     <td>
                                                         <a class="mb-5 btn waves-effect waves-light gradient-45deg-purple-deep-orange" href="{{ route('notification.edit',[ 'notification' => $notification->id ]) }}">{{ __('customer.customer.edit') }}</a>
-                                                        <a class="mb-5 btn waves-effect waves-light gradient-45deg-purple-deep-orange" href="#">{{ __('customer.notification.send_notifi') }}</a>
+                                                        <a class="mb-5 btn waves-effect waves-light gradient-45deg-purple-deep-orange" href="{{ route('notification.send',$notification->id) }}">{{ __('customer.notification.send_notifi') }}</a>
                                                     </td>
                                                 </tr>
                                             @endforeach

@@ -43,6 +43,7 @@ Route::group(['middleware' => ['auth']], function () {
 
     Route::resource('subscriptionplans','SubsPlanController');
     Route::resource('notification','NotificationController');
+    Route::get('notification-send/{id}','NotificationController@sendNotification')->name('notification.send');
     Route::resource('page', 'PageController')->only(['index','edit','update']);
     Route::get('videoclub/{id}','ProjectVideoViewController@destroy1');
     Route::get('videodetails/{id}','ProjectVideoViewController@video_details');
