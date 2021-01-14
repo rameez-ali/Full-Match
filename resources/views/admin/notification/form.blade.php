@@ -36,7 +36,7 @@
                                                         @enderror
 
                                                     <div class="input-field col s12">
-                                                        <textarea id="notify_desc" name="subp_desc" value="{{ old('notify_desc',$notification->notify_text) }}"  class="materialize-textarea validate" data-error=".errorTxt2">{{ old('notify_desc',$notification->plan_Description) }}</textarea>
+                                                        <textarea id="notify_desc" name="notify_desc" value="{{ old('notify_desc',$notification->notify_text) }}"  class="materialize-textarea validate" data-error=".errorTxt2">{{ old('notify_desc',$notification->notify_text) }}</textarea>
                                                         <label for="notify_desc">{{ __('customer.decs') }}</label>
                                                         <small class="errorTxt2"></small>
                                                     </div>

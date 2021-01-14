@@ -28,16 +28,16 @@ class CreateNotificationRequest extends FormRequest
             'notify_title' => ['string', 'required'],
         ];
     }
-    public function handle()
-    {
+    public function handle(){
 
         $this->validated();
 
         $params = $this->all();
 
         $notif = new Notification();
+
         $notif->notify_title = $params['notify_title'];
-        $notif->notify_text = $params['subp_desc'];
+        $notif->notify_text = $params['notify_desc'];
         $notif->notify_type = $params['notify_type'];
         $notif->lang = 'en';
 

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\Notification\CreateNotificationRequest;
 use App\Http\Requests\Notification\GetAllNotificationsRequest;
 use App\Http\Requests\Notification\GetNotificationRequest;
+use App\Http\Requests\Notification\UpdateNotificationRequest;
 use App\Http\Requests\Subsplans\GetAllSubsPlanRequest;
 use Illuminate\Http\Request;
 
@@ -70,7 +71,15 @@ class NotificationController extends Controller
      */
     public function edit($id)
     {
-        //
+        $request = new GetNotificationRequest();
+
+        $request->id = $id;
+
+        $response = $request->handle();
+
+        $route = route('notification.update', ['notification' => $response->id]);
+
+        return view('admin.notification.form',['notification' => $response, 'route' => $route , 'edit' => true ]);
     }
 
     /**
@@ -80,9 +89,13 @@ class NotificationController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UpdateNotificationRequest $request, $id)
     {
-        //
+        $request->id = $id;
+
+        $response = $request->handle();
+
+        return redirect()->route('notification.index')->with('notifiyeditsuccess','Notification Edit Successfully');
     }
 
     /**
