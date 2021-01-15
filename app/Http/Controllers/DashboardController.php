@@ -2,13 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Dashboard\GetDashboardRequest;
 use Illuminate\Http\Request;
 
 class DashboardController extends Controller
 {
-    //
-    public function dash()
+    public function index(GetDashboardRequest $request)
     {
-        return view('admin/dashboard/index');
+        $response = $request->handle();
+        return view('admin.dashboard.index',['data' => $response]);
     }
 }

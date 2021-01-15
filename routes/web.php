@@ -19,7 +19,7 @@ Route::get('/', function () {
 });
 
 Route::group(['middleware' => ['auth']], function () {
-    Route::get('dashboard', 'DashboardController@dash')->name('dashboard');
+    Route::get('dashboard', 'DashboardController@index')->name('dashboard');
     Route::resource('customer', 'CustomerController');
     Route::resource('subscriptionplans','SubsPlanController');
     Route::resource('discount','PromoCodeController');
