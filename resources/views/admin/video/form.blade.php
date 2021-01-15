@@ -33,7 +33,7 @@
 
                                               <div class="input-field col s12">
                                               <p for="video_title">Add Video Description </p>
-                                              <input type="text" id="video_description" name="video_description" Placeholder="Video Description" class="form-control input-lg" />  
+                                              <input type="text" id="video_description" name="video_description" class="form-control input-lg" />  
                                               </div>
 
                                               <div class="input-field col s12">
@@ -45,18 +45,24 @@
                                               <strong>{{ $message }}</strong>
                                               </span>
                                               @enderror
+                                              </div>
+                                               
+                                               <div class="input-field col s12">
+                                              <p for="video_sorting">Video Duration * </p>
+                                              <div class="input-field col s1">
+                                              <p for="hour">Hour </p>
+                                              <input type="number" id="hour" name="hour"  min="0" class="form-control input-lg" required/>
+                                              </div>
+                                              <div class="input-field col s1">
+                                              <p for="Minutes">Minutes </p>
+                                              <input type="number" id="minute" name="minute"  min="0" class="form-control input-lg" required />
+                                              </div>
+                                              <div class="input-field col s1">
+                                              <p for="second">Second </p>
+                                              <input type="number" id="second" name="second"  min="0"class="form-control input-lg" required />
+                                              </div>
                                                </div>
-
-                                              <div class="input-field col s12">
-                                              <p for="video_duration">Add Video Duration * </p>
-                                              <input id="video_duration" name="video_duration" type="time"  required data-error=".errorTxt3">
-                                              <small class="errorTxt3"></small>
-                                              @error('video_duration')
-                                              <span class="invalid-feedback" role="alert">
-                                              <strong>{{ $message }}</strong>
-                                              </span>
-                                              @enderror
-                                               </div>
+                                               
 
                             
                                               <div class="input-field col s12">
@@ -157,10 +163,10 @@
                                               </div>
 
                                               <div class="input-field col s12">
-                                              <p for="popularsearches"> Select Category </p>
+                                              <p for="popularsearches"> Popular Searches </p>
                                               <select name="popularsearches" class="form-control" style="width:250px">
-                                              <option value="1">Yes</option>
                                               <option value="0">No</option>
+                                              <option value="1">Yes</option>
                                               </select>
                                               </div>
 
@@ -228,18 +234,14 @@
                }
             });
     });
-     </script> 
 
-     <script>
-     $(function () {
-    $('#mySuperCoolForm').validate({
-        rules:{
-            things:{
-                required:true
-            }
-        }
-    });
-});
-</script>  
+     
+     </script> 
+ <script>
+ $('#phone-input').formatter({
+        'pattern': '({{99}}-{{9999}}-{{9999}})',
+        'persistent': true
+      });
+ </script>
 @endsection
 

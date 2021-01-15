@@ -18,9 +18,8 @@ class ProjectLeagueViewController extends Controller
      */
     public function index()
     {
-        $project = League::latest()->paginate(5);
-            return view('admin.league.index', compact('project'))
-            ->with('i', (request()->input('page', 1) - 1) * 5);
+        $project = League::all();
+            return view('admin.league.index', compact('project'));
     }
 
     /**

@@ -46,7 +46,7 @@ class ProjectCategoryGenreViewController extends Controller
 
         $form_data = array(
             'genre_name'     =>   $request->genre_name,
-            'genre_sorting'     =>   $request->genre_sorting,
+            'genre_sorting'     =>   $request->genre_sorting
         );
 
         Video_genre::create($form_data);
@@ -88,7 +88,8 @@ class ProjectCategoryGenreViewController extends Controller
     {
 
         $form_data = array(
-            'genre_name'       =>   $request->genre_name
+            'genre_name'       =>   $request->genre_name,
+            'genre_sorting'       =>   $reques
         );
 
         Video_genre::whereId($id)->update($form_data);

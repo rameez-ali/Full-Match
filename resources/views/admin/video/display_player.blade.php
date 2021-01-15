@@ -17,11 +17,11 @@
                                              <table id="page-length-option" class="display">
                                                 <thead>
                                                 <tr>
-                                                 <th width="8%">Video Title</th>
-                                                  <th width="8%">Video Banner</th>
-                                                  <th width="8%">Video Image</th>
-                                                  <th width="8%">Video Description</th>
-                                                  <th width="10%">Video Link</th>
+                                                 <th width="20%">Video Title</th>
+                                                  <th width="20%">Video Banner</th>
+                                                  <th width="20%">Video Image</th>
+                                                  <th width="15%">Video Description</th>
+                                                  <th width="15%">Video Link</th>
                                                   <th width="10%">Video Duration</th>
                                                  </tr>
                                                 </thead>
@@ -29,10 +29,13 @@
                                                  @foreach($video as $video)
                                                  <tr>
                                                <td>{{ $video->video_title }}</td>
-                                               <td><img src="/images/{{ $video->video_banner_img }}"  class="img-thumbnail" width="75" /></td>
-                                               <td><img src="/images/{{ $video->video_img}}"  class="img-thumbnail" width="75" /></td>
+                                               <td><img src="{{ asset('app-assets/images/video/'.$video->video_banner_img)}}"  class="img-thumbnail" width="75" /></td>
+                                               <td><img src="{{ asset('app-assets/images/video/'.$video->video_img)}}"  class="img-thumbnail" width="75" /></td>
                                                <td>{{ $video->video_description }}</td>
                                                <td>{{ $video->video_link }}</td>
+                                               <td>{{ $video->hour }}:
+                                                   {{ $video->minute }}:
+                                                   {{ $video->second }}</td>
                                                <td>{{ $video->video_duration }}</td>
                                                 </tr>
                                                  @endforeach

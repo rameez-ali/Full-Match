@@ -46,14 +46,19 @@
                                            </div>
 
                                            <div class="input-field col s12">
-                                           <p for="video_duration">Add Video Duration * </p>
-                                           <input type="time" name="video_duration" value="{{ $video->video_duration }}" class="form-control input-lg" required data-error=".errorTxt3" />
-                                           <small class="errorTxt3"></small>
-                                           @error('video_duration')
-                                           <span class="invalid-feedback" role="alert">
-                                           <strong>{{ $message }}</strong>
-                                           </span>
-                                           @enderror
+                                              <p for="video_sorting">Video Duration * </p>
+                                              <div class="input-field col s1">
+                                              <p for="hour">Hour </p>
+                                              <input type="number" id="hour"  min="0" name="hour" value="{{$video->hour}}" min="0" class="form-control input-lg"/>
+                                              </div>
+                                              <div class="input-field col s1">
+                                              <p for="Minutes">Minutes </p>
+                                              <input type="number" id="minute"  min="0" name="minute" value="{{$video->minute}}" min="1" class="form-control input-lg" required />
+                                              </div>
+                                              <div class="input-field col s1">
+                                              <p for="second">Second </p>
+                                              <input type="number" id="second"  min="0" name="second" value="{{$video->second}}" min="0" class="form-control input-lg" />
+                                              </div>
                                            </div>
                                         
 
