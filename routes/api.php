@@ -7,6 +7,7 @@ use App\Http\Controllers\Api\ClubController;
 use App\Http\Controllers\Api\PlayerController;
 use App\Http\Controllers\Api\VideoController;
 use App\Http\Controllers\Api\SubsPlanController;
+use App\Http\Controllers\Api\ContactController;
 
 /*
 |--------------------------------------------------------------------------
@@ -37,3 +38,8 @@ Route::get('/allsubsplans', [SubsPlanController::class , 'index']);
 
 Route::get('/videos', [VideoController::class , 'videos']);
 Route::get('/video/{id}', [VideoController::class , 'video_details']);
+
+Route::post('/contact', [ContactController::class , 'contact']);
+
+Route::get('/contact', [ContactController::class , 'contact']);
+Route::post('/query', [ContactController::class , 'query']);
