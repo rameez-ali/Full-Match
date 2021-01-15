@@ -20,7 +20,7 @@ class ProjectSliderViewController extends Controller
     public function index()
     {
          
-        $slidercategory = Slidercategory1::latest()->paginate(5);
+        $slidercategory = Slidercategory1::all();
             return view('admin.slider.index', compact('slidercategory'));
     }
 

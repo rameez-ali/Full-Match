@@ -27,9 +27,8 @@ class ProjectVideoViewController extends Controller
      */
     public function index()
     {
-        $video = Video::latest()->paginate(5);
-            return view('admin.video.index', compact('video'))
-            ->with('i', (request()->input('page', 1) - 1) * 5);
+        $video = Video::all();
+            return view('admin.video.index', compact('video'));
     }
 
     /**
@@ -94,7 +93,9 @@ class ProjectVideoViewController extends Controller
                 'video_img'     =>   $new_name1,
                 'video_description'     =>   $request->video_description,
                 'video_link'     =>   $request->video_link,
-                'video_duration'     =>   $request->video_duration,
+                'hour'     =>   $request->hour,
+                'minute'     =>   $request->minute,
+                'second'     =>   $request->second,
                 'notify_user'       => $set,
                 'video_sorting'       => $request->video_sorting,
                 'popular_searches'       => $request->popularsearches,
@@ -167,13 +168,16 @@ class ProjectVideoViewController extends Controller
                 'video_banner_img'     =>   $new_name2,
                 'video_description'     =>   $request->video_description,
                 'video_link'     =>   $request->video_link,
-                'video_duration'     =>   $request->video_duration,
+                'hour'     =>   $request->hour,
+                'minute'     =>   $request->minute,
+                'second'     =>   $request->second,
                 'notify_user'       => $set,
                 'video_sorting'       => $request->video_sorting,
                 'popular_searches'       => $request->popularsearches,
                 'video_promo'       => $request->video_promo
 
             );
+
 
             Video::create($form_data2);
 
@@ -349,7 +353,9 @@ class ProjectVideoViewController extends Controller
                 'video_title'    =>   $request->video_title,
                 'video_description'     =>   $request->video_description,
                 'video_link'     =>   $request->video_link,
-                'video_duration'     =>   $request->video_duration,
+                'hour'     =>   $request->hour,
+                'minute'     =>   $request->minute,
+                'second'     =>   $request->second,
                 'notify_user'       => $set,
                 'video_sorting'       => $request->video_sorting,
                 'popular_searches'       => $request->popularsearches,

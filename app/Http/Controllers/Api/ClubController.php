@@ -1,22 +1,58 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api;
 
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Model\ProjectCategory;
-use App\Model\Contact;
+use App\ProjectCategory;
+use App\Model\Videoclub;
+use App\Model\Club;
 
-class ProjectContactViewController extends Controller
+
+
+class ClubController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+
+public $successStatus = 200;
+public $HTTP_FORBIDDEN = 403;
+public $HTTP_NOT_FOUND = 404;
+
+
+    public function clubs()
     {
-         $contact = Contact::all();
-            return view('admin.contact.index', compact('contact'));
+     $clubs = Club::all();
+     return response()->json(['success' => true, 'status' => $this->successStatus, 'message' => 'Club found.', 'data' => $clubs]);
+
+
+    }
+
+
+    public function club($id)
+    {
+
+     
+
+        if (Videoclub::where('Club_id', $id)->exists()) {
+
+            $video_club=Videoclub::select('videos.id','videos.video_title','videos.video_img')
+            ->join('videos','videoclubs.Video_id' , '=' ,'videos.id')
+            ->where('Club_id','=', $id)
+            ->get();
+
+        
+     
+         return response()->json(['success' => true, 'status' => $this->successStatus, 'message' => 'Club found.', 'data' => $video_club]);
+          }
+        else {
+           return response()->json(['error' => false, 'status' => $this->HTTP_NOT_FOUND, 'message' => 'No record found.']);
+         }
+      
+
     }
 
     /**
@@ -38,6 +74,8 @@ class ProjectContactViewController extends Controller
     public function store(Request $request)
     {
         
+
+
     }
 
     /**
@@ -59,11 +97,8 @@ class ProjectContactViewController extends Controller
      */
     public function edit($id)
     {
-        $contact=Contact::find($id);
-        $status=1;
-        $contact->status = $status;
-        $contact->save();
-        return view('admin.contact.edit',compact('contact'));
+        $club=Club::find($id);
+        return view('admin.club.edit',compact('club'));
     }
 
     /**
@@ -75,17 +110,7 @@ class ProjectContactViewController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $response=1;
-        $form_data = array(
-            'response'       =>   $response,
-            'response_message'   =>   $request->response_message
-        );
-  
-        Contact::whereId($id)->update($form_data);
-
-        return redirect('contact-form')->with('success', 'Data is successfully deleted');
-
-
+        
     }
 
     /**
@@ -96,6 +121,8 @@ class ProjectContactViewController extends Controller
      */
     public function destroy($id)
     {
+
+
 
     }
 }
