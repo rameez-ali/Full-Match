@@ -76,6 +76,18 @@ return [
         'usage_peruser' => 'Number of Use For Each User',
         'for_specific_user' => 'Select Specific User',
     ],
+    'notification' => [
+        'notification_section' => 'Notification Page Section',
+        'add_notification' => 'Add Notification',
+        'edit_notification' => 'Edit Notification',
+        'notification' => 'Notification',
+        'notification_type' => 'Notification Type',
+        'all_user' => 'All Users',
+        'guest_user' => 'Guest Users',
+        'registered_user' => 'Registered Users',
+        'send_notifi' => 'Send Notification',
+
+    ],
     'name' => 'Name',
     'slug' => 'Slug',
     'decs' => 'Description',
