@@ -41,6 +41,17 @@
                                           </span>
                                           @enderror -->
                                           </div>
+ 
+                                         <div class="input-field col s12">
+                                          <div name="hidden-panel1" id="hidden-panel1">
+                                         <label><strong>Select Genre </strong></label><br/>
+                                         <select class="selectpicker" multiple data-live-search="true" name="genre[]">
+                                         @foreach($video_genres as $videogenre )
+                                         <option value="{{$videogenre->id}}" {{in_array($videogenre->id, $selected_ids3) ? 'selected' : ''}} >{{$videogenre->genre_name}}</option>
+                                         @endforeach
+                                         </select>
+                                         </div>
+                                         </div>
                                        
                                      
                                          <div class="input-field col s12">

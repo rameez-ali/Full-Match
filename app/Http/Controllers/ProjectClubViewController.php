@@ -65,7 +65,7 @@ class ProjectClubViewController extends Controller
 
         Club::create($form_data2);
 
-        return redirect('club-form')->with('success', 'Data is successfully Added');
+        return redirect('club-form')->with('clubaddsuccess','Club Added Successfully');
 
 
     }
@@ -142,7 +142,7 @@ class ProjectClubViewController extends Controller
 
          Club::whereId($id)->update($form_data);
 
-         return redirect('club-form')->with('success', 'Data is successfully updated');
+         return redirect('club-form')->with('clubeditsuccess','Club Updated Successfully');
     }
 
     /**
@@ -158,7 +158,7 @@ class ProjectClubViewController extends Controller
 
         $data = Club::findOrFail($id);
         $data->delete();
-        return redirect('club-form')->with('success', 'Data is successfully deleted');
+        return redirect('club-form')->with('clubdelsuccess','Club Deleted Successfully');
 
 
     }

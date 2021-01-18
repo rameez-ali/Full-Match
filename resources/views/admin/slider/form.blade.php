@@ -1,6 +1,13 @@
 <!-- dropdown.blade.php -->
 @extends('admin.layouts.app')
 @section('content')
+<html>
+<style>
+select{height: 50px; width: 50px;
+color:black;}
+option {margin: 10px;}
+
+</style>
     <div class="col s12">
         <div class="container">
             <div class="section">
@@ -47,7 +54,7 @@
 
                                         <div class="form-group">
                                            <label for="state">Select Videos</label>
-                                           <select name="state[]" class="select2 browser-default" multiple style="width:250px">
+                                           <select name="state[]" id="testbox"  class="select2 browser-default" multiple="multiple" style="width:250px">
                                            </select>
                                         </div>
 
@@ -83,7 +90,13 @@
     </div>
   </div>
 
+  $(".select2").select2({
+    dropdownAutoWidth: true,
+    width: '100%'
+    });
+
 <script type="text/javascript">
+
     jQuery(document).ready(function ()
     {
             jQuery('select[name="country"]').on('change',function(){
@@ -124,14 +137,27 @@
             });
     });
      </script>
+
+     
+      <script type="text/javascript">
+      $(document).ready(function() {
+        var last_valid_selection = null;
+        $('#testbox').change(function(event) {
+         if ($(this).val().length > 5) {
+           alert('You can only choose 5 videos maximum!');
+           $(this).val(last_valid_selection);
+         } else {
+           last_valid_selection = $(this).val();
+         }
+       });
+        
+     });
+     </script>
+
+     
+    
   </body>
 </html>
 
 @endsection
-@section('scripts')
-     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
-      <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" />
 
-
-
-@endsection

@@ -25,6 +25,7 @@ public $HTTP_NOT_FOUND = 404;
 
     public function clubs()
     {
+     
      $clubs = Club::all();
      return response()->json(['success' => true, 'status' => $this->successStatus, 'message' => 'Club found.', 'data' => $clubs]);
 

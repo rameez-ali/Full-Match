@@ -14,6 +14,39 @@
                                     </h4>
                                     <div class="row">
                                         <div class="col s12">
+                                            @if ($playeraddsuccess = Session::get('playeraddsuccess'))
+                                            <div class="card-alert card gradient-45deg-green-teal">
+                                            <div class="card-content white-text">
+                                            <p>
+                                            <i class="material-icons"></i>{{ $playeraddsuccess }}</p>
+                                            </div>
+                                            <button type="button" class="close white-text" data-dismiss="alert" aria-label="Close">
+                                            <span aria-hidden="true">×</span>
+                                           </button>
+                                            </div>
+                                            @endif
+                                            @if ($playereditsuccess = Session::get('playereditsuccess'))
+                                            <div class="card-alert card gradient-45deg-green-teal">
+                                            <div class="card-content white-text">
+                                            <p>
+                                            <i class="material-icons"></i>{{ $playereditsuccess }}</p>
+                                            </div>
+                                            <button type="button" class="close white-text" data-dismiss="alert" aria-label="Close">
+                                            <span aria-hidden="true">×</span>
+                                           </button>
+                                            </div>
+                                            @endif
+                                            @if ($playerdelsuccess = Session::get('playerdelsuccess'))
+                                            <div class="card-alert card gradient-45deg-green-teal">
+                                            <div class="card-content white-text">
+                                            <p>
+                                            <i class="material-icons"></i>{{ $playerdelsuccess }}</p>
+                                            </div>
+                                            <button type="button" class="close white-text" data-dismiss="alert" aria-label="Close">
+                                            <span aria-hidden="true">×</span>
+                                           </button>
+                                            </div>
+                                            @endif
                                             <table id="page-length-option" class="display">
                                                 <thead>
                                                 <tr>

@@ -8,6 +8,8 @@ use App\Http\Controllers\Api\PlayerController;
 use App\Http\Controllers\Api\VideoController;
 use App\Http\Controllers\Api\SubsPlanController;
 use App\Http\Controllers\Api\ContactController;
+use App\Http\Controllers\Api\SearchController;
+use App\Http\Controllers\Api\CategoryController;
 
 /*
 |--------------------------------------------------------------------------
@@ -43,3 +45,8 @@ Route::post('/contact', [ContactController::class , 'contact']);
 
 Route::get('/contact', [ContactController::class , 'contact']);
 Route::post('/query', [ContactController::class , 'query']);
+
+Route::get('/search/{string}', [SearchController::class , 'search']);
+
+Route::get('/category', [CategoryController::class , 'category']);
+Route::get('/getgenre/{id}', [CategoryController::class , 'getgenre']);
