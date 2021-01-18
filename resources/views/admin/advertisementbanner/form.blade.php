@@ -48,7 +48,7 @@
                                             
 
                                         <div class="input-field col s12">
-                                           <label for="state">Select Videos</label>
+                                           <p for="state">Select Videos:</p>
                                            <select name="state[]" class="select2 browser-default" multiple style="width:250px">
                                            </select>
                                         </div>
