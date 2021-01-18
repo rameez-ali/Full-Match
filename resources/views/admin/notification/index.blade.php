@@ -52,6 +52,7 @@
                                                 <th>{{ __('customer.title') }}</th>
                                                 <th>{{ __('customer.decs') }}</th>
                                                 <th>{{ __('customer.notification.notification_type') }}</th>
+                                                <th>{{ __('customer.notification.notifi_date_time') }}</th>
                                                 <th>{{ __('customer.action') }}</th>
                                             </tr>
                                             </thead>
@@ -68,9 +69,10 @@
                                                     @elseif($notification->notify_type == 3)
                                                         <td>{{ __('customer.notification.registered_user') }}</td>
                                                     @endif
-
+                                                    <td>{{ $notification->created_at }}</td>
                                                     <td>
                                                         <a class="mb-5 btn waves-effect waves-light gradient-45deg-purple-deep-orange" href="{{ route('notification.edit',[ 'notification' => $notification->id ]) }}">{{ __('customer.customer.edit') }}</a>
+                                                        <a class="mb-5 btn waves-effect waves-light gradient-45deg-purple-deep-orange" href="{{ route('notification.show',[ 'notification' => $notification->id ]) }}">{{ __('customer.view') }}</a>
                                                         <a class="mb-5 btn waves-effect waves-light gradient-45deg-purple-deep-orange" href="{{ route('notification.send',$notification->id) }}">{{ __('customer.notification.send_notifi') }}</a>
                                                     </td>
                                                 </tr>
@@ -82,6 +84,7 @@
                                                 <th>{{ __('customer.title') }}</th>
                                                 <th>{{ __('customer.decs') }}</th>
                                                 <th>{{ __('customer.notification.notification_type') }}</th>
+                                                <th>{{ __('customer.notification.notifi_date_time') }}</th>
                                                 <th>{{ __('customer.action') }}</th>
                                             </tr>
                                             </tfoot>

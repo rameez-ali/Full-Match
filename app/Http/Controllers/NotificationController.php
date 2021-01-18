@@ -61,7 +61,13 @@ class NotificationController extends Controller
      */
     public function show($id)
     {
-        //
+        $request = new GetNotificationRequest();
+
+        $request->id = $id;
+
+        $response = $request->handle();
+
+        return view('admin.notification.show',['notification' => $response ]);
     }
 
     /**
@@ -124,7 +130,7 @@ class NotificationController extends Controller
 
         $response = $request->handle();
 
-        return redirect()->route('notification.index')->with('notifiysendsuccess','Notification Send Successfully');
+        return redirect()->route('notification.index')->with('notifiysendsuccess','Notification Sent Successfully');
 
     }
 }
