@@ -67,11 +67,11 @@ return [
         'status' => 'Status',
     ],
     'discount' => [
-        'discount_section' => 'Discount Page Section',
-        'add_discount' => 'Add Discount',
-        'edit_discount' => 'Edit Discount',
-        'discount' => 'Discount',
-        'discount_type' => 'Discount Type',
+        'discount_section' => 'Promo Code Page Section',
+        'add_discount' => 'Add Promo Code',
+        'edit_discount' => 'Edit Promo Code',
+        'discount' => 'Promo Code',
+        'discount_type' => 'Promo Code Type',
         'usage_limit' => 'Number of Limit',
         'usage_peruser' => 'Number of Use For Each User',
         'for_specific_user' => 'Select Specific User',
@@ -85,7 +85,9 @@ return [
         'all_user' => 'All Users',
         'guest_user' => 'Guest Users',
         'registered_user' => 'Registered Users',
-        'send_notifi' => 'Send Notification',
+        'send_notifi' => 'Sent Notification',
+        'notifi_date_time' => 'Notification Date & Time',
+        'notifi_show' => 'Notification Details',
 
     ],
     'name' => 'Name',
@@ -128,5 +130,7 @@ return [
     'total_players' => 'Total Players',
     'delete_message' => 'Are you sure you want to delete?',
     'sent' => 'We have emailed your password reset link!',
+    'view' => 'View',
+    'back' => 'Back',
 
 ];

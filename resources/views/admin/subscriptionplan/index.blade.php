@@ -65,7 +65,7 @@
                                                     <td>{{ $subscriptionplan->id }}</td>
                                                     <td>{{ $subscriptionplan->plan_title }}</td>
                                                     <td>{{ $subscriptionplan->plan_Description }}</td>
-                                                    <td>{{ $subscriptionplan->plan_price }}</td>
+                                                    <td>{{ \App\Helpers\UtilityHelper::getCurrency() }} {{ $subscriptionplan->plan_price }}</td>
                                                     <td>{{ $subscriptionplan->duration_type }}</td>
                                                     <td>{{ $subscriptionplan->duration_value }}</td>
                                                     <td>{{ $subscriptionplan->sort_by }}</td>
