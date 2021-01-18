@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\ApiOrderController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\CustomerController;
@@ -43,3 +44,5 @@ Route::post('/contact', [ContactController::class , 'contact']);
 
 Route::get('/contact', [ContactController::class , 'contact']);
 Route::post('/query', [ContactController::class , 'query']);
+
+Route::get('/forcurrency', [ApiOrderController::class , 'getCurrency']);

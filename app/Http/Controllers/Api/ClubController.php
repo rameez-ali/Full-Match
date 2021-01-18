@@ -25,9 +25,31 @@ public $HTTP_NOT_FOUND = 404;
 
     public function clubs()
     {
-     $clubs = Club::all();
-     return response()->json(['success' => true, 'status' => $this->successStatus, 'message' => 'Club found.', 'data' => $clubs]);
+     $array = array();
 
+     $clubs = Club::all();
+        if (!$clubs->isEmpty()) {
+
+            foreach ($clubs as $k => $v) {
+
+                $club_banner = str_replace('\\', '/', asset('app-assets/images/club/' . $v->club_banner));
+                $club_logo = str_replace('\\', '/', asset('app-assets/images/club/' . $v->club_logo));
+
+                $array[$k]['id'] = $v->id;
+                $array[$k]['club_name'] = $v->club_name;
+                $array[$k]['club_banner'] = $club_banner;
+                $array[$k]['club_logo'] = $club_logo;
+                $array[$k]['club_description'] = $v->club_description;
+                $array[$k]['club_sorting'] = $v->club_sorting;
+                $array[$k]['created_at'] = $v->created_at;
+                $array[$k]['deleted_at'] = $v->deleted_at;
+
+            }
+            return response()->json(['success' => true, 'status' => $this->successStatus, 'message' => 'Club found.', 'data' => $array]);
+
+        }else{
+            return response()->json(['error' => false, 'status' => $this->HTTP_NOT_FOUND, 'message' => 'No record found.', 'data' => []]);
+        }
 
     }
 
@@ -35,7 +57,7 @@ public $HTTP_NOT_FOUND = 404;
     public function club($id)
     {
 
-     
+
 
         if (Videoclub::where('Club_id', $id)->exists()) {
 
@@ -44,14 +66,14 @@ public $HTTP_NOT_FOUND = 404;
             ->where('Club_id','=', $id)
             ->get();
 
-        
-     
+
+
          return response()->json(['success' => true, 'status' => $this->successStatus, 'message' => 'Club found.', 'data' => $video_club]);
           }
         else {
            return response()->json(['error' => false, 'status' => $this->HTTP_NOT_FOUND, 'message' => 'No record found.']);
          }
-      
+
 
     }
 
@@ -62,7 +84,7 @@ public $HTTP_NOT_FOUND = 404;
      */
     public function create()
     {
-        
+
     }
 
     /**
@@ -73,7 +95,7 @@ public $HTTP_NOT_FOUND = 404;
      */
     public function store(Request $request)
     {
-        
+
 
 
     }
@@ -110,7 +132,7 @@ public $HTTP_NOT_FOUND = 404;
      */
     public function update(Request $request, $id)
     {
-        
+
     }
 
     /**
