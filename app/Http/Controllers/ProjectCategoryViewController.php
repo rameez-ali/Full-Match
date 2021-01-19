@@ -42,7 +42,8 @@ class ProjectCategoryViewController extends Controller
     {
         $request->validate([
             'category_name'     => 'required',
-            'category_image'     =>  'required|image|max:2048'
+            'category_image'     =>  'required|image|max:2048',
+            'genre'              =>  'required'
         ]);
 
         $image = $request->file('category_image');
@@ -117,13 +118,15 @@ class ProjectCategoryViewController extends Controller
      */
     public function update(Request $request, $id)
     {
+
         $image_name = $request->hidden_image;
         $image = $request->file('category_image');
         if($image != '')
         {
             $request->validate([
                 'category_name'    =>  'required',
-                'image'         =>  'image|max:2048'
+                'image'         =>  'image|max:2048',
+                'genre'         =>   'required'
             ]);
 
             $image_name = rand() . '.' . $image->getClientOriginalExtension();
@@ -132,7 +135,8 @@ class ProjectCategoryViewController extends Controller
         else
         {
             $request->validate([
-                'category_name'    =>  'required'
+                'category_name'    =>  'required',
+                'genre'            => 'required'
             ]);
         }
 

@@ -23,7 +23,7 @@ option {margin: 10px;}
                                           <form method="post" action="{{route('slider-form.store')}}" enctype="multipart/form-data">
                                           @csrf
                                           <div class="form-group">
-                                          <label for="exampleInputEmail1">Enter Slider Name</label>
+                                          <label for="exampleInputEmail1">Enter Slider Name * </label>
                                           <input type="text" name="slider_name" class="form-control input-lg" required/>
                                           <small class="errorTxt1"></small>
                                           @error('slider_name')
@@ -34,7 +34,7 @@ option {margin: 10px;}
                                           </div>
 
                                           <div class="form-group">
-                                            <label for="country">Select Slider Type:</label>
+                                            <label for="country">Select Slider Type: * </label>
                                             <select name="country" id="country" class="browser-default custom-select" style="width:250px" required data-error=".errorTxt5">
                                             <option selected> </option>
                                             <option value="0"> Home </option>
@@ -53,8 +53,8 @@ option {margin: 10px;}
                                             
 
                                         <div class="form-group">
-                                           <label for="state">Select Videos</label>
-                                           <select name="state[]" id="testbox"  class="select2 browser-default" multiple="multiple" style="width:250px">
+                                           <label for="state">Select Videos * </label>
+                                           <select name="state[]" id="testbox"  class="select2 browser-default" multiple="multiple" style="width:250px" required>
                                            </select>
                                         </div>
 
@@ -62,7 +62,7 @@ option {margin: 10px;}
 
 
                                         <div class="form-group">
-                                          <label for="exampleInputEmail1">Enter Slider Sorting</label>
+                                          <label for="exampleInputEmail1">Enter Slider Sorting * </label>
                                           <input type="text" name="slider_sorting" class="form-control input-lg" required/>
                                           <small class="errorTxt1"></small>
                                           @error('slider_sorting')
