@@ -18,11 +18,19 @@ class SubsPlanController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public $successStatus = 200;
+    public $HTTP_FORBIDDEN = 403;
+    public $HTTP_NOT_FOUND = 404;
     public function index(GetAllSubsPlanRequest $request)
     {
-        $response = $request->handle();
 
-        return CustomerResource::collection($response);
+
+        $array = array();
+
+        $plans = $request->handle();
+        dd($plans);
+
+//     messs   return CustomerResource::collection($response);
     }
 
     /**
