@@ -32,15 +32,15 @@ public $HTTP_NOT_FOUND = 404;
 
             foreach ($clubs as $k => $v) {
 
-                $club_banner = str_replace('\\', '/', asset('app-assets/images/club/' . $v->club_banner));
-                $club_logo = str_replace('\\', '/', asset('app-assets/images/club/' . $v->club_logo));
+                $banner = str_replace('\\', '/', asset('app-assets/images/club/' . $v->club_banner));
+                $logo = str_replace('\\', '/', asset('app-assets/images/club/' . $v->club_logo));
 
                 $array[$k]['id'] = $v->id;
-                $array[$k]['club_name'] = $v->club_name;
-                $array[$k]['club_banner'] = $club_banner;
-                $array[$k]['club_logo'] = $club_logo;
-                $array[$k]['club_description'] = $v->club_description;
-                $array[$k]['club_sorting'] = $v->club_sorting;
+                $array[$k]['name'] = $v->club_name;
+                $array[$k]['banner'] = $banner;
+                $array[$k]['logo'] = $logo;
+                $array[$k]['description'] = $v->club_description;
+                $array[$k]['sorting'] = $v->club_sorting;
                 $array[$k]['created_at'] = $v->created_at;
                 $array[$k]['deleted_at'] = $v->deleted_at;
 
@@ -57,23 +57,32 @@ public $HTTP_NOT_FOUND = 404;
     public function club($id)
     {
 
-
-
-        if (Videoclub::where('Club_id', $id)->exists()) {
-
-            $video_club=Videoclub::select('videos.id','videos.video_title','videos.video_img')
+        $array = array();
+        
+        $video_clubs=Videoclub::select('videos.id','videos.video_title','videos.video_img')
             ->join('videos','videoclubs.Video_id' , '=' ,'videos.id')
             ->where('Club_id','=', $id)
             ->get();
+         
+         if (!$video_clubs->isEmpty()) {
 
+            foreach ($video_clubs as $k => $v) {
 
+                $video_img = str_replace('\\', '/', asset('app-assets/images/videos/' . $v->video_img));
 
-         return response()->json(['success' => true, 'status' => $this->successStatus, 'message' => 'Club found.', 'data' => $video_club]);
-          }
+                $array[$k]['id'] = $v->id;
+                $array[$k]['title'] = $v->video_title;
+                $array[$k]['image'] = $video_img;
+
+            }
+            return response()->json(['success' => true, 'status' => $this->successStatus, 'message' => 'Club Related Videos found.', 'data' => $array]);
+
+        }
+
         else {
-           return response()->json(['error' => false, 'status' => $this->HTTP_NOT_FOUND, 'message' => 'No record found.']);
-         }
-
+           return response()->json(['success' => false, 'status' => $this->HTTP_NOT_FOUND, 'message' => 'Club Related Videos Not Found.', 'data' => []]);
+        }
+         
 
     }
 

@@ -80,11 +80,7 @@ class ProjectVideoViewController extends Controller
             $new_name1 = rand() . '.' . $image1->getClientOriginalExtension();
             $image1->move(public_path('app-assets/images/video'), $new_name1);
 
-           if(isset($request->notify_user)){
-                $set="1";
-            }else{
-                $set="0";
-            }
+          
 
             $form_data2 = array(
                 'Category_id'    =>   $request->Category_id,
@@ -96,7 +92,7 @@ class ProjectVideoViewController extends Controller
                 'hour'     =>   $request->hour,
                 'minute'     =>   $request->minute,
                 'second'     =>   $request->second,
-                'notify_user'       => $set,
+                'notify_user'       => $request->notify_user,
                 'video_sorting'       => $request->video_sorting,
                 'popular_searches'       => $request->popularsearches,
                 'video_promo'       => $request->video_promo
@@ -154,11 +150,7 @@ class ProjectVideoViewController extends Controller
             $new_name2 = rand() . '.' . $image2->getClientOriginalExtension();
             $image2->move(public_path('app-assets/images/video'), $new_name2);
 
-           if(isset($request->notify_user)){
-                $set="1";
-            }else{
-                $set="0";
-            }
+          
 
             $form_data2 = array(
                 'Category_id'    =>   $request->Category_id,
@@ -171,7 +163,7 @@ class ProjectVideoViewController extends Controller
                 'hour'     =>   $request->hour,
                 'minute'     =>   $request->minute,
                 'second'     =>   $request->second,
-                'notify_user'       => $set,
+                'notify_user'       => $request->notify_user,
                 'video_sorting'       => $request->video_sorting,
                 'popular_searches'       => $request->popularsearches,
                 'video_promo'       => $request->video_promo
@@ -341,11 +333,7 @@ class ProjectVideoViewController extends Controller
               Video::whereId($id)->update($form_data2);
         }
 
-        if(isset($request->notify_user)){
-                $set="1";
-            }else{
-                $set="0";
-            }
+       
 
             $form_data3 = array(
                 'Category_id'    =>   $request->Category_id,
@@ -356,7 +344,7 @@ class ProjectVideoViewController extends Controller
                 'hour'     =>   $request->hour,
                 'minute'     =>   $request->minute,
                 'second'     =>   $request->second,
-                'notify_user'       => $set,
+                'notify_user'       => $request->notify_user,
                 'video_sorting'       => $request->video_sorting,
                 'popular_searches'       => $request->popularsearches,
                 'video_promo'       => $request->video_promo

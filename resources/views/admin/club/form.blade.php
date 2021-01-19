@@ -63,8 +63,8 @@
                                                      </div>
 
                                                    <div class="input-field col s12">
-                                                    <p for="club_sorting">Add Club Sorting * </p>
-                                                    <input id="club_sorting" name="club_sorting" type="text" >
+                                                    <p for="club_sorting">Add Club Sorting </p>
+                                                    <input id="club_sorting" name="club_sorting" type="number" >
                                                     </div>
 
                                                    <div class="input-field col s12">
