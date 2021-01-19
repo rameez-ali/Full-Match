@@ -23,14 +23,27 @@ class SubsPlanController extends Controller
     public $HTTP_NOT_FOUND = 404;
     public function index(GetAllSubsPlanRequest $request)
     {
-
-
         $array = array();
 
-        $plans = $request->handle();
-        dd($plans);
+        $plans = $request->handleApi();
 
-//     messs   return CustomerResource::collection($response);
+        if (!$plans->isEmpty()) {
+
+            foreach ($plans as $k => $v) {
+
+                $array[$k]['id'] = $v->id;
+                $array[$k]['title'] = $v->plan_title;
+                $array[$k]['description'] = $v->plan_Description;
+                $array[$k]['price'] = $v->plan_price;
+                $array[$k]['duration_type'] = $v->duration_type;
+                $array[$k]['duration_value'] = $v->duration_value;
+                $array[$k]['sort_by'] = $v->sort_by;
+                $array[$k]['notify'] = $v->notify;
+            }
+            return response()->json(['success' => true, 'status' => $this->successStatus, 'message' => 'Plans found.', 'data' => $array]);
+        }else{
+            return response()->json(['error' => false, 'status' => $this->HTTP_NOT_FOUND, 'message' => 'No record found.', 'data' => []]);
+        }
     }
 
     /**
