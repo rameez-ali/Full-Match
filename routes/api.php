@@ -1,6 +1,8 @@
 <?php
 
+use App\Http\Controllers\Api\ApiNotificationController;
 use App\Http\Controllers\Api\ApiOrderController;
+use App\Http\Controllers\Api\AuthController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\CustomerController;
@@ -48,6 +50,24 @@ Route::get('/contact', [ContactController::class , 'contact']);
 Route::post('/query', [ContactController::class , 'query']);
 
 Route::get('/forcurrency', [ApiOrderController::class , 'getCurrency']);
+
+Route::get('/notify-off', [ApiNotificationController::class , 'notifiOff']);
+
+//Customer Auth Routes
+Route::group([
+    'prefix' => 'auth'
+], function () {
+    Route::post('login', [AuthController::class , 'login']);
+    Route::post('signup', [AuthController::class , 'signup']);
+
+    Route::group([
+        'middleware' => 'auth:api'
+    ], function() {
+        Route::get('logout', [AuthController::class , 'logout']);
+        Route::get('user', [AuthController::class , 'user']);
+    });
+});
+//Customer Auth Routes
 
 Route::get('/search/{string}', [SearchController::class , 'search']);
 
