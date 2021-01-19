@@ -18,7 +18,30 @@
                                             <div class="card-alert card gradient-45deg-green-teal">
                                     <div class="card-content white-text">
                                         <p>
-                                            <i class="material-icons">check</i>{{ $cataddsuccess }}</p>
+                                            <i class="material-icons"></i>{{ $cataddsuccess }}</p>
+                                    </div>
+                                    <button type="button" class="close white-text" data-dismiss="alert" aria-label="Close">
+                                        <span aria-hidden="true">×</span>
+                                    </button>
+                                </div>
+                                            @endif
+                                            @if ($cateditsuccess = Session::get('cateditsuccess'))
+                                            <div class="card-alert card gradient-45deg-green-teal">
+                                    <div class="card-content white-text">
+                                        <p>
+                                            <i class="material-icons"></i>{{ $cateditsuccess }}</p>
+                                    </div>
+                                    <button type="button" class="close white-text" data-dismiss="alert" aria-label="Close">
+                                        <span aria-hidden="true">×</span>
+                                    </button>
+                                </div>
+                                            @endif
+                                             
+                                            @if ($catdelsuccess = Session::get('catdelsuccess'))
+                                            <div class="card-alert card gradient-45deg-green-teal">
+                                    <div class="card-content white-text">
+                                        <p>
+                                            <i class="material-icons"></i>{{ $catdelsuccess }}</p>
                                     </div>
                                     <button type="button" class="close white-text" data-dismiss="alert" aria-label="Close">
                                         <span aria-hidden="true">×</span>

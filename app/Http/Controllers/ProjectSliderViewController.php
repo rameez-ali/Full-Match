@@ -87,7 +87,7 @@ class ProjectSliderViewController extends Controller
             Slidervideo::create($form_data3);
         } 
 
-        return redirect('slider-form')->with('success', 'Data is successfully deleted');
+        return redirect('slider-form')->with('slideraddsuccess','Slider Added Successfully');
       
      
     }
@@ -192,7 +192,7 @@ class ProjectSliderViewController extends Controller
             Slidervideo::create($form_data3);
             }     
             
-               return redirect('slider-form')->with('success', 'Data is successfully deleted');
+               return redirect('slider-form')->with('slidereditsuccess','Slider Updated Successfully');
 
             }               
 
@@ -232,7 +232,7 @@ class ProjectSliderViewController extends Controller
 
         $data = Slidercategory1::findOrFail($id);
         $data->delete();
-        return redirect('slider-form')->with('success', 'Data is successfully deleted');
+        return redirect('slider-form')->with('sliderdelsuccess','Slider Deleted Successfully');
 
 
 

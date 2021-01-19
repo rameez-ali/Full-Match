@@ -14,7 +14,39 @@
                                     </h4>
                                     <div class="row">
                                         <div class="col s12">
-                                            <h2></h2>
+                                            @if ($slideraddsuccess = Session::get('slideraddsuccess'))
+                                            <div class="card-alert card gradient-45deg-green-teal">
+                                            <div class="card-content white-text">
+                                            <p>
+                                            <i class="material-icons"></i>{{ $slideraddsuccess }}</p>
+                                            </div>
+                                            <button type="button" class="close white-text" data-dismiss="alert" aria-label="Close">
+                                            <span aria-hidden="true">×</span>
+                                           </button>
+                                            </div>
+                                            @endif
+                                            @if ($slidereditsuccess = Session::get('slidereditsuccess'))
+                                            <div class="card-alert card gradient-45deg-green-teal">
+                                            <div class="card-content white-text">
+                                            <p>
+                                            <i class="material-icons"></i>{{ $slidereditsuccess }}</p>
+                                            </div>
+                                            <button type="button" class="close white-text" data-dismiss="alert" aria-label="Close">
+                                            <span aria-hidden="true">×</span>
+                                           </button>
+                                            </div>
+                                            @endif
+                                            @if ($sliderdelsuccess = Session::get('sliderdelsuccess'))
+                                            <div class="card-alert card gradient-45deg-green-teal">
+                                            <div class="card-content white-text">
+                                            <p>
+                                            <i class="material-icons"></i>{{ $sliderdelsuccess }}</p>
+                                            </div>
+                                            <button type="button" class="close white-text" data-dismiss="alert" aria-label="Close">
+                                            <span aria-hidden="true">×</span>
+                                           </button>
+                                            </div>
+                                            @endif
                                             <table id="page-length-option" class="display">
                                                 <thead>
                                                 <tr>
@@ -29,11 +61,11 @@
                                                   <td>{{$slidercategory->slider_name}}</td>
                                                   <td>{{$slidercategory->slider_sorting}}</td>
                                                   <td><form action="{{ route('slider-form.destroy', $slidercategory->id)}}" method="post">
-                                                    <a href="{{ url('slider/'.$slidercategory->id)}}" class="btn btn-primary">Details</a>
-                                                    <a href="{{ route('slider-form.edit',$slidercategory->id)}}" class="btn btn-primary">Edit</a>
+                                                    <a href="{{ url('slider/'.$slidercategory->id)}}" class="dt-button buttons-excel buttons-html5 waves-effect waves-light btn gradient-45deg-purple-deep-orange gradient-shadow">Details</a>
+                                                    <a href="{{ route('slider-form.edit',$slidercategory->id)}}" class="dt-button buttons-excel buttons-html5 waves-effect waves-light btn gradient-45deg-purple-deep-orange gradient-shadow">Edit</a>
                                                      {{ csrf_field() }}
                                                      @method('DELETE')
-                                                     <button class="btn btn-danger" type="submit">Delete</button>
+                                                     <button class="dt-button buttons-excel buttons-html5 waves-effect waves-light btn gradient-45deg-purple-deep-orange gradient-shadow" type="submit">Delete</button>
                                                      </form>
                                                  </td>
                                                   </tr>

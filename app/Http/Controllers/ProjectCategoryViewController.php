@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Model\ProjectCategory;
+use App\Model\Video_genre;
+use App\Model\Category_genre;
+use DB;
 
 class ProjectCategoryViewController extends Controller
 {
@@ -25,7 +28,8 @@ class ProjectCategoryViewController extends Controller
      */
     public function create()
     {
-        return view('admin.category.form');
+        $genres=Video_genre::all();
+        return view('admin.category.form', compact('genres'));
     }
 
     /**
@@ -38,7 +42,8 @@ class ProjectCategoryViewController extends Controller
     {
         $request->validate([
             'category_name'     => 'required',
-            'category_image'     =>  'required|image|max:2048'
+            'category_image'     =>  'required|image|max:2048',
+            'genre'              =>  'required'
         ]);
 
         $image = $request->file('category_image');
@@ -52,6 +57,18 @@ class ProjectCategoryViewController extends Controller
         );
 
         ProjectCategory::create($form_data);
+
+        $id = DB::table('project_categories')->orderBy('id', 'DESC')->value('id');
+
+         foreach($request->genre as $genre){
+                $form_data5 = array(
+                    'category_id'     =>  $id,
+                    'genre_id'     =>   $genre
+                );
+
+                Category_genre::create($form_data5);
+            }
+
         return redirect('category-form')->with('cataddsuccess','Category Added Successfully');
     }
 
@@ -75,7 +92,21 @@ class ProjectCategoryViewController extends Controller
     public function edit($id)
     {
         $category=ProjectCategory::find($id);
-        return view('admin.category.edit',compact('category'));
+
+        $video_genres =  DB::table('video_genres')
+        ->where('category_id', '=', $id)
+        ->join('category_genres', 'category_genres.genre_id', '=', 'video_genres.id')
+        ->select('video_genres.id')
+        ->get();
+
+       $selected_ids3 = [];
+       foreach ($video_genres as $key => $gly) {
+           array_push($selected_ids3, $gly->id);
+       }
+
+        $video_genres=Video_genre::select('id','genre_name')->get();
+
+        return view('admin.category.edit',compact('category','selected_ids3','video_genres'));
     }
 
     /**
@@ -87,13 +118,15 @@ class ProjectCategoryViewController extends Controller
      */
     public function update(Request $request, $id)
     {
+
         $image_name = $request->hidden_image;
         $image = $request->file('category_image');
         if($image != '')
         {
             $request->validate([
                 'category_name'    =>  'required',
-                'image'         =>  'image|max:2048'
+                'image'         =>  'image|max:2048',
+                'genre'         =>   'required'
             ]);
 
             $image_name = rand() . '.' . $image->getClientOriginalExtension();
@@ -102,7 +135,8 @@ class ProjectCategoryViewController extends Controller
         else
         {
             $request->validate([
-                'category_name'    =>  'required'
+                'category_name'    =>  'required',
+                'genre'            => 'required'
             ]);
         }
 
@@ -114,7 +148,20 @@ class ProjectCategoryViewController extends Controller
   
         ProjectCategory::whereId($id)->update($form_data);
 
-        return redirect('category-form')->with('success', 'Data is successfully updated');
+        Category_genre::where('category_id', $id)->forceDelete();
+
+        foreach($request->genre as $genre){
+                $form_data5 = array(
+                    'category_id'     =>  $id,
+                    'genre_id'     =>   $genre
+                );
+
+                Category_genre::create($form_data5);
+            }
+
+        
+
+        return redirect('category-form')->with('cateditsuccess','Category Updated Successfully');
     }
 
     /**
@@ -129,7 +176,7 @@ class ProjectCategoryViewController extends Controller
         $data = ProjectCategory::findOrFail($id);
         $data->delete();
         $request->session()->flash('message', 'Successfully deleted the task!');
-        return redirect('category-form');
+        return redirect('category-form')->with('catdelsuccess','Category Deleted Successfully');
 
 
     }

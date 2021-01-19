@@ -64,7 +64,7 @@ class ProjectPlayerViewController extends Controller
 
         Player::create($form_data2);
 
-        return redirect('player-form')->with('success', 'Data is successfully deleted');
+        return redirect('player-form')->with('playeraddsuccess','Player Added Successfully');
         
        
     }
@@ -143,7 +143,7 @@ class ProjectPlayerViewController extends Controller
   
         Player::whereId($id)->update($form_data);
 
-        return redirect('player-form')->with('success', 'Data is successfully updated');
+        return redirect('player-form')->with('playereditsuccess','Player Updated Successfully');
     }
 
     /**
@@ -158,7 +158,7 @@ class ProjectPlayerViewController extends Controller
 
         $data = Player::findOrFail($id);
         $data->delete();
-        return redirect('player-form')->with('success', 'Data is successfully deleted');
+        return redirect('player-form')->with('playerdelsuccess','Player Deleted Successfully');
 
 
     }

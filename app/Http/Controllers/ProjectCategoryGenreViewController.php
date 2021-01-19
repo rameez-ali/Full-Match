@@ -50,7 +50,7 @@ class ProjectCategoryGenreViewController extends Controller
         );
 
         Video_genre::create($form_data);
-       return redirect('genre-form')->with('success', 'Data is successfully Added');
+       return redirect('genre-form')->with('genreaddsuccess','Video Genre Added Successfully');
     }
 
     /**
@@ -94,7 +94,7 @@ class ProjectCategoryGenreViewController extends Controller
 
         Video_genre::whereId($id)->update($form_data);
 
-        return redirect('genre-form')->with('success', 'Data is successfully updated');
+        return redirect('genre-form')->with('genreeditsuccess','Video Genre Updated Successfully');
     }
 
     /**
@@ -109,7 +109,7 @@ class ProjectCategoryGenreViewController extends Controller
 
         $data = Video_genre::findOrFail($id);
         $data->delete();
-        return redirect('genre-form')->with('success', 'Data is successfully deleted');
+        return redirect('genre-form')->with('genredelsuccess','Video Genre Deleted Successfully');
 
 
     }

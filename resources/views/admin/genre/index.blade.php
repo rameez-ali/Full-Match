@@ -14,16 +14,38 @@
                                     </h4>
                                     <div class="row">
                                         <div class="col s12">
-                                            @if ($cataddsuccess = Session::get('cataddsuccess'))
+                                             @if ($genreaddsuccess = Session::get('genreaddsuccess'))
                                             <div class="card-alert card gradient-45deg-green-teal">
-                                    <div class="card-content white-text">
-                                        <p>
-                                            <i class="material-icons">check</i>{{ $cataddsuccess }}</p>
-                                    </div>
-                                    <button type="button" class="close white-text" data-dismiss="alert" aria-label="Close">
-                                        <span aria-hidden="true">×</span>
-                                    </button>
-                                </div>
+                                            <div class="card-content white-text">
+                                            <p>
+                                            <i class="material-icons"></i>{{ $genreaddsuccess }}</p>
+                                            </div>
+                                            <button type="button" class="close white-text" data-dismiss="alert" aria-label="Close">
+                                            <span aria-hidden="true">×</span>
+                                           </button>
+                                            </div>
+                                            @endif
+                                            @if ($genreeditsuccess = Session::get('genreeditsuccess'))
+                                            <div class="card-alert card gradient-45deg-green-teal">
+                                            <div class="card-content white-text">
+                                            <p>
+                                            <i class="material-icons"></i>{{ $genreeditsuccess }}</p>
+                                            </div>
+                                            <button type="button" class="close white-text" data-dismiss="alert" aria-label="Close">
+                                            <span aria-hidden="true">×</span>
+                                           </button>
+                                            </div>
+                                            @endif
+                                            @if ($genredelsuccess = Session::get('genredelsuccess'))
+                                            <div class="card-alert card gradient-45deg-green-teal">
+                                            <div class="card-content white-text">
+                                            <p>
+                                            <i class="material-icons"></i>{{ $genredelsuccess }}</p>
+                                            </div>
+                                            <button type="button" class="close white-text" data-dismiss="alert" aria-label="Close">
+                                            <span aria-hidden="true">×</span>
+                                           </button>
+                                            </div>
                                             @endif
                                             <table id="page-length-option" class="display">
                                                 <thead>
