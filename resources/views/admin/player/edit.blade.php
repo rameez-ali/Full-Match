@@ -21,7 +21,7 @@
                                         <div class="row">
                                           <div class="input-field col s12">
                                           <p for="player_name">Add Player Name * </p>
-                                          <input type="text" name="player_name" Placeholder="Player Name" value="{{ $player->player_name }}" class="form-control input-lg"  required data-error=".errorTxt1" />
+                                          <input type="text" name="player_name" value="{{ $player->player_name }}" class="form-control input-lg"  required data-error=".errorTxt1" />
                                           <small class="errorTxt1"></small>
                                           @error('player_name')
                                           <span class="invalid-feedback" role="alert">
@@ -32,7 +32,7 @@
 
                                           <div class="input-field col s12">
                                           <p for="player_description"> Add Player Description * </p>
-                                          <input type="text" name="player_description" Placeholder="Description" value="{{ $player->player_description }}" class="form-control input-lg"  required data-error=".errorTxt2" />
+                                          <input type="text" name="player_description" value="{{ $player->player_description }}" class="form-control input-lg"  required data-error=".errorTxt2" />
                                           <small class="errorTxt2"></small>
                                           @error('player_description')
                                           <span class="invalid-feedback" role="alert">
@@ -68,7 +68,7 @@
 
                                           <div class="input-field col s12">
                                           <p for="category_image"> Add Player Sorting </p>
-                                          <input type="text" name="player_sorting" Placeholder="Player sorting" value="{{ $player->player_sorting }}" class="form-control input-lg" />
+                                          <input type="number" name="player_sorting"  value="{{ $player->player_sorting }}" class="form-control input-lg" />
                                           </div>
                                        
                                           <div class="input-field col s12">

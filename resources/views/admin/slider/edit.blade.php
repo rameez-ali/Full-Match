@@ -48,7 +48,7 @@
                                        <div class="form-group">
                                        <label class="col-md-4 text-right">Add Slider Sorting * </label>
                                        <div class="col-md-8">
-                                       <input type="text" name="slider_sorting" value="{{ $slider->slider_sorting }}" class="form-control input-lg"  required data-error=".errorTxt3"/>
+                                       <input type="number" name="slider_sorting" value="{{ $slider->slider_sorting }}" class="form-control input-lg"  required data-error=".errorTxt3"/>
                                        <small class="errorTxt3"></small>
                                        @error('slider_sorting')
                                        <span class="invalid-feedback" role="alert">

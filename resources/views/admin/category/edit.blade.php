@@ -55,8 +55,8 @@
                                        
                                      
                                          <div class="input-field col s12">
-                                         <label for="category_name">Add Category Sorting </label>
-                                         <input type="text" name="category_sorting" value="{{ $category->category_sorting }}"  class="form-control input-lg" />
+                                         <label for="category_sorting">Add Category Sorting </label>
+                                         <input type="number" name="category_sorting" value="{{ $category->category_sorting }}"  class="form-control input-lg" />
                                          </div>
                                        
                                           <div class="input-field col s12">

@@ -63,7 +63,7 @@ option {margin: 10px;}
 
                                         <div class="form-group">
                                           <label for="exampleInputEmail1">Enter Slider Sorting * </label>
-                                          <input type="text" name="slider_sorting" class="form-control input-lg" required/>
+                                          <input type="number" name="slider_sorting" class="form-control input-lg" required/>
                                           <small class="errorTxt1"></small>
                                           @error('slider_sorting')
                                           <span class="invalid-feedback" role="alert">

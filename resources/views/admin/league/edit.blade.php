@@ -59,7 +59,7 @@
 
                                           <div class="input-field col s12">
                                           <p for="league_sorting">Add League Sorting  </p>
-                                          <input type="text" name="league_sorting" value="{{ $league->league_sorting }}" class="form-control input-lg" />
+                                          <input type="number" name="league_sorting" value="{{ $league->league_sorting }}" class="form-control input-lg" />
                                           </div>
 
                                          <div class="input-field col s12">

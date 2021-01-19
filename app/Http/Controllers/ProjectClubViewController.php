@@ -102,7 +102,8 @@ class ProjectClubViewController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $image_name1 = $request->hidden_image1;
+        
+       $image_name1 = $request->hidden_image1;
         $image_name2 = $request->hidden_image2;
 
         $image1 = $request->file('club_banner');
@@ -114,7 +115,7 @@ class ProjectClubViewController extends Controller
                 'club_name'    =>  'required',
                 'club_description'    =>  'required',
                 'image1'         =>  'image|max:2048',
-                'image2'         =>  'image|max:2048'            
+                'image2'         =>  'image|max:2048'
             ]);
 
             $image_name1 = rand() . '.' . $image1->getClientOriginalExtension();
@@ -122,27 +123,31 @@ class ProjectClubViewController extends Controller
 
             $image_name2 = rand() . '.' . $image2->getClientOriginalExtension();
             $image2->move(public_path('app-assets/images/club'), $image_name2);
-            echo $image2;
+
         }
         else
         {
             $request->validate([
                 'club_name'    =>  'required',
+                'hidden_image1'    =>  'required',
+                'hidden_image2'    =>  'required',
                 'club_description'    =>  'required'
             ]);
         }
 
-         $form_data = array(
-             'club_name'       =>   $request->club_name,
-             'club_description'       =>   $request->club_description,
-             'club_banner'            =>   $image_name1,
-             'club_logo'            =>   $image_name2,
-             'club_sorting'            =>   $request->club_sorting           
-             );
+        $form_data = array(
+            'club_name'       =>   $request->club_name,
+            'club_description'       =>   $request->club_description,
+            'club_banner'          =>   $image_name1,
+            'club_logo'   =>   $image_name2,
+            'club_sorting'         =>  $request->club_sorting
+        );
+  
+        Club::whereId($id)->update($form_data);
 
-         Club::whereId($id)->update($form_data);
+        return redirect('club-form')->with('clubeditsuccess','Club Updated Successfully');
 
-         return redirect('club-form')->with('clubeditsuccess','Club Updated Successfully');
+     //  return redirect('club-form')->with('clubeditsuccess','Club Updated Successfully');
     }
 
     /**

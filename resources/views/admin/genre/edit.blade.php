@@ -32,7 +32,7 @@
                                        
                                            <div class="input-field col s12">
                                            <label for="category_name">Add Genre Sorting </label>
-                                           <input type="text" name="genre_sorting" value="{{ $genre->genre_sorting }}"  class="form-control input-lg" />
+                                           <input type="number" name="genre_sorting" value="{{ $genre->genre_sorting }}"  class="form-control input-lg" />
                                             </div>
                                        
                                             <div class="input-field col s12">

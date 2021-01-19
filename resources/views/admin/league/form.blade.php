@@ -69,7 +69,7 @@
 
                                       <div class="input-field col s12">
                                       <p for="league_description">Add League Sorting</p>
-                                      <input type="text" name="league_sorting" placeholder="League Sorting" class="form-control input-lg"></textarea>
+                                      <input type="number" name="league_sorting" placeholder="League Sorting" class="form-control input-lg"></textarea>
                                       </div>
 
                                          

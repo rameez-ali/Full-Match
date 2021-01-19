@@ -106,7 +106,6 @@ class ProjectPlayerViewController extends Controller
 
         $image1 = $request->file('player_banner');
         $image2 = $request->file('player_profile_image');
-        echo $image1;
 
         if($image1 != '' || $image2 != '')
         {
@@ -129,6 +128,8 @@ class ProjectPlayerViewController extends Controller
         {
             $request->validate([
                 'player_name'    =>  'required',
+                'hidden_image1'    =>  'required',
+                'hidden_image2'    =>  'required',
                 'player_description'    =>  'required'
             ]);
         }

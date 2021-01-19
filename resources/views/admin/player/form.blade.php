@@ -67,7 +67,7 @@
 
                                                     <div class="input-field col s12">
                                                     <p for="player_sorting">Add Player Sorting * </p>
-                                                    <input id="player_sorting" name="player_sorting" type="text" >
+                                                    <input id="player_sorting" name="player_sorting" type="number" >
                                                     </div>
                  
                 

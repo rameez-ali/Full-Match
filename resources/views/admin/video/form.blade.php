@@ -37,7 +37,7 @@
                                               </div>
 
                                               <div class="input-field col s12">
-                                              <p for="video_link">Add Video Link * </p>
+                                              <p for="video_link">Video Link on Vimeo * </p>
                                               <input id="video_link" name="video_link" type="text"  required data-error=".errorTxt2">
                                               <small class="errorTxt2"></small>
                                               @error('video_link')
@@ -66,15 +66,16 @@
 
                             
                                               <div class="input-field col s12">
-                                              <label>
-                                              <input type="checkbox" name="notify_user" id="customer-status" />
-                                               <span for="customer-status" >Notify User</span>
-                                               </label><br><br>
-                                               </div>
+                                              <p for="popularsearches"> Notify User </p>
+                                              <select name="notify_user" class="form-control" style="width:250px">
+                                              <option value="1">Yes</option>
+                                              <option value="0">No</option>
+                                              </select>
+                                              </div>
 
                                               <div class="input-field col s12">
                                               <p for="video_sorting">Video Sorting </p>
-                                              <input type="text" id="video_sorting" name="video_sorting" class="form-control input-lg" />
+                                              <input type="number" id="video_sorting" name="video_sorting" class="form-control input-lg" />
                                               </div>
 
 

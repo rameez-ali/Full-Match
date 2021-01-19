@@ -35,7 +35,7 @@
                                            </div>
 
                                            <div class="input-field col s12">
-                                           <p for="video_link">Add Video Link * </p>
+                                           <p for="video_link">Video Link on Vimeo * </p>
                                            <input type="text" name="video_link" value="{{ $video->video_link }}" class="form-control input-lg" required data-error=".errorTxt2" />
                                            <small class="errorTxt2"></small>
                                            @error('video_link')
@@ -65,8 +65,8 @@
                             
                                           
                                            <div class="input-field col s12">
-                                           <p for="category_image"> Add Video Sorting * </p>
-                                           <input type="text" name="video_sorting" value="{{$video->video_sorting}}" class="form-control input-lg" />
+                                           <p for="category_image"> Add Video Sorting </p>
+                                           <input type="number" name="video_sorting" value="{{$video->video_sorting}}" class="form-control input-lg" />
                                            </div>
 
 
