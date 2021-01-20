@@ -14,7 +14,39 @@
                                     </h4>
                                     <div class="row">
                                         <div class="col s12">
-                                            <h2></h2>
+                                            @if ($advbanneraddsuccess = Session::get('advbanneraddsuccess'))
+                                                <div class="card-alert card gradient-45deg-green-teal">
+                                                    <div class="card-content white-text">
+                                                        <p>
+                                                            <i class="material-icons"></i>{{ $advbanneraddsuccess }}</p>
+                                                    </div>
+                                                    <button type="button" class="close white-text" data-dismiss="alert" aria-label="Close">
+                                                        <span aria-hidden="true">×</span>
+                                                    </button>
+                                                </div>
+                                            @endif
+                                            @if ($advbannereditsuccess = Session::get('advbannereditsuccess'))
+                                                <div class="card-alert card gradient-45deg-green-teal">
+                                                    <div class="card-content white-text">
+                                                        <p>
+                                                            <i class="material-icons"></i>{{ $advbannereditsuccess }}</p>
+                                                    </div>
+                                                    <button type="button" class="close white-text" data-dismiss="alert" aria-label="Close">
+                                                        <span aria-hidden="true">×</span>
+                                                    </button>
+                                                </div>
+                                            @endif
+                                            @if ($advbannerdelsuccess = Session::get('advbannerdelsuccess'))
+                                                <div class="card-alert card gradient-45deg-green-teal">
+                                                    <div class="card-content white-text">
+                                                        <p>
+                                                            <i class="material-icons"></i>{{ $advbannerdelsuccess }}</p>
+                                                    </div>
+                                                    <button type="button" class="close white-text" data-dismiss="alert" aria-label="Close">
+                                                        <span aria-hidden="true">×</span>
+                                                    </button>
+                                                </div>
+                                            @endif
                                             <table id="page-length-option" class="display">
                                                 <thead>
                                                 <tr>
@@ -28,14 +60,14 @@
                                                   @foreach($Adv_banner as $adv_banner)
                                                   <tr>
                                                   <td>{{$adv_banner->video_title}}</td>
-                                                  <td><img src="{{ asset('app-assets/images/banner/'.$adv_banner->video_banner)}}" style="width:50px;height:50px;" /></td>
+                                                  <td><img src="{{ asset('app-assets/images/advbanner/'.$adv_banner->video_banner)}}" style="width:50px;height:50px;" /></td>
                                                   <td>{{$adv_banner->video_link}}</td>
                                                    <td><form action="{{ route('banner-form.destroy', $adv_banner->id)}}" method="post">
                                                     <a href="{{ url('adv_banner/'.$adv_banner->id)}}" class="dt-button buttons-excel buttons-html5 waves-effect waves-light btn gradient-45deg-purple-deep-orange gradient-shadow">Details</a>
                                                     <a href="{{ route('banner-form.edit',$adv_banner->id)}}" class="dt-button buttons-excel buttons-html5 waves-effect waves-light btn gradient-45deg-purple-deep-orange gradient-shadow">Edit</a>
                                                      {{ csrf_field() }}
                                                      @method('DELETE')
-                                                     <button class="btn btn-danger" type="submit">Delete</button>
+                                                     <button onclick="return window.confirm('Are you sure you want to delete this record?');" class="dt-button buttons-excel buttons-html5 waves-effect waves-light btn gradient-45deg-purple-deep-orange gradient-shadow" type="submit">Delete</button>
                                                      </form>
                                                  </td>
                                                   </tr>

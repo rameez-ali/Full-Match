@@ -50,7 +50,7 @@ option {margin: 10px;}
                                             </select>
                                             </div>
 
-                                            
+
 
                                         <div class="form-group">
                                            <label for="state">Select Videos * </label>
@@ -58,7 +58,7 @@ option {margin: 10px;}
                                            </select>
                                         </div>
 
-                                        
+
 
 
                                         <div class="form-group">
@@ -134,29 +134,6 @@ option {margin: 10px;}
     });
      </script>
 
-     
-      <script type="text/javascript">
-      $(document).ready(function() {
-        $(".max-length").select2({
-    dropdownAutoWidth: true,
-    width: '100%',
-    maximumSelectionLength: 5,
-    placeholder: "You can select only 5 Videos"
-     });
-           
-         }
-
-
-
-       });
-        
-     });
-     </script>
-
-    
-
-     
-    
   </body>
 </html>
 
