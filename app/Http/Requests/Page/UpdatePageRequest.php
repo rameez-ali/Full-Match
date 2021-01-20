@@ -26,7 +26,7 @@ class UpdatePageRequest extends FormRequest
     {
         return [
             'name' => ['required', 'string'],
-            'slug' => ['required', 'string', 'unique:pages'],
+            'slug' => ['required', 'string'],
         ];
     }
     public function handle()

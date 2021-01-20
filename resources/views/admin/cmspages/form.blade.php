@@ -43,9 +43,7 @@
                                                 </div>
 
                                                 <div class="input-field col s12">
-                                                    <textarea name="content" placeholder="{{ __('customer.decs') }}" id="page-content" >
-                                                        {{ old('decs',$pages->content) }}
-                                                    </textarea>
+                                                    <textarea name="content" id="content" value="{{old('decs',$pages->content) }}" class="materialize-textarea validate">{{ old('decs',$pages->content) }}</textarea>
                                                     <label for="page-content" class="active">{{ __('customer.decs') }}</label>
 
                                                     @error('decs')
@@ -77,12 +75,6 @@
 @endsection
 @section('scripts')
     <script src={{ asset('app-assets/vendors/jquery-validation/jquery.validate.min.js') }}></script>
-    <script src="https://cdn.ckeditor.com/4.10.1/standard/ckeditor.js"></script>
-    <script>
-        $(document).ready(function() {
-            CKEDITOR.replace( document.getElementById('page-content'), { language : 'en' } );
-        });
-    </script>
     <script>
         /*
      * Form Validation
@@ -106,6 +98,10 @@
                     slug: {
                         required: true,
                     },
+                    content: {
+                        required: true,
+                        minlength: 10
+                    },
                 },
                 //For custom messages
                 messages: {
@@ -114,6 +110,10 @@
                     },
                     slug: {
                         required: "Enter Slug"
+                    },
+                    content: {
+                        required: "Enter Description",
+                        minlength: "Enter at least 10 characters"
                     },
                     curl: "Enter your website",
                 },
