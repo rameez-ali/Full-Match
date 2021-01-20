@@ -31,4 +31,7 @@ class GetAllSubsPlanRequest extends FormRequest
     public function handle(){
         return Subs_plan::all();
     }
+    public function handleApi(){
+        return Subs_plan::where('status', 1)->get();
+    }
 }
