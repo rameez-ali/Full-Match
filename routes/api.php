@@ -52,7 +52,6 @@ Route::post('/query', [ContactController::class , 'query']);
 
 Route::get('/forcurrency', [ApiOrderController::class , 'getCurrency']);
 
-Route::get('/notify-off', [ApiNotificationController::class , 'notifiOff']);
 
 Route::get('/page/{id}', [PageController::class , 'cmsPage']);
 
@@ -64,8 +63,12 @@ Route::group([
     Route::post('signup', [AuthController::class , 'signup']);
 
     Route::get('logout', [AuthController::class , 'logout']);
-    Route::get('user', [AuthController::class , 'user']);
 
+});
+
+Route::group(['middleware' => 'auth:api'], function(){
+    Route::get('user', [AuthController::class , 'user']);
+    Route::get('/notify-off', [ApiNotificationController::class , 'notifiOff']);
 });
 //Customer Auth Routes
 
