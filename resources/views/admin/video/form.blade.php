@@ -15,7 +15,7 @@
                                     <div class="row">
                                         <div class="col s12">
                                             <h2></h2>
-                                            <form method="post" action="{{route('video-form.store')}}" enctype="multipart/form-data">
+                                            <form method="post" class="formValidate" id="formValidate" action="{{route('video-form.store')}}" enctype="multipart/form-data">
                                             @csrf
                                           
                                            <div class="row">
@@ -38,7 +38,7 @@
 
                                               <div class="input-field col s12">
                                               <p for="video_link">Video Link on Vimeo * </p>
-                                              <input id="video_link" name="video_link" type="text"  required data-error=".errorTxt2">
+                                              <input id="video_link" name="video_link" type="url"  required data-error=".errorTxt2">
                                               <small class="errorTxt2"></small>
                                               @error('video_link')
                                               <span class="invalid-feedback" role="alert">
@@ -51,11 +51,11 @@
                                               <p for="video_sorting">Video Duration * </p>
                                               <div class="input-field col s1">
                                               <p for="hour">Hour </p>
-                                              <input type="number" id="hour" name="hour"  min="0" class="form-control input-lg" required/>
+                                              <input type="number" id="hour" name="hour"  min="0" class="form-control input-lg" />
                                               </div>
                                               <div class="input-field col s1">
                                               <p for="Minutes">Minutes </p>
-                                              <input type="number" id="minute" name="minute"  min="0" class="form-control input-lg" required />
+                                              <input type="number" id="minute" name="minute"  min="0" class="form-control input-lg" />
                                               </div>
                                               <div class="input-field col s1">
                                               <p for="second">Second </p>
@@ -75,7 +75,7 @@
 
                                               <div class="input-field col s12">
                                               <p for="video_sorting">Video Sorting </p>
-                                              <input type="number" id="video_sorting" name="video_sorting" class="form-control input-lg" />
+                                              <input type="number" id="video_sorting" name="video_sorting" min="1" class="form-control input-lg" />
                                               </div>
 
 
@@ -99,15 +99,14 @@
 
                                               <div class="input-field col s12">
                                               <p for="Category_id"> Select Category * </p>
-                                              <select  class="browser-default custom-select" name="Category_id" required data-error=".errorTxt5">                                
+                                              <select  class="form-control" name="Category_id" required>                                
                                               <option selected> </option>
                                               @foreach($category as $category)
                                               <option value="{{$category->id}}">{{$category->category_name}}</option>
                                               @endforeach
-                                              <small class="errorTxt5"></small>
-                                              @error('video_img')
+                                              @error('Category_id')
                                               <span class="invalid-feedback" role="alert">
-                                               <strong>{{ $message }}</strong>
+                                               <strong class="error">{{ $message }}</strong>
                                                </span>
                                                @enderror
                                               </select>
@@ -132,17 +131,16 @@
                            
                                               <div class="input-field col s12">
                                               <p for="genre"> Select Video Genre *</p>
-                                              <select class="selectpicker" multiple data-live-search="true" name="genre[]" >
+                                              <select class="selectpicker" multiple data-live-search="true" name="genre[]" required >
                                               @foreach($videogenres as $videogenre )
                                               <option value="{{$videogenre->id}}">{{$videogenre->genre_name}}</option>
                                               @endforeach
-                                              <small class="errorTxt6"></small>
-                                              @error('genre[]')
+                                              </select>
+                                              @error('genre')
                                               <span class="invalid-feedback" role="alert">
-                                               <strong>{{ $message }}</strong>
+                                               <strong class="error">{{ $message }}</strong>
                                                </span>
                                                @enderror
-                                              </select>
                                                </div>
                             
                                               <div class="input-field col s12">
@@ -238,11 +236,53 @@
 
      
      </script> 
- <script>
- $('#phone-input').formatter({
-        'pattern': '({{99}}-{{9999}}-{{9999}})',
-        'persistent': true
-      });
- </script>
+ 
+  <script>
+    /*
+ * Form Validation
+ */
+    $(function () {
+
+        $('select[required]').css({
+            position: 'absolute',
+            display: 'inline',
+            height: 0,
+            padding: 0,
+            border: '1px solid rgba(255,255,255,0)',
+            width: 0
+        });
+
+        $("#formValidate").validate({
+            rules: {
+                genre: {
+                    required: true,
+                    minlength: 5 ,
+                },
+                tnc_select: "required",
+            },
+            //For custom messages
+            messages: {
+                genre: {
+                    required: "Enter a username",
+                    minlength: "Enter at least 5 characters"
+                },
+                curl: "Enter your website",
+            },
+            errorElement: 'div',
+            errorPlacement: function (error, element) {
+                var placement = $(element).data('error');
+                if (placement) {
+                    $(placement).append(error)
+                } else {
+                    error.insertAfter(element);
+                }
+            }
+        });
+    });
+</script>
+
+
 @endsection
+
+
 

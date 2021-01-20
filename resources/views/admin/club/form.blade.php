@@ -64,7 +64,7 @@
 
                                                    <div class="input-field col s12">
                                                     <p for="club_sorting">Add Club Sorting </p>
-                                                    <input id="club_sorting" name="club_sorting" type="number" >
+                                                    <input id="club_sorting" name="club_sorting" type="number" min="1">
                                                     </div>
 
                                                    <div class="input-field col s12">

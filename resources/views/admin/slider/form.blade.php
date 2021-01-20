@@ -54,7 +54,7 @@ option {margin: 10px;}
 
                                         <div class="form-group">
                                            <label for="state">Select Videos * </label>
-                                           <select name="state[]" id="testbox"  class="select2 browser-default" multiple="multiple" style="width:250px" required>
+                                           <select name="state[]" id="testbox"  class="max-length browser-default" multiple="multiple" style="width:250px" required>
                                            </select>
                                         </div>
 
@@ -63,7 +63,7 @@ option {margin: 10px;}
 
                                         <div class="form-group">
                                           <label for="exampleInputEmail1">Enter Slider Sorting * </label>
-                                          <input type="number" name="slider_sorting" class="form-control input-lg" required/>
+                                          <input type="number" name="slider_sorting" min="1" class="form-control input-lg" required/>
                                           <small class="errorTxt1"></small>
                                           @error('slider_sorting')
                                           <span class="invalid-feedback" role="alert">
@@ -90,10 +90,6 @@ option {margin: 10px;}
     </div>
   </div>
 
-  $(".select2").select2({
-    dropdownAutoWidth: true,
-    width: '100%'
-    });
 
 <script type="text/javascript">
 
@@ -141,18 +137,23 @@ option {margin: 10px;}
      
       <script type="text/javascript">
       $(document).ready(function() {
-        var last_valid_selection = null;
-        $('#testbox').change(function(event) {
-         if ($(this).val().length > 5) {
-           alert('You can only choose 5 videos maximum!');
-           $(this).val(last_valid_selection);
-         } else {
-           last_valid_selection = $(this).val();
+        $(".max-length").select2({
+    dropdownAutoWidth: true,
+    width: '100%',
+    maximumSelectionLength: 5,
+    placeholder: "You can select only 5 Videos"
+     });
+           
          }
+
+
+
        });
         
      });
      </script>
+
+    
 
      
     

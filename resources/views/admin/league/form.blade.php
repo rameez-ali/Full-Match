@@ -69,7 +69,7 @@
 
                                       <div class="input-field col s12">
                                       <p for="league_description">Add League Sorting</p>
-                                      <input type="number" name="league_sorting" placeholder="League Sorting" class="form-control input-lg"></textarea>
+                                      <input type="number" name="league_sorting" placeholder="League Sorting" min="1" class="form-control input-lg"></textarea>
                                       </div>
 
                                          
@@ -82,7 +82,7 @@
                                      
                                       <tr>  
                                       <td><input type="text" name="addmore[0][name]" Value="Season1" class="form-control" /></td>  
-                                      <td><input type="text" name="addmore[0][qty]" placeholder="Enter Season URL" class="form-control" /></td>  
+                                      <td><input type="url" name="addmore[0][qty]" placeholder="Enter Season URL" class="form-control" /></td>  
                                       <td><button type="button" name="add" id="add" class="btn btn-success">Add More Season</button></td>  
                                       </tr>  
                                       </table>
@@ -113,7 +113,7 @@
    var i = 1;
     $("#add").click(function(){
         i++;
-        $("#dynamicTable").append('<tr><td><input type="text" value="Season'+i+'" name="addmore['+i+'][name]" placeholder="Enter Ss['+i+']" class="form-control" /></td><td><input type="text" name="addmore['+i+'][qty]" placeholder="Enter Season URL" class="form-control" /></td><td><button type="button" class="btn btn-danger remove-tr">Remove</button></td></tr>');
+        $("#dynamicTable").append('<tr><td><input type="text" value="Season'+i+'" name="addmore['+i+'][name]" placeholder="Enter Ss['+i+']" class="form-control" /></td><td><input type="url" name="addmore['+i+'][qty]" placeholder="Enter Season URL" class="form-control" /></td><td><button type="button" class="btn btn-danger remove-tr">Remove</button></td></tr>');
 
     });
     $(document).on('click', '.remove-tr', function(){  
