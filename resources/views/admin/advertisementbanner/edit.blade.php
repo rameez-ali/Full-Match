@@ -20,15 +20,15 @@
 
                                         <div class="row">
                                             <div class="input-field col s12">
-                                            <p for="category_image">Edit Banner Video *  </p>
+                                            <p for="category_image">Edit Banner Title *  </p>
                                             <input type="text" name="video_title" value="{{ $slider->video_title }}" class="form-control input-lg" required />
                                             </div>
 
-                                            <div class="form-group">
-                                            <label class="col-md-4 text-right">Edit Video Banner</label>
-                                            <div class="col-md-8">
-                                            <input type="file" name="video_banner" class="dropify mt-3"  value="{{ $slider->video_banner }}"  data-default-file="{{ asset('app-assets/images/banner/'.$slider->video_banner)}}" data-max-file-size="10M" data-allowed-file-extensions="png jpg jpeg"/>
-                                            </div>
+                                            <div class="input-field col s12">
+                                                <p for="category_image">Edit Video Banner  </p>
+
+                                            <input type="file" name="video_banner" class="dropify mt-3"  value="{{ $slider->video_banner }}"  data-default-file="{{ asset('app-assets/images/advbanner/'.$slider->video_banner)}}" data-max-file-size="10M" data-allowed-file-extensions="png jpg jpeg"/>
+
                                              </div>
 
                                             <div class="input-field col s12">
@@ -37,7 +37,7 @@
                                             </div>
 
 
-                                           <div name="hidden-panel1" id="hidden-panel1">
+                                            <div class="input-field col s12">
                                            <label><strong>Edit Category </strong></label><br/>
                                            <select name="category">
                                            <option selected> </option>
@@ -47,7 +47,7 @@
                                            </select>
                                            </div>
 
-                                          <div name="hidden-panel1" id="hidden-panel1">
+                                            <div class="input-field col s12">
                                           <label><strong>Edit Genre </strong></label><br/>
                                           <select name="genre">
                                           <option selected> </option>
@@ -57,7 +57,7 @@
                                           </select>
                                           </div>
 
-                                          <div name="hidden-panel1" id="hidden-panel1">
+                                            <div class="input-field col s12">
                                           <label><strong>Edit Videos </strong></label><br/>
                                           <select class="selectpicker" multiple data-live-search="true" name="video[]">
                                           @foreach($video1 as $video )

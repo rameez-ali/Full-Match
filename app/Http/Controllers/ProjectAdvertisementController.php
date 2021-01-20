@@ -78,14 +78,14 @@ class ProjectAdvertisementController extends Controller
 
        }
        else{
-          $image = $request->file('video_banner');
-          $new_name = rand() . '.' . $image->getClientOriginalExtension();
-          $image->move(public_path('app-assets/images/banner'), $new_name);
+           $image = $request->file('video_banner');
+           $new_name = rand() . '.' . $image->getClientOriginalExtension();
+           $image->move(public_path('app-assets/images/advbanner'), $new_name);
 
            $form_data2 = array(
             'video_title'    =>   $request->video_title,
             'video_link'    =>   $request->video_link,
-            'video_banner'    =>   $image,
+            'video_banner'    =>   $new_name,
             'category_id'    =>   $request->country,
             'genre_id'    =>   $request->genre,
             'homepage'    =>   $request->homepage
@@ -205,12 +205,12 @@ class ProjectAdvertisementController extends Controller
        else{
           $image = $request->file('video_banner');
           $new_name = rand() . '.' . $image->getClientOriginalExtension();
-          $image->move(public_path('app-assets/images/banner'), $new_name);
+          $image->move(public_path('app-assets/images/advgit statbanner'), $new_name);
 
            $form_data2 = array(
             'video_title'    =>   $request->video_title,
             'video_link'    =>   $request->video_link,
-            'video_banner'    =>   $image,
+            'video_banner'    =>   $new_name,
             'category_id'    =>   $request->country,
             'genre_id'    =>   $request->genre,
             'homepage'    =>   $request->homepage
