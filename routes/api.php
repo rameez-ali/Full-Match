@@ -3,6 +3,7 @@
 use App\Http\Controllers\Api\ApiNotificationController;
 use App\Http\Controllers\Api\ApiOrderController;
 use App\Http\Controllers\Api\AuthController;
+use App\Http\Controllers\Api\PageController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\CustomerController;
@@ -52,6 +53,8 @@ Route::post('/query', [ContactController::class , 'query']);
 Route::get('/forcurrency', [ApiOrderController::class , 'getCurrency']);
 
 Route::get('/notify-off', [ApiNotificationController::class , 'notifiOff']);
+
+Route::get('/page/{id}', [PageController::class , 'cmsPage']);
 
 //Customer Auth Routes
 Route::group([

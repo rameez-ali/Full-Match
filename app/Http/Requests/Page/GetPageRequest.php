@@ -33,4 +33,9 @@ class GetPageRequest extends FormRequest
         return Page::findOrNew($this->id);
 
     }
+    public function handleApi(){
+
+        return Page::find($this->id);
+
+    }
 }
