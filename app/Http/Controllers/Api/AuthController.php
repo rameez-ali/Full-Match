@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\customer;
 use App\Http\Controllers\Controller;
 use App\User;
 use Carbon\Carbon;
@@ -19,19 +20,33 @@ class AuthController extends Controller
      * @param  [string] password_confirmation
      * @return [string] message
      */
+    public $successStatus = 200;
+    public $HTTP_FORBIDDEN = 403;
+    public $HTTP_NOT_FOUND = 404;
+
     public function signup(Request $request)
     {
         $request->validate([
             'name' => 'required|string',
+            'phone' => 'required |string | min:8',
             'email' => 'required|string|email|unique:users',
-            'password' => 'required|string|confirmed'
+            'password' => 'required|string|confirmed',
+            'password_confirmation' => 'required',
         ]);
         $user = new User([
             'name' => $request->name,
+            'phone' => $request->phone,
             'email' => $request->email,
             'password' => bcrypt($request->password)
         ]);
         $user->save();
+
+        $customer = new customer([
+        'user_id' => $user->id,
+        'name' => $request->name,
+        'email'=> $request->email,
+        ]);
+        $customer->save();
         return response()->json([
             'message' => 'Successfully created user!'
         ], 201);
@@ -70,6 +85,7 @@ class AuthController extends Controller
         return response()->json([
             'access_token' => $tokenResult->accessToken,
             'token_type' => 'Bearer',
+            'mesaage' => $this->successStatus,
             'auth_info' => $user,
             'expires_at' => Carbon::parse(
                 $tokenResult->token->expires_at
