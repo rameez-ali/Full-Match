@@ -15,17 +15,17 @@
                                         <div class="col s12">
                                           <form method="post" action="{{route('banner-form.store')}}" enctype="multipart/form-data">
                                           @csrf
-                                          
+
                                           <div class="row">
-                                             
+
                                              <div class="input-field col s12">
                                              <p for="video_title">Add Video Title </p>
-                                             <input id="video_title" name="video_title" type="text">
+                                             <input id="video_title" name="video_title" type="text" required>
                                              </div>
 
                                               <div class="input-field col s12">
                                               <p for="video_banner"> Add Video Banner </p>
-                                              <input type="file" name="video_banner" id="video_banner" class="dropify mt-3" data-default-file="" data-max-file-size="10M" data-allowed-file-extensions="png jpg jpeg"  />        
+                                              <input type="file" name="video_banner" id="video_banner" class="dropify mt-3" data-default-file="" data-max-file-size="10M" data-allowed-file-extensions="png jpg jpeg"  />
                                               </div>
 
                                              <div class="input-field col s12">
@@ -33,7 +33,7 @@
                                              <input id="video_link" name="video_link" type="text">
                                              </div>
 
-                                            
+
 
                                             <div class="input-field col s12">
                                             <p for="country">Select Category:</p>
@@ -45,7 +45,7 @@
                                             </select>
                                             </div>
 
-                                            
+
 
                                         <div class="input-field col s12">
                                            <p for="state">Select Videos:</p>
@@ -63,9 +63,9 @@
                                             </select>
                                             </div>
 
-                                          
 
-                                        
+
+
                                              <div class="input-field col s12">
                                              <p for="homepage">Home Page </p>
                                             <select name="homepage" id="country" class="form-control" style="width:250px">
@@ -96,8 +96,8 @@
     <script src={{ asset('app-assets/vendors/jquery-validation/jquery.validate.min.js') }}></script>
     <script src={{ asset('app-assets/js/scripts/form-file-uploads.js') }}></script>
     <script src={{ asset('app-assets/vendors/dropify/js/dropify.min.js') }}></script>
-    
-   
+
+
 
 <script type="text/javascript">
     jQuery(document).ready(function ()

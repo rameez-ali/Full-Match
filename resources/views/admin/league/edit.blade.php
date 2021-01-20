@@ -16,8 +16,8 @@
                              <form method="post" action="{{ route('league-form.update', $league->id) }}" enctype="multipart/form-data">
                              @csrf
                              @method('PATCH')
-                                   
-                                   <div class="row">          
+
+                                   <div class="row">
                                          <div class="input-field col s12">
                                           <p for="category_image">Edit League Name * </p>
                                           <input type="text" name="league_name" value="{{ $league->league_name }}" class="form-control input-lg" required data-error=".errorTxt1" />
@@ -32,7 +32,7 @@
 
                                           <div class="input-field col s12">
                                           <p for="league_banner"> Edit League Banner </p>
-                                          <input type="file" name="filename1" value="{{ $league->league_banner }}" class="dropify mt-3" data-default-file="{{ asset('app-assets/images/league/'.$project->league_banner)}}" data-max-file-size="10M" data-allowed-file-extensions="png jpg jpeg" />
+                                          <input type="file" name="filename1" value="{{ $league->league_banner }}" class="dropify mt-3" data-default-file="{{ asset('app-assets/images/league/'.$league->league_banner)}}" data-max-file-size="10M" data-allowed-file-extensions="png jpg jpeg" />
                                           </div>
 
                                           <div class="input-field col s12">
@@ -48,7 +48,7 @@
 
                                           <div class="input-field col s12">
                                           <p for="league_profile_image"> Edit League Profile Image * </p>
-                                          <input type="file" name="filename3" value="{{ $league->league_profile_image }}" class="dropify mt-3" data-default-file="{{ asset('app-assets/images/league/'.$project->league_profile_image)}}" data-max-file-size="10M" data-allowed-file-extensions="png jpg jpeg"/>
+                                          <input type="file" name="filename3" value="{{ $league->league_profile_image }}" class="dropify mt-3" data-default-file="{{ asset('app-assets/images/league/'.$league->league_profile_image)}}" data-max-file-size="10M" data-allowed-file-extensions="png jpg jpeg"/>
                                           <!-- <small class="errorTxt3"></small>
                                           @error('league_profile_image')
                                           <span class="invalid-feedback" role="alert">
@@ -74,25 +74,25 @@
                                           </div>
 
                                          <div class="input-field col s12">
-                                         <table class="table table-bordered" id="dynamicTable">  
+                                         <table class="table table-bordered" id="dynamicTable">
                                          <?php $i = 1; ?>
-                                         @foreach($season as $season)       
-                                         <tr> 
-                                         <td><input type="text" name="addmore[{{$i}}][name]" Value="{{$season->Seasons}}" class="form-control" /></td>  
-                                         <td><input type="url" name="addmore[{{$i}}][qty]" Value="{{$season->Video}}" class="form-control" /></td> 
+                                         @foreach($season as $season)
+                                         <tr>
+                                         <td><input type="text" name="addmore[{{$i}}][name]" Value="{{$season->Seasons}}" class="form-control" /></td>
+                                         <td><input type="url" name="addmore[{{$i}}][qty]" Value="{{$season->Video}}" class="form-control" /></td>
                                          @if($i==1) @else
-                                         <td><button type="button" class="btn btn-danger remove-tr">Remove</button></td> 
-                                          
+                                         <td><button type="button" class="btn btn-danger remove-tr">Remove</button></td>
+
                                          @endif
                                          </tr>
                                          <?php $i++; ?>
-                                         @endforeach                                  
+                                         @endforeach
                                          </table>
                                         </div>
 
-                                        
 
-                                         <td><button type="button" name="add" id="add" class="btn btn-success">Add More Season</button></td>  
+
+                                         <td><button type="button" name="add" id="add" class="btn btn-success">Add More Season</button></td>
                                             <div class="input-field col s12">
                                                     <button class="btn waves-effect waves-light right submit" type="submit" name="action">Submit
                                                         <i class="material-icons right">send</i>
@@ -119,17 +119,17 @@
    var table = document.getElementById("dynamicTable");
    var i = table.tBodies[0].rows.length;
       i++;
-    $("#add").click(function(){      
+    $("#add").click(function(){
         $("#dynamicTable").append('<tr><td><input type="text" value="Season'+i+'" name="addmore['+i+'][name]" placeholder="Enter Ss['+i+']" class="form-control" /></td><td><input type="url" name="addmore['+i+'][qty]" placeholder="Enter Season URL" class="form-control" /></td><td><button type="button" class="btn btn-danger remove-tr">Remove</button></td></tr>');
          i++;
 
     });
-    $(document).on('click', '.remove-tr', function(){  
+    $(document).on('click', '.remove-tr', function(){
 
          $(this).parents('tr').remove();
 
          i--;
 
-    });  
+    });
 </script>
 @endsection

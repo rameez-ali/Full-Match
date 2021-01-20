@@ -14,7 +14,39 @@
                                     </h4>
                                     <div class="row">
                                         <div class="col s12">
-                                            <h2></h2>
+                                            @if ($advbanneraddsuccess = Session::get('advbanneraddsuccess'))
+                                                <div class="card-alert card gradient-45deg-green-teal">
+                                                    <div class="card-content white-text">
+                                                        <p>
+                                                            <i class="material-icons"></i>{{ $advbanneraddsuccess }}</p>
+                                                    </div>
+                                                    <button type="button" class="close white-text" data-dismiss="alert" aria-label="Close">
+                                                        <span aria-hidden="true">×</span>
+                                                    </button>
+                                                </div>
+                                            @endif
+                                            @if ($advbannereditsuccess = Session::get('advbannereditsuccess'))
+                                                <div class="card-alert card gradient-45deg-green-teal">
+                                                    <div class="card-content white-text">
+                                                        <p>
+                                                            <i class="material-icons"></i>{{ $advbannereditsuccess }}</p>
+                                                    </div>
+                                                    <button type="button" class="close white-text" data-dismiss="alert" aria-label="Close">
+                                                        <span aria-hidden="true">×</span>
+                                                    </button>
+                                                </div>
+                                            @endif
+                                            @if ($advbannerdelsuccess = Session::get('advbannerdelsuccess'))
+                                                <div class="card-alert card gradient-45deg-green-teal">
+                                                    <div class="card-content white-text">
+                                                        <p>
+                                                            <i class="material-icons"></i>{{ $advbannerdelsuccess }}</p>
+                                                    </div>
+                                                    <button type="button" class="close white-text" data-dismiss="alert" aria-label="Close">
+                                                        <span aria-hidden="true">×</span>
+                                                    </button>
+                                                </div>
+                                            @endif
                                             <table id="page-length-option" class="display">
                                                 <thead>
                                                 <tr>
@@ -35,7 +67,7 @@
                                                     <a href="{{ route('banner-form.edit',$adv_banner->id)}}" class="dt-button buttons-excel buttons-html5 waves-effect waves-light btn gradient-45deg-purple-deep-orange gradient-shadow">Edit</a>
                                                      {{ csrf_field() }}
                                                      @method('DELETE')
-                                                     <button class="btn btn-danger" type="submit">Delete</button>
+                                                     <button class="dt-button buttons-excel buttons-html5 waves-effect waves-light btn gradient-45deg-purple-deep-orange gradient-shadow" type="submit">Delete</button>
                                                      </form>
                                                  </td>
                                                   </tr>

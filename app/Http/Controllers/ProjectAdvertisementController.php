@@ -65,7 +65,7 @@ class ProjectAdvertisementController extends Controller
      */
     public function store(Request $request)
     {
-              
+
        if($request->file('video_banner')==null){
         $form_data2 = array(
             'video_title'    =>   $request->video_title,
@@ -76,7 +76,7 @@ class ProjectAdvertisementController extends Controller
         );
           Adv_banner::create($form_data2);
 
-       }  
+       }
        else{
           $image = $request->file('video_banner');
           $new_name = rand() . '.' . $image->getClientOriginalExtension();
@@ -93,7 +93,7 @@ class ProjectAdvertisementController extends Controller
           Adv_banner::create($form_data2);
 
        }
-        
+
         $id = DB::table('adv_banners')->orderBy('id', 'DESC')->value('id');
 
         if($request->state!=null){
@@ -107,7 +107,7 @@ class ProjectAdvertisementController extends Controller
         }
       }
 
-        return redirect('banner-form')->with('success', 'Data is successfully Added');
+        return redirect('banner-form')->with('advbanneraddsuccess','Advertisement Banner Added Successfully');
 
 
     }
@@ -201,7 +201,7 @@ class ProjectAdvertisementController extends Controller
         );
           Adv_banner::whereId($id)->update($form_data2);
 
-       }  
+       }
        else{
           $image = $request->file('video_banner');
           $new_name = rand() . '.' . $image->getClientOriginalExtension();
@@ -218,7 +218,7 @@ class ProjectAdvertisementController extends Controller
           Adv_banner::whereId($id)->update($form_data2);
 
        }
-        
+
         $id = DB::table('adv_banners')->orderBy('id', 'DESC')->value('id');
 
         if($request->state!=null){
@@ -232,7 +232,7 @@ class ProjectAdvertisementController extends Controller
         }
       }
 
-        return redirect('banner-form')->with('success', 'Data is successfully Added');
+        return redirect('banner-form')->with('advbannereditsuccess','Advertisement Banner Updated Successfully');
 
 }
 
@@ -270,7 +270,7 @@ class ProjectAdvertisementController extends Controller
 
         $data = Adv_banner::findOrFail($id);
         $data->delete();
-        return redirect('banner-form')->with('success', 'Data is successfully deleted');
+        return redirect('banner-form')->with('advbannerdelsuccess','Advertisement Banner Deleted Successfully');
 
 
 

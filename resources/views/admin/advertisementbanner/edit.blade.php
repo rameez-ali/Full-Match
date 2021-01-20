@@ -17,17 +17,17 @@
                                         <form method="post" action="{{ route('banner-form.update', $slider->id) }}" enctype="multipart/form-data">
                                         @csrf
                                         @method('PATCH')
-                                       
-                                        <div class="row">  
+
+                                        <div class="row">
                                             <div class="input-field col s12">
-                                            <p for="category_image">Edit Banner Video  </p>
-                                            <input type="text" name="video_title" value="{{ $slider->video_title }}" class="form-control input-lg" />
+                                            <p for="category_image">Edit Banner Video *  </p>
+                                            <input type="text" name="video_title" value="{{ $slider->video_title }}" class="form-control input-lg" required />
                                             </div>
 
                                             <div class="form-group">
                                             <label class="col-md-4 text-right">Edit Video Banner</label>
                                             <div class="col-md-8">
-                                            <input type="file" name="video_banner" class="dropify mt-3"  value="{{ $slider->video_banner }}"  data-default-file="{{ asset('app-assets/images/banner/'.$adv_banner->video_banner)}}" data-max-file-size="10M" data-allowed-file-extensions="png jpg jpeg"/>
+                                            <input type="file" name="video_banner" class="dropify mt-3"  value="{{ $slider->video_banner }}"  data-default-file="{{ asset('app-assets/images/banner/'.$slider->video_banner)}}" data-max-file-size="10M" data-allowed-file-extensions="png jpg jpeg"/>
                                             </div>
                                              </div>
 
@@ -50,7 +50,7 @@
                                           <div name="hidden-panel1" id="hidden-panel1">
                                           <label><strong>Edit Genre </strong></label><br/>
                                           <select name="genre">
-                                          <option selected> </option> 
+                                          <option selected> </option>
                                           @foreach($videogenre as $videogenre )
                                           <option value="{{$videogenre->id}}" {{$videogenre->id == $select_genre_id->genre_id ? 'selected' : ''}} >{{$videogenre->genre_name}}</option>
                                           @endforeach
@@ -79,7 +79,7 @@
                                                         <i class="material-icons right">send</i>
                                              </button>
                                           </div>
-                                       </div>   
+                                       </div>
                                   </form>
                                         </div>
                                     </div>
@@ -168,17 +168,17 @@ $(document).ready(function() {
             if ($("#travel").val() == 1) {
                 $("#hidden-panel1").hide()
                 $("#hidden-panel").show()
-            } 
+            }
             else if ($("#travel").val() == 2) {
                 $("#hidden-panel").hide()
                 $("#hidden-panel1").show()
-            } 
+            }
             else if ($("#travel").val() == 0){
                 $("#hidden-panel").hide()
                 $("#hidden-panel1").hide()
             }
         })
-    }); 
+    });
 
 
 </script>
