@@ -20,7 +20,7 @@
                                        
                                         <div class="row">
                                           <div class="input-field col s12">
-                                          <p for="player_name">Add Player Name * </p>
+                                          <p for="player_name">Edit Player Name * </p>
                                           <input type="text" name="player_name" value="{{ $player->player_name }}" class="form-control input-lg"  required data-error=".errorTxt1" />
                                           <small class="errorTxt1"></small>
                                           @error('player_name')
@@ -31,7 +31,7 @@
                                           </div>
 
                                           <div class="input-field col s12">
-                                          <p for="player_description"> Add Player Description * </p>
+                                          <p for="player_description"> Edit Player Description * </p>
                                           <input type="text" name="player_description" value="{{ $player->player_description }}" class="form-control input-lg"  required data-error=".errorTxt2" />
                                           <small class="errorTxt2"></small>
                                           @error('player_description')
@@ -42,7 +42,7 @@
                                           </div>
 
                                           <div class="input-field col s12">
-                                          <p for="player_banner"> Add Player Banner * </p>
+                                          <p for="player_banner"> Edit Player Banner * </p>
                                           <input type="file" name="player_banner" class="dropify mt-3" data-default-file="{{ asset('app-assets/images/player/'.$player->player_banner)}}" data-max-file-size="10M" data-allowed-file-extensions="png jpg jpeg" />
                                           <input type="hidden" name="hidden_image1" value="{{ $player->player_banner }}" />
                                           <!-- <small class="errorTxt3"></small>
@@ -54,7 +54,7 @@
                                           </div>
 
                                           <div class="input-field col s12">
-                                          <p for="player_profile_image"> Add Player Profile Image * </p>
+                                          <p for="player_profile_image"> Edit Player Profile Image * </p>
                                           <input type="file" name="player_profile_image" class="dropify mt-3" data-default-file="{{ asset('app-assets/images/player/'.$player->player_profile_image)}}" data-max-file-size="10M" data-allowed-file-extensions="png jpg jpeg"/>
                                           <input type="hidden" name="hidden_image2" value="{{ $player->player_profile_image }}" />
                                           <small class="errorTxt4"></small>
@@ -67,8 +67,8 @@
 
 
                                           <div class="input-field col s12">
-                                          <p for="category_image"> Add Player Sorting </p>
-                                          <input type="number" name="player_sorting"  value="{{ $player->player_sorting }}" class="form-control input-lg" />
+                                          <p for="category_image"> Edit Player Sorting </p>
+                                          <input type="number" name="player_sorting"  value="{{ $player->player_sorting }}" min="1" class="form-control input-lg" />
                                           </div>
                                        
                                           <div class="input-field col s12">

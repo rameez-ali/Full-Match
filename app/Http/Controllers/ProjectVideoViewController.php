@@ -70,10 +70,11 @@ class ProjectVideoViewController extends Controller
      */
     public function store(Request $request)
     {
-
+        
         $request->validate([
             'genre'     => 'required'
         ]);
+
 
         if($request->file('video_banner_img')==null) {
             $image1 = $request->file('video_img');
@@ -301,7 +302,7 @@ class ProjectVideoViewController extends Controller
      */
     public function update(Request $request, $id)
     {
-
+      
        $request->validate([
             'genre'     => 'required'
         ]);
@@ -344,7 +345,6 @@ class ProjectVideoViewController extends Controller
                 'hour'     =>   $request->hour,
                 'minute'     =>   $request->minute,
                 'second'     =>   $request->second,
-                'notify_user'       => $request->notify_user,
                 'video_sorting'       => $request->video_sorting,
                 'popular_searches'       => $request->popularsearches,
                 'video_promo'       => $request->video_promo

@@ -35,8 +35,8 @@ $(document).ready(function () {
     $(".max-length").select2({
         dropdownAutoWidth: true,
         width: '100%',
-        maximumSelectionLength: 2,
-        placeholder: "Select maximum 2 items"
+        maximumSelectionLength: 5,
+        placeholder: "Select maximum 5 videos"
     });
 
 

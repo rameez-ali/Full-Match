@@ -20,7 +20,7 @@
                                        
                                        <div class="row">
                                           <div class="input-field col s12">
-                                          <label for="category_name">Add Category Name * </label>
+                                          <label for="category_name">Edit Category Name * </label>
                                           <input type="text" name="category_name" value="{{ $category->category_name }}" class="form-control input-lg" required data-error=".errorTxt1"/>
                                           <small class="errorTxt1"></small>
                                           @error('category_name')
@@ -32,8 +32,8 @@
                                        
                                        
                                           <div class="input-field col s12">
-                                          <p for="category_image"> Add Category Image * </p>
-                                          <input type="file" name="category_image"  id="category_image" class="dropify mt-3" data-default-file="" data-max-file-size="10M" data-allowed-file-extensions="png jpg jpeg"  />
+                                          <p for="category_image"> Edit Category Image * </p>
+                                          <input type="file" name="category_image"  id="category_image" class="dropify mt-3" data-default-file="{{ asset('app-assets/images/category/'.$category->category_image)}}" data-max-file-size="10M" data-allowed-file-extensions="png jpg jpeg"  />
                                          <!--  <small class="errorTxt2"></small>
                                           @error('category_image')
                                           <span class="invalid-feedback" role="alert">
@@ -44,7 +44,7 @@
  
                                          <div class="input-field col s12">
                                           <div name="hidden-panel1" id="hidden-panel1">
-                                         <label><strong>Select Genre * </strong></label><br/>
+                                         <label><strong>Edit Genre * </strong></label><br/>
                                          <select class="selectpicker" multiple data-live-search="true" name="genre[]">
                                          @foreach($video_genres as $videogenre )
                                          <option value="{{$videogenre->id}}" {{in_array($videogenre->id, $selected_ids3) ? 'selected' : ''}} >{{$videogenre->genre_name}}</option>
@@ -55,8 +55,8 @@
                                        
                                      
                                          <div class="input-field col s12">
-                                         <label for="category_sorting">Add Category Sorting </label>
-                                         <input type="number" name="category_sorting" value="{{ $category->category_sorting }}"  class="form-control input-lg" />
+                                         <label for="category_sorting">Edit Category Sorting </label>
+                                         <input type="number" name="category_sorting" value="{{ $category->category_sorting }}" min="1" class="form-control input-lg" />
                                          </div>
                                        
                                           <div class="input-field col s12">

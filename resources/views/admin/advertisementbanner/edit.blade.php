@@ -20,25 +20,25 @@
                                        
                                         <div class="row">  
                                             <div class="input-field col s12">
-                                            <p for="category_image">Add Banner Video  </p>
+                                            <p for="category_image">Edit Banner Video  </p>
                                             <input type="text" name="video_title" value="{{ $slider->video_title }}" class="form-control input-lg" />
                                             </div>
 
                                             <div class="form-group">
-                                            <label class="col-md-4 text-right">Add Video Banner</label>
+                                            <label class="col-md-4 text-right">Edit Video Banner</label>
                                             <div class="col-md-8">
-                                            <input type="file" name="video_banner" class="dropify mt-3"  value="{{ $slider->video_banner }}"  data-default-file="" data-max-file-size="10M" data-allowed-file-extensions="png jpg jpeg"/>
+                                            <input type="file" name="video_banner" class="dropify mt-3"  value="{{ $slider->video_banner }}"  data-default-file="{{ asset('app-assets/images/banner/'.$adv_banner->video_banner)}}" data-max-file-size="10M" data-allowed-file-extensions="png jpg jpeg"/>
                                             </div>
                                              </div>
 
                                             <div class="input-field col s12">
-                                            <p for="category_image">Add Video Link  </p>
+                                            <p for="category_image">Edit Video Link  </p>
                                             <input type="text" name="video_link" value="{{ $slider->video_link}}" class="form-control input-lg" />
                                             </div>
 
 
                                            <div name="hidden-panel1" id="hidden-panel1">
-                                           <label><strong>Select Category </strong></label><br/>
+                                           <label><strong>Edit Category </strong></label><br/>
                                            <select name="category">
                                            <option selected> </option>
                                            @foreach($category as $category )
@@ -48,7 +48,7 @@
                                            </div>
 
                                           <div name="hidden-panel1" id="hidden-panel1">
-                                          <label><strong>Select Genre </strong></label><br/>
+                                          <label><strong>Edit Genre </strong></label><br/>
                                           <select name="genre">
                                           <option selected> </option> 
                                           @foreach($videogenre as $videogenre )
@@ -58,7 +58,7 @@
                                           </div>
 
                                           <div name="hidden-panel1" id="hidden-panel1">
-                                          <label><strong>Select Videos </strong></label><br/>
+                                          <label><strong>Edit Videos </strong></label><br/>
                                           <select class="selectpicker" multiple data-live-search="true" name="video[]">
                                           @foreach($video1 as $video )
                                           <option value="{{$video->id}}" {{in_array($video->id, $selected_ids) ? 'selected' : ''}} >{{$video->video_title}}</option>
@@ -67,7 +67,7 @@
                                           </div>
 
                                           <div class="input-field col s12">
-                                          <p for="category_image">Homepage * </p>
+                                          <p for="category_image">Edit Homepage * </p>
                                           <select name="homepage" id="country" class="form-control" style="width:250px">
                                           <option value="1">Yes</option>
                                           <option value="0">No</option>

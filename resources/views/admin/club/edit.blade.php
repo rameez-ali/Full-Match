@@ -20,7 +20,7 @@
                                        
                                        <div class="row">
                                           <div class="input-field col s12">
-                                          <p for="club_name">Add Club Name * </p>
+                                          <p for="club_name">Edit Club Name * </p>
                                           <input type="text" name="club_name" value="{{ $club->club_name }}" class="form-control input-lg" required />
                                           <small class="errorTxt1"></small>
                                           @error('club_name')
@@ -31,7 +31,7 @@
                                           </div>
 
                                           <div class="input-field col s12">
-                                          <p for="club_description"> Add Club Description * </p>
+                                          <p for="club_description"> Edit Club Description * </p>
                                           <input type="text" name="club_description" value="{{ $club->club_description }}" class="form-control input-lg" required />
                                           <small class="errorTxt2"></small>
                                           @error('club_description')
@@ -42,7 +42,7 @@
                                           </div>
 
                                           <div class="input-field col s12">
-                                          <p for="club_banner"> Add Club Banner * </p>
+                                          <p for="club_banner"> Edit Club Banner * </p>
                                           <input type="file" name="club_banner" class="dropify mt-3" data-default-file="{{ asset('app-assets/images/club/'.$club->club_banner)}}" data-max-file-size="10M" data-allowed-file-extensions="png jpg jpeg" />
                                           <input type="hidden" name="hidden_image1" value="{{ $club->club_banner }}" />
 
@@ -55,8 +55,8 @@
                                           </div>
 
                                           <div class="input-field col s12">
-                                          <p for="club_logo"> Add Club Logo * </p>
-                                          <input type="file" name="club_logo" class="dropify mt-3" data-default-file="{{ asset('app-assets/images/club/'.$club->club_banner)}}" data-max-file-size="10M" data-allowed-file-extensions="png jpg jpeg"/>
+                                          <p for="club_logo"> Edit Club Logo * </p>
+                                          <input type="file" name="club_logo" class="dropify mt-3" data-default-file="{{ asset('app-assets/images/club/'.$club->club_logo)}}" data-max-file-size="10M" data-allowed-file-extensions="png jpg jpeg"/>
                                           <input type="hidden" name="hidden_image2" value="{{ $club->club_logo }}" />
 
                                           <!-- <small class="errorTxt3"></small>
@@ -69,8 +69,8 @@
 
 
                                           <div class="input-field col s12">
-                                          <p for="category_image"> Add Club Sorting </p>
-                                          <input type="number" name="club_sorting" value="{{ $club->club_sorting }}" class="form-control input-lg" />
+                                          <p for="category_image"> Edit Club Sorting </p>
+                                          <input type="number" name="club_sorting" value="{{ $club->club_sorting }}" min="1" class="form-control input-lg" />
                                           </div>
 
                                        

@@ -18,7 +18,7 @@
                                         @csrf
                                         @method('PATCH')
                                        <div class="form-group">
-                                       <label class="col-md-4 text-right">Add Slider Name * </label>
+                                       <label class="col-md-4 text-right">Edit Slider Name * </label>
                                        <div class="col-md-8">
                                        <input type="text" name="slider_name" value="{{ $slider->slider_name }}" class="form-control input-lg"  required data-error=".errorTxt1" />
                                        <small class="errorTxt1"></small>
@@ -31,8 +31,8 @@
                                        </div>
 
                                        <div name="hidden-panel1" id="hidden-panel1">
-                                       <label><strong>Select Videos: * </strong></label><br/>
-                                       <select class="selectpicker" id="testbox" multiple data-live-search="true" name="video[]" data-error=".errorTxt2" required>
+                                       <label><strong>Edit Videos: * </strong></label><br/>
+                                       <select class="max-length browser-default" id="testbox" multiple data-live-search="true" name="video[]" data-error=".errorTxt2" required>
                                        @foreach($video1 as $video )
                                        <option value="{{$video->id}}" {{in_array($video->id, $selected_ids) ? 'selected' : ''}} >{{$video->video_title}}</option>
                                        @endforeach
@@ -46,9 +46,9 @@
                                        </div>
 
                                        <div class="form-group">
-                                       <label class="col-md-4 text-right">Add Slider Sorting * </label>
+                                       <label class="col-md-4 text-right">Edit Slider Sorting * </label>
                                        <div class="col-md-8">
-                                       <input type="number" name="slider_sorting" value="{{ $slider->slider_sorting }}" class="form-control input-lg"  required data-error=".errorTxt3"/>
+                                       <input type="number" name="slider_sorting" value="{{ $slider->slider_sorting }}" min="1" class="form-control input-lg"  required data-error=".errorTxt3"/>
                                        <small class="errorTxt3"></small>
                                        @error('slider_sorting')
                                        <span class="invalid-feedback" role="alert">
@@ -167,18 +167,5 @@ $(document).ready(function() {
 
 </script>
 
- <script type="text/javascript">
-      $(document).ready(function() {
-        var last_valid_selection = null;
-        $('#testbox').change(function(event) {
-         if ($(this).val().length > 5) {
-           alert('You can only choose 5 videos maximum!');
-           $(this).val(last_valid_selection);
-         } else {
-           last_valid_selection = $(this).val();
-         }
-       });
-        
-     });
-     </script>
+ 
 @endsection

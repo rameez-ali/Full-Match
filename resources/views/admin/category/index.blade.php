@@ -63,11 +63,11 @@
                                                 <td>{{ $category->category_name }}</td>
                                                 <td><img src="{{ asset('app-assets/images/category/'.$category->category_image)}}" style="width:50px;height:50px;" /></td>
                                                 <td>{{ $category->category_sorting }}</td>
-                                                <td><form action="{{ route('category-form.destroy', $category->id)}}" method="post">
+                                                <td><form action="{{ route('category-form.destroy', $category->id)}}"  method="post">
                                                     <a href="{{ route('category-form.edit',$category->id)}}" class="dt-button buttons-excel buttons-html5 waves-effect waves-light btn gradient-45deg-purple-deep-orange gradient-shadow">Edit</a>
                                                 {{ csrf_field() }}
                                                 @method('DELETE')
-                                                <button class="dt-button buttons-excel buttons-html5 waves-effect waves-light btn gradient-45deg-purple-deep-orange gradient-shadow" type="submit">Delete</button>
+                                                <button onclick="return window.confirm('Are you sure you want to delete this record?');" class="dt-button buttons-excel buttons-html5 waves-effect waves-light btn gradient-45deg-purple-deep-orange gradient-shadow" type="submit">Delete</button>
                                                 </form></td>
                                                 </tr>
                                                 @endforeach

@@ -20,7 +20,7 @@
                                        
                                         <div class="row">
                                           <div class="input-field col s12">
-                                          <label for="category_name">Add Category Name * </label>
+                                          <label for="category_name">Edit Genre Name * </label>
                                           <input type="text" name="genre_name" value="{{ $genre->genre_name }}" class="form-control input-lg" data-error=".errorTxt1" required />
                                           <small class="errorTxt1"></small>
                                           @error('genre_name')
@@ -31,8 +31,8 @@
                                           </div>
                                        
                                            <div class="input-field col s12">
-                                           <label for="category_name">Add Genre Sorting </label>
-                                           <input type="number" name="genre_sorting" value="{{ $genre->genre_sorting }}"  class="form-control input-lg" />
+                                           <label for="category_name">Edit Genre Sorting </label>
+                                           <input type="number" name="genre_sorting" value="{{ $genre->genre_sorting }}" min="1" class="form-control input-lg" />
                                             </div>
                                        
                                             <div class="input-field col s12">
