@@ -36,7 +36,7 @@
 
                                       <div class="input-field col s12">
                                       <p for="filename2">Add League Promo Video URL * </p>
-                                      <input id="filename2" name="filename2" type="url"  required data-error=".errorTxt2">
+                                      <input id="filename2" name="filename2" type="urlgit sttau"  required data-error=".errorTxt2">
                                       <small class="errorTxt2"></small>
                                       @error('filename2')
                                       <span class="invalid-feedback" role="alert">
