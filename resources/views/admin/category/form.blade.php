@@ -42,20 +42,20 @@
                                                     @enderror
                                                 </div>
 
-                                                
+
                                                <div class="input-field col s12">
                                               <p for="genre"> Select Genre *</p>
-                                              <select class="selectpicker" multiple data-live-search="true" name="genre[]" >
+                                              <select class="selectpicker" multiple data-live-search="true" name="genre[]" required >
                                               @foreach($genres as $videogenre )
                                               <option value="{{$videogenre->id}}">{{$videogenre->genre_name}}</option>
                                               @endforeach
-                                              <small class="errorTxt6"></small>
-                                              @error('genre[]')
-                                              <span class="invalid-feedback" role="alert">
+                                              </select>
+                                                   <small class="errorTxt6"></small>
+                                                   @error('genre')
+                                                   <span class="invalid-feedback" role="alert">
                                                <strong>{{ $message }}</strong>
                                                </span>
-                                               @enderror
-                                              </select>
+                                                   @enderror
                                                </div>
 
 

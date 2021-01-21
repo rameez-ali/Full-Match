@@ -56,7 +56,7 @@ class ProjectCategoryViewController extends Controller
             'category_sorting'   =>   $request->category_sorting
         );
 
-        ProjectCategory::create($form_data);
+        $xyz = ProjectCategory::create($form_data);
 
         $id = DB::table('project_categories')->orderBy('id', 'DESC')->value('id');
 
@@ -80,7 +80,7 @@ class ProjectCategoryViewController extends Controller
      */
     public function show($id)
     {
-      //  
+      //
     }
 
     /**
@@ -145,7 +145,7 @@ class ProjectCategoryViewController extends Controller
             'category_image'            =>   $image_name,
             'category_sorting'       =>   $request->category_sorting
         );
-  
+
         ProjectCategory::whereId($id)->update($form_data);
 
         Category_genre::where('category_id', $id)->forceDelete();
@@ -159,7 +159,7 @@ class ProjectCategoryViewController extends Controller
                 Category_genre::create($form_data5);
             }
 
-        
+
 
         return redirect('category-form')->with('cateditsuccess','Category Updated Successfully');
     }
@@ -174,6 +174,7 @@ class ProjectCategoryViewController extends Controller
     {
 
         $data = ProjectCategory::findOrFail($id);
+
         $data->delete();
         $request->session()->flash('message', 'Successfully deleted the task!');
         return redirect('category-form')->with('catdelsuccess','Category Deleted Successfully');
