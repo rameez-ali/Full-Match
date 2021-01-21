@@ -82,6 +82,7 @@
                                                     </div>
 
                                                     <div class="input-field col s12">
+                                                        <p class="mb-1">{{ __('customer.discount.for_specific_user') }}</p>
                                                         <select id="for_specific_user" class="select2 browser-default" name="for_specific_user">
                                                                 <option value="0">none</option>
                                                             @foreach($customers as $customer)
