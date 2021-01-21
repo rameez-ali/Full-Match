@@ -70,7 +70,7 @@ class ProjectVideoViewController extends Controller
      */
     public function store(Request $request)
     {
-        
+
         $request->validate([
             'genre'     => 'required'
         ]);
@@ -81,7 +81,7 @@ class ProjectVideoViewController extends Controller
             $new_name1 = rand() . '.' . $image1->getClientOriginalExtension();
             $image1->move(public_path('app-assets/images/video'), $new_name1);
 
-          
+
 
             $form_data2 = array(
                 'Category_id'    =>   $request->Category_id,
@@ -136,11 +136,11 @@ class ProjectVideoViewController extends Controller
                 Videogenre::create($form_data5);
             }
 
-              return redirect('video-form')->with('success', 'Data is successfully deleted');
+              return redirect('video-form')->with('videoaddsuccess','Video Added Successfully');
 
 
         }
-        
+
         else if ($request->file('video_banner_img')!=null)
         {
             $image1 = $request->file('video_img');
@@ -151,7 +151,7 @@ class ProjectVideoViewController extends Controller
             $new_name2 = rand() . '.' . $image2->getClientOriginalExtension();
             $image2->move(public_path('app-assets/images/video'), $new_name2);
 
-          
+
 
             $form_data2 = array(
                 'Category_id'    =>   $request->Category_id,
@@ -208,12 +208,12 @@ class ProjectVideoViewController extends Controller
                 Videogenre::create($form_data5);
             }
 
-            return redirect('video-form')->with('success', 'Data is successfully deleted');
+            return redirect('video-form')->with('videoaddsuccess','Video Added Successfully');
 
         }
 
 
-        
+
 
     }
 
@@ -241,7 +241,7 @@ class ProjectVideoViewController extends Controller
         $club=Club::all();
         $player=Player::all();
 
-        
+
 
 
 
@@ -302,12 +302,12 @@ class ProjectVideoViewController extends Controller
      */
     public function update(Request $request, $id)
     {
-      
+
        $request->validate([
             'genre'     => 'required'
         ]);
 
-        //when both field are empty       
+        //when both field are empty
         if($request->video_banner_img!=null)
         {
             $image1=$request->file('video_banner_img');
@@ -334,7 +334,7 @@ class ProjectVideoViewController extends Controller
               Video::whereId($id)->update($form_data2);
         }
 
-       
+
 
             $form_data3 = array(
                 'Category_id'    =>   $request->Category_id,
@@ -352,11 +352,11 @@ class ProjectVideoViewController extends Controller
             );
 
             Video::whereId($id)->update($form_data3);
-           
+
            Videoclub::where('Video_id', $id)->forceDelete();
            Videoplayer::where('Video_id', $id)->forceDelete();
            Videogenre::where('Video_id', $id)->forceDelete();
-            
+
 
             if($request->club!=null){
             foreach($request->club as $club){
@@ -393,9 +393,9 @@ class ProjectVideoViewController extends Controller
                 Videogenre::create($form_data5);
             }
           }
-          return redirect('video-form')->with('success', 'Data is successfully deleted');
+          return redirect('video-form')->with('videoeditsuccess','Video Updated Successfully');
 
-        
+
     }
 
     /**
@@ -411,7 +411,7 @@ class ProjectVideoViewController extends Controller
 
         $data = Video::findOrFail($id);
         $data->delete();
-        return redirect('video-form')->with('success', 'Data is successfully deleted');
+        return redirect('video-form')->with('videodelsuccess','Video Deleted Successfully');
 
 
     }

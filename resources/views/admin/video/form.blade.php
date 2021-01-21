@@ -10,16 +10,16 @@
                                 <div class="card-content">
                                     <h4 class="header mt-0">
                                         ADD VIDEO
-                                         
+
                                     </h4>
                                     <div class="row">
                                         <div class="col s12">
                                             <h2></h2>
                                             <form method="post" class="formValidate" id="formValidate" action="{{route('video-form.store')}}" enctype="multipart/form-data">
                                             @csrf
-                                          
+
                                            <div class="row">
-                            
+
                                               <div class="input-field col s12">
                                               <p for="video_title">Add Video Title * </p>
                                               <input id="video_title" name="video_title" type="text"  required data-error=".errorTxt1">
@@ -33,7 +33,7 @@
 
                                               <div class="input-field col s12">
                                               <p for="video_title">Add Video Description </p>
-                                              <input type="text" id="video_description" name="video_description" class="form-control input-lg" />  
+                                              <input type="text" id="video_description" name="video_description" class="form-control input-lg" />
                                               </div>
 
                                               <div class="input-field col s12">
@@ -46,7 +46,7 @@
                                               </span>
                                               @enderror
                                               </div>
-                                               
+
                                                <div class="input-field col s12">
                                               <p for="video_sorting">Video Duration * </p>
                                               <div class="input-field col s1">
@@ -62,9 +62,9 @@
                                               <input type="number" id="second" name="second"  min="0"class="form-control input-lg" required />
                                               </div>
                                                </div>
-                                               
 
-                            
+
+
                                               <div class="input-field col s12">
                                               <p for="popularsearches"> Notify User </p>
                                               <select name="notify_user" class="form-control" style="width:250px">
@@ -99,7 +99,7 @@
 
                                               <div class="input-field col s12">
                                               <p for="Category_id"> Select Category * </p>
-                                              <select  class="form-control" name="Category_id" required>                                
+                                              <select  class="form-control" name="Category_id" required>
                                               <option selected> </option>
                                               @foreach($category as $category)
                                               <option value="{{$category->id}}">{{$category->category_name}}</option>
@@ -115,7 +115,7 @@
 
                                               <div class="input-field col s12">
                                               <p for="country"> Select League </p>
-                                              <select name="country" id="country" class="form-control" style="width:250px">
+                                              <select name="country" id="country" class="form-control" style="width:250px" onclick="ShowHideDiv(this)">
                                               <option value="">--- Select Leagues ---</option>
                                               @foreach ($leagues as $leagues)
                                               <option value="{{$leagues->id}}">{{ $leagues->league_name }}</option>
@@ -128,7 +128,7 @@
                                               <select name="state" class="select browser-default" style="width:250px">
                                               </select>
                                               </div>
-                           
+
                                               <div class="input-field col s12">
                                               <p for="genre"> Select Video Genre *</p>
                                               <select class="selectpicker" multiple data-live-search="true" name="genre[]" required >
@@ -142,7 +142,7 @@
                                                </span>
                                                @enderror
                                                </div>
-                            
+
                                               <div class="input-field col s12">
                                               <p for="club"> Select Club </p>
                                               <select class="selectpicker" multiple data-live-search="true" name="club[]">
@@ -169,22 +169,20 @@
                                               </select>
                                               </div>
 
-                             
-
-                                              <div class="input-field col s12">
-                                              <p for="video_promo"> Add Promo Video URL </p>
-                                              <input type="text" name="video_promo" id="exampleInputFile1">
-                                              </div>
+                                               <div class="input-field col s12" id="row_dim">
+                                               <p for="promo_video_url">Promo Video URL *</p>
+                                                   <input type="url" name="video_promo" class="dimension" required>
+                                               </div>
                     </div>
-                   </div><br>
-                            
+                   <br>
+
                             <div class="input-field col s12">
                                      <button class="btn waves-effect waves-light right submit" type="submit" name="action">Submit
                                            <i class="material-icons right">send</i>
                                       </button>
                             </div>
                         </form>
-                                            
+
                                         </div>
                                     </div>
                                 </div>
@@ -213,7 +211,7 @@
                console.log(countryID);
                if(countryID == '0')
                {
-                  
+
                }
                else
                {
@@ -234,9 +232,9 @@
             });
     });
 
-     
-     </script> 
- 
+
+     </script>
+
   <script>
     /*
  * Form Validation
@@ -279,7 +277,21 @@
             }
         });
     });
+
 </script>
+
+    <script>
+        $(function() {
+            $('#row_dim').show();
+            $('#country').change(function(){
+                if($('#country').val() != 'null') {
+                    $('#row_dim').hide();
+                } else {
+                    $('#row_dim').show();
+                }
+            });
+        });
+    </script>
 
 
 @endsection
