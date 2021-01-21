@@ -62,13 +62,12 @@ Route::group([
     Route::post('login', [AuthController::class , 'login']);
     Route::post('signup', [AuthController::class , 'signup']);
 
-    Route::get('logout', [AuthController::class , 'logout']);
-
 });
 
 Route::group(['middleware' => 'auth:api'], function(){
     Route::get('user', [AuthController::class , 'user']);
     Route::get('/notify-off', [ApiNotificationController::class , 'notifiOff']);
+    Route::get('logout', [AuthController::class , 'logout']);
 });
 //Customer Auth Routes
 
