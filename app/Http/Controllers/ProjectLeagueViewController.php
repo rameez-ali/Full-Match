@@ -41,8 +41,8 @@ class ProjectLeagueViewController extends Controller
      */
     public function store(Request $request)
     {
-         
-         
+
+
         if ($request->file('filename1')==null)
         {
 
@@ -64,7 +64,7 @@ class ProjectLeagueViewController extends Controller
         $id = DB::table('leagues')->orderBy('ID', 'DESC')->value('ID');
 
         //Insert Season Array
-         
+
         foreach($request->addmore as $addmore){
             $newSeason = new Season();
             $newSeason->Project_id=$id;
@@ -72,9 +72,9 @@ class ProjectLeagueViewController extends Controller
             $newSeason->Video = $addmore['qty'];
             $newSeason->save();
         }
-      
 
-       return redirect('league-form')->with('success', 'Data is successfully updated');
+
+       return redirect('league-form')->with('leagueaddsuccess','League Added Successfully');
       }
 
       else if($request->file('filename1')!=null){
@@ -101,7 +101,7 @@ class ProjectLeagueViewController extends Controller
           $id = DB::table('leagues')->orderBy('ID', 'DESC')->value('ID');
 
         //Insert Season Array
-          
+
         foreach($request->addmore as $addmore){
             $newSeason = new Season();
             $newSeason->Project_id=$id;
@@ -109,9 +109,9 @@ class ProjectLeagueViewController extends Controller
             $newSeason->Video = $addmore['qty'];
             $newSeason->save();
         }
-      
 
-      return redirect('league-form')->with('success', 'Data is successfully updated');
+
+      return redirect('league-form')->with('leagueaddsuccess','League Added Successfully');
 
    }
 
@@ -140,8 +140,8 @@ class ProjectLeagueViewController extends Controller
 
 
          $league=League::find($id);
-         $season= Season::orderBy('id', 'ASC')->where('Project_id', $id)->get(); 
-         
+         $season= Season::orderBy('id', 'ASC')->where('Project_id', $id)->get();
+
           return view('admin.league.edit',compact('league','season'));
     }
 
@@ -155,7 +155,7 @@ class ProjectLeagueViewController extends Controller
     public function update(Request $request, $id)
     {
            // dd($request->addmore);
-        
+
         if($request->filename1!=null)
         {
             $image=$request->file('filename1');
@@ -182,7 +182,7 @@ class ProjectLeagueViewController extends Controller
               League::whereId($id)->update($form_data2);
         }
 
-       
+
         $form_data = array(
             'league_name'       =>   $request->league_name,
             'league_description'       =>   $request->league_description,
@@ -192,9 +192,9 @@ class ProjectLeagueViewController extends Controller
 
         League::whereId($id)->update($form_data);
 
-    
+
         Season::where('Project_id', $id)->forceDelete();
-        
+
            foreach($request->addmore as $addmore){
                $newSeason = new Season();
                $newSeason->Project_id=$id;
@@ -202,10 +202,10 @@ class ProjectLeagueViewController extends Controller
                $newSeason->Video = $addmore['qty'];
                $newSeason->save();
                }
-           
-               return redirect('league-form')->with('success', 'Data is successfully updated');
 
-        
+               return redirect('league-form')->with('leagueeditsuccess','League Updated Successfully');
+
+
 
 
     }
@@ -222,7 +222,7 @@ class ProjectLeagueViewController extends Controller
 
         $data = League::findOrFail($id);
         $data->delete();
-        return redirect('league-form')->with('success', 'Data is successfully deleted');
+        return redirect('league-form')->with('leaguedelsuccess','League Deleted Successfully');
     }
 
     public function destroy1($id)

@@ -14,7 +14,39 @@
                                     </h4>
                                     <div class="row">
                                         <div class="col s12">
-                                            <h2></h2>
+                                            @if ($leagueaddsuccess = Session::get('leagueaddsuccess'))
+                                                <div class="card-alert card gradient-45deg-green-teal">
+                                                    <div class="card-content white-text">
+                                                        <p>
+                                                            <i class="material-icons"></i>{{ $leagueaddsuccess }}</p>
+                                                    </div>
+                                                    <button type="button" class="close white-text" data-dismiss="alert" aria-label="Close">
+                                                        <span aria-hidden="true">×</span>
+                                                    </button>
+                                                </div>
+                                            @endif
+                                            @if ($leagueeditsuccess = Session::get('leagueeditsuccess'))
+                                                <div class="card-alert card gradient-45deg-green-teal">
+                                                    <div class="card-content white-text">
+                                                        <p>
+                                                            <i class="material-icons"></i>{{ $leagueeditsuccess }}</p>
+                                                    </div>
+                                                    <button type="button" class="close white-text" data-dismiss="alert" aria-label="Close">
+                                                        <span aria-hidden="true">×</span>
+                                                    </button>
+                                                </div>
+                                            @endif
+                                            @if ($leaguedelsuccess = Session::get('leaguedelsuccess'))
+                                                <div class="card-alert card gradient-45deg-green-teal">
+                                                    <div class="card-content white-text">
+                                                        <p>
+                                                            <i class="material-icons"></i>{{ $leaguedelsuccess }}</p>
+                                                    </div>
+                                                    <button type="button" class="close white-text" data-dismiss="alert" aria-label="Close">
+                                                        <span aria-hidden="true">×</span>
+                                                    </button>
+                                                </div>
+                                            @endif
                                             <table id="page-length-option" class="display">
                                                 <thead>
                                                 <tr>

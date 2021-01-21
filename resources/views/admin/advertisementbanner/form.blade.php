@@ -30,7 +30,7 @@
 
                                              <div class="input-field col s12">
                                              <p for="video_link">Add Video Link </p>
-                                             <input id="video_link" name="video_link" type="text">
+                                             <input id="video_link" name="video_link" type="url">
                                              </div>
 
 

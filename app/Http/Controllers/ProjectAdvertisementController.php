@@ -248,10 +248,10 @@ class ProjectAdvertisementController extends Controller
 
       $banner_id=$id;
 
-      $adv_banner_videos = DB::table('Adv_banner_videos');
+      $adv_banner_videos = DB::table('adv_banner_videos');
       $videos =  DB::table('videos')
         ->where('banner_id', '=', $banner_id)
-        ->join('Adv_banner_videos', 'Adv_banner_videos.video_id', '=', 'videos.id')
+        ->join('adv_banner_videos', 'adv_banner_videos.video_id', '=', 'videos.id')
         ->select('videos.*', 'videos.video_title')
         ->get();
 

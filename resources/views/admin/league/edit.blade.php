@@ -37,7 +37,7 @@
 
                                           <div class="input-field col s12">
                                           <p for="league_promo_video">Edit League Promo Video URL * </p>
-                                          <input type="text" name="league_promo_video" value="{{ $league->league_promo_video }}" class="form-control input-lg" required data-error=".errorTxt2"/>
+                                          <input type="urlgit" name="league_promo_video" value="{{ $league->league_promo_video }}" class="form-control input-lg" required data-error=".errorTxt2"/>
                                           <small class="errorTxt2"></small>
                                           @error('league_promo_video')
                                           <span class="invalid-feedback" role="alert">
