@@ -33,7 +33,7 @@
 
                                             <div class="input-field col s12">
                                             <p for="category_image">Edit Video Link  </p>
-                                            <input type="text" name="video_link" value="{{ $slider->video_link}}" class="form-control input-lg" />
+                                            <input type="url" name="video_link" value="{{ $slider->video_link}}" class="form-control input-lg" />
                                             </div>
 
 
