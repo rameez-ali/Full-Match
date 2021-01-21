@@ -89,7 +89,7 @@
                                                         <label for="subsplan_notify">{{ __('customer.subsplan.subsplan_notify') }}*</label>
                                                         <p>
                                                             <label>
-                                                                <input type="checkbox" id="subsplan_notify"  name="subsplan_notify" />
+                                                                <input type="checkbox" id="subsplan_notify" {{ $subscriptionplan->notify == 1 ? 'checked' : '' }}  name="subsplan_notify" />
                                                                 <span></span>
                                                             </label>
                                                         </p>

@@ -64,7 +64,7 @@
 
                                                     <div class="input-field col s12">
                                                         <p for="avatar">avatar</p>
-                                                        <input type="file" name="avatar" id="avatar" class="dropify mt-3" data-default-file="{{ $customer->user_image ? url($customer->user_image) : '' }}" data-max-file-size="10M" data-allowed-file-extensions="png jpg jpeg" required />
+                                                        <input type="file" name="avatar" id="avatar" class="dropify mt-3" data-default-file="{{ $customer->user_image ? url($customer->user_image) : '' }}" data-max-file-size="10M" data-allowed-file-extensions="png jpg jpeg" @if(!$edit) required @endif />
                                                         <small class="errorTxt5"></small>
 
                                                             @error('avatar')

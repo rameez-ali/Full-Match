@@ -45,7 +45,7 @@ class UpdateSubsPlanRequest extends FormRequest
         $subsplan->duration_type = $params['subsplan_duration'];
         $subsplan->duration_value = $params['subsplan_value'];
         $subsplan->sort_by = $params['subp_sort'];
-//      $subsplan->notify = $params['subsplan_notify'];
+        $subsplan->notify =isset($params['subsplan_notify']) ? 1  : 0;
         $subsplan->save();
 
         return true;

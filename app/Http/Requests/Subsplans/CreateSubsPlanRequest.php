@@ -47,6 +47,7 @@ class CreateSubsPlanRequest extends FormRequest
         $sub_plan->duration_value = $params['subsplan_value'];
 
         $sub_plan->sort_by = $params['subp_sort'];
+        $sub_plan->notify =isset($params['subsplan_notify']) ? 1  : 0;
 //        $sub_plan->notify = $params['title'];
 
         $sub_plan->save();
