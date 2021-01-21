@@ -20,10 +20,10 @@ class PlayerController extends Controller
      public $successStatus = 200;
      public $HTTP_FORBIDDEN = 403;
      public $HTTP_NOT_FOUND = 404;
-    
+
     public function players()
     {
-     
+
      $array = array();
 
      $players = Player::all();
@@ -67,7 +67,7 @@ class PlayerController extends Controller
 
             foreach ($video_players as $k => $v) {
 
-                $video_img = str_replace('\\', '/', asset('app-assets/images/videos/' . $v->video_img));
+                $video_img = str_replace('\\', '/', asset('app-assets/images/video/' . $v->video_img));
 
                 $array[$k]['id'] = $v->id;
                 $array[$k]['title'] = $v->video_title;
@@ -82,7 +82,7 @@ class PlayerController extends Controller
            return response()->json(['success' => false, 'status' => $this->HTTP_NOT_FOUND, 'message' => 'Player Related Videos Not Found.', 'data' => []]);
         }
 
-        
+
 
 
     }

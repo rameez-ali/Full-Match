@@ -58,17 +58,17 @@ public $HTTP_NOT_FOUND = 404;
     {
 
         $array = array();
-        
+
         $video_clubs=Videoclub::select('videos.id','videos.video_title','videos.video_img')
             ->join('videos','videoclubs.Video_id' , '=' ,'videos.id')
             ->where('Club_id','=', $id)
             ->get();
-         
+
          if (!$video_clubs->isEmpty()) {
 
             foreach ($video_clubs as $k => $v) {
 
-                $video_img = str_replace('\\', '/', asset('app-assets/images/videos/' . $v->video_img));
+                $video_img = str_replace('\\', '/', asset('app-assets/images/video/' . $v->video_img));
 
                 $array[$k]['id'] = $v->id;
                 $array[$k]['title'] = $v->video_title;
@@ -82,7 +82,7 @@ public $HTTP_NOT_FOUND = 404;
         else {
            return response()->json(['success' => false, 'status' => $this->HTTP_NOT_FOUND, 'message' => 'Club Related Videos Not Found.', 'data' => []]);
         }
-         
+
 
     }
 

@@ -36,7 +36,7 @@
 
                                       <div class="input-field col s12">
                                       <p for="filename2">Add League Promo Video URL * </p>
-                                      <input id="filename2" name="filename2" type="text"  required data-error=".errorTxt2">
+                                      <input id="filename2" name="filename2" type="url"  required data-error=".errorTxt2">
                                       <small class="errorTxt2"></small>
                                       @error('filename2')
                                       <span class="invalid-feedback" role="alert">
@@ -44,7 +44,7 @@
                                       </span>
                                       @enderror
                                       </div>
-                                     
+
                                      <div class="input-field col s12">
                                      <p for="filename3"> Add League Profile Image * </p>
                                      <input type="file" name="filename3" id="filename3" class="dropify mt-3" data-default-file="" data-max-file-size="10M" data-allowed-file-extensions="png jpg jpeg" required data-error=".errorTxt3" />
@@ -72,19 +72,19 @@
                                       <input type="number" name="league_sorting" placeholder="League Sorting" min="1" class="form-control input-lg"></textarea>
                                       </div>
 
-                                         
+
                                       <div class="input-field col s12">
-                                      <table class="table table-bordered" id="dynamicTable">  
+                                      <table class="table table-bordered" id="dynamicTable">
                                        <tr>
                                        <th>Season</th>
                                        <th>Video</th>
                                        </tr>
-                                     
-                                      <tr>  
-                                      <td><input type="text" name="addmore[0][name]" Value="Season1" class="form-control" /></td>  
-                                      <td><input type="url" name="addmore[0][qty]" placeholder="Enter Season URL" class="form-control" /></td>  
-                                      <td><button type="button" name="add" id="add" class="btn btn-success">Add More Season</button></td>  
-                                      </tr>  
+
+                                      <tr>
+                                      <td><input type="text" name="addmore[0][name]" Value="Season1" class="form-control" /></td>
+                                      <td><input type="url" name="addmore[0][qty]" placeholder="Enter Season URL" class="form-control" /></td>
+                                      <td><button type="button" name="add" id="add" class="btn btn-success">Add More Season</button></td>
+                                      </tr>
                                       </table>
                                      </div>
 
@@ -116,12 +116,12 @@
         $("#dynamicTable").append('<tr><td><input type="text" value="Season'+i+'" name="addmore['+i+'][name]" placeholder="Enter Ss['+i+']" class="form-control" /></td><td><input type="url" name="addmore['+i+'][qty]" placeholder="Enter Season URL" class="form-control" /></td><td><button type="button" class="btn btn-danger remove-tr">Remove</button></td></tr>');
 
     });
-    $(document).on('click', '.remove-tr', function(){  
+    $(document).on('click', '.remove-tr', function(){
 
          $(this).parents('tr').remove();
          i--;
 
-    });  
+    });
 </script>
 
 
