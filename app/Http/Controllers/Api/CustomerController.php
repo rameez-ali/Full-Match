@@ -80,7 +80,7 @@ class CustomerController extends Controller
         $request->id = $id;
 
         $response = $request->handle_edit();
-
+        dd($response);
         $route = route('customer.update', ['customer' => $response->id]);
 
         return view('admin.customer.form',['customer' => $response, 'route' => $route , 'edit' => true ]);
@@ -97,7 +97,7 @@ class CustomerController extends Controller
     {
         $request->id = $id;
 
-        $response = $request->handle();
+        $response = $request->handleProfileUpdate();
 
         return redirect()->route('customer.index')->with('usereditsuccess','User Edit Successfully');
     }

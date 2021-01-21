@@ -60,7 +60,13 @@ class SubsPlanController extends Controller
      */
     public function show($id)
     {
-        //
+        $request = new GetSubsPlanRequest();
+
+        $request->id = $id;
+
+        $response = $request->handle();
+
+        return view('admin.subscriptionplan.show',['subscription' => $response ]);
     }
 
     /**

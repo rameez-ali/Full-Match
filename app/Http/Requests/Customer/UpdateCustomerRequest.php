@@ -59,4 +59,34 @@ class UpdateCustomerRequest extends FormRequest
 
         return true;
     }
+
+    public function handleProfileUpdate(){
+
+        $this->validated();
+
+        $params = $this->all();
+
+        $customer = Customer::find($this->id);
+
+        $customer->name = $params['name'];
+//        $customer->email = $params['email'];
+        if($this->has('avatar')){
+            $path = $this->file('avatar')->store('avatarDp');
+            $customer->user_image = 'storage/app/public/'.$path;
+        }
+        $customer->save();
+
+        $user = User::find($customer->user_id);
+
+        $user->name = $params['name'];
+        $user->phone = $params['phone'];
+//        $user->email = $params['email'];
+        $user->status =isset($params['status']) ? 1  : 2; //status 1 for block by admin , 2 for unblock ,or active .
+
+        //$user->password = Hash::make($params['password']);
+
+        $user->save();
+
+        return true;
+    }
 }
