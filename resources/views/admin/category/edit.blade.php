@@ -9,7 +9,7 @@
                             <div class="card animate fadeUp">
                                 <div class="card-content">
                                     <h4 class="header mt-0">
-                                        Edit Category Sliders
+                                        Edit Category
                                     </h4>
                                     <div class="row">
                                         <div class="col s12">
@@ -17,7 +17,7 @@
                                         <form method="post" class="formValidate" id="formValidate" action="{{ route('category-form.update', $category->id) }}" enctype="multipart/form-data">
                                         @csrf
                                         @method('PATCH')
-                                       
+
                                        <div class="row">
                                           <div class="input-field col s12">
                                           <label for="category_name">Edit Category Name * </label>
@@ -29,36 +29,38 @@
                                           </span>
                                           @enderror
                                           </div>
-                                       
-                                       
+
+
                                           <div class="input-field col s12">
                                           <p for="category_image"> Edit Category Image * </p>
                                           <input type="file" name="category_image"  id="category_image" class="dropify mt-3" data-default-file="{{ asset('app-assets/images/category/'.$category->category_image)}}" data-max-file-size="10M" data-allowed-file-extensions="png jpg jpeg"  />
-                                         <!--  <small class="errorTxt2"></small>
-                                          @error('category_image')
-                                          <span class="invalid-feedback" role="alert">
-                                          <strong>{{ $message }}</strong>
-                                          </span>
-                                          @enderror -->
+                                              <input type="hidden" name="hidden_image" value="{{ $category->category_image }}" />
+
                                           </div>
- 
+
                                          <div class="input-field col s12">
                                           <div name="hidden-panel1" id="hidden-panel1">
                                          <label><strong>Edit Genre * </strong></label><br/>
-                                         <select class="selectpicker" multiple data-live-search="true" name="genre[]">
+                                         <select class="selectpicker" multiple data-live-search="true" name="genre[]" required>
                                          @foreach($video_genres as $videogenre )
                                          <option value="{{$videogenre->id}}" {{in_array($videogenre->id, $selected_ids3) ? 'selected' : ''}} >{{$videogenre->genre_name}}</option>
                                          @endforeach
                                          </select>
+                                              <small class="errorTxt6"></small>
+                                              @error('genre')
+                                              <span class="invalid-feedback" role="alert">
+                                               <strong>{{ $message }}</strong>
+                                               </span>
+                                              @enderror
                                          </div>
                                          </div>
-                                       
-                                     
+
+
                                          <div class="input-field col s12">
                                          <label for="category_sorting">Edit Category Sorting </label>
                                          <input type="number" name="category_sorting" value="{{ $category->category_sorting }}" min="1" class="form-control input-lg" />
                                          </div>
-                                       
+
                                           <div class="input-field col s12">
                                                 <button class="btn waves-effect waves-light right submit" type="submit" name="action">Submit
                                                     <i class="material-icons right">send</i>
@@ -102,9 +104,7 @@
                     required: true,
                     minlength: 5 ,
                 },
-                category_image: {
-                    required: true,
-                },
+
                 tnc_select: "required",
             },
             //For custom messages
