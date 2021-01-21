@@ -41,9 +41,8 @@ class UpdateCustomerRequest extends FormRequest
         $customer->name = $params['name'];
 //        $customer->email = $params['email'];
         if($this->has('avatar')){
-
-            $customer->user_image = $this->file('avatar')->store('avatarDp');
-
+            $path = $this->file('avatar')->store('avatarDp');
+            $customer->user_image = 'storage/app/public/'.$path;
         }
         $customer->save();
 
