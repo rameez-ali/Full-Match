@@ -54,7 +54,11 @@ class CreateCustomerRequest extends FormRequest
 
         $customer->name = $params['name'];
         $customer->email = $params['email'];
-//      $customer->phone = $params['image'];
+//      $customer->user_image = $params['image'];
+        $path = $this->file('avatar')->store('avatarDp');
+
+        $customer->user_image = 'storage/app/public/'.$path;
+
         $customer->user_id = $user->id;
         $customer->save();
 
