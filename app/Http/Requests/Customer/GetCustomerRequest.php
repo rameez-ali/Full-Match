@@ -43,4 +43,9 @@ class GetCustomerRequest extends FormRequest
         return Customer::with('user')->where('id',$this->id)->First();
 
     }
+    public function handle_editApi(){
+
+        return Customer::with('user')->where('user_id',$this->id)->First();
+
+    }
 }
