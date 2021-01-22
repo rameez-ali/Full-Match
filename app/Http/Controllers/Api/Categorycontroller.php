@@ -29,25 +29,25 @@ class CategoryController extends Controller
      */
     public function gethomepageinfo()
     {
-        $slider_array = array();
+        $home_slider_array = array();
         $category_id=null;
         $categories = ProjectCategory::all();
-        $slider_id = Slidercategory1::select("id")->where('category_id',$category_id)->first();
+        $slider_id = Slidercategory1::select("id")->where('category_id',$category_id)->get();
         $video_id=Slidervideo::select("Video_id")->wherein('Slider_id',$slider_id)->get();
-        $videos=Video::select("video_title")->wherein('id',$video_id)->get();
+        $videos=Video::wherein('id',$video_id)->get();
 
         foreach ($videos as $k => $v) {
 
             $video_img = str_replace('\\', '/', asset('app-assets/images/video/' . $v->video_img));
 
-            $slider_array[$k]['id'] = $v->id;
-            $slider_array[$k]['title'] = $v->video_title;
-            $slider_array[$k]['description'] = $v->video_description;
-            $slider_array[$k]['image'] = $video_img;
+            $home_slider_array[$k]['id'] = $v->id;
+            $home_slider_array[$k]['title'] = $v->video_title;
+            $home_slider_array[$k]['description'] = $v->video_description;
+            $home_slider_array[$k]['image'] = $video_img;
 
         }
 
-        return response()->json(['success' => true, 'status' => $this->successStatus, 'message' => 'Home Slider Videos found.', 'data'=>  $slider_array]);
+        return response()->json(['success' => true, 'status' => $this->successStatus, 'message' => 'Home Slider Videos found.', 'data'=>  $home_slider_array]);
 
 
     }

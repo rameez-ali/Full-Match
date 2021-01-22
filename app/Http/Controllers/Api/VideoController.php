@@ -39,10 +39,10 @@ class VideoController extends Controller
 
             $video_img = str_replace('\\', '/', asset('app-assets/images/video/' . $v->video_img));
 
-            $season_array[$k]['id'] = $v->id;
-            $season_array[$k]['title'] = $v->video_title;
-            $season_array[$k]['description'] = $v->video_description;
-            $season_array[$k]['image'] = $video_img;
+            $all_videos_array[$k]['id'] = $v->id;
+            $all_videos_array[$k]['title'] = $v->video_title;
+            $all_videos_array[$k]['description'] = $v->video_description;
+            $all_videos_array[$k]['image'] = $video_img;
 
         }
         return response()->json(['success' => true, 'status' => $this->successStatus, 'message' => 'All Videos found.', 'data'=> $all_videos_array]);
