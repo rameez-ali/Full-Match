@@ -89,7 +89,7 @@ class CustomerController extends Controller
 
         if (isset($response)) {
 
-            $array['id'] = $response->id;
+            $array['id'] = $response->user_id;
             $array['logo'] = url($response->user_image);
             $array['name'] = $response->name;
             $array['email'] = $response->email;
@@ -118,7 +118,7 @@ class CustomerController extends Controller
 
         $response = $request->handleProfileUpdate();
             dd($response);
-        return redirect()->route('customer.index')->with('usereditsuccess','User Edit Successfully');
+//        return redirect()->route('customer.index')->with('usereditsuccess','User Edit Successfully');
     }
 
     /**
