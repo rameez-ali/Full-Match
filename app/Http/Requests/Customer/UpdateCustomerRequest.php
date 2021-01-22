@@ -27,7 +27,7 @@ class UpdateCustomerRequest extends FormRequest
         return [
             'name' => ['required', 'string', 'max:255'],
 //            'email' => ['required', 'string', 'email'],
-            'phone' => ['integer', 'min:8'],
+            'phone' => ['required', 'min:8'],
         ];
     }
     public function handle(){
@@ -65,6 +65,17 @@ class UpdateCustomerRequest extends FormRequest
         $this->validated();
 
         $params = $this->all();
+        dd($params);
+        $user = User::find($this->id);
+
+        $user->name = $params['name'];
+        $user->phone = $params['phone'];
+//        $user->email = $params['email'];
+        $user->status =isset($params['status']) ? 1  : 2; //status 1 for block by admin , 2 for unblock ,or active .
+
+        //$user->password = Hash::make($params['password']);
+
+        $user->save();
 
         $customer = Customer::find($this->id);
 
@@ -75,17 +86,6 @@ class UpdateCustomerRequest extends FormRequest
             $customer->user_image = 'storage/app/public/'.$path;
         }
         $customer->save();
-
-        $user = User::find($customer->user_id);
-
-        $user->name = $params['name'];
-        $user->phone = $params['phone'];
-//        $user->email = $params['email'];
-        $user->status =isset($params['status']) ? 1  : 2; //status 1 for block by admin , 2 for unblock ,or active .
-
-        //$user->password = Hash::make($params['password']);
-
-        $user->save();
 
         return true;
     }

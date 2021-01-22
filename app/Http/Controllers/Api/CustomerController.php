@@ -14,6 +14,9 @@ use Illuminate\Http\Request;
 
 class CustomerController extends Controller
 {
+    public $successStatus = 200;
+    public $HTTP_FORBIDDEN = 403;
+    public $HTTP_NOT_FOUND = 404;
     /**
      * Display a listing of the resource.
      *
@@ -39,7 +42,7 @@ class CustomerController extends Controller
 
         $route = url('customer');
 
-        return view('admin.customer.form',['customer' => $response, 'route' => $route, 'edit' => false ]);
+//        return view('admin.customer.form',['customer' => $response, 'route' => $route, 'edit' => false ]);
     }
 
     /**
@@ -52,7 +55,7 @@ class CustomerController extends Controller
     {
         $response = $request->handle();
 
-        return redirect()->route('customer.index')->with('useraddsuccess','User add Successfully');
+//        return redirect()->route('customer.index')->with('useraddsuccess','User add Successfully');
     }
 
     /**
@@ -72,18 +75,34 @@ class CustomerController extends Controller
      * @param  \App\customer  $customer
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Request $customer)
     {
+        $array = array();
 
         $request = new GetCustomerRequest();
 
-        $request->id = $id;
+        $request->id = $customer->user()->id;
 
-        $response = $request->handle_edit();
-        dd($response);
-        $route = route('customer.update', ['customer' => $response->id]);
+        $response = $request->handle_editApi();
 
-        return view('admin.customer.form',['customer' => $response, 'route' => $route , 'edit' => true ]);
+        $route = route('customer.profupdate', $response->id);
+
+        if (isset($response)) {
+
+            $array['id'] = $response->id;
+            $array['logo'] = url($response->user_image);
+            $array['name'] = $response->name;
+            $array['email'] = $response->email;
+            $array['phone'] = $response->user->phone;
+            $array['updatelink'] = $route;
+
+            return response()->json(['success' => true, 'status' => $this->successStatus, 'message' => 'customer found.', 'data' => $array]);
+
+        } else {
+
+            return response()->json(['success' => false, 'status' => $this->HTTP_NOT_FOUND, 'message' => 'customer Not Found.', 'data' => []]);
+        }
+
     }
 
     /**
@@ -98,7 +117,7 @@ class CustomerController extends Controller
         $request->id = $id;
 
         $response = $request->handleProfileUpdate();
-
+            dd($response);
         return redirect()->route('customer.index')->with('usereditsuccess','User Edit Successfully');
     }
 

@@ -2,7 +2,7 @@
 
 use App\Http\Controllers\Api\ApiNotificationController;
 use App\Http\Controllers\Api\ApiOrderController;
-use App\Http\Controllers\Api\AuthController;
+use App\Http\Controllers\Api\ApiAuthController;
 use App\Http\Controllers\Api\PageController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -59,15 +59,17 @@ Route::get('/page/{id}', [PageController::class , 'cmsPage']);
 Route::group([
     'prefix' => 'auth'
 ], function () {
-    Route::post('login', [AuthController::class , 'login']);
-    Route::post('signup', [AuthController::class , 'signup']);
+    Route::post('login', [ApiAuthController::class , 'login']);
+    Route::post('signup', [ApiAuthController::class , 'signup']);
 
 });
 
 Route::group(['middleware' => 'auth:api'], function(){
-    Route::get('user', [AuthController::class , 'user']);
+    Route::get('user', [ApiAuthController::class , 'user']);
     Route::get('/notify-off', [ApiNotificationController::class , 'notifiOff']);
-    Route::get('logout', [AuthController::class , 'logout']);
+    Route::get('logout', [ApiAuthController::class , 'logout']);
+    Route::post('/customer-edit', [CustomerController::class , 'edit']);
+    Route::post('/customer-update/{id}', [CustomerController::class , 'update'])->name('customer.profupdate');;
 });
 //Customer Auth Routes
 
