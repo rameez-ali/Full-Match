@@ -16,9 +16,16 @@ class ApiNotificationController extends Controller
 
     public function notifiOff(Request $request)
     {
-        $user = $request->user();
-//        $cust = customer::all();
-        dd($user);
-//            return response()->json(['success' => true, 'status' => $this->successStatus, 'message' => 'Club found.', 'data' => $array]);
+        $cust = customer::where('user_id',$request->user()->id)->First();
+        $cust->notify_status = 0;
+        $cust->save();
+        return response()->json(['success' => true, 'status' => $this->successStatus, 'message' => 'Notification OFF.']);
+    }
+    public function notifiOn(Request $request)
+    {
+        $cust = customer::where('user_id',$request->user()->id)->First();
+        $cust->notify_status = 1;
+        $cust->save();
+        return response()->json(['success' => true, 'status' => $this->successStatus, 'message' => 'Notification ON.']);
     }
 }

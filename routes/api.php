@@ -67,6 +67,7 @@ Route::group([
 Route::group(['middleware' => 'auth:api'], function(){
     Route::get('user', [ApiAuthController::class , 'user']);
     Route::get('/notify-off', [ApiNotificationController::class , 'notifiOff']);
+    Route::get('/notify-on', [ApiNotificationController::class , 'notifiOn']);
     Route::get('logout', [ApiAuthController::class , 'logout']);
     Route::post('/customer-edit', [CustomerController::class , 'edit']);
     Route::post('/customer-update/{id}', [CustomerController::class , 'update'])->name('customer.profupdate');;
