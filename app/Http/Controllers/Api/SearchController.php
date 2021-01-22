@@ -33,45 +33,85 @@ class SearchController extends Controller
      */
     public function search($searchword)
     {
+        $club_search_video = array();
+        $all_videos_array = array();
+        $player_search_video = array();
+
         $video = Video::where('video_title', $searchword)
-                 ->orWhere('video_title', 'like', '%' . $searchword. '%') 
+                 ->orWhere('video_title', 'like', '%' . $searchword. '%')
                   ->get();
 
         $clubs  = Club::select('id')->where('club_name', $searchword)
-                 ->orWhere('club_name', 'like', '%' . $searchword. '%') 
+                 ->orWhere('club_name', 'like', '%' . $searchword. '%')
                   ->first();
 
         $players = Player::where('player_name', $searchword)
-                 ->orWhere('player_name', 'like', '%' . $searchword. '%') 
-                  ->first();                    
-                 
+                 ->orWhere('player_name', 'like', '%' . $searchword. '%')
+                  ->first();
+
          if(count($video)){
-          
-           return response()->json(['success' => true, 'status' => $this->successStatus, 'message' => 'Videos found.', 'data'=> $video]);
+
+             foreach ($video as $k => $v) {
+
+                 $video_img = str_replace('\\', '/', asset('app-assets/images/video/' . $v->video_img));
+
+                 $all_videos_array[$k]['id'] = $v->id;
+                 $all_videos_array[$k]['title'] = $v->video_title;
+                 $all_videos_array[$k]['description'] = $v->video_description;
+                 $all_videos_array[$k]['image'] = $video_img;
+
+             }
+             return response()->json(['success' => true, 'status' => $this->successStatus, 'message' => 'Videos found.', 'data'=> $all_videos_array]);
+
 
         }
          else if($clubs!=null){
 
-            $videos = Videoclub::wherein('Club_id',$clubs)->get();
+            $video_id = Videoclub::select('Video_id')->wherein('Club_id',$clubs)->get();
 
-           return response()->json(['success' => true, 'status' => $this->successStatus, 'message' => 'Videos found.', 'data'=> $videos]);     
+             $videos=Video::wherein('id',$video_id)->get();
 
-         } 
+             foreach ($videos as $k => $v) {
+
+                 $video_img = str_replace('\\', '/', asset('app-assets/images/video/' . $v->video_img));
+
+                 $club_search_video[$k]['id'] = $v->id;
+                 $club_search_video[$k]['title'] = $v->video_title;
+                 $club_search_video[$k]['description'] = $v->video_description;
+                 $club_search_video[$k]['image'] = $video_img;
+
+             }
+             return response()->json(['success' => true, 'status' => $this->successStatus, 'message' => 'Videos in Club found.', 'data'=> $club_search_video]);
+
+
+         }
         else if($players!=null){
 
-           $videos = Videoplayer::wherein('Player_id',$players)->get();
+           $video_id = Videoplayer::select('Video_id')->wherein('Player_id',$players)->get();
+           $videos=Video::wherein('id',$video_id)->get();
 
-           return response()->json(['success' => true, 'status' => $this->successStatus, 'message' => 'Videos found.', 'data'=> $videos]);   
-          
-         }     
-          
+            foreach ($videos as $k => $v) {
+
+                $video_img = str_replace('\\', '/', asset('app-assets/images/video/' . $v->video_img));
+
+                $player_search_video[$k]['id'] = $v->id;
+                $player_search_video[$k]['title'] = $v->video_title;
+                $player_search_video[$k]['description'] = $v->video_description;
+                $player_search_video[$k]['image'] = $video_img;
+
+            }
+            return response()->json(['success' => true, 'status' => $this->successStatus, 'message' => 'Videos in Player found.', 'data'=> $player_search_video]);
+
+
+         }
+
         else {
              return response()->json(['success' => false, 'status' => $this->HTTP_NOT_FOUND, 'message' => 'No Video found.']);
             }
-    
 
 
-    
+
+
 }
 }
 
