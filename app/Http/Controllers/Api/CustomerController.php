@@ -117,8 +117,16 @@ class CustomerController extends Controller
         $request->id = $id;
 
         $response = $request->handleProfileUpdate();
-            dd($response);
-//        return redirect()->route('customer.index')->with('usereditsuccess','User Edit Successfully');
+
+        if ($response) {
+
+            return response()->json(['success' => true, 'status' => $this->successStatus, 'message' => 'Profile Updated.']);
+
+        } else {
+
+            return response()->json(['success' => false, 'status' => $this->HTTP_NOT_FOUND, 'message' => 'Profile Not Updated.']);
+        }
+
     }
 
     /**
