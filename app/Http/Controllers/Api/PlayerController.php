@@ -71,6 +71,7 @@ class PlayerController extends Controller
 
                 $array[$k]['id'] = $v->id;
                 $array[$k]['title'] = $v->video_title;
+                $array[$k]['description'] = $v->video_description;
                 $array[$k]['image'] = $video_img;
 
             }

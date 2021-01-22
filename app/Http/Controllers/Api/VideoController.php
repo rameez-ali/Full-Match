@@ -33,9 +33,20 @@ class VideoController extends Controller
      */
     public function videos()
     {
-        $video = Video::all();
-        return response()->json(['success' => true, 'status' => $this->successStatus, 'message' => 'Record found.', 'data'=> $video]);
-    
+        $all_videos_array = array();
+        $videos = Video::all();
+        foreach ($videos as $k => $v) {
+
+            $video_img = str_replace('\\', '/', asset('app-assets/images/video/' . $v->video_img));
+
+            $all_videos_array[$k]['id'] = $v->id;
+            $all_videos_array[$k]['title'] = $v->video_title;
+            $all_videos_array[$k]['description'] = $v->video_description;
+            $all_videos_array[$k]['image'] = $video_img;
+
+        }
+        return response()->json(['success' => true, 'status' => $this->successStatus, 'message' => 'All Videos found.', 'data'=> $all_videos_array]);
+
     }
 
     /**
@@ -47,6 +58,9 @@ class VideoController extends Controller
 
     public function video_details($id)
     {
+        $season_array = array();
+        $category_array = array();
+
        //Getting league_id of that specific video
         $leagues_id_collection = Video::select('leagues_id')->where('id', $id)->get()->first();
 
@@ -58,25 +72,46 @@ class VideoController extends Controller
         //Converting collection to string
         $category_id=$category_id_collection->Category_id;
 
-        
-       //check if leagues_id exists or not
+
+        //if league is assocaited
        if(isset($league_id))
        {
            $videos = Video::where('leagues_id', $league_id)->get();
-          return response()->json(['success' => true, 'status' => $this->successStatus, 'message' => 'Record found.', 'data'=> $videos]);
+           foreach ($videos as $k => $v) {
+
+               $video_img = str_replace('\\', '/', asset('app-assets/images/video/' . $v->video_img));
+
+               $season_array[$k]['id'] = $v->id;
+               $season_array[$k]['title'] = $v->video_title;
+               $season_array[$k]['description'] = $v->video_description;
+               $season_array[$k]['image'] = $video_img;
+
+           }
+          return response()->json(['success' => true, 'status' => $this->successStatus, 'message' => 'Season Realted Videos found.', 'data'=> $season_array]);
 
        }
+       //in case league is not assocaited
        else{
 
            $videos = Video::where('Category_id', $category_id)->get();
-            
-            return response()->json(['success' => false, 'status' => $this->successStatus, 'message' => 'Category Related Video Found.','data'=> $videos]);
+
+           foreach ($videos as $k => $v) {
+
+               $video_img = str_replace('\\', '/', asset('app-assets/images/video/' . $v->video_img));
+
+               $category_array[$k]['id'] = $v->id;
+               $category_array[$k]['title'] = $v->video_title;
+               $category_array[$k]['description'] = $v->video_description;
+               $category_array[$k]['image'] = $video_img;
+
+           }
+           return response()->json(['success' => true, 'status' => $this->successStatus, 'message' => 'Category Realted Videos found.', 'data'=> $category_array]);
 
        }
-        
-     
-          
-      
+
+
+
+
      }
 
 

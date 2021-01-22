@@ -12,9 +12,54 @@
                                         Videos
                                         <a href="{{ URL::route('video-form.create') }}" class="waves-effect waves-light btn gradient-45deg-purple-deep-orange gradient-shadow right">Add</a>
                                     </h4>
+                                    <form action="{{route('video-form-search.search')}}" method="post" role="search">
+                                        {{ csrf_field() }}
+                                        <div class="input-field col s12">
+
+                                            <input type="text" class="form-control" name="q"
+                                                   placeholder="Search Video by video title, player name or club name"> <span class="input-group-btn">
+                                                <button type="submit" class="dt-button buttons-excel buttons-html5 waves-effect waves-light btn gradient-45deg-purple-deep-orange gradient-shadow">Search Videos
+                                                   <span class="glyphicon glyphicon-search"></span>
+                                                </button>
+                                                  </span>
+
+                                        </div>
+                                    </form>
                                     <div class="row">
                                         <div class="col s14">
-                                            <h2></h2>
+                                            @if ($videoaddsuccess = Session::get('videoaddsuccess'))
+                                                <div class="card-alert card gradient-45deg-green-teal">
+                                                    <div class="card-content white-text">
+                                                        <p>
+                                                            <i class="material-icons"></i>{{ $videoaddsuccess }}</p>
+                                                    </div>
+                                                    <button type="button" class="close white-text" data-dismiss="alert" aria-label="Close">
+                                                        <span aria-hidden="true">×</span>
+                                                    </button>
+                                                </div>
+                                            @endif
+                                            @if ($videoeditsuccess = Session::get('videoeditsuccess'))
+                                                <div class="card-alert card gradient-45deg-green-teal">
+                                                    <div class="card-content white-text">
+                                                        <p>
+                                                            <i class="material-icons"></i>{{ $videoeditsuccess }}</p>
+                                                    </div>
+                                                    <button type="button" class="close white-text" data-dismiss="alert" aria-label="Close">
+                                                        <span aria-hidden="true">×</span>
+                                                    </button>
+                                                </div>
+                                            @endif
+                                            @if ($videodelsuccess = Session::get('videodelsuccess'))
+                                                <div class="card-alert card gradient-45deg-green-teal">
+                                                    <div class="card-content white-text">
+                                                        <p>
+                                                            <i class="material-icons"></i>{{ $videodelsuccess }}</p>
+                                                    </div>
+                                                    <button type="button" class="close white-text" data-dismiss="alert" aria-label="Close">
+                                                        <span aria-hidden="true">×</span>
+                                                    </button>
+                                                </div>
+                                            @endif
                                             <table id="page-length-option" class="display">
                                                 <thead>
                                                 <tr>
