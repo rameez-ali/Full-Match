@@ -72,6 +72,7 @@ public $HTTP_NOT_FOUND = 404;
 
                 $array[$k]['id'] = $v->id;
                 $array[$k]['title'] = $v->video_title;
+                $array[$k]['description'] = $v->video_description;
                 $array[$k]['image'] = $video_img;
 
             }

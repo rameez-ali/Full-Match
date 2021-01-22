@@ -478,6 +478,45 @@ class ProjectVideoViewController extends Controller
 
     }
 
+    public function search(Request $searchword){
+
+
+        $video = Video::where('video_title', $searchword->q)
+            ->orWhere('video_title', 'like', '%' . $searchword->q. '%')
+            ->get();
+
+        $clubs  = Club::select('id')->where('club_name', $searchword->q)
+            ->orWhere('club_name', 'like', '%' . $searchword->q. '%')
+            ->first();
+
+        $players = Player::where('player_name', $searchword->q)
+            ->orWhere('player_name', 'like', '%' . $searchword->q. '%')
+            ->first();
+
+        if(count($video)){
+
+            return view('admin.video.index', compact('video'));
+
+        }
+        else if($clubs!=null){
+
+            $video = Videoclub::wherein('Club_id',$clubs)->get();
+
+            return view('admin.video.index', compact('video'));
+        }
+        else if($players!=null){
+
+            $video = Videoplayer::wherein('Player_id',$players)->get();
+
+            return view('admin.video.index', compact('video'));
+        }
+
+        else {
+            $video = Video::all();
+            return view('admin.video.index', compact('video'));
+        }
+    }
+
 
 
 }

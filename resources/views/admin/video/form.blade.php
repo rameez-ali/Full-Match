@@ -170,7 +170,12 @@
                                               </div>
 
                                                <div class="input-field col s12" id="row_dim">
-                                               <p for="promo_video_url">Promo Video URL *</p>
+                                               <p for="promo_video_url">Promo Video URL </p>
+                                                   <input type="url" name="video_promo" class="dimension" >
+                                               </div>
+
+                                               <div class="input-field col s12" id="row_dim_rquired">
+                                                   <p for="promo_video_url">Promo Video URL *</p>
                                                    <input type="url" name="video_promo" class="dimension" required>
                                                </div>
                     </div>
@@ -283,11 +288,19 @@
     <script>
         $(function() {
             $('#row_dim').show();
+            $('#row_dim_required').show();
+            $('#row_dim').hide();
+            $('#row_dim_required').hide();
             $('#country').change(function(){
-                if($('#country').val() != 'null') {
-                    $('#row_dim').hide();
-                } else {
+                // alert($('#country').val());
+                if($('#country').val() != '') {
+                    $('#row_dim_rquired').hide();
                     $('#row_dim').show();
+
+                } else {
+                    $('#row_dim').hide();
+                    $('#row_dim_rquired').show();
+
                 }
             });
         });

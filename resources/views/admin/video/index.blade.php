@@ -12,6 +12,19 @@
                                         Videos
                                         <a href="{{ URL::route('video-form.create') }}" class="waves-effect waves-light btn gradient-45deg-purple-deep-orange gradient-shadow right">Add</a>
                                     </h4>
+                                    <form action="{{route('video-form-search.search')}}" method="post" role="search">
+                                        {{ csrf_field() }}
+                                        <div class="input-field col s12">
+
+                                            <input type="text" class="form-control" name="q"
+                                                   placeholder="Search Video by video title, player name or club name"> <span class="input-group-btn">
+                                                <button type="submit" class="dt-button buttons-excel buttons-html5 waves-effect waves-light btn gradient-45deg-purple-deep-orange gradient-shadow">Search Videos
+                                                   <span class="glyphicon glyphicon-search"></span>
+                                                </button>
+                                                  </span>
+
+                                        </div>
+                                    </form>
                                     <div class="row">
                                         <div class="col s14">
                                             @if ($videoaddsuccess = Session::get('videoaddsuccess'))
