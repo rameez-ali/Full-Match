@@ -53,10 +53,10 @@
         <li class="bold"><a class="waves-effect waves-cyan " href="{{ route('seasonpart-form.index') }}"><i class="material-icons">person_outline</i><span class="menu-title" data-i18n="User Profile">Season Part Sorting</span></a>
         </li>
 
-        <li class="navigation-header"><a class="navigation-header-text">Charts</a><i class="navigation-header-icon material-icons">more_horiz</i>
-        </li>
-
-
+        <li  class="bold"><a class="waves-effect waves-cyan " href="{{ route('customer.logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><i class="material-icons">keyboard_tab</i>{{ __('Logout') }}</a></li>
+        <form id="logout-form" action="{{ route('customer.logout') }}" method="POST" class="d-none">
+            @csrf
+        </form>
 
     </ul>
 
