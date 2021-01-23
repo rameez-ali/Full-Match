@@ -43,15 +43,26 @@
                                                 </div>
 
                                                 <div class="input-field col s12">
-                                                    <textarea name="content" id="content" value="{{old('decs',$pages->content) }}" class="materialize-textarea validate">{{ old('decs',$pages->content) }}</textarea>
+                                                    <textarea name="content" id="content" value="{{old('content',$pages->content) }}" class="materialize-textarea validate" required>{{ old('content',$pages->content) }}</textarea>
                                                     <label for="page-content" class="active">{{ __('customer.decs') }}</label>
 
-                                                    @error('decs')
+                                                    @error('content')
                                                     <span class="invalid-feedback" role="alert">
                                                         <strong>{{ $message }}</strong>
                                                     </span>
                                                     @enderror
 
+                                                </div>
+
+                                                <div class="input-field col s12">
+                                                    <textarea name="content_ar" id="content_ar" value="{{old('content_ar',$pages->content_ar) }}" class="materialize-textarea validate" required>{{ old('content_ar',$pages->content_ar) }}</textarea>
+                                                    <label for="page-content" class="active">{{ __('customer.decs_ar') }}</label>
+
+                                                    @error('content_ar')
+                                                    <span class="invalid-feedback" role="alert">
+                                                        <strong>{{ $message }}</strong>
+                                                    </span>
+                                                    @enderror
 
                                                 </div>
 
@@ -79,6 +90,9 @@
         /*
      * Form Validation
      */
+        $("#content").keyup(function(){
+            $("#content_ar").val(this.value);
+        });
         $(function () {
 
             $('select[required]').css({
@@ -99,6 +113,10 @@
                         required: true,
                     },
                     content: {
+                        required: true,
+                        minlength: 10
+                    },
+                    content_ar: {
                         required: true,
                         minlength: 10
                     },
