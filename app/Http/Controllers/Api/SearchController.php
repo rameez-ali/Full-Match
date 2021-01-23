@@ -113,6 +113,62 @@ class SearchController extends Controller
 
 
 }
+
+     public function searchclub($searchword){
+
+        $array=array();
+
+         $clubs  = Club::where('club_name', $searchword)
+             ->orWhere('club_name', 'like', '%' . $searchword. '%')
+             ->get();
+
+         if (!$clubs->isEmpty()) {
+
+             foreach ($clubs as $k => $v) {
+
+                 $logo = str_replace('\\', '/', asset('app-assets/images/club/' . $v->club_logo));
+
+                 $array[$k]['id'] = $v->id;
+                 $array[$k]['name'] = $v->club_name;
+                 $array[$k]['image'] = $logo;
+
+             }
+             return response()->json(['success' => true, 'status' => $this->successStatus, 'message' => 'Club found.', 'data' => $array]);
+
+         }else{
+             return response()->json(['error' => false, 'status' => $this->HTTP_NOT_FOUND, 'message' => 'No record found.', 'data' => []]);
+         }
+
+     }
+
+    public function searchplayer($searchword){
+        $array=array();
+
+        $players  = Player::where('player_name', $searchword)
+            ->orWhere('player_name', 'like', '%' . $searchword. '%')
+            ->get();
+
+        if (!$players->isEmpty()) {
+
+            foreach ($players as $k => $v) {
+
+                $profile_image = str_replace('\\', '/', asset('app-assets/images/player/' . $v->player_profile_image));
+
+                $array[$k]['id'] = $v->id;
+                $array[$k]['name'] = $v->player_name;
+                $array[$k]['profile_image'] = $profile_image;
+
+
+            }
+            return response()->json(['success' => true, 'status' => $this->successStatus, 'message' => 'Player found.', 'data' => $array]);
+
+        }
+
+        else {
+            return response()->json(['success' => false, 'status' => $this->HTTP_NOT_FOUND, 'message' => 'Player Not Found found.', 'data' => []]);
+        }
+
+    }
 }
 
 

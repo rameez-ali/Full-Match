@@ -58,7 +58,7 @@ class PlayerController extends Controller
     {
            $array = array();
 
-            $video_players=Videoplayer::select('videos.id','videos.video_title','videos.video_img')
+            $video_players=Videoplayer::select('videos.id','videos.video_title','videos.video_img','videos.video_description')
             ->join('videos','videoplayers.Video_id' , '=' ,'videos.id')
             ->where('Player_id','=', $id)
             ->get();
