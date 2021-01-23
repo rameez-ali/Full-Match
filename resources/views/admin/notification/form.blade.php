@@ -36,9 +36,27 @@
                                                         @enderror
 
                                                     <div class="input-field col s12">
+                                                        <label for="notify_title_ar">{{ __('customer.title_ar') }}*</label>
+                                                        <input id="notify_title_ar" value="{{ old('notify_title_ar',$notification->notify_title_ar) }}" name="notify_title_ar" type="text" data-error=".errorTxt5" required>
+                                                        <small class="errorTxt5"></small>
+                                                    </div>
+
+                                                        @error('notify_title_ar')
+                                                        <span class="invalid-feedback" role="alert">
+                                                                        <strong>{{ $message }}</strong>
+                                                                    </span>
+                                                        @enderror
+
+                                                    <div class="input-field col s12">
                                                         <textarea id="notify_desc" name="notify_desc" value="{{ old('notify_desc',$notification->notify_text) }}"  class="materialize-textarea validate" data-error=".errorTxt2" required>{{ old('notify_desc',$notification->notify_text) }}</textarea>
                                                         <label for="notify_desc">{{ __('customer.decs') }}</label>
                                                         <small class="errorTxt2"></small>
+                                                    </div>
+
+                                                    <div class="input-field col s12">
+                                                        <textarea id="notify_desc_ar" name="notify_desc_ar" value="{{ old('notify_desc_ar',$notification->notify_text_ar) }}"  class="materialize-textarea validate" data-error=".errorTxt3" required>{{ old('notify_desc_ar',$notification->notify_text_ar) }}</textarea>
+                                                        <label for="notify_desc_ar">{{ __('customer.decs_ar') }}</label>
+                                                        <small class="errorTxt3"></small>
                                                     </div>
 
                                                     <div class="input-field col s12">
@@ -93,7 +111,12 @@
     /*
  * Form Validation
  */
-
+    $("#notify_title").keyup(function(){
+        $("#notify_title_ar").val(this.value);
+    });
+    $("#notify_desc").keyup(function(){
+        $("#notify_desc_ar").val(this.value);
+    });
     $(function () {
 
         $('.datepicker').datepicker({
@@ -114,7 +137,13 @@
                 notify_title: {
                     required: true,
                 },
+                notify_title_ar: {
+                    required: true,
+                },
                 notify_desc: {
+                    required: true,
+                },
+                notify_desc_ar: {
                     required: true,
                 },
             },
@@ -123,8 +152,14 @@
                 notify_title: {
                     required: "Enter Title",
                 },
+                notify_title_ar: {
+                    required: "Enter AR Title",
+                },
                 notify_desc: {
                     required: "Enter Description",
+                },
+                notify_desc_ar: {
+                    required: "Enter AR Description",
                 },
                 curl: "Enter your website",
             },

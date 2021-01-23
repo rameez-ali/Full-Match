@@ -33,7 +33,9 @@ class SubsPlanController extends Controller
 
                 $array[$k]['id'] = $v->id;
                 $array[$k]['title'] = $v->plan_title;
+                $array[$k]['title_ar'] = $v->plan_title_ar;
                 $array[$k]['description'] = $v->plan_Description;
+                $array[$k]['description_ar'] = $v->plan_Description_ar;
                 $array[$k]['price'] = $v->plan_price;
                 $array[$k]['duration_type'] = $v->duration_type;
                 $array[$k]['duration_value'] = $v->duration_value;

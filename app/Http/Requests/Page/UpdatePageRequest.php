@@ -27,6 +27,7 @@ class UpdatePageRequest extends FormRequest
         return [
             'name' => ['required', 'string'],
             'slug' => ['required', 'string'],
+            'content' => ['required', 'string'],
         ];
     }
     public function handle()
@@ -41,6 +42,7 @@ class UpdatePageRequest extends FormRequest
         $cmspage->name = $params['name'];
         $cmspage->slug = $params['slug'];
         $cmspage->content = $params['content'];
+        $cmspage->content_ar = $params['content_ar'];
 
         $cmspage->save();
 

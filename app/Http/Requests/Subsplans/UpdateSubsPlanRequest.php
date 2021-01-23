@@ -38,7 +38,9 @@ class UpdateSubsPlanRequest extends FormRequest
         $subsplan = Subs_plan::find($this->id);
 
         $subsplan->plan_title = $params['subp_title'];
+        $subsplan->plan_title_ar = $params['subp_title_ar'];
         $subsplan->plan_Description = $params['subp_desc'];
+        $subsplan->plan_Description_ar = $params['subp_desc_ar'];
         $subsplan->plan_price = $params['subp_price'];
 //        $subsplan->start_date = date('Y-m-d H:i:s',strtotime($params['subp_start_date']));
 //        $subsplan->end_date = date('Y-m-d H:i:s',strtotime($params['subp_end_date']));

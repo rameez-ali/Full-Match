@@ -1,5 +1,5 @@
 <!-- BEGIN: Header-->
-<header class="page-topbar" id="header">
+<header class="page-topbar" id="header" style="display: none !important;">
     <div class="navbar navbar-fixed">
         <nav class="navbar-main navbar-color nav-collapsible sideNav-lock navbar-light">
             <div class="nav-wrapper">

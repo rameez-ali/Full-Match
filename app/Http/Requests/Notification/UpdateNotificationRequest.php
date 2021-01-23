@@ -37,7 +37,9 @@ class UpdateNotificationRequest extends FormRequest
         $notif = Notification::find($this->id);
 
         $notif->notify_title = $params['notify_title'];
+        $notif->notify_title_ar = $params['notify_title_ar'];
         $notif->notify_text = $params['notify_desc'];
+        $notif->notify_text_ar = $params['notify_desc_ar'];
         $notif->notify_type = $params['notify_type'];
         $notif->lang = 'en';
 

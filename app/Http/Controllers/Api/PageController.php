@@ -28,6 +28,7 @@ class PageController extends Controller
                 $array['id'] = $cmspage->id;
                 $array['name'] = $cmspage->name;
                 $array['content'] = $cmspage->content;
+                $array['content_ar'] = $cmspage->content_ar;
 
             return response()->json(['success' => true, 'status' => $this->successStatus, 'message' => 'page found.', 'data' => $array]);
 
