@@ -18,8 +18,14 @@
                                             <h5>{{ __('customer.title') }}</h5>
                                             <p>{{ $notification->notify_title }}</p>
 
+                                            <h5>{{ __('customer.title_ar') }}</h5>
+                                            <p>{{ $notification->notify_title_ar }}</p>
+
                                             <h5>{{ __('customer.decs') }}</h5>
                                             <p>{{ $notification->notify_text }}</p>
+
+                                            <h5>{{ __('customer.decs_ar') }}</h5>
+                                            <p>{{ $notification->notify_text_ar }}</p>
 
                                             <h5>{{ __('customer.notification.notification_type') }}</h5>
                                             <p>@if($notification->notify_type == 1)
