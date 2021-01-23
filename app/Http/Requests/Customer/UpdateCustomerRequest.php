@@ -65,24 +65,20 @@ class UpdateCustomerRequest extends FormRequest
         $this->validated();
 
         $params = $this->all();
-        dd($params);
-        $user = User::find($this->id);
+
+        $user = User::find((int)$this->id);
 
         $user->name = $params['name'];
         $user->phone = $params['phone'];
-//        $user->email = $params['email'];
-        $user->status =isset($params['status']) ? 1  : 2; //status 1 for block by admin , 2 for unblock ,or active .
-
-        //$user->password = Hash::make($params['password']);
 
         $user->save();
 
-        $customer = Customer::find($this->id);
+        $customer = Customer::where('user_id',$this->id)->first();
 
         $customer->name = $params['name'];
-//        $customer->email = $params['email'];
-        if($this->has('avatar')){
-            $path = $this->file('avatar')->store('avatarDp');
+
+        if($this->has('logo')){
+            $path = $this->file('logo')->store('avatarDp');
             $customer->user_image = 'storage/app/public/'.$path;
         }
         $customer->save();
