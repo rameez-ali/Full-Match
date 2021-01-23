@@ -47,10 +47,12 @@ class ContactController extends Controller
          $result=$Contact->save();
 
          if($result){
-              return ["Result"=>"Thank you for submitting your query"];
+             return response()->json(['success' => true, 'status' => $this->successStatus, 'message' => 'Thank you message has been submitted .']);
+
          }
          else{
-             return ["Result"=>"Message has not been sent"];
+             return response()->json(['success' => false, 'status' => $this->HTTP_NOT_FOUND, 'message' => 'Your message has not been submitted.']);
+
          }
     }
 
