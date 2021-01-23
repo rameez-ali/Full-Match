@@ -54,9 +54,9 @@
                                                     </div>
 
                                                     <div class="input-field col s12">
-                                                        <textarea id="subp_desc_ar" name="subp_desc_ar" value="{{ old('subp_desc_ar',$subscriptionplan->plan_Description_ar) }}"  class="materialize-textarea validate" data-error=".errorTxt2" required>{{ old('subp_desc_ar',$subscriptionplan->plan_Description_ar) }}</textarea>
+                                                        <textarea id="subp_desc_ar" name="subp_desc_ar" value="{{ old('subp_desc_ar',$subscriptionplan->plan_Description_ar) }}"  class="materialize-textarea validate" data-error=".errorTxt9" required>{{ old('subp_desc_ar',$subscriptionplan->plan_Description_ar) }}</textarea>
                                                         <label for="subp_desc_ar">{{ __('customer.decs_ar') }}*</label>
-                                                        <small class="errorTxt2"></small>
+                                                        <small class="errorTxt9"></small>
                                                     </div>
 
                                                     <div class="input-field col s12">
