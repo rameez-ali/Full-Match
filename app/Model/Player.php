@@ -9,7 +9,7 @@ class Player extends Model
 {
 	use SoftDeletes;
     protected $fillable = [
-        'player_name','player_banner','player_profile_image','player_description','player_sorting',
+        'name_en','name_ar','player_banner','player_profile_image','description_en','description_ar','player_sorting',
     ];
     protected $dates = ['deleted_at'];
 }

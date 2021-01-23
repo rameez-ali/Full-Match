@@ -41,11 +41,13 @@ class ProjectCategoryGenreViewController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'genre_name'     => 'required'
+            'name_en'     => 'required',
+            'name_ar'     => 'required'
         ]);
 
         $form_data = array(
-            'genre_name'     =>   $request->genre_name,
+             'name_en'      =>   $request->name_en,
+             'name_ar'      =>   $request->name_ar,
             'genre_sorting'     =>   $request->genre_sorting
         );
 
@@ -88,7 +90,8 @@ class ProjectCategoryGenreViewController extends Controller
     {
 
         $form_data = array(
-            'genre_name'       =>   $request->genre_name,
+            'name_en'       =>   $request->name_en,
+            'name_ar'       =>   $request->name_ar,
             'genre_sorting'       =>   $request->genre_sorting
         );
 

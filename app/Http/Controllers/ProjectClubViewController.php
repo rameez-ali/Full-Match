@@ -39,10 +39,12 @@ class ProjectClubViewController extends Controller
     public function store(Request $request)
     {
          $request->validate([
-            'club_name'     => 'required',
-            'club_banner'         =>  'required|image|max:2048',
-            'club_logo'         =>  'required|image|max:2048',
-            'club_description'     => 'required'
+            'name_en'         => 'required',
+             'name_ar'        => 'required',
+            'club_banner'     =>  'required|image|max:2048',
+            'club_logo'       =>  'required|image|max:2048',
+            'description_en'  => 'required',
+             'description_ar' => 'required'
 
         ]);
 
@@ -55,10 +57,12 @@ class ProjectClubViewController extends Controller
         $image1->move(public_path('app-assets/images/club'), $new_name1);
 
         $form_data2 = array(
-            'club_name'     =>   $request->club_name,
+            'name_en'     =>   $request->name_en,
+            'name_ar'     =>   $request->name_ar,
             'club_banner'     =>   $new_name,
             'club_logo'     =>   $new_name1,
-            'club_description'     =>   $request->club_description,
+            'description_en'     =>   $request->description_en,
+            'description_ar'     =>   $request->description_ar,
             'club_sorting'     =>   $request->club_sorting
         );
 
@@ -102,7 +106,7 @@ class ProjectClubViewController extends Controller
      */
     public function update(Request $request, $id)
     {
-        
+
        $image_name1 = $request->hidden_image1;
         $image_name2 = $request->hidden_image2;
 
@@ -112,8 +116,10 @@ class ProjectClubViewController extends Controller
         if($image1 != '' || $image2 != '')
         {
             $request->validate([
-                'club_name'    =>  'required',
-                'club_description'    =>  'required',
+                'name_en'    =>  'required',
+                'name_ar'    =>  'required',
+                'description_en'    =>  'required',
+                'description_ar'    =>  'required',
                 'image1'         =>  'image|max:2048',
                 'image2'         =>  'image|max:2048'
             ]);
@@ -128,21 +134,25 @@ class ProjectClubViewController extends Controller
         else
         {
             $request->validate([
-                'club_name'    =>  'required',
+                'name_en'    =>  'required',
+                'name_ar'    =>  'required',
                 'hidden_image1'    =>  'required',
                 'hidden_image2'    =>  'required',
-                'club_description'    =>  'required'
+                'description_en'    =>  'required',
+                'description_ar'    =>  'required'
             ]);
         }
 
         $form_data = array(
-            'club_name'       =>   $request->club_name,
-            'club_description'       =>   $request->club_description,
+            'name_en'       =>   $request->name_en,
+            'name_ar'       =>   $request->name_ar,
+            'description_en'       =>   $request->description_en,
+            'description_ar'       =>   $request->description_ar,
             'club_banner'          =>   $image_name1,
             'club_logo'   =>   $image_name2,
             'club_sorting'         =>  $request->club_sorting
         );
-  
+
         Club::whereId($id)->update($form_data);
 
         return redirect('club-form')->with('clubeditsuccess','Club Updated Successfully');

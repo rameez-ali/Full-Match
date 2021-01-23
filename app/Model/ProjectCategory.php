@@ -11,7 +11,7 @@ class ProjectCategory extends Model
     use SoftDeletes;
 
     protected $fillable = [
-        'category_name','category_image','category_sorting',
+        'name_en','name_ar','category_image','category_sorting',
     ];
 
     protected $dates = ['deleted_at'];

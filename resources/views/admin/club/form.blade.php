@@ -17,12 +17,56 @@
                                             <form method="post" action="{{ route('club-form.store') }}" enctype="multipart/form-data">
                                             @csrf
                                               <div class="row">
-                                            
+
                                                     <div class="input-field col s12">
-                                                    <p for="club_name">Add Club Name * </p>
-                                                    <input id="club_name" name="club_name" type="text"  required data-error=".errorTxt1">
+                                                    <p for="name_en">Add Club Name EN * </p>
+                                                    <input id="name_en" name="name_en" type="text"  required data-error=".errorTxt1">
                                                     <small class="errorTxt1"></small>
-                                                    @error('club_name')
+                                                    @error('name_en')
+                                                    <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                    </span>
+                                                    @enderror
+                                                    </div>
+
+                                                  <div class="input-field col s12">
+                                                      <p for="name_ar">Add Club Name AR * </p>
+                                                      <input id="name_ar" name="name_ar" type="text"  required data-error=".errorTxt2">
+                                                      <small class="errorTxt2"></small>
+                                                      @error('name_ar')
+                                                      <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                    </span>
+                                                      @enderror
+                                                  </div>
+
+                                                    <div class="input-field col s12">
+                                                    <p for="description_en">Add Club Description EN * </p>
+                                                    <input id="description_en" name="description_en" type="text"  required data-error=".errorTxt3">
+                                                    <small class="errorTxt3"></small>
+                                                    @error('description_en')
+                                                    <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                    </span>
+                                                    @enderror
+                                                    </div>
+
+                                                  <div class="input-field col s12">
+                                                      <p for="description_ar">Add Club Description AR * </p>
+                                                      <input id="description_ar" name="description_ar" type="text"  required data-error=".errorTxt4">
+                                                      <small class="errorTxt4"></small>
+                                                      @error('description_ar')
+                                                      <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                    </span>
+                                                      @enderror
+                                                  </div>
+
+                                                    <div class="input-field col s12">
+                                                    <p for="club_banner"> Add Club Banner * </p>
+                                                    <input type="file" name="club_banner" id="club_banner" class="dropify mt-3" data-default-file="" data-max-file-size="10M" data-allowed-file-extensions="png jpg jpeg" required data-error=".errorTxt5" />
+                                                    <small class="errorTxt5"></small>
+                                                    @error('club_banner')
                                                     <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>
                                                     </span>
@@ -30,31 +74,9 @@
                                                     </div>
 
                                                     <div class="input-field col s12">
-                                                    <p for="club_description">Add Club Description * </p>
-                                                    <input id="club_description" name="club_description" type="text"  required data-error=".errorTxt2">
-                                                    <small class="errorTxt2"></small>
-                                                    @error('club_description')
-                                                    <span class="invalid-feedback" role="alert">
-                                                    <strong>{{ $message }}</strong>
-                                                    </span>
-                                                    @enderror
-                                                    </div>
- 
-                                                    <div class="input-field col s12">
-                                                    <p for="club_banner"> Add Club Banner * </p>
-                                                    <input type="file" name="club_banner" id="club_banner" class="dropify mt-3" data-default-file="" data-max-file-size="10M" data-allowed-file-extensions="png jpg jpeg" required data-error=".errorTxt3" />
-                                                    <small class="errorTxt3"></small>
-                                                    @error('club_banner')
-                                                    <span class="invalid-feedback" role="alert">
-                                                    <strong>{{ $message }}</strong>
-                                                    </span>
-                                                    @enderror
-                                                    </div>
-                 
-                                                    <div class="input-field col s12">
                                                     <p for="club_logo"> Add Club Logo * </p>
-                                                    <input type="file" name="club_logo" id="club_logo" class="dropify mt-3" data-default-file="" data-max-file-size="10M" data-allowed-file-extensions="png jpg jpeg" required data-error=".errorTxt4" />
-                                                    <small class="errorTxt4"></small>
+                                                    <input type="file" name="club_logo" id="club_logo" class="dropify mt-3" data-default-file="" data-max-file-size="10M" data-allowed-file-extensions="png jpg jpeg" required data-error=".errorTxt6" />
+                                                    <small class="errorTxt6"></small>
                                                     @error('club_logo')
                                                     <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>
@@ -72,7 +94,7 @@
                                                           <i class="material-icons right">send</i>
                                                        </button>
                                                    </div>
-                                              </div> 
+                                              </div>
                                              </form>
                                         </div>
                                     </div>

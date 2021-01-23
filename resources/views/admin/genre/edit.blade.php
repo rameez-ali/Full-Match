@@ -17,24 +17,35 @@
                                         <form method="post" action="{{ route('genre-form.update', $genre->id) }}" enctype="multipart/form-data">
                                         @csrf
                                         @method('PATCH')
-                                       
+
                                         <div class="row">
                                           <div class="input-field col s12">
-                                          <label for="category_name">Edit Genre Name * </label>
-                                          <input type="text" name="genre_name" value="{{ $genre->genre_name }}" class="form-control input-lg" data-error=".errorTxt1" required />
+                                          <label for="name_en">Edit Genre Name EN * </label>
+                                          <input type="text" name="name_en" value="{{ $genre->name_en }}" class="form-control input-lg" data-error=".errorTxt1" required />
                                           <small class="errorTxt1"></small>
-                                          @error('genre_name')
+                                          @error('name_en')
                                          <span class="invalid-feedback" role="alert">
                                          <strong>{{ $message }}</strong>
                                          </span>
                                          @enderror
                                           </div>
-                                       
+
+                                            <div class="input-field col s12">
+                                                <label for="name_ar">Edit Genre Name AR * </label>
+                                                <input type="text" name="name_ar" value="{{ $genre->name_ar }}" class="form-control input-lg" data-error=".errorTxt1" required />
+                                                <small class="errorTxt1"></small>
+                                                @error('name_ar')
+                                                <span class="invalid-feedback" role="alert">
+                                         <strong>{{ $message }}</strong>
+                                         </span>
+                                                @enderror
+                                            </div>
+
                                            <div class="input-field col s12">
                                            <label for="category_name">Edit Genre Sorting </label>
                                            <input type="number" name="genre_sorting" value="{{ $genre->genre_sorting }}" min="1" class="form-control input-lg" />
                                             </div>
-                                       
+
                                             <div class="input-field col s12">
                                                 <button class="btn waves-effect waves-light right submit" type="submit" name="action">Submit
                                                     <i class="material-icons right">send</i>

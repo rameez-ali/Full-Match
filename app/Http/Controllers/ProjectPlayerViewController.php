@@ -39,11 +39,13 @@ class ProjectPlayerViewController extends Controller
     public function store(Request $request)
     {
          $request->validate([
-            'player_name'     => 'required',
+            'name_en'     => 'required',
+             'name_ar'     => 'required',
             'player_banner'         =>  'required|image|max:2048',
             'player_profile_image'  =>  'required|image|max:2048',
-            'player_description'     => 'required'        
-            ]);
+            'description_en'     => 'required',
+             'description_ar'     => 'required'
+         ]);
 
         $image = $request->file('player_banner');
         $new_name = rand() . '.' . $image->getClientOriginalExtension();
@@ -52,12 +54,14 @@ class ProjectPlayerViewController extends Controller
         $image1 = $request->file('player_profile_image');
         $new_name1 = rand() . '.' . $image1->getClientOriginalExtension();
         $image1->move(public_path('app-assets/images/player'), $new_name1);
-       
+
         $form_data2 = array(
-            'player_name'     =>   $request->player_name,
+            'name_en'     =>   $request->name_en,
+            'name_ar'     =>   $request->name_ar,
             'player_banner'     =>   $new_name,
             'player_profile_image'     =>   $new_name1,
-            'player_description'     =>   $request->player_description,
+            'description_en'     =>   $request->description_en,
+            'description_ar'     =>   $request->description_ar,
             'player_sorting'     =>   $request->player_sorting
         );
 
@@ -65,8 +69,8 @@ class ProjectPlayerViewController extends Controller
         Player::create($form_data2);
 
         return redirect('player-form')->with('playeraddsuccess','Player Added Successfully');
-        
-       
+
+
     }
 
     /**
@@ -110,8 +114,10 @@ class ProjectPlayerViewController extends Controller
         if($image1 != '' || $image2 != '')
         {
             $request->validate([
-                'player_name'    =>  'required',
-                'player_description'    =>  'required',
+                'name_en'    =>  'required',
+                'name_ar'    =>  'required',
+                'description_en'    =>  'required',
+                'description_ar'    =>  'required',
                 'image1'         =>  'image|max:2048',
                 'image2'         =>  'image|max:2048'
             ]);
@@ -127,21 +133,25 @@ class ProjectPlayerViewController extends Controller
         else
         {
             $request->validate([
-                'player_name'    =>  'required',
+                'name_en'    =>  'required',
+                'name_ar'    =>  'required',
                 'hidden_image1'    =>  'required',
                 'hidden_image2'    =>  'required',
-                'player_description'    =>  'required'
+                'description_en'    =>  'required',
+                'description_ar'    =>  'required'
             ]);
         }
 
         $form_data = array(
-            'player_name'       =>   $request->player_name,
-            'player_description'       =>   $request->player_description,
+            'name_en'       =>   $request->name_en,
+            'name_ar'       =>   $request->name_ar,
+            'description_en'       =>   $request->description_en,
+            'description_ar'       =>   $request->description_ar,
             'player_banner'          =>   $image_name1,
             'player_profile_image'   =>   $image_name2,
             'player_sorting'         =>  $request->player_sorting
         );
-  
+
         Player::whereId($id)->update($form_data);
 
         return redirect('player-form')->with('playereditsuccess','Player Updated Successfully');

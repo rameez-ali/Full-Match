@@ -40,8 +40,10 @@ class ProjectCategoryViewController extends Controller
      */
     public function store(Request $request)
     {
+        //dd($request);
         $request->validate([
-            'category_name'     => 'required',
+            'name_en'     => 'required',
+            'name_ar'     => 'required',
             'category_image'     =>  'required|image|max:2048',
             'genre'              =>  'required'
         ]);
@@ -51,12 +53,13 @@ class ProjectCategoryViewController extends Controller
         $new_name = rand() . '.' . $image->getClientOriginalExtension();
         $image->move(public_path('app-assets/images/category'), $new_name);
         $form_data = array(
-            'category_name'      =>   $request->category_name,
+            'name_en'      =>   $request->name_en,
+            'name_ar'      =>   $request->name_ar,
             'category_image'     =>   $new_name,
             'category_sorting'   =>   $request->category_sorting
         );
 
-        $xyz = ProjectCategory::create($form_data);
+         ProjectCategory::create($form_data);
 
         $id = DB::table('project_categories')->orderBy('id', 'DESC')->value('id');
 
@@ -124,7 +127,8 @@ class ProjectCategoryViewController extends Controller
         if($image != '')
         {
             $request->validate([
-                'category_name'    =>  'required',
+                'name_en'    =>  'required',
+                'name_ar'    =>  'required',
                 'image'         =>  'image|max:2048',
                 'genre'         =>   'required'
             ]);
@@ -135,13 +139,15 @@ class ProjectCategoryViewController extends Controller
         else
         {
             $request->validate([
-                'category_name'    =>  'required',
+                'name_en'    =>  'required',
+                'name_ar'    =>  'required',
                 'genre'            => 'required'
             ]);
         }
 
         $form_data = array(
-            'category_name'       =>   $request->category_name,
+            'name_en'       =>   $request->name_en,
+            'name_ar'       =>   $request->name_ar,
             'category_image'            =>   $image_name,
             'category_sorting'       =>   $request->category_sorting
         );
