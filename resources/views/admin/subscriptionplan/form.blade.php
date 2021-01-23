@@ -30,14 +30,32 @@
                                                     </div>
 
                                                         @error('subp_title')
-                                                        <span class="invalid-feedback" role="alert">
+                                                                <span class="invalid-feedback" role="alert">
                                                                     <strong>{{ $message }}</strong>
                                                                 </span>
+                                                        @enderror
+
+                                                        <div class="input-field col s12">
+                                                            <label for="subp_title_ar">{{ __('customer.title_ar') }}*</label>
+                                                            <input id="subp_title_ar" value="{{ old('subp_title_ar',$subscriptionplan->plan_title_ar) }}" name="subp_title_ar" type="text" data-error=".errorTxt8" required>
+                                                            <small class="errorTxt8"></small>
+                                                        </div>
+
+                                                        @error('subp_title_ar')
+                                                            <span class="invalid-feedback" role="alert">
+                                                                <strong>{{ $message }}</strong>
+                                                            </span>
                                                         @enderror
 
                                                     <div class="input-field col s12">
                                                         <textarea id="subp_desc" name="subp_desc" value="{{ old('subp_desc',$subscriptionplan->plan_Description) }}"  class="materialize-textarea validate" data-error=".errorTxt2" required>{{ old('subp_title',$subscriptionplan->plan_Description) }}</textarea>
                                                         <label for="subp_desc">{{ __('customer.subsplan.subsplan_decs') }}*</label>
+                                                        <small class="errorTxt2"></small>
+                                                    </div>
+
+                                                    <div class="input-field col s12">
+                                                        <textarea id="subp_desc_ar" name="subp_desc_ar" value="{{ old('subp_desc_ar',$subscriptionplan->plan_Description_ar) }}"  class="materialize-textarea validate" data-error=".errorTxt2" required>{{ old('subp_desc_ar',$subscriptionplan->plan_Description_ar) }}</textarea>
+                                                        <label for="subp_desc_ar">{{ __('customer.decs_ar') }}*</label>
                                                         <small class="errorTxt2"></small>
                                                     </div>
 
@@ -122,7 +140,12 @@
     /*
  * Form Validation
  */
-
+    $("#subp_title").keyup(function(){
+        $("#subp_title_ar").val(this.value);
+    });
+    $("#subp_desc").keyup(function(){
+        $("#subp_desc_ar").val(this.value);
+    });
     $(function () {
 
         $('.datepicker').datepicker({

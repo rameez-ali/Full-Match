@@ -18,8 +18,14 @@
                                             <h5>{{ __('customer.title') }}</h5>
                                             <p>{{ $subscription->plan_title }}</p>
 
+                                            <h5>{{ __('customer.title_ar') }}</h5>
+                                            <p>{{ $subscription->plan_title_ar }}</p>
+
                                             <h5>{{ __('customer.decs') }}</h5>
                                             <p>{{ $subscription->plan_Description }}</p>
+
+                                            <h5>{{ __('customer.decs_ar') }}</h5>
+                                            <p>{{ $subscription->plan_Description_ar }}</p>
 
                                             <h5>{{ __('customer.subsplan.subsplan_price') }}</h5>
                                             <p>{{ $subscription->plan_price }}</p>

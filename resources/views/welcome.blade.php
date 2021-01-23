@@ -74,9 +74,9 @@
                     @else
                         <a href="{{ route('customer.login.show') }}">Login</a>
 
-                        @if (Route::has('customer.register'))
-                            <a href="{{ route('customer.register') }}">Register</a>
-                        @endif
+{{--                        @if (Route::has('customer.register'))--}}
+{{--                            <a href="{{ route('customer.register') }}">Register</a>--}}
+{{--                        @endif--}}
                     @endauth
                 </div>
             @endif

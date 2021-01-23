@@ -10,6 +10,6 @@ class Subs_plan extends Model
     use SoftDeletes;
 
     protected $fillable = [
-       'duration_type', 'duration_value',
+       'duration_type', 'duration_value','plan_title_ar','plan_Description_ar',
     ];
 }

@@ -38,7 +38,9 @@ class CreateSubsPlanRequest extends FormRequest
         $sub_plan = new Subs_plan();
 
         $sub_plan->plan_title = $params['subp_title'];
+        $sub_plan->plan_title_ar = $params['subp_title_ar'];
         $sub_plan->plan_Description = $params['subp_desc'];
+        $sub_plan->plan_Description_ar = $params['subp_desc_ar'];
         $sub_plan->plan_price = $params['subp_price'];
         $sub_plan->lang = "en";
 //        $sub_plan->start_date = date('Y-m-d H:i:s',strtotime($params['subp_start_date']));
