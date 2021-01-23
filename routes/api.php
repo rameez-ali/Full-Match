@@ -75,5 +75,8 @@ Route::group(['middleware' => 'auth:api'], function(){
 
 Route::get('/search/{string}', [SearchController::class , 'search']);
 
+Route::get('/searchclub/{string}', [SearchController::class , 'searchclub']);
+Route::get('/searchplayer/{string}', [SearchController::class , 'searchplayer']);
+
 Route::get('/category', [CategoryController::class , 'gethomepageinfo']);
 Route::get('/category/{id}', [CategoryController::class , 'getcategoryinfo']);

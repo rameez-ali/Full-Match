@@ -8,6 +8,7 @@ use App\ProjectCategory;
 use App\Model\Videoclub;
 use App\Model\Contact;
 use App\Model\Fullmatchcontact;
+use Validator;
 
 class ContactController extends Controller
 {
@@ -25,13 +26,20 @@ class ContactController extends Controller
     {
         $contactus = Fullmatchcontact::all();
         return response()->json(['success' => true, 'status' => $this->successStatus, 'message' => 'Record found.', 'data'=> $contactus]);
-    
+
     }
 
 
     public function query(Request $request)
     {
-
+        $validator = Validator::make($request->input(), [
+            'name' => 'required',
+            'email' => 'required',
+            'message' => 'required',
+        ]);
+        if($validator->fails()){
+            return response()->json(['error'=>$validator->errors()], 401);
+        }
          $Contact = new Contact;
          $Contact->name=$request->name;
          $Contact->email=$request->email;
@@ -46,5 +54,5 @@ class ContactController extends Controller
          }
     }
 
-    
+
 }

@@ -59,7 +59,7 @@ public $HTTP_NOT_FOUND = 404;
 
         $array = array();
 
-        $video_clubs=Videoclub::select('videos.id','videos.video_title','videos.video_img')
+        $video_clubs=Videoclub::select('videos.id','videos.video_title','videos.video_img','videos.video_description')
             ->join('videos','videoclubs.Video_id' , '=' ,'videos.id')
             ->where('Club_id','=', $id)
             ->get();

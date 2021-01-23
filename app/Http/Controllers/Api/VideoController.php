@@ -60,6 +60,9 @@ class VideoController extends Controller
     {
         $season_array = array();
         $category_array = array();
+        $specific_video_array=array();
+
+
 
        //Getting league_id of that specific video
         $leagues_id_collection = Video::select('leagues_id')->where('id', $id)->get()->first();
@@ -91,7 +94,7 @@ class VideoController extends Controller
 
        }
        //in case league is not assocaited
-       else{
+       elseif(isset($category_id)) {
 
            $videos = Video::where('Category_id', $category_id)->get();
 
@@ -106,6 +109,10 @@ class VideoController extends Controller
 
            }
            return response()->json(['success' => true, 'status' => $this->successStatus, 'message' => 'Category Realted Videos found.', 'data'=> $category_array]);
+
+       }
+       else{
+           return response()->json(['success' => false, 'status' => $this->HTTP_NOT_FOUND, 'message' => 'No Videos found.']);
 
        }
 
