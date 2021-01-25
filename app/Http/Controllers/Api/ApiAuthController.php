@@ -8,6 +8,7 @@ use App\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
 
 class ApiAuthController extends Controller
 {
@@ -26,33 +27,43 @@ class ApiAuthController extends Controller
 
     public function signup(Request $request)
     {
-        $request->validate([
+        $validator = Validator::make($request->all(), [
             'name' => 'required|string',
             'phone' => 'required |string | min:8',
             'email' => 'required|string|email|unique:users',
             'password' => 'required|string|confirmed | min:6 | max:32',
             'password_confirmation' => 'required',
         ]);
-        $user = new User([
-            'name' => $request->name,
-            'phone' => $request->phone,
-            'email' => $request->email,
-            'password' => bcrypt($request->password)
-        ]);
-        $user->save();
 
-        $customer = new customer([
-        'user_id' => $user->id,
-        'name' => $request->name,
-        'email'=> $request->email,
-        ]);
-        $customer->save();
-        return response()->json([
-            'message' => 'Successfully created user!',
-            'success' => true,
-            'error' => null,
-            'status' => $this->successStatus,
-        ], 200);
+        if ($validator->fails()) {
+            return response()->json([
+                'message' => 'Invalid field',
+                'success' => false,
+                'error' => $validator->errors()->messages(),
+                'status' => $this->HTTP_FORBIDDEN,
+            ], 403);
+        } else {
+            $user = new User([
+                'name' => $request->name,
+                'phone' => $request->phone,
+                'email' => $request->email,
+                'password' => bcrypt($request->password)
+            ]);
+            $user->save();
+
+            $customer = new customer([
+                'user_id' => $user->id,
+                'name' => $request->name,
+                'email' => $request->email,
+            ]);
+            $customer->save();
+            return response()->json([
+                'message' => 'Successfully created user!',
+                'success' => true,
+                'error' => null,
+                'status' => $this->successStatus,
+            ], 200);
+        }
     }
 
     /**
