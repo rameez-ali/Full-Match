@@ -30,7 +30,7 @@ class ApiAuthController extends Controller
             'name' => 'required|string',
             'phone' => 'required |string | min:8',
             'email' => 'required|string|email|unique:users',
-            'password' => 'required|string|confirmed',
+            'password' => 'required|string|confirmed | min:6 | max:32',
             'password_confirmation' => 'required',
         ]);
         $user = new User([
@@ -48,8 +48,11 @@ class ApiAuthController extends Controller
         ]);
         $customer->save();
         return response()->json([
-            'message' => 'Successfully created user!'
-        ], 201);
+            'message' => 'Successfully created user!',
+            'success' => true,
+            'error' => null,
+            'status' => $this->successStatus,
+        ], 200);
     }
 
     /**
