@@ -4338,7 +4338,7 @@ li.home:before
 }
 
 /*----------------------------------------
-  Grid 
+  Grid
 ------------------------------------------*/
 .section
 {
@@ -8992,7 +8992,9 @@ nav.display-none.search-sm .nav-wrapper form .input-field i
 
 .brand-sidebar .logo-wrapper a.brand-logo img
 {
-    height: 18px;
+    /*height: 18px;*/
+    height: 58px;
+    vertical-align: middle;
 }
 
 .brand-sidebar .logo-wrapper a.navbar-toggler
@@ -9038,8 +9040,8 @@ nav.display-none.search-sm .nav-wrapper form .input-field i
     display: inline-block;
 
     margin: 1px 0;
-    padding: 22px 12px 22px 22px;
-
+    /*padding: 22px 12px 22px 22px;*/
+    padding: 5px 12px 22px 10px;
     color: #333;
 }
 
@@ -9346,7 +9348,8 @@ nav.display-none.search-sm .nav-wrapper form .input-field i
 
 .nav-collapsed .brand-sidebar .brand-logo
 {
-    padding: 22px 12px 22px 15px;
+    /*padding: 22px 12px 22px 15px;*/
+    padding: 0 12px 22px 0;
 }
 
 .nav-collapsed .navigation-header-text
