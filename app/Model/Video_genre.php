@@ -9,7 +9,7 @@ class Video_genre extends Model
 {
 	use SoftDeletes;
      protected $fillable = [
-        'genre_name','genre_sorting',
+        'name_en','name_ar','genre_sorting',
     ];
     protected $dates = ['deleted_at'];
 }

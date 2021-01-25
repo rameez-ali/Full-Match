@@ -20,15 +20,26 @@
 
                                        <div class="row">
                                           <div class="input-field col s12">
-                                          <label for="category_name">Edit Category Name * </label>
-                                          <input type="text" name="category_name" value="{{ $category->category_name }}" class="form-control input-lg" required data-error=".errorTxt1"/>
+                                          <label for="name_er">Edit Category Name * </label>
+                                          <input type="text" name="name_en" value="{{ $category->name_en }}" class="form-control input-lg" required data-error=".errorTxt1"/>
                                           <small class="errorTxt1"></small>
-                                          @error('category_name')
+                                          @error('name_er')
                                           <span class="invalid-feedback" role="alert">
                                           <strong>{{ $message }}</strong>
                                           </span>
                                           @enderror
                                           </div>
+
+                                           <div class="input-field col s12">
+                                               <label for="name_ar">Edit Category Name AR * </label>
+                                               <input type="text" name="name_ar" value="{{ $category->name_ar }}" class="form-control input-lg" required data-error=".errorTxt2"/>
+                                               <small class="errorTxt2"></small>
+                                               @error('name_ar')
+                                               <span class="invalid-feedback" role="alert">
+                                          <strong>{{ $message }}</strong>
+                                          </span>
+                                               @enderror
+                                           </div>
 
 
                                           <div class="input-field col s12">

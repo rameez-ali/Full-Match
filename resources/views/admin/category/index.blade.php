@@ -36,7 +36,7 @@
                                     </button>
                                 </div>
                                             @endif
-                                             
+
                                             @if ($catdelsuccess = Session::get('catdelsuccess'))
                                             <div class="card-alert card gradient-45deg-green-teal">
                                     <div class="card-content white-text">
@@ -51,16 +51,18 @@
                                             <table id="page-length-option" class="display">
                                                 <thead>
                                                 <tr>
-                                                 <th width="15%">Category Name</th>
-                                                 <th width="15%">Category Image</th>
-                                                 <th width="15%">Category Sorting</th>
+                                                 <th width="10%">Name EN</th>
+                                                    <th width="10%">Name AR </th>
+                                                 <th width="10%">Image</th>
+                                                 <th width="10%">Sorting</th>
                                                  <th width="15%">Action</th>
                                                  </tr>
                                                 </thead>
                                                 <tbody>
                                                 @foreach($category as $category)
                                                <tr>
-                                                <td>{{ $category->category_name }}</td>
+                                                <td>{{ $category->name_en }}</td>
+                                                   <td>{{ $category->name_ar }}</td>
                                                 <td><img src="{{ asset('app-assets/images/category/'.$category->category_image)}}" style="width:50px;height:50px;" /></td>
                                                 <td>{{ $category->category_sorting }}</td>
                                                 <td><form action="{{ route('category-form.destroy', $category->id)}}"  method="post">

@@ -9,7 +9,7 @@ class Club extends Model
 {
 	use SoftDeletes;
     protected $fillable = [
-        'club_name','club_banner','club_logo','club_description','club_sorting',
+        'name_en','name_ar','club_banner','club_logo','description_en','description_ar','club_sorting',
     ];
     protected $dates = ['deleted_at'];
 }

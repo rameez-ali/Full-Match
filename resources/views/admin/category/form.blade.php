@@ -21,10 +21,21 @@
                                         @csrf
                                             <div class="row">
                                                 <div class="input-field col s12">
-                                                    <p for="category_name">Add Category Name * </p>
-                                                    <input id="category_name" name="category_name" type="text" data-error=".errorTxt1">
+                                                    <p for="name_en">Add Category Name * </p>
+                                                    <input id="name_en" name="name_en" type="text" data-error=".errorTxt1" required>
                                                     <small class="errorTxt1"></small>
-                                                    @error('category_name')
+                                                    @error('name_en')
+                                                    <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
+                                                    @enderror
+                                                </div>
+
+                                                <div class="input-field col s12">
+                                                    <p for="name_ar">Add Category Name AR * </p>
+                                                    <input id="name_ar" name="name_ar" type="text" data-error=".errorTxt2" required>
+                                                    <small class="errorTxt2"></small>
+                                                    @error('name_ar')
                                                     <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>
                                                 </span>
@@ -33,8 +44,8 @@
 
                                                 <div class="input-field col s12">
                                                     <p for="category_image"> Add Category Image * </p>
-                                                    <input type="file" name="category_image" id="category_image" class="dropify mt-3" data-default-file="" data-max-file-size="10M" data-allowed-file-extensions="png jpg jpeg" required data-error=".errorTxt2" />
-                                                    <small class="errorTxt2"></small>
+                                                    <input type="file" name="category_image" id="category_image" class="dropify mt-3" data-default-file="" data-max-file-size="10M" data-allowed-file-extensions="png jpg jpeg" required data-error=".errorTxt3" />
+                                                    <small class="errorTxt3"></small>
                                                     @error('category_image')
                                                     <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>
@@ -103,10 +114,10 @@
 
         $("#formValidate").validate({
             rules: {
-                category_name: {
-                    required: true,
-                    minlength: 5 ,
-                },
+                // category_name: {
+                //     required: true,
+                //     minlength: 5 ,
+                // },
                 category_image: {
                     required: true,
                 },

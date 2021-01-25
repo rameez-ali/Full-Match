@@ -50,15 +50,17 @@
                                             <table id="page-length-option" class="display">
                                                 <thead>
                                                 <tr>
-                                                 <th width="15%">Genre Name</th>
-                                                 <th width="15%">Genre Sorting</th>
+                                                 <th width="10%">Name EN </th>
+                                                    <th width="10%">Name AR </th>
+                                                 <th width="10%">Sorting</th>
                                                  <th width="15%">Action</th>
                                                  </tr>
                                                 </thead>
                                                 <tbody>
                                                 @foreach($video_genre as $genre)
                                                <tr>
-                                                <td>{{ $genre->genre_name }}</td>
+                                                <td>{{ $genre->name_en }}</td>
+                                                   <td>{{ $genre->name_ar }}</td>
                                                 <td>{{ $genre->genre_sorting }}</td>
                                                 <td><form action="{{ route('genre-form.destroy', $genre->id)}}" method="post">
                                                     <a href="{{ route('genre-form.edit',$genre->id)}}" class="dt-button buttons-excel buttons-html5 waves-effect waves-light btn gradient-45deg-purple-deep-orange gradient-shadow">Edit</a>
