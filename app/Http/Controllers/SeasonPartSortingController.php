@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Model\ProjectCategory;
+use App\Model\Category;
 use App\Model\Video;
 use App\Model\League;
 use App\Model\Club;

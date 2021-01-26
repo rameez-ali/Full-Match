@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\ProjectCategory;
 use App\Model\Videoclub;
 use App\Model\Club;
 
@@ -17,7 +16,7 @@ class ProjectClubViewController extends Controller
     public function index()
     {
         $club = Club::all();
-            return view('admin.club.index', compact('club'));
+        return view('admin.club.index', compact('club'));
     }
 
     /**
@@ -38,13 +37,13 @@ class ProjectClubViewController extends Controller
      */
     public function store(Request $request)
     {
-         $request->validate([
+        $request->validate([
             'name_en'         => 'required',
-             'name_ar'        => 'required',
+            'name_ar'        => 'required',
             'club_banner'     =>  'required|image|max:2048',
             'club_logo'       =>  'required|image|max:2048',
             'description_en'  => 'required',
-             'description_ar' => 'required'
+            'description_ar' => 'required'
 
         ]);
 
@@ -107,7 +106,7 @@ class ProjectClubViewController extends Controller
     public function update(Request $request, $id)
     {
 
-       $image_name1 = $request->hidden_image1;
+        $image_name1 = $request->hidden_image1;
         $image_name2 = $request->hidden_image2;
 
         $image1 = $request->file('club_banner');
@@ -157,7 +156,7 @@ class ProjectClubViewController extends Controller
 
         return redirect('club-form')->with('clubeditsuccess','Club Updated Successfully');
 
-     //  return redirect('club-form')->with('clubeditsuccess','Club Updated Successfully');
+        //  return redirect('club-form')->with('clubeditsuccess','Club Updated Successfully');
     }
 
     /**

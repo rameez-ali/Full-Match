@@ -18,11 +18,11 @@
                                         @csrf
                                         @method('PATCH')
                                        <div class="form-group">
-                                       <label class="col-md-4 text-right">Edit Slider Name * </label>
+                                       <label class="col-md-4 text-right">Edit Slider Name EN * </label>
                                        <div class="col-md-8">
-                                       <input type="text" name="slider_name" value="{{ $slider->slider_name }}" class="form-control input-lg"  required data-error=".errorTxt1" />
+                                       <input type="text" name="name_en" value="{{ $slider->name_en }}" class="form-control input-lg"  required data-error=".errorTxt1" />
                                        <small class="errorTxt1"></small>
-                                       @error('slider_name')
+                                       @error('name_en')
                                        <span class="invalid-feedback" role="alert">
                                        <strong>{{ $message }}</strong>
                                        </span>
@@ -30,11 +30,23 @@
                                        </div>
                                        </div>
 
+                                            <label class="col-md-4 text-right">Edit Slider Name AR * </label>
+                                            <div class="col-md-8">
+                                                <input type="text" name="name_ar" value="{{ $slider->name_ar }}" class="form-control input-lg"  required data-error=".errorTxt4" />
+                                                <small class="errorTxt4"></small>
+                                                @error('name_ar')
+                                                <span class="invalid-feedback" role="alert">
+                                       <strong>{{ $message }}</strong>
+                                       </span>
+                                                @enderror
+                                            </div>
+                                        </div>
+
                                        <div name="hidden-panel1" id="hidden-panel1">
                                        <label><strong>Edit Videos: * </strong></label><br/>
                                        <select class="max-length browser-default" id="testbox" multiple data-live-search="true" name="video[]" data-error=".errorTxt2" required>
                                        @foreach($video1 as $video )
-                                       <option value="{{$video->id}}" {{in_array($video->id, $selected_ids) ? 'selected' : ''}} >{{$video->video_title}}</option>
+                                       <option value="{{$video->id}}" {{in_array($video->id, $selected_ids) ? 'selected' : ''}} >{{$video->title_en}}</option>
                                        @endforeach
                                        <small class="errorTxt2"></small>
                                        @error('video')
@@ -59,7 +71,7 @@
                                        </div>
 
 
-                                       
+
                                        <div class="input-field col s12">
                                              <button class="btn waves-effect waves-light right submit" type="submit" name="action">Submit
                                                 <i class="material-icons right">send</i>
@@ -152,20 +164,20 @@ $(document).ready(function() {
             if ($("#travel").val() == 1) {
                 $("#hidden-panel1").hide()
                 $("#hidden-panel").show()
-            } 
+            }
             else if ($("#travel").val() == 2) {
                 $("#hidden-panel").hide()
                 $("#hidden-panel1").show()
-            } 
+            }
             else if ($("#travel").val() == 0){
                 $("#hidden-panel").hide()
                 $("#hidden-panel1").hide()
             }
         })
-    }); 
+    });
 
 
 </script>
 
- 
+
 @endsection

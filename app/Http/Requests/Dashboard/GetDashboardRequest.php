@@ -6,7 +6,7 @@ use App\customer;
 use App\Model\Club;
 use App\Model\Order;
 use App\Model\Player;
-use App\Model\ProjectCategory;
+use App\Model\Category;
 use App\Model\Video;
 use App\Model\Video_genre;
 use Illuminate\Foundation\Http\FormRequest;
@@ -45,7 +45,7 @@ class GetDashboardRequest extends FormRequest
 
           $all_videos = Video::get()->count();
 
-          $all_categories = ProjectCategory::get()->count();
+          $all_categories = Category::get()->count();
 
           $all_video_genres = Video_genre::get()->count();
 

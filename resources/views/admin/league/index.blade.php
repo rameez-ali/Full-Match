@@ -4,87 +4,87 @@
     <div class="col s12">
         <div class="container">
             <div class="section">
-                    <div class="row">
-                        <div class="col s12 m12 l12">
-                            <div class="card animate fadeUp">
-                                <div class="card-content">
-                                    <h4 class="header mt-0">
-                                        LEAGUES
-                                        <a href="{{ URL::route('league-form.create') }}" class="waves-effect waves-light btn gradient-45deg-purple-deep-orange gradient-shadow right">Add</a>
-                                    </h4>
-                                    <div class="row">
-                                        <div class="col s12">
-                                            @if ($leagueaddsuccess = Session::get('leagueaddsuccess'))
-                                                <div class="card-alert card gradient-45deg-green-teal">
-                                                    <div class="card-content white-text">
-                                                        <p>
-                                                            <i class="material-icons"></i>{{ $leagueaddsuccess }}</p>
-                                                    </div>
-                                                    <button type="button" class="close white-text" data-dismiss="alert" aria-label="Close">
-                                                        <span aria-hidden="true">×</span>
-                                                    </button>
+                <div class="row">
+                    <div class="col s12 m12 l12">
+                        <div class="card animate fadeUp">
+                            <div class="card-content">
+                                <h4 class="header mt-0">
+                                    LEAGUES
+                                    <a href="{{ URL::route('league-form.create') }}" class="waves-effect waves-light btn gradient-45deg-purple-deep-orange gradient-shadow right">Add</a>
+                                </h4>
+                                <div class="row">
+                                    <div class="col s12">
+                                        @if ($leagueaddsuccess = Session::get('leagueaddsuccess'))
+                                            <div class="card-alert card gradient-45deg-green-teal">
+                                                <div class="card-content white-text">
+                                                    <p>
+                                                        <i class="material-icons"></i>{{ $leagueaddsuccess }}</p>
                                                 </div>
-                                            @endif
-                                            @if ($leagueeditsuccess = Session::get('leagueeditsuccess'))
-                                                <div class="card-alert card gradient-45deg-green-teal">
-                                                    <div class="card-content white-text">
-                                                        <p>
-                                                            <i class="material-icons"></i>{{ $leagueeditsuccess }}</p>
-                                                    </div>
-                                                    <button type="button" class="close white-text" data-dismiss="alert" aria-label="Close">
-                                                        <span aria-hidden="true">×</span>
-                                                    </button>
+                                                <button type="button" class="close white-text" data-dismiss="alert" aria-label="Close">
+                                                    <span aria-hidden="true">×</span>
+                                                </button>
+                                            </div>
+                                        @endif
+                                        @if ($leagueeditsuccess = Session::get('leagueeditsuccess'))
+                                            <div class="card-alert card gradient-45deg-green-teal">
+                                                <div class="card-content white-text">
+                                                    <p>
+                                                        <i class="material-icons"></i>{{ $leagueeditsuccess }}</p>
                                                 </div>
-                                            @endif
-                                            @if ($leaguedelsuccess = Session::get('leaguedelsuccess'))
-                                                <div class="card-alert card gradient-45deg-green-teal">
-                                                    <div class="card-content white-text">
-                                                        <p>
-                                                            <i class="material-icons"></i>{{ $leaguedelsuccess }}</p>
-                                                    </div>
-                                                    <button type="button" class="close white-text" data-dismiss="alert" aria-label="Close">
-                                                        <span aria-hidden="true">×</span>
-                                                    </button>
+                                                <button type="button" class="close white-text" data-dismiss="alert" aria-label="Close">
+                                                    <span aria-hidden="true">×</span>
+                                                </button>
+                                            </div>
+                                        @endif
+                                        @if ($leaguedelsuccess = Session::get('leaguedelsuccess'))
+                                            <div class="card-alert card gradient-45deg-green-teal">
+                                                <div class="card-content white-text">
+                                                    <p>
+                                                        <i class="material-icons"></i>{{ $leaguedelsuccess }}</p>
                                                 </div>
-                                            @endif
-                                            <table id="page-length-option" class="display">
-                                                <thead>
+                                                <button type="button" class="close white-text" data-dismiss="alert" aria-label="Close">
+                                                    <span aria-hidden="true">×</span>
+                                                </button>
+                                            </div>
+                                        @endif
+                                        <table id="page-length-option" class="display">
+                                            <thead>
+                                            <tr>
+                                                <th width="10%">Name</th>
+                                                <th width="15%">Description</th>
+                                                <th width="10%">Banner</th>
+                                                <th width="10%">Promo Video</th>
+                                                <th width="10%">Profile Image</th>
+                                                <th width="50%">Action</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            @foreach($project as $project)
                                                 <tr>
-                                                 <th width="10%">League Name</th>
-                                                 <th width="15%">League Description</th>
-                                                 <th width="10%">League Banner</th>
-                                                 <th width="10%">League Promo Video</th>
-                                                 <th width="10%">League Profile Image</th>
-                                                 <th width="50%">Action</th>
-                                                 </tr>
-                                                </thead>
-                                                 <tbody>
-                                                 @foreach($project as $project)
-                                                <tr>
-                                                <td>{{ $project->league_name   }}</td>
-                                                <td>{{ $project->league_description }}</td>
-                                                <td><img src="{{ asset('app-assets/images/league/'.$project->league_banner)}}" style="width:50px;height:50px;" /></td>
-                                                <td>{{ $project->league_promo_video }}</td>
-                                                <td><img src="{{ asset('app-assets/images/league/'.$project->league_profile_image)}}" style="width:50px;height:50px;" /></td>
-                                                 <td><form action="{{ route('league-form.destroy', $project->id)}}" method="post">
-                                                    <a href="{{ url('league/'.$project->id)}}" class="dt-button buttons-excel buttons-html5 waves-effect waves-light btn gradient-45deg-purple-deep-orange gradient-shadow">Details</a>
-                                                    <a href="{{ route('league-form.edit',$project->id)}}" class="dt-button buttons-excel buttons-html5 waves-effect waves-light btn gradient-45deg-purple-deep-orange gradient-shadow">Edit</a>
-                                                     {{ csrf_field() }}
-                                                     @method('DELETE')
-                                                     <button onclick="return window.confirm('Are you sure you want to delete this record?');" class="dt-button buttons-excel buttons-html5 waves-effect waves-light btn gradient-45deg-purple-deep-orange gradient-shadow" type="submit">Delete</button>
-                                                     </form>
-                                                 </td>
+                                                    <td>{{ $project->name_en   }}</td>
+                                                    <td>{{ $project->description_en }}</td>
+                                                    <td><img src="{{ asset('app-assets/images/league/'.$project->league_banner)}}" style="width:50px;height:50px;" /></td>
+                                                    <td>{{ $project->league_promo_video }}</td>
+                                                    <td><img src="{{ asset('app-assets/images/league/'.$project->league_profile_image)}}" style="width:50px;height:50px;" /></td>
+                                                    <td><form action="{{ route('league-form.destroy', $project->id)}}" method="post">
+                                                            <a href="{{ url('league/'.$project->id)}}" class="dt-button buttons-excel buttons-html5 waves-effect waves-light btn gradient-45deg-purple-deep-orange gradient-shadow">Details</a>
+                                                            <a href="{{ route('league-form.edit',$project->id)}}" class="dt-button buttons-excel buttons-html5 waves-effect waves-light btn gradient-45deg-purple-deep-orange gradient-shadow">Edit</a>
+                                                            {{ csrf_field() }}
+                                                            @method('DELETE')
+                                                            <button onclick="return window.confirm('Are you sure you want to delete this record?');" class="dt-button buttons-excel buttons-html5 waves-effect waves-light btn gradient-45deg-purple-deep-orange gradient-shadow" type="submit">Delete</button>
+                                                        </form>
+                                                    </td>
                                                 </tr>
-                                                @endforeach
-                                                 </tbody>
+                                            @endforeach
+                                            </tbody>
 
-                                            </table>
-                                        </div>
+                                        </table>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
+                </div>
             </div>
         </div>
         <div class="content-overlay"></div>

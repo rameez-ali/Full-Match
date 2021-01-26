@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Model\ProjectCategory;
+use App\Model\Category;
 use App\Model\Player;
 use App\Model\Videoplayer;
 

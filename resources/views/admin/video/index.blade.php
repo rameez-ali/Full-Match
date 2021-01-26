@@ -4,103 +4,103 @@
     <div class="col s12">
         <div class="container">
             <div class="section">
-                    <div class="row">
-                        <div class="col s12 m12 l12">
-                            <div class="card animate fadeUp">
-                                <div class="card-content">
-                                    <h4 class="header mt-0">
-                                        Videos
-                                        <a href="{{ URL::route('video-form.create') }}" class="waves-effect waves-light btn gradient-45deg-purple-deep-orange gradient-shadow right">Add</a>
-                                    </h4>
-                                    <form action="{{route('video-form-search.search')}}" method="post" role="search">
-                                        {{ csrf_field() }}
-                                        <div class="input-field col s12">
+                <div class="row">
+                    <div class="col s12 m12 l12">
+                        <div class="card animate fadeUp">
+                            <div class="card-content">
+                                <h4 class="header mt-0">
+                                    Videos
+                                    <a href="{{ URL::route('video-form.create') }}" class="waves-effect waves-light btn gradient-45deg-purple-deep-orange gradient-shadow right">Add</a>
+                                </h4>
+                                <form action="{{route('video-form-search.search')}}" method="post" role="search">
+                                    {{ csrf_field() }}
+                                    <div class="input-field col s12">
 
-                                            <input type="text" class="form-control" name="q"
-                                                   placeholder="Search Video by video title, player name or club name"> <span class="input-group-btn">
+                                        <input type="text" class="form-control" name="q"
+                                               placeholder="Search Video by video title, player name or club name"> <span class="input-group-btn">
                                                 <button type="submit" class="dt-button buttons-excel buttons-html5 waves-effect waves-light btn gradient-45deg-purple-deep-orange gradient-shadow">Search Videos
                                                    <span class="glyphicon glyphicon-search"></span>
                                                 </button>
                                                   </span>
 
-                                        </div>
-                                    </form>
-                                    <div class="row">
-                                        <div class="col s14">
-                                            @if ($videoaddsuccess = Session::get('videoaddsuccess'))
-                                                <div class="card-alert card gradient-45deg-green-teal">
-                                                    <div class="card-content white-text">
-                                                        <p>
-                                                            <i class="material-icons"></i>{{ $videoaddsuccess }}</p>
-                                                    </div>
-                                                    <button type="button" class="close white-text" data-dismiss="alert" aria-label="Close">
-                                                        <span aria-hidden="true">×</span>
-                                                    </button>
+                                    </div>
+                                </form>
+                                <div class="row">
+                                    <div class="col s14">
+                                        @if ($videoaddsuccess = Session::get('videoaddsuccess'))
+                                            <div class="card-alert card gradient-45deg-green-teal">
+                                                <div class="card-content white-text">
+                                                    <p>
+                                                        <i class="material-icons"></i>{{ $videoaddsuccess }}</p>
                                                 </div>
-                                            @endif
-                                            @if ($videoeditsuccess = Session::get('videoeditsuccess'))
-                                                <div class="card-alert card gradient-45deg-green-teal">
-                                                    <div class="card-content white-text">
-                                                        <p>
-                                                            <i class="material-icons"></i>{{ $videoeditsuccess }}</p>
-                                                    </div>
-                                                    <button type="button" class="close white-text" data-dismiss="alert" aria-label="Close">
-                                                        <span aria-hidden="true">×</span>
-                                                    </button>
+                                                <button type="button" class="close white-text" data-dismiss="alert" aria-label="Close">
+                                                    <span aria-hidden="true">×</span>
+                                                </button>
+                                            </div>
+                                        @endif
+                                        @if ($videoeditsuccess = Session::get('videoeditsuccess'))
+                                            <div class="card-alert card gradient-45deg-green-teal">
+                                                <div class="card-content white-text">
+                                                    <p>
+                                                        <i class="material-icons"></i>{{ $videoeditsuccess }}</p>
                                                 </div>
-                                            @endif
-                                            @if ($videodelsuccess = Session::get('videodelsuccess'))
-                                                <div class="card-alert card gradient-45deg-green-teal">
-                                                    <div class="card-content white-text">
-                                                        <p>
-                                                            <i class="material-icons"></i>{{ $videodelsuccess }}</p>
-                                                    </div>
-                                                    <button type="button" class="close white-text" data-dismiss="alert" aria-label="Close">
-                                                        <span aria-hidden="true">×</span>
-                                                    </button>
+                                                <button type="button" class="close white-text" data-dismiss="alert" aria-label="Close">
+                                                    <span aria-hidden="true">×</span>
+                                                </button>
+                                            </div>
+                                        @endif
+                                        @if ($videodelsuccess = Session::get('videodelsuccess'))
+                                            <div class="card-alert card gradient-45deg-green-teal">
+                                                <div class="card-content white-text">
+                                                    <p>
+                                                        <i class="material-icons"></i>{{ $videodelsuccess }}</p>
                                                 </div>
-                                            @endif
-                                            <table id="page-length-option" class="display">
-                                                <thead>
+                                                <button type="button" class="close white-text" data-dismiss="alert" aria-label="Close">
+                                                    <span aria-hidden="true">×</span>
+                                                </button>
+                                            </div>
+                                        @endif
+                                        <table id="page-length-option" class="display">
+                                            <thead>
+                                            <tr>
+                                                <th width="5%">Title</th>
+                                                <th width="5%">Banner</th>
+                                                <th width="5%">Image</th>
+                                                <th width="5%">Description</th>
+                                                <th width="5%">Link</th>
+                                                <th width="5%">Sorting</th>
+                                                <th width="80%">Action</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            @foreach($video as $video)
                                                 <tr>
-                                                 <th width="5%">Video Title</th>
-                                                  <th width="5%">Video Banner</th>
-                                                  <th width="5%">Video Image</th>
-                                                  <th width="5%">Video Description</th>
-                                                  <th width="5%">Video Link</th>
-                                                  <th width="5%">Video Sorting</th>
-                                                   <th width="80%">Action</th>
-                                                 </tr>
-                                                </thead>
-                                                 <tbody>
-                                                 @foreach($video as $video)
-                                                 <tr>
-                                               <td>{{ $video->video_title }}</td>
-                                               <td><img src="{{ asset('app-assets/images/video/'.$video->video_banner_img)}}"  class="img-thumbnail" width="75" /></td>
-                                               <td><img src="{{ asset('app-assets/images/video/'.$video->video_img)}}"  class="img-thumbnail" width="75" /></td>
-                                               <td>{{ $video->video_description }}</td>
-                                               <td>{{ $video->video_link }}</td>
-                                               <td>{{ $video->video_sorting }}</td>
-                                              <td><form action="{{ route('video-form.destroy', $video->id)}}" method="post">
-                                                    <a href="{{ url('videodetails/'.$video->id)}}" class="dt-button buttons-excel buttons-html5 waves-effect waves-light btn gradient-45deg-purple-deep-orange gradient-shadow">Details</a>
-                                                    <a href="{{ route('video-form.edit',$video->id)}}" class="dt-button buttons-excel buttons-html5 waves-effect waves-light btn gradient-45deg-purple-deep-orange gradient-shadow">Edit</a>
-                                                     {{ csrf_field() }}
-                                                     @method('DELETE')
-                                                     <button onclick="return window.confirm('Are you sure you want to delete this record?');" class="dt-button buttons-excel buttons-html5 waves-effect waves-light btn gradient-45deg-purple-deep-orange gradient-shadow" type="submit">Delete</button>
-                                                     </form>
-                                                 </td>
+                                                    <td>{{ $video->title_en }}</td>
+                                                    <td><img src="{{ asset('app-assets/images/video/'.$video->video_banner_img)}}"  class="img-thumbnail" width="75" /></td>
+                                                    <td><img src="{{ asset('app-assets/images/video/'.$video->video_img)}}"  class="img-thumbnail" width="75" /></td>
+                                                    <td>{{ $video->description_en }}</td>
+                                                    <td>{{ $video->video_link }}</td>
+                                                    <td>{{ $video->video_sorting }}</td>
+                                                    <td><form action="{{ route('video-form.destroy', $video->id)}}" method="post">
+                                                            <a href="{{ url('videodetails/'.$video->id)}}" class="dt-button buttons-excel buttons-html5 waves-effect waves-light btn gradient-45deg-purple-deep-orange gradient-shadow">Details</a>
+                                                            <a href="{{ route('video-form.edit',$video->id)}}" class="dt-button buttons-excel buttons-html5 waves-effect waves-light btn gradient-45deg-purple-deep-orange gradient-shadow">Edit</a>
+                                                            {{ csrf_field() }}
+                                                            @method('DELETE')
+                                                            <button onclick="return window.confirm('Are you sure you want to delete this record?');" class="dt-button buttons-excel buttons-html5 waves-effect waves-light btn gradient-45deg-purple-deep-orange gradient-shadow" type="submit">Delete</button>
+                                                        </form>
+                                                    </td>
 
                                                 </tr>
-                                                 @endforeach
-                                                 </tbody>
-                                                 </tbody>
-                                            </table>
-                                        </div>
+                                            @endforeach
+                                            </tbody>
+                                            </tbody>
+                                        </table>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
+                </div>
             </div>
         </div>
         <div class="content-overlay"></div>

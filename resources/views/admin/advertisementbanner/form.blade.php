@@ -19,9 +19,14 @@
                                           <div class="row">
 
                                              <div class="input-field col s12">
-                                             <p for="video_title">Add Video Title </p>
-                                             <input id="video_title" name="video_title" type="text" required>
+                                             <p for="title_en">Add Video Title EN * </p>
+                                             <input id="title_en" name="title_en" type="text" required>
                                              </div>
+
+                                              <div class="input-field col s12">
+                                                  <p for="title_ar">Add Video Title AR * </p>
+                                                  <input id="title_ar" name="title_ar" type="text" required>
+                                              </div>
 
                                               <div class="input-field col s12">
                                               <p for="video_banner"> Add Video Banner </p>
@@ -40,7 +45,7 @@
                                             <select name="country" id="country" class="form-control" style="width:250px">
                                             <option selected> </option>
                                             @foreach ($video as $video)
-                                            <option value="{{$video->id}}">{{ $video->category_name }}</option>
+                                            <option value="{{$video->id}}">{{ $video->name_en }}</option>
                                             @endforeach
                                             </select>
                                             </div>
@@ -48,7 +53,7 @@
 
 
                                         <div class="input-field col s12">
-                                           <p for="state">Select Videos:</p>
+                                           <p for="state">Add Videos:</p>
                                            <select name="state[]" class="select2 browser-default" multiple style="width:250px">
                                            </select>
                                         </div>
@@ -58,7 +63,7 @@
                                             <select name="genre" class="form-control" style="width:250px">
                                             <option selected> </option>
                                             @foreach ($videogenre as $videogenre)
-                                            <option value="{{$videogenre->id}}">{{ $videogenre->genre_name }}</option>
+                                            <option value="{{$videogenre->id}}">{{ $videogenre->name_en }}</option>
                                             @endforeach
                                             </select>
                                             </div>

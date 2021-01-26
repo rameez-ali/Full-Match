@@ -3,15 +3,15 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Model\ProjectCategory;
+use App\Model\Category;
 use App\Model\Video;
 use DB;
-use App\Model\Slidercategory1;
+use App\Model\Slider;
 use App\Model\Adv_banner_video;
 use App\Model\Adv_banner;
 use App\Model\Video_genre;
 
-class ProjectAdvertisementController extends Controller
+class ProjectAdvertisementViewController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -34,7 +34,7 @@ class ProjectAdvertisementController extends Controller
     public function create()
     {
         $videogenre=Video_genre::all();
-        $video=ProjectCategory::all();
+        $video=Category::all();
         return view('admin.advertisementbanner.form',compact('video','videogenre'));
     }
 
@@ -52,7 +52,7 @@ class ProjectAdvertisementController extends Controller
     public function getvideos($id)
     {
         //$states1 = DB::table("videos")->where("Category_id",$id)->pluck("video_title","id");
-       $states1=Video::select('video_title','id')->where("Category_id",$id)->pluck("video_title","id");
+       $states1=Video::select('title_en','id')->where("category_id",$id)->pluck("title_en","id");
 
         return json_encode($states1);
     }
@@ -68,7 +68,8 @@ class ProjectAdvertisementController extends Controller
 
        if($request->file('video_banner')==null){
         $form_data2 = array(
-            'video_title'    =>   $request->video_title,
+            'title_en'    =>   $request->title_en,
+            'title_ar'    =>   $request->title_ar,
             'video_link'    =>   $request->video_link,
             'category_id'    =>   $request->country,
             'genre_id'    =>   $request->genre,
@@ -83,7 +84,8 @@ class ProjectAdvertisementController extends Controller
            $image->move(public_path('app-assets/images/advbanner'), $new_name);
 
            $form_data2 = array(
-            'video_title'    =>   $request->video_title,
+            'title_en'    =>   $request->title_en,
+               'title_ar'    =>   $request->title_ar,
             'video_link'    =>   $request->video_link,
             'video_banner'    =>   $new_name,
             'category_id'    =>   $request->country,
@@ -132,7 +134,7 @@ class ProjectAdvertisementController extends Controller
     public function edit($id)
     {
 
-     $category=ProjectCategory::all();
+     $category=Category::all();
       $banner_id=$id;
       $slidervideos = DB::table('adv_banner_videos');
       $videos =  DB::table('videos')
@@ -149,7 +151,7 @@ class ProjectAdvertisementController extends Controller
            array_push($selected_ids, $vid->id);
        }
 
-       $category=ProjectCategory::select('id','category_name')->get();
+       $category=Category::select('id','name_en')->get();
        $videogenre=Video_genre::select('id','genre_name')->get();
        //$video=video::select('id','video_title')->get();
 
@@ -163,8 +165,8 @@ class ProjectAdvertisementController extends Controller
          $videos1=json_decode($videos2, true);
 
             $video1 =  DB::table('videos')
-             ->where('Category_id', '=', $videos1)
-             ->select('videos.id','videos.video_title')
+             ->where('category_id', '=', $videos1)
+             ->select('videos.id','videos.title_en')
              ->get();
 
 
@@ -193,7 +195,8 @@ class ProjectAdvertisementController extends Controller
 
         if($request->file('video_banner')==null){
         $form_data2 = array(
-            'video_title'    =>   $request->video_title,
+            'title_en'    =>   $request->title_en,
+            'title_ar'    =>   $request->title_ar,
             'video_link'    =>   $request->video_link,
             'category_id'    =>   $request->country,
             'genre_id'    =>   $request->genre,
@@ -208,7 +211,8 @@ class ProjectAdvertisementController extends Controller
           $image->move(public_path('app-assets/images/advbanner'), $new_name);
 
            $form_data2 = array(
-            'video_title'    =>   $request->video_title,
+            'title_en'    =>   $request->title_en,
+               'title_ar'    =>   $request->title_ar,
             'video_link'    =>   $request->video_link,
             'video_banner'    =>   $new_name,
             'category_id'    =>   $request->country,
@@ -252,7 +256,7 @@ class ProjectAdvertisementController extends Controller
       $videos =  DB::table('videos')
         ->where('banner_id', '=', $banner_id)
         ->join('adv_banner_videos', 'adv_banner_videos.video_id', '=', 'videos.id')
-        ->select('videos.*', 'videos.video_title')
+        ->select('videos.*', 'videos.title_en')
         ->get();
 
             return view('admin.advertisementbanner.display', compact('videos','adv_banner_videos'))

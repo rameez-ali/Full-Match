@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Model\ProjectCategory;
+use App\Model\Category;
 use App\Model\Contact;
 
 class ProjectContactViewController extends Controller
@@ -26,7 +26,7 @@ class ProjectContactViewController extends Controller
      */
     public function create()
     {
-        
+
     }
 
     /**
@@ -37,7 +37,7 @@ class ProjectContactViewController extends Controller
      */
     public function store(Request $request)
     {
-        
+
     }
 
     /**
@@ -80,7 +80,7 @@ class ProjectContactViewController extends Controller
             'response'       =>   $response,
             'response_message'   =>   $request->response_message
         );
-  
+
         Contact::whereId($id)->update($form_data);
 
         return redirect('contact-form')->with('success', 'Data is successfully deleted');

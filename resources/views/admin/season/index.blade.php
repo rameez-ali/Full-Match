@@ -23,15 +23,15 @@
                                                 </thead>
                                                  <tbody>
                                                   @if($data3->count())
-                                                  @foreach($data3->where('Project_id', $Image_id) as $data3)
+                                                  @foreach($data3->where('league_id', $Image_id) as $data3)
                                                   <tr>
-                                                  <td>{{$data3->Seasons}}</td>
+                                                  <td>{{$data3->name_en}}</td>
                                                   <td>{{$data3->Video}}</td>
                                                   </tr>
                                                   @endforeach
                                                   @endif
                                                  </tbody>
-                                               
+
                                             </table>
                                         </div>
                                     </div>
@@ -74,7 +74,7 @@
                     {
                         extend: 'excel',
                         text: '{{ __("customer.excel") }}',
-                        className: 'waves-effect waves-light btn-small',
+                        className: 'dt-button buttons-excel buttons-html5 waves-effect waves-light btn gradient-45deg-purple-deep-orange gradient-shadow',
                         filename : '{{ __("customer.excel") }}' ,
                         exportOptions: {
                             columns: [ 0,1 ]
@@ -83,7 +83,7 @@
                     {
                         extend: 'csv',
                         text: '{{ __("customer.csv") }}',
-                        className: 'waves-effect waves-light btn-small',
+                        className: 'dt-button buttons-excel buttons-html5 waves-effect waves-light btn gradient-45deg-purple-deep-orange gradient-shadow',
                         filename : '{{ __("customer.csv") }}' ,
                         exportOptions: {
                             columns: [ 0,1 ]

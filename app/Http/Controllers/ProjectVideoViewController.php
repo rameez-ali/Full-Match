@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Model\ProjectCategory;
+use App\Model\Category;
 use App\Model\Video;
 use App\Model\League;
 use App\Model\Video_genre;
@@ -28,7 +28,7 @@ class ProjectVideoViewController extends Controller
     public function index()
     {
         $video = Video::all();
-            return view('admin.video.index', compact('video'));
+        return view('admin.video.index', compact('video'));
     }
 
     /**
@@ -38,13 +38,12 @@ class ProjectVideoViewController extends Controller
      */
     public function create()
     {
-        $category=ProjectCategory::all();
+        $category=Category::all();
         $club=Club::all();
         $player=Player::all();
         $leagues=League::all();
         $videogenres=Video_genre::all();
-        $countries = DB::table('countries')->pluck("name","id");
-        return view('admin.video.form',compact('countries','category','club','player','leagues','videogenres'));
+        return view('admin.video.form',compact('category','club','player','leagues','videogenres'));
     }
 
     public function getallseasons($id)
@@ -84,11 +83,13 @@ class ProjectVideoViewController extends Controller
 
 
             $form_data2 = array(
-                'Category_id'    =>   $request->Category_id,
+                'category_id'    =>   $request->Category_id,
                 'leagues_id'     =>   $request->state,
-                'video_title'    =>   $request->video_title,
+                'title_en'    =>   $request->title_en,
+                'title_ar'    =>   $request->title_ar,
                 'video_img'     =>   $new_name1,
-                'video_description'     =>   $request->video_description,
+                'description_en'     =>   $request->description_en,
+                'description_ar'     =>   $request->description_ar,
                 'video_link'     =>   $request->video_link,
                 'hour'     =>   $request->hour,
                 'minute'     =>   $request->minute,
@@ -103,28 +104,28 @@ class ProjectVideoViewController extends Controller
             Video::create($form_data2);
 
             if($request->club!=null){
-            foreach($request->club as $club){
-                $id = DB::table('videos')->orderBy('id', 'DESC')->value('id');
-                $form_data3 = array(
-                    'Club_id'     =>   $club,
-                    'Video_id'     =>  $id
-                );
+                foreach($request->club as $club){
+                    $id = DB::table('videos')->orderBy('id', 'DESC')->value('id');
+                    $form_data3 = array(
+                        'Club_id'     =>   $club,
+                        'Video_id'     =>  $id
+                    );
 
-                Videoclub::create($form_data3);
-            }
+                    Videoclub::create($form_data3);
+                }
             }
 
             if($request->player!=null){
-            foreach($request->player as $player){
-                $id = DB::table('videos')->orderBy('id', 'DESC')->value('id');
-                $form_data4 = array(
-                    'Player_id'     =>   $player,
-                    'Video_id'     =>  $id
-                );
+                foreach($request->player as $player){
+                    $id = DB::table('videos')->orderBy('id', 'DESC')->value('id');
+                    $form_data4 = array(
+                        'Player_id'     =>   $player,
+                        'Video_id'     =>  $id
+                    );
 
-                Videoplayer::create($form_data4);
+                    Videoplayer::create($form_data4);
+                }
             }
-           }
 
             foreach($request->genre as $genre){
                 $id = DB::table('videos')->orderBy('id', 'DESC')->value('id');
@@ -136,7 +137,7 @@ class ProjectVideoViewController extends Controller
                 Videogenre::create($form_data5);
             }
 
-              return redirect('video-form')->with('videoaddsuccess','Video Added Successfully');
+            return redirect('video-form')->with('videoaddsuccess','Video Added Successfully');
 
 
         }
@@ -154,12 +155,14 @@ class ProjectVideoViewController extends Controller
 
 
             $form_data2 = array(
-                'Category_id'    =>   $request->Category_id,
+                'category_id'    =>   $request->Category_id,
                 'leagues_id'     =>   $request->state,
-                'video_title'    =>   $request->video_title,
+                'title_en'    =>   $request->title_en,
+                'title_ar'    =>   $request->title_ar,
                 'video_img'     =>   $new_name1,
                 'video_banner_img'     =>   $new_name2,
-                'video_description'     =>   $request->video_description,
+                'description_en'     =>   $request->description_en,
+                'description_ar'     =>   $request->description_ar,
                 'video_link'     =>   $request->video_link,
                 'hour'     =>   $request->hour,
                 'minute'     =>   $request->minute,
@@ -175,28 +178,28 @@ class ProjectVideoViewController extends Controller
             Video::create($form_data2);
 
             if($request->club!=null){
-            foreach($request->club as $club){
-                $id = DB::table('videos')->orderBy('id', 'DESC')->value('id');
-                $form_data3 = array(
-                    'Club_id'     =>   $club,
-                    'Video_id'     =>  $id
-                );
+                foreach($request->club as $club){
+                    $id = DB::table('videos')->orderBy('id', 'DESC')->value('id');
+                    $form_data3 = array(
+                        'Club_id'     =>   $club,
+                        'Video_id'     =>  $id
+                    );
 
-                Videoclub::create($form_data3);
-            }
+                    Videoclub::create($form_data3);
+                }
             }
 
             if($request->player!=null){
-            foreach($request->player as $player){
-                $id = DB::table('videos')->orderBy('id', 'DESC')->value('id');
-                $form_data4 = array(
-                    'Player_id'     =>   $player,
-                    'Video_id'     =>  $id
-                );
+                foreach($request->player as $player){
+                    $id = DB::table('videos')->orderBy('id', 'DESC')->value('id');
+                    $form_data4 = array(
+                        'Player_id'     =>   $player,
+                        'Video_id'     =>  $id
+                    );
 
-                Videoplayer::create($form_data4);
+                    Videoplayer::create($form_data4);
+                }
             }
-           }
 
             foreach($request->genre as $genre){
                 $id = DB::table('videos')->orderBy('id', 'DESC')->value('id');
@@ -237,7 +240,7 @@ class ProjectVideoViewController extends Controller
     public function edit($id)
     {
         $video=Video::find($id);
-        $category=ProjectCategory::all();
+        $category=Category::all();
         $club=Club::all();
         $player=Player::all();
 
@@ -246,46 +249,46 @@ class ProjectVideoViewController extends Controller
 
 
 
-       ///Getting Selected Clubs id
-       $clubs =  DB::table('clubs')
-        ->where('Video_id', '=', $id)
-        ->join('videoclubs', 'videoclubs.Club_id', '=', 'clubs.id')
-        ->select('clubs.id')
-        ->get();
+        ///Getting Selected Clubs id
+        $clubs =  DB::table('clubs')
+            ->where('Video_id', '=', $id)
+            ->join('videoclubs', 'videoclubs.Club_id', '=', 'clubs.id')
+            ->select('clubs.id')
+            ->get();
 
-       $selected_ids = [];
-       foreach ($clubs as $key => $clb) {
-           array_push($selected_ids, $clb->id);
-       }
-        $club=club::select('id','club_name')->get();
+        $selected_ids = [];
+        foreach ($clubs as $key => $clb) {
+            array_push($selected_ids, $clb->id);
+        }
+        $club=club::select('id','name_en')->get();
 
 
         ///Getting Selected Player id
         $players =  DB::table('players')
-        ->where('Video_id', '=', $id)
-        ->join('videoplayers', 'videoplayers.Player_id', '=', 'players.id')
-        ->select('players.id')
-        ->get();
+            ->where('Video_id', '=', $id)
+            ->join('videoplayers', 'videoplayers.Player_id', '=', 'players.id')
+            ->select('players.id')
+            ->get();
 
-       $selected_ids1 = [];
-       foreach ($players as $key => $ply) {
-           array_push($selected_ids1, $ply->id);
-       }
-        $player=player::select('id','player_name')->get();
+        $selected_ids1 = [];
+        foreach ($players as $key => $ply) {
+            array_push($selected_ids1, $ply->id);
+        }
+        $player=player::select('id','name_en')->get();
 
 
         $video_genres =  DB::table('video_genres')
-        ->where('video_id', '=', $id)
-        ->join('videogenres', 'videogenres.genre_id', '=', 'video_genres.id')
-        ->select('video_genres.id')
-        ->get();
+            ->where('video_id', '=', $id)
+            ->join('videogenres', 'videogenres.genre_id', '=', 'video_genres.id')
+            ->select('video_genres.id')
+            ->get();
 
-       $selected_ids3 = [];
-       foreach ($video_genres as $key => $gly) {
-           array_push($selected_ids3, $gly->id);
-       }
+        $selected_ids3 = [];
+        foreach ($video_genres as $key => $gly) {
+            array_push($selected_ids3, $gly->id);
+        }
 
-        $video_genres=Video_genre::select('id','genre_name')->get();
+        $video_genres=Video_genre::select('id','name_en')->get();
 
 
 
@@ -303,7 +306,7 @@ class ProjectVideoViewController extends Controller
     public function update(Request $request, $id)
     {
 
-       $request->validate([
+        $request->validate([
             'genre'     => 'required'
         ]);
 
@@ -318,7 +321,7 @@ class ProjectVideoViewController extends Controller
                 'video_banner_img'     =>   $new_name1
             );
 
-              Video::whereId($id)->update($form_data2);
+            Video::whereId($id)->update($form_data2);
         }
 
         if($request->video_img!=null)
@@ -327,38 +330,40 @@ class ProjectVideoViewController extends Controller
             $new_name2 = rand() . '.' . $image2->getClientOriginalExtension();
             $image2->move(public_path('app-assets/images/video'), $new_name2);
 
-             $form_data2 = array(
+            $form_data2 = array(
                 'video_img'     =>   $new_name2
             );
 
-              Video::whereId($id)->update($form_data2);
+            Video::whereId($id)->update($form_data2);
         }
 
 
 
-            $form_data3 = array(
-                'Category_id'    =>   $request->Category_id,
-                'leagues_id'     =>   $request->state,
-                'video_title'    =>   $request->video_title,
-                'video_description'     =>   $request->video_description,
-                'video_link'     =>   $request->video_link,
-                'hour'     =>   $request->hour,
-                'minute'     =>   $request->minute,
-                'second'     =>   $request->second,
-                'video_sorting'       => $request->video_sorting,
-                'popular_searches'       => $request->popularsearches,
-                'video_promo'       => $request->video_promo
+        $form_data3 = array(
+            'category_id'    =>   $request->Category_id,
+            'leagues_id'     =>   $request->state,
+            'title_en'    =>   $request->title_en,
+            'title_ar'    =>   $request->title_ar,
+            'description_en'     =>   $request->description_en,
+            'description_ar'     =>   $request->description_ar,
+            'video_link'     =>   $request->video_link,
+            'hour'     =>   $request->hour,
+            'minute'     =>   $request->minute,
+            'second'     =>   $request->second,
+            'video_sorting'       => $request->video_sorting,
+            'popular_searches'       => $request->popularsearches,
+            'video_promo'       => $request->video_promo
 
-            );
+        );
 
-            Video::whereId($id)->update($form_data3);
+        Video::whereId($id)->update($form_data3);
 
-           Videoclub::where('Video_id', $id)->forceDelete();
-           Videoplayer::where('Video_id', $id)->forceDelete();
-           Videogenre::where('Video_id', $id)->forceDelete();
+        Videoclub::where('Video_id', $id)->forceDelete();
+        Videoplayer::where('Video_id', $id)->forceDelete();
+        Videogenre::where('Video_id', $id)->forceDelete();
 
 
-            if($request->club!=null){
+        if($request->club!=null){
             foreach($request->club as $club){
                 $id = DB::table('videos')->orderBy('id', 'DESC')->value('id');
                 $form_data3 = array(
@@ -368,9 +373,9 @@ class ProjectVideoViewController extends Controller
 
                 Videoclub::create($form_data3);
             }
-          }
+        }
 
-            if($request->player!=null){
+        if($request->player!=null){
             foreach($request->player as $player){
                 $id = DB::table('videos')->orderBy('id', 'DESC')->value('id');
                 $form_data4 = array(
@@ -380,9 +385,9 @@ class ProjectVideoViewController extends Controller
 
                 Videoplayer::create($form_data4);
             }
-          }
+        }
 
-            if($request->genre!=null){
+        if($request->genre!=null){
             foreach($request->genre as $genre){
                 $id = DB::table('videos')->orderBy('id', 'DESC')->value('id');
                 $form_data5 = array(
@@ -392,8 +397,8 @@ class ProjectVideoViewController extends Controller
 
                 Videogenre::create($form_data5);
             }
-          }
-          return redirect('video-form')->with('videoeditsuccess','Video Updated Successfully');
+        }
+        return redirect('video-form')->with('videoeditsuccess','Video Updated Successfully');
 
 
     }
@@ -419,21 +424,21 @@ class ProjectVideoViewController extends Controller
     public function destroy1($id)
     {
 
-      $Video_id=$id;
+        $Video_id=$id;
 
-      $video_clubs = DB::table('videoclubs');
-      $clubs =  DB::table('clubs')
-        ->where('Video_id', '=', $Video_id)
-        ->join('videoclubs', 'videoclubs.Club_id', '=', 'clubs.id')
-        ->select('clubs.*', 'clubs.club_name')
-        ->get();
+        $video_clubs = DB::table('videoclubs');
+        $clubs =  DB::table('clubs')
+            ->where('Video_id', '=', $Video_id)
+            ->join('videoclubs', 'videoclubs.Club_id', '=', 'clubs.id')
+            ->select('clubs.*', 'clubs.club_name')
+            ->get();
 
-     $video_players = Videoplayer::latest();;
+        $video_players = Videoplayer::latest();;
         $players =  DB::table('players')
-        ->where('Video_id', '=', $Video_id)
-        ->join('videoplayers', 'videoplayers.Player_id', '=', 'players.id')
-        ->select('players.*', 'players.player_name')
-        ->get();
+            ->where('Video_id', '=', $Video_id)
+            ->join('videoplayers', 'videoplayers.Player_id', '=', 'players.id')
+            ->select('players.*', 'players.player_name')
+            ->get();
 
 
 
@@ -447,31 +452,31 @@ class ProjectVideoViewController extends Controller
 
     public function video_details($id)
     {
-      $Video_id=$id;
-      $video = Video::latest()
-               ->where('id', '=', $Video_id)
-               ->get();
+        $Video_id=$id;
+        $video = Video::latest()
+            ->where('id', '=', $Video_id)
+            ->get();
 
-      $video_clubs = DB::table('videoclubs');
-      $clubs =  DB::table('clubs')
-        ->where('Video_id', '=', $Video_id)
-        ->join('videoclubs', 'videoclubs.Club_id', '=', 'clubs.id')
-        ->select('clubs.*', 'clubs.club_name')
-        ->get();
+        $video_clubs = DB::table('videoclubs');
+        $clubs =  DB::table('clubs')
+            ->where('Video_id', '=', $Video_id)
+            ->join('videoclubs', 'videoclubs.Club_id', '=', 'clubs.id')
+            ->select('clubs.*', 'clubs.name_en')
+            ->get();
 
-     $video_players = Videoplayer::latest();;
+        $video_players = Videoplayer::latest();;
         $players =  DB::table('players')
-        ->where('Video_id', '=', $Video_id)
-        ->join('videoplayers', 'videoplayers.Player_id', '=', 'players.id')
-        ->select('players.*', 'players.player_name')
-        ->get();
+            ->where('Video_id', '=', $Video_id)
+            ->join('videoplayers', 'videoplayers.Player_id', '=', 'players.id')
+            ->select('players.*', 'players.name_en')
+            ->get();
 
-     $videogenres = DB::table('videogenres');
-       $video_genres =  DB::table('video_genres')
-        ->where('video_id', '=', $Video_id)
-        ->join('videogenres', 'videogenres.genre_id', '=', 'video_genres.id')
-        ->select('video_genres.*', 'video_genres.genre_name')
-        ->get();
+        $videogenres = DB::table('videogenres');
+        $video_genres =  DB::table('video_genres')
+            ->where('video_id', '=', $Video_id)
+            ->join('videogenres', 'videogenres.genre_id', '=', 'video_genres.id')
+            ->select('video_genres.*', 'video_genres.name_en')
+            ->get();
 
         return view('admin.video.display_player', compact('video_clubs','clubs','video_players','players','video','videogenres','video_genres'))
             ->with('i', (request()->input('page', 1) - 1) * 5);

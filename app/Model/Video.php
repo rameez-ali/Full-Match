@@ -9,7 +9,7 @@ class Video extends Model
 {
 	use SoftDeletes;
     protected $fillable = [
-        'Category_id','leagues_id','video_title','video_banner_img','video_img','video_description',
+        'category_id','leagues_id','title_en','title_ar','video_banner_img','video_img','description_en','description_ar',
         'video_link','hour','minute','second','notify_user','video_sorting','popular_searches','video_promo',
     ];
 //    protected $dates = ['deleted_at'];

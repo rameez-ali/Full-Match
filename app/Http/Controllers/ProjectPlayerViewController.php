@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\ProjectCategory;
 use App\Model\Player;
 use App\Model\Videoplayer;
 
@@ -17,7 +16,7 @@ class ProjectPlayerViewController extends Controller
     public function index()
     {
         $player = Player::all();
-            return view('admin.player.index', compact('player'));
+        return view('admin.player.index', compact('player'));
     }
 
     /**
@@ -38,14 +37,14 @@ class ProjectPlayerViewController extends Controller
      */
     public function store(Request $request)
     {
-         $request->validate([
+        $request->validate([
             'name_en'     => 'required',
-             'name_ar'     => 'required',
+            'name_ar'     => 'required',
             'player_banner'         =>  'required|image|max:2048',
             'player_profile_image'  =>  'required|image|max:2048',
             'description_en'     => 'required',
-             'description_ar'     => 'required'
-         ]);
+            'description_ar'     => 'required'
+        ]);
 
         $image = $request->file('player_banner');
         $new_name = rand() . '.' . $image->getClientOriginalExtension();

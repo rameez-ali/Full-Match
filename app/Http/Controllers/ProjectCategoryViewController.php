@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Model\ProjectCategory;
+use App\Model\Category;
 use App\Model\Video_genre;
 use App\Model\Category_genre;
 use DB;
@@ -17,7 +17,7 @@ class ProjectCategoryViewController extends Controller
      */
     public function index()
     {
-          $category = ProjectCategory::all();
+          $category = Category::all();
           return view('admin.category.index', compact('category'));
     }
 
@@ -59,9 +59,9 @@ class ProjectCategoryViewController extends Controller
             'category_sorting'   =>   $request->category_sorting
         );
 
-         ProjectCategory::create($form_data);
+         Category::create($form_data);
 
-        $id = DB::table('project_categories')->orderBy('id', 'DESC')->value('id');
+        $id = DB::table('categories')->orderBy('id', 'DESC')->value('id');
 
          foreach($request->genre as $genre){
                 $form_data5 = array(
@@ -94,7 +94,7 @@ class ProjectCategoryViewController extends Controller
      */
     public function edit($id)
     {
-        $category=ProjectCategory::find($id);
+        $category=Category::find($id);
 
         $video_genres =  DB::table('video_genres')
         ->where('category_id', '=', $id)
@@ -107,7 +107,7 @@ class ProjectCategoryViewController extends Controller
            array_push($selected_ids3, $gly->id);
        }
 
-        $video_genres=Video_genre::select('id','genre_name')->get();
+        $video_genres=Video_genre::select('id','name_en')->get();
 
         return view('admin.category.edit',compact('category','selected_ids3','video_genres'));
     }
@@ -152,7 +152,7 @@ class ProjectCategoryViewController extends Controller
             'category_sorting'       =>   $request->category_sorting
         );
 
-        ProjectCategory::whereId($id)->update($form_data);
+        Category::whereId($id)->update($form_data);
 
         Category_genre::where('category_id', $id)->forceDelete();
 
@@ -179,7 +179,7 @@ class ProjectCategoryViewController extends Controller
     public function destroy(Request $request, $id)
     {
 
-        $data = ProjectCategory::findOrFail($id);
+        $data = Category::findOrFail($id);
 
         $data->delete();
         $request->session()->flash('message', 'Successfully deleted the task!');

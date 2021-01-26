@@ -19,24 +19,40 @@
                                         @method('PATCH')
                                         <div class="row">
                                            <div class="input-field col s12">
-                                           <p for="category_image">Edit League Name * </p>
-                                           <input type="text" name="video_title" value="{{ old('video_title',$video->video_title) }}" class="form-control input-lg" required data-error=".errorTxt1" />
-                                           <small class="errorTxt1"></small>
-                                           @error('video_title')
+                                           <p for="title_en">Edit Video Title EN * </p>
+                                           <input type="text" name="title_en" value="{{ old('title_en',$video->title_en) }}" class="form-control input-lg" required data-error=".errorTxt10" />
+                                           <small class="errorTxt10"></small>
+                                           @error('title_en')
                                            <span class="invalid-feedback" role="alert">
                                            <strong>{{ $message }}</strong>
                                            </span>
                                            @enderror
                                            </div>
 
+                                            <div class="input-field col s12">
+                                                <p for="title_ar">Edit Video Title AR * </p>
+                                                <input type="text" name="title_ar" value="{{ old('title_ar',$video->title_ar) }}" class="form-control input-lg" required data-error=".errorTxt11" />
+                                                <small class="errorTxt11"></small>
+                                                @error('title_ar')
+                                                <span class="invalid-feedback" role="alert">
+                                           <strong>{{ $message }}</strong>
+                                           </span>
+                                                @enderror
+                                            </div>
+
                                            <div class="input-field col s12">
-                                           <p for="category_image">Edit Video Description </p>
-                                           <input type="text" name="video_description" value="{{ old('video_description',$video->video_description) }}" class="form-control input-lg" />
+                                           <p for="description_en">Edit Video Description EN </p>
+                                           <input type="text" name="description_en" value="{{ old('description_en',$video->description_en) }}" class="form-control input-lg" />
                                            </div>
+
+                                            <div class="input-field col s12">
+                                                <p for="description_ar">Edit Video Description AR </p>
+                                                <input type="text" name="description_ar" value="{{ old('description_ar',$video->description_ar) }}" class="form-control input-lg" />
+                                            </div>
 
                                            <div class="input-field col s12">
                                            <p for="video_link">Edit Video Link on Vimeo * </p>
-                                           <input type="url" name="video_link" value="{{ old('video_link',$video->video_link) }}" class="form-control input-lg" required data-error=".errorTxt2" />
+                                           <input type="url" name="video_link" value="{{ old('video_link',$video->video_link) }}" required data-error=".errorTxt2" />
                                            <small class="errorTxt2"></small>
                                            @error('video_link')
                                            <span class="invalid-feedback" role="alert">
@@ -60,10 +76,10 @@
                                               <input type="number" id="second"  min="0" name="second" value="{{ old('second',$video->second) }}" min="0" class="form-control input-lg" required />
                                               </div>
                                            </div>
-                                        
 
-                            
-                                          
+
+
+
                                            <div class="input-field col s12">
                                            <p for="category_image"> Edit Video Sorting </p>
                                            <input type="number" name="video_sorting" value="{{ old('video_sorting',$video->video_sorting) }}" min="1" class="form-control input-lg" />
@@ -75,7 +91,7 @@
                                           <input type="file" name="video_banner_img" value="{{ old('video_banner_img',$video->video_banner_img) }}" class="dropify mt-3"  data-default-file="{{ asset('app-assets/images/video/'.$video->video_banner_img)}}" data-max-file-size="10M" data-allowed-file-extensions="png jpg jpeg" />
 
                                           </div>
-                                        
+
                                           <div class="input-field col s12">
                                           <p for="category_image"> Edit Video Image * </p>
                                           <input type="file" name="video_img" value="{{ old('video_img',$video->video_img) }}" class="dropify mt-3" data-default-file="{{ asset('app-assets/images/video/'.$video->video_img)}}" data-max-file-size="10M" data-allowed-file-extensions="png jpg jpeg"/>
@@ -85,9 +101,9 @@
                                           <label><strong>Edit Category * </strong></label><br/>
                                           <select class="form-control input-lg" name="Category_id"  required>
                                           @foreach($category as $category )
-                                          <option value="{{$category->id}}">{{$category->category_name}}</option>
+                                          <option value="{{$category->id}}">{{$category->name_en}}</option>
                                           @endforeach
-                      
+
                                           @error('Category_id')
                                           <small class="errorTxt7"></small>
                                           <span class="invalid-feedback" role="alert">
@@ -101,10 +117,10 @@
                                          <label><strong>Edit Genre * </strong></label><br/>
                                          <select class="form-control input-lg" multiple data-live-search="true" name="genre[]"  required>
                                          @foreach($video_genres as $videogenre )
-                                         <option value="{{$videogenre->id}}" {{in_array($videogenre->id, $selected_ids3) ? 'selected' : ''}} >{{$videogenre->genre_name}}</option>
+                                         <option value="{{$videogenre->id}}" {{in_array($videogenre->id, $selected_ids3) ? 'selected' : ''}} >{{$videogenre->name_en}}</option>
                                          @endforeach
                                          </select>
-                                         
+
                                          @error('genre')
                                           <small class="errorTxt8"></small>
                                           <span class="invalid-feedback" role="alert">
@@ -118,7 +134,7 @@
                                          <label><strong>Edit club </strong></label><br/>
                                          <select class="selectpicker" multiple data-live-search="true" name="club[]">
                                          @foreach($club as $club)
-                                         <option value="{{$club->id}}" {{in_array($club->id, $selected_ids) ? 'selected' : ''}} >{{$club->club_name}}</option>
+                                         <option value="{{$club->id}}" {{in_array($club->id, $selected_ids) ? 'selected' : ''}} >{{$club->name_en}}</option>
                                           @endforeach
                                          </select>
                                          </div>
@@ -127,7 +143,7 @@
                                          <label><strong>Edit Player </strong></label><br/>
                                          <select class="selectpicker" multiple data-live-search="true" name="player[]">
                                          @foreach($player as $player )
-                                         <option value="{{$player->id}}" {{in_array($player->id, $selected_ids1) ? 'selected' : ''}} >{{$player->player_name}}</option>
+                                         <option value="{{$player->id}}" {{in_array($player->id, $selected_ids1) ? 'selected' : ''}} >{{$player->name_en}}</option>
                                          @endforeach
                                          </select>
                                          </div>

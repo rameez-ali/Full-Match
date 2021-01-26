@@ -50,15 +50,15 @@
                                             <table id="page-length-option" class="display">
                                                 <thead>
                                                 <tr>
-                                                  <th width="27%">Slider Name</th>
-                                                  <th width="27%">Slider Sorting</th>
+                                                  <th width="27%">Name</th>
+                                                  <th width="27%">Sorting</th>
                                                   <th width="30%">Action</th>
                                                  </tr>
                                                 </thead>
                                                  <tbody>
                                                   @foreach($slidercategory as $slidercategory)
                                                   <tr>
-                                                  <td>{{$slidercategory->slider_name}}</td>
+                                                  <td>{{$slidercategory->name_en}}</td>
                                                   <td>{{$slidercategory->slider_sorting}}</td>
                                                   <td><form action="{{ route('slider-form.destroy', $slidercategory->id)}}" method="post">
                                                     <a href="{{ url('slider/'.$slidercategory->id)}}" class="dt-button buttons-excel buttons-html5 waves-effect waves-light btn gradient-45deg-purple-deep-orange gradient-shadow">Details</a>

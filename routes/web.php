@@ -24,7 +24,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::resource('subscriptionplans','SubsPlanController');
     Route::resource('discount','PromoCodeController');
     Route::resource('category-form','ProjectCategoryViewController');
-    Route::resource('genre-form','ProjectCategoryGenreViewController');
+    Route::resource('genre-form','ProjectGenreViewController');
 
     Route::resource('player-form','ProjectPlayerViewController');
     Route::resource('contact-form','ProjectContactViewController');
@@ -36,7 +36,7 @@ Route::group(['middleware' => ['auth']], function () {
 
     Route::resource('video-form','ProjectVideoViewController');
     Route::get('video-form/videos/{id}','ProjectVideoViewController@getseasons');
-//    Route::post('video-form/search','ProjectVideoViewController@search')->name('video-form.search');
+//    Route::post('video-form/search','VideoController@search')->name('video-form.search');
 
     Route::post('video-form-search','VideoSearchController@search')->name('video-form-search.search');
 
@@ -57,10 +57,10 @@ Route::group(['middleware' => ['auth']], function () {
 
     Route::get('slider/{id}','ProjectSliderViewController@destroy1');
 
-    Route::resource('banner-form','ProjectAdvertisementController');
-    Route::get('banner-form/allvideos/{id}','ProjectAdvertisementController@getallvideos');
-    Route::get('banner-form/videos/{id}','ProjectAdvertisementController@getvideos');
-    Route::get('adv_banner/{id}','ProjectAdvertisementController@destroy1');
+    Route::resource('banner-form','ProjectAdvertisementViewController');
+    Route::get('banner-form/allvideos/{id}','ProjectAdvertisementViewController@getallvideos');
+    Route::get('banner-form/videos/{id}','ProjectAdvertisementViewController@getvideos');
+    Route::get('adv_banner/{id}','ProjectAdvertisementViewController@destroy1');
 
     Route::resource('my-form','SeasonPartSortingController');
     Route::get("addmore","SeasonPartSortingController@addMore");
