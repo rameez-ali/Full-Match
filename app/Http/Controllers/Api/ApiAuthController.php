@@ -122,7 +122,9 @@ class ApiAuthController extends Controller
     {
         $request->user()->token()->revoke();
         return response()->json([
-            'message' => 'Successfully logged out'
+            'message' => 'Successfully logged out',
+            'success' => true,
+            'status' => $this->successStatus,
         ]);
     }
 
@@ -133,6 +135,11 @@ class ApiAuthController extends Controller
      */
     public function user(Request $request)
     {
-        return response()->json($request->user());
+        return response()->json([
+            'message' => 'User Details',
+            'success' => true,
+            'status' => $this->successStatus,
+            'data' => $request->user()
+        ]);
     }
 }
