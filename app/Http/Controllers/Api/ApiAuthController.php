@@ -90,8 +90,10 @@ class ApiAuthController extends Controller
 
         if(!Auth::attempt($credentials))
             return response()->json([
-                'message' => 'Unauthorized'
-            ], 401);
+                'message' => 'User Login Fail',
+                'status' => $this->HTTP_FORBIDDEN,
+                'success' => false,
+            ], 403);
         $user = $request->user();
         $tokenResult = $user->createToken('Personal Access Token');
         $token = $tokenResult->token;
@@ -102,7 +104,7 @@ class ApiAuthController extends Controller
         return response()->json([
             'data' => $array,
             'token_type' => 'Bearer',
-            'message' => 'User Create Successfully',
+            'message' => 'User Login Successfully',
             'status' => $this->successStatus,
             'success' => true,
             'auth_info' => $user,
