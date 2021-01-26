@@ -86,6 +86,8 @@ class ApiAuthController extends Controller
         ]);
         $credentials = request(['email', 'password']);
 
+        $array = array();
+
         if(!Auth::attempt($credentials))
             return response()->json([
                 'message' => 'Unauthorized'
@@ -96,10 +98,13 @@ class ApiAuthController extends Controller
         if ($request->remember_me)
             $token->expires_at = Carbon::now()->addWeeks(1);
         $token->save();
+        $array['token'] = $tokenResult->accessToken;
         return response()->json([
-            'access_token' => $tokenResult->accessToken,
+            'data' => $array,
             'token_type' => 'Bearer',
-            'mesaage' => $this->successStatus,
+            'message' => 'User Create Successfully',
+            'status' => $this->successStatus,
+            'success' => true,
             'auth_info' => $user,
             'expires_at' => Carbon::parse(
                 $tokenResult->token->expires_at

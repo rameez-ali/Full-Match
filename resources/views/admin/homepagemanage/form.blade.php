@@ -47,9 +47,8 @@
                                                     <div class="input-field col s12">
                                                         <p class="mb-1">{{ __('customer.select_players') }}</p>
                                                         <select class="max-length browser-default" multiple="multiple" name="players" id="players">
-                                                            <option value="0">none</option>
                                                             @foreach($all_players as $player)
-                                                                <option value="{{$player->id}}" >{{$player->player_name}}</option>
+                                                                <option value="{{$player->id}}" >{{$player->name_en}}</option>
                                                             @endforeach
                                                         </select>
                                                     </div>
@@ -57,9 +56,8 @@
                                                     <div class="input-field col s12">
                                                         <p class="mb-1">{{ __('customer.select_clubs') }}</p>
                                                         <select class="max-length browser-default" multiple="multiple" name="clubs" id="clubs">
-                                                            <option value="0">none</option>
                                                             @foreach($all_clubs as $club)
-                                                                <option value="{{$club->id}}" >{{$club->club_name}}</option>
+                                                                <option value="{{$club->id}}" >{{$club->name_en}}</option>
                                                             @endforeach
                                                         </select>
                                                     </div>
@@ -67,9 +65,8 @@
                                                     <div class="input-field col s12">
                                                         <p class="mb-1">{{ __('customer.select_videos') }}</p>
                                                         <select class="max-length browser-default" multiple="multiple" name="videos" id="videos">
-                                                            <option value="0">none</option>
                                                             @foreach($all_videos as $video)
-                                                                <option value="{{$video->id}}" >{{$video->video_title}}</option>
+                                                                <option value="{{$video->id}}" >{{$video->title_en}}</option>
                                                             @endforeach
                                                         </select>
                                                     </div>
