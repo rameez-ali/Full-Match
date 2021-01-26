@@ -90,6 +90,12 @@ return [
         'notifi_show' => 'Notification Details',
 
     ],
+    'homepgmanage' => [
+        'homepgmanage_section' => 'Home Page management Section',
+        'homepg' => 'Home Management',
+        'edit' => 'Edit Home Page Management',
+        'add' => 'Add Home Page Management',
+    ],
     'name' => 'Name',
     'slug' => 'Slug',
     'decs' => 'Description',
@@ -134,5 +140,11 @@ return [
     'sent' => 'We have emailed your password reset link!',
     'view' => 'View',
     'back' => 'Back',
+    'active' => 'Activate',
+    'de-active' => 'Deactivate',
+    'select_seasons' => 'Select Seasons',
+    'select_clubs' => 'Select Clubs',
+    'select_players' => 'Select Players',
+    'select_videos' => 'Select Videos',
 
 ];

@@ -37,9 +37,8 @@ class ApiAuthController extends Controller
 
         if ($validator->fails()) {
             return response()->json([
-                'message' => 'Invalid field',
+                'message' => $validator->errors()->messages()['email'],
                 'success' => false,
-                'error' => $validator->errors()->messages(),
                 'status' => $this->HTTP_FORBIDDEN,
             ], 403);
         } else {
@@ -62,7 +61,7 @@ class ApiAuthController extends Controller
                 'success' => true,
                 'error' => null,
                 'status' => $this->successStatus,
-            ], 200);
+            ]);
         }
     }
 
@@ -86,20 +85,27 @@ class ApiAuthController extends Controller
         ]);
         $credentials = request(['email', 'password']);
 
+        $array = array();
+
         if(!Auth::attempt($credentials))
             return response()->json([
-                'message' => 'Unauthorized'
-            ], 401);
+                'message' => 'User Login Fail',
+                'status' => $this->HTTP_FORBIDDEN,
+                'success' => false,
+            ], 403);
         $user = $request->user();
         $tokenResult = $user->createToken('Personal Access Token');
         $token = $tokenResult->token;
         if ($request->remember_me)
             $token->expires_at = Carbon::now()->addWeeks(1);
         $token->save();
+        $array['token'] = $tokenResult->accessToken;
         return response()->json([
-            'access_token' => $tokenResult->accessToken,
+            'data' => $array,
             'token_type' => 'Bearer',
-            'mesaage' => $this->successStatus,
+            'message' => 'User Login Successfully',
+            'status' => $this->successStatus,
+            'success' => true,
             'auth_info' => $user,
             'expires_at' => Carbon::parse(
                 $tokenResult->token->expires_at
