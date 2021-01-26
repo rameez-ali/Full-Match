@@ -37,9 +37,8 @@ class ApiAuthController extends Controller
 
         if ($validator->fails()) {
             return response()->json([
-                'message' => 'Invalid field',
+                'message' => $validator->errors()->messages()['email'],
                 'success' => false,
-                'error' => $validator->errors()->messages(),
                 'status' => $this->HTTP_FORBIDDEN,
             ], 403);
         } else {
@@ -62,7 +61,7 @@ class ApiAuthController extends Controller
                 'success' => true,
                 'error' => null,
                 'status' => $this->successStatus,
-            ], 200);
+            ]);
         }
     }
 
