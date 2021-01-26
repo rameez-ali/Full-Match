@@ -24,12 +24,12 @@
                                                   @if($slidervideos->count())
                                                   @foreach($videos as $videos)
                                                   <tr>
-                                                  <td>{{$videos->video_title}}</td>
+                                                  <td>{{$videos->title_en}}</td>
                                                   </tr>
                                                   @endforeach
-                                                  @endif     
+                                                  @endif
                                                  </tbody>
-                                                
+
                                             </table>
                                         </div>
                                     </div>

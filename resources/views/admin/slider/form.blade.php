@@ -23,15 +23,26 @@ option {margin: 10px;}
                                           <form method="post" action="{{route('slider-form.store')}}" enctype="multipart/form-data">
                                           @csrf
                                           <div class="form-group">
-                                          <label for="exampleInputEmail1">Enter Slider Name * </label>
-                                          <input type="text" name="slider_name" class="form-control input-lg" required/>
+                                          <label for="name_en">Add Slider Name EN * </label>
+                                          <input type="text" name="name_en" class="form-control input-lg" required/>
                                           <small class="errorTxt1"></small>
-                                          @error('slider_name')
+                                          @error('name_en')
                                           <span class="invalid-feedback" role="alert">
                                           <strong>{{ $message }}</strong>
                                           </span>
                                           @enderror
                                           </div>
+
+                                              <div class="form-group">
+                                                  <label for="name_ar">Add Slider Name AR * </label>
+                                                  <input type="text" name="name_ar" class="form-control input-lg" required/>
+                                                  <small class="errorTxt4"></small>
+                                                  @error('name_ar')
+                                                  <span class="invalid-feedback" role="alert">
+                                          <strong>{{ $message }}</strong>
+                                          </span>
+                                                  @enderror
+                                              </div>
 
                                           <div class="form-group">
                                             <label for="country">Select Slider Type: * </label>
@@ -39,7 +50,7 @@ option {margin: 10px;}
                                             <option selected> </option>
                                             <option value="0"> Home </option>
                                             @foreach ($video as $video)
-                                            <option value="{{$video->id}}">{{ $video->category_name }}</option>
+                                            <option value="{{$video->id}}">{{ $video->name_en }}</option>
                                             @endforeach
                                             <small class="errorTxt5"></small>
                                             @error('video_img')

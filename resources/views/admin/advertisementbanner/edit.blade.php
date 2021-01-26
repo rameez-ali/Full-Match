@@ -20,8 +20,13 @@
 
                                         <div class="row">
                                             <div class="input-field col s12">
-                                            <p for="category_image">Edit Banner Title *  </p>
-                                            <input type="text" name="video_title" value="{{ $slider->video_title }}" class="form-control input-lg" required />
+                                            <p for="title_en">Edit Video Title EN *  </p>
+                                            <input type="text" name="title_en" value="{{ $slider->title_en }}" class="form-control input-lg" required />
+                                            </div>
+
+                                            <div class="input-field col s12">
+                                                <p for="title_ar">Edit Video Title AR *  </p>
+                                                <input type="text" name="title_ar" value="{{ $slider->title_ar }}" class="form-control input-lg" required />
                                             </div>
 
                                             <div class="input-field col s12">
@@ -42,7 +47,7 @@
                                            <select name="category">
                                            <option selected> </option>
                                            @foreach($category as $category )
-                                           <option value="{{$category->id}}" {{$category->id == $select_category_id->category_id ? 'selected' : ''}} >{{$category->category_name}}</option>
+                                           <option value="{{$category->id}}" {{$category->id == $select_category_id->category_id ? 'selected' : ''}} >{{$category->name_en}}</option>
                                            @endforeach
                                            </select>
                                            </div>
@@ -52,7 +57,7 @@
                                           <select name="genre">
                                           <option selected> </option>
                                           @foreach($videogenre as $videogenre )
-                                          <option value="{{$videogenre->id}}" {{$videogenre->id == $select_genre_id->genre_id ? 'selected' : ''}} >{{$videogenre->genre_name}}</option>
+                                          <option value="{{$videogenre->id}}" {{$videogenre->id == $select_genre_id->genre_id ? 'selected' : ''}} >{{$videogenre->name_en}}</option>
                                           @endforeach
                                           </select>
                                           </div>
@@ -61,7 +66,7 @@
                                           <label><strong>Edit Videos </strong></label><br/>
                                           <select class="selectpicker" multiple data-live-search="true" name="video[]">
                                           @foreach($video1 as $video )
-                                          <option value="{{$video->id}}" {{in_array($video->id, $selected_ids) ? 'selected' : ''}} >{{$video->video_title}}</option>
+                                          <option value="{{$video->id}}" {{in_array($video->id, $selected_ids) ? 'selected' : ''}} >{{$video->name_en}}</option>
                                           @endforeach
                                           </select>
                                           </div>

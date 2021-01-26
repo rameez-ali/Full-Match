@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Model\ProjectCategory;
+use App\Model\Category;
 use App\Model\Video;
 use App\Model\League;
 use App\Model\Video_genre;
@@ -23,16 +23,16 @@ class VideoSearchController extends Controller
     public function search(Request $searchword){
 
 
-        $video = Video::where('video_title', $searchword->q)
-            ->orWhere('video_title', 'like', '%' . $searchword->q. '%')
+        $video = Video::where('title_en', $searchword->q)
+            ->orWhere('title_en', 'like', '%' . $searchword->q. '%')
             ->get();
 
-        $clubs  = Club::select('id')->where('club_name', $searchword->q)
-            ->orWhere('club_name', 'like', '%' . $searchword->q. '%')
+        $clubs  = Club::select('id')->where('name_en', $searchword->q)
+            ->orWhere('name_en', 'like', '%' . $searchword->q. '%')
             ->first();
 
-        $players = Player::where('player_name', $searchword->q)
-            ->orWhere('player_name', 'like', '%' . $searchword->q. '%')
+        $players = Player::where('name_en', $searchword->q)
+            ->orWhere('name_en', 'like', '%' . $searchword->q. '%')
             ->first();
 
         if(count($video)){

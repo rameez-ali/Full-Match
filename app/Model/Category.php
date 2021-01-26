@@ -5,11 +5,14 @@ namespace App\Model;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Slidercategory1 extends Model
+
+class Category extends Model
 {
-	use SoftDeletes;
+    use SoftDeletes;
+
     protected $fillable = [
-        'id','Category_id','slider_name','slider_sorting',
+        'name_en','name_ar','category_image','category_sorting',
     ];
+
     protected $dates = ['deleted_at'];
 }

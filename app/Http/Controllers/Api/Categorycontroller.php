@@ -5,10 +5,10 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 
 use Illuminate\Http\Request;
-use App\Model\ProjectCategory;
+use App\Model\Category;
 use App\Model\Category_genre;
 use App\Model\Video_genre;
-use App\Model\Slidercategory1;
+use App\Model\Slider;
 use App\Model\Slidervideo;
 use App\Model\Video;
 use App\Model\Adv_banner;
@@ -31,8 +31,8 @@ class CategoryController extends Controller
     {
         $home_slider_array = array();
         $category_id=null;
-        $categories = ProjectCategory::all();
-        $slider_id = Slidercategory1::select("id")->where('category_id',$category_id)->get();
+        $categories = Category::all();
+        $slider_id = Slider::select("id")->where('category_id',$category_id)->get();
         $video_id=Slidervideo::select("Video_id")->wherein('Slider_id',$slider_id)->get();
         $videos=Video::wherein('id',$video_id)->get();
 
@@ -62,7 +62,7 @@ class CategoryController extends Controller
         $genre_array=array();
 
         //getting slider id of that specific categories
-        $slider_id = Slidercategory1::select("id")->where('Category_id',$id)->first();
+        $slider_id = Slider::select("id")->where('Category_id',$id)->first();
 
         //getting banner_id of that specific categories
         $banner_id = Adv_banner::select("id")->where('category_id',$id)->get();

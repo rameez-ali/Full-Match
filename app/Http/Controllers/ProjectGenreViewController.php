@@ -3,13 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Model\ProjectCategory;
 use App\Model\Video_genre;
 use App\Model\Videogenre;
-use App\Model\Video;
 use DB;
 
-class ProjectCategoryGenreViewController extends Controller
+class ProjectGenreViewController extends Controller
 {
     /**
      * Display a listing of the resource.

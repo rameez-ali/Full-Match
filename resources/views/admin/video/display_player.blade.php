@@ -4,97 +4,101 @@
     <div class="col s12">
         <div class="container">
             <div class="section">
-                    <div class="row">
-                        <div class="col s12 m12 l12">
-                            <div class="card animate fadeUp">
-                                <div class="card-content">
-                                    <h4 class="header mt-0">
-                                        Video Details
-                                    </h4>
-                                    <div class="row">
-                                        <div class="col s12">
-                                            <h2></h2>
-                                             <table id="page-length-option" class="display">
-                                                <thead>
+                <div class="row">
+                    <div class="col s12 m12 l12">
+                        <div class="card animate fadeUp">
+                            <div class="card-content">
+                                <h4 class="header mt-0">
+                                    Video Details
+                                </h4>
+                                <div class="row">
+                                    <div class="col s12">
+                                        <h2></h2>
+                                        <table id="page-length-option" class="display">
+                                            <thead>
+                                            <tr>
+                                                <th width="20%">Title EN</th>
+                                                <th width="20%">Title AR</th>
+                                                <th width="20%">Banner</th>
+                                                <th width="20%">Image</th>
+                                                <th width="15%">Description EN</th>
+                                                <th width="15%">Description AR</th>
+                                                <th width="15%">Link</th>
+                                                <th width="10%">Duration</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            @foreach($video as $video)
                                                 <tr>
-                                                 <th width="20%">Video Title</th>
-                                                  <th width="20%">Video Banner</th>
-                                                  <th width="20%">Video Image</th>
-                                                  <th width="15%">Video Description</th>
-                                                  <th width="15%">Video Link</th>
-                                                  <th width="10%">Video Duration</th>
-                                                 </tr>
-                                                </thead>
-                                                 <tbody>
-                                                 @foreach($video as $video)
-                                                 <tr>
-                                               <td>{{ $video->video_title }}</td>
-                                               <td><img src="{{ asset('app-assets/images/video/'.$video->video_banner_img)}}"  class="img-thumbnail" width="75" /></td>
-                                               <td><img src="{{ asset('app-assets/images/video/'.$video->video_img)}}"  class="img-thumbnail" width="75" /></td>
-                                               <td>{{ $video->video_description }}</td>
-                                               <td>{{ $video->video_link }}</td>
-                                               <td>{{ $video->hour }}:
-                                                   {{ $video->minute }}:
-                                                   {{ $video->second }}</td>
-                                               <td>{{ $video->video_duration }}</td>
+                                                    <td>{{ $video->title_en }}</td>
+                                                    <td>{{ $video->title_ar }}</td>
+                                                    <td><img src="{{ asset('app-assets/images/video/'.$video->video_banner_img)}}"  class="img-thumbnail" width="75" /></td>
+                                                    <td><img src="{{ asset('app-assets/images/video/'.$video->video_img)}}"  class="img-thumbnail" width="75" /></td>
+                                                    <td>{{ $video->description_en }}</td>
+                                                    <td>{{ $video->description_ar }}</td>
+                                                    <td>{{ $video->video_link }}</td>
+                                                    <td>{{ $video->hour }}:
+                                                        {{ $video->minute }}:
+                                                        {{ $video->second }}</td>
+                                                    <td>{{ $video->video_duration }}</td>
                                                 </tr>
-                                                 @endforeach
-                                                 </tbody>                                     
-                                                 </tbody>
-                                            </table>
-                                            <table id="page-length-option" class="display">
-                                                <thead>
-                                                <tr>
+                                            @endforeach
+                                            </tbody>
+                                            </tbody>
+                                        </table>
+                                        <table id="page-length-option" class="display">
+                                            <thead>
+                                            <tr>
                                                 <th width="27%">Clubs</th>
-                                                 </tr>
-                                                </thead>
-                                                 <tbody>
-                                                  @foreach($clubs as $club)
-                                                  <tr>
-                                                  <td>{{ $club->club_name}}</td>
-                                                  </tr>
-                                                  @endforeach            
-                                                 </tbody>
-                                                
-                                            </table>
-
-                                            <table id="page-length-option" class="display">
-                                                <thead>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            @foreach($clubs as $club)
                                                 <tr>
+                                                    <td>{{ $club->name_en}}</td>
+                                                </tr>
+                                            @endforeach
+                                            </tbody>
+
+                                        </table>
+
+                                        <table id="page-length-option" class="display">
+                                            <thead>
+                                            <tr>
                                                 <th width="27%">Players</th>
-                                                 </tr>
-                                                </thead>
-                                                 <tbody>
-                                                  @foreach($players as $player)
-                                                  <tr>
-                                                  <td>{{ $player->player_name}}</td>
-                                                  </tr>
-                                                  @endforeach            
-                                                 </tbody>
-                                                
-                                            </table>
-
-                                             <table id="page-length-option" class="display">
-                                                <thead>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            @foreach($players as $player)
                                                 <tr>
+                                                    <td>{{ $player->name_en}}</td>
+                                                </tr>
+                                            @endforeach
+                                            </tbody>
+
+                                        </table>
+
+                                        <table id="page-length-option" class="display">
+                                            <thead>
+                                            <tr>
                                                 <th width="27%">Video Genres</th>
-                                                 </tr>
-                                                </thead>
-                                                 <tbody>
-                                                  @foreach($video_genres as $video_genre)
-                                                  <tr>
-                                                  <td>{{ $video_genre->genre_name}}</td>
-                                                  </tr>
-                                                  @endforeach            
-                                                 </tbody>
-                                                
-                                            </table>
-                                        </div>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            @foreach($video_genres as $video_genre)
+                                                <tr>
+                                                    <td>{{ $video_genre->name_en}}</td>
+                                                </tr>
+                                            @endforeach
+                                            </tbody>
+
+                                        </table>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
+                </div>
             </div>
         </div>
         <div class="content-overlay"></div>

@@ -54,7 +54,7 @@
                                          <label><strong>Edit Genre * </strong></label><br/>
                                          <select class="selectpicker" multiple data-live-search="true" name="genre[]" required>
                                          @foreach($video_genres as $videogenre )
-                                         <option value="{{$videogenre->id}}" {{in_array($videogenre->id, $selected_ids3) ? 'selected' : ''}} >{{$videogenre->genre_name}}</option>
+                                         <option value="{{$videogenre->id}}" {{in_array($videogenre->id, $selected_ids3) ? 'selected' : ''}} >{{$videogenre->name_en}}</option>
                                          @endforeach
                                          </select>
                                               <small class="errorTxt6"></small>

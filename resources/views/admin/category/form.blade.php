@@ -58,7 +58,7 @@
                                               <p for="genre"> Select Genre *</p>
                                               <select class="selectpicker" multiple data-live-search="true" name="genre[]" required >
                                               @foreach($genres as $videogenre )
-                                              <option value="{{$videogenre->id}}">{{$videogenre->genre_name}}</option>
+                                              <option value="{{$videogenre->id}}">{{$videogenre->name_en}}</option>
                                               @endforeach
                                               </select>
                                                    <small class="errorTxt6"></small>
