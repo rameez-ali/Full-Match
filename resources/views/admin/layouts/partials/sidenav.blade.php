@@ -14,6 +14,9 @@
         <li class="bold"><a class="waves-effect waves-cyan " href="{{ route('page.index') }}"><i class="material-icons dp48">settings</i><span class="menu-title" data-i18n="User Profile">{{ __('customer.cmspage.cmspage') }}</span></a>
         </li>
 
+        <li class="bold"><a class="waves-effect waves-cyan " href="{{ route('home-page-manage.index') }}"><i class="material-icons dp48">settings</i><span class="menu-title" data-i18n="User Profile">{{ __('customer.homepgmanage.homepg') }}</span></a>
+        </li>
+
         <li class="bold"><a class="waves-effect waves-cyan " href="{{ route('order.index') }}"><i class="material-icons dp48">shopping_cart</i><span class="menu-title" data-i18n="User Profile">{{ __('customer.order.orders') }}</span></a>
         </li>
 

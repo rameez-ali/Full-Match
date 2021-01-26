@@ -69,6 +69,7 @@ Route::group(['middleware' => ['auth']], function () {
 
     Route::post("addmore","SeasonPartSortingController@addMorePost");
     Route::resource("order","OrderController");
+    Route::resource("home-page-manage","HomePageManageController");
     Route::post('discount/promo/verify','DiscountController@verify')->name('discount.promo.verify');
 
 
