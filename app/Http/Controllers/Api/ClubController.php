@@ -36,10 +36,12 @@ public $HTTP_NOT_FOUND = 404;
                 $logo = str_replace('\\', '/', asset('app-assets/images/club/' . $v->club_logo));
 
                 $array[$k]['id'] = $v->id;
-                $array[$k]['name'] = $v->club_name;
+                $array[$k]['name'] = $v->name_en;
+                $array[$k]['name_ar'] = $v->name_ar;
                 $array[$k]['banner'] = $banner;
                 $array[$k]['logo'] = $logo;
-                $array[$k]['description'] = $v->club_description;
+                $array[$k]['description'] = $v->description_en;
+                $array[$k]['description_ar'] = $v->description_ar;
                 $array[$k]['sorting'] = $v->club_sorting;
                 $array[$k]['created_at'] = $v->created_at;
                 $array[$k]['deleted_at'] = $v->deleted_at;
@@ -59,7 +61,7 @@ public $HTTP_NOT_FOUND = 404;
 
         $array = array();
 
-        $video_clubs=Videoclub::select('videos.id','videos.video_title','videos.video_img','videos.video_description')
+        $video_clubs=Videoclub::select('videos.id','videos.title_en','videos.title_ar','videos.video_img','videos.description_en','videos.description_ar')
             ->join('videos','videoclubs.Video_id' , '=' ,'videos.id')
             ->where('Club_id','=', $id)
             ->get();
@@ -71,8 +73,10 @@ public $HTTP_NOT_FOUND = 404;
                 $video_img = str_replace('\\', '/', asset('app-assets/images/video/' . $v->video_img));
 
                 $array[$k]['id'] = $v->id;
-                $array[$k]['title'] = $v->video_title;
-                $array[$k]['description'] = $v->video_description;
+                $array[$k]['title'] = $v->title_en;
+                $array[$k]['title_ar'] = $v->title_en;
+                $array[$k]['description'] = $v->description_en;
+                $array[$k]['description_en'] = $v->description_ar;
                 $array[$k]['image'] = $video_img;
 
             }
@@ -87,74 +91,4 @@ public $HTTP_NOT_FOUND = 404;
 
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-
-
-
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        $club=Club::find($id);
-        return view('admin.club.edit',compact('club'));
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-
-
-
-    }
 }

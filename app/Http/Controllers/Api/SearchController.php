@@ -37,17 +37,23 @@ class SearchController extends Controller
         $all_videos_array = array();
         $player_search_video = array();
 
-        $video = Video::where('video_title', $searchword)
-                 ->orWhere('video_title', 'like', '%' . $searchword. '%')
-                  ->get();
+        $video = Video::where('title_en', $searchword->q)
+            ->orwhere('title_ar', $searchword->q)
+            ->orWhere('title_en', 'like', '%' . $searchword->q. '%')
+            ->orWhere('title_ar', 'like', '%' . $searchword->q. '%')
+            ->get();
 
-        $clubs  = Club::select('id')->where('club_name', $searchword)
-                 ->orWhere('club_name', 'like', '%' . $searchword. '%')
-                  ->first();
+        $clubs  = Club::select('id')->where('name_en', $searchword->q)
+            ->orwhere('name_ar', $searchword->q)
+            ->orWhere('name_en', 'like', '%' . $searchword->q. '%')
+            ->orWhere('name_ar', 'like', '%' . $searchword->q. '%')
+            ->first();
 
-        $players = Player::where('player_name', $searchword)
-                 ->orWhere('player_name', 'like', '%' . $searchword. '%')
-                  ->first();
+        $players = Player::where('name_en', $searchword->q)
+            ->orwhere('name_ar', $searchword->q)
+            ->orWhere('name_en', 'like', '%' . $searchword->q. '%')
+            ->orWhere('name_ar', 'like', '%' . $searchword->q. '%')
+            ->first();
 
          if(count($video)){
 
@@ -56,8 +62,10 @@ class SearchController extends Controller
                  $video_img = str_replace('\\', '/', asset('app-assets/images/video/' . $v->video_img));
 
                  $all_videos_array[$k]['id'] = $v->id;
-                 $all_videos_array[$k]['title'] = $v->video_title;
-                 $all_videos_array[$k]['description'] = $v->video_description;
+                 $all_videos_array[$k]['title'] = $v->title_en;
+                 $all_videos_array[$k]['title_ar'] = $v->title_ar;
+                 $all_videos_array[$k]['description'] = $v->description_en;
+                 $all_videos_array[$k]['description_ar'] = $v->description_ar;
                  $all_videos_array[$k]['image'] = $video_img;
 
              }
@@ -76,8 +84,10 @@ class SearchController extends Controller
                  $video_img = str_replace('\\', '/', asset('app-assets/images/video/' . $v->video_img));
 
                  $club_search_video[$k]['id'] = $v->id;
-                 $club_search_video[$k]['title'] = $v->video_title;
-                 $club_search_video[$k]['description'] = $v->video_description;
+                 $club_search_video[$k]['title'] = $v->title_en;
+                 $club_search_video[$k]['title_ar'] = $v->title_ar;
+                 $club_search_video[$k]['description'] = $v->description_en;
+                 $club_search_video[$k]['description_ar'] = $v->description_ar;
                  $club_search_video[$k]['image'] = $video_img;
 
              }
@@ -95,8 +105,10 @@ class SearchController extends Controller
                 $video_img = str_replace('\\', '/', asset('app-assets/images/video/' . $v->video_img));
 
                 $player_search_video[$k]['id'] = $v->id;
-                $player_search_video[$k]['title'] = $v->video_title;
-                $player_search_video[$k]['description'] = $v->video_description;
+                $player_search_video[$k]['title'] = $v->title_en;
+                $player_search_video[$k]['title_ar'] = $v->title_ar;
+                $player_search_video[$k]['description'] = $v->description_en;
+                $player_search_video[$k]['description'] = $v->description_ar;
                 $player_search_video[$k]['image'] = $video_img;
 
             }
@@ -118,8 +130,10 @@ class SearchController extends Controller
 
         $array=array();
 
-         $clubs  = Club::where('club_name', $searchword)
-             ->orWhere('club_name', 'like', '%' . $searchword. '%')
+         $clubs  = Club::where('name_en', $searchword)
+             ->orwhere('name_ar', $searchword)
+             ->orWhere('name_en', 'like', '%' . $searchword. '%')
+             ->orWhere('name_ar', 'like', '%' . $searchword. '%')
              ->get();
 
          if (!$clubs->isEmpty()) {
@@ -129,7 +143,8 @@ class SearchController extends Controller
                  $logo = str_replace('\\', '/', asset('app-assets/images/club/' . $v->club_logo));
 
                  $array[$k]['id'] = $v->id;
-                 $array[$k]['name'] = $v->club_name;
+                 $array[$k]['name'] = $v->name_en;
+                 $array[$k]['name_ar'] = $v->name_ar;
                  $array[$k]['image'] = $logo;
 
              }
@@ -144,8 +159,10 @@ class SearchController extends Controller
     public function searchplayer($searchword){
         $array=array();
 
-        $players  = Player::where('player_name', $searchword)
-            ->orWhere('player_name', 'like', '%' . $searchword. '%')
+        $players  = Player::where('name_en', $searchword)
+            ->orwhere('name_ar', $searchword)
+            ->orWhere('name_en', 'like', '%' . $searchword. '%')
+            ->orWhere('name_ar', 'like', '%' . $searchword. '%')
             ->get();
 
         if (!$players->isEmpty()) {
@@ -155,7 +172,8 @@ class SearchController extends Controller
                 $profile_image = str_replace('\\', '/', asset('app-assets/images/player/' . $v->player_profile_image));
 
                 $array[$k]['id'] = $v->id;
-                $array[$k]['name'] = $v->player_name;
+                $array[$k]['name'] = $v->name_en;
+                $array[$k]['name_ar'] = $v->name_ar;
                 $array[$k]['profile_image'] = $profile_image;
 
 

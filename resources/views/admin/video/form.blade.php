@@ -44,12 +44,12 @@
 
                                                 <div class="input-field col s12">
                                                     <p for="description_en">Add Video Description EN </p>
-                                                    <input type="text" id="description_en" name="description_en" class="form-control input-lg" />
+                                                    <input type="text" id="description_en" name="description_en" class="form-control input-lg" required/>
                                                 </div>
 
                                                 <div class="input-field col s12">
                                                     <p for="description_ar">Add Video Description AR </p>
-                                                    <input type="text" id="description_ar" name="description_ar" class="form-control input-lg" />
+                                                    <input type="text" id="description_ar" name="description_ar" class="form-control input-lg" required/>
                                                 </div>
 
                                                 <div class="input-field col s12">

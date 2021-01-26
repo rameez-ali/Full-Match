@@ -36,10 +36,12 @@ class PlayerController extends Controller
                 $profile_image = str_replace('\\', '/', asset('app-assets/images/player/' . $v->player_profile_image));
 
                 $array[$k]['id'] = $v->id;
-                $array[$k]['name'] = $v->player_name;
+                $array[$k]['name'] = $v->name_en;
+                $array[$k]['name_ar'] = $v->name_ar;
                 $array[$k]['banner'] = $banner;
                 $array[$k]['profile_image'] = $profile_image;
-                $array[$k]['description'] = $v->player_description;
+                $array[$k]['description_en'] = $v->description_en;
+                $array[$k]['description_ar'] = $v->description_ar;
                 $array[$k]['sorting'] = $v->player_sorting;
 
             }
@@ -58,7 +60,7 @@ class PlayerController extends Controller
     {
            $array = array();
 
-            $video_players=Videoplayer::select('videos.id','videos.video_title','videos.video_img','videos.video_description')
+            $video_players=Videoplayer::select('videos.id','videos.title_en','videos.title_ar','videos.video_img','videos.description_en','videos.description_ar')
             ->join('videos','videoplayers.Video_id' , '=' ,'videos.id')
             ->where('Player_id','=', $id)
             ->get();
@@ -70,8 +72,10 @@ class PlayerController extends Controller
                 $video_img = str_replace('\\', '/', asset('app-assets/images/video/' . $v->video_img));
 
                 $array[$k]['id'] = $v->id;
-                $array[$k]['title'] = $v->video_title;
-                $array[$k]['description'] = $v->video_description;
+                $array[$k]['title'] = $v->title_en;
+                $array[$k]['title_ar'] = $v->title_ar;
+                $array[$k]['description'] = $v->description_en;
+                $array[$k]['description_ar'] = $v->description_ar;
                 $array[$k]['image'] = $video_img;
 
             }

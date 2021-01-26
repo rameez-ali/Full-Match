@@ -24,15 +24,21 @@ class VideoSearchController extends Controller
 
 
         $video = Video::where('title_en', $searchword->q)
+            ->orwhere('title_ar', $searchword->q)
             ->orWhere('title_en', 'like', '%' . $searchword->q. '%')
+            ->orWhere('title_ar', 'like', '%' . $searchword->q. '%')
             ->get();
 
         $clubs  = Club::select('id')->where('name_en', $searchword->q)
+            ->orwhere('name_ar', $searchword->q)
             ->orWhere('name_en', 'like', '%' . $searchword->q. '%')
+            ->orWhere('name_ar', 'like', '%' . $searchword->q. '%')
             ->first();
 
         $players = Player::where('name_en', $searchword->q)
+            ->orwhere('name_ar', $searchword->q)
             ->orWhere('name_en', 'like', '%' . $searchword->q. '%')
+            ->orWhere('name_ar', 'like', '%' . $searchword->q. '%')
             ->first();
 
         if(count($video)){
