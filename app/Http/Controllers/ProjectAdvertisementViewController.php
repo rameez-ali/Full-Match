@@ -42,7 +42,7 @@ class ProjectAdvertisementViewController extends Controller
     {
         //$states = DB::table("videos")->pluck("video_title","id");
         //$states = DB::table("videos")->pluck("video_title","id","category");;
-        $states=Video::pluck('video_title','id','category');
+        $states=Video::pluck('title_en','id','category');
        // echo $states;
 
          return json_encode($states);
@@ -152,7 +152,7 @@ class ProjectAdvertisementViewController extends Controller
        }
 
        $category=Category::select('id','name_en')->get();
-       $videogenre=Video_genre::select('id','genre_name')->get();
+       $videogenre=Video_genre::select('id','name_en')->get();
        //$video=video::select('id','video_title')->get();
 
 

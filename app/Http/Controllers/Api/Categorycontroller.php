@@ -41,8 +41,10 @@ class CategoryController extends Controller
             $video_img = str_replace('\\', '/', asset('app-assets/images/video/' . $v->video_img));
 
             $home_slider_array[$k]['id'] = $v->id;
-            $home_slider_array[$k]['title'] = $v->video_title;
-            $home_slider_array[$k]['description'] = $v->video_description;
+            $home_slider_array[$k]['title'] = $v->title_en;
+            $home_slider_array[$k]['title_ar'] = $v->title_ar;
+            $home_slider_array[$k]['description'] = $v->description_en;
+            $home_slider_array[$k]['description_ar'] = $v->description_ar;
             $home_slider_array[$k]['image'] = $video_img;
 
         }
@@ -62,7 +64,7 @@ class CategoryController extends Controller
         $genre_array=array();
 
         //getting slider id of that specific categories
-        $slider_id = Slider::select("id")->where('Category_id',$id)->first();
+        $slider_id = Slider::select("id")->where('category_id',$id)->first();
 
         //getting banner_id of that specific categories
         $banner_id = Adv_banner::select("id")->where('category_id',$id)->get();
@@ -82,8 +84,10 @@ class CategoryController extends Controller
                  $video_img = str_replace('\\', '/', asset('app-assets/images/video/' . $v->video_img));
 
                  $slider_array[$k]['id'] = $v->id;
-                 $slider_array[$k]['title'] = $v->video_title;
-                 $slider_array[$k]['description'] = $v->video_description;
+                 $slider_array[$k]['title'] = $v->title_en;
+                 $slider_array[$k]['title_ar'] = $v->title_ar;
+                 $slider_array[$k]['description'] = $v->description_en;
+                 $slider_array[$k]['description_ar'] = $v->description_ar;
                  $slider_array[$k]['image'] = $video_img;
 
              }
@@ -97,14 +101,16 @@ class CategoryController extends Controller
          if($banner_id!=null)
          {
          $video_id=Adv_banner_video::select("video_id")->wherein('banner_id',$banner_id)->get();
-         $banner_videos=Video::select("id","video_title")->wherein('id',$video_id)->get();
+         $banner_videos=Video::select("id","title_en")->wherein('id',$video_id)->get();
              foreach ($banner_videos as $k => $v) {
 
                  $video_img = str_replace('\\', '/', asset('app-assets/images/video/' . $v->video_img));
 
                  $banner_array[$k]['id'] = $v->id;
-                 $banner_array[$k]['title'] = $v->video_title;
-                 $banner_array[$k]['description'] = $v->video_description;
+                 $banner_array[$k]['title'] = $v->title_en;
+                 $banner_array[$k]['title_ar'] = $v->title_ar;
+                 $banner_array[$k]['description'] = $v->description_en;
+                 $banner_array[$k]['description_ar'] = $v->description_ar;
                  $banner_array[$k]['image'] = $video_img;
 
              }
@@ -115,7 +121,7 @@ class CategoryController extends Controller
 
         if($genre_id!=null)
         {
-            $genres=Video_genre::select("genre_name")->wherein('id',$genre_id)->get();
+            $genres=Video_genre::select("name_en","name_ar")->wherein('id',$genre_id)->get();
             $obj->category_genre = $genres;
 
         }

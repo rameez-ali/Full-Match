@@ -42,12 +42,12 @@
 
                                            <div class="input-field col s12">
                                            <p for="description_en">Edit Video Description EN </p>
-                                           <input type="text" name="description_en" value="{{ old('description_en',$video->description_en) }}" class="form-control input-lg" />
+                                           <input type="text" name="description_en" value="{{ old('description_en',$video->description_en) }}" class="form-control input-lg" required />
                                            </div>
 
                                             <div class="input-field col s12">
                                                 <p for="description_ar">Edit Video Description AR </p>
-                                                <input type="text" name="description_ar" value="{{ old('description_ar',$video->description_ar) }}" class="form-control input-lg" />
+                                                <input type="text" name="description_ar" value="{{ old('description_ar',$video->description_ar) }}" class="form-control input-lg" required />
                                             </div>
 
                                            <div class="input-field col s12">

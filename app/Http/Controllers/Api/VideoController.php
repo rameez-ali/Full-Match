@@ -40,8 +40,10 @@ class VideoController extends Controller
             $video_img = str_replace('\\', '/', asset('app-assets/images/video/' . $v->video_img));
 
             $all_videos_array[$k]['id'] = $v->id;
-            $all_videos_array[$k]['title'] = $v->video_title;
-            $all_videos_array[$k]['description'] = $v->video_description;
+            $all_videos_array[$k]['title'] = $v->title_en;
+            $all_videos_array[$k]['title_ar'] = $v->title_ar;
+            $all_videos_array[$k]['description'] = $v->description_en;
+            $all_videos_array[$k]['description_ar'] = $v->description_ar;
             $all_videos_array[$k]['image'] = $video_img;
 
         }
@@ -85,8 +87,10 @@ class VideoController extends Controller
                $video_img = str_replace('\\', '/', asset('app-assets/images/video/' . $v->video_img));
 
                $season_array[$k]['id'] = $v->id;
-               $season_array[$k]['title'] = $v->video_title;
-               $season_array[$k]['description'] = $v->video_description;
+               $season_array[$k]['title'] = $v->title_en;
+               $season_array[$k]['title_ar'] = $v->title_ar;
+               $season_array[$k]['description'] = $v->description_en;
+               $season_array[$k]['description_ar'] = $v->description_ar;
                $season_array[$k]['image'] = $video_img;
 
            }
@@ -96,15 +100,17 @@ class VideoController extends Controller
        //in case league is not assocaited
        elseif(isset($category_id)) {
 
-           $videos = Video::where('Category_id', $category_id)->get();
+           $videos = Video::where('category_id', $category_id)->get();
 
            foreach ($videos as $k => $v) {
 
                $video_img = str_replace('\\', '/', asset('app-assets/images/video/' . $v->video_img));
 
                $category_array[$k]['id'] = $v->id;
-               $category_array[$k]['title'] = $v->video_title;
-               $category_array[$k]['description'] = $v->video_description;
+               $category_array[$k]['title'] = $v->title_en;
+               $category_array[$k]['title_ar'] = $v->title_ar;
+               $category_array[$k]['description'] = $v->description_en;
+               $category_array[$k]['description_ar'] = $v->description_ar;
                $category_array[$k]['image'] = $video_img;
 
            }

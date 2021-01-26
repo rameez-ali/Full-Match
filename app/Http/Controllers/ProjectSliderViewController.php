@@ -68,7 +68,7 @@ class ProjectSliderViewController extends Controller
         if($request->country!=null)
         {
             $form_data2 = array(
-                'Category_id'    => $request->country > 0 ? $request->country : null,
+                'category_id'    => $request->country > 0 ? $request->country : null,
                 'name_en'    =>   $request->name_en,
                 'name_ar'    =>   $request->name_ar,
                 'slider_sorting'    =>   $request->slider_sorting
@@ -128,7 +128,7 @@ class ProjectSliderViewController extends Controller
 
         $videos2 =  DB::table('sliders')
             ->where('id', '=', $slider_id)
-            ->select('sliders.Category_id')
+            ->select('sliders.category_id')
             ->get();
 
 
@@ -136,7 +136,7 @@ class ProjectSliderViewController extends Controller
 
         foreach($videos1 as $videos1)
         {
-            if($videos1['Category_id']==null)
+            if($videos1['category_id']==null)
             {
                 $video1 =  DB::table('videos')
                     ->select('videos.id','videos.title_en')
@@ -144,7 +144,7 @@ class ProjectSliderViewController extends Controller
             }
             else{
                 $video1 =  DB::table('videos')
-                    ->where('Category_id', '=', $videos1)
+                    ->where('category_id', '=', $videos1)
                     ->select('videos.id','videos.title_en')
                     ->get();
             }
