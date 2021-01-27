@@ -37,22 +37,24 @@ class SearchController extends Controller
         $all_videos_array = array();
         $player_search_video = array();
 
-        $video = Video::where('title_en', $searchword->q)
-            ->orwhere('title_ar', $searchword->q)
-            ->orWhere('title_en', 'like', '%' . $searchword->q. '%')
-            ->orWhere('title_ar', 'like', '%' . $searchword->q. '%')
+        $video = Video::where('title_en', $searchword)
+            ->orwhere('title_ar', $searchword)
+            ->orWhere('title_en', 'like', '%' . $searchword. '%')
+            ->orWhere('title_ar', 'like', '%' . $searchword. '%')
             ->get();
 
-        $clubs  = Club::select('id')->where('name_en', $searchword->q)
-            ->orwhere('name_ar', $searchword->q)
-            ->orWhere('name_en', 'like', '%' . $searchword->q. '%')
-            ->orWhere('name_ar', 'like', '%' . $searchword->q. '%')
+
+        $clubs  = Club::select('id')->where('name_en', $searchword)
+            ->orwhere('name_ar', $searchword)
+            ->orWhere('name_en', 'like', '%' . $searchword. '%')
+            ->orWhere('name_ar', 'like', '%' . $searchword. '%')
             ->first();
 
-        $players = Player::where('name_en', $searchword->q)
-            ->orwhere('name_ar', $searchword->q)
-            ->orWhere('name_en', 'like', '%' . $searchword->q. '%')
-            ->orWhere('name_ar', 'like', '%' . $searchword->q. '%')
+
+        $players = Player::where('name_en', $searchword)
+            ->orwhere('name_ar', $searchword)
+            ->orWhere('name_en', 'like', '%' . $searchword. '%')
+            ->orWhere('name_ar', 'like', '%' . $searchword. '%')
             ->first();
 
          if(count($video)){

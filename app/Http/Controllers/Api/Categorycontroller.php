@@ -134,6 +134,28 @@ class CategoryController extends Controller
 
         if($videos_id!=null)
         {
+            $videos=Video::wherein('id',$videos_id)->get();
+
+            foreach ($videos as $k => $v) {
+
+                $video_img = str_replace('\\', '/', asset('app-assets/images/video/' . $v->video_img));
+
+                $latest_videos_array[$k]['id'] = $v->id;
+                $latest_videos_array[$k]['title'] = $v->title_en;
+                $latest_videos_array[$k]['title_ar'] = $v->title_ar;
+                $latest_videos_array[$k]['description'] = $v->description_en;
+                $latest_videos_array[$k]['description_ar'] = $v->description_ar;
+                $latest_videos_array[$k]['image'] = $video_img;
+
+            }
+            $obj->latest_videos = $latest_videos_array;
+//             return response()->json(['success' => true, 'status' => $this->successStatus, 'message' => 'Slider Related Related Videos found.', 'data' => $slider_array]);
+
+        }
+
+
+        if($videos_id!=null)
+        {
             $club_id=Videoclub::select("Club_id")->wherein('Video_id',$videos_id)->get();
             $clubs=Club::wherein('id',$club_id)->get();
 
