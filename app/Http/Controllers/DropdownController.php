@@ -20,7 +20,7 @@ class DropdownController extends Controller
         public function getStateList(Request $request)
         {
 
-            $states=Season::select('Seasons','id')->where("Project_id",$request->country_id)->pluck("Seasons","id");
+            $states=Season::select('name_en','id')->where("league_id",$request->country_id)->pluck("name_en","id");
             return response()->json($states);
         }
 

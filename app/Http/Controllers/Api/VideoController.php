@@ -69,13 +69,19 @@ class VideoController extends Controller
        //Getting league_id of that specific video
         $leagues_id_collection = Video::select('leagues_id')->where('id', $id)->get()->first();
 
-        $category_id_collection = Video::select('Category_id')->where('id', $id)->get()->first();
+        $category_id_collection = Video::select('category_id')->where('id', $id)->get()->first();
 
         //Converting collection to string
-        $league_id=$leagues_id_collection->leagues_id;
+        if(isset($leagues_id_collection->leagues_id)){
+        $league_id = $leagues_id_collection->leagues_id;
+        }
 
         //Converting collection to string
-        $category_id=$category_id_collection->Category_id;
+        if(isset($category_id_collection)){
+            $category_id=$category_id_collection->category_id;
+
+        }
+
 
 
         //if league is assocaited

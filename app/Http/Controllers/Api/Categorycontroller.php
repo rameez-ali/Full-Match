@@ -13,6 +13,8 @@ use App\Model\Slidervideo;
 use App\Model\Video;
 use App\Model\Adv_banner;
 use App\Model\Adv_banner_video;
+use App\Model\Videoclub;
+use App\Model\Club;
 use DB;
 use \stdClass;
 
@@ -72,6 +74,10 @@ class CategoryController extends Controller
         //getting genres id of that specific categories
         $genre_id = Category_genre::select("genre_id")->where('category_id',$id)->get();
 
+        //getting videos id that are associated with that specific categories
+        $videos_id = Video::select("id")->where('category_id',$id)->get();
+
+
 
 
 
@@ -91,7 +97,7 @@ class CategoryController extends Controller
                  $slider_array[$k]['image'] = $video_img;
 
              }
-             $obj->category_slider = $slider_array;
+               $obj->category_slider = $slider_array;
 //             return response()->json(['success' => true, 'status' => $this->successStatus, 'message' => 'Slider Related Related Videos found.', 'data' => $slider_array]);
 
          }
@@ -126,8 +132,52 @@ class CategoryController extends Controller
 
         }
 
+        if($videos_id!=null)
+        {
+            $videos=Video::wherein('id',$videos_id)->get();
 
-         return response()->json(['success' => true, 'status' => $this->successStatus, 'message' => 'Category Related Videos found.', 'data'=> $obj]);
+            foreach ($videos as $k => $v) {
+
+                $video_img = str_replace('\\', '/', asset('app-assets/images/video/' . $v->video_img));
+
+                $latest_videos_array[$k]['id'] = $v->id;
+                $latest_videos_array[$k]['title'] = $v->title_en;
+                $latest_videos_array[$k]['title_ar'] = $v->title_ar;
+                $latest_videos_array[$k]['description'] = $v->description_en;
+                $latest_videos_array[$k]['description_ar'] = $v->description_ar;
+                $latest_videos_array[$k]['image'] = $video_img;
+
+            }
+            $obj->latest_videos = $latest_videos_array;
+//             return response()->json(['success' => true, 'status' => $this->successStatus, 'message' => 'Slider Related Related Videos found.', 'data' => $slider_array]);
+
+        }
+
+
+        if($videos_id!=null)
+        {
+            $club_id=Videoclub::select("Club_id")->wherein('Video_id',$videos_id)->get();
+            $clubs=Club::wherein('id',$club_id)->get();
+
+            foreach ($clubs as $k => $v) {
+
+                $club_banner = str_replace('\\', '/', asset('app-assets/images/club/' . $v->club_banner));
+
+                $club_array[$k]['id'] = $v->id;
+                $clubs_array[$k]['name'] = $v->name_en;
+                $clubs_array[$k]['name_ar'] = $v->name_ar;
+                $clubs_array[$k]['description'] = $v->description_en;
+                $clubs_array[$k]['description_ar'] = $v->description_ar;
+                $clubs_array[$k]['banner'] = $club_banner;
+
+            }
+            $obj->category_clubs = $clubs_array;
+//             return response()->json(['success' => true, 'status' => $this->successStatus, 'message' => 'Slider Related Related Videos found.', 'data' => $slider_array]);
+
+        }
+
+
+         return response()->json(['success' => true, 'status' => $this->successStatus, 'message' => 'Category Related Data Found.', 'data'=> $obj]);
 
     }
 

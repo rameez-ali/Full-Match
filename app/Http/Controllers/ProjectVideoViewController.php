@@ -57,7 +57,7 @@ class ProjectVideoViewController extends Controller
 
     public function getseasons($id)
     {
-        $states1=Season::select('Seasons','id')->where("Project_id",$id)->pluck("Seasons","id");
+        $states1=Season::select('name_en','id')->where("league_id",$id)->pluck("name_en","id");
         return json_encode($states1);
     }
 
