@@ -10,7 +10,7 @@
                             <div class="card-alert card gradient-45deg-green-teal">
                                 <div class="card-content white-text">
                                     <p>
-                                        <i class="material-icons">check</i>{{ $sectionaddsuccess }}</p>
+                                        <i class="material-icons">check</i> {{ $sectionaddsuccess }}</p>
                                 </div>
                                 <button type="button" class="close white-text" data-dismiss="alert" aria-label="Close">
                                     <span aria-hidden="true">×</span>
@@ -20,17 +20,27 @@
                             <div class="card-alert card gradient-45deg-green-teal">
                                 <div class="card-content white-text">
                                     <p>
-                                        <i class="material-icons">check</i>{{ $sectioneditsuccess }}</p>
+                                        <i class="material-icons">check</i> {{ $sectioneditsuccess }}</p>
                                 </div>
                                 <button type="button" class="close white-text" data-dismiss="alert" aria-label="Close">
                                     <span aria-hidden="true">×</span>
                                 </button>
                             </div>
-                        @elseif($discountdeletesuccess = Session::get('discountdeletesuccess'))
+                        @elseif($sectiondeletesuccess = Session::get('sectiondeletesuccess'))
                             <div class="card-alert card gradient-45deg-green-teal">
                                 <div class="card-content white-text">
                                     <p>
-                                        <i class="material-icons">check</i>{{ $discountdeletesuccess }}</p>
+                                        <i class="material-icons">check</i> {{ $sectiondeletesuccess }}</p>
+                                </div>
+                                <button type="button" class="close white-text" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">×</span>
+                                </button>
+                            </div>
+                        @elseif($secalreadyactive = Session::get('secalreadyactive'))
+                            <div class="card-alert card gradient-45deg-amber-amber">
+                                <div class="card-content white-text">
+                                    <p>
+                                        <i class="material-icons">warning</i> {{ $secalreadyactive }}</p>
                                 </div>
                                 <button type="button" class="close white-text" data-dismiss="alert" aria-label="Close">
                                     <span aria-hidden="true">×</span>

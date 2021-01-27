@@ -147,7 +147,11 @@ class HomePageManageController extends Controller
 
         $response = $request->handle();
 
-        return redirect()->route('home-page-manage.index')->with('sectioneditsuccess','Section Edit Successfully');
+        if ($response == false){
+            return redirect()->route('home-page-manage.index')->with('secalreadyactive', 'One Section Is Already Active');
+        }else{
+            return redirect()->route('home-page-manage.index')->with('sectioneditsuccess','Section Edit Successfully');
+        }
     }
 
     /**
@@ -158,6 +162,8 @@ class HomePageManageController extends Controller
      */
     public function destroy($id)
     {
-        //
+       HomePageManagement::find($id)->forceDelete();
+       HomePgItem::where('section_id',$id)->forceDelete();
+       return redirect()->route('home-page-manage.index')->with('sectiondeletesuccess','Section delete Successfully');
     }
 }
