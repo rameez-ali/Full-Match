@@ -34,9 +34,11 @@ Route::get('/allcustomers', [CustomerController::class , 'index']);
 
 Route::get('/clubs', [ClubController::class , 'clubs']);
 Route::get('/club/{id}', [ClubController::class , 'club']);
+Route::get('/clubsearch/{string}', [SearchController::class , 'searchclub']);
 
 Route::get('/players', [PlayerController::class , 'players']);
 Route::get('/player/{id}', [PlayerController::class , 'player']);
+Route::get('/playersearch/{string}', [SearchController::class , 'searchplayer']);
 
 Route::get('/customer/{id}', [CustomerController::class , 'show']);
 
