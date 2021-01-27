@@ -91,7 +91,7 @@ class CategoryController extends Controller
                  $slider_array[$k]['image'] = $video_img;
 
              }
-             $obj->category_slider = $slider_array;
+               $obj->category_slider = $slider_array;
 //             return response()->json(['success' => true, 'status' => $this->successStatus, 'message' => 'Slider Related Related Videos found.', 'data' => $slider_array]);
 
          }
