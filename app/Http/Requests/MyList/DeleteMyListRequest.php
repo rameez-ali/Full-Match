@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\MyList;
 
+use App\Model\My_wish_list;
 use Illuminate\Foundation\Http\FormRequest;
 
 class DeleteMyListRequest extends FormRequest
@@ -13,7 +14,7 @@ class DeleteMyListRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -26,5 +27,10 @@ class DeleteMyListRequest extends FormRequest
         return [
             //
         ];
+    }
+    public function handle()
+    {
+         My_wish_list::where('user_id' ,$this->custinfo)->where('video_id',$this->id)->forceDelete();
+        return true;
     }
 }

@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\MyList;
 
+use App\Model\My_wish_list;
 use Illuminate\Foundation\Http\FormRequest;
 
 class GetAllMyListRequest extends FormRequest
@@ -13,7 +14,7 @@ class GetAllMyListRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -26,5 +27,9 @@ class GetAllMyListRequest extends FormRequest
         return [
             //
         ];
+    }
+    public function handle()
+    {
+        return My_wish_list::with('wishlistvideo')->where('user_id' ,$this->custinfo)->get();
     }
 }
