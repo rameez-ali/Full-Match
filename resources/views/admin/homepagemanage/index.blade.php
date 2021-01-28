@@ -6,31 +6,41 @@
             <div class="section">
                 <div class="row">
                     <div class="col s12 m12 l12">
-                        @if ($discountaddsuccess = Session::get('discountaddsuccess'))
+                        @if ($sectionaddsuccess = Session::get('sectionaddsuccess'))
                             <div class="card-alert card gradient-45deg-green-teal">
                                 <div class="card-content white-text">
                                     <p>
-                                        <i class="material-icons">check</i>{{ $discountaddsuccess }}</p>
+                                        <i class="material-icons">check</i> {{ $sectionaddsuccess }}</p>
                                 </div>
                                 <button type="button" class="close white-text" data-dismiss="alert" aria-label="Close">
                                     <span aria-hidden="true">×</span>
                                 </button>
                             </div>
-                        @elseif($discounteditsuccess = Session::get('discounteditsuccess'))
+                        @elseif($sectioneditsuccess = Session::get('sectioneditsuccess'))
                             <div class="card-alert card gradient-45deg-green-teal">
                                 <div class="card-content white-text">
                                     <p>
-                                        <i class="material-icons">check</i>{{ $discounteditsuccess }}</p>
+                                        <i class="material-icons">check</i> {{ $sectioneditsuccess }}</p>
                                 </div>
                                 <button type="button" class="close white-text" data-dismiss="alert" aria-label="Close">
                                     <span aria-hidden="true">×</span>
                                 </button>
                             </div>
-                        @elseif($discountdeletesuccess = Session::get('discountdeletesuccess'))
+                        @elseif($sectiondeletesuccess = Session::get('sectiondeletesuccess'))
                             <div class="card-alert card gradient-45deg-green-teal">
                                 <div class="card-content white-text">
                                     <p>
-                                        <i class="material-icons">check</i>{{ $discountdeletesuccess }}</p>
+                                        <i class="material-icons">check</i> {{ $sectiondeletesuccess }}</p>
+                                </div>
+                                <button type="button" class="close white-text" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">×</span>
+                                </button>
+                            </div>
+                        @elseif($secalreadyactive = Session::get('secalreadyactive'))
+                            <div class="card-alert card gradient-45deg-amber-amber">
+                                <div class="card-content white-text">
+                                    <p>
+                                        <i class="material-icons">warning</i> {{ $secalreadyactive }}</p>
                                 </div>
                                 <button type="button" class="close white-text" data-dismiss="alert" aria-label="Close">
                                     <span aria-hidden="true">×</span>
@@ -59,13 +69,13 @@
                                                 <tr>
                                                     <td>{{ $homepagemanage->id }}</td>
                                                     <td>{{ $homepagemanage->name }}</td>
-                                                    @if($homepagemanage->status == 0)
+                                                    @if($homepagemanage->status == 1)
                                                         <td>{{ __('customer.active') }}</td>
-                                                    @elseif($homepagemanage->status == 1)
+                                                    @elseif($homepagemanage->status == 0)
                                                         <td>{{ __('customer.de-active') }}</td>
                                                     @endif
                                                     <td>
-{{--                                                        <a class="mb-5 btn waves-effect waves-light gradient-45deg-purple-deep-orange" href="{{ route('home-page-manage.edit',[ 'home-page-manage' => $homepagemanage->id ]) }}">{{ __('customer.customer.edit') }}</a>--}}
+                                                        <a class="mb-5 btn waves-effect waves-light gradient-45deg-purple-deep-orange" href="{{ route('home-page-manage.edit', $homepagemanage->id ) }}">{{ __('customer.customer.edit') }}</a>
                                                         <a class="mb-5 btn waves-effect waves-light gradient-45deg-amber-amber" onclick="deletePlan({{ $homepagemanage->id }})" href="#">{{ __('customer.delete') }}</a>
                                                     </td>
                                                 </tr>

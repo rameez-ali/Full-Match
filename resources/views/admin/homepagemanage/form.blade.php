@@ -46,27 +46,27 @@
 
                                                     <div class="input-field col s12">
                                                         <p class="mb-1">{{ __('customer.select_players') }}</p>
-                                                        <select class="max-length browser-default" multiple="multiple" name="players" id="players">
+                                                        <select class="max-length browser-default" multiple="multiple" name="players[]" id="players" required>
                                                             @foreach($all_players as $player)
-                                                                <option value="{{$player->id}}" >{{$player->name_en}}</option>
+                                                                <option value="{{$player->id}}" @if($edit) {{ in_array($player->id,$selected_players)? 'selected' : '' }} @endif >{{$player->name_en}}</option>
                                                             @endforeach
                                                         </select>
                                                     </div>
 
                                                     <div class="input-field col s12">
                                                         <p class="mb-1">{{ __('customer.select_clubs') }}</p>
-                                                        <select class="max-length browser-default" multiple="multiple" name="clubs" id="clubs">
+                                                        <select class="max-length browser-default" multiple="multiple" name="clubs[]" id="clubs" required>
                                                             @foreach($all_clubs as $club)
-                                                                <option value="{{$club->id}}" >{{$club->name_en}}</option>
+                                                                <option value="{{$club->id}}"  @if($edit) {{ in_array($club->id,$selected_clubs)? 'selected' : '' }} @endif >{{$club->name_en}}</option>
                                                             @endforeach
                                                         </select>
                                                     </div>
 
                                                     <div class="input-field col s12">
                                                         <p class="mb-1">{{ __('customer.select_videos') }}</p>
-                                                        <select class="max-length browser-default" multiple="multiple" name="videos" id="videos">
+                                                        <select class="max-length browser-default" multiple="multiple" name="videos[]" id="videos" required>
                                                             @foreach($all_videos as $video)
-                                                                <option value="{{$video->id}}" >{{$video->title_en}}</option>
+                                                                <option value="{{$video->id}}"  @if($edit) {{ in_array($video->id,$selected_videos)? 'selected' : '' }} @endif >{{$video->title_en}}</option>
                                                             @endforeach
                                                         </select>
                                                     </div>
@@ -75,7 +75,7 @@
 
                                                         <p class="mb-1">
                                                             <label>
-                                                                <input name="status" {{ $homepagemanage->status == '1' ? 'checked' : '' }}  @if(!$edit) checked="checked" @endif type="checkbox" />
+                                                                <input name="status" {{ $homepagemanage->status == '1' ? 'checked' : '' }}  type="checkbox" />
                                                                 <span>{{ __('customer.status') }}</span>
                                                             </label>
                                                         </p>

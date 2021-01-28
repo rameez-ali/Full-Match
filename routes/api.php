@@ -3,6 +3,7 @@
 use App\Http\Controllers\Api\ApiNotificationController;
 use App\Http\Controllers\Api\ApiOrderController;
 use App\Http\Controllers\Api\ApiAuthController;
+use App\Http\Controllers\Api\MyListController;
 use App\Http\Controllers\Api\PageController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -71,6 +72,9 @@ Route::group(['middleware' => 'auth:api'], function(){
     Route::get('user', [ApiAuthController::class , 'user']);
     Route::get('/notify-off', [ApiNotificationController::class , 'notifiOff']);
     Route::get('/notify-on', [ApiNotificationController::class , 'notifiOn']);
+    Route::get('/add-to-mylist/{id}', [MyListController::class , 'addToMylist']);
+    Route::get('/remove-to-mylist/{id}', [MyListController::class , 'removeToMylist']);
+    Route::get('/all-mylist', [MyListController::class , 'getAllMylist']);
     Route::get('logout', [ApiAuthController::class , 'logout']);
     Route::post('/customer-edit', [CustomerController::class , 'edit']);
     Route::post('/customer-update/{id}', [CustomerController::class , 'update'])->name('customer.profupdate');;
