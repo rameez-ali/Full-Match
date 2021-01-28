@@ -135,11 +135,22 @@ class ApiAuthController extends Controller
      */
     public function user(Request $request)
     {
+        $customer = customer::where('user_id',$request->user()->id)->first();
+
+        $array = array();
+
+            $array['id'] = $customer->user_id;
+            $array['image'] = url($customer->user_image);
+            $array['name'] = $customer->name;
+            $array['email'] = $customer->email;
+            $array['phone'] = $customer->phone;
+            $array['status'] = $customer->status;
+
         return response()->json([
             'message' => 'User Details',
             'success' => true,
             'status' => $this->successStatus,
-            'data' => $request->user()
+            'data' => $array
         ]);
     }
 }
