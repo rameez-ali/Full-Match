@@ -139,9 +139,8 @@ class ApiAuthController extends Controller
 
         $array = array();
 
-            $image = str_replace('\\', '/', url($customer->user_image));
             $array['id'] = $customer->user_id;
-            $array['image'] = $image;
+            $array['image'] = url($customer->user_image);
             $array['name'] = $customer->name;
             $array['email'] = $customer->email;
             $array['phone'] = $customer->phone;
