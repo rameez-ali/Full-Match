@@ -128,6 +128,16 @@
                                           </span>
                                           @enderror
                                          </div>
+{{--                                            {{dd($selected_popular_search->popular_searches)}}--}}
+                                            <div name="hidden-panel1" id="hidden-panel1">
+                                                <label><strong>Edit Popular Searches </strong></label><br/>
+                                                <select class="selectpicker" name="popularsearches">
+                                                    @foreach($popular_searches as $popular_search )
+
+                                                        <option value="{{$popular_search->id}}" {{$popular_search->id == $selected_popular_search->popular_searches ? 'selected' : ''}} >{{$popular_search->status}}</option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
 
 
                                          <div name="hidden-panel1" id="hidden-panel1">

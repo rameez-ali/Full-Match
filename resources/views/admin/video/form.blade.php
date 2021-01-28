@@ -180,8 +180,8 @@
                                                 <div class="input-field col s12">
                                                     <p for="popularsearches"> Popular Searches </p>
                                                     <select name="popularsearches" class="form-control" style="width:250px">
-                                                        <option value="0">No</option>
-                                                        <option value="1">Yes</option>
+                                                        <option value="1">No</option>
+                                                        <option value="2">Yes</option>
                                                     </select>
                                                 </div>
 

@@ -244,11 +244,6 @@ class ProjectVideoViewController extends Controller
         $club=Club::all();
         $player=Player::all();
 
-
-
-
-
-
         ///Getting Selected Clubs id
         $clubs =  DB::table('clubs')
             ->where('Video_id', '=', $id)
@@ -290,10 +285,13 @@ class ProjectVideoViewController extends Controller
 
         $video_genres=Video_genre::select('id','name_en')->get();
 
+        $selected_popular_search=Video::select('popular_searches')->where('id',$id)->first();
+        $popular_searches=Popular_search::select('id','status')->get();
 
 
 
-        return view('admin.video.edit',compact('category','clubs','club','players','player','video','selected_ids','selected_ids1','selected_ids3','video_genres'));
+
+        return view('admin.video.edit',compact('category','clubs','club','players','player','video','selected_ids','selected_ids1','selected_ids3','video_genres','selected_popular_search','popular_searches'));
     }
 
     /**
@@ -363,39 +361,43 @@ class ProjectVideoViewController extends Controller
         Videogenre::where('Video_id', $id)->forceDelete();
 
 
+
+
+
         if($request->club!=null){
             foreach($request->club as $club){
                 $id = DB::table('videos')->orderBy('id', 'DESC')->value('id');
-                $form_data3 = array(
+                $form_data7 = array(
                     'Club_id'     =>   $club,
                     'Video_id'     =>  $id
                 );
 
-                Videoclub::create($form_data3);
+                Videoclub::create($form_data7);
+
             }
         }
 
         if($request->player!=null){
             foreach($request->player as $player){
                 $id = DB::table('videos')->orderBy('id', 'DESC')->value('id');
-                $form_data4 = array(
+                $form_data8 = array(
                     'Player_id'     =>   $player,
                     'Video_id'     =>  $id
                 );
 
-                Videoplayer::create($form_data4);
+                Videoplayer::create($form_data8);
             }
         }
 
         if($request->genre!=null){
             foreach($request->genre as $genre){
                 $id = DB::table('videos')->orderBy('id', 'DESC')->value('id');
-                $form_data5 = array(
+                $form_data9 = array(
                     'video_id'     =>  $id,
                     'genre_id'     =>   $genre
                 );
 
-                Videogenre::create($form_data5);
+                Videogenre::create($form_data9);
             }
         }
         return redirect('video-form')->with('videoeditsuccess','Video Updated Successfully');
