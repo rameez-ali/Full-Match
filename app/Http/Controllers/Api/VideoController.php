@@ -60,15 +60,19 @@ class VideoController extends Controller
 
     public function video_details($id)
     {
+        $obj = new stdClass;
+
         $season_array = array();
         $category_array = array();
         $specific_video_array=array();
 
-
+        //getting video details of that specific video
+        $videos = Video::where('id', $id)->get();
 
        //Getting league_id of that specific video
         $leagues_id_collection = Video::select('leagues_id')->where('id', $id)->get()->first();
 
+        //Getting Category_id of that specific video
         $category_id_collection = Video::select('category_id')->where('id', $id)->get()->first();
 
         //Converting collection to string
@@ -79,6 +83,26 @@ class VideoController extends Controller
         //Converting collection to string
         if(isset($category_id_collection)){
             $category_id=$category_id_collection->category_id;
+
+        }
+
+
+        if($videos!=null)
+        {
+
+            foreach ($videos as $k => $v) {
+
+                $video_img = str_replace('\\', '/', asset('app-assets/images/video/' . $v->video_img));
+
+                $latest_videos_array[$k]['id'] = $v->id;
+                $latest_videos_array[$k]['title'] = $v->title_en;
+                $latest_videos_array[$k]['title_ar'] = $v->title_ar;
+                $latest_videos_array[$k]['description'] = $v->description_en;
+                $latest_videos_array[$k]['description_ar'] = $v->description_ar;
+                $latest_videos_array[$k]['image'] = $video_img;
+
+            }
+            $obj->video_details = $latest_videos_array;
 
         }
 
@@ -100,8 +124,7 @@ class VideoController extends Controller
                $season_array[$k]['image'] = $video_img;
 
            }
-          return response()->json(['success' => true, 'status' => $this->successStatus, 'message' => 'Season Realted Videos found.', 'data'=> $season_array]);
-
+           $obj->season_videos = $season_array;
        }
        //in case league is not assocaited
        elseif(isset($category_id)) {
@@ -120,18 +143,20 @@ class VideoController extends Controller
                $category_array[$k]['image'] = $video_img;
 
            }
-           return response()->json(['success' => true, 'status' => $this->successStatus, 'message' => 'Category Realted Videos found.', 'data'=> $category_array]);
-
+           $obj->category_videos = $category_array;
        }
        else{
-           return response()->json(['success' => false, 'status' => $this->HTTP_NOT_FOUND, 'message' => 'No Videos found.']);
+           return response()->json(['success' => false, 'status' => $this->HTTP_NOT_FOUND, 'message' => 'No Videos found realted to leagues or categories.']);
 
        }
 
+        return response()->json(['success' => true, 'status' => $this->successStatus, 'message' => 'Videos Data Found', 'data'=> $obj]);
 
 
 
-     }
+
+
+    }
 
 
 

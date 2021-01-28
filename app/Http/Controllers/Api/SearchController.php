@@ -36,6 +36,7 @@ class SearchController extends Controller
         $club_search_video = array();
         $all_videos_array = array();
         $player_search_video = array();
+        $popular_search_video = array();
 
         $video = Video::where('title_en', $searchword)
             ->orwhere('title_ar', $searchword)
@@ -56,6 +57,8 @@ class SearchController extends Controller
             ->orWhere('name_en', 'like', '%' . $searchword. '%')
             ->orWhere('name_ar', 'like', '%' . $searchword. '%')
             ->first();
+
+        $popular_search_videos = Video::where('popular_searches', 1)->get();
 
          if(count($video)){
 
@@ -118,6 +121,26 @@ class SearchController extends Controller
 
 
          }
+
+        elseif($popular_search_videos!=null){
+
+            foreach ($popular_search_videos as $k => $v) {
+
+                $video_img = str_replace('\\', '/', asset('app-assets/images/video/' . $v->video_img));
+
+                $popular_search_video[$k]['id'] = $v->id;
+                $popular_search_video[$k]['title'] = $v->title_en;
+                $popular_search_video[$k]['title_ar'] = $v->title_ar;
+                $popular_search_video[$k]['description'] = $v->description_en;
+                $popular_search_video[$k]['description'] = $v->description_ar;
+                $popular_search_video[$k]['image'] = $video_img;
+
+            }
+
+            return response()->json(['success' => true, 'status' => $this->successStatus, 'message' => 'Videos found in Popular Searches.', 'data'=> $popular_search_video]);
+
+
+        }
 
         else {
              return response()->json(['success' => false, 'status' => $this->HTTP_NOT_FOUND, 'message' => 'No Video found.']);

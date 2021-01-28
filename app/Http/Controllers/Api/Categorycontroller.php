@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 
+use App\Model\My_wish_list;
 use Illuminate\Http\Request;
 use App\Model\Category;
 use App\Model\Category_genre;
@@ -57,13 +58,14 @@ class CategoryController extends Controller
     }
 
 
-    public function getcategoryinfo($id)
+    public function getcategoryinfo(request $request,$id)
     {
         $obj = new stdClass;
 
         $slider_array = array();
         $banner_array = array();
         $genre_array=array();
+        $mylist_videos_array=array();
 
         //getting slider id of that specific categories
         $slider_id = Slider::select("id")->where('category_id',$id)->first();
@@ -76,6 +78,9 @@ class CategoryController extends Controller
 
         //getting videos id that are associated with that specific categories
         $videos_id = Video::select("id")->where('category_id',$id)->get();
+
+        //getting user id
+        $user_id=$request->user()->id;
 
 
 
@@ -175,21 +180,39 @@ class CategoryController extends Controller
 //             return response()->json(['success' => true, 'status' => $this->successStatus, 'message' => 'Slider Related Related Videos found.', 'data' => $slider_array]);
 
         }
+        //geeting user id
+        if($user_id!=null){
+            $videos_id_mylist = My_wish_list::select("video_id")->where('user_id',$user_id)->get();
+            $videos=Video::wherein('id',$videos_id_mylist )->where('category_id',$id)->get();
+
+            foreach ($videos as $k => $v) {
+
+                $video_img = str_replace('\\', '/', asset('app-assets/images/video/' . $v->video_img));
+
+                $mylist_videos_array[$k]['id'] = $v->id;
+                $mylist_videos_array[$k]['title'] = $v->title_en;
+                $mylist_videos_array[$k]['title_ar'] = $v->title_ar;
+                $mylist_videos_array[$k]['description'] = $v->description_en;
+                $mylist_videos_array[$k]['description_ar'] = $v->description_ar;
+                $mylist_videos_array[$k]['image'] = $video_img;
+
+            }
+            $obj->mylist_videos = $mylist_videos_array;
+        }
 
 
-         return response()->json(['success' => true, 'status' => $this->successStatus, 'message' => 'Category Related Data Found.', 'data'=> $obj]);
+
+        return response()->json(['success' => true, 'status' => $this->successStatus, 'message' => 'Category Related Data Found.', 'data'=> $obj]);
 
     }
 
-//    public function getgenre($id)
-//    {
-//
-//          $genre_id = Category_genre::select("genre_id")->where('category_id',$id)->get();
-//
-//          $genres= Video_genre::select("genre_name")->wherein('id',$genre_id )->get();
-//
-//           return json_encode($genres);
-//    }
+    public function mylist(request $request){
+        $user_id=$request->user()->id;
+
+
+    }
+
+
 
 }
 

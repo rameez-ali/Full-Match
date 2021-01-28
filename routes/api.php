@@ -14,6 +14,7 @@ use App\Http\Controllers\Api\SubsPlanController;
 use App\Http\Controllers\Api\ContactController;
 use App\Http\Controllers\Api\SearchController;
 use App\Http\Controllers\Api\CategoryController;
+use App\Http\Controllers\Api\WishController;
 
 /*
 |--------------------------------------------------------------------------
@@ -73,13 +74,21 @@ Route::group(['middleware' => 'auth:api'], function(){
     Route::get('logout', [ApiAuthController::class , 'logout']);
     Route::post('/customer-edit', [CustomerController::class , 'edit']);
     Route::post('/customer-update/{id}', [CustomerController::class , 'update'])->name('customer.profupdate');;
+    Route::get('/category/{id}', [CategoryController::class , 'getcategoryinfo']);
+
 });
 //Customer Auth Routes
 
 Route::get('/search/{string}', [SearchController::class , 'search']);
 
+Route::get('/videouserid', [WishController::class , 'wishlist']);
+
+
+
+
+
 Route::get('/searchclub/{string}', [SearchController::class , 'searchclub']);
 Route::get('/searchplayer/{string}', [SearchController::class , 'searchplayer']);
 
 Route::get('/category', [CategoryController::class , 'gethomepageinfo']);
-Route::get('/category/{id}', [CategoryController::class , 'getcategoryinfo']);
+
