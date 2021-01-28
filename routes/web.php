@@ -39,6 +39,8 @@ Route::group(['middleware' => ['auth']], function () {
 //    Route::post('video-form/search','VideoController@search')->name('video-form.search');
 
     Route::post('video-form-search','VideoSearchController@search')->name('video-form-search.search');
+    Route::get('video-form-search','ProjectVideoViewController@index')->name('video-form-search.search');
+
 
     Route::resource('seasonpart-form','DropdownController');
     Route::get('get-state-list','DropdownController@getStateList');

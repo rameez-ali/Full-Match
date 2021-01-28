@@ -29,11 +29,13 @@ class VideoSearchController extends Controller
             ->orWhere('title_ar', 'like', '%' . $searchword->q. '%')
             ->get();
 
+
         $clubs  = Club::select('id')->where('name_en', $searchword->q)
             ->orwhere('name_ar', $searchword->q)
             ->orWhere('name_en', 'like', '%' . $searchword->q. '%')
             ->orWhere('name_ar', 'like', '%' . $searchword->q. '%')
             ->first();
+
 
         $players = Player::where('name_en', $searchword->q)
             ->orwhere('name_ar', $searchword->q)
@@ -41,29 +43,25 @@ class VideoSearchController extends Controller
             ->orWhere('name_ar', 'like', '%' . $searchword->q. '%')
             ->first();
 
+
         if(count($video)){
 
             return view('admin.video.index', compact('video'));
 
         }
         else if($clubs!=null){
-
             $video_id = Videoclub::select('Video_id')->wherein('Club_id',$clubs)->get();
             $video=Video::wherein('id',$video_id)->get();
-
-
             return view('admin.video.index', compact('video'));
         }
         else if($players!=null){
-
-            $video_id = Videoplayer::wherein('Player_id',$players)->get();
+            $video_id = Videoplayer::select('Video_id')->wherein('Player_id',$players)->get();
             $video=Video::wherein('id',$video_id)->get();
-
             return view('admin.video.index', compact('video'));
         }
 
         else {
-            return view('admin.video.search');
+            return view('admin.video.index', compact('video'));
         }
     }
 
