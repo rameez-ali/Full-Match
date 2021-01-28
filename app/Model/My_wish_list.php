@@ -10,4 +10,7 @@ class My_wish_list extends Model
     {
         return $this->belongsTo(Video::class, 'video_id');
     }
+    protected $fillable = [
+        'user_id','video_id',
+    ];
 }
