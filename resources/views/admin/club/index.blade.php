@@ -62,8 +62,8 @@
                                             @foreach($club as $club)
                                                 <tr>
                                                     <td>{{ $club->name_en }}</td>
-                                                    <td><img src="{{ asset('app-assets/images/club/'.$club->club_banner)}}" style="width:50px;height:50px;" /></td>
                                                     <td><img src="{{ asset('app-assets/images/club/'.$club->club_logo)}}" style="width:50px;height:50px;" /></td>
+                                                    <td><img src="{{ asset('app-assets/images/club/'.$club->club_banner)}}" style="width:50px;height:50px;" /></td>
                                                     <td>{{ $club->description_en }}</td>
                                                     <td>{{ $club->club_sorting }}</td>
                                                     <td><form action="{{ route('club-form.destroy', $club->id)}}" method="post">
