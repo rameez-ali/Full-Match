@@ -20,12 +20,12 @@
 
                                              <div class="input-field col s12">
                                              <p for="title_en">Add Video Title EN * </p>
-                                             <input id="title_en" name="title_en" type="text" required>
+                                             <input id="title_en" name="title_en" id="title_en" type="text" required>
                                              </div>
 
                                               <div class="input-field col s12">
                                                   <p for="title_ar">Add Video Title AR * </p>
-                                                  <input id="title_ar" name="title_ar" type="text" required>
+                                                  <input id="title_ar" name="title_ar" id="title_ar" type="text" required>
                                               </div>
 
                                               <div class="input-field col s12">
@@ -145,6 +145,12 @@
             });
     });
      </script>
+
+        <script>
+            $("#title_en").keyup(function(){
+                $("#title_ar").val(this.value);
+            });
+        </script>
   </body>
 </html>
 @endsection

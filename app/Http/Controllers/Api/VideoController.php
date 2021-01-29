@@ -97,7 +97,16 @@ class VideoController extends Controller
                 $latest_videos_array[$k]['id'] = $v->id;
                 $latest_videos_array[$k]['title'] = $v->title_en;
                 $latest_videos_array[$k]['title_ar'] = $v->title_ar;
-                $latest_videos_array[$k]['description'] = $v->description_en;
+                if($v->video_link==null)
+                {
+                    $season_id = Video::select('leagues_id')->where('id', $v->id)->first();
+                    $league_id = Season::select('league_id')->where('id', $season_id)->first();
+                    $video_link=League::select('video_link')->where('id', $league_id)->first();
+                    $latest_videos_array[$k]['video_link'] = $video_link;
+                }
+                else{
+                    $latest_videos_array[$k]['video_link'] = $v->video_link;
+                }
                 $latest_videos_array[$k]['description_ar'] = $v->description_ar;
                 $latest_videos_array[$k]['image'] = $video_img;
 

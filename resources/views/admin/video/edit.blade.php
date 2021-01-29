@@ -20,7 +20,7 @@
                                         <div class="row">
                                            <div class="input-field col s12">
                                            <p for="title_en">Edit Video Title EN * </p>
-                                           <input type="text" name="title_en" value="{{ old('title_en',$video->title_en) }}" class="form-control input-lg" required data-error=".errorTxt10" />
+                                           <input type="text" name="title_en" id="title_en" value="{{ old('title_en',$video->title_en) }}" class="form-control input-lg" required data-error=".errorTxt10" />
                                            <small class="errorTxt10"></small>
                                            @error('title_en')
                                            <span class="invalid-feedback" role="alert">
@@ -31,7 +31,7 @@
 
                                             <div class="input-field col s12">
                                                 <p for="title_ar">Edit Video Title AR * </p>
-                                                <input type="text" name="title_ar" value="{{ old('title_ar',$video->title_ar) }}" class="form-control input-lg" required data-error=".errorTxt11" />
+                                                <input type="text" name="title_ar" id="title_ar" value="{{ old('title_ar',$video->title_ar) }}" class="form-control input-lg" required data-error=".errorTxt11" />
                                                 <small class="errorTxt11"></small>
                                                 @error('title_ar')
                                                 <span class="invalid-feedback" role="alert">
@@ -41,13 +41,13 @@
                                             </div>
 
                                            <div class="input-field col s12">
-                                           <p for="description_en">Edit Video Description EN * </p>
-                                           <input type="text" name="description_en" value="{{ old('description_en',$video->description_en) }}" class="form-control input-lg" required />
+                                           <p for="description_en">Edit Video Description EN  </p>
+                                           <input type="text" name="description_en" id="description_en" value="{{ old('description_en',$video->description_en) }}" class="form-control input-lg"  />
                                            </div>
 
                                             <div class="input-field col s12">
-                                                <p for="description_ar">Edit Video Description AR * </p>
-                                                <input type="text" name="description_ar" value="{{ old('description_ar',$video->description_ar) }}" class="form-control input-lg" required />
+                                                <p for="description_ar">Edit Video Description AR  </p>
+                                                <input type="text" name="description_ar" id="description_ar" value="{{ old('description_ar',$video->description_ar) }}" class="form-control input-lg"  />
                                             </div>
 
                                            <div class="input-field col s12">
@@ -224,5 +224,14 @@
         });
     });
 </script>
+
+    <script>
+        $("#title_en").keyup(function(){
+            $("#title_ar").val(this.value);
+        });
+        $("#description_en").keyup(function(){
+            $("#description_ar").val(this.value);
+        });
+    </script>
 
 @endsection

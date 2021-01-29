@@ -21,7 +21,7 @@
                                        <div class="row">
                                           <div class="input-field col s12">
                                           <label for="name_er">Edit Category Name * </label>
-                                          <input type="text" name="name_en" value="{{ $category->name_en }}" class="form-control input-lg" required data-error=".errorTxt1"/>
+                                          <input type="text" name="name_en" id="name_en" value="{{ $category->name_en }}" class="form-control input-lg" required data-error=".errorTxt1"/>
                                           <small class="errorTxt1"></small>
                                           @error('name_er')
                                           <span class="invalid-feedback" role="alert">
@@ -32,7 +32,7 @@
 
                                            <div class="input-field col s12">
                                                <label for="name_ar">Edit Category Name AR * </label>
-                                               <input type="text" name="name_ar" value="{{ $category->name_ar }}" class="form-control input-lg" required data-error=".errorTxt2"/>
+                                               <input type="text" name="name_ar" id="name_ar"  value="{{ $category->name_ar }}" class="form-control input-lg" required data-error=".errorTxt2"/>
                                                <small class="errorTxt2"></small>
                                                @error('name_ar')
                                                <span class="invalid-feedback" role="alert">
@@ -98,6 +98,11 @@
     /*
  * Form Validation
  */
+    $("#name_en").keyup(function(){
+        $("#name_ar").val(this.value);
+    });
+
+
     $(function () {
 
         $('select[required]').css({

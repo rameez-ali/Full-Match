@@ -29,7 +29,7 @@
                                             <thead>
                                             <tr>
                                                 <th>{{ __('customer.name') }}</th>
-                                                <th>{{ __('customer.slug') }}</th>
+{{--                                                <th>{{ __('customer.slug') }}</th>--}}
 {{--                                                <th>{{ __('customer.decs') }}</th>--}}
                                                 <th>{{ __('customer.action') }}</th>
                                             </tr>
@@ -38,7 +38,7 @@
                                             @foreach($pages as $page)
                                                 <tr>
                                                     <td>{{ $page->name }}</td>
-                                                    <td>{{ $page->slug }}</td>
+{{--                                                    <td>{{ $page->slug }}</td>--}}
 {{--                                                    <td>{{ $page->active }}</td>--}}
                                                     <td>
                                                         <a class="mb-5 mr-2 btn waves-effect waves-light gradient-45deg-purple-deep-orange" href="{{ route('page.edit',[ 'page' => $page->id ]) }}">{{ __('customer.customer.edit') }}</a>
@@ -49,7 +49,7 @@
                                             <tfoot>
                                             <tr>
                                                 <th>{{ __('customer.name') }}</th>
-                                                <th>{{ __('customer.slug') }}</th>
+{{--                                                <th>{{ __('customer.slug') }}</th>--}}
 {{--                                                <th>{{ __('customer.decs') }}</th>--}}
                                                 <th>{{ __('customer.action') }}</th>
                                             </tr>
@@ -102,7 +102,7 @@
                         className: 'waves-effect waves-light btn gradient-45deg-purple-deep-orange gradient-shadow',
                         filename : '{{ __("customer.excel") }}' ,
                         exportOptions: {
-                            columns: [ 0,1 ]
+                            columns: [ 0 ]
                         },
                     },
                     {
@@ -111,7 +111,7 @@
                         className: 'waves-effect waves-light btn gradient-45deg-purple-deep-orange gradient-shadow',
                         filename : '{{ __("customer.csv") }}' ,
                         exportOptions: {
-                            columns: [ 0,1 ]
+                            columns: [ 0 ]
                         },
                     }
                 ],
