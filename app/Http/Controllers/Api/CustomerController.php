@@ -147,14 +147,13 @@ class CustomerController extends Controller
 
         return redirect()->route('customer.index')->with('userdeletesuccess','User Delete Successfully');
     }
+    use SendsPasswordResetEmails;
     public function forgotpass(Request $request)
     {
         $customer = customer::where('email',$request->email)->get();
 
         if (!$customer->isEmpty()) {
-
-           $email = new SendsPasswordResetEmails();
-           $email->sendResetLinkEmail($request);
+            $this->sendResetLinkEmail($request);
 
             return response()->json(['success' => true, 'status' => $this->successStatus, 'message' => 'Email Found and sent.']);
 
