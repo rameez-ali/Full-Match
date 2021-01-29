@@ -13,7 +13,7 @@ return [
     |
     */
 
-    'name' => env('APP_NAME', 'Laravel'),
+    'name' => env('APP_NAME', 'Full Match'),
     'asset_url' => env('ASSET_URL', null),
 
     /*
