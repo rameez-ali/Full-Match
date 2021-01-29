@@ -1,0 +1,110 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use Illuminate\Http\Request;
+use App\Model\Videoclub;
+use App\Model\Club;
+use App\Model\fullmatchcontact;
+
+class ContactUSController extends Controller
+{
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index()
+    {
+        $fullmatchcontact = Fullmatchcontact::all();
+        return view('admin.contactus.index', compact('fullmatchcontact'));
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
+    {
+        return view('admin.contactus.form');
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(Request $request)
+    {
+
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function show($id)
+    {
+        //
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function edit($id)
+    {
+        $fullmatchcontact=Fullmatchcontact::find($id);
+        return view('admin.contactus.edit',compact('fullmatchcontact'));
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request, $id)
+    {
+        $request->validate([
+                'call_us'    =>  'required',
+                'email_us'    =>  'required',
+                'address_en'    =>  'required',
+                'address_ar'    =>  'required'
+            ]);
+
+
+        $form_data = array(
+            'call_us'       =>   $request->call_us,
+            'email_us'       =>   $request->email_us,
+            'address_en'       =>   $request->address_en,
+            'address_ar'       =>   $request->address_ar
+        );
+
+        Fullmatchcontact::whereId($id)->update($form_data);
+
+        return redirect('Contactus-form')->with('contactuseditsuccess','Contact Information Updated Successfully');
+
+        //  return redirect('club-form')->with('clubeditsuccess','Club Updated Successfully');
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy($id)
+    {
+
+
+
+    }
+}
