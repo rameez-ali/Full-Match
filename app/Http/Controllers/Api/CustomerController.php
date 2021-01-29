@@ -10,6 +10,8 @@ use App\Http\Requests\Customer\GetAllCustomerRequest;
 use App\Http\Requests\Customer\GetCustomerRequest;
 use App\Http\Requests\Customer\UpdateCustomerRequest;
 use App\Http\Resources\CustomerResource;
+use App\User;
+use Illuminate\Foundation\Auth\SendsPasswordResetEmails;
 use Illuminate\Http\Request;
 
 class CustomerController extends Controller
@@ -144,5 +146,22 @@ class CustomerController extends Controller
         $response = $request->handle();
 
         return redirect()->route('customer.index')->with('userdeletesuccess','User Delete Successfully');
+    }
+    public function forgotpass(Request $request)
+    {
+        $customer = customer::where('email',$request->email)->get();
+
+        if (!$customer->isEmpty()) {
+
+           $email = new SendsPasswordResetEmails();
+           $email->sendResetLinkEmail($request);
+
+            return response()->json(['success' => true, 'status' => $this->successStatus, 'message' => 'Email Found and sent.']);
+
+        }else{
+
+            return response()->json(['success' => false, 'status' => $this->HTTP_NOT_FOUND, 'message' => 'Email Not Found.']);
+        }
+
     }
 }

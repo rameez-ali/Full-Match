@@ -79,8 +79,8 @@ Route::group(['middleware' => 'auth:api'], function(){
     Route::post('/customer-edit', [CustomerController::class , 'edit']);
     Route::post('/customer-update/{id}', [CustomerController::class , 'update'])->name('customer.profupdate');;
     Route::get('/category/{id}', [CategoryController::class , 'getcategoryinfo']);
-
 });
+Route::post('fogetpass', [CustomerController::class , 'forgotpass']);
 //Customer Auth Routes
 
 Route::get('/search/{string}', [SearchController::class , 'search']);
