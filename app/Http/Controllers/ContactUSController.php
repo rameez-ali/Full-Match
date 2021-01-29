@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Model\Videoclub;
 use App\Model\Club;
-use App\Model\fullmatchcontact;
+use App\Model\Fullmatchcontact;
 
 class ContactUSController extends Controller
 {
