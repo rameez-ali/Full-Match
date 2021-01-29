@@ -143,8 +143,8 @@ class ApiAuthController extends Controller
             $array['image'] = url($customer->user_image);
             $array['name'] = $customer->name;
             $array['email'] = $customer->email;
-            $array['phone'] = $customer->phone;
-            $array['status'] = $customer->status;
+            $array['phone'] = $request->user()->phone;
+            $array['status'] = $request->user()->status;
 
         return response()->json([
             'message' => 'User Details',
