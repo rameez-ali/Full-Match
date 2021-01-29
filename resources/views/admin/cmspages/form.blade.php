@@ -29,18 +29,18 @@
                                                     <small class="errorTxt1"></small>
 
                                                 </div>
-                                                <div class="input-field col s12">
-                                                    <label for="slug">{{ __('customer.slug') }}*</label>
-                                                    <input id="slug" value="{{ old('slug',$pages->slug) }}" type="text" name="slug" data-error=".errorTxt2">
-                                                    <small class="errorTxt2"></small>
+{{--                                                <div class="input-field col s12">--}}
+{{--                                                    <label for="slug">{{ __('customer.slug') }}*</label>--}}
+{{--                                                    <input id="slug" value="{{ old('slug',$pages->slug) }}" type="text" name="slug" data-error=".errorTxt2">--}}
+{{--                                                    <small class="errorTxt2"></small>--}}
 
-                                                    @error('slug')
-                                                    <span class="invalid-feedback" role="alert">
-                                                                <strong>{{ $message }}</strong>
-                                                            </span>
-                                                    @enderror
+{{--                                                    @error('slug')--}}
+{{--                                                    <span class="invalid-feedback" role="alert">--}}
+{{--                                                                <strong>{{ $message }}</strong>--}}
+{{--                                                            </span>--}}
+{{--                                                    @enderror--}}
 
-                                                </div>
+{{--                                                </div>--}}
 
                                                 <div class="input-field col s12">
                                                     <textarea name="content" id="content" value="{{old('content',$pages->content) }}" class="materialize-textarea validate" required>{{ old('content',$pages->content) }}</textarea>
