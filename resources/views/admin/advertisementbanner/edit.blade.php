@@ -21,12 +21,12 @@
                                         <div class="row">
                                             <div class="input-field col s12">
                                             <p for="title_en">Edit Video Title EN *  </p>
-                                            <input type="text" name="title_en" value="{{ $slider->title_en }}" class="form-control input-lg" required />
+                                            <input type="text" name="title_en" id="title_en" value="{{ $slider->title_en }}" class="form-control input-lg" required />
                                             </div>
 
                                             <div class="input-field col s12">
                                                 <p for="title_ar">Edit Video Title AR *  </p>
-                                                <input type="text" name="title_ar" value="{{ $slider->title_ar }}" class="form-control input-lg" required />
+                                                <input type="text" name="title_ar" id="title_ar" value="{{ $slider->title_ar }}" class="form-control input-lg" required />
                                             </div>
 
                                             <div class="input-field col s12">
@@ -105,6 +105,12 @@
     /*
  * Form Validation
  */
+
+    $("#title_en").keyup(function(){
+        $("#title_ar").val(this.value);
+    });
+
+
     $(function () {
 
         $('select[required]').css({

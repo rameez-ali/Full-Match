@@ -20,7 +20,7 @@
                                             <div class="row">
                                                 <div class="input-field col s12">
                                                     <p for="name_en">Edit League Name EN * </p>
-                                                    <input type="text" name="name_en" value="{{ $league->name_en }}" class="form-control input-lg" required data-error=".errorTxt1" />
+                                                    <input type="text" name="name_en" id="name_en" value="{{ $league->name_en }}" class="form-control input-lg" required data-error=".errorTxt1" />
                                                     <small class="errorTxt1"></small>
                                                     @error('name_en')
                                                     <span class="invalid-feedback" role="alert">
@@ -31,7 +31,7 @@
 
                                                 <div class="input-field col s12">
                                                     <p for="name_ar">Edit League Name AR * </p>
-                                                    <input type="text" name="name_ar" value="{{ $league->name_ar }}" class="form-control input-lg" required data-error=".errorTxt5" />
+                                                    <input type="text" name="name_ar" id="name_ar" value="{{ $league->name_ar }}" class="form-control input-lg" required data-error=".errorTxt5" />
                                                     <small class="errorTxt5"></small>
                                                     @error('name_ar')
                                                     <span class="invalid-feedback" role="alert">
@@ -75,7 +75,7 @@
 
                                                 <div class="input-field col s12">
                                                     <p for="description_en">Edit League Description EN * </p>
-                                                    <input type="text" name="description_en" value="{{ $league->description_en}}" class="form-control input-lg" required data-error=".errorTxt4" />
+                                                    <input type="text" name="description_en" id="description_en" value="{{ $league->description_en}}" class="form-control input-lg" required data-error=".errorTxt4" />
                                                     <small class="errorTxt4"></small>
                                                     @error('description_en')
                                                     <span class="invalid-feedback" role="alert">
@@ -86,7 +86,7 @@
 
                                                 <div class="input-field col s12">
                                                     <p for="description_ar">Edit League Description AR * </p>
-                                                    <input type="text" name="description_ar" value="{{ $league->description_ar}}" class="form-control input-lg" required data-error=".errorTxt6" />
+                                                    <input type="text" name="description_ar" id="description_ar"  value="{{ $league->description_ar}}" class="form-control input-lg" required data-error=".errorTxt6" />
                                                     <small class="errorTxt6"></small>
                                                     @error('description_ar')
                                                     <span class="invalid-feedback" role="alert">
@@ -154,4 +154,14 @@
 
                     });
                 </script>
+
+    <script>
+        $("#name_en").keyup(function(){
+            $("#name_ar").val(this.value);
+        });
+        $("#description_en").keyup(function(){
+            $("#description_ar").val(this.value);
+        });
+
+    </script>
 @endsection

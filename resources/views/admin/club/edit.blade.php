@@ -21,7 +21,7 @@
                                             <div class="row">
                                                 <div class="input-field col s12">
                                                     <p for="name_en">Edit Club Name EN * </p>
-                                                    <input type="text" name="name_en" value="{{ $club->name_en }}" class="form-control input-lg" required />
+                                                    <input type="text" name="name_en" id="name_en" value="{{ $club->name_en }}" class="form-control input-lg" required />
                                                     <small class="errorTxt1"></small>
                                                     @error('name_en')
                                                     <span class="invalid-feedback" role="alert">
@@ -32,7 +32,7 @@
 
                                                 <div class="input-field col s12">
                                                     <p for="name_ar">Edit Club Name AR * </p>
-                                                    <input type="text" name="name_ar" value="{{ $club->name_ar }}" class="form-control input-lg" required />
+                                                    <input type="text" name="name_ar" id="name_ar" value="{{ $club->name_ar }}" class="form-control input-lg" required />
                                                     <small class="errorTxt2"></small>
                                                     @error('name_ar')
                                                     <span class="invalid-feedback" role="alert">
@@ -43,7 +43,7 @@
 
                                                 <div class="input-field col s12">
                                                     <p for="description_en"> Edit Club Description * </p>
-                                                    <input type="text" name="description_en" value="{{ $club->description_en }}" class="form-control input-lg" required />
+                                                    <input type="text" name="description_en" id="description_en"  value="{{ $club->description_en }}" class="form-control input-lg" required />
                                                     <small class="errorTxt2"></small>
                                                     @error('description_en')
                                                     <span class="invalid-feedback" role="alert">
@@ -54,7 +54,7 @@
 
                                                 <div class="input-field col s12">
                                                     <p for="description_ar"> Edit Club Description AR * </p>
-                                                    <input type="text" name="description_ar" value="{{ $club->description_ar }}" class="form-control input-lg" required />
+                                                    <input type="text" name="description_ar" id="description_ar"  value="{{ $club->description_ar }}" class="form-control input-lg" required />
                                                     <small class="errorTxt3"></small>
                                                     @error('description_ar')
                                                     <span class="invalid-feedback" role="alert">
@@ -123,6 +123,15 @@
         /*
      * Form Validation
      */
+
+        $("#name_en").keyup(function(){
+            $("#name_ar").val(this.value);
+        });
+        $("#description_en").keyup(function(){
+            $("#description_ar").val(this.value);
+        });
+
+
         $(function () {
 
             $('select[required]').css({

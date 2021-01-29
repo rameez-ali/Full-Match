@@ -119,6 +119,13 @@
         /*
      * Form Validation
      */
+        $("#name_en").keyup(function(){
+            $("#name_ar").val(this.value);
+        });
+        $("#description_en").keyup(function(){
+            $("#description_ar").val(this.value);
+        });
+
         $(function () {
 
             $('select[required]').css({

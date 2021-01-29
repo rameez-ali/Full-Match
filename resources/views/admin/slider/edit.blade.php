@@ -20,7 +20,7 @@
                                        <div class="form-group">
                                        <label class="col-md-4 text-right">Edit Slider Name EN * </label>
                                        <div class="col-md-8">
-                                       <input type="text" name="name_en" value="{{ $slider->name_en }}" class="form-control input-lg"  required data-error=".errorTxt1" />
+                                       <input type="text" name="name_en" id="name_en" value="{{ $slider->name_en }}" class="form-control input-lg"  required data-error=".errorTxt1" />
                                        <small class="errorTxt1"></small>
                                        @error('name_en')
                                        <span class="invalid-feedback" role="alert">
@@ -32,7 +32,7 @@
 
                                             <label class="col-md-4 text-right">Edit Slider Name AR * </label>
                                             <div class="col-md-8">
-                                                <input type="text" name="name_ar" value="{{ $slider->name_ar }}" class="form-control input-lg"  required data-error=".errorTxt4" />
+                                                <input type="text" name="name_ar"  id="name_ar" value="{{ $slider->name_ar }}" class="form-control input-lg"  required data-error=".errorTxt4" />
                                                 <small class="errorTxt4"></small>
                                                 @error('name_ar')
                                                 <span class="invalid-feedback" role="alert">
@@ -178,6 +178,11 @@ $(document).ready(function() {
 
 
 </script>
+    <script>
+        $("#name_en").keyup(function(){
+            $("#name_ar").val(this.value);
+        });
+    </script>
 
 
 @endsection

@@ -24,7 +24,7 @@ option {margin: 10px;}
                                           @csrf
                                           <div class="form-group">
                                           <label for="name_en">Add Slider Name EN * </label>
-                                          <input type="text" name="name_en" class="form-control input-lg" required/>
+                                          <input type="text" name="name_en" id="name_en" class="form-control input-lg" required/>
                                           <small class="errorTxt1"></small>
                                           @error('name_en')
                                           <span class="invalid-feedback" role="alert">
@@ -35,7 +35,7 @@ option {margin: 10px;}
 
                                               <div class="form-group">
                                                   <label for="name_ar">Add Slider Name AR * </label>
-                                                  <input type="text" name="name_ar" class="form-control input-lg" required/>
+                                                  <input type="text" name="name_ar" id="name_ar" class="form-control input-lg" required/>
                                                   <small class="errorTxt4"></small>
                                                   @error('name_ar')
                                                   <span class="invalid-feedback" role="alert">
@@ -144,6 +144,12 @@ option {margin: 10px;}
             });
     });
      </script>
+
+<script>
+    $("#name_en").keyup(function(){
+        $("#name_ar").val(this.value);
+    });
+</script>
 
   </body>
 </html>
