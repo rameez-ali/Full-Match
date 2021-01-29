@@ -73,7 +73,9 @@
                                             </tr>
                                             </thead>
                                             <tbody>
+
                                             @foreach($video as $video)
+                                                @if($video!=null)
                                                 <tr>
                                                     <td>{{ $video->title_en }}</td>
                                                     <td><img src="{{ asset('app-assets/images/video/'.$video->video_banner_img)}}"  class="img-thumbnail" width="75" /></td>
@@ -91,7 +93,9 @@
                                                     </td>
 
                                                 </tr>
+                                                @endif
                                             @endforeach
+
                                             </tbody>
                                             </tbody>
                                         </table>
