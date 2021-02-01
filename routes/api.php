@@ -65,10 +65,11 @@ Route::group([
     'prefix' => 'auth'
 ], function () {
     Route::post('login', [ApiAuthController::class , 'login']);
+    Route::post('socialLogin', [ApiAuthController::class , 'socialLogin']);
     Route::post('signup', [ApiAuthController::class , 'signup']);
 
-    Route::get('/google-redirect', [ApiAuthController::class , 'googleRedirect']);
-    Route::get('/google-callback', [ApiAuthController::class , 'googlecCallback']);
+//    Route::get('/google-redirect', [ApiAuthController::class , 'googleRedirect']);
+//    Route::get('/google-callback', [ApiAuthController::class , 'googlecCallback']);
 
 });
 
