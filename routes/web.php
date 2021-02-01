@@ -33,6 +33,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::resource('league-form','ProjectLeagueViewController');
     Route::get('league/{id}','ProjectLeagueViewController@destroy1');
 
+    Route::resource('Contactus-form','ContactUSController');
 
     Route::resource('video-form','ProjectVideoViewController');
     Route::get('video-form/videos/{id}','ProjectVideoViewController@getseasons');

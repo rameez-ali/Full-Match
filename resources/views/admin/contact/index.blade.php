@@ -9,13 +9,14 @@
                             <div class="card animate fadeUp">
                                 <div class="card-content">
                                     <h4 class="header mt-0">
-                                        Contact US
+                                        Contact Queries
                                     </h4>
                                     <div class="row">
                                         <div class="col s12">
                                             <table id="page-length-option" class="display">
                                                 <thead>
                                                 <tr>
+                                                    <th width="20%">No</th>
                                                  <th width="27%">Name</th>
                                                  <th width="27%">Email</th>
                                                  <th width="27%">Message</th>
@@ -28,6 +29,7 @@
                                                 <tbody>
                                                 @foreach($contact as $contact)
                                                <tr>
+                                                   <td>{{ $contact->id }}</td>
                                                 <td>{{ $contact->name }}</td>
                                                 <td>{{ $contact->email }}</td>
                                                 <td>{{ $contact->message }}</td>
@@ -90,6 +92,7 @@
                     [10, 25, 50, -1],
                     [10, 25, 50, "All"]
                 ],
+                "order":[[0,"dsc"]],
                 buttons: [
                     {
                         extend: 'excel',
@@ -97,7 +100,7 @@
                         className: 'waves-effect waves-light btn gradient-45deg-purple-deep-orange gradient-shadow',
                         filename : '{{ __("customer.excel") }}' ,
                         exportOptions: {
-                            columns: [ 0,1,2,3,4,5 ]
+                            columns: [ 0,1,2,3,4,5,6 ]
                         },
                     },
                     {
@@ -106,7 +109,7 @@
                         className: 'waves-effect waves-light btn gradient-45deg-purple-deep-orange gradient-shadow',
                         filename : '{{ __("customer.csv") }}' ,
                         exportOptions: {
-                            columns: [ 0,1,2,3,4,5 ]
+                            columns: [ 0,1,2,3,4,5,6 ]
                         },
                     }
                 ],
