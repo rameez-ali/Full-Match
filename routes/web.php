@@ -75,6 +75,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::resource("home-page-manage","HomePageManageController");
     Route::post('discount/promo/verify','DiscountController@verify')->name('discount.promo.verify');
 
+    Route::resource("user","UserRoleController");
 
 // Route::get('dropdownlist','DataController@getCountries');
 // Route::get('dropdownlist/getstates/{id}','DataController@getStates');
@@ -102,6 +103,6 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::get('blankpg', function () { return view('admin/blank/index');});
 Route::get('blankform', function () { return view('admin/blank/form');});
 
-Route::get('userr', function () { return view('admin/customer/index');});
+//Route::get('userr', function () { return view('admin/customer/index');});
 
 

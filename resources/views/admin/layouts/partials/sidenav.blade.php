@@ -62,6 +62,9 @@
         <li class="bold"><a class="waves-effect waves-cyan " href="{{ route('seasonpart-form.index') }}"><i class="material-icons">ac_unit</i><span class="menu-title" data-i18n="User Profile">Season Part Sorting</span></a>
         </li>
 
+        <li class="bold"><a class="waves-effect waves-cyan " href="{{ route('user.index') }}"><i class="material-icons">people</i><span class="menu-title" data-i18n="User Profile">{{ __('customer.syst_users') }}</span></a>
+        </li>
+
         <li  class="bold"><a class="waves-effect waves-cyan " href="{{ route('customer.logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><i class="material-icons">keyboard_tab</i>{{ __('Logout') }}</a></li>
         <form id="logout-form" action="{{ route('customer.logout') }}" method="POST" class="d-none">
             @csrf

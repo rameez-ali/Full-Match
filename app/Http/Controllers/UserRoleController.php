@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\User\GetAllUsersRequest;
 use Illuminate\Http\Request;
 
 class UserRoleController extends Controller
@@ -11,9 +12,11 @@ class UserRoleController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(GetAllUsersRequest $request)
     {
-        //
+        $response = $request->handle();
+
+        return view('admin.user.index',['user' => $response] );
     }
 
     /**

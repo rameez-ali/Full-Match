@@ -146,5 +146,7 @@ return [
     'select_clubs' => 'Select Clubs',
     'select_players' => 'Select Players',
     'select_videos' => 'Select Videos',
+    'syst_users' => 'System Users',
+    'syst_user_sec' => 'System User Section',
 
 ];
