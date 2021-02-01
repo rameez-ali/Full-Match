@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
+use Laravel\Socialite\Facades\Socialite;
 
 /*
 |--------------------------------------------------------------------------
@@ -78,6 +79,16 @@ Route::group(['middleware' => ['auth']], function () {
 
 // Route::get('dropdownlist','DataController@getCountries');
 // Route::get('dropdownlist/getstates/{id}','DataController@getStates');
+});
+
+Route::get('/google-redirect', function () {
+    return Socialite::driver('google')->redirect();
+});
+
+Route::get('/google-callback', function () {
+    $user = Socialite::driver('google')->user();
+
+    return $user->token;
 });
 Route::get('/home', 'HomeController@index')->name('home');
 
