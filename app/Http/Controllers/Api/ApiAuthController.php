@@ -155,10 +155,10 @@ class ApiAuthController extends Controller
         ]);
     }
 
-    public function googleRedirect(){
+    public function googleRedirect(Request $request){
         return Socialite::driver('google')->redirect();
     }
-    public function googlecCallback(){
+    public function googlecCallback(Request $request){
         $user = Socialite::driver('google')->user();
 
         return $user->token;
