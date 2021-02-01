@@ -9,6 +9,7 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
+use Laravel\Socialite\Facades\Socialite;
 
 class ApiAuthController extends Controller
 {
@@ -152,5 +153,14 @@ class ApiAuthController extends Controller
             'status' => $this->successStatus,
             'data' => $array
         ]);
+    }
+
+    public function googleRedirect(){
+        return Socialite::driver('google')->redirect();
+    }
+    public function googlecCallback(){
+        $user = Socialite::driver('google')->user();
+
+        return $user->token;
     }
 }
