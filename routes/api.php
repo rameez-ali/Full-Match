@@ -67,8 +67,8 @@ Route::group([
     Route::post('login', [ApiAuthController::class , 'login']);
     Route::post('signup', [ApiAuthController::class , 'signup']);
 
-    Route::post('/google-redirect', [ApiAuthController::class , 'googleRedirect']);
-    Route::post('/google-callback', [ApiAuthController::class , 'googlecCallback']);
+    Route::get('/google-redirect', [ApiAuthController::class , 'googleRedirect']);
+    Route::get('/google-callback', [ApiAuthController::class , 'googlecCallback']);
 
 });
 
