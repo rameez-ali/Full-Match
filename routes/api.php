@@ -65,7 +65,6 @@ Route::group([
 ], function () {
     Route::post('login', [ApiAuthController::class , 'login']);
     Route::post('signup', [ApiAuthController::class , 'signup']);
-
 });
 
 Route::group(['middleware' => 'auth:api'], function(){
