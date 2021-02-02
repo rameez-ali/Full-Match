@@ -39,11 +39,11 @@ class UpdateHomePgManageRequest extends FormRequest
         $clubs = $params['clubs'];
         $videos = $params['videos'];
 
-        $forhomepgstatus = HomePageManagement::where('status' , 1)->first();
-
-        if (isset($params['status']) && $forhomepgstatus->id != $this->id ){
-            return false;
-        }
+//        $forhomepgstatus = HomePageManagement::where('status' , 1)->first();
+//
+//        if (isset($params['status']) && $forhomepgstatus->id != $this->id ){
+//            return false;
+//        }
         $homepgsection = HomePageManagement::find($this->id);
 
         $homepgsection->name = $params['name'];
