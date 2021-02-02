@@ -40,7 +40,7 @@ class PlayerController extends Controller
                 $array[$k]['name_ar'] = $v->name_ar;
                 $array[$k]['banner'] = $banner;
                 $array[$k]['profile_image'] = $profile_image;
-                $array[$k]['description_en'] = $v->description_en;
+                $array[$k]['description'] = $v->description_en;
                 $array[$k]['description_ar'] = $v->description_ar;
                 $array[$k]['sorting'] = $v->player_sorting;
 
