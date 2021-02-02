@@ -35,7 +35,7 @@
                                                     </div>
 
                                                     <div class="input-field col s12">
-                                                        <p class="mb-1">{{ __('customer.select_seasons') }}</p>
+                                                        <p class="mb-1">{{ __('customer.select_leagues') }}</p>
                                                         <select class="max-length browser-default" multiple="multiple" name="league[]" id="league" required>
                                                             @foreach($all_league as $league)
                                                                 <option value="{{$league->id}}" @if($edit) {{ in_array($league->id,$selected_league)? 'selected' : '' }} @endif >{{$league->name_en}}</option>

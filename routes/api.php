@@ -3,6 +3,7 @@
 use App\Http\Controllers\Api\ApiNotificationController;
 use App\Http\Controllers\Api\ApiOrderController;
 use App\Http\Controllers\Api\ApiAuthController;
+use App\Http\Controllers\Api\HomePageLayoutController;
 use App\Http\Controllers\Api\MyListController;
 use App\Http\Controllers\Api\PageController;
 use Illuminate\Http\Request;
@@ -59,6 +60,8 @@ Route::get('/forcurrency', [ApiOrderController::class , 'getCurrency']);
 
 
 Route::get('/page/{id}', [PageController::class , 'cmsPage']);
+
+Route::get('/homepg-layout', [HomePageLayoutController::class , 'index']);
 
 //Customer Auth Routes
 Route::group([
