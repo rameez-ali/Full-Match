@@ -9,6 +9,7 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
+use Laravel\Socialite\Facades\Socialite;
 
 class ApiAuthController extends Controller
 {
@@ -153,4 +154,56 @@ class ApiAuthController extends Controller
             'data' => $array
         ]);
     }
+
+    public function googleRedirect(Request $request){
+        return Socialite::driver('google')->redirect();
+    }
+    public function googlecCallback(Request $request){
+        $user = Socialite::driver('google')->user();
+
+        return $user->token;
+    }
+
+    public function socialLogin(Request $request)
+    {
+        $request->validate([
+            'email' => 'required|string|email'
+        ]);
+        $array = array();
+        if (User::where('email', $request->email)->first() != null) {
+            $user = User::where('email', $request->email)->first();
+        } else {
+            $user = new User([
+                'name' => $request->name,
+                'phone' => 13245678,
+                'email' => $request->email,
+                'provider_id' => $request->provider,
+                'email_verified_at' => Carbon::now()
+            ]);
+            $user->save();
+            $customer = new customer([
+                'user_id' => $user->id,
+                'name' => $request->name,
+                'email' => $request->email,
+            ]);
+            $customer->save();
+        }
+
+        $tokenResult = $user->createToken('Personal Access Token');
+        $user = $request->user();
+
+        $array['token'] = $tokenResult->accessToken;
+        return response()->json([
+            'data' => $array,
+            'token_type' => 'Bearer',
+            'message' => 'User Login Successfully',
+            'status' => $this->successStatus,
+            'success' => true,
+            'auth_info' => $user,
+            'expires_at' => Carbon::parse(
+                $tokenResult->token->expires_at
+            )->toDateTimeString()
+        ]);
+    }
+
 }

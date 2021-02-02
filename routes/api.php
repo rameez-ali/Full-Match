@@ -16,6 +16,7 @@ use App\Http\Controllers\Api\ContactController;
 use App\Http\Controllers\Api\SearchController;
 use App\Http\Controllers\Api\CategoryController;
 use App\Http\Controllers\Api\WishController;
+use Laravel\Socialite\Facades\Socialite;
 
 /*
 |--------------------------------------------------------------------------
@@ -64,7 +65,12 @@ Route::group([
     'prefix' => 'auth'
 ], function () {
     Route::post('login', [ApiAuthController::class , 'login']);
+    Route::post('socialLogin', [ApiAuthController::class , 'socialLogin']);
     Route::post('signup', [ApiAuthController::class , 'signup']);
+
+//    Route::get('/google-redirect', [ApiAuthController::class , 'googleRedirect']);
+//    Route::get('/google-callback', [ApiAuthController::class , 'googlecCallback']);
+
 });
 
 Route::group(['middleware' => 'auth:api'], function(){
