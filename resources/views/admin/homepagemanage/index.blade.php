@@ -51,7 +51,7 @@
                             <div class="card-content">
                                 <h4 class="header mt-0">
                                     {{ __('customer.homepgmanage.homepgmanage_section') }}
-                                    <a href="{{ route('home-page-manage.create') }}" class="waves-effect waves-light btn gradient-45deg-purple-deep-orange gradient-shadow right"> {{ __('customer.add') }}</a>
+{{--                                    <a href="{{ route('home-page-manage.create') }}" class="waves-effect waves-light btn gradient-45deg-purple-deep-orange gradient-shadow right"> {{ __('customer.add') }}</a>--}}
                                 </h4>
                                 <div class="row">
                                     <div class="col s12">
@@ -76,7 +76,7 @@
                                                     @endif
                                                     <td>
                                                         <a class="mb-5 btn waves-effect waves-light gradient-45deg-purple-deep-orange" href="{{ route('home-page-manage.edit', $homepagemanage->id ) }}">{{ __('customer.customer.edit') }}</a>
-                                                        <a class="mb-5 btn waves-effect waves-light gradient-45deg-amber-amber" onclick="deletePlan({{ $homepagemanage->id }})" href="#">{{ __('customer.delete') }}</a>
+{{--                                                        <a class="mb-5 btn waves-effect waves-light gradient-45deg-amber-amber" onclick="deletePlan({{ $homepagemanage->id }})" href="#">{{ __('customer.delete') }}</a>--}}
                                                     </td>
                                                 </tr>
                                             @endforeach

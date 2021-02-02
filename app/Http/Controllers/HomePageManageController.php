@@ -9,6 +9,7 @@ use App\Http\Requests\Homepgmanage\UpdateHomePgManageRequest;
 use App\Model\Club;
 use App\Model\HomePageManagement;
 use App\Model\HomePgItem;
+use App\Model\League;
 use App\Model\Player;
 use App\Model\Season;
 use App\Model\Video;
@@ -41,7 +42,7 @@ class HomePageManageController extends Controller
 
         $route = url('home-page-manage');
 
-        $all_seasons = Season::all();
+        $all_league = League::all();
         $all_players = Player::all();
         $all_clubs = Club::all();
         $all_videos = Video::where('leagues_id',null)->get();
@@ -50,7 +51,7 @@ class HomePageManageController extends Controller
             'homepagemanage' => $response,
             'route' => $route,
             'edit' => false,
-            'all_seasons' => $all_seasons,
+            'all_league' => $all_league,
             'all_players' => $all_players,
             'all_clubs' => $all_clubs,
             'all_videos' => $all_videos,
@@ -97,6 +98,12 @@ class HomePageManageController extends Controller
 
         $route = route('home-page-manage.update', $response->id);
 
+        $get_league  =  HomePgItem::where('section_id',$response->id)->where('item_name','league')->get();
+        $selected_league = array();
+        foreach ($get_league as $k => $v ){
+            array_push($selected_league, $v->item_id);
+        }
+
         $get_players  =  HomePgItem::where('section_id',$response->id)->where('item_name','players')->get();
         $selected_players = array();
         foreach ($get_players as $k => $v ){
@@ -115,7 +122,7 @@ class HomePageManageController extends Controller
             array_push($selected_videos, $v->item_id);
         }
 
-        $all_seasons = Season::all();
+        $all_league = League::all();
         $all_players = Player::all();
         $all_clubs = Club::all();
         $all_videos = Video::where('leagues_id',null)->get();
@@ -124,10 +131,11 @@ class HomePageManageController extends Controller
             'homepagemanage' => $response,
             'route' => $route ,
             'edit' => true ,
-            'all_seasons' => $all_seasons,
+            'all_league' => $all_league,
             'all_players' => $all_players,
             'all_clubs' => $all_clubs,
             'all_videos' => $all_videos,
+            'selected_league' => $selected_league,
             'selected_players' => $selected_players,
             'selected_clubs' => $selected_clubs,
             'selected_videos' => $selected_videos,
