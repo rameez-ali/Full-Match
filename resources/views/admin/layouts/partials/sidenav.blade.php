@@ -8,8 +8,8 @@
         <li class="bold"><a class="waves-effect waves-cyan " href="{{ route('customer.index') }}"><i class="material-icons dp48">people</i><span class="menu-title" data-i18n="User Profile">{{ __('customer.customer.customer_head') }}</span></a>
         </li>
 
-        <li class="bold"><a class="waves-effect waves-cyan " href="{{ route('subscriptionplans.index') }}"><i class="material-icons dp48">subscriptions</i><span class="menu-title" data-i18n="User Profile">{{ __('customer.subsplan.subsplan_head') }}</span></a>
-        </li>
+{{--        <li class="bold"><a class="waves-effect waves-cyan " href="{{ route('subscriptionplans.index') }}"><i class="material-icons dp48">subscriptions</i><span class="menu-title" data-i18n="User Profile">{{ __('customer.subsplan.subsplan_head') }}</span></a>--}}
+{{--        </li>--}}
 
         <li class="bold"><a class="waves-effect waves-cyan " href="{{ route('page.index') }}"><i class="material-icons dp48">settings</i><span class="menu-title" data-i18n="User Profile">{{ __('customer.cmspage.cmspage') }}</span></a>
         </li>
@@ -17,11 +17,11 @@
         <li class="bold"><a class="waves-effect waves-cyan " href="{{ route('home-page-manage.index') }}"><i class="material-icons dp48">settings</i><span class="menu-title" data-i18n="User Profile">{{ __('customer.homepgmanage.homepg') }}</span></a>
         </li>
 
-        <li class="bold"><a class="waves-effect waves-cyan " href="{{ route('order.index') }}"><i class="material-icons dp48">shopping_cart</i><span class="menu-title" data-i18n="User Profile">{{ __('customer.order.orders') }}</span></a>
-        </li>
+{{--        <li class="bold"><a class="waves-effect waves-cyan " href="{{ route('order.index') }}"><i class="material-icons dp48">shopping_cart</i><span class="menu-title" data-i18n="User Profile">{{ __('customer.order.orders') }}</span></a>--}}
+{{--        </li>--}}
 
-        <li class="bold"><a class="waves-effect waves-cyan " href="{{ route('discount.index') }}"><i class="material-icons dp48">local_offer</i><span class="menu-title" data-i18n="User Profile">{{ __('customer.discount.discount') }}</span></a>
-        </li>
+{{--        <li class="bold"><a class="waves-effect waves-cyan " href="{{ route('discount.index') }}"><i class="material-icons dp48">local_offer</i><span class="menu-title" data-i18n="User Profile">{{ __('customer.discount.discount') }}</span></a>--}}
+{{--        </li>--}}
 
         <li class="bold"><a class="waves-effect waves-cyan " href="{{ route('notification.index') }}"><i class="material-icons dp48">notifications_active</i><span class="menu-title" data-i18n="User Profile">{{ __('customer.notification.notification') }}</span></a>
         </li>
