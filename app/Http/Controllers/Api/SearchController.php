@@ -64,14 +64,14 @@ class SearchController extends Controller
 
              foreach ($video as $k => $v) {
 
-                 $video_img = str_replace('\\', '/', asset('app-assets/images/video/' . $v->video_img));
+                 $banner = str_replace('\\', '/', asset('app-assets/images/video/' . $v->video_banner_img));
 
                  $all_videos_array[$k]['id'] = $v->id;
-                 $all_videos_array[$k]['title'] = $v->title_en;
-                 $all_videos_array[$k]['title_ar'] = $v->title_ar;
+                 $all_videos_array[$k]['name'] = $v->title_en;
+                 $all_videos_array[$k]['name_ar'] = $v->title_ar;
                  $all_videos_array[$k]['description'] = $v->description_en;
                  $all_videos_array[$k]['description_ar'] = $v->description_ar;
-                 $all_videos_array[$k]['image'] = $video_img;
+                 $all_videos_array[$k]['banner'] = $banner;
 
              }
              return response()->json(['success' => true, 'status' => $this->successStatus, 'message' => 'Videos found.', 'data'=> $all_videos_array]);
@@ -86,14 +86,14 @@ class SearchController extends Controller
 
              foreach ($videos as $k => $v) {
 
-                 $video_img = str_replace('\\', '/', asset('app-assets/images/video/' . $v->video_img));
+                 $banner = str_replace('\\', '/', asset('app-assets/images/video/' . $v->video_banner_img));
 
                  $club_search_video[$k]['id'] = $v->id;
-                 $club_search_video[$k]['title'] = $v->title_en;
-                 $club_search_video[$k]['title_ar'] = $v->title_ar;
+                 $club_search_video[$k]['name'] = $v->title_en;
+                 $club_search_video[$k]['name_ar'] = $v->title_ar;
                  $club_search_video[$k]['description'] = $v->description_en;
                  $club_search_video[$k]['description_ar'] = $v->description_ar;
-                 $club_search_video[$k]['image'] = $video_img;
+                 $club_search_video[$k]['banner'] = $banner;
 
              }
              return response()->json(['success' => true, 'status' => $this->successStatus, 'message' => 'Videos in Club found.', 'data'=> $club_search_video]);
@@ -107,14 +107,14 @@ class SearchController extends Controller
 
             foreach ($videos as $k => $v) {
 
-                $video_img = str_replace('\\', '/', asset('app-assets/images/video/' . $v->video_img));
+                $banner = str_replace('\\', '/', asset('app-assets/images/video/' . $v->video_banner_img));
 
                 $player_search_video[$k]['id'] = $v->id;
-                $player_search_video[$k]['title'] = $v->title_en;
-                $player_search_video[$k]['title_ar'] = $v->title_ar;
+                $player_search_video[$k]['name'] = $v->title_en;
+                $player_search_video[$k]['name_ar'] = $v->title_ar;
                 $player_search_video[$k]['description'] = $v->description_en;
-                $player_search_video[$k]['description'] = $v->description_ar;
-                $player_search_video[$k]['image'] = $video_img;
+                $player_search_video[$k]['description_ar'] = $v->description_ar;
+                $player_search_video[$k]['banner'] = $banner;
 
             }
             return response()->json(['success' => true, 'status' => $this->successStatus, 'message' => 'Videos in Player found.', 'data'=> $player_search_video]);
@@ -126,14 +126,14 @@ class SearchController extends Controller
 
             foreach ($popular_search_videos as $k => $v) {
 
-                $video_img = str_replace('\\', '/', asset('app-assets/images/video/' . $v->video_img));
+                $banner = str_replace('\\', '/', asset('app-assets/images/video/' . $v->video_banner_img));
 
                 $popular_search_video[$k]['id'] = $v->id;
-                $popular_search_video[$k]['title'] = $v->title_en;
-                $popular_search_video[$k]['title_ar'] = $v->title_ar;
+                $popular_search_video[$k]['name'] = $v->title_en;
+                $popular_search_video[$k]['name_ar'] = $v->title_ar;
                 $popular_search_video[$k]['description'] = $v->description_en;
                 $popular_search_video[$k]['description'] = $v->description_ar;
-                $popular_search_video[$k]['image'] = $video_img;
+                $popular_search_video[$k]['banner'] = $banner;
 
             }
 

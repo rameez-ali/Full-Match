@@ -73,8 +73,8 @@ public $HTTP_NOT_FOUND = 404;
                 $video_img = str_replace('\\', '/', asset('app-assets/images/video/' . $v->video_img));
 
                 $array[$k]['id'] = $v->id;
-                $array[$k]['title'] = $v->title_en;
-                $array[$k]['title_ar'] = $v->title_en;
+                $array[$k]['name'] = $v->title_en;
+                $array[$k]['name_ar'] = $v->title_en;
                 $array[$k]['description'] = $v->description_en;
                 $array[$k]['description_en'] = $v->description_ar;
                 $array[$k]['image'] = $video_img;
