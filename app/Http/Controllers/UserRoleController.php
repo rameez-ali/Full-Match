@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Role\GetAllRolesRequest;
 use App\Http\Requests\User\CreateUserRequest;
 use App\Http\Requests\User\DeleteUserRequest;
 use App\Http\Requests\User\GetAllUsersRequest;
@@ -36,7 +37,11 @@ class UserRoleController extends Controller
 
         $route = url('user');
 
-        return view('admin.user.form',['user' => $response, 'route' => $route, 'edit' => false ]);
+        $request = new GetAllRolesRequest();
+
+        $roles = $request->handle();
+
+        return view('admin.user.form',['user' => $response, 'route' => $route, 'roles' => $roles, 'edit' => false ]);
     }
 
     /**
@@ -77,9 +82,13 @@ class UserRoleController extends Controller
 
         $response = $request->handle();
 
+        $request = new GetAllRolesRequest();
+
+        $roles = $request->handle();
+
         $route = route('user.update', ['user' => $response->id]);
 
-        return view('admin.user.form',['user' => $response, 'route' => $route , 'edit' => true ]);
+        return view('admin.user.form',['user' => $response, 'route' => $route , 'roles' => $roles , 'edit' => true ]);
     }
 
     /**

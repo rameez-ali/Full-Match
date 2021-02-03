@@ -60,12 +60,21 @@
                                                                         <strong>{{ $message }}</strong>
                                                                     </span>
                                                                 @enderror
-
                                                         </div>
                                                         <div class="input-field col s12">
                                                         <label for="cpassword">{{ __('customer.customer.confirm_password') }} *</label>
                                                         <input id="cpassword" type="password" name="cpassword" data-error=".errorTxt4" @if(!$edit) required @endif>
                                                         <small class="errorTxt4"></small>
+                                                    </div>
+
+
+                                                    <div class="input-field col s12">
+                                                        <p for="roles">{{ __('customer.role.roles') }}</p>
+                                                        <select id="roles" class="select2 browser-default" name="roles" required>
+                                                            @foreach($roles as $role)
+                                                                <option value="{{$role->id}}" {{ $role->name == $user->getRoles()->first() ? 'selected' : '' }} >{{ $role->title }}</option>
+                                                            @endforeach
+                                                        </select>
                                                     </div>
 
                                                     @if($edit)

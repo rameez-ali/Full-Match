@@ -5,6 +5,7 @@ namespace App\Http\Requests\User;
 use App\User;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Hash;
+use Bouncer;
 
 class UpdateUserRequest extends FormRequest
 {
@@ -47,6 +48,10 @@ class UpdateUserRequest extends FormRequest
         }
 
         $user->save();
+
+        Bouncer::sync($user)->roles([]);
+
+        $user->assign($params['roles']);
 
         return true;
     }
