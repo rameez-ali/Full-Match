@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 
-use App\Model\My_wish_list;
+
 use Illuminate\Http\Request;
 use App\Model\Category;
 use App\Model\Category_genre;
@@ -14,8 +14,13 @@ use App\Model\Slidervideo;
 use App\Model\Video;
 use App\Model\Adv_banner;
 use App\Model\Adv_banner_video;
-use App\Model\Videoclub;
 use App\Model\Club;
+use App\Model\League;
+use App\Model\Player;
+use App\Model\Leaguecategory;
+use App\Model\Videoclub;
+use App\Model\Videogenre;
+use App\Model\Videoplayer;
 use DB;
 use \stdClass;
 
@@ -64,8 +69,10 @@ class CategoryController extends Controller
 
         $slider_array = array();
         $banner_array = array();
-        $genre_array=array();
-        $mylist_videos_array=array();
+        $club_array = array();
+        $player_array = array();
+        $league_array = array();
+        $latest_videos_array=array();
 
         //getting slider id of that specific categories
         $slider_id = Slider::select("id")->where('category_id',$id)->first();
@@ -79,11 +86,14 @@ class CategoryController extends Controller
         //getting videos id that are associated with that specific categories
         $videos_id = Video::select("id")->where('category_id',$id)->get();
 
-        //getting user id
-        $user_id=$request->user()->id;
+        //getting videos id that are associated with that specific categories
+        $club_ids = Videoclub::select("Club_id")->where('category_id',$id)->get();
 
+        //getting palyers id that are associated with that specific categories
+        $player_ids = Videoplayer::select("Player_id")->where('category_id',$id)->get();
 
-
+        //getting leagues id that are associated with that specific categories
+        $league_ids = Leaguecategory::select("league_id")->where('category_id',$id)->get();
 
 
          if($slider_id!=null)
@@ -103,7 +113,6 @@ class CategoryController extends Controller
 
              }
                $obj->category_slider = $slider_array;
-//             return response()->json(['success' => true, 'status' => $this->successStatus, 'message' => 'Slider Related Related Videos found.', 'data' => $slider_array]);
 
          }
 
@@ -126,13 +135,11 @@ class CategoryController extends Controller
 
              }
              $obj->category_banner = $banner_array;
-//             return response()->json(['success' => true, 'status' => $this->successStatus, 'message' => 'Banner Related Videos found.', 'data' => $banner_array]);
-
          }
 
         if($genre_id!=null)
         {
-            $genres=Video_genre::select("name_en","name_ar")->wherein('id',$genre_id)->get();
+            $genres=Video_genre::select("id","name_en","name_ar")->wherein('id',$genre_id)->get();
             $obj->category_genre = $genres;
 
         }
@@ -140,6 +147,7 @@ class CategoryController extends Controller
         if($videos_id!=null)
         {
             $videos=Video::wherein('id',$videos_id)->get();
+
 
             foreach ($videos as $k => $v) {
 
@@ -153,61 +161,180 @@ class CategoryController extends Controller
                 $latest_videos_array[$k]['image'] = $video_img;
 
             }
-            $obj->latest_videos = $latest_videos_array;
-//             return response()->json(['success' => true, 'status' => $this->successStatus, 'message' => 'Slider Related Related Videos found.', 'data' => $slider_array]);
+            $obj->Category_latest_videos = $latest_videos_array;
 
         }
 
 
-        if($videos_id!=null)
+        if($club_ids!=null)
         {
-            $club_id=Videoclub::select("Club_id")->wherein('Video_id',$videos_id)->get();
-            $clubs=Club::wherein('id',$club_id)->get();
+            $clubs=Club::wherein('id',$club_ids)->get();
 
             foreach ($clubs as $k => $v) {
 
                 $club_banner = str_replace('\\', '/', asset('app-assets/images/club/' . $v->club_banner));
 
                 $club_array[$k]['id'] = $v->id;
-                $clubs_array[$k]['name'] = $v->name_en;
-                $clubs_array[$k]['name_ar'] = $v->name_ar;
-                $clubs_array[$k]['description'] = $v->description_en;
-                $clubs_array[$k]['description_ar'] = $v->description_ar;
-                $clubs_array[$k]['banner'] = $club_banner;
+                $club_array[$k]['name'] = $v->name_en;
+                $club_array[$k]['name_ar'] = $v->name_ar;
+                $club_array[$k]['description'] = $v->description_en;
+                $club_array[$k]['description_ar'] = $v->description_ar;
+                $club_array[$k]['banner'] = $club_banner;
 
             }
-            $obj->category_clubs = $clubs_array;
-//             return response()->json(['success' => true, 'status' => $this->successStatus, 'message' => 'Slider Related Related Videos found.', 'data' => $slider_array]);
+            $obj->category_clubs = $club_array;
 
-        }
-        //geeting user id
-        if($user_id!=null){
-            $videos_id_mylist = My_wish_list::select("video_id")->where('user_id',$user_id)->get();
-            $videos=Video::wherein('id',$videos_id_mylist )->where('category_id',$id)->get();
-
-            foreach ($videos as $k => $v) {
-
-                $video_img = str_replace('\\', '/', asset('app-assets/images/video/' . $v->video_img));
-
-                $mylist_videos_array[$k]['id'] = $v->id;
-                $mylist_videos_array[$k]['title'] = $v->title_en;
-                $mylist_videos_array[$k]['title_ar'] = $v->title_ar;
-                $mylist_videos_array[$k]['description'] = $v->description_en;
-                $mylist_videos_array[$k]['description_ar'] = $v->description_ar;
-                $mylist_videos_array[$k]['image'] = $video_img;
-
-            }
-            $obj->mylist_videos = $mylist_videos_array;
         }
 
 
+        if($player_ids!=null)
+        {
+            $players=Player::wherein('id',$player_ids)->get();
+
+            foreach ($players as $k => $v) {
+
+                $player_banner = str_replace('\\', '/', asset('app-assets/images/player/' . $v->player_banner));
+
+                $player_array[$k]['id'] = $v->id;
+                $player_array[$k]['name'] = $v->name_en;
+                $player_array[$k]['name_ar'] = $v->name_ar;
+                $player_array[$k]['description'] = $v->description_en;
+                $player_array[$k]['description_ar'] = $v->description_ar;
+                $player_array[$k]['banner'] = $player_banner;
+
+            }
+            $obj->category_player = $player_array;
+
+        }
+
+        if($league_ids!=null)
+        {
+            $leagues=League::wherein('id',$league_ids)->get();
+
+            foreach ($leagues as $k => $v) {
+
+                $league_banner = str_replace('\\', '/', asset('app-assets/images/league/' . $v->league_banner));
+
+                $league_array[$k]['id'] = $v->id;
+                $league_array[$k]['name'] = $v->name_en;
+                $league_array[$k]['name_ar'] = $v->name_ar;
+                $league_array[$k]['description'] = $v->description_en;
+                $league_array[$k]['description_ar'] = $v->description_ar;
+                $league_array[$k]['banner'] = $league_banner;
+
+            }
+            $obj->category_leagues = $league_array;
+
+        }
 
         return response()->json(['success' => true, 'status' => $this->successStatus, 'message' => 'Category Related Data Found.', 'data'=> $obj]);
 
     }
 
-    public function mylist(request $request){
-        $user_id=$request->user()->id;
+    public function getcategorygenreinfo($category_id, $genre_ids){
+
+        $obj = new stdClass;
+
+
+        // getting Video ids of that specific category and genre both
+        $video_ids = Videogenre::select("video_id")->where('category_id',$category_id)
+                      ->where('genre_id',$genre_ids)
+                      ->distinct()
+                      ->get();
+
+        $videos = Video::wherein('id', $video_ids)->get();
+
+
+        if($videos!=null){
+            foreach ($videos as $k => $v) {
+
+                $video_img = str_replace('\\', '/', asset('app-assets/images/video/' . $v->video_img));
+
+                $latest_videos_array[$k]['id'] = $v->id;
+                $latest_videos_array[$k]['title'] = $v->title_en;
+                $latest_videos_array[$k]['title_ar'] = $v->title_ar;
+                $latest_videos_array[$k]['description'] = $v->description_en;
+                $latest_videos_array[$k]['description_ar'] = $v->description_ar;
+                $latest_videos_array[$k]['image'] = $video_img;
+
+            }
+            $obj->Category_latest_videos = $latest_videos_array;
+
+
+        }
+
+
+        // getting Club ids of that specific category and genre both
+        $club_ids = VideoClub::select("Club_id")->wherein('Video_id', $video_ids)
+                        ->distinct()
+                        ->get();
+        // getting Clubs of that specific category and genre both
+        $clubs = Club::wherein('id', $club_ids)->get();
+        if($clubs!=null){
+            foreach ($clubs as $k => $v) {
+
+                $club_banner = str_replace('\\', '/', asset('app-assets/images/club/' . $v->club_banner));
+
+                $club_array[$k]['id'] = $v->id;
+                $club_array[$k]['name'] = $v->name_en;
+                $club_array[$k]['name_ar'] = $v->name_ar;
+                $club_array[$k]['description'] = $v->description_en;
+                $club_array[$k]['description_ar'] = $v->description_ar;
+                $club_array[$k]['banner'] = $club_banner;
+
+            }
+            $obj->category_clubs = $club_array;
+        }
+
+
+        // getting Player ids of that specific category and genre both
+        $player_ids = VideoPlayer::select("Player_id")->wherein('Video_id', $video_ids)
+                      ->distinct()
+                      ->get();
+        // getting Players of that specific category and genre both
+        $players = Player::wherein('id', $player_ids)->get();
+        if($players!=null){
+            foreach ($players as $k => $v) {
+
+                $player_banner = str_replace('\\', '/', asset('app-assets/images/player/' . $v->player_banner));
+
+                $player_array[$k]['id'] = $v->id;
+                $player_array[$k]['name'] = $v->name_en;
+                $player_array[$k]['name_ar'] = $v->name_ar;
+                $player_array[$k]['description'] = $v->description_en;
+                $player_array[$k]['description_ar'] = $v->description_ar;
+                $player_array[$k]['banner'] = $player_banner;
+
+            }
+            $obj->category_player = $player_array;
+
+        }
+
+
+        // getting league ids of that specific category and genre both
+        $leagues_ids = Leaguecategory::select("league_id")->wherein('video_id', $video_ids)
+                       ->distinct()
+                       ->get();
+        // getting Leagues of that specific category and genre both
+        $leagues = League::wherein('id', $leagues_ids)->get();
+        if($leagues!=null){
+            foreach ($leagues as $k => $v) {
+
+                $league_banner = str_replace('\\', '/', asset('app-assets/images/league/' . $v->league_banner));
+
+                $league_array[$k]['id'] = $v->id;
+                $league_array[$k]['name'] = $v->name_en;
+                $league_array[$k]['name_ar'] = $v->name_ar;
+                $league_array[$k]['description'] = $v->description_en;
+                $league_array[$k]['description_ar'] = $v->description_ar;
+                $league_array[$k]['banner'] = $league_banner;
+
+            }
+            $obj->category_leagues = $league_array;
+
+        }
+
+        return response()->json(['success' => true, 'status' => $this->successStatus, 'message' => 'Category Genre Related Data Found.', 'data'=> $obj]);
 
 
     }

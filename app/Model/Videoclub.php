@@ -9,7 +9,7 @@ class Videoclub extends Model
 {
 	use SoftDeletes;
     protected $fillable = [
-        'Club_id','Video_id',
+        'Club_id','Video_id','category_id'
     ];
     protected $dates = ['deleted_at'];
 }
