@@ -76,12 +76,13 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('discount/promo/verify','DiscountController@verify')->name('discount.promo.verify');
 
     Route::resource("user","UserRoleController");
-
+    Route::resource("role","RoleController");
+    Route::get('/home', 'DashboardController@index')->name('home');
 // Route::get('dropdownlist','DataController@getCountries');
 // Route::get('dropdownlist/getstates/{id}','DataController@getStates');
 });
 
-Route::get('/home', 'HomeController@index')->name('home');
+
 
 //Auth::routes();
 

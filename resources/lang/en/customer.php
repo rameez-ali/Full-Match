@@ -100,6 +100,12 @@ return [
         'edit' => 'Edit System User',
         'add' => 'Add System User',
     ],
+    'role' => [
+        'edit' => 'Edit Role',
+        'add' => 'Add Role',
+        'roles' => 'Roles',
+        'section_head' => 'Roles Section',
+    ],
     'name' => 'Name',
     'slug' => 'Slug',
     'decs' => 'Description',
@@ -153,5 +159,6 @@ return [
     'select_videos' => 'Select Videos',
     'syst_users' => 'System Users',
     'syst_user_sec' => 'System Users Section',
+    'permission' => 'Permissions',
 
 ];
