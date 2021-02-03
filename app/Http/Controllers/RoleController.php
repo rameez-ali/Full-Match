@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Permission\GetAllPermissionsRequest;
+use App\Http\Requests\Permission\SavePermissionRequest;
 use App\Http\Requests\Role\CreateRoleRequest;
 use App\Http\Requests\Role\DeleteRoleRequest;
 use App\Http\Requests\Role\GetAllRolesRequest;
@@ -113,5 +115,28 @@ class RoleController extends Controller
         $response = $request->handle();
 
         return redirect()->route('role.index')->with('roledeletesuccess','Role Delete Successfully');
+    }
+    public function permission($id)
+    {;
+        $request = new GetRoleRequest();
+
+        $request->id = $id;
+
+        $response = $request->handle();
+
+        $request = new GetAllPermissionsRequest();
+
+        $permissions = $request->handle();
+
+        $assigned_permissions = $response->getAbilities()->pluck('name')->toArray();
+
+        return view('admin.role.permission',[ 'role' => $response, 'permissions' => $permissions, 'assigned_permissions' => $assigned_permissions ]);
+    }
+
+    public function savePermissions(SavePermissionRequest $request)
+    {
+        $response = $request->handle();
+
+        return redirect()->route('role.index')->with('permissionsuccess','Permission Assigne Successfully');
     }
 }

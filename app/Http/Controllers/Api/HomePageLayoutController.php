@@ -50,7 +50,7 @@ class HomePageLayoutController extends Controller
             $selected_players = array();
             foreach ($player_details as $k => $v) {
 
-                $image = str_replace('\\', '/', asset('app-assets/images/league/' . $v->player_profile_image));
+                $image = str_replace('\\', '/', asset('app-assets/images/player/' . $v->player_profile_image));
                 $selected_players[$k]['id'] = $v->id;
                 $selected_players[$k]['name'] = $v->name_en;
                 $selected_players[$k]['name_ar'] = $v->name_ar;
@@ -64,7 +64,7 @@ class HomePageLayoutController extends Controller
             $selected_clubs = array();
             foreach ($club_details as $k => $v) {
 
-                $image = str_replace('\\', '/', asset('app-assets/images/league/' . $v->club_logo));
+                $image = str_replace('\\', '/', asset('app-assets/images/club/' . $v->club_logo));
                 $selected_clubs[$k]['id'] = $v->id;
                 $selected_clubs[$k]['name'] = $v->name_en;
                 $selected_clubs[$k]['name_ar'] = $v->name_ar;
@@ -78,7 +78,7 @@ class HomePageLayoutController extends Controller
             $selected_videos = array();
             foreach ($video_details as $k => $v) {
 
-                $image = str_replace('\\', '/', asset('app-assets/images/league/' . $v->video_img));
+                $image = str_replace('\\', '/', asset('app-assets/images/video/' . $v->video_img));
                 $selected_videos[$k]['id'] = $v->id;
                 $selected_videos[$k]['name'] = $v->title_en;
                 $selected_videos[$k]['name_ar'] = $v->title_ar;

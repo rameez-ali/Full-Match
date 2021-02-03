@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests\Role;
+namespace App\Http\Requests\Permission;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class SavePermissionsRequest extends FormRequest
+class GetPermissionRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.

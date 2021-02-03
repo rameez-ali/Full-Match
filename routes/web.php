@@ -77,6 +77,8 @@ Route::group(['middleware' => ['auth']], function () {
 
     Route::resource("user","UserRoleController");
     Route::resource("role","RoleController");
+    Route::get('role/permissions/{id}', 'RoleController@permission')->name('role.permission');
+    Route::post('role/permissions', 'RoleController@savePermissions')->name('save.role.permission');
     Route::get('/home', 'DashboardController@index')->name('home');
 // Route::get('dropdownlist','DataController@getCountries');
 // Route::get('dropdownlist/getstates/{id}','DataController@getStates');

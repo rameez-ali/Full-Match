@@ -36,6 +36,16 @@
                                         <span aria-hidden="true">×</span>
                                     </button>
                                 </div>
+                            @elseif($permissionsuccess = Session::get('permissionsuccess'))
+                                <div class="card-alert card gradient-45deg-green-teal">
+                                    <div class="card-content white-text">
+                                        <p>
+                                            <i class="material-icons">check</i>{{ $permissionsuccess }}</p>
+                                    </div>
+                                    <button type="button" class="close white-text" data-dismiss="alert" aria-label="Close">
+                                        <span aria-hidden="true">×</span>
+                                    </button>
+                                </div>
                             @endif
                             <div class="card animate fadeUp">
                                 <div class="card-content">
@@ -59,7 +69,7 @@
                                                     <tr>
                                                         <td>{{ $role->id }}</td>
                                                         <td>{{ $role->title }}</td>
-                                                        <td>  <a class="mb-5 mr-2 btn waves-effect waves-light gradient-45deg-purple-deep-orange" href="{{ route('role.edit',[ 'role' => $role->id ]) }}">{{ __('customer.permission') }}</a></td>
+                                                        <td>  <a class="mb-5 mr-2 btn waves-effect waves-light gradient-45deg-purple-deep-orange" href="{{ route('role.permission',['id' => $role->id ]) }}">{{ __('customer.permission') }}</a></td>
                                                         <td>
                                                             <a class="mb-5 mr-2 btn waves-effect waves-light gradient-45deg-purple-deep-orange" href="{{ route('role.edit',[ 'role' => $role->id ]) }}">{{ __('customer.customer.edit') }}</a>
                                                             <a class="mb-5 btn waves-effect waves-light gradient-45deg-amber-amber" onclick="deleteCustomer({{ $role->id }})" href="#">{{ __('customer.customer.delete') }}</a>
