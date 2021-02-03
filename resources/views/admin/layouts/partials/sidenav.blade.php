@@ -8,8 +8,8 @@
         <li class="bold"><a class="waves-effect waves-cyan " href="{{ route('customer.index') }}"><i class="material-icons dp48">people</i><span class="menu-title" data-i18n="User Profile">{{ __('customer.customer.customer_head') }}</span></a>
         </li>
 
-        <li class="bold"><a class="waves-effect waves-cyan " href="{{ route('subscriptionplans.index') }}"><i class="material-icons dp48">subscriptions</i><span class="menu-title" data-i18n="User Profile">{{ __('customer.subsplan.subsplan_head') }}</span></a>
-        </li>
+{{--        <li class="bold"><a class="waves-effect waves-cyan " href="{{ route('subscriptionplans.index') }}"><i class="material-icons dp48">subscriptions</i><span class="menu-title" data-i18n="User Profile">{{ __('customer.subsplan.subsplan_head') }}</span></a>--}}
+{{--        </li>--}}
 
         <li class="bold"><a class="waves-effect waves-cyan " href="{{ route('page.index') }}"><i class="material-icons dp48">settings</i><span class="menu-title" data-i18n="User Profile">{{ __('customer.cmspage.cmspage') }}</span></a>
         </li>
@@ -17,11 +17,11 @@
         <li class="bold"><a class="waves-effect waves-cyan " href="{{ route('home-page-manage.index') }}"><i class="material-icons dp48">settings</i><span class="menu-title" data-i18n="User Profile">{{ __('customer.homepgmanage.homepg') }}</span></a>
         </li>
 
-        <li class="bold"><a class="waves-effect waves-cyan " href="{{ route('order.index') }}"><i class="material-icons dp48">shopping_cart</i><span class="menu-title" data-i18n="User Profile">{{ __('customer.order.orders') }}</span></a>
-        </li>
+{{--        <li class="bold"><a class="waves-effect waves-cyan " href="{{ route('order.index') }}"><i class="material-icons dp48">shopping_cart</i><span class="menu-title" data-i18n="User Profile">{{ __('customer.order.orders') }}</span></a>--}}
+{{--        </li>--}}
 
-        <li class="bold"><a class="waves-effect waves-cyan " href="{{ route('discount.index') }}"><i class="material-icons dp48">local_offer</i><span class="menu-title" data-i18n="User Profile">{{ __('customer.discount.discount') }}</span></a>
-        </li>
+{{--        <li class="bold"><a class="waves-effect waves-cyan " href="{{ route('discount.index') }}"><i class="material-icons dp48">local_offer</i><span class="menu-title" data-i18n="User Profile">{{ __('customer.discount.discount') }}</span></a>--}}
+{{--        </li>--}}
 
         <li class="bold"><a class="waves-effect waves-cyan " href="{{ route('notification.index') }}"><i class="material-icons dp48">notifications_active</i><span class="menu-title" data-i18n="User Profile">{{ __('customer.notification.notification') }}</span></a>
         </li>
@@ -60,6 +60,9 @@
         </li>
 
         <li class="bold"><a class="waves-effect waves-cyan " href="{{ route('seasonpart-form.index') }}"><i class="material-icons">ac_unit</i><span class="menu-title" data-i18n="User Profile">Season Part Sorting</span></a>
+        </li>
+
+        <li class="bold"><a class="waves-effect waves-cyan " href="{{ route('user.index') }}"><i class="material-icons">people</i><span class="menu-title" data-i18n="User Profile">{{ __('customer.syst_users') }}</span></a>
         </li>
 
         <li  class="bold"><a class="waves-effect waves-cyan " href="{{ route('customer.logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><i class="material-icons">keyboard_tab</i>{{ __('Logout') }}</a></li>

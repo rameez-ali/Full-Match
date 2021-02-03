@@ -20,17 +20,30 @@
                             </div>
                             </a>
                         </div>
+{{--                        <div class="col s12 m6 l6 card-width">--}}
+{{--                            <a href="{{ route('order.index') }}">--}}
+{{--                                <div class="card row gradient-45deg-deep-orange-orange gradient-shadow white-text padding-4 mt-3 animate fadeRight">--}}
+{{--                                <div class="col s7 m7">--}}
+{{--                                    <i class="material-icons background-round mt-5 mb-5">add_shopping_cart</i>--}}
+{{--                                    <p>{{ __('customer.total_sold_plans') }}</p>--}}
+{{--                                </div>--}}
+{{--                                <div class="col s5 m5 right-align">--}}
+{{--                                    <h5 class="mb-0 white-text">{{ $data['sold_plans'] }}</h5>--}}
+{{--                                </div>--}}
+{{--                            </div>--}}
+{{--                            </a>--}}
+{{--                        </div>--}}
                         <div class="col s12 m6 l6 card-width">
-                            <a href="{{ route('order.index') }}">
-                                <div class="card row gradient-45deg-deep-orange-orange gradient-shadow white-text padding-4 mt-3 animate fadeRight">
-                                <div class="col s7 m7">
-                                    <i class="material-icons background-round mt-5 mb-5">add_shopping_cart</i>
-                                    <p>{{ __('customer.total_sold_plans') }}</p>
+                            <a href="{{ route('player-form.index') }}">
+                                <div class="card row gradient-45deg-deep-orange-orange gradient-shadow white-text padding-4 mt-3 animate fadeLeft">
+                                    <div class="col s7 m7">
+                                        <i class="material-icons background-round mt-5 mb-5">directions_run</i>
+                                        <p>{{ __('customer.total_players') }}</p>
+                                    </div>
+                                    <div class="col s5 m5 right-align">
+                                        <h5 class="mb-0 white-text">{{ $data['all_players'] }}</h5>
+                                    </div>
                                 </div>
-                                <div class="col s5 m5 right-align">
-                                    <h5 class="mb-0 white-text">{{ $data['sold_plans'] }}</h5>
-                                </div>
-                            </div>
                             </a>
                         </div>
                         <div class="col s12 m6 l6 card-width">
@@ -61,22 +74,10 @@
                         </div>
                     </div>
                     <div class="row" id="gradient-Analytics">
-                        <div class="col s12 m6 l6 card-width">
-                            <a href="{{ route('player-form.index') }}">
-                                <div class="card row gradient-45deg-deep-orange-orange gradient-shadow white-text padding-4 mt-3 animate fadeLeft">
-                                <div class="col s7 m7">
-                                    <i class="material-icons background-round mt-5 mb-5">directions_run</i>
-                                    <p>{{ __('customer.total_players') }}</p>
-                                </div>
-                                <div class="col s5 m5 right-align">
-                                    <h5 class="mb-0 white-text">{{ $data['all_players'] }}</h5>
-                                </div>
-                            </div>
-                            </a>
-                        </div>
+
                         <div class="col s12 m6 l6 card-width">
                             <a href="{{ route('club-form.index') }}">
-                            <div class="card row gradient-45deg-blue-indigo gradient-shadow white-text padding-4 mt-3 animate fadeLeft">
+                                <div class="card row gradient-45deg-amber-amber gradient-shadow white-text padding-4 mt-3 animate fadeLeft">
                                 <div class="col s7 m7">
                                     <i class="material-icons background-round mt-5 mb-5">airplay</i>
                                     <p>{{ __('customer.total_clubs') }}</p>
@@ -89,7 +90,7 @@
                         </div>
                         <div class="col s12 m6 l6 card-width">
                             <a href="{{ route('category-form.index') }}">
-                            <div class="card row gradient-45deg-purple-deep-orange gradient-shadow white-text padding-4 mt-3 animate fadeRight">
+                                <div class="card row gradient-45deg-red-pink gradient-shadow white-text padding-4 mt-3 animate fadeRight">
                                 <div class="col s7 m7">
                                     <i class="material-icons background-round mt-5 mb-5">video_library</i>
                                     <p>{{ __('customer.total_categories') }}</p>
@@ -100,19 +101,19 @@
                             </div>
                             </a>
                         </div>
-                        <div class="col s12 m6 l6 card-width">
-                            <a href="#">
-                                <div class="card row gradient-45deg-purple-deep-purple gradient-shadow white-text padding-4 mt-3 animate fadeRight">
-                                <div class="col s7 m7">
-                                    <i class="material-icons background-round mt-5 mb-5">not_interested</i>
-                                    <p>----</p>
-                                </div>
-                                <div class="col s5 m5 right-align">
-                                    <h5 class="mb-0 white-text">---</h5>
-                                </div>
-                            </div>
-                            </a>
-                        </div>
+{{--                        <div class="col s12 m6 l6 card-width">--}}
+{{--                            <a href="#">--}}
+{{--                                <div class="card row gradient-45deg-purple-deep-purple gradient-shadow white-text padding-4 mt-3 animate fadeRight">--}}
+{{--                                <div class="col s7 m7">--}}
+{{--                                    <i class="material-icons background-round mt-5 mb-5">not_interested</i>--}}
+{{--                                    <p>----</p>--}}
+{{--                                </div>--}}
+{{--                                <div class="col s5 m5 right-align">--}}
+{{--                                    <h5 class="mb-0 white-text">---</h5>--}}
+{{--                                </div>--}}
+{{--                            </div>--}}
+{{--                            </a>--}}
+{{--                        </div>--}}
                     </div>
                 </div>
                 <!--card stats end-->

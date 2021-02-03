@@ -34,15 +34,14 @@
                                                         @enderror
                                                     </div>
 
-{{--                                                    <div class="input-field col s12">--}}
-{{--                                                        <p class="mb-1">{{ __('customer.select_seasons') }}</p>--}}
-{{--                                                        <select id="seasons" class="select2 browser-default" name="seasons">--}}
-{{--                                                                <option value="0">none</option>--}}
-{{--                                                            @foreach($all_seasons as $season)--}}
-{{--                                                                <option value="{{$season->id}}" >{{$season->name}}</option>--}}
-{{--                                                            @endforeach--}}
-{{--                                                        </select>--}}
-{{--                                                    </div>--}}
+                                                    <div class="input-field col s12">
+                                                        <p class="mb-1">{{ __('customer.select_leagues') }}</p>
+                                                        <select class="max-length browser-default" multiple="multiple" name="league[]" id="league" required>
+                                                            @foreach($all_league as $league)
+                                                                <option value="{{$league->id}}" @if($edit) {{ in_array($league->id,$selected_league)? 'selected' : '' }} @endif >{{$league->name_en}}</option>
+                                                            @endforeach
+                                                        </select>
+                                                    </div>
 
                                                     <div class="input-field col s12">
                                                         <p class="mb-1">{{ __('customer.select_players') }}</p>
@@ -109,6 +108,12 @@
 
     $(function () {
 
+        $("#league").select2({
+            dropdownAutoWidth: true,
+            width: '100%',
+            maximumSelectionLength: 10,
+            placeholder: "Select maximum 10 items"
+        });
         $("#players").select2({
             dropdownAutoWidth: true,
             width: '100%',

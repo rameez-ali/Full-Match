@@ -2,6 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\User\CreateUserRequest;
+use App\Http\Requests\User\DeleteUserRequest;
+use App\Http\Requests\User\GetAllUsersRequest;
+use App\Http\Requests\User\GetUserRequest;
+use App\Http\Requests\User\UpdateUserRequest;
 use Illuminate\Http\Request;
 
 class UserRoleController extends Controller
@@ -11,9 +16,11 @@ class UserRoleController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(GetAllUsersRequest $request)
     {
-        //
+        $response = $request->handle();
+
+        return view('admin.user.index',['users' => $response] );
     }
 
     /**
@@ -21,9 +28,15 @@ class UserRoleController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(GetUserRequest $request)
     {
-        //
+        $request->id = 0;
+
+        $response = $request->handle();
+
+        $route = url('user');
+
+        return view('admin.user.form',['user' => $response, 'route' => $route, 'edit' => false ]);
     }
 
     /**
@@ -32,9 +45,11 @@ class UserRoleController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CreateUserRequest $request)
     {
-        //
+        $response = $request->handle();
+
+        return redirect()->route('user.index')->with('useraddsuccess','System User add Successfully');
     }
 
     /**
@@ -56,7 +71,15 @@ class UserRoleController extends Controller
      */
     public function edit($id)
     {
-        //
+        $request = new GetUserRequest();
+
+        $request->id = $id;
+
+        $response = $request->handle();
+
+        $route = route('user.update', ['user' => $response->id]);
+
+        return view('admin.user.form',['user' => $response, 'route' => $route , 'edit' => true ]);
     }
 
     /**
@@ -66,9 +89,13 @@ class UserRoleController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UpdateUserRequest $request, $id)
     {
-        //
+        $request->id = $id;
+
+        $response = $request->handle();
+
+        return redirect()->route('user.index')->with('usereditsuccess','System User Edit Successfully');
     }
 
     /**
@@ -79,6 +106,12 @@ class UserRoleController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $request = new DeleteUserRequest();
+
+        $request->id = $id;
+
+        $response = $request->handle();
+
+        return redirect()->route('user.index')->with('userdeletesuccess',' System User Delete Successfully');
     }
 }

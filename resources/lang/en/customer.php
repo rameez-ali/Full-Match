@@ -96,6 +96,16 @@ return [
         'edit' => 'Edit Home Page Management',
         'add' => 'Add Home Page Management',
     ],
+    'sysusers' => [
+        'edit' => 'Edit System User',
+        'add' => 'Add System User',
+    ],
+    'role' => [
+        'edit' => 'Edit Role',
+        'add' => 'Add Role',
+        'roles' => 'Roles',
+        'section_head' => 'Roles Section',
+    ],
     'name' => 'Name',
     'slug' => 'Slug',
     'decs' => 'Description',
@@ -143,8 +153,12 @@ return [
     'active' => 'Activate',
     'de-active' => 'Deactivate',
     'select_seasons' => 'Select Seasons',
+    'select_leagues' => 'Select Leagues',
     'select_clubs' => 'Select Clubs',
     'select_players' => 'Select Players',
     'select_videos' => 'Select Videos',
+    'syst_users' => 'System Users',
+    'syst_user_sec' => 'System Users Section',
+    'permission' => 'Permissions',
 
 ];

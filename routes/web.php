@@ -21,8 +21,8 @@ Route::get('/', function () {
 Route::group(['middleware' => ['auth']], function () {
     Route::get('dashboard', 'DashboardController@index')->name('dashboard');
     Route::resource('customer', 'CustomerController');
-    Route::resource('subscriptionplans','SubsPlanController');
-    Route::resource('discount','PromoCodeController');
+//    Route::resource('subscriptionplans','SubsPlanController');
+//    Route::resource('discount','PromoCodeController');
     Route::resource('category-form','ProjectCategoryViewController');
     Route::resource('genre-form','ProjectGenreViewController');
 
@@ -71,16 +71,20 @@ Route::group(['middleware' => ['auth']], function () {
 
 
     Route::post("addmore","SeasonPartSortingController@addMorePost");
-    Route::resource("order","OrderController");
+//    Route::resource("order","OrderController");
     Route::resource("home-page-manage","HomePageManageController");
     Route::post('discount/promo/verify','DiscountController@verify')->name('discount.promo.verify');
 
-
+    Route::resource("user","UserRoleController");
+    Route::resource("role","RoleController");
+    Route::get('role/permissions/{id}', 'RoleController@permission')->name('role.permission');
+    Route::post('role/permissions', 'RoleController@savePermissions')->name('save.role.permission');
+    Route::get('/home', 'DashboardController@index')->name('home');
 // Route::get('dropdownlist','DataController@getCountries');
 // Route::get('dropdownlist/getstates/{id}','DataController@getStates');
 });
 
-Route::get('/home', 'HomeController@index')->name('home');
+
 
 //Auth::routes();
 
@@ -99,9 +103,8 @@ Route::get('/home', 'HomeController@index')->name('home');
     Route::post('email/resend', 'Auth\VerificationController@resend')->name('customer.verification.resend');
 
 
-Route::get('blankpg', function () { return view('admin/blank/index');});
-Route::get('blankform', function () { return view('admin/blank/form');});
+//Route::get('blankpg', function () { return view('admin/blank/index');});
+//Route::get('blankform', function () { return view('admin/blank/form');});
 
-Route::get('userr', function () { return view('admin/customer/index');});
 
 

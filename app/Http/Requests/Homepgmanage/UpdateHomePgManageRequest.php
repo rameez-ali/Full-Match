@@ -34,15 +34,16 @@ class UpdateHomePgManageRequest extends FormRequest
         $this->validated();
 
         $params = $this->all();
+        $leagues = $params['league'];
         $players = $params['players'];
         $clubs = $params['clubs'];
         $videos = $params['videos'];
 
-        $forhomepgstatus = HomePageManagement::where('status' , 1)->first();
-
-        if (isset($params['status']) && $forhomepgstatus->id != $this->id ){
-            return false;
-        }
+//        $forhomepgstatus = HomePageManagement::where('status' , 1)->first();
+//
+//        if (isset($params['status']) && $forhomepgstatus->id != $this->id ){
+//            return false;
+//        }
         $homepgsection = HomePageManagement::find($this->id);
 
         $homepgsection->name = $params['name'];
@@ -51,6 +52,15 @@ class UpdateHomePgManageRequest extends FormRequest
         $homepgsection->save();
 
        HomePgItem::where('section_id',$this->id)->forceDelete();
+
+        foreach ($leagues as $league ){
+            $data = array(
+                'section_id'     =>   $homepgsection->id,
+                'item_name'     =>  'league',
+                'item_id'     =>  $league,
+            );
+            HomePgItem::create($data);
+        }
 
         foreach ($players as $player ){
             $data = array(
