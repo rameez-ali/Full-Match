@@ -10,15 +10,15 @@
                                 <div class="card-content">
                                     <h4 class="header mt-0">
                                         @if(!$edit)
-                                        {{ __('customer.customer.add_customer') }}
+                                        {{ __('customer.sysusers.add') }}
                                         @else
-                                        {{ __('customer.customer.edit_customer') }}
+                                        {{ __('customer.sysusers.edit') }}
                                         @endif
 
                                     </h4>
                                     <div class="row">
                                         <div class="col s12">
-                                            <form class="formValidate" id="formValidate" method="POST" action="{{ $route }}" enctype="multipart/form-data">
+                                            <form class="formValidate" id="formValidate" method="POST" action="{{ $route }}">
                                                 @csrf
                                                 @if($edit)
                                                     @method('PUT')
@@ -27,7 +27,7 @@
                                                 <div class="row">
                                                     <div class="input-field col s12">
                                                         <label for="uname">{{ __('customer.customer.name') }} *</label>
-                                                        <input id="uname" value="{{ old('name',$customer->name) }}" name="name" type="text"  data-error=".errorTxt1">
+                                                        <input id="uname" value="{{ old('name',$user->name) }}" name="name" type="text"  data-error=".errorTxt1">
                                                         <small class="errorTxt1"></small>
 
                                                             @error('uname')
@@ -39,7 +39,7 @@
                                                     </div>
                                                     <div class="input-field col s12">
                                                         <label for="cemail">{{ __('customer.customer.email') }}*</label>
-                                                        <input id="cemail" value="{{ old('email',$customer->email) }}" type="email" name="email" data-error=".errorTxt2">
+                                                        <input id="cemail" value="{{ old('email',$user->email) }}" type="email" name="email" data-error=".errorTxt2">
                                                         <small class="errorTxt2"></small>
 
                                                             @error('cemail')
@@ -49,35 +49,10 @@
                                                             @enderror
 
                                                     </div>
-                                                    <div class="input-field col s12">
-                                                        <label for="uphone">{{ __('customer.customer.mobile') }}</label>
-                                                        <input id="uphone" value="{{ old('phone',$customer->user->phone) }}" name="phone" type="number" data-error=".errorTxt5">
-                                                        <small class="errorTxt5"></small>
 
-                                                            @error('uphone')
-                                                            <span class="invalid-feedback" role="alert">
-                                                                    <strong>{{ $message }}</strong>
-                                                                </span>
-                                                            @enderror
-
-                                                    </div>
-
-                                                    <div class="input-field col s12">
-                                                        <p for="avatar">avatar</p>
-                                                        <input type="file" name="avatar" id="avatar" class="dropify mt-3" data-default-file="{{ $customer->user_image ? url($customer->user_image) : '' }}" data-max-file-size="10M" data-allowed-file-extensions="png jpg jpeg" @if(!$edit) required @endif />
-                                                        <small class="errorTxt5"></small>
-
-                                                            @error('avatar')
-                                                            <span class="invalid-feedback" role="alert">
-                                                                    <strong>{{ $message }}</strong>
-                                                                </span>
-                                                            @enderror
-
-                                                    </div>
-                                                    @if(!$edit)
                                                         <div class="input-field col s12">
                                                             <label for="password">{{ __('customer.customer.password') }} *</label>
-                                                            <input id="password" type="password" name="password" data-error=".errorTxt3">
+                                                            <input id="password" type="password" name="password" data-error=".errorTxt3" @if(!$edit) required @endif>
                                                             <small class="errorTxt3"></small>
 
                                                                 @error('password')
@@ -89,15 +64,14 @@
                                                         </div>
                                                         <div class="input-field col s12">
                                                         <label for="cpassword">{{ __('customer.customer.confirm_password') }} *</label>
-                                                        <input id="cpassword" type="password" name="cpassword" data-error=".errorTxt4">
+                                                        <input id="cpassword" type="password" name="cpassword" data-error=".errorTxt4" @if(!$edit) required @endif>
                                                         <small class="errorTxt4"></small>
                                                     </div>
-                                                    @endif
 
                                                     @if($edit)
                                                     <div class="input-field col s6">
                                                         <label>
-                                                            <input type="checkbox" {{ $customer->user->status == 1 ? 'checked' : '' }} name="status" id="customer-status" />
+                                                            <input type="checkbox" {{ $user->status == 1 ? 'checked' : '' }} name="status" id="customer-status" />
                                                             <span for="customer-status" >{{ __('customer.customer.block_customer') }}</span>
                                                         </label>
                                                     </div>
@@ -122,8 +96,6 @@
 @endsection
 @section('scripts')
     <script src={{ asset('app-assets/vendors/jquery-validation/jquery.validate.min.js') }}></script>
-    <script src={{ asset('app-assets/js/scripts/form-file-uploads.js') }}></script>
-    <script src={{ asset('app-assets/vendors/dropify/js/dropify.min.js') }}></script>
     <script>
         /*
      * Form Validation
@@ -150,17 +122,11 @@
                         email: true
                     },
                     password: {
-                        required: true,
                         minlength: 8
                     },
                     cpassword: {
-                        required: true,
                         minlength: 8,
                         equalTo: "#password"
-                    },
-                    phone: {
-                        required: false,
-                        minlength: 8,
                     },
 
                 },

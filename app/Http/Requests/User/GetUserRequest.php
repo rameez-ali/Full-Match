@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\User;
 
+use App\User;
 use Illuminate\Foundation\Http\FormRequest;
 
 class GetUserRequest extends FormRequest
@@ -13,7 +14,7 @@ class GetUserRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -26,5 +27,10 @@ class GetUserRequest extends FormRequest
         return [
             //
         ];
+    }
+    public function handle(){
+
+        return User::findOrNew($this->id);
+
     }
 }

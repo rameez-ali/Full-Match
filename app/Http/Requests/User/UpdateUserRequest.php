@@ -2,7 +2,9 @@
 
 namespace App\Http\Requests\User;
 
+use App\User;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Hash;
 
 class UpdateUserRequest extends FormRequest
 {
@@ -13,7 +15,7 @@ class UpdateUserRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +26,28 @@ class UpdateUserRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'name' => ['required', 'string', 'max:255'],
+//            'email' => ['required', 'string', 'email'],
         ];
+    }
+    public function handle(){
+
+        $this->validated();
+
+        $params = $this->all();
+
+        $user = User::find($this->id);
+
+        $user->name = $params['name'];
+        $user->email = $params['email'];
+        $user->status =isset($params['status']) ? 1  : 2; //status 1 for block by admin , 2 for unblock ,or active .
+
+        if (isset($params['password'])){
+            $user->password = Hash::make($params['password']);
+        }
+
+        $user->save();
+
+        return true;
     }
 }

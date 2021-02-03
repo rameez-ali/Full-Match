@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\User;
 
+use App\User;
 use Illuminate\Foundation\Http\FormRequest;
 
 class GetAllUsersRequest extends FormRequest
@@ -26,5 +27,10 @@ class GetAllUsersRequest extends FormRequest
         return [
             //
         ];
+    }
+    public function handle(){
+
+        return User::where('deleted_at',null)->where('is_customer',3)->get();
+
     }
 }

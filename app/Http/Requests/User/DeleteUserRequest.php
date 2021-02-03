@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\User;
 
+use App\User;
 use Illuminate\Foundation\Http\FormRequest;
 
 class DeleteUserRequest extends FormRequest
@@ -13,7 +14,7 @@ class DeleteUserRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -26,5 +27,13 @@ class DeleteUserRequest extends FormRequest
         return [
             //
         ];
+    }
+    public function handle(){
+
+        $User = User::find($this->id);
+
+        $User->delete();
+
+        return true;
     }
 }

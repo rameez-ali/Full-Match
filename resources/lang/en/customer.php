@@ -96,6 +96,10 @@ return [
         'edit' => 'Edit Home Page Management',
         'add' => 'Add Home Page Management',
     ],
+    'sysusers' => [
+        'edit' => 'Edit System User',
+        'add' => 'Add System User',
+    ],
     'name' => 'Name',
     'slug' => 'Slug',
     'decs' => 'Description',
@@ -148,6 +152,6 @@ return [
     'select_players' => 'Select Players',
     'select_videos' => 'Select Videos',
     'syst_users' => 'System Users',
-    'syst_user_sec' => 'System User Section',
+    'syst_user_sec' => 'System Users Section',
 
 ];
