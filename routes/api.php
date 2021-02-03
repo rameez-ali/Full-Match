@@ -86,7 +86,6 @@ Route::group(['middleware' => 'auth:api'], function(){
     Route::get('logout', [ApiAuthController::class , 'logout']);
     Route::post('/customer-edit', [CustomerController::class , 'edit']);
     Route::post('/customer-update/{id}', [CustomerController::class , 'update'])->name('customer.profupdate');;
-    Route::get('/category/{id}', [CategoryController::class , 'getcategoryinfo']);
 });
 Route::post('fogetpass', [CustomerController::class , 'forgotpass']);
 //Customer Auth Routes
@@ -96,11 +95,12 @@ Route::get('/search/{string}', [SearchController::class , 'search']);
 Route::get('/videouserid', [WishController::class , 'wishlist']);
 
 
-
+Route::get('/category/{id}', [CategoryController::class , 'getcategoryinfo']);
+Route::post('/categoryinfo/{category_id}/{genre_id}', [CategoryController::class , 'getcategorygenreinfo']);
 
 
 Route::get('/searchclub/{string}', [SearchController::class , 'searchclub']);
 Route::get('/searchplayer/{string}', [SearchController::class , 'searchplayer']);
 
-Route::get('/category', [CategoryController::class , 'gethomepageinfo']);
+//Route::get('/category', [CategoryController::class , 'gethomepageinfo1']);
 

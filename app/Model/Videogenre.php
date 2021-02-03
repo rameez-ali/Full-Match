@@ -7,6 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 class Videogenre extends Model
 {
      protected $fillable = [
-        'video_id','genre_id','deleted_at',
+        'video_id','genre_id','category_id','deleted_at',
     ];
 }
