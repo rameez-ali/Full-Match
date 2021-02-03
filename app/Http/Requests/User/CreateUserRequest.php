@@ -45,6 +45,7 @@ class CreateUserRequest extends FormRequest
         $user->is_customer = 3;
 
         $user->save();
+        $user->assign($params['roles']);
         return true;
     }
 }

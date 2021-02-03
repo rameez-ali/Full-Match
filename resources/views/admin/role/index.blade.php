@@ -50,7 +50,7 @@
                             <div class="card animate fadeUp">
                                 <div class="card-content">
                                     <h4 class="header mt-0">
-                                        {{ __('customer.syst_user_sec') }}
+                                        {{ __('customer.role.section_head') }}
                                         <a href="{{ route('role.create') }}" class="waves-effect waves-light btn gradient-45deg-purple-deep-orange gradient-shadow right"> {{ __('customer.customer.add') }}</a>
                                     </h4>
                                     <div class="row">
