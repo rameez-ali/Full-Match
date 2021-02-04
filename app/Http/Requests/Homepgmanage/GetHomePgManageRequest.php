@@ -14,7 +14,7 @@ class GetHomePgManageRequest extends FormRequest
      */
     public function authorize()
     {
-        return true;
+        return Bouncer::can('view-homepg-manage');
     }
 
     /**

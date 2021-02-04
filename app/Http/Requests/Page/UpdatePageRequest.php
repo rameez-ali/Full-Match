@@ -4,6 +4,7 @@ namespace App\Http\Requests\Page;
 
 use App\Model\Page;
 use Illuminate\Foundation\Http\FormRequest;
+use Bouncer;
 
 class UpdatePageRequest extends FormRequest
 {
@@ -14,7 +15,7 @@ class UpdatePageRequest extends FormRequest
      */
     public function authorize()
     {
-        return true;
+        return Bouncer::can('edit-cmspage');
     }
 
     /**

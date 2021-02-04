@@ -61,7 +61,9 @@
                                                 <th>{{ __('customer.id') }}</th>
                                                 <th>{{ __('customer.title') }}</th>
                                                 <th>{{ __('customer.status') }}</th>
+                                                @can('edit-homepg-manage')
                                                 <th>{{ __('customer.action') }}</th>
+                                                @endcan
                                             </tr>
                                             </thead>
                                             <tbody>
@@ -74,10 +76,12 @@
                                                     @elseif($homepagemanage->status == 0)
                                                         <td>{{ __('customer.de-active') }}</td>
                                                     @endif
+                                                    @can('edit-homepg-manage')
                                                     <td>
                                                         <a class="mb-5 btn waves-effect waves-light gradient-45deg-purple-deep-orange" href="{{ route('home-page-manage.edit', $homepagemanage->id ) }}">{{ __('customer.customer.edit') }}</a>
 {{--                                                        <a class="mb-5 btn waves-effect waves-light gradient-45deg-amber-amber" onclick="deletePlan({{ $homepagemanage->id }})" href="#">{{ __('customer.delete') }}</a>--}}
                                                     </td>
+                                                    @endcan
                                                 </tr>
                                             @endforeach
                                             </tbody>
@@ -86,7 +90,9 @@
                                                 <th>{{ __('customer.id') }}</th>
                                                 <th>{{ __('customer.title') }}</th>
                                                 <th>{{ __('customer.status') }}</th>
-                                                <th>{{ __('customer.action') }}</th>
+                                                @can('edit-homepg-manage')
+                                                    <th>{{ __('customer.action') }}</th>
+                                                @endcan
                                             </tr>
                                             </tfoot>
                                         </table>

@@ -15,7 +15,7 @@ class UpdateHomePgManageRequest extends FormRequest
      */
     public function authorize()
     {
-        return true;
+        return Bouncer::can('edit-homepg-manage');
     }
 
     /**

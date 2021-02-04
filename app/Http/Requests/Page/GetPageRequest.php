@@ -4,6 +4,7 @@ namespace App\Http\Requests\Page;
 
 use App\Model\Page;
 use Illuminate\Foundation\Http\FormRequest;
+use Bouncer;
 
 class GetPageRequest extends FormRequest
 {
@@ -14,7 +15,7 @@ class GetPageRequest extends FormRequest
      */
     public function authorize()
     {
-        return true;
+        return Bouncer::can('view-cmspage');
     }
 
     /**

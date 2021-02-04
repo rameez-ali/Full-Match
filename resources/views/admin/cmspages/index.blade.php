@@ -31,7 +31,9 @@
                                                 <th>{{ __('customer.name') }}</th>
 {{--                                                <th>{{ __('customer.slug') }}</th>--}}
 {{--                                                <th>{{ __('customer.decs') }}</th>--}}
-                                                <th>{{ __('customer.action') }}</th>
+                                                @can('edit-cmspage')
+                                                    <th>{{ __('customer.action') }}</th>
+                                                @endcan
                                             </tr>
                                             </thead>
                                             <tbody>
@@ -40,9 +42,11 @@
                                                     <td>{{ $page->name }}</td>
 {{--                                                    <td>{{ $page->slug }}</td>--}}
 {{--                                                    <td>{{ $page->active }}</td>--}}
+                                                    @can('edit-cmspage')
                                                     <td>
                                                         <a class="mb-5 mr-2 btn waves-effect waves-light gradient-45deg-purple-deep-orange" href="{{ route('page.edit',[ 'page' => $page->id ]) }}">{{ __('customer.customer.edit') }}</a>
                                                     </td>
+                                                    @endcan
                                                 </tr>
                                             @endforeach
                                             </tbody>
@@ -51,7 +55,9 @@
                                                 <th>{{ __('customer.name') }}</th>
 {{--                                                <th>{{ __('customer.slug') }}</th>--}}
 {{--                                                <th>{{ __('customer.decs') }}</th>--}}
+                                                @can('edit-cmspage')
                                                 <th>{{ __('customer.action') }}</th>
+                                                @endcan
                                             </tr>
                                             </tfoot>
                                         </table>
