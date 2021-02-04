@@ -4,6 +4,7 @@ namespace App\Http\Requests\Homepgmanage;
 
 use App\Model\HomePageManagement;
 use Illuminate\Foundation\Http\FormRequest;
+use Bouncer;
 
 class GetHomePgManageRequest extends FormRequest
 {
