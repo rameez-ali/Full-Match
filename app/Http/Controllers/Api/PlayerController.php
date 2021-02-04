@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Model\Category;
 use App\Model\Player;
 use App\Model\Videoplayer;
+use \stdClass;
 
 
 class PlayerController extends Controller
@@ -23,7 +24,7 @@ class PlayerController extends Controller
 
     public function players()
     {
-
+        $obj = new stdClass;
      $array = array();
 
      $players = Player::all();
@@ -45,7 +46,9 @@ class PlayerController extends Controller
                 $array[$k]['sorting'] = $v->player_sorting;
 
             }
-            return response()->json(['success' => true, 'status' => $this->successStatus, 'message' => 'Player found.', 'data' => $array]);
+             $obj->Heading = "All Clubs";
+             $obj->Content = $array;
+            return response()->json(['success' => true, 'status' => $this->successStatus, 'message' => 'Player found.', 'data' => $obj]);
 
         }
 

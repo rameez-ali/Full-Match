@@ -49,8 +49,8 @@ public $HTTP_NOT_FOUND = 404;
                 $array[$k]['deleted_at'] = $v->deleted_at;
 
             }
-            $obj->Club_heading = "All Clubs";
-            $obj->All_clubs = $array;
+            $obj->Heading = "All Clubs";
+            $obj->Content = $array;
             return response()->json(['success' => true, 'status' => $this->successStatus, 'message' => 'Club found.', 'data' => $obj]);
 
         }else{
