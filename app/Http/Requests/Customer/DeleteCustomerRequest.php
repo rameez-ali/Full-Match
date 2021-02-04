@@ -4,6 +4,7 @@ namespace App\Http\Requests\Customer;
 
 use App\User;
 use Illuminate\Foundation\Http\FormRequest;
+use Bouncer;
 
 class DeleteCustomerRequest extends FormRequest
 {
@@ -14,7 +15,7 @@ class DeleteCustomerRequest extends FormRequest
      */
     public function authorize()
     {
-        return true;
+        return Bouncer::can('delete-customer');
     }
 
     /**

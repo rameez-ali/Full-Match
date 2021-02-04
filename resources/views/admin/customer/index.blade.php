@@ -41,7 +41,9 @@
                                 <div class="card-content">
                                     <h4 class="header mt-0">
                                         {{ __('customer.customer.customer_section') }}
-                                        <a href="{{ route('customer.create') }}" class="waves-effect waves-light btn gradient-45deg-purple-deep-orange gradient-shadow right"> {{ __('customer.customer.add') }}</a>
+                                        @can('add-customer')
+                                            <a href="{{ route('customer.create') }}" class="waves-effect waves-light btn gradient-45deg-purple-deep-orange gradient-shadow right"> {{ __('customer.customer.add') }}</a>
+                                        @endcan
                                     </h4>
                                     <div class="row">
                                         <div class="col s12">
@@ -52,8 +54,10 @@
                                                     <th>{{ __('customer.customer.name') }}</th>
                                                     <th>{{ __('customer.customer.email') }}</th>
                                                     <th>{{ __('customer.customer.mobile') }}</th>
-                                                    <th>{{ __('customer.customer.active_subscription_plan') }}</th>
+{{--                                                    <th>{{ __('customer.customer.active_subscription_plan') }}</th>--}}
+                                                    @can('edit-customer')
                                                     <th>{{ __('customer.customer.reset_password') }}</th>
+                                                    @endcan
                                                     <th>{{ __('customer.customer.action') }}</th>
                                                 </tr>
                                                 </thead>
@@ -65,12 +69,18 @@
                                                         <td>{{ $customer->name }}</td>
                                                         <td>{{ $customer->email }}</td>
                                                         <td>{{ $customer->phone }}</td>
-                                                        <td>plan</td>
+{{--                                                        <td>plan</td>--}}
+                                                        @can('edit-customer')
                                                         <td><a class="mb-6 btn waves-effect waves-light gradient-45deg-red-pink" onclick="resetCustomerPassword('{{ $customer->email }}')">Reset Link</a></td>
+                                                        @endcan
                                                         <td>
-                                                            <a class="mb-5 btn waves-effect waves-light gradient-45deg-light-blue-cyan" href="#">{{ __('customer.customer.view_billing') }}</a> <br>
+{{--                                                            <a class="mb-5 btn waves-effect waves-light gradient-45deg-light-blue-cyan" href="#">{{ __('customer.customer.view_billing') }}</a> <br>--}}
+                                                            @can('edit-customer')
                                                             <a class="mb-5 mr-2 btn waves-effect waves-light gradient-45deg-purple-deep-orange" href="{{ route('customer.edit',[ 'customer' => $customer->id ]) }}">{{ __('customer.customer.edit') }}</a>
+                                                            @endcan
+                                                            @can('delete-customer')
                                                             <a class="mb-5 btn waves-effect waves-light gradient-45deg-amber-amber" onclick="deleteCustomer({{ $customer->user_id }})" href="#">{{ __('customer.customer.delete') }}</a>
+                                                            @endcan
                                                         </td>
                                                     </tr>
                                                 @endforeach
@@ -81,8 +91,10 @@
                                                     <th>{{ __('customer.customer.name') }}</th>
                                                     <th>{{ __('customer.customer.email') }}</th>
                                                     <th>{{ __('customer.customer.mobile') }}</th>
-                                                    <th>{{ __('customer.customer.active_subscription_plan') }}</th>
-                                                    <th>{{ __('customer.customer.reset_password') }}</th>
+{{--                                                    <th>{{ __('customer.customer.active_subscription_plan') }}</th>--}}
+                                                    @can('edit-customer')
+                                                        <th>{{ __('customer.customer.reset_password') }}</th>
+                                                    @endcan
                                                     <th>{{ __('customer.customer.action') }}</th>
                                                 </tr>
                                                 </tfoot>

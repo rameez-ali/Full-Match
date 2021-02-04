@@ -4,69 +4,77 @@
     <div class="brand-sidebar">
         <h1 class="logo-wrapper"><a class="brand-logo darken-1" href="{{ route('dashboard') }}"><img class="hide-on-med-and-down " src={{ asset('app-assets/images/logo/fm-logo.png') }} alt="materializelogo" /><img class="show-on-medium-and-down hide-on-med-and-up" src={{ asset('app-assets/images/logo/fm-logo.png') }} alt="materializelogo" /><span class="logo-text hide-on-med-and-down">Full Match</span></a><a class="navbar-toggler" href="#"><i class="material-icons">radio_button_checked</i></a></h1>
     </div>
+          @php
+              $menu = [
+                    [  'icon' => 'people' , 'label'  => __('customer.customer.customer_head') , 'route' => 'customer.index' , 'children' => [], 'permission' => 'view-customer' ],
+                    [  'icon' => 'settings' , 'label'  => __('customer.cmspage.cmspage') , 'route' => 'page.index' , 'children' => [], 'permission' => 'view-cmspage' ],
+
+                ];
+          @endphp
+
+
+
     <ul class="sidenav sidenav-collapsible leftside-navigation collapsible sidenav-fixed menu-shadow" id="slide-out" data-menu="menu-navigation" data-collapsible="menu-accordion">
-        <li class="bold"><a class="waves-effect waves-cyan " href="{{ route('customer.index') }}"><i class="material-icons dp48">people</i><span class="menu-title" data-i18n="User Profile">{{ __('customer.customer.customer_head') }}</span></a>
-        </li>
+        @foreach($menu as $item)
+            @php
+                $route = count($item['children']) > 0 ? 'JavaScript:void(0)' : route($item['route']);
+                $li_class = (Route::current()->getName() == $item['route']) ? 'active' : '';
+                $anchor_class = $li_class == 'active' ? 'active' : '';
 
-{{--        <li class="bold"><a class="waves-effect waves-cyan " href="{{ route('subscriptionplans.index') }}"><i class="material-icons dp48">subscriptions</i><span class="menu-title" data-i18n="User Profile">{{ __('customer.subsplan.subsplan_head') }}</span></a>--}}
-{{--        </li>--}}
+                if($li_class == '' && count($item['children']) > 0)
+                {
+                    $children_routes = array_column($item['children'],'route');
 
-        <li class="bold"><a class="waves-effect waves-cyan " href="{{ route('page.index') }}"><i class="material-icons dp48">settings</i><span class="menu-title" data-i18n="User Profile">{{ __('customer.cmspage.cmspage') }}</span></a>
-        </li>
+                    if(in_array(Route::current()->getName(),$children_routes)){
+                        $li_class = 'active';
+                    }
+                }
 
-        <li class="bold"><a class="waves-effect waves-cyan " href="{{ route('home-page-manage.index') }}"><i class="material-icons dp48">settings</i><span class="menu-title" data-i18n="User Profile">{{ __('customer.homepgmanage.homepg') }}</span></a>
-        </li>
+                $handler = '';
 
-{{--        <li class="bold"><a class="waves-effect waves-cyan " href="{{ route('order.index') }}"><i class="material-icons dp48">shopping_cart</i><span class="menu-title" data-i18n="User Profile">{{ __('customer.order.orders') }}</span></a>--}}
-{{--        </li>--}}
+                if(isset($item['handler'])){
+                    $handler = "onclick=";
+                    $handler .= $item['handler'];
+                    $route = 'JavaScript:void(0)';
+                }
 
-{{--        <li class="bold"><a class="waves-effect waves-cyan " href="{{ route('discount.index') }}"><i class="material-icons dp48">local_offer</i><span class="menu-title" data-i18n="User Profile">{{ __('customer.discount.discount') }}</span></a>--}}
-{{--        </li>--}}
+            @endphp
 
-        <li class="bold"><a class="waves-effect waves-cyan " href="{{ route('notification.index') }}"><i class="material-icons dp48">notifications_active</i><span class="menu-title" data-i18n="User Profile">{{ __('customer.notification.notification') }}</span></a>
-        </li>
+            @if(!isset($item['permission']) || (isset($item['permission']) && Bouncer::can($item['permission'])))
+                <li class="bold {{ $li_class }}">
+                    <a class="{{ count($item['children']) > 0 ? 'collapsible-header' : '' }} waves-effect waves-cyan {{ $anchor_class }}" href="{{ $route }}" {{ $handler }}   >
+                        <i class="material-icons">{{ $item['icon'] }}</i>
+                        <span class="menu-title" data-i18n="Dashboard">{{ $item['label'] }}</span>
+                    </a>
 
-        <li class="bold"><a class="waves-effect waves-cyan " href="{{ route('Contactus-form.index') }}"><i class="material-icons">add_location</i><span class="menu-title" data-i18n="User Profile">Contact Us</span></a>
-        </li>
+                    @if(count($item['children']) > 0)
 
-        <li class="bold"><a class="waves-effect waves-cyan " href="{{ route('contact-form.index') }}"><i class="material-icons">question_answer
-                </i><span class="menu-title" data-i18n="User Profile">Contact Queries</span></a>
-        </li>
+                        <div class="collapsible-body">
+                            <ul class="collapsible collapsible-sub" data-collapsible="accordion">
 
-        <li class="bold"><a class="waves-effect waves-cyan " href="{{ route('category-form.index') }}"><i class="material-icons">domain</i><span class="menu-title" data-i18n="User Profile">Category</span></a>
-        </li>
+                                @foreach($item['children'] as $child)
+                                    @php
+                                        $sub_li_class = (Route::current()->getName() == $child['route']) ? 'active' : '';
+                                    @endphp
 
-        <li class="bold"><a class="waves-effect waves-cyan " href="{{ route('genre-form.index') }}"><i class="material-icons">video_library</i><span class="menu-title" data-i18n="User Profile">Genre</span></a>
-        </li>
+                                    @if(!isset($child['permission']) || (isset($child['permission']) && Bouncer::can($child['permission'])))
+                                        <li class="{{ $sub_li_class }}" >
+                                            <a href="{{ route($child['route']) }}" class="{{ $sub_li_class }}" >
+                                                <i class="material-icons">{{ $child['icon'] }}</i>
+                                                <span data-i18n="List">{{ $child['label'] }}</span>
+                                            </a>
+                                        </li>
+                                    @endif
+                                @endforeach
 
-        <li class="bold"><a class="waves-effect waves-cyan " href="{{ route('player-form.index') }}"><i class="material-icons">directions_walk
-                </i><span class="menu-title" data-i18n="User Profile">Players</span></a>
-        </li>
+                            </ul>
+                        </div>
+                    @endif
+                </li>
+            @endif
 
-        <li class="bold"><a class="waves-effect waves-cyan " href="{{ route('club-form.index') }}"><i class="material-icons">border_all</i><span class="menu-title" data-i18n="User Profile">Club</span></a>
-        </li>
+        @endforeach
 
-        <li class="bold"><a class="waves-effect waves-cyan " href="{{ route('league-form.index') }}"><i class="material-icons">event</i><span class="menu-title" data-i18n="User Profile">League</span></a>
-        </li>
-
-        <li class="bold"><a class="waves-effect waves-cyan " href="{{ route('video-form.index') }}"><i class="material-icons">ondemand_video
-                </i><span class="menu-title" data-i18n="User Profile">Videos</span></a>
-        </li>
-
-        <li class="bold"><a class="waves-effect waves-cyan " href="{{ route('slider-form.index') }}"><i class="material-icons">slideshow</i><span class="menu-title" data-i18n="User Profile">Category Slider</span></a>
-        </li>
-
-        <li class="bold"><a class="waves-effect waves-cyan " href="{{ route('banner-form.index') }}"><i class="material-icons">announcement</i><span class="menu-title" data-i18n="User Profile">Advertisement Banner</span></a>
-        </li>
-
-        <li class="bold"><a class="waves-effect waves-cyan " href="{{ route('seasonpart-form.index') }}"><i class="material-icons">ac_unit</i><span class="menu-title" data-i18n="User Profile">Season Part Sorting</span></a>
-        </li>
-
-        <li class="bold"><a class="waves-effect waves-cyan " href="{{ route('user.index') }}"><i class="material-icons">people</i><span class="menu-title" data-i18n="User Profile">{{ __('customer.syst_users') }}</span></a>
-        </li>
-
-        <li class="bold"><a class="waves-effect waves-cyan " href="{{ route('role.index') }}"><i class="material-icons">people</i><span class="menu-title" data-i18n="User Profile">{{ __('customer.role.roles') }}</span></a>
-        </li>
 
         <li  class="bold"><a class="waves-effect waves-cyan " href="{{ route('customer.logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><i class="material-icons">keyboard_tab</i>{{ __('Logout') }}</a></li>
         <form id="logout-form" action="{{ route('customer.logout') }}" method="POST" class="d-none">

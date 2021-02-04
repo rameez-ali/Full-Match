@@ -3,6 +3,7 @@
 namespace App\Http\Requests\Customer;
 use App\customer;
 use Illuminate\Foundation\Http\FormRequest;
+use Bouncer;
 
 class GetAllCustomerRequest extends FormRequest
 {
@@ -13,7 +14,7 @@ class GetAllCustomerRequest extends FormRequest
      */
     public function authorize()
     {
-        return true;
+        return Bouncer::can('view-customer');
     }
 
     /**

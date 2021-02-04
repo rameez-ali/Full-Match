@@ -51,19 +51,26 @@
                                                     <th>{{ __('customer.customer.sequence_no') }}</th>
                                                     <th>{{ __('customer.customer.name') }}</th>
                                                     <th>{{ __('customer.customer.email') }}</th>
+                                                    <th>{{ __('customer.role.roles') }}</th>
                                                     <th>{{ __('customer.customer.action') }}</th>
                                                 </tr>
                                                 </thead>
                                                 <tbody>
+
                                                 @foreach($users as $user)
 
                                                     <tr>
                                                         <td>{{ $user->id }}</td>
                                                         <td>{{ $user->name }}</td>
                                                         <td>{{ $user->email }}</td>
+                                                        <td>{{ $user->getRoles()->first() }}</td>
                                                         <td>
                                                             <a class="mb-5 mr-2 btn waves-effect waves-light gradient-45deg-purple-deep-orange" href="{{ route('user.edit',[ 'user' => $user->id ]) }}">{{ __('customer.customer.edit') }}</a>
-                                                            <a class="mb-5 btn waves-effect waves-light gradient-45deg-amber-amber" onclick="deleteCustomer({{ $user->id }})" href="#">{{ __('customer.customer.delete') }}</a>
+                                                            @can('delete-user')
+                                                                @if(Auth::user()->id != $user->id || !Bouncer::is(Auth::user())->an('Admin'))
+                                                                    <a class="mb-5 btn waves-effect waves-light gradient-45deg-amber-amber" onclick="deleteCustomer({{ $user->id }})" href="#">{{ __('customer.customer.delete') }}</a>
+                                                                @endif
+                                                            @endcan
                                                         </td>
                                                     </tr>
                                                 @endforeach
@@ -73,6 +80,7 @@
                                                     <th>{{ __('customer.customer.sequence_no') }}</th>
                                                     <th>{{ __('customer.customer.name') }}</th>
                                                     <th>{{ __('customer.customer.email') }}</th>
+                                                    <th>{{ __('customer.role.roles') }}</th>
                                                     <th>{{ __('customer.customer.action') }}</th>
                                                 </tr>
                                                 </tfoot>
