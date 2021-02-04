@@ -5,6 +5,7 @@ namespace App\Http\Requests\Homepgmanage;
 use App\Model\HomePageManagement;
 use App\Model\HomePgItem;
 use Illuminate\Foundation\Http\FormRequest;
+use Bouncer;
 
 class UpdateHomePgManageRequest extends FormRequest
 {
