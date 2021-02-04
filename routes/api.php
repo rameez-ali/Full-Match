@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\CustomerController;
 use App\Http\Controllers\Api\ClubController;
 use App\Http\Controllers\Api\PlayerController;
+use App\Http\Controllers\Api\LeagueController;
 use App\Http\Controllers\Api\VideoController;
 use App\Http\Controllers\Api\SubsPlanController;
 use App\Http\Controllers\Api\ContactController;
@@ -43,6 +44,9 @@ Route::get('/clubsearch/{string}', [SearchController::class , 'searchclub']);
 Route::get('/players', [PlayerController::class , 'players']);
 Route::get('/player/{id}', [PlayerController::class , 'player']);
 Route::get('/playersearch/{string}', [SearchController::class , 'searchplayer']);
+
+Route::get('/leagues', [LeagueController::class , 'leagues']);
+Route::get('/league/{id}', [LeagueController::class , 'league']);
 
 Route::get('/customer/{id}', [CustomerController::class , 'show']);
 

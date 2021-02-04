@@ -81,7 +81,7 @@ class CategoryController extends Controller
         $banner_id = Adv_banner::select("id")->where('category_id',$id)->get();
 
         //getting genres id of that specific categories
-        $genre_id = Category_genre::select("genre_id")->where('category_id',$id)->get();
+        $genre_id = Videogenre::select("genre_id")->where('category_id',$id)->get();
 
         //getting videos id that are associated with that specific categories
         $videos_id = Video::select("id")->where('category_id',$id)->get();
