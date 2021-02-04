@@ -125,7 +125,7 @@ class HomePageManageController extends Controller
         $all_league = League::all();
         $all_players = Player::all();
         $all_clubs = Club::all();
-        $all_videos = Video::where('leagues_id',null)->get();
+        $all_videos = Video::where('season_id',null)->get();
 
         return view('admin.homepagemanage.form',[
             'homepagemanage' => $response,
