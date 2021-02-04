@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\ProjectCategory;
 use App\Model\Videoclub;
 use App\Model\Club;
+use \stdClass;
 
 
 
@@ -25,6 +26,7 @@ public $HTTP_NOT_FOUND = 404;
 
     public function clubs()
     {
+        $obj = new stdClass;
      $array = array();
 
      $clubs = Club::all();
@@ -47,7 +49,9 @@ public $HTTP_NOT_FOUND = 404;
                 $array[$k]['deleted_at'] = $v->deleted_at;
 
             }
-            return response()->json(['success' => true, 'status' => $this->successStatus, 'message' => 'Club found.', 'data' => $array]);
+            $obj->Club_heading = "All Clubs";
+            $obj->All_clubs = $array;
+            return response()->json(['success' => true, 'status' => $this->successStatus, 'message' => 'Club found.', 'data' => $obj]);
 
         }else{
             return response()->json(['error' => false, 'status' => $this->HTTP_NOT_FOUND, 'message' => 'No record found.', 'data' => []]);
