@@ -91,9 +91,9 @@
                                                 <tr>
                                                     <th>{{ __('customer.customer.sequence_no') }}</th>
                                                     <th>{{ __('customer.name') }}</th>
-{{--                                                    @can('assigned-permission')--}}
-{{--                                                        <th>{{ __('customer.permission') }}</th>--}}
-{{--                                                    @endcan--}}
+                                                    @can('assigned-permission')
+                                                        <th>{{ __('customer.permission') }}</th>
+                                                    @endcan
                                                     <th>{{ __('customer.customer.action') }}</th>
                                                 </tr>
                                                 </tfoot>
