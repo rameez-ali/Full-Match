@@ -41,7 +41,9 @@
                                 <div class="card-content">
                                     <h4 class="header mt-0">
                                         {{ __('customer.syst_user_sec') }}
-                                        <a href="{{ route('user.create') }}" class="waves-effect waves-light btn gradient-45deg-purple-deep-orange gradient-shadow right"> {{ __('customer.customer.add') }}</a>
+                                        @can('add-system-user')
+                                            <a href="{{ route('user.create') }}" class="waves-effect waves-light btn gradient-45deg-purple-deep-orange gradient-shadow right"> {{ __('customer.customer.add') }}</a>
+                                        @endcan
                                     </h4>
                                     <div class="row">
                                         <div class="col s12">
@@ -65,12 +67,14 @@
                                                         <td>{{ $user->email }}</td>
                                                         <td>{{ $user->getRoles()->first() }}</td>
                                                         <td>
+                                                            @can('delete-system-user')
                                                             <a class="mb-5 mr-2 btn waves-effect waves-light gradient-45deg-purple-deep-orange" href="{{ route('user.edit',[ 'user' => $user->id ]) }}">{{ __('customer.customer.edit') }}</a>
-                                                            @can('delete-user')
+                                                            @endcan
+                                                                @can('delete-system-user')
                                                                 @if(Auth::user()->id != $user->id || !Bouncer::is(Auth::user())->an('Admin'))
                                                                     <a class="mb-5 btn waves-effect waves-light gradient-45deg-amber-amber" onclick="deleteCustomer({{ $user->id }})" href="#">{{ __('customer.customer.delete') }}</a>
                                                                 @endif
-                                                            @endcan
+                                                                @endcan
                                                         </td>
                                                     </tr>
                                                 @endforeach

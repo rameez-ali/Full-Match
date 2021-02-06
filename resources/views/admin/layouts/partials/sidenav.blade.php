@@ -10,6 +10,7 @@
                     [  'icon' => 'settings' , 'label'  => __('customer.cmspage.cmspage') , 'route' => 'page.index' , 'children' => [], 'permission' => 'view-cmspage' ],
                     [  'icon' => 'settings' , 'label'  => __('customer.homepgmanage.homepg') , 'route' => 'home-page-manage.index' , 'children' => [], 'permission' => 'view-homepg-manage' ],
                     [  'icon' => 'notifications_active' , 'label'  => __('customer.notification.notification') , 'route' => 'notification.index' , 'children' => [], 'permission' => 'view-notify' ],
+                    [  'icon' => 'people' , 'label'  => __('customer.syst_users') , 'route' => 'user.index' , 'children' => [], 'permission' => 'view-system-user' ],
 
                 ];
           @endphp
