@@ -6,7 +6,6 @@ use App\customer;
 use App\User;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Hash;
-use Bouncer;
 
 class CreateCustomerRequest extends FormRequest
 {
@@ -17,7 +16,7 @@ class CreateCustomerRequest extends FormRequest
      */
     public function authorize()
     {
-        return Bouncer::can('add-customer');
+        return true;
     }
 
     /**
