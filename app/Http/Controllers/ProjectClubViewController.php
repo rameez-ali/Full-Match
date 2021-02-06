@@ -13,6 +13,14 @@ class ProjectClubViewController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    function __construct() {
+        $this->middleware('can:view-club', ['only' => ['index', 'show']]);
+        $this->middleware('can:add-club', ['only' => ['create', 'store']]);
+        $this->middleware('can:edit-club', ['only' => ['edit', 'update']]);
+        $this->middleware('can:delete-club', ['only' => ['destroy']]);
+    }
+
     public function index()
     {
         $club = Club::all();

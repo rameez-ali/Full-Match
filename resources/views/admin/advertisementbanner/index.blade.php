@@ -10,7 +10,9 @@
                             <div class="card-content">
                                 <h4 class="header mt-0">
                                     Advertisement Banner
+                                    @can('add-advbanner')
                                     <a href="{{ URL::route('banner-form.create') }}" class="waves-effect waves-light btn gradient-45deg-purple-deep-orange gradient-shadow right">Add</a>
+                                    @endcan
                                 </h4>
                                 <div class="row">
                                     <div class="col s12">
@@ -64,10 +66,14 @@
                                                     <td>{{$adv_banner->video_link}}</td>
                                                     <td><form action="{{ route('banner-form.destroy', $adv_banner->id)}}" method="post">
                                                             <a href="{{ url('adv_banner/'.$adv_banner->id)}}" class="dt-button buttons-excel buttons-html5 waves-effect waves-light btn gradient-45deg-purple-deep-orange gradient-shadow">Details</a>
+                                                            @can('edit-advbanner')
                                                             <a href="{{ route('banner-form.edit',$adv_banner->id)}}" class="dt-button buttons-excel buttons-html5 waves-effect waves-light btn gradient-45deg-purple-deep-orange gradient-shadow">Edit</a>
-                                                            {{ csrf_field() }}
+                                                            @endcan
+                                                                {{ csrf_field() }}
+                                                            @can('edit-advbanner')
                                                             @method('DELETE')
                                                             <button onclick="return window.confirm('Are you sure you want to delete this record?');" class="dt-button buttons-excel buttons-html5 waves-effect waves-light btn gradient-45deg-purple-deep-orange gradient-shadow" type="submit">Delete</button>
+                                                            @endcan
                                                         </form>
                                                     </td>
                                                 </tr>

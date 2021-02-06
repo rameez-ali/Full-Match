@@ -10,7 +10,9 @@
                             <div class="card-content">
                                 <h4 class="header mt-0">
                                     LEAGUES
+                                    @can('add-league')
                                     <a href="{{ URL::route('league-form.create') }}" class="waves-effect waves-light btn gradient-45deg-purple-deep-orange gradient-shadow right">Add</a>
+                                    @endcan
                                 </h4>
                                 <div class="row">
                                     <div class="col s12">
@@ -67,11 +69,17 @@
                                                     <td>{{ $project->league_promo_video }}</td>
                                                     <td><img src="{{ asset('app-assets/images/league/'.$project->league_profile_image)}}" style="width:50px;height:50px;" /></td>
                                                     <td><form action="{{ route('league-form.destroy', $project->id)}}" method="post">
+                                                            @can('view-leaguedetail')
                                                             <a href="{{ url('league/'.$project->id)}}" class="dt-button buttons-excel buttons-html5 waves-effect waves-light btn gradient-45deg-purple-deep-orange gradient-shadow">Details</a>
-                                                            <a href="{{ route('league-form.edit',$project->id)}}" class="dt-button buttons-excel buttons-html5 waves-effect waves-light btn gradient-45deg-purple-deep-orange gradient-shadow">Edit</a>
-                                                            {{ csrf_field() }}
+                                                            @endcan
+                                                                @can('edit-league')
+                                                                <a href="{{ route('league-form.edit',$project->id)}}" class="dt-button buttons-excel buttons-html5 waves-effect waves-light btn gradient-45deg-purple-deep-orange gradient-shadow">Edit</a>
+                                                            @endcan
+                                                                {{ csrf_field() }}
+                                                                @can('delete-video')
                                                             @method('DELETE')
                                                             <button onclick="return window.confirm('Are you sure you want to delete this record?');" class="dt-button buttons-excel buttons-html5 waves-effect waves-light btn gradient-45deg-purple-deep-orange gradient-shadow" type="submit">Delete</button>
+                                                            @endcan
                                                         </form>
                                                     </td>
                                                 </tr>

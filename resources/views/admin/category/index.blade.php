@@ -10,7 +10,9 @@
                                 <div class="card-content">
                                     <h4 class="header mt-0">
                                         Category
+                                        @can('add-category')
                                         <a href="{{ URL::route('category-form.create') }}" class="waves-effect waves-light btn gradient-45deg-purple-deep-orange gradient-shadow right">Add</a>
+                                        @endcan
                                     </h4>
                                     <div class="row">
                                         <div class="col s12">
@@ -64,10 +66,14 @@
                                                 <td><img src="{{ asset('app-assets/images/category/'.$category->category_image)}}" style="width:50px;height:50px;" /></td>
                                                 <td>{{ $category->category_sorting }}</td>
                                                 <td><form action="{{ route('category-form.destroy', $category->id)}}"  method="post">
-                                                    <a href="{{ route('category-form.edit',$category->id)}}" class="dt-button buttons-excel buttons-html5 waves-effect waves-light btn gradient-45deg-purple-deep-orange gradient-shadow">Edit</a>
+                                                @can('edit-category')
+                                                <a href="{{ route('category-form.edit',$category->id)}}" class="dt-button buttons-excel buttons-html5 waves-effect waves-light btn gradient-45deg-purple-deep-orange gradient-shadow">Edit</a>
+                                                @endcan
                                                 {{ csrf_field() }}
+                                                @can('delete-category')
                                                 @method('DELETE')
                                                 <button onclick="return window.confirm('Are you sure you want to delete this record?');" class="dt-button buttons-excel buttons-html5 waves-effect waves-light btn gradient-45deg-purple-deep-orange gradient-shadow" type="submit">Delete</button>
+                                                @endcan
                                                 </form></td>
                                                 </tr>
                                                 @endforeach

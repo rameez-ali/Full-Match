@@ -42,8 +42,10 @@
                                                     <td>{{ $fullmatchcontact->call_us}}</td>
                                                     <td>{{ $fullmatchcontact->email_us}}</td>
                                                     <td>{{ $fullmatchcontact->address_en}}</td>
+                                                    @can('edit-contactus')
                                                     <td><a href="{{ route('Contactus-form.edit',$fullmatchcontact->id)}}" class="dt-button buttons-excel buttons-html5 waves-effect waves-light btn gradient-45deg-purple-deep-orange gradient-shadow">Edit</a>
                                                         </td>
+                                                @endcan
                                             @endforeach
                                             </tbody>
 

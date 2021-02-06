@@ -16,6 +16,14 @@ class ProjectLeagueViewController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    function __construct() {
+        $this->middleware('can:view-league', ['only' => ['index', 'show']]);
+        $this->middleware('can:add-league', ['only' => ['create', 'store']]);
+        $this->middleware('can:edit-league', ['only' => ['edit', 'update']]);
+        $this->middleware('can:delete-league', ['only' => ['destroy']]);
+    }
+
     public function index()
     {
         $project = League::all();

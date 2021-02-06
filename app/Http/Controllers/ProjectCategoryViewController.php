@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Model\Category;
 use App\Model\Video_genre;
 use App\Model\Category_genre;
+use Bouncer;
 use DB;
 
 class ProjectCategoryViewController extends Controller
@@ -15,8 +16,17 @@ class ProjectCategoryViewController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    function __construct() {
+        $this->middleware('can:view-category', ['only' => ['index', 'show']]);
+        $this->middleware('can:add-category', ['only' => ['create', 'store']]);
+        $this->middleware('can:edit-category', ['only' => ['edit', 'update']]);
+        $this->middleware('can:delete-category', ['only' => ['destroy']]);
+    }
+
     public function index()
     {
+
           $category = Category::all();
           return view('admin.category.index', compact('category'));
     }
