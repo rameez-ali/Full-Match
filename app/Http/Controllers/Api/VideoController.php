@@ -79,14 +79,15 @@ class VideoController extends Controller
         $videos = Video::where('id', $id)->get();
 
        //Getting league_id of that specific video
-        $leagues_id_collection = Video::select('leagues_id')->where('id', $id)->get()->first();
+        $leagues_id_collection = Video::select('season_id')->where('id', $id)->get()->first();
+
 
         //Getting Category_id of that specific video
         $category_id_collection = Video::select('category_id')->where('id', $id)->get()->first();
 
         //Converting collection to string
-        if(isset($leagues_id_collection->leagues_id)){
-        $league_id = $leagues_id_collection->leagues_id;
+        if(isset($leagues_id_collection->season_id)){
+        $league_id = $leagues_id_collection->season_id;
         }
 
         //Converting collection to string
@@ -108,7 +109,7 @@ class VideoController extends Controller
                 $latest_videos_array[$k]['title_ar'] = $v->title_ar;
                 if($v->video_link==null)
                 {
-                    $season_id = Video::select('leagues_id')->where('id', $v->id)->first();
+                    $season_id = Video::select('season_id')->where('id', $v->id)->first();
                     $league_id = Season::select('league_id')->where('id', $season_id)->first();
                     $video_link=League::select('video_link')->where('id', $league_id)->first();
                     $latest_videos_array[$k]['video_link'] = $video_link;
@@ -129,7 +130,7 @@ class VideoController extends Controller
         //if league is assocaited
        if(isset($league_id))
        {
-           $videos = Video::where('leagues_id', $league_id)->get();
+           $videos = Video::where('season_id', $league_id)->get();
            foreach ($videos as $k => $v) {
 
                $video_img = str_replace('\\', '/', asset('app-assets/images/video/' . $v->video_img));
