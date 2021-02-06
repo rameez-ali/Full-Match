@@ -5,7 +5,6 @@ namespace App\Http\Requests\User;
 use App\User;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Hash;
-use Bouncer;
 
 class UpdateUserRequest extends FormRequest
 {

@@ -4,6 +4,7 @@ namespace App\Http\Requests\Role;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Silber\Bouncer\Database\Role;
+use Bouncer;
 
 class UpdateRoleRequest extends FormRequest
 {
@@ -14,7 +15,7 @@ class UpdateRoleRequest extends FormRequest
      */
     public function authorize()
     {
-        return true;
+        return Bouncer::can('edit-role');
     }
 
     /**

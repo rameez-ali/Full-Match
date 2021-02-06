@@ -51,7 +51,9 @@
                                 <div class="card-content">
                                     <h4 class="header mt-0">
                                         {{ __('customer.role.section_head') }}
+                                        @can('add-role')
                                         <a href="{{ route('role.create') }}" class="waves-effect waves-light btn gradient-45deg-purple-deep-orange gradient-shadow right"> {{ __('customer.customer.add') }}</a>
+                                        @endcan
                                     </h4>
                                     <div class="row">
                                         <div class="col s12">
@@ -60,7 +62,9 @@
                                                 <tr>
                                                     <th>{{ __('customer.customer.sequence_no') }}</th>
                                                     <th>{{ __('customer.name') }}</th>
-                                                    <th>{{ __('customer.permission') }}</th>
+                                                    @can('assigned-permission')
+                                                        <th>{{ __('customer.permission') }}</th>
+                                                    @endcan
                                                     <th>{{ __('customer.customer.action') }}</th>
                                                 </tr>
                                                 </thead>
@@ -69,10 +73,16 @@
                                                     <tr>
                                                         <td>{{ $role->id }}</td>
                                                         <td>{{ $role->title }}</td>
-                                                        <td>  <a class="mb-5 mr-2 btn waves-effect waves-light gradient-45deg-purple-deep-orange" href="{{ route('role.permission',['id' => $role->id ]) }}">{{ __('customer.permission') }}</a></td>
+                                                        @can('assigned-permission')
+                                                            <td>  <a class="mb-5 mr-2 btn waves-effect waves-light gradient-45deg-purple-deep-orange" href="{{ route('role.permission',['id' => $role->id ]) }}">{{ __('customer.permission') }}</a></td>
+                                                        @endcan
                                                         <td>
-                                                            <a class="mb-5 mr-2 btn waves-effect waves-light gradient-45deg-purple-deep-orange" href="{{ route('role.edit',[ 'role' => $role->id ]) }}">{{ __('customer.customer.edit') }}</a>
-                                                            <a class="mb-5 btn waves-effect waves-light gradient-45deg-amber-amber" onclick="deleteCustomer({{ $role->id }})" href="#">{{ __('customer.customer.delete') }}</a>
+                                                            @can('edit-role')
+                                                                <a class="mb-5 mr-2 btn waves-effect waves-light gradient-45deg-purple-deep-orange" href="{{ route('role.edit',[ 'role' => $role->id ]) }}">{{ __('customer.customer.edit') }}</a>
+                                                            @endcan
+                                                            @can('delete-role')
+                                                                <a class="mb-5 btn waves-effect waves-light gradient-45deg-amber-amber" onclick="deleteCustomer({{ $role->id }})" href="#">{{ __('customer.customer.delete') }}</a>
+                                                            @endcan
                                                         </td>
                                                     </tr>
                                                 @endforeach
@@ -81,7 +91,9 @@
                                                 <tr>
                                                     <th>{{ __('customer.customer.sequence_no') }}</th>
                                                     <th>{{ __('customer.name') }}</th>
-                                                    <th>{{ __('customer.permission') }}</th>
+                                                    @can('assigned-permission')
+                                                        <th>{{ __('customer.permission') }}</th>
+                                                    @endcan
                                                     <th>{{ __('customer.customer.action') }}</th>
                                                 </tr>
                                                 </tfoot>
