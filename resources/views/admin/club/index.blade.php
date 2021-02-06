@@ -10,7 +10,9 @@
                             <div class="card-content">
                                 <h4 class="header mt-0">
                                     Club
+                                    @can('add-club')
                                     <a href="{{ URL::route('club-form.create') }}" class="waves-effect waves-light btn gradient-45deg-purple-deep-orange gradient-shadow right">Add</a>
+                                        @endcan
                                 </h4>
                                 <div class="row">
                                     <div class="col s12">
@@ -67,10 +69,14 @@
                                                     <td>{{ $club->description_en }}</td>
                                                     <td>{{ $club->club_sorting }}</td>
                                                     <td><form action="{{ route('club-form.destroy', $club->id)}}" method="post">
+                                                            @can('edit-club')
                                                             <a href="{{ route('club-form.edit',$club->id)}}" class="dt-button buttons-excel buttons-html5 waves-effect waves-light btn gradient-45deg-purple-deep-orange gradient-shadow">Edit</a>
-                                                            {{ csrf_field() }}
-                                                            @method('DELETE')
+                                                            @endcan
+                                                                {{ csrf_field() }}
+                                                                @can('delete-club')
+                                                                @method('DELETE')
                                                             <button onclick="return window.confirm('Are you sure you want to delete this record?');" class="dt-button buttons-excel buttons-html5 waves-effect waves-light btn gradient-45deg-purple-deep-orange gradient-shadow" type="submit">Delete</button>
+                                                            @endcan
                                                         </form></td>
                                             @endforeach
                                             </tbody>

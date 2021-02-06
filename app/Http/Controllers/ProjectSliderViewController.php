@@ -17,6 +17,14 @@ class ProjectSliderViewController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    function __construct() {
+        $this->middleware('can:view-slider', ['only' => ['index', 'show']]);
+        $this->middleware('can:add-slider', ['only' => ['create', 'store']]);
+        $this->middleware('can:edit-slider', ['only' => ['edit', 'update']]);
+        $this->middleware('can:delete-slider', ['only' => ['destroy']]);
+    }
+
     public function index()
     {
 

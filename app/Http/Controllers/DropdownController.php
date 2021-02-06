@@ -10,6 +10,10 @@ use App\Model\Season;
 
 class DropdownController extends Controller
 {
+    function __construct() {
+        $this->middleware('can:view-seasonpartsorting', ['only' => ['index', 'show']]);
+    }
+
     public function index()
         {
 

@@ -14,6 +14,14 @@ class ProjectGenreViewController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    function __construct() {
+        $this->middleware('can:view-genre', ['only' => ['index', 'show']]);
+        $this->middleware('can:add-genre', ['only' => ['create', 'store']]);
+        $this->middleware('can:edit-genre', ['only' => ['edit', 'update']]);
+        $this->middleware('can:delete-genre', ['only' => ['destroy']]);
+    }
+
     public function index()
     {
             $video_genre=Video_genre::all();

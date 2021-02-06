@@ -48,8 +48,10 @@
                                                 @endif
                                                 </td>
                                                 <td>{{ $contact->response_message }}</td>
+                                                   @can('respond-contactqueries')
                                                 <td><a href="{{ route('contact-form.edit',$contact->id)}}" class="dt-button buttons-excel buttons-html5 waves-effect waves-light btn gradient-45deg-purple-deep-orange gradient-shadow">Response</a></td>
-                                                </tr>
+                                                    @endcan
+                                               </tr>
                                                 @endforeach
                                                 </tbody>
 

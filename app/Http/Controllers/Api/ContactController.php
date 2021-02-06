@@ -25,7 +25,20 @@ class ContactController extends Controller
     public function contact()
     {
         $contactus = Fullmatchcontact::all();
-        return response()->json(['success' => true, 'status' => $this->successStatus, 'message' => 'Record found.', 'data'=> $contactus]);
+        if (!$contactus->isEmpty()) {
+
+            foreach ($contactus as $k => $v) {
+                $array[$k]['id'] = $v->id;
+                $array[$k]['call_us'] = $v->call_us;
+                $array[$k]['email_us'] = $v->email_us;
+                $array[$k]['address'] = $v->address_en;
+                $array[$k]['address_ar'] = $v->address_ar;
+            }
+            return response()->json(['success' => true, 'status' => $this->successStatus, 'message' => 'Contact Info found.', 'data' => $array]);
+
+        }else{
+            return response()->json(['error' => false, 'status' => $this->HTTP_NOT_FOUND, 'message' => 'No Contact Info found.', 'data' => []]);
+        }
 
     }
 

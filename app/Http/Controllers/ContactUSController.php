@@ -14,6 +14,11 @@ class ContactUSController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    function __construct() {
+        $this->middleware('can:view-contactus', ['only' => ['index', 'show']]);
+        $this->middleware('can:edit-contactus', ['only' => ['edit', 'update']]);
+    }
+
     public function index()
     {
         $fullmatchcontact = Fullmatchcontact::all();

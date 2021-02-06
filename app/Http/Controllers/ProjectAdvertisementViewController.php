@@ -18,6 +18,14 @@ class ProjectAdvertisementViewController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    function __construct() {
+        $this->middleware('can:view-advbanner', ['only' => ['index', 'show']]);
+        $this->middleware('can:add-advbanner', ['only' => ['create', 'store']]);
+        $this->middleware('can:edit-advbanner', ['only' => ['edit', 'update']]);
+        $this->middleware('can:delete-advbanner', ['only' => ['destroy']]);
+    }
+
     public function index()
     {
         $Adv_banner = Adv_banner::all();

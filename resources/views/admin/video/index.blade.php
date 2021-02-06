@@ -10,7 +10,9 @@
                             <div class="card-content">
                                 <h4 class="header mt-0">
                                     Videos
+                                    @can('add-video')
                                     <a href="{{ URL::route('video-form.create') }}" class="waves-effect waves-light btn gradient-45deg-purple-deep-orange gradient-shadow right">Add</a>
+                                    @endcan
                                 </h4>
                                 <form action="{{route('video-form-search.search')}}" method="post" role="search">
                                     {{ csrf_field() }}
@@ -84,11 +86,17 @@
                                                     <td>{{ $video->video_link }}</td>
                                                     <td>{{ $video->video_sorting }}</td>
                                                     <td><form action="{{ route('video-form.destroy', $video->id)}}" method="post">
+                                                            @can('view-videodetail')
                                                             <a href="{{ url('videodetails/'.$video->id)}}" class="dt-button buttons-excel buttons-html5 waves-effect waves-light btn gradient-45deg-purple-deep-orange gradient-shadow">Details</a>
-                                                            <a href="{{ route('video-form.edit',$video->id)}}" class="dt-button buttons-excel buttons-html5 waves-effect waves-light btn gradient-45deg-purple-deep-orange gradient-shadow">Edit</a>
-                                                            {{ csrf_field() }}
+                                                            @endcan
+                                                                @can('edit-video')
+                                                                <a href="{{ route('video-form.edit',$video->id)}}" class="dt-button buttons-excel buttons-html5 waves-effect waves-light btn gradient-45deg-purple-deep-orange gradient-shadow">Edit</a>
+                                                                @endcan
+                                                                    {{ csrf_field() }}
+                                                                @can('delete-video')
                                                             @method('DELETE')
                                                             <button onclick="return window.confirm('Are you sure you want to delete this record?');" class="dt-button buttons-excel buttons-html5 waves-effect waves-light btn gradient-45deg-purple-deep-orange gradient-shadow" type="submit">Delete</button>
+                                                             @endcan
                                                         </form>
                                                     </td>
 

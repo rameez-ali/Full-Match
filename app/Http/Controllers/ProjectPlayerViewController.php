@@ -13,6 +13,14 @@ class ProjectPlayerViewController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    function __construct() {
+        $this->middleware('can:view-player', ['only' => ['index', 'show']]);
+        $this->middleware('can:add-player', ['only' => ['create', 'store']]);
+        $this->middleware('can:edit-player', ['only' => ['edit', 'update']]);
+        $this->middleware('can:delete-player', ['only' => ['destroy']]);
+    }
+
     public function index()
     {
         $player = Player::all();

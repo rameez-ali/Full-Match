@@ -26,6 +26,14 @@ class ProjectVideoViewController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    function __construct() {
+        $this->middleware('can:view-video', ['only' => ['index', 'show']]);
+        $this->middleware('can:add-video', ['only' => ['create', 'store']]);
+        $this->middleware('can:edit-video', ['only' => ['edit', 'update']]);
+        $this->middleware('can:delete-video', ['only' => ['destroy']]);
+    }
+
     public function index()
     {
         $video = Video::all();

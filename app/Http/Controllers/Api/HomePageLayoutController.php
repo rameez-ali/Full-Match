@@ -41,6 +41,7 @@ class HomePageLayoutController extends Controller
                 $selected_league[$k]['name'] = $v->name_en;
                 $selected_league[$k]['name_ar'] = $v->name_ar;
                 $selected_league[$k]['image'] = $image;
+                $selected_league[$k]['route'] = "https://line-kw.com/fullmatch/api/league/".$v->id;
             }
             $obj->leagues = $selected_league;
 
@@ -55,6 +56,7 @@ class HomePageLayoutController extends Controller
                 $selected_players[$k]['name'] = $v->name_en;
                 $selected_players[$k]['name_ar'] = $v->name_ar;
                 $selected_players[$k]['image'] = $image;
+                $selected_players[$k]['route'] = "https://line-kw.com/fullmatch/api/player/".$v->id;
             }
             $obj->players = $selected_players;
 
@@ -69,6 +71,7 @@ class HomePageLayoutController extends Controller
                 $selected_clubs[$k]['name'] = $v->name_en;
                 $selected_clubs[$k]['name_ar'] = $v->name_ar;
                 $selected_clubs[$k]['image'] = $image;
+                $selected_clubs[$k]['route'] = "https://line-kw.com/fullmatch/api/club/".$v->id;
             }
             $obj->clubs = $selected_clubs;
 
@@ -83,6 +86,7 @@ class HomePageLayoutController extends Controller
                 $selected_videos[$k]['name'] = $v->title_en;
                 $selected_videos[$k]['name_ar'] = $v->title_ar;
                 $selected_videos[$k]['image'] = $image;
+                $selected_videos[$k]['route'] = "https://line-kw.com/fullmatch/api/video/".$v->id;
             }
             $obj->videos = $selected_videos;
             //  END
