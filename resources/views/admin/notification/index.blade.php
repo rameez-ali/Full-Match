@@ -41,7 +41,9 @@
                             <div class="card-content">
                                 <h4 class="header mt-0">
                                     {{ __('customer.notification.notification_section') }}
+                                    @can('add-notify')
                                     <a href="{{ route('notification.create') }}" class="waves-effect waves-light btn gradient-45deg-purple-deep-orange gradient-shadow right"> {{ __('customer.add') }}</a>
+                                    @endcan
                                 </h4>
                                 <div class="row">
                                     <div class="col s12">
@@ -71,9 +73,13 @@
                                                     @endif
                                                     <td>{{ $notification->created_at }}</td>
                                                     <td>
-                                                        <a class="mb-5 btn waves-effect waves-light gradient-45deg-purple-deep-orange" href="{{ route('notification.edit',[ 'notification' => $notification->id ]) }}">{{ __('customer.customer.edit') }}</a>
+                                                        @can('edit-notify')
+                                                            <a class="mb-5 btn waves-effect waves-light gradient-45deg-purple-deep-orange" href="{{ route('notification.edit',[ 'notification' => $notification->id ]) }}">{{ __('customer.customer.edit') }}</a>
+                                                        @endcan
                                                         <a class="mb-5 btn waves-effect waves-light gradient-45deg-purple-deep-orange" href="{{ route('notification.show',[ 'notification' => $notification->id ]) }}">{{ __('customer.view') }}</a>
-                                                        <a class="mb-5 btn waves-effect waves-light gradient-45deg-purple-deep-orange" href="{{ route('notification.send',$notification->id) }}">{{ __('customer.notification.send_notifi') }}</a>
+                                                        @can('edit-notify')
+                                                            <a class="mb-5 btn waves-effect waves-light gradient-45deg-purple-deep-orange" href="{{ route('notification.send',$notification->id) }}">{{ __('customer.notification.send_notifi') }}</a>
+                                                        @endcan
                                                     </td>
                                                 </tr>
                                             @endforeach

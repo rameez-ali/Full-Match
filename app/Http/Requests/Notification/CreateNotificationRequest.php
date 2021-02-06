@@ -4,6 +4,7 @@ namespace App\Http\Requests\Notification;
 
 use App\Model\Notification;
 use Illuminate\Foundation\Http\FormRequest;
+use Bouncer;
 
 class CreateNotificationRequest extends FormRequest
 {
@@ -14,7 +15,7 @@ class CreateNotificationRequest extends FormRequest
      */
     public function authorize()
     {
-        return true;
+        return Bouncer::can('add-notify');
     }
 
     /**
