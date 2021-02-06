@@ -33,8 +33,11 @@ class VideoController extends Controller
      */
     public function videos()
     {
+        $obj = new stdClass;
         $all_videos_array = array();
         $videos = Video::all();
+
+        if(isset($videos)) {
         foreach ($videos as $k => $v) {
 
             $video_img = str_replace('\\', '/', asset('app-assets/images/video/' . $v->video_img));
@@ -47,8 +50,14 @@ class VideoController extends Controller
             $all_videos_array[$k]['image'] = $video_img;
 
         }
-        return response()->json(['success' => true, 'status' => $this->successStatus, 'message' => 'All Videos found.', 'data'=> $all_videos_array]);
+        $obj->Heading = "All Videos";
+        $obj->Content = $all_videos_array;
+        return response()->json(['success' => true, 'status' => $this->successStatus, 'message' => 'All Videos found.', 'data'=> $obj]);
 
+    }
+        else{
+            return response()->json(['success' => false, 'status' => $this->HTTP_NOT_FOUND, 'message' => 'No Videos found.']);
+        }
     }
 
     /**

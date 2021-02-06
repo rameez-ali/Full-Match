@@ -46,7 +46,7 @@ class PlayerController extends Controller
                 $array[$k]['sorting'] = $v->player_sorting;
 
             }
-             $obj->Heading = "All Clubs";
+             $obj->Heading = "All Players";
              $obj->Content = $array;
             return response()->json(['success' => true, 'status' => $this->successStatus, 'message' => 'Player found.', 'data' => $obj]);
 
