@@ -4,7 +4,6 @@ namespace App\Http\Requests\Customer;
 use App\customer;
 use App\User;
 use Illuminate\Foundation\Http\FormRequest;
-use Bouncer;
 
 class UpdateCustomerRequest extends FormRequest
 {
@@ -15,7 +14,7 @@ class UpdateCustomerRequest extends FormRequest
      */
     public function authorize()
     {
-        return Bouncer::can('edit-customer');
+        return true;
     }
 
     /**
