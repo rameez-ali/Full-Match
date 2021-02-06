@@ -12,6 +12,7 @@
                     [  'icon' => 'notifications_active' , 'label'  => __('customer.notification.notification') , 'route' => 'notification.index' , 'children' => [], 'permission' => 'view-notify' ],
                     [  'icon' => 'people' , 'label'  => __('customer.syst_users') , 'route' => 'user.index' , 'children' => [], 'permission' => 'view-system-user' ],
 
+
                 ];
           @endphp
 
