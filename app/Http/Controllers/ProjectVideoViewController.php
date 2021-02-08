@@ -470,6 +470,8 @@ class ProjectVideoViewController extends Controller
     {
         Videoplayer::where('Video_id', $id)->delete();
         Videoclub::where('Video_id', $id)->delete();
+        Videogenre::where('video_id', $id)->delete();
+        Leaguecategory::where('video_id', $id)->delete();
 
         $data = Video::findOrFail($id);
         $data->delete();

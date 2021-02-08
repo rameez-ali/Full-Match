@@ -62,9 +62,34 @@ class LeagueController extends Controller
 
     public function league($id)
     {
-           $array = array();
+        $obj = new stdClass;
+        $league_detail = array();
+        $league_related_video = array();
 
-            $video_leagues=Leaguecategory::select('videos.id','videos.title_en','videos.title_ar','videos.video_img','videos.description_en','videos.description_ar')
+        $leagues = League::where('id',$id)->get();;
+
+        if (!$leagues->isEmpty()) {
+
+            foreach ($leagues as $k => $v) {
+
+                $banner = str_replace('\\', '/', asset('app-assets/images/league/' . $v->league_banner));
+                $profile_image = str_replace('\\', '/', asset('app-assets/images/league/' . $v->league_profile_image));
+
+                $league_detail[$k]['id'] = $v->id;
+                $league_detail[$k]['name'] = $v->name_en;
+                $league_detail[$k]['name_ar'] = $v->name_ar;
+                $league_detail[$k]['banner'] = $banner;
+                $league_detail[$k]['profile_image'] = $profile_image;
+                $league_detail[$k]['description'] = $v->description_en;
+                $league_detail[$k]['description_ar'] = $v->description_ar;
+
+            }
+            $obj->League_Detail = $league_detail;
+
+        }
+
+
+        $video_leagues=Leaguecategory::select('videos.id','videos.title_en','videos.title_ar','videos.video_img','videos.description_en','videos.description_ar')
             ->join('videos','leaguecategories.video_id' , '=' ,'videos.id')
             ->where('league_id','=', $id)
             ->get();
@@ -75,21 +100,19 @@ class LeagueController extends Controller
 
                 $video_img = str_replace('\\', '/', asset('app-assets/images/video/' . $v->video_img));
 
-                $array[$k]['id'] = $v->id;
-                $array[$k]['name'] = $v->title_en;
-                $array[$k]['name_ar'] = $v->title_ar;
-                $array[$k]['description'] = $v->description_en;
-                $array[$k]['description_ar'] = $v->description_ar;
-                $array[$k]['image'] = $video_img;
+                $league_related_video[$k]['id'] = $v->id;
+                $league_related_video[$k]['name'] = $v->title_en;
+                $league_related_video[$k]['name_ar'] = $v->title_ar;
+                $league_related_video[$k]['description'] = $v->description_en;
+                $league_related_video[$k]['description_ar'] = $v->description_ar;
+                $league_related_video[$k]['image'] = $video_img;
 
             }
-            return response()->json(['success' => true, 'status' => $this->successStatus, 'message' => 'League Related Videos found.', 'data' => $array]);
-
+             $obj->League_Related_Videos = $league_related_video;
         }
 
-        else {
-           return response()->json(['success' => false, 'status' => $this->HTTP_NOT_FOUND, 'message' => 'league Related Videos Not Found.', 'data' => []]);
-        }
+            return response()->json(['success' => true, 'status' => $this->successStatus, 'message' => 'League Detail Data found.', 'data' => $obj]);
+
 
 
 

@@ -53,23 +53,6 @@
                                                     @enderror
                                                 </div>
 
-
-                                               <div class="input-field col s12">
-                                              <p for="genre"> Select Genre *</p>
-                                              <select class="selectpicker" multiple data-live-search="true" name="genre[]" required >
-                                              @foreach($genres as $videogenre )
-                                              <option value="{{$videogenre->id}}">{{$videogenre->name_en}}</option>
-                                              @endforeach
-                                              </select>
-                                                   <small class="errorTxt6"></small>
-                                                   @error('genre')
-                                                   <span class="invalid-feedback" role="alert">
-                                               <strong>{{ $message }}</strong>
-                                               </span>
-                                                   @enderror
-                                               </div>
-
-
                                                 <div class="input-field col s12">
                                                     <label for="category_sorting">Add Category Sorting</label>
                                                     <input id="category_sorting" name="category_sorting" type="number" min="1" >

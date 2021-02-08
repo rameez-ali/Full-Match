@@ -207,6 +207,7 @@ class CategoryController extends Controller
 
         }
 
+
         if($league_ids!=null)
         {
             $leagues=League::wherein('id',$league_ids)->get();
@@ -235,6 +236,10 @@ class CategoryController extends Controller
 
         $obj = new stdClass;
 
+        $latest_videos_array = array();
+        $player_array = array();
+        $club_array = array();
+        $league_array = array();
 
         // getting Video ids of that specific category and genre both
         $video_ids = Videogenre::select("video_id")->where('category_id',$category_id)
@@ -315,9 +320,20 @@ class CategoryController extends Controller
         $leagues_ids = Leaguecategory::select("league_id")->wherein('video_id', $video_ids)
                        ->distinct()
                        ->get();
-        // getting Leagues of that specific category and genre both
-        $leagues = League::wherein('id', $leagues_ids)->get();
-        if($leagues!=null){
+
+//        if($leagues_ids!=null){
+//            echo "yes";
+//        }
+//        else{
+//            echo "no";
+//        }
+
+
+        if($leagues_ids!=null){
+
+            // getting Leagues of that specific category and genre both
+            $leagues = League::wherein('id', $leagues_ids)->get();
+
             foreach ($leagues as $k => $v) {
 
                 $league_banner = str_replace('\\', '/', asset('app-assets/images/league/' . $v->league_banner));
