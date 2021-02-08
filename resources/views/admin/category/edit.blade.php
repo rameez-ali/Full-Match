@@ -50,24 +50,6 @@
                                           </div>
 
                                          <div class="input-field col s12">
-                                          <div name="hidden-panel1" id="hidden-panel1">
-                                         <label><strong>Edit Genre * </strong></label><br/>
-                                         <select class="selectpicker" multiple data-live-search="true" name="genre[]" required>
-                                         @foreach($video_genres as $videogenre )
-                                         <option value="{{$videogenre->id}}" {{in_array($videogenre->id, $selected_ids3) ? 'selected' : ''}} >{{$videogenre->name_en}}</option>
-                                         @endforeach
-                                         </select>
-                                              <small class="errorTxt6"></small>
-                                              @error('genre')
-                                              <span class="invalid-feedback" role="alert">
-                                               <strong>{{ $message }}</strong>
-                                               </span>
-                                              @enderror
-                                         </div>
-                                         </div>
-
-
-                                         <div class="input-field col s12">
                                          <label for="category_sorting">Edit Category Sorting </label>
                                          <input type="number" name="category_sorting" value="{{ $category->category_sorting }}" min="1" class="form-control input-lg" />
                                          </div>

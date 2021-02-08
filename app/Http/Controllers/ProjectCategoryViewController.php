@@ -54,8 +54,7 @@ class ProjectCategoryViewController extends Controller
         $request->validate([
             'name_en'     => 'required',
             'name_ar'     => 'required',
-            'category_image'     =>  'required|image|max:2048',
-            'genre'              =>  'required'
+            'category_image'     =>  'required|image|max:2048'
         ]);
 
         $image = $request->file('category_image');
@@ -70,17 +69,6 @@ class ProjectCategoryViewController extends Controller
         );
 
          Category::create($form_data);
-
-        $id = DB::table('categories')->orderBy('id', 'DESC')->value('id');
-
-         foreach($request->genre as $genre){
-                $form_data5 = array(
-                    'category_id'     =>  $id,
-                    'genre_id'     =>   $genre
-                );
-
-                Category_genre::create($form_data5);
-            }
 
         return redirect('category-form')->with('cataddsuccess','Category Added Successfully');
     }
@@ -106,20 +94,7 @@ class ProjectCategoryViewController extends Controller
     {
         $category=Category::find($id);
 
-        $video_genres =  DB::table('video_genres')
-        ->where('category_id', '=', $id)
-        ->join('category_genres', 'category_genres.genre_id', '=', 'video_genres.id')
-        ->select('video_genres.id')
-        ->get();
-
-       $selected_ids3 = [];
-       foreach ($video_genres as $key => $gly) {
-           array_push($selected_ids3, $gly->id);
-       }
-
-        $video_genres=Video_genre::select('id','name_en')->get();
-
-        return view('admin.category.edit',compact('category','selected_ids3','video_genres'));
+        return view('admin.category.edit',compact('category'));
     }
 
     /**
@@ -139,8 +114,7 @@ class ProjectCategoryViewController extends Controller
             $request->validate([
                 'name_en'    =>  'required',
                 'name_ar'    =>  'required',
-                'image'         =>  'image|max:2048',
-                'genre'         =>   'required'
+                'image'         =>  'image|max:2048'
             ]);
 
             $image_name = rand() . '.' . $image->getClientOriginalExtension();
@@ -150,8 +124,7 @@ class ProjectCategoryViewController extends Controller
         {
             $request->validate([
                 'name_en'    =>  'required',
-                'name_ar'    =>  'required',
-                'genre'            => 'required'
+                'name_ar'    =>  'required'
             ]);
         }
 
@@ -163,18 +136,6 @@ class ProjectCategoryViewController extends Controller
         );
 
         Category::whereId($id)->update($form_data);
-
-        Category_genre::where('category_id', $id)->forceDelete();
-
-        foreach($request->genre as $genre){
-                $form_data5 = array(
-                    'category_id'     =>  $id,
-                    'genre_id'     =>   $genre
-                );
-
-                Category_genre::create($form_data5);
-            }
-
 
 
         return redirect('category-form')->with('cateditsuccess','Category Updated Successfully');
