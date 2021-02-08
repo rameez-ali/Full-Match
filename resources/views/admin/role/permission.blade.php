@@ -18,36 +18,28 @@
                                                 @csrf
                                                 <input type="hidden" value="{{ $role->name }}" name="role">
 
-                                                    <table id="page-length-option" class="display">
-                                                <thead>
-                                                <tr>
-                                                    <th>
+                                                <ul class="permissions">
+                                                    <li>
                                                         <label>
                                                             <input type="checkbox" class="permissions-all" />
                                                             <span>All</span>
                                                         </label>
-                                                    </th>
-                                                    <th>{{ __('customer.title') }}</th>
-                                                </tr>
-                                                </thead>
-                                                <tbody>
-                                                @foreach($permissions as $permission)
-                                                    <tr>
-                                                        <td><label>
-                                                                <input
-                                                                    type="checkbox"
-                                                                    class="permission"
-                                                                    name="permission[]"
-                                                                    value="{{ $permission->name }}"
-                                                                    {{ in_array($permission->name,$assigned_permissions) ? 'checked' : '' }}
-                                                                />
-                                                                <span>&nbsp;</span>
-                                                            </label></td>
-                                                        <td>{{ $permission->title }}</td>
-                                                    </tr>
-                                                @endforeach
-                                                </tbody>
-                                            </table>
+                                                    </li>
+                                                    @foreach($permissions as $permission)
+                                                    <li class="{{ $permission->title }}">
+                                                        <input
+                                                            type="checkbox"
+                                                            class="permission"
+                                                            name="permission[]"
+                                                            value="{{ $permission->name }}"
+                                                            {{ in_array($permission->name,$assigned_permissions) ? 'checked' : '' }}
+                                                        />
+                                                        <span>&nbsp;</span>
+                                                        <span>{{ $permission->title }}</span>
+                                                    </li>
+                                                    @endforeach
+
+                                                </ul>
 
                                                 <div class="input-field col s12">
                                                     <button class="btn waves-effect waves-light right submit" type="submit" name="action">Submit
