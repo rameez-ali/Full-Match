@@ -62,13 +62,37 @@ public $HTTP_NOT_FOUND = 404;
 
     public function club($id)
     {
-
-        $array = array();
+        $obj = new stdClass;
+        $club_detail = array();
+        $club_related_video = array();
 
         $video_clubs=Videoclub::select('videos.id','videos.title_en','videos.title_ar','videos.video_img','videos.description_en','videos.description_ar')
             ->join('videos','videoclubs.Video_id' , '=' ,'videos.id')
             ->where('Club_id','=', $id)
             ->get();
+        
+
+        $clubs = Club::where('id',$id)->get();
+        if (!$clubs->isEmpty()) {
+
+            foreach ($clubs as $k => $v) {
+
+                $banner = str_replace('\\', '/', asset('app-assets/images/club/' . $v->club_banner));
+                $logo = str_replace('\\', '/', asset('app-assets/images/club/' . $v->club_logo));
+
+                $club_detail[$k]['id'] = $v->id;
+                $club_detail[$k]['name'] = $v->name_en;
+                $club_detail[$k]['name_ar'] = $v->name_ar;
+                $club_detail[$k]['banner'] = $banner;
+                $club_detail[$k]['logo'] = $logo;
+                $club_detail[$k]['description'] = $v->description_en;
+                $club_detail[$k]['description_ar'] = $v->description_ar;
+
+            }
+            $obj->Club_Details = $club_detail;
+        }
+
+
 
          if (!$video_clubs->isEmpty()) {
 
@@ -76,21 +100,18 @@ public $HTTP_NOT_FOUND = 404;
 
                 $video_img = str_replace('\\', '/', asset('app-assets/images/video/' . $v->video_img));
 
-                $array[$k]['id'] = $v->id;
-                $array[$k]['name'] = $v->title_en;
-                $array[$k]['name_ar'] = $v->title_en;
-                $array[$k]['description'] = $v->description_en;
-                $array[$k]['description_en'] = $v->description_ar;
-                $array[$k]['image'] = $video_img;
+                $club_related_video[$k]['id'] = $v->id;
+                $club_related_video[$k]['name'] = $v->title_en;
+                $club_related_video[$k]['name_ar'] = $v->title_en;
+                $club_related_video[$k]['description'] = $v->description_en;
+                $club_related_video[$k]['description_en'] = $v->description_ar;
+                $club_related_video[$k]['image'] = $video_img;
 
             }
-            return response()->json(['success' => true, 'status' => $this->successStatus, 'message' => 'Club Related Videos found.', 'data' => $array]);
-
+             $obj->Club_Related_Videos = $club_related_video;
         }
 
-        else {
-           return response()->json(['success' => false, 'status' => $this->HTTP_NOT_FOUND, 'message' => 'Club Related Videos Not Found.', 'data' => []]);
-        }
+        return response()->json(['success' => true, 'status' => $this->successStatus, 'message' => 'Club Detail Data found.', 'data' => $obj]);
 
 
     }

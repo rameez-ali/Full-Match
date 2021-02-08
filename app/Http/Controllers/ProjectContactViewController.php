@@ -15,7 +15,7 @@ class ProjectContactViewController extends Controller
      */
     function __construct() {
         $this->middleware('can:view-contactqueries', ['only' => ['index', 'show']]);
-        $this->middleware('can:edit-contactqueries', ['only' => ['edit', 'update']]);
+        $this->middleware('can:respond-contactqueries', ['only' => ['edit', 'update']]);
     }
 
     public function index()
