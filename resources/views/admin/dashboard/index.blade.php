@@ -8,7 +8,7 @@
                 <div id="card-stats" class="pt-0">
                     <div class="row" id="gradient-Analytics">
                         <div class="col s12 m6 l6 card-width">
-                            <a href="{{ route('customer.index') }}">
+                            <a @can('view-customer') href="{{ route('customer.index') }}" @endcan>
                                 <div class="card row gradient-45deg-purple-deep-purple gradient-shadow white-text padding-4 mt-3 animate fadeLeft">
                                 <div class="col s7 m7">
                                     <i class="material-icons background-round mt-5 mb-5">people</i>
@@ -34,7 +34,7 @@
 {{--                            </a>--}}
 {{--                        </div>--}}
                         <div class="col s12 m6 l6 card-width">
-                            <a href="{{ route('player-form.index') }}">
+                            <a @can('view-player') href="{{ route('player-form.index') }}" @endcan>
                                 <div class="card row gradient-45deg-deep-orange-orange gradient-shadow white-text padding-4 mt-3 animate fadeLeft">
                                     <div class="col s7 m7">
                                         <i class="material-icons background-round mt-5 mb-5">directions_run</i>
@@ -47,7 +47,7 @@
                             </a>
                         </div>
                         <div class="col s12 m6 l6 card-width">
-                            <a href="{{ route('video-form.index') }}">
+                            <a @can('view-video') href="{{ route('video-form.index') }}" @endcan>
                                 <div class="card row gradient-45deg-blue-indigo gradient-shadow white-text padding-4 mt-3 animate fadeLeft">
                                 <div class="col s7 m7">
                                     <i class="material-icons background-round mt-5 mb-5">ondemand_video</i>
@@ -60,7 +60,7 @@
                             </a>
                         </div>
                         <div class="col s12 m6 l6 card-width">
-                            <a href="{{ route('genre-form.index') }}">
+                            <a @can('view-genre') href="{{ route('genre-form.index') }}" @endcan>
                                 <div class="card row gradient-45deg-purple-deep-orange gradient-shadow white-text padding-4 mt-3 animate fadeRight">
                                 <div class="col s7 m7">
                                     <i class="material-icons background-round mt-5 mb-5">timeline</i>
@@ -76,7 +76,7 @@
                     <div class="row" id="gradient-Analytics">
 
                         <div class="col s12 m6 l6 card-width">
-                            <a href="{{ route('club-form.index') }}">
+                            <a @can('view-club') href="{{ route('club-form.index') }}" @endcan>
                                 <div class="card row gradient-45deg-amber-amber gradient-shadow white-text padding-4 mt-3 animate fadeLeft">
                                 <div class="col s7 m7">
                                     <i class="material-icons background-round mt-5 mb-5">airplay</i>
@@ -89,7 +89,7 @@
                             </a>
                         </div>
                         <div class="col s12 m6 l6 card-width">
-                            <a href="{{ route('category-form.index') }}">
+                            <a @can('view-category') href="{{ route('category-form.index') }}" @endcan>
                                 <div class="card row gradient-45deg-red-pink gradient-shadow white-text padding-4 mt-3 animate fadeRight">
                                 <div class="col s7 m7">
                                     <i class="material-icons background-round mt-5 mb-5">video_library</i>
