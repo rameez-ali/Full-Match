@@ -1,11 +1,146 @@
-/*================================================================================
-	Item Name: Materialize - Material Design Admin Template
-	Version: 5.0
-	Author: PIXINVENT
-	Author URL: https://themeforest.net/user/pixinvent/portfolio
-================================================================================
-
-NOTE:
-------
-PLACE HERE YOUR OWN CSS CODES AND IF NEEDED, OVERRIDE THE STYLES FROM THE OTHER STYLESHEETS.
-WE WILL RELEASE FUTURE UPDATES SO IN ORDER TO NOT OVERWRITE YOUR STYLES IT'S BETTER LIKE THIS.  */
+ul.permissions li {
+    padding-bottom: 15px;
+    height: auto !important;
+    padding-left: 20px;
+}
+ul.permissions li.Add.Customer,
+ul.permissions li.View.CMSpage,
+ul.permissions li.View.Management,
+ul.permissions li.View.Notification,
+ul.permissions li.View.Category,
+ul.permissions li.View.Club,
+ul.permissions li.View.Player,
+ul.permissions li.View.Genre,
+ul.permissions li.View.Video,
+ul.permissions li.View.League,
+ul.permissions li.Edit.ContactUS,
+ul.permissions li.Respond.ContactQueries,
+ul.permissions li.View.Slider,
+ul.permissions li.View.AdvBanner,
+ul.permissions li.View.SeasonPartSorting,
+ul.permissions li.View.LeagueDetail,
+ul.permissions li.View.VideoDetail,
+ul.permissions li.View.System.User,
+ul.permissions li.View.SliderDetail,
+ul.permissions li.Assigned.Permission,
+ul.permissions li.View.Role{
+	padding-top: 48px;
+	position: relative;
+}
+ul.permissions li.Dashboard {
+    display: none;
+}
+ul.permissions li.Delete.Customer,
+ul.permissions li.Edit.CMSpage,
+ul.permissions li.Edit.Management,
+ul.permissions li.Edit.Notification,
+ul.permissions li.Delete.Category,
+ul.permissions li.Delete.Club,
+ul.permissions li.Delete.Player,
+ul.permissions li.Delete.Genre,
+ul.permissions li.Delete.Video,
+ul.permissions li.Delete.League,
+ul.permissions li.View.ContactUS,
+ul.permissions li.View.ContactQueries,
+ul.permissions li.Delete.slider,
+ul.permissions li.View.LeagueDetail,
+ul.permissions li.Edit.SeasonPartSorting,
+ul.permissions li.Delete.AdvBanner,
+ul.permissions li.View.VideoDetail,
+ul.permissions li.View.SliderDetail,
+ul.permissions li.Delete.System.User,
+ul.permissions li.Assigned.Permission,
+ul.permissions li.Delete.Role{
+	border-bottom: 1px solid #dcdcdc;
+    margin-bottom: 21px;
+}
+ul.permissions li.Add.Customer:before,
+ul.permissions li.View.CMSpage:before,
+ul.permissions li.View.Management:before,
+ul.permissions li.View.Notification:before,
+ul.permissions li.View.Category:before,
+ul.permissions li.View.Club:before,
+ul.permissions li.View.Player:before,
+ul.permissions li.View.Genre:before,
+ul.permissions li.View.Video:before,
+ul.permissions li.View.League:before,
+ul.permissions li.Edit.ContactUS:before,
+ul.permissions li.Respond.ContactQueries:before,
+ul.permissions li.View.Slider:before,
+ul.permissions li.View.AdvBanner:before,
+ul.permissions li.View.LeagueDetail:before,
+ul.permissions li.View.SeasonPartSorting:before,
+ul.permissions li.View.VideoDetail:before,
+ul.permissions li.View.SliderDetail:before,
+ul.permissions li.View.System.User:before,
+ul.permissions li.Assigned.Permission:before,
+ul.permissions li.View.Role:before     {
+    position: absolute;
+    top: 10px;
+    font-size: 17px;
+    font-weight: 700;
+    left: 4px;
+}
+ul.permissions li.Add.Customer:before {
+    content: 'Customers';
+}
+ul.permissions li.View.CMSpage:before {
+    content: 'CMSpage';
+}
+ul.permissions li.View.Management:before {
+    content: 'Home Page Management';
+}
+ul.permissions li.View.Notification:before {
+    content: 'Notification';
+}
+ul.permissions li.View.Category:before {
+    content: 'Category';
+}
+ul.permissions li.View.Club:before {
+    content: 'Club';
+}
+ul.permissions li.View.Player:before {
+    content: 'Player';
+}
+ul.permissions li.View.Genre:before {
+    content: 'Genre';
+}
+ul.permissions li.View.Video:before {
+    content: 'Video';
+}
+ul.permissions li.View.League:before {
+    content: 'League';
+}
+ul.permissions li.Edit.ContactUS:before {
+    content: 'Contact US';
+}
+ul.permissions li.Respond.ContactQueries:before {
+    content: 'Contact Queries';
+}
+ul.permissions li.View.Slider:before {
+    content: 'Slider';
+}
+ul.permissions li.View.AdvBanner:before {
+    content: 'AdvBanner';
+}
+ul.permissions li.View.SeasonPartSorting:before {
+    content: 'Season Part Sorting';
+}
+ul.permissions li.View.LeagueDetail:before {
+    content: 'League Detail';
+}
+ul.permissions li.View.VideoDetail:before {
+    content: 'Video Detail';
+}
+ul.permissions li.View.System.User:before {
+    content: 'System User';
+}
+ul.permissions li.View.SliderDetail:before {
+    content: 'Slider Detail';
+}
+ul.permissions li.Assigned.Permission:before {
+    content: 'Assigned Permission';
+}
+ul.permissions li.View.Role:before {
+    content: 'View Role';
+}
