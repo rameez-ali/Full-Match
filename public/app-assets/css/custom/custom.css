@@ -144,3 +144,12 @@ ul.permissions li.Assigned.Permission:before {
 ul.permissions li.View.Role:before {
     content: 'View Role';
 }
+
+[type='checkbox']:not(:checked), [type='checkbox']:checked {
+    position: absolute;
+    pointer-events: painted;
+    opacity: 0;
+    z-index: 9999;
+    height: 20px;
+    width: 20px;
+}
