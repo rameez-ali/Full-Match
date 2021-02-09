@@ -81,7 +81,9 @@
                                                                 <a class="mb-5 mr-2 btn waves-effect waves-light gradient-45deg-purple-deep-orange" href="{{ route('role.edit',[ 'role' => $role->id ]) }}">{{ __('customer.customer.edit') }}</a>
                                                             @endcan
                                                             @can('delete-role')
+                                                               @if(!Bouncer::is(Auth::user())->an('Admin') || $role->title != "Admin")
                                                                 <a class="mb-5 btn waves-effect waves-light gradient-45deg-amber-amber" onclick="deleteCustomer({{ $role->id }})" href="#">{{ __('customer.customer.delete') }}</a>
+                                                               @endif
                                                             @endcan
                                                         </td>
                                                     </tr>
