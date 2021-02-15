@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Model\Adv_banner;
 use Illuminate\Http\Request;
 use App\Model\Category;
 use App\Model\Video;
@@ -293,7 +294,6 @@ class ProjectVideoViewController extends Controller
     public function edit($id)
     {
         $video=Video::find($id);
-        $category=Category::all();
         $club=Club::all();
         $player=Player::all();
 
@@ -340,11 +340,12 @@ class ProjectVideoViewController extends Controller
 
         $selected_popular_search=Video::select('popular_searches')->where('id',$id)->first();
         $popular_searches=Popular_search::select('id','status')->get();
+        $select_category_id = Video::select('category_id')->where('id', '=', $id )->first();
+        $category=Category::select('id','name_en')->get();
 
 
 
-
-        return view('admin.video.edit',compact('category','clubs','club','players','player','video','selected_ids','selected_ids1','selected_ids3','video_genres','selected_popular_search','popular_searches'));
+        return view('admin.video.edit',compact('category','select_category_id','clubs','club','players','player','video','selected_ids','selected_ids1','selected_ids3','video_genres','selected_popular_search','popular_searches'));
     }
 
     /**

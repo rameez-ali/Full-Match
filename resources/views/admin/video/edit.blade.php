@@ -97,12 +97,15 @@
                                           <input type="file" name="video_img" value="{{ old('video_img',$video->video_img) }}" class="dropify mt-3" data-default-file="{{ asset('app-assets/images/video/'.$video->video_img)}}" data-max-file-size="10M" data-allowed-file-extensions="png jpg jpeg"/>
                                           </div>
 
-                                          <div name="hidden-panel1" id="hidden-panel1">
-                                          <label><strong>Edit Category * </strong></label><br/>
-                                          <select class="form-control input-lg" name="Category_id"  required>
-                                          @foreach($category as $category )
-                                          <option value="{{$category->id}}">{{$category->name_en}}</option>
-                                          @endforeach
+
+                                            <div class="input-field col s12">
+                                                  <label><strong>Edit Category </strong></label><br/>
+                                                  <select class="selectpicker" name="Category_id" required>
+                                                      @foreach($category as $category )
+                                                          <option value="{{$category->id}}" {{$category->id == $select_category_id->category_id ? 'selected' : ''}} >{{$category->name_en}}</option>
+                                                      @endforeach
+                                                  </select>
+                                              </div>
 
                                           @error('Category_id')
                                           <small class="errorTxt7"></small>
@@ -128,12 +131,11 @@
                                           </span>
                                           @enderror
                                          </div>
-{{--                                            {{dd($selected_popular_search->popular_searches)}}--}}
+
                                             <div name="hidden-panel1" id="hidden-panel1">
                                                 <label><strong>Edit Popular Searches </strong></label><br/>
                                                 <select class="selectpicker" name="popularsearches">
                                                     @foreach($popular_searches as $popular_search )
-
                                                         <option value="{{$popular_search->id}}" {{$popular_search->id == $selected_popular_search->popular_searches ? 'selected' : ''}} >{{$popular_search->status}}</option>
                                                     @endforeach
                                                 </select>
