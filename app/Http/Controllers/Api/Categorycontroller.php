@@ -27,9 +27,9 @@ use \stdClass;
 
 class CategoryController extends Controller
 {
-  public $successStatus = 200;
-  public $HTTP_FORBIDDEN = 403;
-  public $HTTP_NOT_FOUND = 404;
+    public $successStatus = 200;
+    public $HTTP_FORBIDDEN = 403;
+    public $HTTP_NOT_FOUND = 404;
     /**
      * Display a listing of the resource.
      *
@@ -96,50 +96,50 @@ class CategoryController extends Controller
         $league_ids = Leaguecategory::select("league_id")->where('category_id',$id)->get();
 
 
-         if($slider_id!=null)
-         {
-           $video_id=Slidervideo::select("Video_id")->wherein('Slider_id',$slider_id)->get();
-           $videos=Video::wherein('id',$video_id)->get();
-             foreach ($videos as $k => $v) {
+        if($slider_id!=null)
+        {
+            $video_id=Slidervideo::select("Video_id")->wherein('Slider_id',$slider_id)->get();
+            $videos=Video::wherein('id',$video_id)->get();
+            foreach ($videos as $k => $v) {
 
-                 $video_img = str_replace('\\', '/', asset('app-assets/images/video/' . $v->video_img));
+                $video_img = str_replace('\\', '/', asset('app-assets/images/video/' . $v->video_img));
 
-                 $slider_array[$k]['id'] = $v->id;
-                 $slider_array[$k]['title'] = $v->title_en;
-                 $slider_array[$k]['title_ar'] = $v->title_ar;
-                 $slider_array[$k]['description'] = $v->description_en;
-                 $slider_array[$k]['description_ar'] = $v->description_ar;
-                 $slider_array[$k]['image'] = $video_img;
+                $slider_array[$k]['id'] = $v->id;
+                $slider_array[$k]['title'] = $v->title_en;
+                $slider_array[$k]['title_ar'] = $v->title_ar;
+                $slider_array[$k]['description'] = $v->description_en;
+                $slider_array[$k]['description_ar'] = $v->description_ar;
+                $slider_array[$k]['image'] = $video_img;
 
-             }
-               $obj->category_slider = $slider_array;
+            }
+            $obj->category_slider = $slider_array;
 
-         }
+        }
 
 
 
-         if($banner_id!=null)
-         {
-         $video_id=Adv_banner_video::select("video_id")->wherein('banner_id',$banner_id)->get();
-         $banner_videos=Video::select("id","title_en")->wherein('id',$video_id)->get();
-             foreach ($banner_videos as $k => $v) {
+        if($banner_id!=null)
+        {
+            $video_id=Adv_banner_video::select("video_id")->wherein('banner_id',$banner_id)->get();
+            $banner_videos=Video::select("id","title_en")->wherein('id',$video_id)->get();
+            foreach ($banner_videos as $k => $v) {
 
-                 $video_img = str_replace('\\', '/', asset('app-assets/images/video/' . $v->video_img));
+                $video_img = str_replace('\\', '/', asset('app-assets/images/video/' . $v->video_img));
 
-                 $banner_array[$k]['id'] = $v->id;
-                 $banner_array[$k]['title'] = $v->title_en;
-                 $banner_array[$k]['title_ar'] = $v->title_ar;
-                 $banner_array[$k]['description'] = $v->description_en;
-                 $banner_array[$k]['description_ar'] = $v->description_ar;
-                 $banner_array[$k]['image'] = $video_img;
+                $banner_array[$k]['id'] = $v->id;
+                $banner_array[$k]['title'] = $v->title_en;
+                $banner_array[$k]['title_ar'] = $v->title_ar;
+                $banner_array[$k]['description'] = $v->description_en;
+                $banner_array[$k]['description_ar'] = $v->description_ar;
+                $banner_array[$k]['image'] = $video_img;
 
-             }
-             $obj->category_banner = $banner_array;
-         }
+            }
+            $obj->category_banner = $banner_array;
+        }
 
         if($genre_id!=null)
         {
-            $genres=Video_genre::select("id","name_en","name_ar")->wherein('id',$genre_id)->get();
+            $genres=Video_genre::select("id","name_en","name_ar")->get();
             $obj->category_genre = $genres;
 
         }
@@ -152,6 +152,8 @@ class CategoryController extends Controller
             foreach ($videos as $k => $v) {
 
                 $video_img = str_replace('\\', '/', asset('app-assets/images/video/' . $v->video_img));
+                $video_banner_img = str_replace('\\', '/', asset('app-assets/images/video/' . $v->video_banner_img));
+
 
                 $latest_videos_array[$k]['id'] = $v->id;
                 $latest_videos_array[$k]['title'] = $v->title_en;
@@ -159,6 +161,7 @@ class CategoryController extends Controller
                 $latest_videos_array[$k]['description'] = $v->description_en;
                 $latest_videos_array[$k]['description_ar'] = $v->description_ar;
                 $latest_videos_array[$k]['image'] = $video_img;
+                $latest_videos_array[$k]['banner'] = $video_banner_img;
 
             }
             $obj->Category_latest_videos = $latest_videos_array;
@@ -173,6 +176,8 @@ class CategoryController extends Controller
             foreach ($clubs as $k => $v) {
 
                 $club_banner = str_replace('\\', '/', asset('app-assets/images/club/' . $v->club_banner));
+                $club_logo = str_replace('\\', '/', asset('app-assets/images/club/' . $v->club_logo));
+
 
                 $club_array[$k]['id'] = $v->id;
                 $club_array[$k]['name'] = $v->name_en;
@@ -180,6 +185,7 @@ class CategoryController extends Controller
                 $club_array[$k]['description'] = $v->description_en;
                 $club_array[$k]['description_ar'] = $v->description_ar;
                 $club_array[$k]['banner'] = $club_banner;
+                $club_array[$k]['logo'] = $club_logo;
 
             }
             $obj->category_clubs = $club_array;
@@ -194,6 +200,7 @@ class CategoryController extends Controller
             foreach ($players as $k => $v) {
 
                 $player_banner = str_replace('\\', '/', asset('app-assets/images/player/' . $v->player_banner));
+                $player_profile_image = str_replace('\\', '/', asset('app-assets/images/player/' . $v->player_profile_image));
 
                 $player_array[$k]['id'] = $v->id;
                 $player_array[$k]['name'] = $v->name_en;
@@ -201,6 +208,8 @@ class CategoryController extends Controller
                 $player_array[$k]['description'] = $v->description_en;
                 $player_array[$k]['description_ar'] = $v->description_ar;
                 $player_array[$k]['banner'] = $player_banner;
+                $player_array[$k]['image'] = $player_profile_image;
+
 
             }
             $obj->category_player = $player_array;
@@ -215,6 +224,7 @@ class CategoryController extends Controller
             foreach ($leagues as $k => $v) {
 
                 $league_banner = str_replace('\\', '/', asset('app-assets/images/league/' . $v->league_banner));
+                $league_profile_image = str_replace('\\', '/', asset('app-assets/images/league/' . $v->league_profile_image));
 
                 $league_array[$k]['id'] = $v->id;
                 $league_array[$k]['name'] = $v->name_en;
@@ -222,6 +232,7 @@ class CategoryController extends Controller
                 $league_array[$k]['description'] = $v->description_en;
                 $league_array[$k]['description_ar'] = $v->description_ar;
                 $league_array[$k]['banner'] = $league_banner;
+                $league_array[$k]['image'] = $league_profile_image;
 
             }
             $obj->category_leagues = $league_array;
@@ -243,9 +254,9 @@ class CategoryController extends Controller
 
         // getting Video ids of that specific category and genre both
         $video_ids = Videogenre::select("video_id")->where('category_id',$category_id)
-                      ->where('genre_id',$genre_ids)
-                      ->distinct()
-                      ->get();
+            ->where('genre_id',$genre_ids)
+            ->distinct()
+            ->get();
 
         $videos = Video::wherein('id', $video_ids)->get();
 
@@ -254,6 +265,7 @@ class CategoryController extends Controller
             foreach ($videos as $k => $v) {
 
                 $video_img = str_replace('\\', '/', asset('app-assets/images/video/' . $v->video_img));
+                $video_banner_img = str_replace('\\', '/', asset('app-assets/images/video/' . $v->video_banner_img));
 
                 $latest_videos_array[$k]['id'] = $v->id;
                 $latest_videos_array[$k]['title'] = $v->title_en;
@@ -261,6 +273,7 @@ class CategoryController extends Controller
                 $latest_videos_array[$k]['description'] = $v->description_en;
                 $latest_videos_array[$k]['description_ar'] = $v->description_ar;
                 $latest_videos_array[$k]['image'] = $video_img;
+                $latest_videos_array[$k]['banner'] = $video_banner_img;
 
             }
             $obj->Category_latest_videos = $latest_videos_array;
@@ -271,14 +284,15 @@ class CategoryController extends Controller
 
         // getting Club ids of that specific category and genre both
         $club_ids = VideoClub::select("Club_id")->wherein('Video_id', $video_ids)
-                        ->distinct()
-                        ->get();
+            ->distinct()
+            ->get();
         // getting Clubs of that specific category and genre both
         $clubs = Club::wherein('id', $club_ids)->get();
         if($clubs!=null){
             foreach ($clubs as $k => $v) {
 
                 $club_banner = str_replace('\\', '/', asset('app-assets/images/club/' . $v->club_banner));
+                $club_logo = str_replace('\\', '/', asset('app-assets/images/club/' . $v->club_logo));
 
                 $club_array[$k]['id'] = $v->id;
                 $club_array[$k]['name'] = $v->name_en;
@@ -286,6 +300,7 @@ class CategoryController extends Controller
                 $club_array[$k]['description'] = $v->description_en;
                 $club_array[$k]['description_ar'] = $v->description_ar;
                 $club_array[$k]['banner'] = $club_banner;
+                $club_array[$k]['logo'] = $club_logo;
 
             }
             $obj->category_clubs = $club_array;
@@ -294,14 +309,15 @@ class CategoryController extends Controller
 
         // getting Player ids of that specific category and genre both
         $player_ids = VideoPlayer::select("Player_id")->wherein('Video_id', $video_ids)
-                      ->distinct()
-                      ->get();
+            ->distinct()
+            ->get();
         // getting Players of that specific category and genre both
         $players = Player::wherein('id', $player_ids)->get();
         if($players!=null){
             foreach ($players as $k => $v) {
 
                 $player_banner = str_replace('\\', '/', asset('app-assets/images/player/' . $v->player_banner));
+                $player_profile_image = str_replace('\\', '/', asset('app-assets/images/player/' . $v->player_profile_image));
 
                 $player_array[$k]['id'] = $v->id;
                 $player_array[$k]['name'] = $v->name_en;
@@ -309,6 +325,7 @@ class CategoryController extends Controller
                 $player_array[$k]['description'] = $v->description_en;
                 $player_array[$k]['description_ar'] = $v->description_ar;
                 $player_array[$k]['banner'] = $player_banner;
+                $player_array[$k]['image'] = $player_profile_image;
 
             }
             $obj->category_player = $player_array;
@@ -318,8 +335,8 @@ class CategoryController extends Controller
 
         // getting league ids of that specific category and genre both
         $leagues_ids = Leaguecategory::select("league_id")->wherein('video_id', $video_ids)
-                       ->distinct()
-                       ->get();
+            ->distinct()
+            ->get();
 
 //        if($leagues_ids!=null){
 //            echo "yes";
@@ -337,6 +354,8 @@ class CategoryController extends Controller
             foreach ($leagues as $k => $v) {
 
                 $league_banner = str_replace('\\', '/', asset('app-assets/images/league/' . $v->league_banner));
+                $league_profile_image= str_replace('\\', '/', asset('app-assets/images/league/' . $v->league_profile_image));
+
 
                 $league_array[$k]['id'] = $v->id;
                 $league_array[$k]['name'] = $v->name_en;
@@ -344,6 +363,7 @@ class CategoryController extends Controller
                 $league_array[$k]['description'] = $v->description_en;
                 $league_array[$k]['description_ar'] = $v->description_ar;
                 $league_array[$k]['banner'] = $league_banner;
+                $league_array[$k]['image'] = $league_profile_image;
 
             }
             $obj->category_leagues = $league_array;

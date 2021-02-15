@@ -175,13 +175,14 @@ class ProjectClubViewController extends Controller
      */
     public function destroy($id)
     {
-
-        Videoclub::where('Club_id', $id)->delete();
-
-        $data = Club::findOrFail($id);
-        $data->delete();
-        return redirect('club-form')->with('clubdelsuccess','Club Deleted Successfully');
-
-
+        $videoclub=Videoclub::where('Club_id', $id)->get()->toArray();
+        if($videoclub!=null){
+            return redirect('club-form')->with('clubdelsuccess','You cant delete this Club because Video is Associated with this Club');
+        }
+        else{
+            $data = Club::findOrFail($id);
+            $data->delete();
+            return redirect('club-form')->with('clubdelsuccess','Club Deleted Successfully');
+        }
     }
 }

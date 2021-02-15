@@ -172,12 +172,14 @@ class ProjectPlayerViewController extends Controller
      */
     public function destroy($id)
     {
-        Videoplayer::where('Player_id', $id)->delete();
-
-        $data = Player::findOrFail($id);
-        $data->delete();
-        return redirect('player-form')->with('playerdelsuccess','Player Deleted Successfully');
-
-
+        $videoplayer=Videoplayer::where('Player_id', $id)->get()->toArray();
+        if($videoplayer!=null){
+            return redirect('player-form')->with('playerdelsuccess','You cant delete this Player because Video is Associated with this Player');
+        }
+        else{
+            $data = Player::findOrFail($id);
+            $data->delete();
+            return redirect('player-form')->with('playerdelsuccess','Player Deleted Successfully');
+        }
     }
 }

@@ -23,9 +23,9 @@ use \stdClass;
 
 class VideoController extends Controller
 {
-  public $successStatus = 200;
-  public $HTTP_FORBIDDEN = 403;
-  public $HTTP_NOT_FOUND = 404;
+    public $successStatus = 200;
+    public $HTTP_FORBIDDEN = 403;
+    public $HTTP_NOT_FOUND = 404;
     /**
      * Display a listing of the resource.
      *
@@ -35,26 +35,30 @@ class VideoController extends Controller
     {
         $obj = new stdClass;
         $all_videos_array = array();
-        $videos = Video::all();
+        $videos = Video::orderBy('video_sorting')->get();
 
         if(isset($videos)) {
-        foreach ($videos as $k => $v) {
+            foreach ($videos as $k => $v) {
 
-            $video_img = str_replace('\\', '/', asset('app-assets/images/video/' . $v->video_img));
+                $video_img = str_replace('\\', '/', asset('app-assets/images/video/' . $v->video_img));
+                $video_banner_img = str_replace('\\', '/', asset('app-assets/images/video/' . $v->video_banner_img));
 
-            $all_videos_array[$k]['id'] = $v->id;
-            $all_videos_array[$k]['title'] = $v->title_en;
-            $all_videos_array[$k]['title_ar'] = $v->title_ar;
-            $all_videos_array[$k]['description'] = $v->description_en;
-            $all_videos_array[$k]['description_ar'] = $v->description_ar;
-            $all_videos_array[$k]['image'] = $video_img;
+
+                $all_videos_array[$k]['id'] = $v->id;
+                $all_videos_array[$k]['title'] = $v->title_en;
+                $all_videos_array[$k]['title_ar'] = $v->title_ar;
+                $all_videos_array[$k]['description'] = $v->description_en;
+                $all_videos_array[$k]['description_ar'] = $v->description_ar;
+                $all_videos_array[$k]['sorting'] = $v->video_sorting;
+                $all_videos_array[$k]['image'] = $video_img;
+                $all_videos_array[$k]['banner'] = $video_banner_img;
+
+            }
+            $obj->Heading = "All Videos";
+            $obj->Content = $all_videos_array;
+            return response()->json(['success' => true, 'status' => $this->successStatus, 'message' => 'All Videos found.', 'data'=> $obj]);
 
         }
-        $obj->Heading = "All Videos";
-        $obj->Content = $all_videos_array;
-        return response()->json(['success' => true, 'status' => $this->successStatus, 'message' => 'All Videos found.', 'data'=> $obj]);
-
-    }
         else{
             return response()->json(['success' => false, 'status' => $this->HTTP_NOT_FOUND, 'message' => 'No Videos found.']);
         }
@@ -76,9 +80,9 @@ class VideoController extends Controller
         $specific_video_array=array();
 
         //getting video details of that specific video
-        $videos = Video::where('id', $id)->get();
+        $videos = Video::where('id', $id)->orderBy('video_sorting')->get();
 
-       //Getting league_id of that specific video
+        //Getting league_id of that specific video
         $leagues_id_collection = Video::select('season_id')->where('id', $id)->get()->first();
 
 
@@ -87,7 +91,7 @@ class VideoController extends Controller
 
         //Converting collection to string
         if(isset($leagues_id_collection->season_id)){
-        $league_id = $leagues_id_collection->season_id;
+            $league_id = $leagues_id_collection->season_id;
         }
 
         //Converting collection to string
@@ -103,6 +107,7 @@ class VideoController extends Controller
             foreach ($videos as $k => $v) {
 
                 $video_img = str_replace('\\', '/', asset('app-assets/images/video/' . $v->video_img));
+                $video_banner_img = str_replace('\\', '/', asset('app-assets/images/video/' . $v->video_banner_img));
 
                 $latest_videos_array[$k]['id'] = $v->id;
                 $latest_videos_array[$k]['title'] = $v->title_en;
@@ -119,6 +124,7 @@ class VideoController extends Controller
                 }
                 $latest_videos_array[$k]['description_ar'] = $v->description_ar;
                 $latest_videos_array[$k]['image'] = $video_img;
+                $latest_videos_array[$k]['banner'] = $video_banner_img;
 
             }
             $obj->video_details = $latest_videos_array;
@@ -128,52 +134,53 @@ class VideoController extends Controller
 
 
         //if league is assocaited
-       if(isset($league_id))
-       {
-           $videos = Video::where('season_id', $league_id)->get();
-           foreach ($videos as $k => $v) {
+        if(isset($league_id))
+        {
+            $videos = Video::where('season_id', $league_id)->orderBy('video_sorting')->get();
+            foreach ($videos as $k => $v) {
 
-               $video_img = str_replace('\\', '/', asset('app-assets/images/video/' . $v->video_img));
+                $video_img = str_replace('\\', '/', asset('app-assets/images/video/' . $v->video_img));
+                $video_banner_img = str_replace('\\', '/', asset('app-assets/images/video/' . $v->video_banner_img));
 
-               $season_array[$k]['id'] = $v->id;
-               $season_array[$k]['title'] = $v->title_en;
-               $season_array[$k]['title_ar'] = $v->title_ar;
-               $season_array[$k]['description'] = $v->description_en;
-               $season_array[$k]['description_ar'] = $v->description_ar;
-               $season_array[$k]['image'] = $video_img;
+                $season_array[$k]['id'] = $v->id;
+                $season_array[$k]['title'] = $v->title_en;
+                $season_array[$k]['title_ar'] = $v->title_ar;
+                $season_array[$k]['description'] = $v->description_en;
+                $season_array[$k]['description_ar'] = $v->description_ar;
+                $season_array[$k]['image'] = $video_img;
+                $season_array[$k]['banner'] = $video_banner_img;
 
-           }
-           $obj->season_videos = $season_array;
-       }
-       //in case league is not assocaited
-       elseif(isset($category_id)) {
+            }
+            $obj->season_videos = $season_array;
+        }
+        //in case league is not assocaited
+        elseif(isset($category_id)) {
 
-           $videos = Video::where('category_id', $category_id)->get();
+            $videos = Video::where('category_id', $category_id)->orderBy('video_sorting')->get();
 
-           foreach ($videos as $k => $v) {
+            foreach ($videos as $k => $v) {
 
-               $video_img = str_replace('\\', '/', asset('app-assets/images/video/' . $v->video_img));
+                $video_img = str_replace('\\', '/', asset('app-assets/images/video/' . $v->video_img));
+                $video_banner_img = str_replace('\\', '/', asset('app-assets/images/video/' . $v->video_banner_img));
 
-               $category_array[$k]['id'] = $v->id;
-               $category_array[$k]['title'] = $v->title_en;
-               $category_array[$k]['title_ar'] = $v->title_ar;
-               $category_array[$k]['description'] = $v->description_en;
-               $category_array[$k]['description_ar'] = $v->description_ar;
-               $category_array[$k]['image'] = $video_img;
+                $category_array[$k]['id'] = $v->id;
+                $category_array[$k]['title'] = $v->title_en;
+                $category_array[$k]['title_ar'] = $v->title_ar;
+                $category_array[$k]['description'] = $v->description_en;
+                $category_array[$k]['description_ar'] = $v->description_ar;
+                $category_array[$k]['sorting'] = $v->video_sorting;
+                $category_array[$k]['image'] = $video_img;
+                $category_array[$k]['banner'] = $video_banner_img;
 
-           }
-           $obj->category_videos = $category_array;
-       }
-       else{
-           return response()->json(['success' => false, 'status' => $this->HTTP_NOT_FOUND, 'message' => 'No Videos found realted to leagues or categories.']);
+            }
+            $obj->category_videos = $category_array;
+        }
+        else{
+            return response()->json(['success' => false, 'status' => $this->HTTP_NOT_FOUND, 'message' => 'No Videos found realted to leagues or categories.']);
 
-       }
+        }
 
         return response()->json(['success' => true, 'status' => $this->successStatus, 'message' => 'Videos Data Found', 'data'=> $obj]);
-
-
-
-
 
     }
 

@@ -27,8 +27,21 @@ class ProjectSliderViewController extends Controller
 
     public function index()
     {
+       $category_id = Slider::select('category_id')->get()->toArray();
 
-        $slidercategory = Slider::all();
+       foreach($category_id as $category_id){
+        if($category_id!=null){
+           $slidercategory = DB::table('sliders')
+             ->leftjoin('categories', 'categories.id', '=', 'sliders.category_id')
+            ->select('sliders.*','sliders.id','sliders.name_en',
+                'sliders.slider_sorting','categories.name_en as catname')
+            ->get();
+        }
+        else{
+            $slidercategory = Slider::select('name_en','slider_sorting')->get();
+        }
+       }
+
         return view('admin.slider.index', compact('slidercategory'));
     }
 
@@ -217,8 +230,24 @@ class ProjectSliderViewController extends Controller
 
     public function destroy1($id)
     {
-        $slidercategory = Slider::latest()->paginate(5);
+        $category_id = Slider::select('category_id')->where('id','=',$id)->get()->first();
+
+        if($category_id->category_id!=null){
+           $sliders = DB::table('sliders')
+             ->join('categories', 'categories.id', '=', 'sliders.category_id')
+            ->select('sliders.*','sliders.id','sliders.name_en',
+                'sliders.slider_sorting','categories.name_en as catname')
+            ->where('sliders.id',$id)
+            ->get();
+        }
+        else{
+            $sliders = Slider::select('name_en','slider_sorting')->where('id','=',$id)->get();
+        }
+
+        // $sliders = Slider::where('id',$id)->get();
         $slider_id=$id;
+
+        // dd($sliders);
 
         $slidervideos = DB::table('slidervideos');
         $videos =  DB::table('videos')
@@ -227,8 +256,7 @@ class ProjectSliderViewController extends Controller
             ->select('videos.*', 'videos.title_en')
             ->get();
 
-        return view('admin.slider.display', compact('videos','slidervideos','slidercategory'))
-            ->with('i', (request()->input('page', 1) - 1) * 5);
+        return view('admin.slider.display', compact('videos','sliders'));
 
 
 
@@ -238,11 +266,6 @@ class ProjectSliderViewController extends Controller
 
     public function destroy($id)
     {
-        SliderVideo::where('Slider_id', $id)->delete();
-
-        $data = Slider::findOrFail($id);
-        $data->delete();
-        return redirect('slider-form')->with('sliderdelsuccess','Slider Deleted Successfully');
 
 
 

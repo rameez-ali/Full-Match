@@ -28,7 +28,7 @@
                                     </div>
                                 </form>
                                 <div class="row">
-                                    <div class="col s14">
+                                    <div class="col">
                                         @if ($videoaddsuccess = Session::get('videoaddsuccess'))
                                             <div class="card-alert card gradient-45deg-green-teal">
                                                 <div class="card-content white-text">
@@ -66,10 +66,11 @@
                                             <thead>
                                             <tr>
                                                 <th width="5%">Title</th>
+                                                <th width="5%">Description</th>
                                                 <th width="5%">Banner</th>
                                                 <th width="5%">Image</th>
-                                                <th width="5%">Description</th>
                                                 <th width="5%">Link</th>
+                                                <th width="5%">Promo Video</th>
                                                 <th width="5%">Sorting</th>
                                                 <th width="80%">Action</th>
                                             </tr>
@@ -80,11 +81,12 @@
                                                 @if($video!=null)
                                                 <tr>
                                                     <td>{{ $video->title_en }}</td>
+                                                    <td>{{ $video->description_en }}</td>
                                                     <td><img src="{{ asset('app-assets/images/video/'.$video->video_banner_img)}}"  class="img-thumbnail" width="75" /></td>
                                                     <td><img src="{{ asset('app-assets/images/video/'.$video->video_img)}}"  class="img-thumbnail" width="75" /></td>
-                                                    <td>{{ $video->description_en }}</td>
                                                     <td>{{ $video->video_link }}</td>
-                                                    <td>{{ $video->video_sorting }}</td>
+                                                    <td>{{ $video->video_promo }}</td>
+                                                    <td>{{ $video->video_sorting}}</td>
                                                     <td><form action="{{ route('video-form.destroy', $video->id)}}" method="post">
                                                             @can('view-videodetail')
                                                             <a href="{{ url('videodetails/'.$video->id)}}" class="dt-button buttons-excel buttons-html5 waves-effect waves-light btn gradient-45deg-purple-deep-orange gradient-shadow">Details</a>
@@ -151,7 +153,7 @@
                         className: 'waves-effect waves-light btn gradient-45deg-purple-deep-orange gradient-shadow',
                         filename : '{{ __("customer.excel") }}' ,
                         exportOptions: {
-                            columns: [ 0,1,2,3,4,5 ]
+                            columns: [ 0,1,4,5,6 ]
                         },
                     },
                     {
@@ -160,7 +162,7 @@
                         className: 'waves-effect waves-light btn gradient-45deg-purple-deep-orange gradient-shadow',
                         filename : '{{ __("customer.csv") }}' ,
                         exportOptions: {
-                            columns: [ 0,1,2,3,4,5 ]
+                            columns: [ 0,1,4,5,6 ]
                         },
                     }
                 ],

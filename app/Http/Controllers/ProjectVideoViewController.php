@@ -36,7 +36,18 @@ class ProjectVideoViewController extends Controller
 
     public function index()
     {
-        $video = Video::all();
+        $category_id = Video::select('category_id')->get()->toArray();
+        $league_id = Video::select('league_id')->get()->toArray();
+
+        $video = DB::table('videos')
+            ->join('categories', 'categories.id', '=', 'videos.category_id')
+            ->leftJoin('leagues', 'leagues.id', '=', 'videos.league_id')
+            ->select('videos.*','videos.id','videos.title_en','videos.description_en','videos.video_link',
+                'videos.video_sorting','videos.video_banner_img','videos.video_img',
+                'videos.title_en','categories.name_en','leagues.name_en as leaguename')
+            ->get();
+
+
         return view('admin.video.index', compact('video'));
     }
 
@@ -476,8 +487,6 @@ class ProjectVideoViewController extends Controller
         $data = Video::findOrFail($id);
         $data->delete();
         return redirect('video-form')->with('videodelsuccess','Video Deleted Successfully');
-
-
     }
 
     public function destroy1($id)
@@ -512,9 +521,35 @@ class ProjectVideoViewController extends Controller
     public function video_details($id)
     {
         $Video_id=$id;
-        $video = Video::latest()
-            ->where('id', '=', $Video_id)
+
+        $category_id = Video::select('category_id')->where('id','=',$id)->get()->first();
+
+        $league_id = Video::select('league_id')->where('id','=',$id)->get()->first();
+
+
+
+        if($league_id->league_id!=null){
+
+        $video = DB::table('videos')
+            ->join('categories', 'categories.id', '=', 'videos.category_id')
+            ->join('leagues', 'leagues.id', '=', 'videos.league_id')
+            ->select('videos.*','videos.id','videos.title_en','videos.description_en','videos.video_link',
+                'videos.video_sorting','videos.video_banner_img','videos.video_img',
+                'videos.title_en','categories.name_en','leagues.name_en as leaguename')
+            ->where('videos.id',$id)
             ->get();
+        }
+        else{
+            $video = DB::table('videos')
+             ->join('categories', 'categories.id', '=', 'videos.category_id')
+            ->select('videos.*','videos.id','videos.title_en','videos.description_en','videos.video_link',
+                'videos.video_sorting','videos.video_banner_img','videos.video_img',
+                'videos.title_en','categories.name_en')
+            ->where('videos.id',$id)
+            ->get();
+        }
+
+
 
         $video_clubs = DB::table('videoclubs');
         $clubs =  DB::table('clubs')

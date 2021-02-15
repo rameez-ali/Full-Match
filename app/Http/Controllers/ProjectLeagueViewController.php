@@ -232,23 +232,39 @@ class ProjectLeagueViewController extends Controller
      */
     public function destroy($id)
     {
-        Season::where('league_id', $id)->delete();
-
-        $data = League::findOrFail($id);
-        $data->delete();
-        return redirect('league-form')->with('leaguedelsuccess','League Deleted Successfully');
+        $videoleague=Leaguecategory::where('league_id', $id)->get()->toArray();
+        if($videoleague!=null){
+            return redirect('league-form')->with('leaguedelsuccess','You cant delete this League because Video is Associated with this League');
+        }
+        else{
+            Season::where('league_id', $id)->delete();
+            $data = League::findOrFail($id);
+            $data->delete();
+            return redirect('league-form')->with('leaguedelsuccess','League Deleted Successfully');
+        }
     }
 
     public function destroy1($id)
     {
         //  $data = Category::findOrFail($id);
         //  $data->delete();
-        $Image_id=$id;
-        $data3 = Season::all();
-        $data4 = League::all();
-        // $id = DB::table('seasons')->where('Project_id', $Cat_id)->value('id');
-        return view('admin.season.index', compact('Image_id','data3','data4'));
-        // return view('helloworld')->with('variableone', $id);
+        // $Image_id=$id;
+        // $data3 = Season::all();
+        // $data4 = League::all();
+         $league1 = League::find($id)->get();
+
+         $league = DB::table('seasons')
+            ->join('leagues', 'leagues.id', '=', 'seasons.league_id')
+            ->select('leagues.*','seasons.name_en','seasons.Video',
+                     'leagues.name_en as leaguename','leagues.description_en','leagues.league_promo_video',
+                     'leagues.league_sorting')
+            ->where('league_id','=',$id)
+            ->distinct()
+
+            ->get();
+
+
+            return view('admin.season.index', compact('league','league1'));
 
     }
 }

@@ -57,6 +57,7 @@
                                                 <th width="10%">Banner</th>
                                                 <th width="10%">Promo Video</th>
                                                 <th width="10%">Profile Image</th>
+                                                <th width="10%">League Sorting</th>
                                                 <th width="50%">Action</th>
                                             </tr>
                                             </thead>
@@ -68,6 +69,7 @@
                                                     <td><img src="{{ asset('app-assets/images/league/'.$project->league_banner)}}" style="width:50px;height:50px;" /></td>
                                                     <td>{{ $project->league_promo_video }}</td>
                                                     <td><img src="{{ asset('app-assets/images/league/'.$project->league_profile_image)}}" style="width:50px;height:50px;" /></td>
+                                                    <td>{{ $project->league_sorting }}</td>
                                                     <td><form action="{{ route('league-form.destroy', $project->id)}}" method="post">
                                                             @can('view-leaguedetail')
                                                             <a href="{{ url('league/'.$project->id)}}" class="dt-button buttons-excel buttons-html5 waves-effect waves-light btn gradient-45deg-purple-deep-orange gradient-shadow">Details</a>
@@ -131,7 +133,7 @@
                         className: 'waves-effect waves-light btn gradient-45deg-purple-deep-orange gradient-shadow',
                         filename : '{{ __("customer.excel") }}' ,
                         exportOptions: {
-                            columns: [ 0,1,2,3,4 ]
+                            columns: [ 0,1,3,5 ]
                         },
                     },
                     {
@@ -140,7 +142,7 @@
                         className: 'waves-effect waves-light btn gradient-45deg-purple-deep-orange gradient-shadow',
                         filename : '{{ __("customer.csv") }}' ,
                         exportOptions: {
-                            columns: [ 0,1,2,3,4 ]
+                            columns: [ 0,1,3,5 ]
                         },
                     }
                 ],

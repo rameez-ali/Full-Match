@@ -17,81 +17,50 @@
                                         <table id="page-length-option" class="display">
                                             <thead>
                                             <tr>
-                                                <th width="20%">Title EN</th>
-                                                <th width="20%">Title AR</th>
-                                                <th width="20%">Banner</th>
-                                                <th width="20%">Image</th>
-                                                <th width="15%">Description EN</th>
-                                                <th width="15%">Description AR</th>
-                                                <th width="15%">Link</th>
-                                                <th width="10%">Duration</th>
+                                                <th width="20%">Title</th>
+                                                <th width="20%">Description</th>
+                                                <th width="20%">Link</th>
+                                                <th width="20%">Promo</th>
+                                                <th width="20%">Category</th>
+                                                <th width="20%">League</th>
+                                                <th width="20%">Link</th>
+                                                <th width="20%">Sorting</th>
+                                                <th width="20%">Players</th>
+                                                <th width="20%">Clubs</th>
+                                                <th width="20%">Genres</th>
                                             </tr>
                                             </thead>
                                             <tbody>
-                                            @foreach($video as $video)
-                                                <tr>
-                                                    <td>{{ $video->title_en }}</td>
-                                                    <td>{{ $video->title_ar }}</td>
-                                                    <td><img src="{{ asset('app-assets/images/video/'.$video->video_banner_img)}}"  class="img-thumbnail" width="75" /></td>
-                                                    <td><img src="{{ asset('app-assets/images/video/'.$video->video_img)}}"  class="img-thumbnail" width="75" /></td>
-                                                    <td>{{ $video->description_en }}</td>
-                                                    <td>{{ $video->description_ar }}</td>
-                                                    <td>{{ $video->video_link }}</td>
-                                                    <td>{{ $video->hour }}:
-                                                        {{ $video->minute }}:
-                                                        {{ $video->second }}</td>
-                                                    <td>{{ $video->video_duration }}</td>
-                                                </tr>
-                                            @endforeach
-                                            </tbody>
-                                            </tbody>
-                                        </table>
-                                        <table id="page-length-option" class="display">
-                                            <thead>
                                             <tr>
-                                                <th width="27%">Clubs</th>
+                                                <td>
+                                                    @foreach($video as $video)
+                                                       {{$video->title_en}}
+                                                        <td>{{$video->description_en}}</td>
+                                                        <td>{{$video->video_link}}</td>
+                                                        <td>{{$video->video_promo}}</td>
+                                                        <td>{{$video->name_en}}</td>
+                                                        @if(isset($video->leaguename))
+                                                        <td>{{$video->leaguename}}</td>
+                                                        
+                                                        @else
+                                                        <td></td>
+                                                        @endif
+                                                        <td>{{$video->video_link}}</td>
+                                                        <td>{{$video->video_sorting}}</td>
+                                                    @endforeach
+                                                </td>
+
+                                                <td>
+                                                    @foreach($clubs as $club){{$club->name_en}}, @endforeach
+                                                </td>
+                                                <td>
+                                                    @foreach($players as $item){{$item->name_en}}, @endforeach
+                                                </td>
+                                                <td>
+                                                    @foreach($video_genres as $videogenre){{$videogenre->name_en}}, @endforeach
+                                                </td>
                                             </tr>
-                                            </thead>
-                                            <tbody>
-                                            @foreach($clubs as $club)
-                                                <tr>
-                                                    <td>{{ $club->name_en}}</td>
-                                                </tr>
-                                            @endforeach
                                             </tbody>
-
-                                        </table>
-
-                                        <table id="page-length-option" class="display">
-                                            <thead>
-                                            <tr>
-                                                <th width="27%">Players</th>
-                                            </tr>
-                                            </thead>
-                                            <tbody>
-                                            @foreach($players as $player)
-                                                <tr>
-                                                    <td>{{ $player->name_en}}</td>
-                                                </tr>
-                                            @endforeach
-                                            </tbody>
-
-                                        </table>
-
-                                        <table id="page-length-option" class="display">
-                                            <thead>
-                                            <tr>
-                                                <th width="27%">Video Genres</th>
-                                            </tr>
-                                            </thead>
-                                            <tbody>
-                                            @foreach($video_genres as $video_genre)
-                                                <tr>
-                                                    <td>{{ $video_genre->name_en}}</td>
-                                                </tr>
-                                            @endforeach
-                                            </tbody>
-
                                         </table>
                                     </div>
                                 </div>
@@ -105,6 +74,9 @@
     </div>
 @endsection
 @section('scripts')
+    <script src={{ asset('app-assets/vendors/data-tables/js/jquery.dataTables.min.js') }}></script>
+    <script src={{ asset('app-assets/vendors/data-tables/extensions/responsive/js/dataTables.responsive.min.js') }}></script>
+    <script src={{ asset('app-assets/vendors/data-tables/js/dataTables.select.min.js') }}></script>
     <script type="text/javascript" src="https://cdn.datatables.net/buttons/1.6.1/js/dataTables.buttons.min.js"></script>
     <script type="text/javascript" src="https://cdn.datatables.net/buttons/1.6.1/js/buttons.flash.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
@@ -131,19 +103,19 @@
                     {
                         extend: 'excel',
                         text: '{{ __("customer.excel") }}',
-                        className: 'waves-effect waves-light btn-small',
+                        className: 'waves-effect waves-light btn gradient-45deg-purple-deep-orange gradient-shadow',
                         filename : '{{ __("customer.excel") }}' ,
                         exportOptions: {
-                            columns: [ 0,1,2,3,4,5 ]
+                            columns: [ 0,1,2,3,4,5,6,7,8,9,10 ]
                         },
                     },
                     {
                         extend: 'csv',
                         text: '{{ __("customer.csv") }}',
-                        className: 'waves-effect waves-light btn-small',
+                        className: 'waves-effect waves-light btn gradient-45deg-purple-deep-orange gradient-shadow',
                         filename : '{{ __("customer.csv") }}' ,
                         exportOptions: {
-                            columns: [ 0,1,2,3,4,5 ]
+                            columns: [ 0,1,2,3,4,5,6,7,8,9,10 ]
                         },
                     }
                 ],

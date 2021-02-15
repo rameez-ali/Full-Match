@@ -19,17 +19,17 @@ class ClubController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-public $successStatus = 200;
-public $HTTP_FORBIDDEN = 403;
-public $HTTP_NOT_FOUND = 404;
+    public $successStatus = 200;
+    public $HTTP_FORBIDDEN = 403;
+    public $HTTP_NOT_FOUND = 404;
 
 
     public function clubs()
     {
         $obj = new stdClass;
-     $array = array();
+        $array = array();
 
-     $clubs = Club::all();
+        $clubs = Club::orderBy('club_sorting')->get();
         if (!$clubs->isEmpty()) {
 
             foreach ($clubs as $k => $v) {
@@ -66,13 +66,14 @@ public $HTTP_NOT_FOUND = 404;
         $club_detail = array();
         $club_related_video = array();
 
-        $video_clubs=Videoclub::select('videos.id','videos.title_en','videos.title_ar','videos.video_img','videos.description_en','videos.description_ar')
+        $video_clubs=Videoclub::select('videos.id','videos.title_en','videos.title_ar','videos.video_img','videos.description_en','videos.description_ar','videos.video_banner_img')
             ->join('videos','videoclubs.Video_id' , '=' ,'videos.id')
             ->where('Club_id','=', $id)
+            ->orderBy('video_sorting')
             ->get();
-        
 
-        $clubs = Club::where('id',$id)->get();
+
+        $clubs = Club::where('id',$id)->orderBy('club_sorting')->get();
         if (!$clubs->isEmpty()) {
 
             foreach ($clubs as $k => $v) {
@@ -94,11 +95,12 @@ public $HTTP_NOT_FOUND = 404;
 
 
 
-         if (!$video_clubs->isEmpty()) {
+        if (!$video_clubs->isEmpty()) {
 
             foreach ($video_clubs as $k => $v) {
 
                 $video_img = str_replace('\\', '/', asset('app-assets/images/video/' . $v->video_img));
+                $video_banner_img = str_replace('\\', '/', asset('app-assets/images/video/' . $v->video_img));
 
                 $club_related_video[$k]['id'] = $v->id;
                 $club_related_video[$k]['name'] = $v->title_en;
@@ -106,9 +108,10 @@ public $HTTP_NOT_FOUND = 404;
                 $club_related_video[$k]['description'] = $v->description_en;
                 $club_related_video[$k]['description_en'] = $v->description_ar;
                 $club_related_video[$k]['image'] = $video_img;
+                $club_related_video[$k]['banner'] = $video_banner_img;
 
             }
-             $obj->Club_Related_Videos = $club_related_video;
+            $obj->Club_Related_Videos = $club_related_video;
         }
 
         return response()->json(['success' => true, 'status' => $this->successStatus, 'message' => 'Club Detail Data found.', 'data' => $obj]);

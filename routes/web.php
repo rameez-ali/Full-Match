@@ -41,6 +41,8 @@ Route::group(['middleware' => ['auth']], function () {
 
     Route::post('video-form-search','VideoSearchController@search')->name('video-form-search.search');
     Route::get('video-form-search','ProjectVideoViewController@index')->name('video-form-search.search');
+    Route::get('exportxls/{id}', 'ProjectVideoViewController@exportexcel');
+    Route::get('exportcsv/{id}', 'ProjectVideoViewController@exportcsv');
 
 
     Route::resource('seasonpart-form','DropdownController');
@@ -64,6 +66,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('banner-form/allvideos/{id}','ProjectAdvertisementViewController@getallvideos');
     Route::get('banner-form/videos/{id}','ProjectAdvertisementViewController@getvideos');
     Route::get('adv_banner/{id}','ProjectAdvertisementViewController@destroy1');
+
 
     Route::resource('my-form','SeasonPartSortingController');
     Route::get("addmore","SeasonPartSortingController@addMore");
@@ -89,18 +92,18 @@ Route::group(['middleware' => ['auth']], function () {
 //Auth::routes();
 
 /* overridden to give custom names to routes */
-    Route::get('login','Auth\LoginController@showLoginForm')->name('customer.login.show');
-    Route::post('login', 'Auth\LoginController@login')->name('customer.login');
-    Route::post('logout', 'Auth\LoginController@logout')->name('customer.logout');
-    Route::get('register','Auth\RegisterController@showRegistrationForm')->name('customer.register');
-    Route::post('register','Auth\RegisterController@register')->name('customer.login.show.register');
-    Route::get('password/reset', 'Auth\ForgotPasswordController@showLinkRequestForm')->name('password.request');
-    Route::post('password/email', 'Auth\ForgotPasswordController@sendResetLinkEmail')->name('password.email');
-    Route::get('password/reset/{token}', 'Auth\ResetPasswordController@showResetForm')->name('password.reset');
-    Route::post('password/reset', 'Auth\ResetPasswordController@reset')->name('password.update');
-    Route::get('email/verify', 'Auth\VerificationController@show')->name('customer.verification.notice');
-    Route::get('email/verify/{id}/{hash}', 'Auth\VerificationController@verify')->name('customer.verification.verify');
-    Route::post('email/resend', 'Auth\VerificationController@resend')->name('customer.verification.resend');
+Route::get('login','Auth\LoginController@showLoginForm')->name('customer.login.show');
+Route::post('login', 'Auth\LoginController@login')->name('customer.login');
+Route::post('logout', 'Auth\LoginController@logout')->name('customer.logout');
+Route::get('register','Auth\RegisterController@showRegistrationForm')->name('customer.register');
+Route::post('register','Auth\RegisterController@register')->name('customer.login.show.register');
+Route::get('password/reset', 'Auth\ForgotPasswordController@showLinkRequestForm')->name('password.request');
+Route::post('password/email', 'Auth\ForgotPasswordController@sendResetLinkEmail')->name('password.email');
+Route::get('password/reset/{token}', 'Auth\ResetPasswordController@showResetForm')->name('password.reset');
+Route::post('password/reset', 'Auth\ResetPasswordController@reset')->name('password.update');
+Route::get('email/verify', 'Auth\VerificationController@show')->name('customer.verification.notice');
+Route::get('email/verify/{id}/{hash}', 'Auth\VerificationController@verify')->name('customer.verification.verify');
+Route::post('email/resend', 'Auth\VerificationController@resend')->name('customer.verification.resend');
 
 
 //Route::get('blankpg', function () { return view('admin/blank/index');});

@@ -52,8 +52,9 @@
                                             <table id="page-length-option" class="display">
                                                 <thead>
                                                 <tr>
-                                                  <th width="27%">Name</th>
-                                                  <th width="27%">Sorting</th>
+                                                  <th width="20%">Name</th>
+                                                  <th width="20%">Type</th>
+                                                  <th width="10%">Sorting</th>
                                                   <th width="30%">Action</th>
                                                  </tr>
                                                 </thead>
@@ -61,6 +62,11 @@
                                                   @foreach($slidercategory as $slidercategory)
                                                   <tr>
                                                   <td>{{$slidercategory->name_en}}</td>
+                                                  @if(isset($slidercategory->catname))
+                                                    <td>{{$slidercategory->catname}}</td>
+                                                  @else
+                                                    <td>Home</td>
+                                                  @endif
                                                   <td>{{$slidercategory->slider_sorting}}</td>
                                                   <td><form action="{{ route('slider-form.destroy', $slidercategory->id)}}" method="post">
                                                           @can('view-sliderdetail')

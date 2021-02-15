@@ -149,13 +149,25 @@ class ProjectCategoryViewController extends Controller
      */
     public function destroy(Request $request, $id)
     {
-
         $data = Category::findOrFail($id);
 
-        $data->delete();
-        $request->session()->flash('message', 'Successfully deleted the task!');
-        return redirect('category-form')->with('catdelsuccess','Category Deleted Successfully');
+        $video=Video::where('category_id',$id)->get()->toArray();
+        $slider=Slider::where('category_id',$id)->get()->toArray();
+        $advbanner=Adv_banner::where('category_id',$id)->get()->toArray();
 
+        if($video!=null){
+            return redirect('category-form')->with('catdelsuccess','You cant delete this category because Video is Associated with this Category');
+        }
+        elseif($slider!=null){
+            return redirect('category-form')->with('catdelsuccess','You cant delete this category because Slider is Associated with this Category');
+        }
+        elseif($advbanner!=null){
+            return redirect('category-form')->with('catdelsuccess','You cant delete this category because Adv Banner is Associated with this Category');
+        }
+        else{
+            $data->delete();
+            return redirect('category-form')->with('catdelsuccess','Category Deleted Successfully');
+        }
 
     }
 }

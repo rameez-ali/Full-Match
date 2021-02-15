@@ -13,24 +13,24 @@ use \stdClass;
 
 class LeagueController extends Controller
 {
-     /**
+    /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
 
-     public $successStatus = 200;
-     public $HTTP_FORBIDDEN = 403;
-     public $HTTP_NOT_FOUND = 404;
+    public $successStatus = 200;
+    public $HTTP_FORBIDDEN = 403;
+    public $HTTP_NOT_FOUND = 404;
 
     public function leagues()
     {
         $obj = new stdClass;
-     $array = array();
+        $array = array();
 
-     $leagues = League::all();
+        $leagues = League::orderBy('league_sorting')->get();
 
-     if (!$leagues->isEmpty()) {
+        if (!$leagues->isEmpty()) {
 
             foreach ($leagues as $k => $v) {
 
@@ -47,14 +47,14 @@ class LeagueController extends Controller
                 $array[$k]['sorting'] = $v->league_sorting;
 
             }
-             $obj->Heading = "All Leagues";
-             $obj->Content = $array;
+            $obj->Heading = "All Leagues";
+            $obj->Content = $array;
             return response()->json(['success' => true, 'status' => $this->successStatus, 'message' => 'League found.', 'data' => $obj]);
 
         }
 
-     else {
-           return response()->json(['success' => false, 'status' => $this->HTTP_NOT_FOUND, 'message' => 'League not found .', 'data' => []]);
+        else {
+            return response()->json(['success' => false, 'status' => $this->HTTP_NOT_FOUND, 'message' => 'League not found .', 'data' => []]);
         }
 
     }
@@ -66,7 +66,7 @@ class LeagueController extends Controller
         $league_detail = array();
         $league_related_video = array();
 
-        $leagues = League::where('id',$id)->get();;
+        $leagues = League::where('id',$id)->orderBy('league_sorting')->get();
 
         if (!$leagues->isEmpty()) {
 
@@ -89,16 +89,18 @@ class LeagueController extends Controller
         }
 
 
-        $video_leagues=Leaguecategory::select('videos.id','videos.title_en','videos.title_ar','videos.video_img','videos.description_en','videos.description_ar')
+        $video_leagues=Leaguecategory::select('videos.id','videos.title_en','videos.title_ar','videos.video_img','videos.description_en','videos.description_ar','videos.video_banner_img')
             ->join('videos','leaguecategories.video_id' , '=' ,'videos.id')
             ->where('league_id','=', $id)
+            ->orderBy('video_sorting')
             ->get();
 
-         if (!$video_leagues->isEmpty()) {
+        if (!$video_leagues->isEmpty()) {
 
             foreach ($video_leagues as $k => $v) {
 
                 $video_img = str_replace('\\', '/', asset('app-assets/images/video/' . $v->video_img));
+                $video_banner_img = str_replace('\\', '/', asset('app-assets/images/video/' . $v->video_banner_img));
 
                 $league_related_video[$k]['id'] = $v->id;
                 $league_related_video[$k]['name'] = $v->title_en;
@@ -106,12 +108,13 @@ class LeagueController extends Controller
                 $league_related_video[$k]['description'] = $v->description_en;
                 $league_related_video[$k]['description_ar'] = $v->description_ar;
                 $league_related_video[$k]['image'] = $video_img;
+                $league_related_video[$k]['image'] = $video_banner_img;
 
             }
-             $obj->League_Related_Videos = $league_related_video;
+            $obj->League_Related_Videos = $league_related_video;
         }
 
-            return response()->json(['success' => true, 'status' => $this->successStatus, 'message' => 'League Detail Data found.', 'data' => $obj]);
+        return response()->json(['success' => true, 'status' => $this->successStatus, 'message' => 'League Detail Data found.', 'data' => $obj]);
 
 
 

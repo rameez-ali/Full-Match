@@ -17,19 +17,36 @@
                                             <table id="page-length-option" class="display">
                                                 <thead>
                                                 <tr>
+                                                <th width="27%">Name</th>
+                                                <th width="27%">Description</th>
+                                                <th width="27%">Promo Video</th>
+                                                <th width="27%">Sorting</th>
                                                 <th width="27%">Seasons</th>
                                                 <th width="27%">Promo Video URL of Season</th>
                                                  </tr>
                                                 </thead>
                                                  <tbody>
-                                                  @if($data3->count())
-                                                  @foreach($data3->where('league_id', $Image_id) as $data3)
+                                                  @foreach($league as $league)
                                                   <tr>
-                                                  <td>{{$data3->name_en}}</td>
-                                                  <td>{{$data3->Video}}</td>
+                                                  <td>
+                                                  @if($loop->index == 0) 
+                                                       {{$league->leaguename}}
+                                                   <td>{{$league->description_en}}</td>
+                                                   <td>{{$league->league_promo_video}}</td>
+                                                   <td>{{$league->league_sorting}}</td>
+                                                  @endif
+                                                  @if($loop->index == 0)
+                                                  <td>{{$league->name_en}}</td>
+                                                  <td>{{$league->Video}}</td>
+                                                  @else
+                                                  <td></td>
+                                                  <td></td>
+                                                  <td></td>
+                                                  <td>{{$league->name_en}}</td>
+                                                  <td>{{$league->Video}}</td>
+                                                  @endif
                                                   </tr>
                                                   @endforeach
-                                                  @endif
                                                  </tbody>
 
                                             </table>
@@ -70,6 +87,7 @@
                     [10, 25, 50, -1],
                     [10, 25, 50, "All"]
                 ],
+                "order":[[5,"desc"]],
                 buttons: [
                     {
                         extend: 'excel',
@@ -77,7 +95,7 @@
                         className: 'dt-button buttons-excel buttons-html5 waves-effect waves-light btn gradient-45deg-purple-deep-orange gradient-shadow',
                         filename : '{{ __("customer.excel") }}' ,
                         exportOptions: {
-                            columns: [ 0,1 ]
+                            columns: [ 0,1,2,3,4,5 ]
                         },
                     },
                     {
@@ -86,7 +104,7 @@
                         className: 'dt-button buttons-excel buttons-html5 waves-effect waves-light btn gradient-45deg-purple-deep-orange gradient-shadow',
                         filename : '{{ __("customer.csv") }}' ,
                         exportOptions: {
-                            columns: [ 0,1 ]
+                            columns: [ 0,1,2,3,4,5 ]
                         },
                     }
                 ],
