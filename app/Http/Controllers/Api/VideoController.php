@@ -45,8 +45,8 @@ class VideoController extends Controller
 
 
                 $all_videos_array[$k]['id'] = $v->id;
-                $all_videos_array[$k]['title'] = $v->title_en;
-                $all_videos_array[$k]['title_ar'] = $v->title_ar;
+                $all_videos_array[$k]['name'] = $v->title_en;
+                $all_videos_array[$k]['name_ar'] = $v->title_ar;
                 $all_videos_array[$k]['description'] = $v->description_en;
                 $all_videos_array[$k]['description_ar'] = $v->description_ar;
                 $all_videos_array[$k]['sorting'] = $v->video_sorting;
@@ -110,8 +110,8 @@ class VideoController extends Controller
                 $video_banner_img = str_replace('\\', '/', asset('app-assets/images/video/' . $v->video_banner_img));
 
                 $latest_videos_array[$k]['id'] = $v->id;
-                $latest_videos_array[$k]['title'] = $v->title_en;
-                $latest_videos_array[$k]['title_ar'] = $v->title_ar;
+                $latest_videos_array[$k]['name'] = $v->title_en;
+                $latest_videos_array[$k]['name_ar'] = $v->title_ar;
                 if($v->video_link==null)
                 {
                     $season_id = Video::select('season_id')->where('id', $v->id)->first();
@@ -143,8 +143,8 @@ class VideoController extends Controller
                 $video_banner_img = str_replace('\\', '/', asset('app-assets/images/video/' . $v->video_banner_img));
 
                 $season_array[$k]['id'] = $v->id;
-                $season_array[$k]['title'] = $v->title_en;
-                $season_array[$k]['title_ar'] = $v->title_ar;
+                $season_array[$k]['name'] = $v->title_en;
+                $season_array[$k]['name_ar'] = $v->title_ar;
                 $season_array[$k]['description'] = $v->description_en;
                 $season_array[$k]['description_ar'] = $v->description_ar;
                 $season_array[$k]['logo'] = $video_img;
@@ -164,8 +164,8 @@ class VideoController extends Controller
                 $video_banner_img = str_replace('\\', '/', asset('app-assets/images/video/' . $v->video_banner_img));
 
                 $category_array[$k]['id'] = $v->id;
-                $category_array[$k]['title'] = $v->title_en;
-                $category_array[$k]['title_ar'] = $v->title_ar;
+                $category_array[$k]['name'] = $v->title_en;
+                $category_array[$k]['name_ar'] = $v->title_ar;
                 $category_array[$k]['description'] = $v->description_en;
                 $category_array[$k]['description_ar'] = $v->description_ar;
                 $category_array[$k]['sorting'] = $v->video_sorting;
