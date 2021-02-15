@@ -29,18 +29,12 @@ class ProjectSliderViewController extends Controller
     {
        $category_id = Slider::select('category_id')->get()->toArray();
 
-       foreach($category_id as $category_id){
-        if($category_id!=null){
            $slidercategory = DB::table('sliders')
              ->leftjoin('categories', 'categories.id', '=', 'sliders.category_id')
             ->select('sliders.*','sliders.id','sliders.name_en',
                 'sliders.slider_sorting','categories.name_en as catname')
             ->get();
-        }
-        else{
-            $slidercategory = Slider::select('name_en','slider_sorting')->get();
-        }
-       }
+
 
         return view('admin.slider.index', compact('slidercategory'));
     }

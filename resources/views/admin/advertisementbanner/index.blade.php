@@ -55,15 +55,29 @@
                                                 <th width="15%">Video Title</th>
                                                 <th width="15%">Video Banner</th>
                                                 <th width="25%">Video Link</th>
+                                                <th width="25%">Category</th>
+                                                <th width="25%">Genres</th>
+                                                <th width="25%">Homepage</th>
                                                 <th width="50%">Action</th>
                                             </tr>
                                             </thead>
                                             <tbody>
                                             @foreach($Adv_banner as $adv_banner)
                                                 <tr>
-                                                    <td>{{$adv_banner->video_title}}</td>
+                                                    <td>{{$adv_banner->title_en}}</td>
                                                     <td><img src="{{ asset('app-assets/images/advbanner/'.$adv_banner->video_banner)}}" style="width:50px;height:50px;" /></td>
                                                     <td>{{$adv_banner->video_link}}</td>
+                                                    <td>{{$adv_banner->categoryname}}</td>
+                                                    @if($adv_banner->genrename==0)
+                                                        <td>All Genres</td>
+                                                    @else
+                                                        {{$adv_banner->categoryname}}
+                                                    @endif
+                                                    @if($adv_banner->homepage==1)
+                                                     <td>Yes</td>
+                                                    @else
+                                                      <td>No</td>
+                                                    @endif
                                                     <td><form action="{{ route('banner-form.destroy', $adv_banner->id)}}" method="post">
                                                             <a href="{{ url('adv_banner/'.$adv_banner->id)}}" class="dt-button buttons-excel buttons-html5 waves-effect waves-light btn gradient-45deg-purple-deep-orange gradient-shadow">Details</a>
                                                             @can('edit-advbanner')
@@ -125,7 +139,7 @@
                         className: 'waves-effect waves-light btn gradient-45deg-purple-deep-orange gradient-shadow',
                         filename : '{{ __("customer.excel") }}' ,
                         exportOptions: {
-                            columns: [ 0,1,2 ]
+                            columns: [ 0,2,3,4,5 ]
                         },
                     },
                     {
@@ -134,7 +148,7 @@
                         className: 'waves-effect waves-light btn gradient-45deg-purple-deep-orange gradient-shadow',
                         filename : '{{ __("customer.csv") }}' ,
                         exportOptions: {
-                            columns: [ 0,1,2 ]
+                            columns: [ 0,2,3,4,5 ]
                         },
                     }
                 ],

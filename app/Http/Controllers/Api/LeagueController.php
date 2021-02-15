@@ -41,7 +41,7 @@ class LeagueController extends Controller
                 $array[$k]['name'] = $v->name_en;
                 $array[$k]['name_ar'] = $v->name_ar;
                 $array[$k]['banner'] = $banner;
-                $array[$k]['profile_image'] = $profile_image;
+                $array[$k]['logo'] = $profile_image;
                 $array[$k]['description'] = $v->description_en;
                 $array[$k]['description_ar'] = $v->description_ar;
                 $array[$k]['sorting'] = $v->league_sorting;
@@ -79,7 +79,7 @@ class LeagueController extends Controller
                 $league_detail[$k]['name'] = $v->name_en;
                 $league_detail[$k]['name_ar'] = $v->name_ar;
                 $league_detail[$k]['banner'] = $banner;
-                $league_detail[$k]['profile_image'] = $profile_image;
+                $league_detail[$k]['logo'] = $profile_image;
                 $league_detail[$k]['description'] = $v->description_en;
                 $league_detail[$k]['description_ar'] = $v->description_ar;
 
@@ -107,8 +107,8 @@ class LeagueController extends Controller
                 $league_related_video[$k]['name_ar'] = $v->title_ar;
                 $league_related_video[$k]['description'] = $v->description_en;
                 $league_related_video[$k]['description_ar'] = $v->description_ar;
-                $league_related_video[$k]['image'] = $video_img;
-                $league_related_video[$k]['image'] = $video_banner_img;
+                $league_related_video[$k]['logo'] = $video_img;
+                $league_related_video[$k]['banner'] = $video_banner_img;
 
             }
             $obj->League_Related_Videos = $league_related_video;

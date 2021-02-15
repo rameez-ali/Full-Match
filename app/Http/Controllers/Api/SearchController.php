@@ -33,6 +33,8 @@ class SearchController extends Controller
      */
     public function search($searchword)
     {
+        $obj = new stdClass;
+
         $club_search_video = array();
         $all_videos_array = array();
         $player_search_video = array();
@@ -52,7 +54,7 @@ class SearchController extends Controller
             ->first();
 
 
-        $players = Player::where('name_en', $searchword)
+        $players = Player::select('id')->where('name_en', $searchword)
             ->orwhere('name_ar', $searchword)
             ->orWhere('name_en', 'like', '%' . $searchword. '%')
             ->orWhere('name_ar', 'like', '%' . $searchword. '%')
@@ -74,11 +76,11 @@ class SearchController extends Controller
                  $all_videos_array[$k]['banner'] = $banner;
 
              }
-             return response()->json(['success' => true, 'status' => $this->successStatus, 'message' => 'Videos found.', 'data'=> $all_videos_array]);
-
+             $obj->Byvideotitile= $all_videos_array;
 
         }
-         else if($clubs!=null){
+
+         if($clubs!=null){
 
             $video_id = Videoclub::select('Video_id')->wherein('Club_id',$clubs)->get();
 
@@ -87,6 +89,7 @@ class SearchController extends Controller
              foreach ($videos as $k => $v) {
 
                  $banner = str_replace('\\', '/', asset('app-assets/images/video/' . $v->video_banner_img));
+                 $image = str_replace('\\', '/', asset('app-assets/images/video/' . $v->video_img));
 
                  $club_search_video[$k]['id'] = $v->id;
                  $club_search_video[$k]['name'] = $v->title_en;
@@ -94,13 +97,15 @@ class SearchController extends Controller
                  $club_search_video[$k]['description'] = $v->description_en;
                  $club_search_video[$k]['description_ar'] = $v->description_ar;
                  $club_search_video[$k]['banner'] = $banner;
+                 $club_search_video[$k]['image'] = $image;
 
              }
-             return response()->json(['success' => true, 'status' => $this->successStatus, 'message' => 'Videos in Club found.', 'data'=> $club_search_video]);
+             $obj->Byclubname = $club_search_video;
 
 
          }
-        else if($players!=null){
+
+         if($players!=null){
 
            $video_id = Videoplayer::select('Video_id')->wherein('Player_id',$players)->get();
            $videos=Video::wherein('id',$video_id)->get();
@@ -108,6 +113,7 @@ class SearchController extends Controller
             foreach ($videos as $k => $v) {
 
                 $banner = str_replace('\\', '/', asset('app-assets/images/video/' . $v->video_banner_img));
+                $image = str_replace('\\', '/', asset('app-assets/images/video/' . $v->video_img));
 
                 $player_search_video[$k]['id'] = $v->id;
                 $player_search_video[$k]['name'] = $v->title_en;
@@ -115,18 +121,19 @@ class SearchController extends Controller
                 $player_search_video[$k]['description'] = $v->description_en;
                 $player_search_video[$k]['description_ar'] = $v->description_ar;
                 $player_search_video[$k]['banner'] = $banner;
+                $player_search_video[$k]['image'] = $image;
+
 
             }
-            return response()->json(['success' => true, 'status' => $this->successStatus, 'message' => 'Videos in Player found.', 'data'=> $player_search_video]);
-
-
+             $obj->Byplayername = $player_search_video;
          }
 
-        elseif($popular_search_videos!=null){
+        if( $popular_search_videos!=null){
 
             foreach ($popular_search_videos as $k => $v) {
 
                 $banner = str_replace('\\', '/', asset('app-assets/images/video/' . $v->video_banner_img));
+                $image = str_replace('\\', '/', asset('app-assets/images/video/' . $v->video_img));
 
                 $popular_search_video[$k]['id'] = $v->id;
                 $popular_search_video[$k]['name'] = $v->title_en;
@@ -134,22 +141,16 @@ class SearchController extends Controller
                 $popular_search_video[$k]['description'] = $v->description_en;
                 $popular_search_video[$k]['description'] = $v->description_ar;
                 $popular_search_video[$k]['banner'] = $banner;
+                $popular_search_video[$k]['image'] = $image;
 
             }
-
-            return response()->json(['success' => true, 'status' => $this->successStatus, 'message' => 'Videos found in Popular Searches.', 'data'=> $popular_search_video]);
-
+            $obj->PopularSearches = $popular_search_video;
 
         }
 
-        else {
-             return response()->json(['success' => false, 'status' => $this->HTTP_NOT_FOUND, 'message' => 'No Video found.']);
-            }
+        return response()->json(['success' => true, 'status' => $this->successStatus, 'message' => 'Search Result found.', 'data' => $obj]);
 
-
-
-
-}
+    }
 
      public function searchclub($searchword){
 

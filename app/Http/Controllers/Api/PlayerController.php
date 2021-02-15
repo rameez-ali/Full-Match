@@ -40,7 +40,7 @@ class PlayerController extends Controller
                 $array[$k]['name'] = $v->name_en;
                 $array[$k]['name_ar'] = $v->name_ar;
                 $array[$k]['banner'] = $banner;
-                $array[$k]['profile_image'] = $profile_image;
+                $array[$k]['logo'] = $profile_image;
                 $array[$k]['description'] = $v->description_en;
                 $array[$k]['description_ar'] = $v->description_ar;
                 $array[$k]['sorting'] = $v->player_sorting;
@@ -78,7 +78,7 @@ class PlayerController extends Controller
                 $player_detail[$k]['name'] = $v->name_en;
                 $player_detail[$k]['name_ar'] = $v->name_ar;
                 $player_detail[$k]['banner'] = $banner;
-                $player_detail[$k]['profile_image'] = $profile_image;
+                $player_detail[$k]['logo'] = $profile_image;
                 $player_detail[$k]['description'] = $v->description_en;
                 $player_detail[$k]['description_ar'] = $v->description_ar;
                 $player_detail[$k]['sorting'] = $v->player_sorting;
@@ -104,7 +104,7 @@ class PlayerController extends Controller
                 $player_related_video[$k]['name_ar'] = $v->title_ar;
                 $player_related_video[$k]['description'] = $v->description_en;
                 $player_related_video[$k]['description_ar'] = $v->description_ar;
-                $player_related_video[$k]['image'] = $video_img;
+                $player_related_video[$k]['logo'] = $video_img;
                 $player_related_video[$k]['banner'] = $video_banner_img;
                 $player_related_video[$k]['sorting'] = $v->video_sorting;
 

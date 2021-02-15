@@ -50,18 +50,16 @@
                                             </select>
                                             </div>
 
-
-
-                                        <div class="input-field col s12">
-                                           <p for="state">Add Videos:</p>
-                                           <select name="state[]" class="select2 browser-default" multiple style="width:250px">
-                                           </select>
-                                        </div>
+                                              <div class="input-field col s12">
+                                                  <p for="state">Select Video:</p>
+                                                  <select name="state" class="select browser-default" style="width:250px">
+                                                  </select>
+                                              </div>
 
                                             <div class="input-field col s12">
                                             <p for="genre">Add Video Genre </p>
                                             <select name="genre" class="form-control" style="width:250px">
-                                            <option selected> </option>
+                                            <option selected value="0">All Genres </option>
                                             @foreach ($videogenre as $videogenre)
                                             <option value="{{$videogenre->id}}">{{ $videogenre->name_en }}</option>
                                             @endforeach
@@ -119,9 +117,9 @@
                      success:function(data)
                      {
                         console.log(data);
-                        jQuery('select[name="state[]"]').empty();
+                        jQuery('select[name="state"]').empty();
                         jQuery.each(data, function(key,value){
-                           $('select[name="state[]"]').append('<option value="'+ key +'">'+ value +'</option>');
+                           $('select[name="state"]').append('<option value="'+ key +'">'+ value +'</option>');
                         });
                      }
                   });
@@ -135,9 +133,9 @@
                      success:function(data)
                      {
                         console.log(data);
-                        jQuery('select[name="state[]"]').empty();
+                        jQuery('select[name="state"]').empty();
                         jQuery.each(data, function(key,value){
-                           $('select[name="state[]"]').append('<option value="'+ key +'">'+ value +'</option>');
+                           $('select[name="state"]').append('<option value="'+ key +'">'+ value +'</option>');
                         });
                      }
                   });

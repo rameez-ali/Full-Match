@@ -8,6 +8,8 @@ use App\Model\Club;
 use App\Model\HomePgItem;
 use App\Model\League;
 use App\Model\Player;
+use App\Model\Slider;
+use App\Model\Slidervideo;
 use App\Model\Video;
 use Illuminate\Http\Request;
 use stdClass;
@@ -89,6 +91,27 @@ class HomePageLayoutController extends Controller
                 $selected_videos[$k]['route'] = "video/".$v->id;
             }
             $obj->videos = $selected_videos;
+
+            $home_slider_array = array();
+            $category_id=null;
+            $slider_id = Slider::select("id")->where('category_id',$category_id)->get();
+            $video_id=Slidervideo::select("Video_id")->wherein('Slider_id',$slider_id)->get();
+            $videos=Video::wherein('id',$video_id)->get();
+
+            foreach ($videos as $k => $v) {
+
+                $video_img = str_replace('\\', '/', asset('app-assets/images/video/' . $v->video_img));
+
+                $home_slider_array[$k]['id'] = $v->id;
+                $home_slider_array[$k]['title'] = $v->title_en;
+                $home_slider_array[$k]['title_ar'] = $v->title_ar;
+                $home_slider_array[$k]['description'] = $v->description_en;
+                $home_slider_array[$k]['description_ar'] = $v->description_ar;
+                $home_slider_array[$k]['image'] = $video_img;
+
+            }
+            $obj->$home_slider_array = $selected_videos;
+
             //  END
             return response()->json(['success' => true, 'status' => $this->successStatus, 'message' => 'Data found And layout is Active.', 'data' => $obj]);
         }else{

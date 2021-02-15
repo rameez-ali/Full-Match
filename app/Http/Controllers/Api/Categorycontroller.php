@@ -39,7 +39,6 @@ class CategoryController extends Controller
     {
         $home_slider_array = array();
         $category_id=null;
-        $categories = Category::all();
         $slider_id = Slider::select("id")->where('category_id',$category_id)->get();
         $video_id=Slidervideo::select("Video_id")->wherein('Slider_id',$slider_id)->get();
         $videos=Video::wherein('id',$video_id)->get();
@@ -77,8 +76,10 @@ class CategoryController extends Controller
         //getting slider id of that specific categories
         $slider_id = Slider::select("id")->where('category_id',$id)->first();
 
-        //getting banner_id of that specific categories
-        $banner_id = Adv_banner::select("id")->where('category_id',$id)->get();
+        //getting video id of banner_id of that specific category
+        $banner_video_id = Adv_banner::select("id")->where('category_id',$id)
+                    ->where('genre_id','=',0)
+                    ->get();
 
         //getting genres id of that specific categories
         $genre_id = Videogenre::select("genre_id")->where('category_id',$id)->get();
@@ -118,20 +119,22 @@ class CategoryController extends Controller
 
 
 
-        if($banner_id!=null)
+        if($banner_video_id!=null)
         {
-            $video_id=Adv_banner_video::select("video_id")->wherein('banner_id',$banner_id)->get();
-            $banner_videos=Video::select("id","title_en")->wherein('id',$video_id)->get();
+            $banner_videos=Video::wherein('id',$banner_video_id)->get();
+
             foreach ($banner_videos as $k => $v) {
 
                 $video_img = str_replace('\\', '/', asset('app-assets/images/video/' . $v->video_img));
+                $video_banner_img = str_replace('\\', '/', asset('app-assets/images/video/' . $v->video_banner_img));
 
                 $banner_array[$k]['id'] = $v->id;
                 $banner_array[$k]['title'] = $v->title_en;
                 $banner_array[$k]['title_ar'] = $v->title_ar;
                 $banner_array[$k]['description'] = $v->description_en;
                 $banner_array[$k]['description_ar'] = $v->description_ar;
-                $banner_array[$k]['image'] = $video_img;
+                $banner_array[$k]['banner'] = $video_banner_img;
+                $banner_array[$k]['logo'] = $video_img;
 
             }
             $obj->category_banner = $banner_array;
@@ -153,7 +156,6 @@ class CategoryController extends Controller
 
                 $video_img = str_replace('\\', '/', asset('app-assets/images/video/' . $v->video_img));
                 $video_banner_img = str_replace('\\', '/', asset('app-assets/images/video/' . $v->video_banner_img));
-
 
                 $latest_videos_array[$k]['id'] = $v->id;
                 $latest_videos_array[$k]['title'] = $v->title_en;
@@ -251,6 +253,36 @@ class CategoryController extends Controller
         $player_array = array();
         $club_array = array();
         $league_array = array();
+        $banner_array = array();
+
+
+        //getting video id of banner_id of that specific category and genre both
+        $banner_video_id = Adv_banner::select("id")->where('category_id',$category_id)
+            ->where('genre_id','=',$genre_ids)
+            ->get();
+
+        if($banner_video_id!=null)
+        {
+            $banner_videos=Video::wherein('id',$banner_video_id)->get();
+
+            foreach ($banner_videos as $k => $v) {
+
+                $video_img = str_replace('\\', '/', asset('app-assets/images/video/' . $v->video_img));
+                $video_banner_img = str_replace('\\', '/', asset('app-assets/images/video/' . $v->video_banner_img));
+
+                $banner_array[$k]['id'] = $v->id;
+                $banner_array[$k]['title'] = $v->title_en;
+                $banner_array[$k]['title_ar'] = $v->title_ar;
+                $banner_array[$k]['description'] = $v->description_en;
+                $banner_array[$k]['description_ar'] = $v->description_ar;
+                $banner_array[$k]['banner'] = $video_banner_img;
+                $banner_array[$k]['logo'] = $video_img;
+
+            }
+            $obj->category_banner = $banner_array;
+        }
+
+
 
         // getting Video ids of that specific category and genre both
         $video_ids = Videogenre::select("video_id")->where('category_id',$category_id)

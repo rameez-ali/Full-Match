@@ -43,16 +43,6 @@
 
 
                                             <div class="input-field col s12">
-                                           <label><strong>Edit Category </strong></label><br/>
-                                           <select name="category">
-                                           <option selected> </option>
-                                           @foreach($category as $category )
-                                           <option value="{{$category->id}}" {{$category->id == $select_category_id->category_id ? 'selected' : ''}} >{{$category->name_en}}</option>
-                                           @endforeach
-                                           </select>
-                                           </div>
-
-                                            <div class="input-field col s12">
                                           <label><strong>Edit Genre </strong></label><br/>
                                           <select name="genre">
                                           <option selected> </option>
@@ -64,9 +54,9 @@
 
                                             <div class="input-field col s12">
                                           <label><strong>Edit Videos </strong></label><br/>
-                                          <select class="selectpicker" multiple data-live-search="true" name="video[]">
+                                          <select name="state" class="select browser-default" style="width:250px">
                                           @foreach($video1 as $video )
-                                          <option value="{{$video->id}}" {{in_array($video->id, $selected_ids) ? 'selected' : ''}} >{{$video->name_en}}</option>
+                                          <option value="{{$video->id}}" {{$video->id == $select_video_id->video_id ? 'selected' : ''}}  >{{$video->title_en}}</option>
                                           @endforeach
                                           </select>
                                           </div>

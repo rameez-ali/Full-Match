@@ -107,7 +107,7 @@ class ClubController extends Controller
                 $club_related_video[$k]['name_ar'] = $v->title_en;
                 $club_related_video[$k]['description'] = $v->description_en;
                 $club_related_video[$k]['description_en'] = $v->description_ar;
-                $club_related_video[$k]['image'] = $video_img;
+                $club_related_video[$k]['logo'] = $video_img;
                 $club_related_video[$k]['banner'] = $video_banner_img;
 
             }
