@@ -279,7 +279,7 @@ class CategoryController extends Controller
                 $banner_array[$k]['logo'] = $video_img;
 
             }
-            $obj->category_banner = $banner_array;
+            $obj->category_genre_banner = $banner_array;
         }
 
 
@@ -308,7 +308,7 @@ class CategoryController extends Controller
                 $latest_videos_array[$k]['banner'] = $video_banner_img;
 
             }
-            $obj->Category_latest_videos = $latest_videos_array;
+            $obj->Category_genre_videos = $latest_videos_array;
 
 
         }
@@ -335,7 +335,7 @@ class CategoryController extends Controller
                 $club_array[$k]['logo'] = $club_logo;
 
             }
-            $obj->category_clubs = $club_array;
+            $obj->category_genre_clubs = $club_array;
         }
 
 
@@ -360,7 +360,7 @@ class CategoryController extends Controller
                 $player_array[$k]['image'] = $player_profile_image;
 
             }
-            $obj->category_player = $player_array;
+            $obj->category_genre_players = $player_array;
 
         }
 
@@ -398,7 +398,7 @@ class CategoryController extends Controller
                 $league_array[$k]['image'] = $league_profile_image;
 
             }
-            $obj->category_leagues = $league_array;
+            $obj->category_genre_leagues = $league_array;
 
         }
 

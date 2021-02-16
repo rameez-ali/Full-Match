@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\CustomerController;
 use App\Http\Controllers\Api\ClubController;
+use App\Http\Controllers\Api\HomesliderbannerController;
 use App\Http\Controllers\Api\PlayerController;
 use App\Http\Controllers\Api\LeagueController;
 use App\Http\Controllers\Api\VideoController;
@@ -101,7 +102,7 @@ Route::get('/videouserid', [WishController::class , 'wishlist']);
 
 Route::get('/category/{id}', [CategoryController::class , 'getcategoryinfo']);
 Route::post('/categoryinfo/{category_id}/{genre_id}', [CategoryController::class , 'getcategorygenreinfo']);
-
+Route::get('/homesliderbanner', [HomesliderbannerController::class , 'getsliderbanner']);
 
 Route::get('/searchclub/{string}', [SearchController::class , 'searchclub']);
 Route::get('/searchplayer/{string}', [SearchController::class , 'searchplayer']);
