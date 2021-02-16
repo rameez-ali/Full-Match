@@ -340,6 +340,8 @@ class ProjectVideoViewController extends Controller
 
         $selected_popular_search=Video::select('popular_searches')->where('id',$id)->first();
         $popular_searches=Popular_search::select('id','status')->get();
+
+
         $select_category_id = Video::select('category_id')->where('id', '=', $id )->first();
         $category=Category::select('id','name_en')->get();
 

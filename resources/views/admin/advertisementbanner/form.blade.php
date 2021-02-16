@@ -41,9 +41,9 @@
 
 
                                             <div class="input-field col s12">
-                                            <p for="country">Select Category:</p>
-                                            <select name="country" id="country" class="form-control" style="width:250px">
-                                            <option selected> </option>
+                                            <p for="country">Select Category * </p>
+                                            <select name="country" id="country" class="form-control" style="width:250px" required>
+                                            <option selected > --Select Category-- </option>
                                             @foreach ($video as $video)
                                             <option value="{{$video->id}}">{{ $video->name_en }}</option>
                                             @endforeach
@@ -51,8 +51,8 @@
                                             </div>
 
                                               <div class="input-field col s12">
-                                                  <p for="state">Select Video:</p>
-                                                  <select name="state" class="select browser-default" style="width:250px">
+                                                  <p for="state">Select Video *</p>
+                                                  <select name="state" class="select browser-default" style="width:250px" required>
                                                   </select>
                                               </div>
 

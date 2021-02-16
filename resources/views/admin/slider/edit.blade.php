@@ -18,59 +18,39 @@
                                         @csrf
                                         @method('PATCH')
                                        <div class="form-group">
-                                       <label class="col-md-4 text-right">Edit Slider Name EN * </label>
-                                       <div class="col-md-8">
+
+                                       <div class="input-field col s12">
+                                       <p for="name_en"> Edit Slider Name * </p>
                                        <input type="text" name="name_en" id="name_en" value="{{ $slider->name_en }}" class="form-control input-lg"  required data-error=".errorTxt1" />
-                                       <small class="errorTxt1"></small>
-                                       @error('name_en')
-                                       <span class="invalid-feedback" role="alert">
-                                       <strong>{{ $message }}</strong>
-                                       </span>
-                                        @enderror
-                                       </div>
                                        </div>
 
-                                            <label class="col-md-4 text-right">Edit Slider Name AR * </label>
-                                            <div class="col-md-8">
-                                                <input type="text" name="name_ar"  id="name_ar" value="{{ $slider->name_ar }}" class="form-control input-lg"  required data-error=".errorTxt4" />
-                                                <small class="errorTxt4"></small>
-                                                @error('name_ar')
-                                                <span class="invalid-feedback" role="alert">
-                                       <strong>{{ $message }}</strong>
-                                       </span>
-                                                @enderror
-                                            </div>
-                                        </div>
+                                       <div class="input-field col s12">
+                                          <p for="name_ar"> Edit Slider Name AR *</p>
+                                           <input type="text" name="name_ar"  id="name_ar" value="{{ $slider->name_ar }}" class="form-control input-lg"  required data-error=".errorTxt4" />
+                                       </div>
 
-                                       <div name="hidden-panel1" id="hidden-panel1">
-                                       <label><strong>Edit Videos: * </strong></label><br/>
+                                        <div class="input-field col s12">
+                                            <p for="Category_id"> Type *</p>
+                                        @if(isset($select_category_id->category_id))
+                                            <input type="text" name="Category_id" value="{{$category->name_en}}" readonly />
+                                        @else
+                                            <input type="number" name="Category_id" value="Home" readonly />
+                                       @endif
+                                      </div>
+
+                                       <div class="input-field col s12">
+                                         <p for="video[]"> Edit Videos *</p>
                                        <select class="max-length browser-default" id="testbox" multiple data-live-search="true" name="video[]" data-error=".errorTxt2" required>
                                        @foreach($video1 as $video )
                                        <option value="{{$video->id}}" {{in_array($video->id, $selected_ids) ? 'selected' : ''}} >{{$video->title_en}}</option>
                                        @endforeach
-                                       <small class="errorTxt2"></small>
-                                       @error('video')
-                                       <span class="invalid-feedback" role="alert">
-                                       <strong>{{ $message }}</strong>
-                                       </span>
-                                        @enderror
                                        </select>
                                        </div>
 
-                                       <div class="form-group">
-                                       <label class="col-md-4 text-right">Edit Slider Sorting * </label>
-                                       <div class="col-md-8">
+                                       <div class="input-field col s12">
+                                         <p for="slider_sorting"> Edit Slider Sorting *</p>
                                        <input type="number" name="slider_sorting" value="{{ $slider->slider_sorting }}" min="1" class="form-control input-lg"  required data-error=".errorTxt3"/>
-                                       <small class="errorTxt3"></small>
-                                       @error('slider_sorting')
-                                       <span class="invalid-feedback" role="alert">
-                                       <strong>{{ $message }}</strong>
-                                       </span>
-                                       @enderror
                                        </div>
-                                       </div>
-
-
 
                                        <div class="input-field col s12">
                                              <button class="btn waves-effect waves-light right submit" type="submit" name="action">Submit

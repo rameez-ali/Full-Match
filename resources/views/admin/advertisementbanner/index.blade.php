@@ -62,16 +62,17 @@
                                             </tr>
                                             </thead>
                                             <tbody>
+
                                             @foreach($Adv_banner as $adv_banner)
                                                 <tr>
                                                     <td>{{$adv_banner->title_en}}</td>
                                                     <td><img src="{{ asset('app-assets/images/advbanner/'.$adv_banner->video_banner)}}" style="width:50px;height:50px;" /></td>
                                                     <td>{{$adv_banner->video_link}}</td>
                                                     <td>{{$adv_banner->categoryname}}</td>
-                                                    @if($adv_banner->genrename==0)
-                                                        <td>All Genres</td>
+                                                    @if(isset($adv_banner->genrename))
+                                                      <td>{{$adv_banner->genrename}}</td>
                                                     @else
-                                                        {{$adv_banner->categoryname}}
+                                                        <td>All Genres</td>
                                                     @endif
                                                     @if($adv_banner->homepage==1)
                                                      <td>Yes</td>
@@ -79,7 +80,6 @@
                                                       <td>No</td>
                                                     @endif
                                                     <td><form action="{{ route('banner-form.destroy', $adv_banner->id)}}" method="post">
-                                                            <a href="{{ url('adv_banner/'.$adv_banner->id)}}" class="dt-button buttons-excel buttons-html5 waves-effect waves-light btn gradient-45deg-purple-deep-orange gradient-shadow">Details</a>
                                                             @can('edit-advbanner')
                                                             <a href="{{ route('banner-form.edit',$adv_banner->id)}}" class="dt-button buttons-excel buttons-html5 waves-effect waves-light btn gradient-45deg-purple-deep-orange gradient-shadow">Edit</a>
                                                             @endcan

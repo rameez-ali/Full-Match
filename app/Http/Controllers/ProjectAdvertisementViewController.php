@@ -152,7 +152,6 @@ class ProjectAdvertisementViewController extends Controller
             ->select('videos.id')
             ->get();
 
-        $select_category_id = Adv_banner::select('category_id')->where('id', '=', $id )->first();
         $select_genre_id = Adv_banner::select('genre_id')->where('id', '=', $id )->first();
         $select_video_id = Adv_banner::select('video_id')->where('id', '=', $id )->first();
 
@@ -161,11 +160,14 @@ class ProjectAdvertisementViewController extends Controller
             array_push($selected_ids, $vid->id);
         }
 
-        $category=Category::select('id','name_en')->get();
-        $videogenre=Video_genre::select('id','name_en')->get();
-        //$video=video::select('id','video_title')->get();
+        $select_category_id = Adv_banner::select('category_id')->where('id', '=', $id )->get()->first();
+        $category=Category::select('id','name_en')->wherein('id',$select_category_id )->get()->first();
 
+        $select_genre_id = Adv_banner::select('genre_id')->where('id', '=', $id )->get()->first();
+        $genres=Video_genre::select('id','name_en')->get();
 
+        $select_homepage_id=Adv_banner::select('homepage')->where('id',$id)->first();
+        $homepages=DB::table('homepages')->select('id','status')->get();
 
         $videos2 =  DB::table('adv_banners')
             ->where('id', '=', $banner_id)
@@ -182,7 +184,7 @@ class ProjectAdvertisementViewController extends Controller
 
         $slider=Adv_banner::where('id',$id)->first();
 
-        return view('admin.advertisementbanner.edit', compact('videos','video1','selected_ids','select_category_id','select_video_id','select_genre_id','slider','category','videogenre'))
+        return view('admin.advertisementbanner.edit', compact('videos','video1','selected_ids','select_category_id','select_genre_id','select_video_id','select_homepage_id','select_genre_id','slider','category','genres','videogenre','homepages'))
             ->with('i', (request()->input('page', 1) - 1) * 5);
 
 
