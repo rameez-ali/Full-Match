@@ -25,7 +25,7 @@ use DB;
 use \stdClass;
 
 
-class HomesliderbannerController extends Controller
+class HomeSliderBannerController extends Controller
 {
     public $successStatus = 200;
     public $HTTP_FORBIDDEN = 403;
@@ -63,7 +63,7 @@ class HomesliderbannerController extends Controller
 
         //getting video id of banner_id of home
         $banner_video_id = Adv_banner::select("id")->where('homepage',1)
-                         ->orderBy('desc')
+                         ->orderBy('created_at','desc')
                          ->first();
 
         $videos=Video::select('id','video_banner_img', 'title_en',

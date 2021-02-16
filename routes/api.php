@@ -102,7 +102,7 @@ Route::get('/videouserid', [WishController::class , 'wishlist']);
 
 Route::get('/category/{id}', [CategoryController::class , 'getcategoryinfo']);
 Route::post('/categoryinfo/{category_id}/{genre_id}', [CategoryController::class , 'getcategorygenreinfo']);
-Route::get('/homesliderbanner', [HomesliderbannerController::class , 'getsliderbanner']);
+Route::get('/homesliderbanner', [HomeSliderBannerController::class , 'getsliderbanner']);
 
 Route::get('/searchclub/{string}', [SearchController::class , 'searchclub']);
 Route::get('/searchplayer/{string}', [SearchController::class , 'searchplayer']);
