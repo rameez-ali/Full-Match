@@ -62,14 +62,15 @@ class HomeSliderBannerController extends Controller
         $obj->Homeslider=$home_slider_array;
 
         //getting video id of banner_id of home
-        $banner_video_id = Adv_banner::select("id")->where('homepage',1)
+        $banner_video_id = Adv_banner::select("video_id")->where('homepage',1)
             ->orderBy('created_at','desc')
             ->first();
 
         $videos=Video::select('id','video_banner_img', 'title_en',
             'description_en','video_img')
-            ->where('id',$banner_video_id)
+            ->wherein('id',$banner_video_id)
             ->get();
+
 
         $obj->Homebanner=$videos;
 
