@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Api;
 
 use App\customer;
 use App\Http\Controllers\Controller;
+use App\Mail\Auth\EmailVerificationNotification;
+use Mail;
 use App\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -57,6 +59,12 @@ class ApiAuthController extends Controller
                 'email' => $request->email,
             ]);
             $customer->save();
+
+            try {
+                Mail::to($user)->send(new EmailVerificationNotification($user));
+            } catch (\Exception $e) {
+                echo "some error !";
+            }
             return response()->json([
                 'message' => 'Successfully created user!',
                 'success' => true,
