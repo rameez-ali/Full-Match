@@ -10,7 +10,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\CustomerController;
 use App\Http\Controllers\Api\ClubController;
-use App\Http\Controllers\Api\HomesliderbannerController;
+use App\Http\Controllers\Api\HomeSliderBannerController;
 use App\Http\Controllers\Api\PlayerController;
 use App\Http\Controllers\Api\LeagueController;
 use App\Http\Controllers\Api\VideoController;
