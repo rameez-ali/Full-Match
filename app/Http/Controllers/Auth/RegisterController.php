@@ -104,7 +104,7 @@ class RegisterController extends Controller
         try {
             Mail::to($user)->send(new EmailVerificationNotification($user));
         } catch (\Exception $e) {
-
+            echo "some error !";
         }
 
         if ($response = $this->registered($request, $user)) {
