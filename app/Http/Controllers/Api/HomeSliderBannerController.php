@@ -68,7 +68,7 @@ class HomeSliderBannerController extends Controller
             ->orderBy('created_at','desc')
             ->first();
 
-        $videos=Video::wherein('id',$banner_video_id)
+        $videos=Video::where('id',$banner_video_id)
             ->get();
 
         foreach ($videos as $k => $v) {
