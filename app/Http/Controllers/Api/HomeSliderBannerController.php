@@ -40,6 +40,8 @@ class HomeSliderBannerController extends Controller
         $obj = new stdClass;
 
         $home_slider_array = array();
+        $home_banner_array = array();
+        $new_adding_video = array();
 
 
         $category_id=null;
@@ -66,13 +68,45 @@ class HomeSliderBannerController extends Controller
             ->orderBy('created_at','desc')
             ->first();
 
-        $videos=Video::select('id','video_banner_img', 'title_en',
-            'description_en','video_img')
-            ->wherein('id',$banner_video_id)
+        $videos=Video::wherein('id',$banner_video_id)
             ->get();
 
+        foreach ($videos as $k => $v) {
 
-        $obj->Homebanner=$videos;
+            $video_img = str_replace('\\', '/', asset('app-assets/images/video/' . $v->video_img));
+            $video_banner_img = str_replace('\\', '/', asset('app-assets/images/video/' . $v->video_img));
+
+            $home_banner_array[$k]['id'] = $v->id;
+            $home_banner_array[$k]['name'] = $v->title_en;
+            $home_banner_array[$k]['name_ar'] = $v->title_en;
+            $home_banner_array[$k]['description'] = $v->description_en;
+            $home_banner_array[$k]['description_en'] = $v->description_ar;
+            $home_banner_array[$k]['logo'] = $video_img;
+            $home_banner_array[$k]['banner'] = $video_banner_img;
+
+        }
+
+        $obj->Homebanner=$home_banner_array;
+
+        $new_adding_videos=Video::orderBy('created_at','desc')
+            ->get();
+
+        foreach ($new_adding_videos as $k => $v) {
+
+            $video_img = str_replace('\\', '/', asset('app-assets/images/video/' . $v->video_img));
+            $video_banner_img = str_replace('\\', '/', asset('app-assets/images/video/' . $v->video_img));
+
+            $new_adding_video[$k]['id'] = $v->id;
+            $new_adding_video[$k]['name'] = $v->title_en;
+            $new_adding_video[$k]['name_ar'] = $v->title_en;
+            $new_adding_video[$k]['description'] = $v->description_en;
+            $new_adding_video[$k]['description_en'] = $v->description_ar;
+            $new_adding_video[$k]['logo'] = $video_img;
+            $new_adding_video[$k]['banner'] = $video_banner_img;
+
+        }
+
+        $obj->NewAdding=$new_adding_video;
 
 
         return response()->json(['success' => true, 'status' => $this->successStatus, 'message' => 'Home Slider Banner found.', 'data'=>  $obj]);
