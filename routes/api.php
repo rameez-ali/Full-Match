@@ -91,8 +91,10 @@ Route::group(['middleware' => 'auth:api'], function(){
     Route::get('/all-mylist', [MyListController::class , 'getAllMylist']);
     Route::get('logout', [ApiAuthController::class , 'logout']);
     Route::post('/customer-edit', [CustomerController::class , 'edit']);
-    Route::post('/customer-update/{id}', [CustomerController::class , 'update'])->name('customer.profupdate');;
+    Route::post('/customer-update/{id}', [CustomerController::class , 'update'])->name('customer.profupdate');
 });
+Route::post('/initalToken', [CustomerController::class , 'initalToken']);
+
 Route::post('fogetpass', [CustomerController::class , 'forgotpass']);
 //Customer Auth Routes
 

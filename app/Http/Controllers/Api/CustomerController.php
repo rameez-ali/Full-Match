@@ -10,6 +10,7 @@ use App\Http\Requests\Customer\GetAllCustomerRequest;
 use App\Http\Requests\Customer\GetCustomerRequest;
 use App\Http\Requests\Customer\UpdateCustomerRequest;
 use App\Http\Resources\CustomerResource;
+use App\Model\DeviceToken;
 use App\User;
 use Illuminate\Foundation\Auth\SendsPasswordResetEmails;
 use Illuminate\Http\Request;
@@ -162,5 +163,23 @@ class CustomerController extends Controller
             return response()->json(['success' => false, 'status' => $this->HTTP_NOT_FOUND, 'message' => 'Email Not Found.']);
         }
 
+    }
+
+    public function initalToken(Request $request)
+    {
+        $selected_token = DeviceToken::where('token' ,$request->token)->first();
+
+        if ($selected_token == null){
+            $device_token = new DeviceToken([
+                'device' => $request->deviceType,
+                'token' => $request->token,
+            ]);
+            $device_token->save();
+
+            return response()->json(['success' => true, 'status' => $this->successStatus, 'message' => 'Device add Successfully']);
+        }else{
+
+            return response()->json(['success' => false, 'status' => $this->HTTP_NOT_FOUND, 'message' => 'Device already added']);
+        }
     }
 }
