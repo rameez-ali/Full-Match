@@ -97,7 +97,7 @@
                                           <input type="file" name="video_img" value="{{ old('video_img',$video->video_img) }}" class="dropify mt-3" data-default-file="{{ asset('app-assets/images/video/'.$video->video_img)}}" data-max-file-size="10M" data-allowed-file-extensions="png jpg jpeg"/>
                                           </div>
 
-
+                                           @if($select_category_id!=null)
                                             <div class="input-field col s12">
                                                   <label><strong>Edit Category </strong></label><br/>
                                                   <select class="selectpicker" name="Category_id" required>
@@ -106,6 +106,15 @@
                                                       @endforeach
                                                   </select>
                                               </div>
+                                        @else
+                                            <div class="input-field col s12">
+                                                <label><strong>Edit Category </strong></label><br/>
+                                                <select class="selectpicker" name="Category_id" required>
+                                                        <option SELECTED value="" >Home</option>
+                                                </select>
+                                            </div>
+                                        @endif
+
 
                                           @error('Category_id')
                                           <small class="errorTxt7"></small>

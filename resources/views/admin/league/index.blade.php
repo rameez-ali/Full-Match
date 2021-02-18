@@ -62,20 +62,20 @@
                                             </tr>
                                             </thead>
                                             <tbody>
-                                            @foreach($project as $project)
+                                            @foreach($leagues as $league)
                                                 <tr>
-                                                    <td>{{ $project->name_en   }}</td>
-                                                    <td>{{ $project->description_en }}</td>
-                                                    <td><img src="{{ asset('app-assets/images/league/'.$project->league_banner)}}" style="width:50px;height:50px;" /></td>
-                                                    <td>{{ $project->league_promo_video }}</td>
-                                                    <td><img src="{{ asset('app-assets/images/league/'.$project->league_profile_image)}}" style="width:50px;height:50px;" /></td>
-                                                    <td>{{ $project->league_sorting }}</td>
-                                                    <td><form action="{{ route('league-form.destroy', $project->id)}}" method="post">
+                                                    <td>{{ $league->name_en   }}</td>
+                                                    <td>{{ $league->description_en }}</td>
+                                                    <td><img src="{{ asset('app-assets/images/league/'.$league->league_banner)}}" style="width:50px;height:50px;" /></td>
+                                                    <td>{{ $league->league_promo_video }}</td>
+                                                    <td><img src="{{ asset('app-assets/images/league/'.$league->league_profile_image)}}" style="width:50px;height:50px;" /></td>
+                                                    <td>{{ $league->league_sorting }}</td>
+                                                    <td><form action="{{ route('league-form.destroy', $league->id)}}" method="post">
                                                             @can('view-leaguedetail')
-                                                            <a href="{{ url('league/'.$project->id)}}" class="dt-button buttons-excel buttons-html5 waves-effect waves-light btn gradient-45deg-purple-deep-orange gradient-shadow">Details</a>
+                                                            <a href="{{ url('leaguedetails/'.$league->id)}}" class="dt-button buttons-excel buttons-html5 waves-effect waves-light btn gradient-45deg-purple-deep-orange gradient-shadow">Details</a>
                                                             @endcan
                                                                 @can('edit-league')
-                                                                <a href="{{ route('league-form.edit',$project->id)}}" class="dt-button buttons-excel buttons-html5 waves-effect waves-light btn gradient-45deg-purple-deep-orange gradient-shadow">Edit</a>
+                                                                <a href="{{ route('league-form.edit',$league->id)}}" class="dt-button buttons-excel buttons-html5 waves-effect waves-light btn gradient-45deg-purple-deep-orange gradient-shadow">Edit</a>
                                                             @endcan
                                                                 {{ csrf_field() }}
                                                                 @can('delete-video')

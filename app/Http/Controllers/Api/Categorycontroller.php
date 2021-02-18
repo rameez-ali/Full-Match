@@ -100,7 +100,7 @@ class CategoryController extends Controller
         if($slider_id!=null)
         {
             $video_id=Slidervideo::select("Video_id")->wherein('Slider_id',$slider_id)->get();
-            $videos=Video::wherein('id',$video_id)->get();
+            $videos=Video::orderBy('video_sorting')->wherein('id',$video_id)->get();
             foreach ($videos as $k => $v) {
 
                 $video_img = str_replace('\\', '/', asset('app-assets/images/video/' . $v->video_img));
@@ -113,15 +113,13 @@ class CategoryController extends Controller
                 $slider_array[$k]['image'] = $video_img;
 
             }
-            $obj->category_slider = $slider_array;
-
         }
-
+        $obj->category_slider = $slider_array;
 
 
         if($banner_video_id!=null)
         {
-            $banner_videos=Video::wherein('id',$banner_video_id)->get();
+            $banner_videos=Video::orderBy('video_sorting')->wherein('id',$banner_video_id)->get();
 
             foreach ($banner_videos as $k => $v) {
 
@@ -149,7 +147,7 @@ class CategoryController extends Controller
 
         if($videos_id!=null)
         {
-            $videos=Video::wherein('id',$videos_id)->get();
+            $videos=Video::orderBy('video_sorting')->wherein('id',$videos_id)->get();
 
 
             foreach ($videos as $k => $v) {
@@ -173,7 +171,7 @@ class CategoryController extends Controller
 
         if($club_ids!=null)
         {
-            $clubs=Club::wherein('id',$club_ids)->get();
+            $clubs=Club::orderBy('club_sorting')->wherein('id',$club_ids)->get();
 
             foreach ($clubs as $k => $v) {
 
@@ -197,7 +195,7 @@ class CategoryController extends Controller
 
         if($player_ids!=null)
         {
-            $players=Player::wherein('id',$player_ids)->get();
+            $players=Player::orderBy('player_sorting')->wherein('id',$player_ids)->get();
 
             foreach ($players as $k => $v) {
 
@@ -221,7 +219,7 @@ class CategoryController extends Controller
 
         if($league_ids!=null)
         {
-            $leagues=League::wherein('id',$league_ids)->get();
+            $leagues=League::orderBy('league_sorting')->wherein('id',$league_ids)->get();
 
             foreach ($leagues as $k => $v) {
 
@@ -263,7 +261,7 @@ class CategoryController extends Controller
 
         if($banner_video_id!=null)
         {
-            $banner_videos=Video::wherein('id',$banner_video_id)->get();
+            $banner_videos=Video::orderBy('video_sorting')->wherein('id',$banner_video_id)->get();
 
             foreach ($banner_videos as $k => $v) {
 
@@ -290,7 +288,7 @@ class CategoryController extends Controller
             ->distinct()
             ->get();
 
-        $videos = Video::wherein('id', $video_ids)->get();
+        $videos = Video::orderBy('video_sorting')->wherein('id', $video_ids)->get();
 
 
         if($videos!=null){
@@ -319,7 +317,7 @@ class CategoryController extends Controller
             ->distinct()
             ->get();
         // getting Clubs of that specific category and genre both
-        $clubs = Club::wherein('id', $club_ids)->get();
+        $clubs = Club::orderBy('club_sorting')->wherein('id', $club_ids)->get();
         if($clubs!=null){
             foreach ($clubs as $k => $v) {
 
@@ -344,7 +342,7 @@ class CategoryController extends Controller
             ->distinct()
             ->get();
         // getting Players of that specific category and genre both
-        $players = Player::wherein('id', $player_ids)->get();
+        $players = Player::orderBy('player_sorting')->wherein('id', $player_ids)->get();
         if($players!=null){
             foreach ($players as $k => $v) {
 
@@ -381,7 +379,7 @@ class CategoryController extends Controller
         if($leagues_ids!=null){
 
             // getting Leagues of that specific category and genre both
-            $leagues = League::wherein('id', $leagues_ids)->get();
+            $leagues = League::orderBy('league_sorting')->wherein('id', $leagues_ids)->get();
 
             foreach ($leagues as $k => $v) {
 

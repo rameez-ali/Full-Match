@@ -91,20 +91,21 @@
 
                                                 <div class="input-field col s12">
                                                     <p for="league_description">Add League Sorting</p>
-                                                    <input type="number" name="league_sorting" placeholder="League Sorting" min="1" class="form-control input-lg"></textarea>
+                                                    <input type="number" name="league_sorting"  min="1" class="form-control input-lg"></textarea>
                                                 </div>
 
 
                                                 <div class="input-field col s12">
+                                                    <p for="seasons">Add Seasons</p>
                                                     <table class="table table-bordered" id="dynamicTable">
                                                         <tr>
                                                             <th>Season</th>
-                                                            <th>Video</th>
+                                                            <th>Video URL</th>
                                                         </tr>
 
                                                         <tr>
                                                             <td><input type="text" name="addmore[0][name_en]" Value="Season1" class="form-control" /></td>
-                                                            <td><input type="url" name="addmore[0][qty]" placeholder="Enter Season URL" class="form-control" /></td>
+                                                            <td><input type="url" name="addmore[0][video_link]" class="form-control" /></td>
                                                             <td><button type="button" name="add" id="add" class="btn btn-success">Add More Season</button></td>
                                                         </tr>
                                                     </table>
@@ -135,7 +136,7 @@
                     var i = 1;
                     $("#add").click(function(){
                         i++;
-                        $("#dynamicTable").append('<tr><td><input type="text" value="Season'+i+'" name="addmore['+i+'][name_en]" placeholder="Enter Ss['+i+']" class="form-control" /></td></td><td><input type="url" name="addmore['+i+'][qty]" placeholder="Enter Season URL" class="form-control" /></td><td><button type="button" class="btn btn-danger remove-tr">Remove</button></td></tr>');
+                        $("#dynamicTable").append('<tr><td><input type="text" value="Season'+i+'" name="addmore['+i+'][name_en]"  class="form-control" /></td></td><td><input type="url" name="addmore['+i+'][video_link]"  class="form-control" /></td><td><button type="button" class="btn btn-danger remove-tr">Remove</button></td></tr>');
 
                     });
                     $(document).on('click', '.remove-tr', function(){

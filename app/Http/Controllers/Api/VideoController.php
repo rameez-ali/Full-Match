@@ -136,7 +136,7 @@ class VideoController extends Controller
         //if league is assocaited
         if(isset($league_id))
         {
-            $videos = Video::where('season_id', $league_id)->orderBy('video_sorting')->get();
+            $videos = Video::orderBy('video_sorting')->where('season_id', $league_id)->orderBy('video_sorting')->get();
             foreach ($videos as $k => $v) {
 
                 $video_img = str_replace('\\', '/', asset('app-assets/images/video/' . $v->video_img));
@@ -156,7 +156,7 @@ class VideoController extends Controller
         //in case league is not assocaited
         elseif(isset($category_id)) {
 
-            $videos = Video::where('category_id', $category_id)->orderBy('video_sorting')->get();
+            $videos = Video::orderBy('video_sorting')->where('category_id', $category_id)->orderBy('video_sorting')->get();
 
             foreach ($videos as $k => $v) {
 

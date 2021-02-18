@@ -73,7 +73,7 @@ class ClubController extends Controller
             ->get();
 
 
-        $clubs = Club::where('id',$id)->orderBy('club_sorting')->get();
+        $clubs = Club::orderBy('club_sorting')->where('id',$id)->orderBy('club_sorting')->get();
         if (!$clubs->isEmpty()) {
 
             foreach ($clubs as $k => $v) {

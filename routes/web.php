@@ -31,13 +31,12 @@ Route::group(['middleware' => ['auth']], function () {
     Route::resource('club-form','ProjectClubViewController');
 
     Route::resource('league-form','ProjectLeagueViewController');
-    Route::get('league/{id}','ProjectLeagueViewController@destroy1');
+    Route::get('leaguedetails/{id}','ProjectLeagueViewController@league_details');
 
     Route::resource('Contactus-form','ContactUSController');
 
     Route::resource('video-form','ProjectVideoViewController');
-    Route::get('video-form/videos/{id}','ProjectVideoViewController@getseasons');
-//    Route::post('video-form/search','VideoController@search')->name('video-form.search');
+    Route::get('video-form/seasons/{id}','ProjectVideoViewController@getseasons');
 
     Route::post('video-form-search','VideoSearchController@search')->name('video-form-search.search');
     Route::get('video-form-search','ProjectVideoViewController@index')->name('video-form-search.search');
@@ -60,11 +59,11 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('slider-form/allvideos/{id}','ProjectSliderViewController@getallvideos');
     Route::get('slider-form/videos/{id}','ProjectSliderViewController@getvideos');
 
-    Route::get('slider/{id}','ProjectSliderViewController@destroy1');
+    Route::get('slider/{id}','ProjectSliderViewController@slider_details');
 
     Route::resource('banner-form','ProjectAdvertisementViewController');
     Route::get('banner-form/allvideos/{id}','ProjectAdvertisementViewController@getallvideos');
-    Route::get('banner-form/videos/{id}','ProjectAdvertisementViewController@getvideos');
+    Route::get('banner-form/videos/{id}','ProjectAdvertisementViewController@getvideo');
     Route::get('adv_banner/{id}','ProjectAdvertisementViewController@destroy1');
 
 

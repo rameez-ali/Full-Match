@@ -17,6 +17,7 @@ use App\Http\Controllers\Api\VideoController;
 use App\Http\Controllers\Api\SubsPlanController;
 use App\Http\Controllers\Api\ContactController;
 use App\Http\Controllers\Api\SearchController;
+use App\Http\Controllers\Api\SearchSuggestionController;
 use App\Http\Controllers\Api\CategoryController;
 use App\Http\Controllers\Api\WishController;
 use Laravel\Socialite\Facades\Socialite;
@@ -96,6 +97,7 @@ Route::post('fogetpass', [CustomerController::class , 'forgotpass']);
 //Customer Auth Routes
 
 Route::get('/search/{string}', [SearchController::class , 'search']);
+Route::get('/searchsuggestion/{string}', [SearchSuggestionController::class , 'searchsuggestion']);
 
 Route::get('/videouserid', [WishController::class , 'wishlist']);
 

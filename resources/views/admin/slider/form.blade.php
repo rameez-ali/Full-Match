@@ -115,13 +115,16 @@ option {margin: 10px;}
                      url : 'allvideos/' +countryID,
                      type : "GET",
                      dataType : "json",
-                     success:function(data)
-                     {
-                        console.log(data);
-                        jQuery('select[name="state[]"]').empty();
-                        jQuery.each(data, function(key,value){
-                           $('select[name="state[]"]').append('<option value="'+ key +'">'+ value +'</option>');
-                        });
+                     success:function(data) {
+                         console.log(data);
+                         if (data != 0) {
+                             jQuery('select[name="state[]"]').empty();
+                             jQuery.each(data, function (key, value) {
+                                 $('select[name="state[]"]').append('<option value="' + key + '">' + value + '</option>');
+                             });
+                         } else {
+                             alert("Home Slider Already Exist");
+                         }
                      }
                   });
                }
@@ -131,13 +134,17 @@ option {margin: 10px;}
                      url : 'videos/' +countryID,
                      type : "GET",
                      dataType : "json",
-                     success:function(data)
-                     {
-                        console.log(data);
-                        jQuery('select[name="state[]"]').empty();
-                        jQuery.each(data, function(key,value){
-                           $('select[name="state[]"]').append('<option value="'+ key +'">'+ value +'</option>');
-                        });
+                     success:function(data) {
+                         console.log(data);
+                         if (data!=0) {
+                         jQuery('select[name="state[]"]').empty();
+                         jQuery.each(data, function (key, value) {
+                             $('select[name="state[]"]').append('<option value="' + key + '">' + value + '</option>');
+                         });
+                        }
+                         else{
+                             alert("Category Slider Already Exist");
+                         }
                      }
                   });
                }

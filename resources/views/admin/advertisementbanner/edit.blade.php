@@ -41,33 +41,53 @@
                                             <input type="url" name="video_link" value="{{ $slider->video_link}}" class="form-control input-lg" />
                                             </div>
 
+                                            <div class="input-field col s12">
+                                                <p for="Category_id"> Type *</p>
+                                                @if(isset($select_category_id->category_id))
+                                                    <input type="text" name="Category_id" value="{{$category->name_en}}" readonly />
+                                                @else
+                                                    <input type="number" name="Category_id" value="Home" readonly />
+                                                @endif
+                                            </div>
+
 
                                             <div class="input-field col s12">
-                                          <label><strong>Edit Genre </strong></label><br/>
-                                          <select name="genre">
-                                          <option selected> </option>
-                                          @foreach($videogenre as $videogenre )
-                                          <option value="{{$videogenre->id}}" {{$videogenre->id == $select_genre_id->genre_id ? 'selected' : ''}} >{{$videogenre->name_en}}</option>
-                                          @endforeach
-                                          </select>
-                                          </div>
-
-                                            <div class="input-field col s12">
-                                          <label><strong>Edit Videos </strong></label><br/>
-                                          <select name="state" class="select browser-default" style="width:250px">
-                                          @foreach($video1 as $video )
+                                            <p for="category_image">Edit Videos * </p>
+                                          <select name="state" class="select browser-default" style="width:250px" >
+                                          @foreach($videos as $video )
                                           <option value="{{$video->id}}" {{$video->id == $select_video_id->video_id ? 'selected' : ''}}  >{{$video->title_en}}</option>
                                           @endforeach
                                           </select>
                                           </div>
 
-                                          <div class="input-field col s12">
-                                          <p for="category_image">Edit Homepage * </p>
-                                          <select name="homepage" id="country" class="form-control" style="width:250px">
-                                          <option value="1">Yes</option>
-                                          <option value="0">No</option>
-                                          </select>
-                                          </div>
+                                            <div class="input-field col s12">
+                                            <p for="category_image">Edit Genres </p>
+                                            @if($select_genre_id->genre_id!=null)
+                                                <select class="selectpicker" name="genre" >
+                                                    @foreach($genres as $genre )
+                                                        <option value="{{$genre->id}}" {{$genre->id == $select_genre_id->genre_id ? 'selected' : ''}} >{{$genre->name_en}}</option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                            @else
+                                            <div class="input-field col s12">
+                                                <select class="selectpicker" name="genre" >
+                                                    <option SELECTED value="" >All Genres</option>
+                                                    @foreach($genres as $genre )
+                                                        <option value="{{$genre->id}}" {{$genre->id == $select_genre_id->genre_id ? 'selected' : ''}} >{{$genre->name_en}}</option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                            @endif
+
+                                            <div class="input-field col s12">
+                                                <p for="category_image">Edit Homepage Selection </p>
+                                                <select class="homepage" name="homepage">
+                                                    @foreach($homepages as $homepage )
+                                                        <option value="{{$homepage->id}}" {{$homepage->id == $select_homepage_id->homepage ? 'selected' : ''}} >{{$homepage->status}}</option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
 
                                           <div class="input-field col s12">
                                               <button class="btn waves-effect waves-light right submit" type="submit" name="action">Submit
