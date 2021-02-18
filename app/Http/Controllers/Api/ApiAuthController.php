@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\customer;
 use App\Http\Controllers\Controller;
 use App\Mail\Auth\EmailVerificationNotification;
+use App\Model\DeviceToken;
 use Mail;
 use App\User;
 use Carbon\Carbon;
@@ -105,10 +106,29 @@ class ApiAuthController extends Controller
         $user = $request->user();
         $tokenResult = $user->createToken('Personal Access Token');
         $token = $tokenResult->token;
+
         if ($request->remember_me)
             $token->expires_at = Carbon::now()->addWeeks(1);
         $token->save();
         $array['token'] = $tokenResult->accessToken;
+
+        $selected_token = DeviceToken::where('token' ,$request->devicetoken)->first();
+
+        if ($selected_token == null) {
+            $device_token = new DeviceToken([
+                'user_id' => $request->user()->id,
+                'device' => $request->devicetype,
+                'token' => $request->token,
+            ]);
+            $device_token->save();
+        }else{
+            $device_token = DeviceToken::find($selected_token->id);
+
+            $device_token->user_id = $request->user()->id;
+            $device_token->device = $request->devicetype;
+
+            $device_token->save();
+        }
         return response()->json([
             'data' => $array,
             'token_type' => 'Bearer',
