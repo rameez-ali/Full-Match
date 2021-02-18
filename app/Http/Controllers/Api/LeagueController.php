@@ -66,7 +66,7 @@ class LeagueController extends Controller
         $league_detail = array();
         $league_related_video = array();
 
-        $leagues = League::where('id',$id)->orderBy('league_sorting')->get();
+        $leagues = League::orderBy('league_sorting')->where('id',$id)->orderBy('league_sorting')->get();
 
         if (!$leagues->isEmpty()) {
 

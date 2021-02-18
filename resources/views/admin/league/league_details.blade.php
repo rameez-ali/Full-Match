@@ -4,58 +4,58 @@
     <div class="col s12">
         <div class="container">
             <div class="section">
-                    <div class="row">
-                        <div class="col s12 m12 l12">
-                            <div class="card animate fadeUp">
-                                <div class="card-content">
-                                    <h4 class="header mt-0">
-                                        League Details
-                                    </h4>
-                                    <div class="row">
-                                        <div class="col s12">
-                                            <h2></h2>
-                                            <table id="page-length-option" class="display">
-                                                <thead>
-                                                <tr>
-                                                <th width="27%">Name</th>
-                                                <th width="27%">Description</th>
-                                                <th width="27%">Promo Video</th>
-                                                <th width="27%">Sorting</th>
-                                                <th width="27%">Seasons</th>
+                <div class="row">
+                    <div class="col s12 m12 l12">
+                        <div class="card animate fadeUp">
+                            <div class="card-content">
+                                <h4 class="header mt-0">
+                                    League Details
+                                </h4>
+                                <div class="row">
+                                    <div class="col s12">
+                                        <h2></h2>
+                                        <table id="page-length-option" class="display">
+                                            <thead>
+                                            <tr>
+                                                <th width="5%">Name</th>
+                                                <th width="5%">Description</th>
+                                                <th width="10%">Promo Video</th>
+                                                <th width="5%">Sorting</th>
+                                                <th width="10%">Seasons</th>
                                                 <th width="27%">Promo Video URL of Season</th>
-                                                 </tr>
-                                                </thead>
-                                                 <tbody>
-                                                  @foreach($league as $league)
-                                                  <tr>
-                                                  <td>
-                                                  @if($loop->index == 0) 
-                                                       {{$league->leaguename}}
-                                                   <td>{{$league->description_en}}</td>
-                                                   <td>{{$league->league_promo_video}}</td>
-                                                   <td>{{$league->league_sorting}}</td>
-                                                  @endif
-                                                  @if($loop->index == 0)
-                                                  <td>{{$league->name_en}}</td>
-                                                  <td>{{$league->Video}}</td>
-                                                  @else
-                                                  <td></td>
-                                                  <td></td>
-                                                  <td></td>
-                                                  <td>{{$league->name_en}}</td>
-                                                  <td>{{$league->Video}}</td>
-                                                  @endif
-                                                  </tr>
-                                                  @endforeach
-                                                 </tbody>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            @foreach($leagues as $league)
+                                                <tr>
+                                                    <td>
+                                                    @if($loop->index == 0)
+                                                        {{$league->leaguename}}
+                                                        <td>{{$league->description_en}}</td>
+                                                        <td>{{$league->league_promo_video}}</td>
+                                                        <td>{{$league->league_sorting}}</td>
+                                                    @endif
+                                                    @if($loop->index == 0)
+                                                        <td>{{$league->name_en}}</td>
+                                                        <td>{{$league->video_link}}</td>
+                                                    @else
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td>{{$league->name_en}}</td>
+                                                        <td>{{$league->video_link}}</td>
+                                                    @endif
+                                                </tr>
+                                            @endforeach
+                                            </tbody>
 
-                                            </table>
-                                        </div>
+                                        </table>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
+                </div>
             </div>
         </div>
         <div class="content-overlay"></div>
@@ -87,7 +87,7 @@
                     [10, 25, 50, -1],
                     [10, 25, 50, "All"]
                 ],
-                "order":[[5,"desc"]],
+                "order":[[4,"asc"]],
                 buttons: [
                     {
                         extend: 'excel',

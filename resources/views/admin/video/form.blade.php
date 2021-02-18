@@ -130,8 +130,8 @@
 
 
                                                 <div class="input-field col s12">
-                                                    <p for="country"> Select League </p>
-                                                    <select name="country" id="country" class="form-control" style="width:250px" onclick="ShowHideDiv(this)">
+                                                    <p for="league_id"> Select League </p>
+                                                    <select name="league_id" id="league_id" class="form-control" style="width:250px" onclick="ShowHideDiv(this)">
                                                         <option value="">--- Select Leagues ---</option>
                                                         @foreach ($leagues as $leagues)
                                                             <option value="{{$leagues->id}}">{{ $leagues->name_en }}</option>
@@ -140,8 +140,8 @@
                                                 </div>
 
                                                 <div class="input-field col s12">
-                                                    <p for="state">Select Season:</p>
-                                                    <select name="state" class="select browser-default" style="width:250px">
+                                                    <p for="season_id">Select Season:</p>
+                                                    <select name="season_id" class="select browser-default" style="width:250px">
                                                     </select>
                                                 </div>
 
@@ -227,25 +227,25 @@
     <script type="text/javascript">
         jQuery(document).ready(function ()
         {
-            jQuery('select[name="country"]').on('change',function(){
-                var countryID = jQuery(this).val();
-                console.log(countryID);
-                if(countryID == '0')
+            jQuery('select[name="league_id"]').on('change',function(){
+                var league_id = jQuery(this).val();
+                console.log(league_id);
+                if(league_id == '0')
                 {
 
                 }
                 else
                 {
                     jQuery.ajax({
-                        url : 'videos/' +countryID,
+                        url : 'seasons/' +league_id,
                         type : "GET",
                         dataType : "json",
                         success:function(data)
                         {
                             console.log(data);
-                            jQuery('select[name="state"]').empty();
+                            jQuery('select[name="season_id"]').empty();
                             jQuery.each(data, function(key,value){
-                                $('select[name="state"]').append('<option value="'+ key +'">'+ value +'</option>');
+                                $('select[name="season_id"]').append('<option value="'+ key +'">'+ value +'</option>');
                             });
                         }
                     });

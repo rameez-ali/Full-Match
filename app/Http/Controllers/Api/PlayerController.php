@@ -65,7 +65,7 @@ class PlayerController extends Controller
         $player_detail = array();
         $player_related_video = array();
 
-        $players = Player::where('id',$id)->orderBy('player_sorting')->get();;
+        $players = Player::orderBy('player_sorting')->where('id',$id)->orderBy('player_sorting')->get();;
 
         if (!$players->isEmpty()) {
 

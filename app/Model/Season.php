@@ -8,6 +8,6 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Season extends Model
 {
 	use SoftDeletes;
-    protected $fillable = ['league_id', 'name_en','Video'];
+    protected $fillable = ['league_id', 'name_en','video_link'];
     protected $dates = ['deleted_at'];
 }

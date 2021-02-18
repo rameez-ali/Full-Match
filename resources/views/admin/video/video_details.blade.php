@@ -25,8 +25,8 @@
                                                 <th width="20%">League</th>
                                                 <th width="20%">Link</th>
                                                 <th width="20%">Sorting</th>
-                                                <th width="20%">Players</th>
                                                 <th width="20%">Clubs</th>
+                                                <th width="20%">Players</th>
                                                 <th width="20%">Genres</th>
                                             </tr>
                                             </thead>
@@ -41,7 +41,7 @@
                                                         <td>{{$video->name_en}}</td>
                                                         @if(isset($video->leaguename))
                                                         <td>{{$video->leaguename}}</td>
-                                                        
+
                                                         @else
                                                         <td></td>
                                                         @endif

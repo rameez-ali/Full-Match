@@ -34,7 +34,7 @@
                                         @if(isset($select_category_id->category_id))
                                             <input type="text" name="Category_id" value="{{$category->name_en}}" readonly />
                                         @else
-                                            <input type="number" name="Category_id" value="Home" readonly />
+                                            <input type="text" name="Category_id" value="Home" readonly />
                                        @endif
                                       </div>
 

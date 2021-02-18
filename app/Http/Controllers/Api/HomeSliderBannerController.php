@@ -46,6 +46,8 @@ class HomeSliderBannerController extends Controller
 
         $category_id=null;
         $slider_id = Slider::select("id")->where('category_id',$category_id)->get();
+
+        if($slider_id!=null){
         $video_id=Slidervideo::select("Video_id")->wherein('Slider_id',$slider_id)->get();
         $videos=Video::wherein('id',$video_id)->get();
 
@@ -60,16 +62,18 @@ class HomeSliderBannerController extends Controller
             $home_slider_array[$k]['description_ar'] = $v->description_ar;
             $home_slider_array[$k]['image'] = $video_img;
 
-        }
-        $obj->Homeslider=$home_slider_array;
+        }      
+      }
+      $obj->Homeslider=$home_slider_array;
 
         //getting video id of banner_id of home
         $banner_video_id = Adv_banner::select("video_id")->where('homepage',1)
             ->orderBy('created_at','desc')
             ->first();
 
-        $videos=Video::where('id',$banner_video_id)
-            ->get();
+        if($banner_video_id!=null){
+         
+        $videos=Video::wherein('id',$banner_video_id)->get();
 
         foreach ($videos as $k => $v) {
 
@@ -84,12 +88,15 @@ class HomeSliderBannerController extends Controller
             $home_banner_array[$k]['logo'] = $video_img;
             $home_banner_array[$k]['banner'] = $video_banner_img;
 
+           }
         }
-
         $obj->Homebanner=$home_banner_array;
 
+        
         $new_adding_videos=Video::orderBy('created_at','desc')
             ->get();
+
+
 
         foreach ($new_adding_videos as $k => $v) {
 

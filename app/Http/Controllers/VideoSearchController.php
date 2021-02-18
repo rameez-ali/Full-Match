@@ -34,14 +34,14 @@ class VideoSearchController extends Controller
             ->orwhere('name_ar', $searchword->q)
             ->orWhere('name_en', 'like', '%' . $searchword->q. '%')
             ->orWhere('name_ar', 'like', '%' . $searchword->q. '%')
-            ->first();
+            ->get();
 
 
         $players = Player::where('name_en', $searchword->q)
             ->orwhere('name_ar', $searchword->q)
             ->orWhere('name_en', 'like', '%' . $searchword->q. '%')
             ->orWhere('name_ar', 'like', '%' . $searchword->q. '%')
-            ->first();
+            ->get();
 
 
         if(count($video)){

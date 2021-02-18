@@ -33,7 +33,7 @@ class HomePageLayoutController extends Controller
             $obj = new stdClass;
 
             $get_league = HomePgItem::select('item_id')->where('section_id', $response->id)->where('item_name', 'league')->get()->toArray();
-            $league_details = League::wherein('id', $get_league)->get();
+            $league_details = League::orderBy('league_sorting')->wherein('id', $get_league)->get();
 
             $selected_league = array();
             foreach ($league_details as $k => $v) {
@@ -48,7 +48,7 @@ class HomePageLayoutController extends Controller
             $obj->leagues = $selected_league;
 
             $get_players = HomePgItem::select('item_id')->where('section_id', $response->id)->where('item_name', 'players')->get()->toArray();
-            $player_details = Player::wherein('id', $get_players)->get();
+            $player_details = Player::orderBy('player_sorting')->wherein('id', $get_players)->get();
 
             $selected_players = array();
             foreach ($player_details as $k => $v) {
@@ -63,7 +63,7 @@ class HomePageLayoutController extends Controller
             $obj->players = $selected_players;
 
             $get_clubs = HomePgItem::select('item_id')->where('section_id', $response->id)->where('item_name', 'clubs')->get()->toArray();
-            $club_details = Club::wherein('id', $get_clubs)->get();
+            $club_details = Club::orderBy('club_sorting')->wherein('id', $get_clubs)->get();
 
             $selected_clubs = array();
             foreach ($club_details as $k => $v) {
@@ -78,7 +78,7 @@ class HomePageLayoutController extends Controller
             $obj->clubs = $selected_clubs;
 
             $get_videos = HomePgItem::select('item_id')->where('section_id', $response->id)->where('item_name', 'videos')->get()->toArray();
-            $video_details = Video::wherein('id', $get_videos)->get();
+            $video_details = Video::orderBy('video_sorting')->wherein('id', $get_videos)->get();
 
             $selected_videos = array();
             foreach ($video_details as $k => $v) {

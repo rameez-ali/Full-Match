@@ -28,12 +28,15 @@ class ProjectAdvertisementViewController extends Controller
 
     public function index()
     {
-
+        //Getting Categories id associated with the videos
         $category_id = Video::select('category_id')->get()->toArray();
+
+        //Getting Genres id associated with the videos
         $genre_id = Video::select('league_id')->get()->toArray();
 
-        $Adv_banner= DB::table('adv_banners')
-            ->leftJoin('categories', 'categories.id', '=', 'adv_banners.category_id')
+        //Getting Categories and Genres associated with the videos
+        $Adv_banner= Adv_banner::
+              leftJoin('categories', 'categories.id', '=', 'adv_banners.category_id')
             ->leftJoin('video_genres', 'video_genres.id', '=', 'adv_banners.genre_id')
             ->select('adv_banners.*','adv_banners.id','adv_banners.title_en','adv_banners.video_link',
                 'adv_banners.video_banner', 'categories.name_en as categoryname',
@@ -57,23 +60,11 @@ class ProjectAdvertisementViewController extends Controller
         return view('admin.advertisementbanner.form',compact('video','videogenre'));
     }
 
-    public function getallvideos($id)
+    
+    public function getvideo($id)
     {
-        //$states = DB::table("videos")->pluck("video_title","id");
-        //$states = DB::table("videos")->pluck("video_title","id","category");;
-        $states=Video::pluck('title_en','id','category');
-        // echo $states;
-
-        return json_encode($states);
-        //return json_encode($states);
-    }
-
-    public function getvideos($id)
-    {
-        //$states1 = DB::table("videos")->where("Category_id",$id)->pluck("video_title","id");
-        $states1=Video::select('title_en','id')->where("category_id",$id)->pluck("title_en","id");
-
-        return json_encode($states1);
+        $video=Video::select('title_en','id')->where("category_id",$id)->pluck("title_en","id");
+        return json_encode($video);
     }
 
     /**
@@ -143,48 +134,46 @@ class ProjectAdvertisementViewController extends Controller
     public function edit($id)
     {
 
+       //Getting All Categories 
         $category=Category::all();
-        $banner_id=$id;
-        $slidervideos = DB::table('adv_banner_videos');
-        $videos =  DB::table('videos')
-            ->where('banner_id', '=', $banner_id)
-            ->join('adv_banner_videos', 'adv_banner_videos.Video_id', '=', 'videos.id')
-            ->select('videos.id')
-            ->get();
 
-        $select_genre_id = Adv_banner::select('genre_id')->where('id', '=', $id )->first();
+        //Getting Video id associated with this banner
         $select_video_id = Adv_banner::select('video_id')->where('id', '=', $id )->first();
-
-        $selected_ids = [];
-        foreach ($videos as $key => $vid) {
-            array_push($selected_ids, $vid->id);
-        }
-
+      
+        //Getting Category id associated with this banner
         $select_category_id = Adv_banner::select('category_id')->where('id', '=', $id )->get()->first();
+        //Getting Category associated with this banner
         $category=Category::select('id','name_en')->wherein('id',$select_category_id )->get()->first();
 
+        //Getting Genre id associated with this banner
         $select_genre_id = Adv_banner::select('genre_id')->where('id', '=', $id )->get()->first();
+        //Getting Genre associated with this banner
         $genres=Video_genre::select('id','name_en')->get();
 
+        //Getting Homepage Status associated with this banner
         $select_homepage_id=Adv_banner::select('homepage')->where('id',$id)->first();
+        //Getting Homepage Status
         $homepages=DB::table('homepages')->select('id','status')->get();
 
+        
+        //Getting Category id of banner to find videos associated with this category id
         $videos2 =  DB::table('adv_banners')
-            ->where('id', '=', $banner_id)
+            ->where('id', '=', $id)
             ->select('adv_banners.category_id')
             ->get();
 
-        $videos1=json_decode($videos2, true);
+        $banner_category_id=json_decode($videos2, true);
 
-        $video1 =  DB::table('videos')
-            ->where('category_id', '=', $videos1)
+        //Getting Videos assocaited with the category of this banner
+        $videos =  Video::
+              where('category_id', '=', $banner_category_id)
             ->select('videos.id','videos.title_en')
             ->get();
 
 
         $slider=Adv_banner::where('id',$id)->first();
 
-        return view('admin.advertisementbanner.edit', compact('videos','video1','selected_ids','select_category_id','select_genre_id','select_video_id','select_homepage_id','select_genre_id','slider','category','genres','videogenre','homepages'))
+        return view('admin.advertisementbanner.edit', compact('videos','select_category_id','select_genre_id','select_video_id','select_homepage_id','select_genre_id','slider','category','genres','homepages'))
             ->with('i', (request()->input('page', 1) - 1) * 5);
 
 

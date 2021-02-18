@@ -97,24 +97,23 @@
                                           <input type="file" name="video_img" value="{{ old('video_img',$video->video_img) }}" class="dropify mt-3" data-default-file="{{ asset('app-assets/images/video/'.$video->video_img)}}" data-max-file-size="10M" data-allowed-file-extensions="png jpg jpeg"/>
                                           </div>
 
-                                           @if($select_category_id!=null){
+                                           @if($select_category_id!=null)
                                             <div class="input-field col s12">
                                                   <label><strong>Edit Category </strong></label><br/>
                                                   <select class="selectpicker" name="Category_id" required>
                                                       @foreach($category as $category )
-                                                          <option value="{{$category->id}}" @if {{$category->id == $select_category_id->category_id ? 'selected' : ''}} @else Home @endif>{{$category->name_en}}</option>
+                                                          <option value="{{$category->id}}" {{$category->id == $select_category_id->category_id ? 'selected' : ''}} >{{$category->name_en}}</option>
                                                       @endforeach
                                                   </select>
                                               </div>
-                                           }
-                                        @else{
+                                        @else
                                             <div class="input-field col s12">
                                                 <label><strong>Edit Category </strong></label><br/>
                                                 <select class="selectpicker" name="Category_id" required>
                                                         <option SELECTED value="" >Home</option>
                                                 </select>
                                             </div>
-                                        }
+                                        @endif
 
 
                                           @error('Category_id')

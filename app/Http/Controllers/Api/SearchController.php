@@ -51,16 +51,16 @@ class SearchController extends Controller
             ->orwhere('name_ar', $searchword)
             ->orWhere('name_en', 'like', '%' . $searchword. '%')
             ->orWhere('name_ar', 'like', '%' . $searchword. '%')
-            ->first();
+            ->get();
 
 
         $players = Player::select('id')->where('name_en', $searchword)
             ->orwhere('name_ar', $searchword)
             ->orWhere('name_en', 'like', '%' . $searchword. '%')
             ->orWhere('name_ar', 'like', '%' . $searchword. '%')
-            ->first();
+            ->get();
 
-        $popular_search_videos = Video::where('popular_searches', 1)->get();
+        $popular_search_videos = Video::where('popular_searches', 2)->get();
 
          if(count($video)){
 
@@ -73,12 +73,12 @@ class SearchController extends Controller
                  $all_videos_array[$k]['name_ar'] = $v->title_ar;
                  $all_videos_array[$k]['description'] = $v->description_en;
                  $all_videos_array[$k]['description_ar'] = $v->description_ar;
-                 $all_videos_array[$k]['banner'] = $banner;
+                 $all_videos_array[$k]['logo'] = $banner;
 
              }
-             $obj->Byvideotitile= $all_videos_array;
 
         }
+        $obj->Byvideotitle= $all_videos_array;
 
          if($clubs!=null){
 
@@ -96,14 +96,12 @@ class SearchController extends Controller
                  $club_search_video[$k]['name_ar'] = $v->title_ar;
                  $club_search_video[$k]['description'] = $v->description_en;
                  $club_search_video[$k]['description_ar'] = $v->description_ar;
-                 $club_search_video[$k]['banner'] = $banner;
+                 $club_search_video[$k]['logo'] = $banner;
                  $club_search_video[$k]['image'] = $image;
 
              }
-             $obj->Byclubname = $club_search_video;
-
-
          }
+         $obj->Byclubname = $club_search_video;
 
          if($players!=null){
 
@@ -120,13 +118,14 @@ class SearchController extends Controller
                 $player_search_video[$k]['name_ar'] = $v->title_ar;
                 $player_search_video[$k]['description'] = $v->description_en;
                 $player_search_video[$k]['description_ar'] = $v->description_ar;
-                $player_search_video[$k]['banner'] = $banner;
+                $player_search_video[$k]['logo'] = $banner;
                 $player_search_video[$k]['image'] = $image;
 
 
             }
-             $obj->Byplayername = $player_search_video;
          }
+         $obj->Byplayername = $player_search_video;
+
 
         if( $popular_search_videos!=null){
 
@@ -140,7 +139,7 @@ class SearchController extends Controller
                 $popular_search_video[$k]['name_ar'] = $v->title_ar;
                 $popular_search_video[$k]['description'] = $v->description_en;
                 $popular_search_video[$k]['description'] = $v->description_ar;
-                $popular_search_video[$k]['banner'] = $banner;
+                $popular_search_video[$k]['logo'] = $banner;
                 $popular_search_video[$k]['image'] = $image;
 
             }

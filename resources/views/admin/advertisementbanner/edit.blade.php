@@ -54,7 +54,7 @@
                                             <div class="input-field col s12">
                                             <p for="category_image">Edit Videos * </p>
                                           <select name="state" class="select browser-default" style="width:250px" >
-                                          @foreach($video1 as $video )
+                                          @foreach($videos as $video )
                                           <option value="{{$video->id}}" {{$video->id == $select_video_id->video_id ? 'selected' : ''}}  >{{$video->title_en}}</option>
                                           @endforeach
                                           </select>

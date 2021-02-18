@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Model\Adv_banner;
 use Illuminate\Http\Request;
 use App\Model\Category;
 use App\Model\Video;
@@ -31,10 +30,12 @@ class ProjectSliderViewController extends Controller
 
     public function index()
     {
+       //Getting Category id associated with this slider
        $category_id = Slider::select('category_id')->get()->toArray();
 
-           $slidercategory = DB::table('sliders')
-             ->leftjoin('categories', 'categories.id', '=', 'sliders.category_id')
+        //Getting Category associated with this slider
+           $slidercategory = Slider::
+             leftjoin('categories', 'categories.id', '=', 'sliders.category_id')
             ->select('sliders.*','sliders.id','sliders.name_en',
                 'sliders.slider_sorting','categories.name_en as catname')
             ->get();
@@ -61,28 +62,31 @@ class ProjectSliderViewController extends Controller
     public function getallvideos($id)
     {
         $nullability=null;
-        $category_status = DB::table("sliders")->where("category_id",$nullability)->get()->first();
+
+        //Check if slider associated with home already exists
+        $category_status = Slider::where("category_id",$nullability)->get()->first();
 
         if(!isset($category_status)) {
-            $states = Video::pluck('title_en', 'id', 'category');
-            return json_encode($states);
+            $all_videos = Video::pluck('title_en', 'id', 'category');
+            return json_encode($all_videos);
         }
         else{
-            $states="0";
-            return json_encode($states);
+            $all_videos="0";
+            return json_encode($all_videos);
         }
     }
 
     public function getvideos($id)
     {
-        $category_status = DB::table("sliders")->where("category_id",$id)->get()->first();
+        //Check if slider associated with Category already exists
+        $category_status = Slider::where("category_id",$id)->get()->first();
         if(!isset($category_status)) {
-            $states1 = Video::select('title_en', 'id')->where("category_id", $id)->pluck("title_en", "id");
-            return json_encode($states1);
+            $category_videos = Video::select('title_en', 'id')->where("category_id", $id)->pluck("title_en", "id");
+            return json_encode($category_videos);
         }
         else{
-            $states1="0";
-            return json_encode($states1);
+            $category_videos="0";
+            return json_encode($category_videos);
         }
     }
 
@@ -94,43 +98,31 @@ class ProjectSliderViewController extends Controller
      */
     public function store(Request $request)
     {
-        $slidercheck=Slider::where('category_id',$request->country)->get()
-                    ->first();
-        if($slidercheck!=null)
+        if($request->country!=null)
         {
-            return back()
-                ->withInput()
-                ->withErrors(['msg', 'Name is required']);
-        }
-        else{
-            echo "no exist";
+            $form_data2 = array(
+                'category_id'    => $request->country > 0 ? $request->country : null,
+                'name_en'    =>   $request->name_en,
+                'name_ar'    =>   $request->name_ar,
+                'slider_sorting'    =>   $request->slider_sorting
+            );
+            Slider::create($form_data2);
         }
 
-//        if($request->country!=null)
-//        {
-//            $form_data2 = array(
-//                'category_id'    => $request->country > 0 ? $request->country : null,
-//                'name_en'    =>   $request->name_en,
-//                'name_ar'    =>   $request->name_ar,
-//                'slider_sorting'    =>   $request->slider_sorting
-//            );
-//            Slider::create($form_data2);
-//        }
-//
-//
-//        $id = DB::table('sliders')->orderBy('id', 'DESC')->value('id');
-//
-//        foreach($request->state as $state){
-//            $form_data3 = array(
-//                'Video_id'     =>  $state,
-//                'Slider_id'     =>   $id,
-//            );
-//
-//            Slidervideo::create($form_data3);
-//        }
-//
-//        return redirect('slider-form')->with('slideraddsuccess','Slider Added Successfully');
-//
+
+        $id = Slider::orderBy('id', 'DESC')->value('id');
+
+        foreach($request->state as $state){
+            $form_data3 = array(
+                'Video_id'     =>  $state,
+                'Slider_id'     =>   $id,
+            );
+
+            Slidervideo::create($form_data3);
+        }
+
+        return redirect('slider-form')->with('slideraddsuccess','Slider Added Successfully');
+
 
     }
 
@@ -154,9 +146,9 @@ class ProjectSliderViewController extends Controller
     public function edit($id)
     {
         $slider_id=$id;
-        $slidervideos = DB::table('slidervideos');
-        $videos =  DB::table('videos')
-            ->where('Slider_id', '=', $slider_id)
+
+        $videos =  Video::
+              where('Slider_id', '=', $slider_id)
             ->join('slidervideos', 'slidervideos.Video_id', '=', 'videos.id')
             ->select('videos.id')
             ->get();
@@ -167,16 +159,17 @@ class ProjectSliderViewController extends Controller
         }
 
 
-        $videos2 =  DB::table('sliders')
-            ->where('id', '=', $slider_id)
+        $videos2 =  Slider::
+              where('id', '=', $slider_id)
             ->select('sliders.category_id')
             ->get();
 
-
         $videos1=json_decode($videos2, true);
 
+        //Getting All Videos associated with slider
         foreach($videos1 as $videos1)
         {
+            //Getting All Videos associated with slider when its a home slider
             if($videos1['category_id']==null)
             {
                 $video1 =  DB::table('videos')
@@ -184,6 +177,7 @@ class ProjectSliderViewController extends Controller
                     ->get();
             }
             else{
+                //Getting All Videos associated with slider when its a category slider
                 $video1 =  DB::table('videos')
                     ->where('category_id', '=', $videos1)
                     ->select('videos.id','videos.title_en')
@@ -191,9 +185,10 @@ class ProjectSliderViewController extends Controller
             }
         }
 
-
+       //Getting Slider Details
         $slider=Slider::find($id);
 
+        //Getting Category associated with this slider
         $select_category_id = Slider::select('category_id')->where('id', '=', $id )->get()->first();
         $category=Category::select('id','name_en')->wherein('id',$select_category_id )->get()->first();
 
@@ -252,13 +247,14 @@ class ProjectSliderViewController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-    public function destroy1($id)
+    public function slider_details($id)
     {
+        //Getting Category
         $category_id = Slider::select('category_id')->where('id','=',$id)->get()->first();
 
         if($category_id->category_id!=null){
-           $sliders = DB::table('sliders')
-             ->join('categories', 'categories.id', '=', 'sliders.category_id')
+           $sliders = Slider::
+              join('categories', 'categories.id', '=', 'sliders.category_id')
             ->select('sliders.*','sliders.id','sliders.name_en',
                 'sliders.slider_sorting','categories.name_en as catname')
             ->where('sliders.id',$id)
@@ -268,19 +264,17 @@ class ProjectSliderViewController extends Controller
             $sliders = Slider::select('name_en','slider_sorting')->where('id','=',$id)->get();
         }
 
-        // $sliders = Slider::where('id',$id)->get();
+
         $slider_id=$id;
 
-        // dd($sliders);
-
-        $slidervideos = DB::table('slidervideos');
-        $videos =  DB::table('videos')
-            ->where('Slider_id', '=', $slider_id)
+        //Getting Videos assocaited with this slider
+        $videos =  Video::
+              where('Slider_id', '=', $slider_id)
             ->join('slidervideos', 'slidervideos.Video_id', '=', 'videos.id')
             ->select('videos.*', 'videos.title_en')
             ->get();
 
-        return view('admin.slider.display', compact('videos','sliders'));
+        return view('admin.slider.slider_details', compact('videos','sliders'));
 
 
 
@@ -290,8 +284,13 @@ class ProjectSliderViewController extends Controller
 
     public function destroy($id)
     {
+        //Delete Relation of Slider and Video
+        SliderVideo::where('Slider_id', $id)->delete();
 
-
+        //Delete Slider
+        $data = Slider::findOrFail($id);
+        $data->delete();
+        return redirect('slider-form')->with('sliderdelsuccess','Slider Deleted Successfully');
 
     }
 }
