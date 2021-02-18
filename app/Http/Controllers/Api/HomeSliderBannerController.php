@@ -39,10 +39,13 @@ class HomeSliderBannerController extends Controller
     {
         $obj = new stdClass;
 
+        $category = array();
         $home_slider_array = array();
         $home_banner_array = array();
         $new_adding_video = array();
 
+        $category=Category::select('id','name_en')->get();
+        $obj->Categories=$category;
 
         $category_id=null;
         $slider_id = Slider::select("id")->where('category_id',$category_id)->get();
@@ -62,7 +65,7 @@ class HomeSliderBannerController extends Controller
             $home_slider_array[$k]['description_ar'] = $v->description_ar;
             $home_slider_array[$k]['image'] = $video_img;
 
-        }      
+        }
       }
       $obj->Homeslider=$home_slider_array;
 
@@ -72,7 +75,7 @@ class HomeSliderBannerController extends Controller
             ->first();
 
         if($banner_video_id!=null){
-         
+
         $videos=Video::wherein('id',$banner_video_id)->get();
 
         foreach ($videos as $k => $v) {
@@ -92,7 +95,7 @@ class HomeSliderBannerController extends Controller
         }
         $obj->Homebanner=$home_banner_array;
 
-        
+
         $new_adding_videos=Video::orderBy('created_at','desc')
             ->get();
 
