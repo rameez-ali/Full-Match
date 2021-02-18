@@ -66,12 +66,12 @@ class CategoryController extends Controller
     {
         $obj = new stdClass;
 
-        $Homeslider = array();
-        $Homebanner = array();
-        $clubs = array();
-        $players = array();
-        $leagues = array();
-        $videos=array();
+        $slider_array = array();
+        $banner_array = array();
+        $latest_videos_array = array();
+        $club_array = array();
+        $player_array = array();
+        $league_array=array();
 
         //getting slider id of that specific categories
         $slider_id = Slider::select("id")->where('category_id',$id)->first();
@@ -248,11 +248,11 @@ class CategoryController extends Controller
 
         $obj = new stdClass;
 
-        $videos = array();
-        $players = array();
-        $clubs = array();
-        $leagues = array();
-        $Homebanner = array();
+        $latest_videos_array = array();
+        $banner_array = array();
+        $club_array = array();
+        $league_array = array();
+        $player_array = array();
 
 
         //getting video id of banner_id of that specific category and genre both
