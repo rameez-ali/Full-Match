@@ -66,12 +66,12 @@ class CategoryController extends Controller
     {
         $obj = new stdClass;
 
-        $slider_array = array();
-        $banner_array = array();
-        $club_array = array();
-        $player_array = array();
-        $league_array = array();
-        $latest_videos_array=array();
+        $Homeslider = array();
+        $Homebanner = array();
+        $clubs = array();
+        $players = array();
+        $leagues = array();
+        $videos=array();
 
         //getting slider id of that specific categories
         $slider_id = Slider::select("id")->where('category_id',$id)->first();
@@ -110,11 +110,12 @@ class CategoryController extends Controller
                 $slider_array[$k]['title_ar'] = $v->title_ar;
                 $slider_array[$k]['description'] = $v->description_en;
                 $slider_array[$k]['description_ar'] = $v->description_ar;
+                $slider_array[$k]['promo'] = $v->video_promo;
                 $slider_array[$k]['image'] = $video_img;
 
             }
         }
-        $obj->category_slider = $slider_array;
+        $obj->Homeslider = $slider_array;
 
 
         if($banner_video_id!=null)
@@ -135,7 +136,7 @@ class CategoryController extends Controller
                 $banner_array[$k]['logo'] = $video_img;
 
             }
-            $obj->category_banner = $banner_array;
+            $obj->Homebanner = $banner_array;
         }
 
         if($genre_id!=null)
@@ -164,7 +165,7 @@ class CategoryController extends Controller
                 $latest_videos_array[$k]['banner'] = $video_banner_img;
 
             }
-            $obj->Category_latest_videos = $latest_videos_array;
+            $obj->videos = $latest_videos_array;
 
         }
 
@@ -188,7 +189,7 @@ class CategoryController extends Controller
                 $club_array[$k]['logo'] = $club_logo;
 
             }
-            $obj->category_clubs = $club_array;
+            $obj->clubs = $club_array;
 
         }
 
@@ -212,7 +213,7 @@ class CategoryController extends Controller
 
 
             }
-            $obj->category_player = $player_array;
+            $obj->players = $player_array;
 
         }
 
@@ -235,7 +236,7 @@ class CategoryController extends Controller
                 $league_array[$k]['image'] = $league_profile_image;
 
             }
-            $obj->category_leagues = $league_array;
+            $obj->leagues = $league_array;
 
         }
 
@@ -247,11 +248,11 @@ class CategoryController extends Controller
 
         $obj = new stdClass;
 
-        $latest_videos_array = array();
-        $player_array = array();
-        $club_array = array();
-        $league_array = array();
-        $banner_array = array();
+        $videos = array();
+        $players = array();
+        $clubs = array();
+        $leagues = array();
+        $Homebanner = array();
 
 
         //getting video id of banner_id of that specific category and genre both
@@ -277,7 +278,7 @@ class CategoryController extends Controller
                 $banner_array[$k]['logo'] = $video_img;
 
             }
-            $obj->category_genre_banner = $banner_array;
+            $obj->Homebanner = $banner_array;
         }
 
 
@@ -306,7 +307,7 @@ class CategoryController extends Controller
                 $latest_videos_array[$k]['banner'] = $video_banner_img;
 
             }
-            $obj->Category_genre_videos = $latest_videos_array;
+            $obj->videos = $latest_videos_array;
 
 
         }
@@ -333,7 +334,7 @@ class CategoryController extends Controller
                 $club_array[$k]['logo'] = $club_logo;
 
             }
-            $obj->category_genre_clubs = $club_array;
+            $obj->clubs = $club_array;
         }
 
 
@@ -358,7 +359,7 @@ class CategoryController extends Controller
                 $player_array[$k]['image'] = $player_profile_image;
 
             }
-            $obj->category_genre_players = $player_array;
+            $obj->players = $player_array;
 
         }
 
@@ -396,7 +397,7 @@ class CategoryController extends Controller
                 $league_array[$k]['image'] = $league_profile_image;
 
             }
-            $obj->category_genre_leagues = $league_array;
+            $obj->leagues = $league_array;
 
         }
 

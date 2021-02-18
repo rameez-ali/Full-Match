@@ -63,6 +63,7 @@ class HomeSliderBannerController extends Controller
             $home_slider_array[$k]['title_ar'] = $v->title_ar;
             $home_slider_array[$k]['description'] = $v->description_en;
             $home_slider_array[$k]['description_ar'] = $v->description_ar;
+            $home_slider_array[$k]['promo'] = $v->promo_video;
             $home_slider_array[$k]['image'] = $video_img;
 
         }
