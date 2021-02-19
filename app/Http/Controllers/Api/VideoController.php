@@ -77,7 +77,7 @@ class VideoController extends Controller
 
         $season_array = array();
         $category_array = array();
-        $specific_video_array=array();
+        $latest_videos_array=array();
 
         //getting video details of that specific video
         $videos = Video::where('id', $id)->orderBy('video_sorting')->get();
@@ -112,14 +112,12 @@ class VideoController extends Controller
                 $latest_videos_array[$k]['id'] = $v->id;
                 $latest_videos_array[$k]['name'] = $v->title_en;
                 $latest_videos_array[$k]['name_ar'] = $v->title_ar;
-                if($v->video_link==null)
-                {
+                if ($v->video_link == null) {
                     $season_id = Video::select('season_id')->where('id', $v->id)->first();
                     $league_id = Season::select('league_id')->where('id', $season_id)->first();
-                    $video_link=League::select('video_link')->where('id', $league_id)->first();
+                    $video_link = League::select('video_link')->where('id', $league_id)->first();
                     $latest_videos_array[$k]['video_link'] = $video_link;
-                }
-                else{
+                } else {
                     $latest_videos_array[$k]['video_link'] = $v->video_link;
                 }
                 $latest_videos_array[$k]['description_ar'] = $v->description_ar;
@@ -127,9 +125,9 @@ class VideoController extends Controller
                 $latest_videos_array[$k]['banner'] = $video_banner_img;
 
             }
-            $obj->video_details = $latest_videos_array;
 
         }
+        $obj->video_details = $latest_videos_array;
 
 
 

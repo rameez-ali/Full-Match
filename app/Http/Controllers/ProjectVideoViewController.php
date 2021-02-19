@@ -103,7 +103,6 @@ class ProjectVideoViewController extends Controller
             $image1->move(public_path('app-assets/images/video'), $new_name1);
 
 
-dd($request);
             $form_data2 = array(
                 'category_id'    =>   $request->Category_id,
                 'league_id'     =>   $request->league_id,
