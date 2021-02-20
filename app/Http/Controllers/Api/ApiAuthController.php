@@ -215,7 +215,7 @@ class ApiAuthController extends Controller
         $request->validate([
             'email' => 'required|string|email',
             'name' => 'required',
-            'provider' => 'required',
+            'provider_id' => 'required',
         ]);
         $array = array();
         if (User::where('email', $request->email)->first() != null) {
@@ -225,7 +225,7 @@ class ApiAuthController extends Controller
                 'name' => $request->name,
                 'phone' => 13245678,
                 'email' => $request->email,
-                'provider_id' => $request->provider,
+                'provider_id' => $request->provider_id,
                 'email_verified_at' => Carbon::now()
             ]);
             $user->save();
