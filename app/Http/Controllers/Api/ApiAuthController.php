@@ -213,7 +213,9 @@ class ApiAuthController extends Controller
     public function socialLogin(Request $request)
     {
         $request->validate([
-            'email' => 'required|string|email'
+            'email' => 'required|string|email',
+            'name' => 'required',
+            'provider' => 'required',
         ]);
         $array = array();
         if (User::where('email', $request->email)->first() != null) {
