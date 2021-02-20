@@ -192,6 +192,24 @@ class ApiAuthController extends Controller
         return $user->token;
     }
 
+    public function facebookRedirect(Request $request){
+        return Socialite::driver('facebook')->redirect();
+    }
+    public function facebookCallback(Request $request){
+        $user = Socialite::driver('facebook')->user();
+
+        return $user->token;
+    }
+
+    public function appleRedirect(Request $request){
+        return Socialite::driver('apple')->redirect();
+    }
+    public function appleCallback(Request $request){
+        $user = Socialite::driver('apple')->user();
+
+        return $user->token;
+    }
+
     public function socialLogin(Request $request)
     {
         $request->validate([
