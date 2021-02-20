@@ -77,14 +77,14 @@ Route::group([
     Route::post('socialLogin', [ApiAuthController::class , 'socialLogin']);
     Route::post('signup', [ApiAuthController::class , 'signup']);
 
-    Route::get('/google-redirect', [ApiAuthController::class , 'googleRedirect']);
-    Route::get('/google-callback', [ApiAuthController::class , 'googlecCallback']);
-
-    Route::get('/facebook-redirect', [ApiAuthController::class , 'facebookRedirect']);
-    Route::get('/facebook-callback', [ApiAuthController::class , 'facebookCallback']);
-
-    Route::get('/apple-redirect', [ApiAuthController::class , 'appleRedirect']);
-    Route::get('/apple-callback', [ApiAuthController::class , 'appleCallback']);
+//    Route::get('/google-redirect', [ApiAuthController::class , 'googleRedirect']);
+//    Route::get('/google-callback', [ApiAuthController::class , 'googlecCallback']);
+//just put these routes and functions
+//    Route::get('/facebook-redirect', [ApiAuthController::class , 'facebookRedirect']);
+//    Route::get('/facebook-callback', [ApiAuthController::class , 'facebookCallback']);
+//
+//    Route::get('/apple-redirect', [ApiAuthController::class , 'appleRedirect']);
+//    Route::get('/apple-callback', [ApiAuthController::class , 'appleCallback']);
 
 });
 
