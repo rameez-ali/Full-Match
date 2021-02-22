@@ -192,10 +192,30 @@ class ApiAuthController extends Controller
         return $user->token;
     }
 
+    public function facebookRedirect(Request $request){
+        return Socialite::driver('facebook')->redirect();
+    }
+    public function facebookCallback(Request $request){
+        $user = Socialite::driver('facebook')->user();
+
+        return $user->token;
+    }
+
+    public function appleRedirect(Request $request){
+        return Socialite::driver('apple')->redirect();
+    }
+    public function appleCallback(Request $request){
+        $user = Socialite::driver('apple')->user();
+
+        return $user->token;
+    }
+
     public function socialLogin(Request $request)
     {
         $request->validate([
-            'email' => 'required|string|email'
+            'email' => 'required|string|email',
+            'name' => 'required',
+            'provider_id' => 'required',
         ]);
         $array = array();
         if (User::where('email', $request->email)->first() != null) {
@@ -205,7 +225,7 @@ class ApiAuthController extends Controller
                 'name' => $request->name,
                 'phone' => 13245678,
                 'email' => $request->email,
-                'provider_id' => $request->provider,
+                'provider_id' => $request->provider_id,
                 'email_verified_at' => Carbon::now()
             ]);
             $user->save();

@@ -17,6 +17,7 @@ use Illuminate\Support\Facades\Auth;
 Route::get('/', function () {
     return view('/welcome');
 });
+Route::get('page/{id}', 'PageController@show')->name('page.id');
 Auth::routes(['verify' => true]);
 Route::group(['middleware' => ['auth']], function () {
     Route::get('dashboard', 'DashboardController@index')->name('dashboard');

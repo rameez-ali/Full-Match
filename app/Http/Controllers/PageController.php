@@ -50,7 +50,13 @@ class PageController extends Controller
      */
     public function show($id)
     {
-        //
+        $request = new GetPageRequest();
+
+        $request->id = $id;
+
+        $response = $request->handle();
+
+        return view('cmspage',['cmspage' => $response,]);
     }
 
     /**

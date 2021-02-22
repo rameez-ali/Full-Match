@@ -108,8 +108,8 @@ class CategoryController extends Controller
                 $video_img = str_replace('\\', '/', asset('app-assets/images/video/' . $v->video_img));
 
                 $slider_array[$k]['id'] = $v->id;
-                $slider_array[$k]['title'] = $v->title_en;
-                $slider_array[$k]['title_ar'] = $v->title_ar;
+                $slider_array[$k]['name'] = $v->title_en;
+                $slider_array[$k]['name_ar'] = $v->title_ar;
                 $slider_array[$k]['description'] = $v->description_en;
                 $slider_array[$k]['description_ar'] = $v->description_ar;
                 $slider_array[$k]['promo'] = $v->video_promo;
@@ -130,8 +130,8 @@ class CategoryController extends Controller
                 $video_banner_img = str_replace('\\', '/', asset('app-assets/images/video/' . $v->video_banner_img));
 
                 $banner_array[$k]['id'] = $v->id;
-                $banner_array[$k]['title'] = $v->title_en;
-                $banner_array[$k]['title_ar'] = $v->title_ar;
+                $banner_array[$k]['name'] = $v->title_en;
+                $banner_array[$k]['name_ar'] = $v->title_ar;
                 $banner_array[$k]['description'] = $v->description_en;
                 $banner_array[$k]['description_ar'] = $v->description_ar;
                 $banner_array[$k]['banner'] = $video_banner_img;
@@ -159,8 +159,8 @@ class CategoryController extends Controller
                 $video_banner_img = str_replace('\\', '/', asset('app-assets/images/video/' . $v->video_banner_img));
 
                 $latest_videos_array[$k]['id'] = $v->id;
-                $latest_videos_array[$k]['title'] = $v->title_en;
-                $latest_videos_array[$k]['title_ar'] = $v->title_ar;
+                $latest_videos_array[$k]['name'] = $v->title_en;
+                $latest_videos_array[$k]['name_ar'] = $v->title_ar;
                 $latest_videos_array[$k]['description'] = $v->description_en;
                 $latest_videos_array[$k]['description_ar'] = $v->description_ar;
                 $latest_videos_array[$k]['image'] = $video_img;
@@ -188,7 +188,7 @@ class CategoryController extends Controller
                 $club_array[$k]['description'] = $v->description_en;
                 $club_array[$k]['description_ar'] = $v->description_ar;
                 $club_array[$k]['banner'] = $club_banner;
-                $club_array[$k]['logo'] = $club_logo;
+                $club_array[$k]['image'] = $club_logo;
 
             }
             $obj->homelayout->clubs = $club_array;

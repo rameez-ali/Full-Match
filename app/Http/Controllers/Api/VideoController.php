@@ -50,7 +50,7 @@ class VideoController extends Controller
                 $all_videos_array[$k]['description'] = $v->description_en;
                 $all_videos_array[$k]['description_ar'] = $v->description_ar;
                 $all_videos_array[$k]['sorting'] = $v->video_sorting;
-                $all_videos_array[$k]['logo'] = $video_img;
+                $all_videos_array[$k]['image'] = $video_img;
                 $all_videos_array[$k]['banner'] = $video_banner_img;
 
             }
@@ -121,7 +121,7 @@ class VideoController extends Controller
                     $latest_videos_array[$k]['video_link'] = $v->video_link;
                 }
                 $latest_videos_array[$k]['description_ar'] = $v->description_ar;
-                $latest_videos_array[$k]['logo'] = $video_img;
+                $latest_videos_array[$k]['image'] = $video_img;
                 $latest_videos_array[$k]['banner'] = $video_banner_img;
 
             }
@@ -145,7 +145,7 @@ class VideoController extends Controller
                 $season_array[$k]['name_ar'] = $v->title_ar;
                 $season_array[$k]['description'] = $v->description_en;
                 $season_array[$k]['description_ar'] = $v->description_ar;
-                $season_array[$k]['logo'] = $video_img;
+                $season_array[$k]['image'] = $video_img;
                 $season_array[$k]['banner'] = $video_banner_img;
 
             }
@@ -167,7 +167,7 @@ class VideoController extends Controller
                 $category_array[$k]['description'] = $v->description_en;
                 $category_array[$k]['description_ar'] = $v->description_ar;
                 $category_array[$k]['sorting'] = $v->video_sorting;
-                $category_array[$k]['logo'] = $video_img;
+                $category_array[$k]['image'] = $video_img;
                 $category_array[$k]['banner'] = $video_banner_img;
 
             }
