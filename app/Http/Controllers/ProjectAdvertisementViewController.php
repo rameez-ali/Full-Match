@@ -60,11 +60,19 @@ class ProjectAdvertisementViewController extends Controller
         return view('admin.advertisementbanner.form',compact('video','videogenre'));
     }
 
-    
+
     public function getvideo($id)
     {
-        $video=Video::select('title_en','id')->where("category_id",$id)->pluck("title_en","id");
-        return json_encode($video);
+        //Check if banner associated with Category already exists
+        $category_status = Adv_banner::where("category_id",$id)->get()->first();
+        if(!isset($category_status)) {
+            $category_videos = Video::select('title_en', 'id')->where("category_id", $id)->pluck("title_en", "id");
+            return json_encode($category_videos);
+        }
+        else{
+            $category_videos="null";
+            return json_encode($category_videos);
+        }
     }
 
     /**
@@ -134,12 +142,12 @@ class ProjectAdvertisementViewController extends Controller
     public function edit($id)
     {
 
-       //Getting All Categories 
+       //Getting All Categories
         $category=Category::all();
 
         //Getting Video id associated with this banner
         $select_video_id = Adv_banner::select('video_id')->where('id', '=', $id )->first();
-      
+
         //Getting Category id associated with this banner
         $select_category_id = Adv_banner::select('category_id')->where('id', '=', $id )->get()->first();
         //Getting Category associated with this banner
@@ -155,7 +163,7 @@ class ProjectAdvertisementViewController extends Controller
         //Getting Homepage Status
         $homepages=DB::table('homepages')->select('id','status')->get();
 
-        
+
         //Getting Category id of banner to find videos associated with this category id
         $videos2 =  DB::table('adv_banners')
             ->where('id', '=', $id)

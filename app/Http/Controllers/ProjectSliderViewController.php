@@ -71,7 +71,7 @@ class ProjectSliderViewController extends Controller
             return json_encode($all_videos);
         }
         else{
-            $all_videos="0";
+            $all_videos="null";
             return json_encode($all_videos);
         }
     }
@@ -85,7 +85,7 @@ class ProjectSliderViewController extends Controller
             return json_encode($category_videos);
         }
         else{
-            $category_videos="0";
+            $category_videos="null";
             return json_encode($category_videos);
         }
     }

@@ -101,50 +101,55 @@
     <script src={{ asset('app-assets/vendors/dropify/js/dropify.min.js') }}></script>
 
 
+            <script type="text/javascript">
 
-<script type="text/javascript">
-    jQuery(document).ready(function ()
-    {
-            jQuery('select[name="country"]').on('change',function(){
-               var countryID = jQuery(this).val();
-               console.log(countryID);
-               if(countryID == '0')
-               {
-                  jQuery.ajax({
-                     url : 'allvideos/' +countryID,
-                     type : "GET",
-                     dataType : "json",
-                     success:function(data)
-                     {
-                        console.log(data);
-                        jQuery('select[name="state"]').empty();
-                        jQuery.each(data, function(key,value){
-                           $('select[name="state"]').append('<option value="'+ key +'">'+ value +'</option>');
-                        });
-                     }
-                  });
-               }
-               else
-               {
-                  jQuery.ajax({
-                     url : 'videos/' +countryID,
-                     type : "GET",
-                     dataType : "json",
-                     success:function(data)
-                     {
-                        console.log(data);
-                        jQuery('select[name="state"]').empty();
-                        jQuery.each(data, function(key,value){
-                           $('select[name="state"]').append('<option value="'+ key +'">'+ value +'</option>');
-                        });
-                     }
-                  });
-               }
-            });
-    });
-     </script>
+                jQuery(document).ready(function ()
+                {
+                    jQuery('select[name="country"]').on('change',function(){
+                        var countryID = jQuery(this).val();
+                        console.log(countryID);
+                        if(countryID == '0')
+                        {
+                            jQuery.ajax({
+                                url : 'allvideos/' +countryID,
+                                type : "GET",
+                                dataType : "json",
+                                success:function(data) {
+                                    console.log(data);
+                                    if (data != "null") {
+                                        jQuery('select[name="state"]').empty();
+                                        jQuery.each(data, function (key, value) {
+                                            $('select[name="state"]').append('<option value="' + key + '">' + value + '</option>');
+                                        });
+                                    } else {
+                                        alert("Home Slider Already Exist");
+                                    }
+                                }
+                            });
+                        }
+                        else
+                        {
+                            jQuery.ajax({
+                                url : 'videos/' +countryID,
+                                type : "GET",
+                                dataType : "json",
+                                success:function(data) {
+                                    console.log(data);
+                                    if (data!="null") {
+                                        jQuery('select[name="state"]').empty();
+                                        jQuery.each(data, function (key, value) {
+                                            $('select[name="state"]').append('<option value="' + key + '">' + value + '</option>');
+                                        });
+                                    }
+                                    else{
+                                        alert("Category Banner Already Exist");
+                                    }
+                                }
+                            });
+                        }
+                    });
+                });
 
-        <script>
             $("#title_en").keyup(function(){
                 $("#title_ar").val(this.value);
             });
