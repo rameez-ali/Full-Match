@@ -83,7 +83,7 @@ class PlayerController extends Controller
                 $player_detail[$k]['description_ar'] = $v->description_ar;
                 $player_detail[$k]['sorting'] = $v->player_sorting;
             }
-            $obj->Player_Details = $player_detail;
+            $obj->detail = $player_detail;
         }
 
         $video_players=Videoplayer::select('videos.id','videos.video_sorting','videos.title_en','videos.title_ar','videos.video_img','videos.description_en','videos.description_ar','videos.video_banner_img')
@@ -109,7 +109,7 @@ class PlayerController extends Controller
                 $player_related_video[$k]['sorting'] = $v->video_sorting;
 
             }
-            $obj->Player_Related_Videos = $player_related_video;
+            $obj->related_video = $player_related_video;
         }
 
 

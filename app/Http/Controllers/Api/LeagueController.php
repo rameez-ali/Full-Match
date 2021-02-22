@@ -84,7 +84,7 @@ class LeagueController extends Controller
                 $league_detail[$k]['description_ar'] = $v->description_ar;
 
             }
-            $obj->League_Detail = $league_detail;
+            $obj->detail = $league_detail;
 
         }
 
@@ -111,7 +111,7 @@ class LeagueController extends Controller
                 $league_related_video[$k]['banner'] = $video_banner_img;
 
             }
-            $obj->League_Related_Videos = $league_related_video;
+            $obj->related_video = $league_related_video;
         }
 
         return response()->json(['success' => true, 'status' => $this->successStatus, 'message' => 'League Detail Data found.', 'data' => $obj]);
