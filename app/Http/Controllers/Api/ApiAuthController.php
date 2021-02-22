@@ -216,10 +216,20 @@ class ApiAuthController extends Controller
             'email' => 'required|string|email',
             'name' => 'required',
             'provider_id' => 'required',
+            'device_type' => 'required',
+            'token' => 'required',
         ]);
         $array = array();
         if (User::where('email', $request->email)->first() != null) {
             $user = User::where('email', $request->email)->first();
+            $user->provider_id = $request->provider_id;
+            $user->save();
+
+            $deviceInfo = DeviceToken::where('user_id', $user->id)->first();
+            $deviceInfo->device = $request->device_type;
+            $deviceInfo->token = $request->token;
+            $deviceInfo->save();
+
         } else {
             $user = new User([
                 'name' => $request->name,
@@ -229,12 +239,20 @@ class ApiAuthController extends Controller
                 'email_verified_at' => Carbon::now()
             ]);
             $user->save();
+
             $customer = new customer([
                 'user_id' => $user->id,
                 'name' => $request->name,
                 'email' => $request->email,
             ]);
             $customer->save();
+
+            $deviceInfo = new DeviceToken([
+                'user_id' => $user->id,
+                'device' => $request->device_type,
+                'token' => $request->token,
+            ]);
+            $deviceInfo->save();
         }
 
         $tokenResult = $user->createToken('Personal Access Token');
