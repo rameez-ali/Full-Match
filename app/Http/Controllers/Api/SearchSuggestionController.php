@@ -76,16 +76,25 @@ class SearchSuggestionController extends Controller
 
         if($clubs!=null){
 
-            $video_id = Videoclub::select('Video_id')->wherein('Club_id',$clubs)->get();
-            $videosclub=Video::select('title_en as name')->wherein('id',$video_id)->get()->toArray();
+            $videosclub  = Club::select('name_en as name')->where('name_en', $searchword)
+            ->orwhere('name_ar', $searchword)
+            ->orWhere('name_en', 'like', '%' . $searchword. '%')
+            ->orWhere('name_ar', 'like', '%' . $searchword. '%')
+            ->get()
+            ->toArray();
 
         }
         // $obj->Byclubname = $videosclub;
 
         if($players!=null){
 
-            $video_id = Videoplayer::select('Video_id')->wherein('Player_id',$players)->get();
-            $videosplayer=Video::select('title_en as name')->wherein('id',$video_id)->get()->toArray();
+             $videosplayer = Player::select('name_en as name')->where('name_en', $searchword)
+            ->orwhere('name_ar', $searchword)
+            ->orWhere('name_en', 'like', '%' . $searchword. '%')
+            ->orWhere('name_ar', 'like', '%' . $searchword. '%')
+            ->get()
+            ->toArray();
+
 
         }
 
