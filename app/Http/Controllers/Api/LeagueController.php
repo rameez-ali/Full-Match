@@ -91,7 +91,7 @@ class LeagueController extends Controller
 
         $video_leagues=Leaguecategory::select('videos.id','videos.title_en','videos.title_ar','videos.video_img','videos.description_en','videos.description_ar','videos.video_banner_img')
             ->join('videos','leaguecategories.video_id' , '=' ,'videos.id')
-            ->where('league_id','=', $id)
+            ->where('leaguecategories.league_id','=', $id)
             ->orderBy('video_sorting')
             ->get();
 
