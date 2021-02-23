@@ -17,7 +17,8 @@
         "laravel/socialite": "^5.1",
         "laravel/tinker": "^2.0",
         "laravel/ui": "^2.0",
-        "silber/bouncer": "v1.0.0-rc.10"
+        "silber/bouncer": "v1.0.0-rc.10",
+        "vimeo/vimeo-api": "^3.0"
     },
     "require-dev": {
         "facade/ignition": "^2.0",
