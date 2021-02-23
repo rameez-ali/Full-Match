@@ -41,8 +41,6 @@ class VideoController extends Controller
             foreach ($videos as $k => $v) {
 
                 $video_img = str_replace('\\', '/', asset('app-assets/images/video/' . $v->video_img));
-                $video_banner_img = str_replace('\\', '/', asset('app-assets/images/video/' . $v->video_banner_img));
-
 
                 $all_videos_array[$k]['id'] = $v->id;
                 $all_videos_array[$k]['name'] = $v->title_en;
@@ -51,7 +49,6 @@ class VideoController extends Controller
                 $all_videos_array[$k]['description_ar'] = $v->description_ar;
                 $all_videos_array[$k]['sorting'] = $v->video_sorting;
                 $all_videos_array[$k]['image'] = $video_img;
-                $all_videos_array[$k]['banner'] = $video_banner_img;
 
             }
             $obj->Heading = "All Videos";
@@ -106,7 +103,6 @@ class VideoController extends Controller
 
             foreach ($videos as $k => $v) {
 
-                $video_img = str_replace('\\', '/', asset('app-assets/images/video/' . $v->video_img));
                 $video_banner_img = str_replace('\\', '/', asset('app-assets/images/video/' . $v->video_banner_img));
 
                 $latest_videos_array[$k]['id'] = $v->id;
@@ -120,9 +116,9 @@ class VideoController extends Controller
                 } else {
                     $latest_videos_array[$k]['video_link'] = $v->video_link;
                 }
+                $latest_videos_array[$k]['description'] = $v->description_en;
                 $latest_videos_array[$k]['description_ar'] = $v->description_ar;
-                $latest_videos_array[$k]['image'] = $video_img;
-                $latest_videos_array[$k]['banner'] = $video_banner_img;
+                $latest_videos_array[$k]['image'] = $video_banner_img;
 
             }
 
@@ -138,7 +134,6 @@ class VideoController extends Controller
             foreach ($videos as $k => $v) {
 
                 $video_img = str_replace('\\', '/', asset('app-assets/images/video/' . $v->video_img));
-                $video_banner_img = str_replace('\\', '/', asset('app-assets/images/video/' . $v->video_banner_img));
 
                 $season_array[$k]['id'] = $v->id;
                 $season_array[$k]['name'] = $v->title_en;
@@ -146,7 +141,6 @@ class VideoController extends Controller
                 $season_array[$k]['description'] = $v->description_en;
                 $season_array[$k]['description_ar'] = $v->description_ar;
                 $season_array[$k]['image'] = $video_img;
-                $season_array[$k]['banner'] = $video_banner_img;
 
             }
             $obj->season_videos = $season_array;
@@ -159,17 +153,13 @@ class VideoController extends Controller
             foreach ($videos as $k => $v) {
 
                 $video_img = str_replace('\\', '/', asset('app-assets/images/video/' . $v->video_img));
-                $video_banner_img = str_replace('\\', '/', asset('app-assets/images/video/' . $v->video_banner_img));
 
                 $category_array[$k]['id'] = $v->id;
                 $category_array[$k]['name'] = $v->title_en;
                 $category_array[$k]['name_ar'] = $v->title_ar;
                 $category_array[$k]['description'] = $v->description_en;
                 $category_array[$k]['description_ar'] = $v->description_ar;
-                $category_array[$k]['sorting'] = $v->video_sorting;
                 $category_array[$k]['image'] = $video_img;
-                $category_array[$k]['banner'] = $video_banner_img;
-
             }
             $obj->category_videos = $category_array;
         }

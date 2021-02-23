@@ -34,17 +34,14 @@ class LeagueController extends Controller
 
             foreach ($leagues as $k => $v) {
 
-                $banner = str_replace('\\', '/', asset('app-assets/images/league/' . $v->league_banner));
                 $profile_image = str_replace('\\', '/', asset('app-assets/images/league/' . $v->league_profile_image));
 
                 $array[$k]['id'] = $v->id;
                 $array[$k]['name'] = $v->name_en;
                 $array[$k]['name_ar'] = $v->name_ar;
-                $array[$k]['banner'] = $banner;
-                $array[$k]['logo'] = $profile_image;
+                $array[$k]['image'] = $profile_image;
                 $array[$k]['description'] = $v->description_en;
                 $array[$k]['description_ar'] = $v->description_ar;
-                $array[$k]['sorting'] = $v->league_sorting;
 
             }
             $obj->Heading = "All Leagues";
@@ -73,13 +70,11 @@ class LeagueController extends Controller
             foreach ($leagues as $k => $v) {
 
                 $banner = str_replace('\\', '/', asset('app-assets/images/league/' . $v->league_banner));
-                $profile_image = str_replace('\\', '/', asset('app-assets/images/league/' . $v->league_profile_image));
 
                 $league_detail[$k]['id'] = $v->id;
                 $league_detail[$k]['name'] = $v->name_en;
                 $league_detail[$k]['name_ar'] = $v->name_ar;
-                $league_detail[$k]['banner'] = $banner;
-                $league_detail[$k]['logo'] = $profile_image;
+                $league_detail[$k]['image'] = $banner;
                 $league_detail[$k]['description'] = $v->description_en;
                 $league_detail[$k]['description_ar'] = $v->description_ar;
 
@@ -100,15 +95,13 @@ class LeagueController extends Controller
             foreach ($video_leagues as $k => $v) {
 
                 $video_img = str_replace('\\', '/', asset('app-assets/images/video/' . $v->video_img));
-                $video_banner_img = str_replace('\\', '/', asset('app-assets/images/video/' . $v->video_banner_img));
 
                 $league_related_video[$k]['id'] = $v->id;
                 $league_related_video[$k]['name'] = $v->title_en;
                 $league_related_video[$k]['name_ar'] = $v->title_ar;
                 $league_related_video[$k]['description'] = $v->description_en;
                 $league_related_video[$k]['description_ar'] = $v->description_ar;
-                $league_related_video[$k]['logo'] = $video_img;
-                $league_related_video[$k]['banner'] = $video_banner_img;
+                $league_related_video[$k]['image'] = $video_img;
 
             }
             $obj->related_video = $league_related_video;
