@@ -17,6 +17,7 @@ use App\Model\Videoplayer;
 use App\Model\Season;
 use App\Model\Popular_search;
 use DB;
+use Vimeo\Vimeo;
 
 
 class ProjectVideoViewController extends Controller
@@ -95,6 +96,16 @@ class ProjectVideoViewController extends Controller
         $request->validate([
             'genre'     => 'required'
         ]);
+
+        // for video duration (Sec)
+        $client = new Vimeo("24205e7ac91e486d8c2ef88490c4af32f9d9d67f", "zoUUWHOyoaI25PckaIq7s3D+1fzLAGh/81pxbAeI41LSCSFpHSRlL1s5Yc+K0ku1xfinHBmE3RfDqGUIvdTBqPzVAPAdZJd6Qe1tjN3q5INs5K7x7H5SeEeo4fhm7GGT", "fa0e6157d975fe04f800a8954ec2c2a0");
+        $response = $client->request('/videos/515195443', array(), 'GET');
+//        dd($response);
+//        if ($response['status'] == 200){
+//          do
+//        }else{
+//          error
+//        }
 
 
         if($request->file('video_banner_img')==null) {
