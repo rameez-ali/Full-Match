@@ -38,12 +38,12 @@
                         </div>
                         <div class="row">
                             <div class="col s12 m12 l12 ml-2 mt-1">
-                                <p>
-                                    <label>
-                                        <input type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }} />
-                                        <span> {{ __('Remember Me') }}</span>
-                                    </label>
-                                </p>
+{{--                                <p>--}}
+{{--                                    <label>--}}
+{{--                                        <input type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }} />--}}
+{{--                                        <span> {{ __('Remember Me') }}</span>--}}
+{{--                                    </label>--}}
+{{--                                </p>--}}
                             </div>
                         </div>
                         <div class="row">
@@ -55,7 +55,7 @@
                             <div class="input-field col s6 m6 l6">
                             </div>
                             <div class="input-field col s6 m6 l6">
-                                <p class="margin right-align medium-small"><a href="{{ route('password.request') }}">Forgot password ?</a></p>
+{{--                                <p class="margin right-align medium-small"><a href="{{ route('password.request') }}">Forgot password ?</a></p>--}}
                             </div>
                         </div>
                     </form>
