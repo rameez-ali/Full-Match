@@ -34,14 +34,12 @@ class ClubController extends Controller
 
             foreach ($clubs as $k => $v) {
 
-                $banner = str_replace('\\', '/', asset('app-assets/images/club/' . $v->club_banner));
                 $logo = str_replace('\\', '/', asset('app-assets/images/club/' . $v->club_logo));
 
                 $array[$k]['id'] = $v->id;
                 $array[$k]['name'] = $v->name_en;
                 $array[$k]['name_ar'] = $v->name_ar;
-                $array[$k]['banner'] = $banner;
-                $array[$k]['logo'] = $logo;
+                $array[$k]['image'] = $logo;
                 $array[$k]['description'] = $v->description_en;
                 $array[$k]['description_ar'] = $v->description_ar;
                 $array[$k]['sorting'] = $v->club_sorting;
@@ -79,13 +77,11 @@ class ClubController extends Controller
             foreach ($clubs as $k => $v) {
 
                 $banner = str_replace('\\', '/', asset('app-assets/images/club/' . $v->club_banner));
-                $logo = str_replace('\\', '/', asset('app-assets/images/club/' . $v->club_logo));
 
                 $club_detail[$k]['id'] = $v->id;
                 $club_detail[$k]['name'] = $v->name_en;
                 $club_detail[$k]['name_ar'] = $v->name_ar;
-                $club_detail[$k]['banner'] = $banner;
-                $club_detail[$k]['logo'] = $logo;
+                $club_detail[$k]['image'] = $banner;
                 $club_detail[$k]['description'] = $v->description_en;
                 $club_detail[$k]['description_ar'] = $v->description_ar;
 
@@ -100,15 +96,13 @@ class ClubController extends Controller
             foreach ($video_clubs as $k => $v) {
 
                 $video_img = str_replace('\\', '/', asset('app-assets/images/video/' . $v->video_img));
-                $video_banner_img = str_replace('\\', '/', asset('app-assets/images/video/' . $v->video_img));
 
                 $club_related_video[$k]['id'] = $v->id;
                 $club_related_video[$k]['name'] = $v->title_en;
                 $club_related_video[$k]['name_ar'] = $v->title_en;
                 $club_related_video[$k]['description'] = $v->description_en;
                 $club_related_video[$k]['description_en'] = $v->description_ar;
-                $club_related_video[$k]['logo'] = $video_img;
-                $club_related_video[$k]['banner'] = $video_banner_img;
+                $club_related_video[$k]['image'] = $video_img;
 
             }
             $obj->related_video = $club_related_video;

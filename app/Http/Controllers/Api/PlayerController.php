@@ -33,14 +33,12 @@ class PlayerController extends Controller
 
             foreach ($players as $k => $v) {
 
-                $banner = str_replace('\\', '/', asset('app-assets/images/player/' . $v->player_banner));
                 $profile_image = str_replace('\\', '/', asset('app-assets/images/player/' . $v->player_profile_image));
 
                 $array[$k]['id'] = $v->id;
                 $array[$k]['name'] = $v->name_en;
                 $array[$k]['name_ar'] = $v->name_ar;
-                $array[$k]['banner'] = $banner;
-                $array[$k]['logo'] = $profile_image;
+                $array[$k]['image'] = $profile_image;
                 $array[$k]['description'] = $v->description_en;
                 $array[$k]['description_ar'] = $v->description_ar;
                 $array[$k]['sorting'] = $v->player_sorting;
@@ -72,13 +70,11 @@ class PlayerController extends Controller
             foreach ($players as $k => $v) {
 
                 $banner = str_replace('\\', '/', asset('app-assets/images/player/' . $v->player_banner));
-                $profile_image = str_replace('\\', '/', asset('app-assets/images/player/' . $v->player_profile_image));
 
                 $player_detail[$k]['id'] = $v->id;
                 $player_detail[$k]['name'] = $v->name_en;
                 $player_detail[$k]['name_ar'] = $v->name_ar;
-                $player_detail[$k]['banner'] = $banner;
-                $player_detail[$k]['logo'] = $profile_image;
+                $player_detail[$k]['image'] = $banner;
                 $player_detail[$k]['description'] = $v->description_en;
                 $player_detail[$k]['description_ar'] = $v->description_ar;
                 $player_detail[$k]['sorting'] = $v->player_sorting;
@@ -97,15 +93,13 @@ class PlayerController extends Controller
             foreach ($video_players as $k => $v) {
 
                 $video_img = str_replace('\\', '/', asset('app-assets/images/video/' . $v->video_img));
-                $video_banner_img = str_replace('\\', '/', asset('app-assets/images/video/' . $v->video_banner_img));
 
                 $player_related_video[$k]['id'] = $v->id;
                 $player_related_video[$k]['name'] = $v->title_en;
                 $player_related_video[$k]['name_ar'] = $v->title_ar;
                 $player_related_video[$k]['description'] = $v->description_en;
                 $player_related_video[$k]['description_ar'] = $v->description_ar;
-                $player_related_video[$k]['logo'] = $video_img;
-                $player_related_video[$k]['banner'] = $video_banner_img;
+                $player_related_video[$k]['image'] = $video_img;
                 $player_related_video[$k]['sorting'] = $v->video_sorting;
 
             }
