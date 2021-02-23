@@ -117,7 +117,7 @@ option {margin: 10px;}
                      dataType : "json",
                      success:function(data) {
                          console.log(data);
-                         if (data != 0) {
+                         if (data!="null") {
                              jQuery('select[name="state[]"]').empty();
                              jQuery.each(data, function (key, value) {
                                  $('select[name="state[]"]').append('<option value="' + key + '">' + value + '</option>');
@@ -136,7 +136,7 @@ option {margin: 10px;}
                      dataType : "json",
                      success:function(data) {
                          console.log(data);
-                         if (data!=0) {
+                         if (data!="null") {
                          jQuery('select[name="state[]"]').empty();
                          jQuery.each(data, function (key, value) {
                              $('select[name="state[]"]').append('<option value="' + key + '">' + value + '</option>');

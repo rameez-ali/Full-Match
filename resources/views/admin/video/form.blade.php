@@ -307,9 +307,9 @@
             $('#row_dim_required').show();
             $('#row_dim').hide();
             $('#row_dim_required').hide();
-            $('#country').change(function(){
+            $('#league_id').change(function(){
                 // alert($('#country').val());
-                if($('#country').val() != '') {
+                if($('#league_id').val() != '') {
                     $('#row_dim_rquired').hide();
                     $('#row_dim').show();
 

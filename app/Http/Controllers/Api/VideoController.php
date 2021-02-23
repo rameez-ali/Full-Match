@@ -127,7 +127,7 @@ class VideoController extends Controller
             }
 
         }
-        $obj->video_details = $latest_videos_array;
+        $obj->detail = $latest_videos_array;
 
 
 

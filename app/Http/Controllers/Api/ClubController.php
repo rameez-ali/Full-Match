@@ -90,7 +90,7 @@ class ClubController extends Controller
                 $club_detail[$k]['description_ar'] = $v->description_ar;
 
             }
-            $obj->Club_Details = $club_detail;
+            $obj->detail = $club_detail;
         }
 
 
@@ -111,7 +111,7 @@ class ClubController extends Controller
                 $club_related_video[$k]['banner'] = $video_banner_img;
 
             }
-            $obj->Club_Related_Videos = $club_related_video;
+            $obj->related_video = $club_related_video;
         }
 
         return response()->json(['success' => true, 'status' => $this->successStatus, 'message' => 'Club Detail Data found.', 'data' => $obj]);
