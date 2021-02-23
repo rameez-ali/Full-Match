@@ -64,19 +64,8 @@
                                                 </div>
 
                                                 <div class="input-field col s12">
-                                                    <p for="video_sorting">Video Duration * </p>
-                                                    <div class="input-field col s1">
-                                                        <p for="hour">Hour </p>
-                                                        <input type="number" id="hour" name="hour"  min="0" class="form-control input-lg" />
-                                                    </div>
-                                                    <div class="input-field col s1">
-                                                        <p for="Minutes">Minutes </p>
-                                                        <input type="number" id="minute" name="minute"  min="0" class="form-control input-lg" />
-                                                    </div>
-                                                    <div class="input-field col s1">
-                                                        <p for="second">Second </p>
-                                                        <input type="number" id="second" name="second"  min="0"class="form-control input-lg" required />
-                                                    </div>
+                                                    <p for="video_id">Video Id * </p>
+                                                        <input type="number" id="video_id" name="video_id"  class="form-control input-lg" required />
                                                 </div>
 
 

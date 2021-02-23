@@ -37,6 +37,12 @@ class ProjectVideoViewController extends Controller
 
     public function index()
     {
+        $client = new Vimeo("24205e7ac91e486d8c2ef88490c4af32f9d9d67f", "zoUUWHOyoaI25PckaIq7s3D+1fzLAGh/81pxbAeI41LSCSFpHSRlL1s5Yc+K0ku1xfinHBmE3RfDqGUIvdTBqPzVAPAdZJd6Qe1tjN3q5INs5K7x7H5SeEeo4fhm7GGT", "fa0e6157d975fe04f800a8954ec2c2a0");
+        $response = $client->request('/videos/515195443', array(), 'GET');
+        $durationseconds=$response['body']['duration'];
+        $seconds = round($durationseconds);
+        $output = sprintf('%02d:%02d:%02d', ($seconds/ 3600),($seconds/ 60 % 60), $seconds% 60);
+
         //Getting Categories id associated with the videos
         $category_id = Video::select('category_id')->get()->toArray();
 
@@ -97,15 +103,18 @@ class ProjectVideoViewController extends Controller
             'genre'     => 'required'
         ]);
 
-        // for video duration (Sec)
+        //Getting Video id in seconds
+        $video_id=$request->video_id;
+
+        //Getting Video duration in seconds
         $client = new Vimeo("24205e7ac91e486d8c2ef88490c4af32f9d9d67f", "zoUUWHOyoaI25PckaIq7s3D+1fzLAGh/81pxbAeI41LSCSFpHSRlL1s5Yc+K0ku1xfinHBmE3RfDqGUIvdTBqPzVAPAdZJd6Qe1tjN3q5INs5K7x7H5SeEeo4fhm7GGT", "fa0e6157d975fe04f800a8954ec2c2a0");
-        $response = $client->request('/videos/515195443', array(), 'GET');
-//        dd($response);
-//        if ($response['status'] == 200){
-//          do
-//        }else{
-//          error
-//        }
+        $response = $client->request('/videos/'.$video_id, array(), 'GET');
+        $durationseconds=$response['body']['duration'];
+
+        //Converting Seconds to HH:MM:SS
+        $seconds = round($durationseconds);
+        $video_duration = sprintf('%02d:%02d:%02d', ($seconds/ 3600),($seconds/ 60 % 60), $seconds% 60);
+
 
 
         if($request->file('video_banner_img')==null) {
@@ -124,9 +133,8 @@ class ProjectVideoViewController extends Controller
                 'description_en'     =>   $request->description_en,
                 'description_ar'     =>   $request->description_ar,
                 'video_link'     =>   $request->video_link,
-                'hour'     =>   $request->hour,
-                'minute'     =>   $request->minute,
-                'second'     =>   $request->second,
+                'video_id'     => $request->video_id,
+                'duration'     =>   $video_duration,
                 'notify_user'       => $request->notify_user,
                 'video_sorting'       => $request->video_sorting,
                 'popular_searches'       => $request->popularsearches,
@@ -214,17 +222,14 @@ class ProjectVideoViewController extends Controller
                 'description_en'     =>   $request->description_en,
                 'description_ar'     =>   $request->description_ar,
                 'video_link'     =>   $request->video_link,
-                'hour'     =>   $request->hour,
-                'minute'     =>   $request->minute,
-                'second'     =>   $request->second,
+                'video_id'     => $request->video_id,
+                'duration'     =>   $video_duration,
                 'notify_user'       => $request->notify_user,
                 'video_sorting'       => $request->video_sorting,
                 'popular_searches'       => $request->popularsearches,
                 'video_promo'       => $request->video_promo
 
             );
-
-
             Video::create($form_data2);
 
 
@@ -356,7 +361,7 @@ class ProjectVideoViewController extends Controller
         $player=Player::select('id','name_en')->get();
 
         ///Getting All Genres
-        $video_genres=Video_genre::select('id','name_en')->get();
+        $all_genres=Video_genre::select('id','name_en')->get();
 
         //Getting All Popular Search Status
         $popular_searches=Popular_search::select('id','status')->get();
@@ -412,7 +417,7 @@ class ProjectVideoViewController extends Controller
 
 
 
-        return view('admin.video.edit',compact('category','select_category_id','clubs','club','players','player','video','selected_ids','selected_ids1','selected_ids3','video_genres','selected_popular_search','popular_searches'));
+        return view('admin.video.edit',compact('all_genres','category','select_category_id','clubs','club','players','player','video','selected_ids','selected_ids1','selected_ids3','video_genres','selected_popular_search','popular_searches'));
     }
 
     /**
@@ -428,6 +433,19 @@ class ProjectVideoViewController extends Controller
         $request->validate([
             'genre'     => 'required'
         ]);
+
+        //Getting Video id in seconds
+        $video_id=$request->video_id;
+
+        //Getting Video duration in seconds
+        $client = new Vimeo("24205e7ac91e486d8c2ef88490c4af32f9d9d67f", "zoUUWHOyoaI25PckaIq7s3D+1fzLAGh/81pxbAeI41LSCSFpHSRlL1s5Yc+K0ku1xfinHBmE3RfDqGUIvdTBqPzVAPAdZJd6Qe1tjN3q5INs5K7x7H5SeEeo4fhm7GGT", "fa0e6157d975fe04f800a8954ec2c2a0");
+        $response = $client->request('/videos/'.$video_id, array(), 'GET');
+        $durationseconds=$response['body']['duration'];
+
+        //Converting Seconds to HH:MM:SS
+        $seconds = round($durationseconds);
+        $video_duration = sprintf('%02d:%02d:%02d', ($seconds/ 3600),($seconds/ 60 % 60), $seconds% 60);
+
 
         //when both field are empty
         if($request->video_banner_img!=null)
@@ -465,9 +483,8 @@ class ProjectVideoViewController extends Controller
             'description_en'     =>   $request->description_en,
             'description_ar'     =>   $request->description_ar,
             'video_link'     =>   $request->video_link,
-            'hour'     =>   $request->hour,
-            'minute'     =>   $request->minute,
-            'second'     =>   $request->second,
+            'video_id'     => $request->video_id,
+            'duration'     =>   $video_duration,
             'video_sorting'       => $request->video_sorting,
             'popular_searches'       => $request->popularsearches,
             'video_promo'       => $request->video_promo
