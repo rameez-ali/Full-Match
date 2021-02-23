@@ -7,6 +7,7 @@ use App\Model\Leaguecategory;
 use Illuminate\Http\Request;
 use App\Model\Category;
 use App\Model\League;
+use App\Model\Season;
 use App\Model\Videoplayer;
 use \stdClass;
 
@@ -83,29 +84,32 @@ class LeagueController extends Controller
 
         }
 
+        $seasons=Season::select('id','name_en')->where('league_id',$id)->get()->toArray();
 
-        $video_leagues=Leaguecategory::select('videos.id','videos.title_en','videos.title_ar','videos.video_img','videos.description_en','videos.description_ar','videos.video_banner_img')
-            ->join('videos','leaguecategories.video_id' , '=' ,'videos.id')
-            ->where('leaguecategories.league_id','=', $id)
-            ->orderBy('video_sorting')
-            ->get();
+        $obj->seasons = $seasons;
 
-        if (!$video_leagues->isEmpty()) {
+//        $video_leagues=Leaguecategory::select('videos.id','videos.title_en','videos.title_ar','videos.video_img','videos.description_en','videos.description_ar','videos.video_banner_img')
+//            ->join('videos','leaguecategories.video_id' , '=' ,'videos.id')
+//            ->where('leaguecategories.league_id','=', $id)
+//            ->orderBy('video_sorting')
+//            ->get();
 
-            foreach ($video_leagues as $k => $v) {
-
-                $video_img = str_replace('\\', '/', asset('app-assets/images/video/' . $v->video_img));
-
-                $league_related_video[$k]['id'] = $v->id;
-                $league_related_video[$k]['name'] = $v->title_en;
-                $league_related_video[$k]['name_ar'] = $v->title_ar;
-                $league_related_video[$k]['description'] = $v->description_en;
-                $league_related_video[$k]['description_ar'] = $v->description_ar;
-                $league_related_video[$k]['image'] = $video_img;
-
-            }
-            $obj->related_video = $league_related_video;
-        }
+//        if (!$video_leagues->isEmpty()) {
+//
+//            foreach ($video_leagues as $k => $v) {
+//
+//                $video_img = str_replace('\\', '/', asset('app-assets/images/video/' . $v->video_img));
+//
+//                $league_related_video[$k]['id'] = $v->id;
+//                $league_related_video[$k]['name'] = $v->title_en;
+//                $league_related_video[$k]['name_ar'] = $v->title_ar;
+//                $league_related_video[$k]['description'] = $v->description_en;
+//                $league_related_video[$k]['description_ar'] = $v->description_ar;
+//                $league_related_video[$k]['image'] = $video_img;
+//
+//            }
+//            $obj->related_video = $league_related_video;
+//        }
 
         return response()->json(['success' => true, 'status' => $this->successStatus, 'message' => 'League Detail Data found.', 'data' => $obj]);
 
