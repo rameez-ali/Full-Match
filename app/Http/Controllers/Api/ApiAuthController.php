@@ -236,7 +236,6 @@ class ApiAuthController extends Controller
                 'phone' => 13245678,
                 'email' => $request->email,
                 'provider_id' => $request->provider_id,
-                'email_verified_at' => Carbon::now()
             ]);
             $user->save();
 
@@ -256,7 +255,7 @@ class ApiAuthController extends Controller
         }
 
         $tokenResult = $user->createToken('Personal Access Token');
-        $user = $request->user();
+//        $user = $request->user();
 
         $array['token'] = $tokenResult->accessToken;
         return response()->json([
@@ -265,7 +264,6 @@ class ApiAuthController extends Controller
             'message' => 'User Login Successfully',
             'status' => $this->successStatus,
             'success' => true,
-            'auth_info' => $user,
             'expires_at' => Carbon::parse(
                 $tokenResult->token->expires_at
             )->toDateTimeString()
