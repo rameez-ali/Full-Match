@@ -259,6 +259,7 @@ class ApiAuthController extends Controller
 
         $array['token'] = $tokenResult->accessToken;
         return response()->json([
+            'data' => $array,
             'token_type' => 'Bearer',
             'message' => 'User Login Successfully',
             'status' => $this->successStatus,
