@@ -65,6 +65,8 @@ class HomeSliderBannerController extends Controller
             $home_slider_array[$k]['description_ar'] = $v->description_ar;
             $home_slider_array[$k]['promo'] = $v->promo_video;
             $home_slider_array[$k]['image'] = $video_img;
+            $home_slider_array[$k]['duration'] = $v->duration;
+
 
         }
       }
@@ -89,6 +91,8 @@ class HomeSliderBannerController extends Controller
             $home_banner_array[$k]['description'] = $v->description_en;
             $home_banner_array[$k]['description_en'] = $v->description_ar;
             $home_banner_array[$k]['image'] = $video_img;
+            $home_banner_array[$k]['duration'] = $v->duration;
+
            }
         }
         $obj->Homebanner=$home_banner_array;
@@ -109,6 +113,8 @@ class HomeSliderBannerController extends Controller
             $new_adding_video[$k]['description'] = $v->description_en;
             $new_adding_video[$k]['description_en'] = $v->description_ar;
             $new_adding_video[$k]['image'] = $video_img;
+            $new_adding_video[$k]['duration'] = $v->duration;
+
 
         }
 

@@ -66,7 +66,6 @@ Route::post('/query', [ContactController::class , 'query']);
 
 Route::post('/leagueseason/{league_id}/{season_id}', [LeagueSeasonController::class , 'season']);
 
-Route::post('/continuewatched', [ContinuewatchedController::class , 'continuewatch']);
 
 Route::get('/forcurrency', [ApiOrderController::class , 'getCurrency']);
 
@@ -101,8 +100,10 @@ Route::group(['middleware' => 'auth:api'], function(){
     Route::get('/add-to-mylist/{id}', [MyListController::class , 'addToMylist']);
     Route::get('/remove-to-mylist/{id}', [MyListController::class , 'removeToMylist']);
     Route::get('/all-mylist', [MyListController::class , 'getAllMylist']);
+    Route::get('/getcontinuewatched', [ContinuewatchedController::class , 'getcontinuewatch']);
     Route::get('logout', [ApiAuthController::class , 'logout']);
     Route::post('/customer-edit', [CustomerController::class , 'edit']);
+    Route::post('/continuewatched', [ContinuewatchedController::class , 'continuewatch']);
     Route::post('/customer-update/{id}', [CustomerController::class , 'update'])->name('customer.profupdate');
 });
 Route::post('/initalToken', [CustomerController::class , 'initalToken']);

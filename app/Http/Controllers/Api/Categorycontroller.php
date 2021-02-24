@@ -114,6 +114,8 @@ class CategoryController extends Controller
                 $slider_array[$k]['description_ar'] = $v->description_ar;
                 $slider_array[$k]['promo'] = $v->video_promo;
                 $slider_array[$k]['image'] = $video_img;
+                $slider_array[$k]['duration'] = $v->duration;
+
 
             }
         }
@@ -134,6 +136,8 @@ class CategoryController extends Controller
                 $banner_array[$k]['description'] = $v->description_en;
                 $banner_array[$k]['description_ar'] = $v->description_ar;
                 $banner_array[$k]['image'] = $video_img;
+                $banner_array[$k]['duration'] = $v->duration;
+
 
             }
             $obj->Homebanner = $banner_array;
@@ -161,6 +165,8 @@ class CategoryController extends Controller
                 $latest_videos_array[$k]['description'] = $v->description_en;
                 $latest_videos_array[$k]['description_ar'] = $v->description_ar;
                 $latest_videos_array[$k]['image'] = $video_img;
+                $latest_videos_array[$k]['duration'] = $v->duration;
+
 
             }
             $obj->homelayout->videos = $latest_videos_array;
@@ -267,6 +273,8 @@ class CategoryController extends Controller
                 $banner_array[$k]['description'] = $v->description_en;
                 $banner_array[$k]['description_ar'] = $v->description_ar;
                 $banner_array[$k]['image'] = $video_img;
+                $banner_array[$k]['duration'] = $v->duration;
+
 
             }
             $obj->Homebanner = $banner_array;
@@ -294,6 +302,8 @@ class CategoryController extends Controller
                 $latest_videos_array[$k]['description'] = $v->description_en;
                 $latest_videos_array[$k]['description_ar'] = $v->description_ar;
                 $latest_videos_array[$k]['image'] = $video_img;
+                $latest_videos_array[$k]['duration'] = $v->duration;
+
 
             }
             $obj->homelayout->videos = $latest_videos_array;
