@@ -49,6 +49,8 @@ class VideoController extends Controller
                 $all_videos_array[$k]['description_ar'] = $v->description_ar;
                 $all_videos_array[$k]['sorting'] = $v->video_sorting;
                 $all_videos_array[$k]['image'] = $video_img;
+                $all_videos_array[$k]['duration'] = $v->duration;
+
 
             }
             $obj->Heading = "All Videos";
@@ -110,6 +112,8 @@ class VideoController extends Controller
                 $latest_videos_array[$k]['description'] = $v->description_en;
                 $latest_videos_array[$k]['description_ar'] = $v->description_ar;
                 $latest_videos_array[$k]['image'] = $video_banner_img;
+                $latest_videos_array[$k]['duration'] = $v->duration;
+
 
             }
 
@@ -131,6 +135,8 @@ class VideoController extends Controller
                 $category_array[$k]['description'] = $v->description_en;
                 $category_array[$k]['description_ar'] = $v->description_ar;
                 $category_array[$k]['image'] = $video_img;
+                $category_array[$k]['duration'] = $v->duration;
+
             }
             $obj->related_video = $category_array;
         }

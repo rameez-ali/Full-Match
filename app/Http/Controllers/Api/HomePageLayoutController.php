@@ -89,6 +89,8 @@ class HomePageLayoutController extends Controller
                 $selected_videos[$k]['name_ar'] = $v->title_ar;
                 $selected_videos[$k]['image'] = $image;
                 $selected_videos[$k]['route'] = "video/".$v->id;
+                $selected_videos[$k]['duration'] = $v->duration;
+
             }
             $obj->videos = $selected_videos;
 

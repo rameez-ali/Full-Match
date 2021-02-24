@@ -82,7 +82,7 @@ class PlayerController extends Controller
             $obj->detail = $player_detail;
         }
 
-        $video_players=Videoplayer::select('videos.id','videos.video_sorting','videos.title_en','videos.title_ar','videos.video_img','videos.description_en','videos.description_ar','videos.video_banner_img')
+        $video_players=Videoplayer::select('videos.id','videos.video_sorting','videos.title_en','videos.title_ar','videos.video_img','videos.description_en','videos.description_ar','videos.video_banner_img','videos.duration')
             ->join('videos','videoplayers.Video_id' , '=' ,'videos.id')
             ->where('Player_id','=', $id)
             ->orderBy('video_sorting')
@@ -101,6 +101,8 @@ class PlayerController extends Controller
                 $player_related_video[$k]['description_ar'] = $v->description_ar;
                 $player_related_video[$k]['image'] = $video_img;
                 $player_related_video[$k]['sorting'] = $v->video_sorting;
+                $player_related_video[$k]['duration'] = $v->duration;
+
 
             }
             $obj->related_video = $player_related_video;
