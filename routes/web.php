@@ -105,6 +105,7 @@ Route::get('email/verify', 'Auth\VerificationController@show')->name('customer.v
 Route::get('email/verify/{id}/{hash}', 'Auth\VerificationController@verify')->name('customer.verification.verify');
 Route::post('email/resend', 'Auth\VerificationController@resend')->name('customer.verification.resend');
 
+Route::get('passchanged', function () { return view('pwdchange');});
 
 //Route::get('blankpg', function () { return view('admin/blank/index');});
 //Route::get('blankform', function () { return view('admin/blank/form');});
