@@ -79,17 +79,8 @@ class VideoController extends Controller
         //getting video details of that specific video
         $videos = Video::where('id', $id)->orderBy('video_sorting')->get();
 
-        //Getting league_id of that specific video
-        $leagues_id_collection = Video::select('season_id')->where('id', $id)->get()->first();
-
-
         //Getting Category_id of that specific video
         $category_id_collection = Video::select('category_id')->where('id', $id)->get()->first();
-
-        //Converting collection to string
-        if(isset($leagues_id_collection->season_id)){
-            $league_id = $leagues_id_collection->season_id;
-        }
 
         //Converting collection to string
         if(isset($category_id_collection)){
@@ -126,27 +117,7 @@ class VideoController extends Controller
         $obj->detail = $latest_videos_array;
 
 
-
-        //if league is assocaited
-        if(isset($league_id))
-        {
-            $videos = Video::orderBy('video_sorting')->where('season_id', $league_id)->orderBy('video_sorting')->get();
-            foreach ($videos as $k => $v) {
-
-                $video_img = str_replace('\\', '/', asset('app-assets/images/video/' . $v->video_img));
-
-                $season_array[$k]['id'] = $v->id;
-                $season_array[$k]['name'] = $v->title_en;
-                $season_array[$k]['name_ar'] = $v->title_ar;
-                $season_array[$k]['description'] = $v->description_en;
-                $season_array[$k]['description_ar'] = $v->description_ar;
-                $season_array[$k]['image'] = $video_img;
-
-            }
-            $obj->season_videos = $season_array;
-        }
-        //in case league is not assocaited
-        elseif(isset($category_id)) {
+        if(isset($category_id)) {
 
             $videos = Video::orderBy('video_sorting')->where('category_id', $category_id)->orderBy('video_sorting')->get();
 
@@ -161,12 +132,9 @@ class VideoController extends Controller
                 $category_array[$k]['description_ar'] = $v->description_ar;
                 $category_array[$k]['image'] = $video_img;
             }
-            $obj->category_videos = $category_array;
+            $obj->related_video = $category_array;
         }
-        else{
-            return response()->json(['success' => false, 'status' => $this->HTTP_NOT_FOUND, 'message' => 'No Videos found realted to leagues or categories.']);
 
-        }
 
         return response()->json(['success' => true, 'status' => $this->successStatus, 'message' => 'Videos Data Found', 'data'=> $obj]);
 

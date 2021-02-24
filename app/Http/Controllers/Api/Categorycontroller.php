@@ -127,15 +127,13 @@ class CategoryController extends Controller
             foreach ($banner_videos as $k => $v) {
 
                 $video_img = str_replace('\\', '/', asset('app-assets/images/video/' . $v->video_img));
-                $video_banner_img = str_replace('\\', '/', asset('app-assets/images/video/' . $v->video_banner_img));
 
                 $banner_array[$k]['id'] = $v->id;
                 $banner_array[$k]['name'] = $v->title_en;
                 $banner_array[$k]['name_ar'] = $v->title_ar;
                 $banner_array[$k]['description'] = $v->description_en;
                 $banner_array[$k]['description_ar'] = $v->description_ar;
-                $banner_array[$k]['banner'] = $video_banner_img;
-                $banner_array[$k]['logo'] = $video_img;
+                $banner_array[$k]['image'] = $video_img;
 
             }
             $obj->Homebanner = $banner_array;
@@ -156,7 +154,6 @@ class CategoryController extends Controller
             foreach ($videos as $k => $v) {
 
                 $video_img = str_replace('\\', '/', asset('app-assets/images/video/' . $v->video_img));
-                $video_banner_img = str_replace('\\', '/', asset('app-assets/images/video/' . $v->video_banner_img));
 
                 $latest_videos_array[$k]['id'] = $v->id;
                 $latest_videos_array[$k]['name'] = $v->title_en;
@@ -164,7 +161,6 @@ class CategoryController extends Controller
                 $latest_videos_array[$k]['description'] = $v->description_en;
                 $latest_videos_array[$k]['description_ar'] = $v->description_ar;
                 $latest_videos_array[$k]['image'] = $video_img;
-                $latest_videos_array[$k]['banner'] = $video_banner_img;
 
             }
             $obj->homelayout->videos = $latest_videos_array;
@@ -178,16 +174,13 @@ class CategoryController extends Controller
 
             foreach ($clubs as $k => $v) {
 
-                $club_banner = str_replace('\\', '/', asset('app-assets/images/club/' . $v->club_banner));
                 $club_logo = str_replace('\\', '/', asset('app-assets/images/club/' . $v->club_logo));
-
 
                 $club_array[$k]['id'] = $v->id;
                 $club_array[$k]['name'] = $v->name_en;
                 $club_array[$k]['name_ar'] = $v->name_ar;
                 $club_array[$k]['description'] = $v->description_en;
                 $club_array[$k]['description_ar'] = $v->description_ar;
-                $club_array[$k]['banner'] = $club_banner;
                 $club_array[$k]['image'] = $club_logo;
 
             }
@@ -202,7 +195,6 @@ class CategoryController extends Controller
 
             foreach ($players as $k => $v) {
 
-                $player_banner = str_replace('\\', '/', asset('app-assets/images/player/' . $v->player_banner));
                 $player_profile_image = str_replace('\\', '/', asset('app-assets/images/player/' . $v->player_profile_image));
 
                 $player_array[$k]['id'] = $v->id;
@@ -210,7 +202,6 @@ class CategoryController extends Controller
                 $player_array[$k]['name_ar'] = $v->name_ar;
                 $player_array[$k]['description'] = $v->description_en;
                 $player_array[$k]['description_ar'] = $v->description_ar;
-                $player_array[$k]['banner'] = $player_banner;
                 $player_array[$k]['image'] = $player_profile_image;
 
 
@@ -226,7 +217,6 @@ class CategoryController extends Controller
 
             foreach ($leagues as $k => $v) {
 
-                $league_banner = str_replace('\\', '/', asset('app-assets/images/league/' . $v->league_banner));
                 $league_profile_image = str_replace('\\', '/', asset('app-assets/images/league/' . $v->league_profile_image));
 
                 $league_array[$k]['id'] = $v->id;
@@ -234,7 +224,6 @@ class CategoryController extends Controller
                 $league_array[$k]['name_ar'] = $v->name_ar;
                 $league_array[$k]['description'] = $v->description_en;
                 $league_array[$k]['description_ar'] = $v->description_ar;
-                $league_array[$k]['banner'] = $league_banner;
                 $league_array[$k]['image'] = $league_profile_image;
 
             }
@@ -271,15 +260,13 @@ class CategoryController extends Controller
             foreach ($banner_videos as $k => $v) {
 
                 $video_img = str_replace('\\', '/', asset('app-assets/images/video/' . $v->video_img));
-                $video_banner_img = str_replace('\\', '/', asset('app-assets/images/video/' . $v->video_banner_img));
 
                 $banner_array[$k]['id'] = $v->id;
                 $banner_array[$k]['title'] = $v->title_en;
                 $banner_array[$k]['title_ar'] = $v->title_ar;
                 $banner_array[$k]['description'] = $v->description_en;
                 $banner_array[$k]['description_ar'] = $v->description_ar;
-                $banner_array[$k]['banner'] = $video_banner_img;
-                $banner_array[$k]['logo'] = $video_img;
+                $banner_array[$k]['image'] = $video_img;
 
             }
             $obj->Homebanner = $banner_array;
@@ -300,7 +287,6 @@ class CategoryController extends Controller
             foreach ($videos as $k => $v) {
 
                 $video_img = str_replace('\\', '/', asset('app-assets/images/video/' . $v->video_img));
-                $video_banner_img = str_replace('\\', '/', asset('app-assets/images/video/' . $v->video_banner_img));
 
                 $latest_videos_array[$k]['id'] = $v->id;
                 $latest_videos_array[$k]['title'] = $v->title_en;
@@ -308,7 +294,6 @@ class CategoryController extends Controller
                 $latest_videos_array[$k]['description'] = $v->description_en;
                 $latest_videos_array[$k]['description_ar'] = $v->description_ar;
                 $latest_videos_array[$k]['image'] = $video_img;
-                $latest_videos_array[$k]['banner'] = $video_banner_img;
 
             }
             $obj->homelayout->videos = $latest_videos_array;
@@ -326,7 +311,6 @@ class CategoryController extends Controller
         if($clubs!=null){
             foreach ($clubs as $k => $v) {
 
-                $club_banner = str_replace('\\', '/', asset('app-assets/images/club/' . $v->club_banner));
                 $club_logo = str_replace('\\', '/', asset('app-assets/images/club/' . $v->club_logo));
 
                 $club_array[$k]['id'] = $v->id;
@@ -334,8 +318,7 @@ class CategoryController extends Controller
                 $club_array[$k]['name_ar'] = $v->name_ar;
                 $club_array[$k]['description'] = $v->description_en;
                 $club_array[$k]['description_ar'] = $v->description_ar;
-                $club_array[$k]['banner'] = $club_banner;
-                $club_array[$k]['logo'] = $club_logo;
+                $club_array[$k]['image'] = $club_logo;
 
             }
             $obj->homelayout->clubs = $club_array;
@@ -351,7 +334,6 @@ class CategoryController extends Controller
         if($players!=null){
             foreach ($players as $k => $v) {
 
-                $player_banner = str_replace('\\', '/', asset('app-assets/images/player/' . $v->player_banner));
                 $player_profile_image = str_replace('\\', '/', asset('app-assets/images/player/' . $v->player_profile_image));
 
                 $player_array[$k]['id'] = $v->id;
@@ -359,7 +341,6 @@ class CategoryController extends Controller
                 $player_array[$k]['name_ar'] = $v->name_ar;
                 $player_array[$k]['description'] = $v->description_en;
                 $player_array[$k]['description_ar'] = $v->description_ar;
-                $player_array[$k]['banner'] = $player_banner;
                 $player_array[$k]['image'] = $player_profile_image;
 
             }
@@ -388,16 +369,13 @@ class CategoryController extends Controller
 
             foreach ($leagues as $k => $v) {
 
-                $league_banner = str_replace('\\', '/', asset('app-assets/images/league/' . $v->league_banner));
                 $league_profile_image= str_replace('\\', '/', asset('app-assets/images/league/' . $v->league_profile_image));
-
 
                 $league_array[$k]['id'] = $v->id;
                 $league_array[$k]['name'] = $v->name_en;
                 $league_array[$k]['name_ar'] = $v->name_ar;
                 $league_array[$k]['description'] = $v->description_en;
                 $league_array[$k]['description_ar'] = $v->description_ar;
-                $league_array[$k]['banner'] = $league_banner;
                 $league_array[$k]['image'] = $league_profile_image;
 
             }

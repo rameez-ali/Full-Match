@@ -62,19 +62,8 @@
                                            </div>
 
                                            <div class="input-field col s12">
-                                              <p for="video_sorting">Edit Video Duration * </p>
-                                              <div class="input-field col s1">
-                                              <p for="hour">Hour </p>
-                                              <input type="number" id="hour"  min="0" name="hour" value="{{ old('hour',$video->hour) }}" min="0" class="form-control input-lg"/>
-                                              </div>
-                                              <div class="input-field col s1">
-                                              <p for="Minutes">Minutes </p>
-                                              <input type="number" id="minute"  min="0" name="minute" value="{{ old('minute',$video->minute) }}" min="1" class="form-control input-lg"  />
-                                              </div>
-                                              <div class="input-field col s1">
-                                              <p for="second">Second </p>
-                                              <input type="number" id="second"  min="0" name="second" value="{{ old('second',$video->second) }}" min="0" class="form-control input-lg" required />
-                                              </div>
+                                              <p for="video_id">Edit Video Id * </p>
+                                              <input type="number" id="video_id"  name="video_id" value="{{ old('video_id',$video->video_id) }}" class="form-control input-lg" required/>
                                            </div>
 
 
@@ -128,7 +117,7 @@
                                          <div name="hidden-panel1" id="hidden-panel1">
                                          <label><strong>Edit Genre * </strong></label><br/>
                                          <select class="form-control input-lg" multiple data-live-search="true" name="genre[]"  required>
-                                         @foreach($video_genres as $videogenre )
+                                         @foreach($all_genres as $videogenre )
                                          <option value="{{$videogenre->id}}" {{in_array($videogenre->id, $selected_ids3) ? 'selected' : ''}} >{{$videogenre->name_en}}</option>
                                          @endforeach
                                          </select>
