@@ -73,25 +73,21 @@ class HomeSliderBannerController extends Controller
       $obj->Homeslider=$home_slider_array;
 
         //getting video id of banner_id of home
-        $banner_video_id = Adv_banner::select("video_id")->where('homepage',1)
+        $banner = Adv_banner::where('homepage',1)
             ->orderBy('created_at','desc')
-            ->first();
+            ->first()
+            ->get();
 
-        if($banner_video_id!=null){
-
-        $videos=Video::wherein('id',$banner_video_id)->get();
-
-        foreach ($videos as $k => $v) {
-
-            $video_img = str_replace('\\', '/', asset('app-assets/images/video/' . $v->video_img));
+        if($banner!=null){
+        foreach ($banner as $k => $v) {
+           
+            $video_banner = str_replace('\\', '/', asset('app-assets/images/advbanner/' . $v->video_banner));
 
             $home_banner_array[$k]['id'] = $v->id;
             $home_banner_array[$k]['name'] = $v->title_en;
             $home_banner_array[$k]['name_ar'] = $v->title_en;
-            $home_banner_array[$k]['description'] = $v->description_en;
-            $home_banner_array[$k]['description_en'] = $v->description_ar;
-            $home_banner_array[$k]['image'] = $video_img;
-            $home_banner_array[$k]['duration'] = $v->duration;
+            $home_banner_array[$k]['image'] = $video_banner;
+            $home_banner_array[$k]['link'] = $v->video_link;
 
            }
         }
