@@ -149,6 +149,9 @@ class ApiAuthController extends Controller
      */
     public function logout(Request $request)
     {
+       $item = DeviceToken::where('user_id' ,$request->user()->id)->first();
+        $item->user_id = null;
+        $item->save();
         $request->user()->token()->revoke();
         return response()->json([
             'message' => 'Successfully logged out',
