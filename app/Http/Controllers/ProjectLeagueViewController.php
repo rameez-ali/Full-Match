@@ -249,13 +249,13 @@ class ProjectLeagueViewController extends Controller
     public function league_details($id)
     {
         //Getting Sesaons associated with this league
-         $leagues = Season::
+         $leagues = League::
                     orderBy('id','desc')
-            ->join('leagues', 'leagues.id', '=', 'seasons.league_id')
+            ->leftJoin('seasons', 'leagues.id', '=', 'seasons.league_id')
             ->select('leagues.*','seasons.name_en','seasons.video_link',
                      'leagues.name_en as leaguename','leagues.description_en','leagues.league_promo_video',
                      'leagues.league_sorting')
-            ->where('league_id','=',$id)
+            ->where('seasons.league_id','=',$id)
             ->distinct()
             ->get();
 

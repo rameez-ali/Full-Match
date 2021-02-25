@@ -67,7 +67,11 @@
                                                     <td>{{ $league->name_en   }}</td>
                                                     <td>{{ substr_replace(strip_tags($league->description_en,'description'), "...", 20) }}</td>
                                                     <td><img src="{{ asset('app-assets/images/league/'.$league->league_banner)}}" style="width:50px;height:50px;" /></td>
-                                                    <td>{{ substr_replace(strip_tags($league->promo_video,'promo'), "...", 60) }}</td>
+                                                    @if($league->league_promo_video!=null)
+                                                    <td>{{ substr_replace(strip_tags($league->league_promo_video,'promo'), "...", 60) }}</td>
+                                                    @else
+                                                    <td>{{$league->league_promo_video}}</td>
+                                                    @endif
                                                     <td><img src="{{ asset('app-assets/images/league/'.$league->league_profile_image)}}" style="width:50px;height:50px;" /></td>
                                                     <td>{{ $league->league_sorting }}</td>
                                                     <td><form action="{{ route('league-form.destroy', $league->id)}}" method="post">

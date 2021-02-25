@@ -37,7 +37,11 @@
                                                        {{$video->title_en}}
                                                          <td>{{ substr_replace(strip_tags($video->description_en,'description'), "...", 20) }}</td>
                                                          <td>{{ substr_replace(strip_tags($video->video_link,'link'), "...", 60) }}</td>
+                                                         @if($video->video_promo!=null)
                                                          <td>{{ substr_replace(strip_tags($video->video_promo,'promo'), "...", 60) }}</td>
+                                                         @else
+                                                         <td>{{$video->video_promo}}</td>
+                                                         @endif
                                                         <td>{{$video->name_en}}</td>
                                                         @if(isset($video->leaguename))
                                                         <td>{{$video->leaguename}}</td>

@@ -85,7 +85,11 @@
                                                     <td><img src="{{ asset('app-assets/images/video/'.$video->video_banner_img)}}"  class="img-thumbnail" width="75" /></td>
                                                     <td><img src="{{ asset('app-assets/images/video/'.$video->video_img)}}"  class="img-thumbnail" width="75" /></td>
                                                     <td>{{ substr_replace(strip_tags($video->video_link,'link'), "...", 60) }}</td>
+                                                    @if($video->video_promo!=null)
                                                      <td>{{ substr_replace(strip_tags($video->video_promo,'promo'), "...", 60) }}</td>
+                                                     @else
+                                                     <td>{{ $video->video_promo }}</td>
+                                                     @endif
                                                     <td>{{ $video->video_sorting}}</td>
                                                     <td><form action="{{ route('video-form.destroy', $video->id)}}" method="post">
                                                             @can('view-videodetail')

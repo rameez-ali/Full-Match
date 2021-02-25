@@ -32,7 +32,11 @@
                                                     @if($loop->index == 0)
                                                         {{$league->leaguename}}
                                                          <td>{{ substr_replace(strip_tags($league->description_en,'description'), "...", 20) }}</td>
+                                                         @if($league->league_promo_video!=null)
                                                          <td>{{ substr_replace(strip_tags($league->league_promo_video,'promo'), "...", 60) }}</td>
+                                                         @else
+                                                         <td>{{$league->league_promo_video}}</td>
+                                                         @endif
                                                         <td>{{$league->league_sorting}}</td>
                                                     @endif
                                                     @if($loop->index == 0)
@@ -43,7 +47,11 @@
                                                         <td></td>
                                                         <td></td>
                                                         <td>{{$league->name_en}}</td>
+                                                        @if($league->video_link!=null)
                                                         <td>{{ substr_replace(strip_tags($league->video_link,'link'), "...", 60) }}</td>
+                                                        @else
+                                                        <td>{{$league->video_link}}</td>
+                                                        @endif
                                                     @endif
                                                 </tr>
                                             @endforeach
