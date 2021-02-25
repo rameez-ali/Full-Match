@@ -68,7 +68,7 @@
                                                     <td>{{ substr_replace(strip_tags($league->description_en,'description'), "...", 20) }}</td>
                                                     <td><img src="{{ asset('app-assets/images/league/'.$league->league_banner)}}" style="width:50px;height:50px;" /></td>
                                                     @if($league->league_promo_video!=null)
-                                                    <td>{{ substr_replace(strip_tags($league->league_promo_video,'promo'), "...", 60) }}</td>
+                                                    <td>{{ substr_replace(strip_tags($league->league_promo_video,'promo'), "...", 20) }}</td>
                                                     @else
                                                     <td>{{$league->league_promo_video}}</td>
                                                     @endif

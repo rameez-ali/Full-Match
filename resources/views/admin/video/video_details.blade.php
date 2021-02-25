@@ -36,9 +36,9 @@
                                                     @foreach($video as $video)
                                                        {{$video->title_en}}
                                                          <td>{{ substr_replace(strip_tags($video->description_en,'description'), "...", 20) }}</td>
-                                                         <td>{{ substr_replace(strip_tags($video->video_link,'link'), "...", 60) }}</td>
+                                                         <td>{{ substr_replace(strip_tags($video->video_link,'link'), "...", 20) }}</td>
                                                          @if($video->video_promo!=null)
-                                                         <td>{{ substr_replace(strip_tags($video->video_promo,'promo'), "...", 60) }}</td>
+                                                         <td>{{ substr_replace(strip_tags($video->video_promo,'promo'), "...", 20) }}</td>
                                                          @else
                                                          <td>{{$video->video_promo}}</td>
                                                          @endif
@@ -49,7 +49,7 @@
                                                         @else
                                                         <td></td>
                                                         @endif
-                                                         <td>{{ substr_replace(strip_tags($video->video_link,'link'), "...", 60) }}</td>
+                                                         <td>{{ substr_replace(strip_tags($video->video_link,'link'), "...", 20) }}</td>
                                                         <td>{{$video->video_sorting}}</td>
                                                     @endforeach
                                                 </td>

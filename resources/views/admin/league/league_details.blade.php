@@ -41,14 +41,14 @@
                                                     @endif
                                                     @if($loop->index == 0)
                                                         <td>{{$league->name_en}}</td>
-                                                        <td>{{ substr_replace(strip_tags($league->video_link,'link'), "...", 60) }}</td>
+                                                        <td>{{ substr_replace(strip_tags($league->video_link,'link'), "...", 20) }}</td>
                                                     @else
                                                         <td></td>
                                                         <td></td>
                                                         <td></td>
                                                         <td>{{$league->name_en}}</td>
                                                         @if($league->video_link!=null)
-                                                        <td>{{ substr_replace(strip_tags($league->video_link,'link'), "...", 60) }}</td>
+                                                        <td>{{ substr_replace(strip_tags($league->video_link,'link'), "...", 20) }}</td>
                                                         @else
                                                         <td>{{$league->video_link}}</td>
                                                         @endif
