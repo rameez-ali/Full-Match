@@ -65,9 +65,9 @@
                                             @foreach($leagues as $league)
                                                 <tr>
                                                     <td>{{ $league->name_en   }}</td>
-                                                    <td>{{ $league->description_en }}</td>
+                                                    <td>{{ substr_replace(strip_tags($league->description_en,'description'), "...", 20) }}</td>
                                                     <td><img src="{{ asset('app-assets/images/league/'.$league->league_banner)}}" style="width:50px;height:50px;" /></td>
-                                                    <td>{{ $league->league_promo_video }}</td>
+                                                    <td>{{ substr_replace(strip_tags($league->promo_video,'promo'), "...", 60) }}</td>
                                                     <td><img src="{{ asset('app-assets/images/league/'.$league->league_profile_image)}}" style="width:50px;height:50px;" /></td>
                                                     <td>{{ $league->league_sorting }}</td>
                                                     <td><form action="{{ route('league-form.destroy', $league->id)}}" method="post">

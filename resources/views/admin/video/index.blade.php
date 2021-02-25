@@ -81,11 +81,11 @@
                                                 @if($video!=null)
                                                 <tr>
                                                     <td>{{ $video->title_en }}</td>
-                                                    <td>{{ $video->description_en }}</td>
+                                                     <td>{{ substr_replace(strip_tags($video->description_en,'description'), "...", 20) }}</td>
                                                     <td><img src="{{ asset('app-assets/images/video/'.$video->video_banner_img)}}"  class="img-thumbnail" width="75" /></td>
                                                     <td><img src="{{ asset('app-assets/images/video/'.$video->video_img)}}"  class="img-thumbnail" width="75" /></td>
-                                                    <td>{{ $video->video_link }}</td>
-                                                    <td>{{ $video->video_promo }}</td>
+                                                    <td>{{ substr_replace(strip_tags($video->video_link,'link'), "...", 60) }}</td>
+                                                     <td>{{ substr_replace(strip_tags($video->video_promo,'promo'), "...", 60) }}</td>
                                                     <td>{{ $video->video_sorting}}</td>
                                                     <td><form action="{{ route('video-form.destroy', $video->id)}}" method="post">
                                                             @can('view-videodetail')
