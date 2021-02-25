@@ -13,7 +13,7 @@
                                     </h4>
                                      <div class="row">
                                         <div class="col s12">
-                                          <form method="post" action="{{route('banner-form.store')}}" enctype="multipart/form-data">
+                                          <form method="post" class="formValidate" id="formValidate" action="{{route('banner-form.store')}}" enctype="multipart/form-data">
                                           @csrf
 
                                           <div class="row">
@@ -34,28 +34,26 @@
                                               </div>
 
                                              <div class="input-field col s12">
-                                             <p for="video_link">Add Video Link </p>
-                                             <input id="video_link" name="video_link" type="url">
+                                             <p for="video_link">Add Video Link * </p>
+                                             <input id="video_link" name="video_link" type="url" required>
                                              </div>
 
 
-
-                                            <div class="input-field col s12">
-                                            <p for="country">Select Category * </p>
-                                            <select name="country" id="country" class="form-control" style="width:250px" required>
-                                            <option selected > --Select Category-- </option>
-                                            @foreach ($video as $video)
-                                            <option value="{{$video->id}}">{{ $video->name_en }}</option>
+                                             <div class="input-field col s12">
+                                            <p for="country">Add Category * </p>
+                                            <select name="country" id="country" class="form-control" required>
+                                            <option selected> </option>
+                                            @foreach ($video as $category)
+                                            <option value="{{$category->id}}">{{ $category->name_en }}</option>
                                             @endforeach
+                                            @error('country')
+                                            <span class="invalid-feedback" role="alert">
+                                            <strong class="error">{{ $message }}</strong>
+                                            </span>
+                                            @enderror
                                             </select>
                                             </div>
-
-                                              <div class="input-field col s12">
-                                                  <p for="state">Select Video *</p>
-                                                  <select name="state" class="select browser-default" style="width:250px" required>
-                                                  </select>
-                                              </div>
-
+                                          
                                             <div class="input-field col s12">
                                             <p for="genre">Add Video Genre </p>
                                             <select name="genre" class="form-control" style="width:250px">
@@ -101,59 +99,28 @@
     <script src={{ asset('app-assets/vendors/dropify/js/dropify.min.js') }}></script>
 
 
-            <script type="text/javascript">
+  <script type="text/javascript">
+   /*
+     * Form Validation
+     */
+        $(function () {
 
-                jQuery(document).ready(function ()
-                {
-                    jQuery('select[name="country"]').on('change',function(){
-                        var countryID = jQuery(this).val();
-                        console.log(countryID);
-                        if(countryID == '0')
-                        {
-                            jQuery.ajax({
-                                url : 'allvideos/' +countryID,
-                                type : "GET",
-                                dataType : "json",
-                                success:function(data) {
-                                    console.log(data);
-                                    if (data != "null") {
-                                        jQuery('select[name="state"]').empty();
-                                        jQuery.each(data, function (key, value) {
-                                            $('select[name="state"]').append('<option value="' + key + '">' + value + '</option>');
-                                        });
-                                    } else {
-                                        alert("Home Slider Already Exist");
-                                    }
-                                }
-                            });
-                        }
-                        else
-                        {
-                            jQuery.ajax({
-                                url : 'videos/' +countryID,
-                                type : "GET",
-                                dataType : "json",
-                                success:function(data) {
-                                    console.log(data);
-                                    if (data!="null") {
-                                        jQuery('select[name="state"]').empty();
-                                        jQuery.each(data, function (key, value) {
-                                            $('select[name="state"]').append('<option value="' + key + '">' + value + '</option>');
-                                        });
-                                    }
-                                    else{
-                                        alert("Category Banner Already Exist");
-                                    }
-                                }
-                            });
-                        }
-                    });
-                });
-
-            $("#title_en").keyup(function(){
-                $("#title_ar").val(this.value);
+            $('select[required]').css({
+                position: 'absolute',
+                display: 'inline',
+                height: 0,
+                padding: 0,
+                border: '1px solid rgba(255,255,255,0)',
+                width: 0
             });
-        </script>
+        });
+
+    $("#title_en").keyup(function(){
+    $("#title_ar").val(this.value);
+    });
+
+  </script>
+
   </body>
 </html>
 @endsection

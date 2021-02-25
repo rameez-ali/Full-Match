@@ -35,9 +35,13 @@
                                                 <td>
                                                     @foreach($video as $video)
                                                        {{$video->title_en}}
-                                                        <td>{{$video->description_en}}</td>
-                                                        <td>{{$video->video_link}}</td>
-                                                        <td>{{$video->video_promo}}</td>
+                                                         <td>{{ substr_replace(strip_tags($video->description_en,'description'), "...", 20) }}</td>
+                                                         <td>{{ substr_replace(strip_tags($video->video_link,'link'), "...", 20) }}</td>
+                                                         @if($video->video_promo!=null)
+                                                         <td>{{ substr_replace(strip_tags($video->video_promo,'promo'), "...", 20) }}</td>
+                                                         @else
+                                                         <td>{{$video->video_promo}}</td>
+                                                         @endif
                                                         <td>{{$video->name_en}}</td>
                                                         @if(isset($video->leaguename))
                                                         <td>{{$video->leaguename}}</td>
@@ -45,7 +49,7 @@
                                                         @else
                                                         <td></td>
                                                         @endif
-                                                        <td>{{$video->video_link}}</td>
+                                                         <td>{{ substr_replace(strip_tags($video->video_link,'link'), "...", 20) }}</td>
                                                         <td>{{$video->video_sorting}}</td>
                                                     @endforeach
                                                 </td>

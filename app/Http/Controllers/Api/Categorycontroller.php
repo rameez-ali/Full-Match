@@ -78,8 +78,8 @@ class CategoryController extends Controller
         //getting slider id of that specific categories
         $slider_id = Slider::select("id")->where('category_id',$id)->first();
 
-        //getting video id of banner_id of that specific category
-        $banner_video_id = Adv_banner::select("id")->where('category_id',$id)
+        //getting banner of that specific category
+        $banner = Adv_banner::where('category_id',$id)
                     ->where('genre_id','=',0)
                     ->get();
 
@@ -121,27 +121,20 @@ class CategoryController extends Controller
         }
         $obj->Homeslider = $slider_array;
 
+        if($banner!=null){
+        foreach ($banner as $k => $v) {
+           
+            $video_banner = str_replace('\\', '/', asset('app-assets/images/advbanner/' . $v->video_banner));
 
-        if($banner_video_id!=null)
-        {
-            $banner_videos=Video::orderBy('video_sorting')->wherein('id',$banner_video_id)->get();
+            $banner_array[$k]['id'] = $v->id;
+            $banner_array[$k]['name'] = $v->title_en;
+            $banner_array[$k]['name_ar'] = $v->title_en;
+            $banner_array[$k]['image'] = $video_banner;
+            $banner_array[$k]['link'] = $v->video_link;
 
-            foreach ($banner_videos as $k => $v) {
-
-                $video_img = str_replace('\\', '/', asset('app-assets/images/video/' . $v->video_img));
-
-                $banner_array[$k]['id'] = $v->id;
-                $banner_array[$k]['name'] = $v->title_en;
-                $banner_array[$k]['name_ar'] = $v->title_ar;
-                $banner_array[$k]['description'] = $v->description_en;
-                $banner_array[$k]['description_ar'] = $v->description_ar;
-                $banner_array[$k]['image'] = $video_img;
-                $banner_array[$k]['duration'] = $v->duration;
-
-
-            }
-            $obj->Homebanner = $banner_array;
+           }
         }
+        $obj->Homebanner=$banner_array;
 
         if($genre_id!=null)
         {
@@ -254,31 +247,25 @@ class CategoryController extends Controller
         $obj->homelayout = new stdClass;
 
 
-        //getting video id of banner_id of that specific category and genre both
-        $banner_video_id = Adv_banner::select("id")->where('category_id',$category_id)
+        //getting banner of that specific category and genre both
+        $banner = Adv_banner::where('category_id',$category_id)
             ->where('genre_id','=',$genre_ids)
             ->get();
 
-        if($banner_video_id!=null)
-        {
-            $banner_videos=Video::orderBy('video_sorting')->wherein('id',$banner_video_id)->get();
+        if($banner!=null){
+        foreach ($banner as $k => $v) {
+           
+            $video_banner = str_replace('\\', '/', asset('app-assets/images/advbanner/' . $v->video_banner));
 
-            foreach ($banner_videos as $k => $v) {
+            $banner_array[$k]['id'] = $v->id;
+            $banner_array[$k]['name'] = $v->title_en;
+            $banner_array[$k]['name_ar'] = $v->title_en;
+            $banner_array[$k]['image'] = $video_banner;
+            $banner_array[$k]['link'] = $v->video_link;
 
-                $video_img = str_replace('\\', '/', asset('app-assets/images/video/' . $v->video_img));
-
-                $banner_array[$k]['id'] = $v->id;
-                $banner_array[$k]['title'] = $v->title_en;
-                $banner_array[$k]['title_ar'] = $v->title_ar;
-                $banner_array[$k]['description'] = $v->description_en;
-                $banner_array[$k]['description_ar'] = $v->description_ar;
-                $banner_array[$k]['image'] = $video_img;
-                $banner_array[$k]['duration'] = $v->duration;
-
-
-            }
-            $obj->Homebanner = $banner_array;
+           }
         }
+        $obj->Homebanner=$banner_array;
 
 
 

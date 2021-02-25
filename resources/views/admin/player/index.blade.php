@@ -66,7 +66,7 @@
                                                     <td>{{ $player->name_en }}</td>
                                                     <td><img src="{{ asset('app-assets/images/player/'.$player->player_banner)}}"  class="img-thumbnail" width="75" /></td>
                                                     <td><img src="{{ asset('app-assets/images/player/'.$player->player_profile_image)}}"  class="img-thumbnail" width="75" /></td>
-                                                    <td>{{ $player->description_en }}</td>
+                                                    <td>{{ substr_replace(strip_tags($player->description_en,'description'), "...", 20) }}</td>
                                                     <td>{{ $player->player_sorting }}</td>
                                                     <td><form action="{{ route('player-form.destroy', $player->id)}}" method="post">
                                                             @can('edit-player')

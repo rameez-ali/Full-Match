@@ -55,8 +55,10 @@ class ProjectAdvertisementViewController extends Controller
      */
     public function create()
     {
+        $category_id = Adv_banner::select('category_id')->get()->toArray();
+
         $videogenre=Video_genre::all();
-        $video=Category::all();
+        $video=Category::get();
         return view('admin.advertisementbanner.form',compact('video','videogenre'));
     }
 
@@ -145,9 +147,6 @@ class ProjectAdvertisementViewController extends Controller
        //Getting All Categories
         $category=Category::all();
 
-        //Getting Video id associated with this banner
-        $select_video_id = Adv_banner::select('video_id')->where('id', '=', $id )->first();
-
         //Getting Category id associated with this banner
         $select_category_id = Adv_banner::select('category_id')->where('id', '=', $id )->get()->first();
         //Getting Category associated with this banner
@@ -164,24 +163,9 @@ class ProjectAdvertisementViewController extends Controller
         $homepages=DB::table('homepages')->select('id','status')->get();
 
 
-        //Getting Category id of banner to find videos associated with this category id
-        $videos2 =  DB::table('adv_banners')
-            ->where('id', '=', $id)
-            ->select('adv_banners.category_id')
-            ->get();
-
-        $banner_category_id=json_decode($videos2, true);
-
-        //Getting Videos assocaited with the category of this banner
-        $videos =  Video::
-              where('category_id', '=', $banner_category_id)
-            ->select('videos.id','videos.title_en')
-            ->get();
-
-
         $slider=Adv_banner::where('id',$id)->first();
 
-        return view('admin.advertisementbanner.edit', compact('videos','select_category_id','select_genre_id','select_video_id','select_homepage_id','select_genre_id','slider','category','genres','homepages'))
+        return view('admin.advertisementbanner.edit', compact('videos','select_category_id','select_genre_id','select_homepage_id','select_genre_id','slider','category','genres','homepages'))
             ->with('i', (request()->input('page', 1) - 1) * 5);
 
 

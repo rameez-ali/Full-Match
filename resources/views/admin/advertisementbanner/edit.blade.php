@@ -37,8 +37,8 @@
                                              </div>
 
                                             <div class="input-field col s12">
-                                            <p for="category_image">Edit Video Link  </p>
-                                            <input type="url" name="video_link" value="{{ $slider->video_link}}" class="form-control input-lg" />
+                                            <p for="category_image">Edit Video Link *  </p>
+                                            <input type="url" name="video_link" value="{{ $slider->video_link}}" class="form-control input-lg" required/>
                                             </div>
 
                                             <div class="input-field col s12">
@@ -52,15 +52,6 @@
 
 
                                             <div class="input-field col s12">
-                                            <p for="category_image">Edit Videos * </p>
-                                          <select name="state" class="select browser-default" style="width:250px" >
-                                          @foreach($videos as $video )
-                                          <option value="{{$video->id}}" {{$video->id == $select_video_id->video_id ? 'selected' : ''}}  >{{$video->title_en}}</option>
-                                          @endforeach
-                                          </select>
-                                          </div>
-
-                                            <div class="input-field col s12">
                                             <p for="category_image">Edit Genres </p>
                                             @if($select_genre_id->genre_id!=null)
                                                 <select class="selectpicker" name="genre" >
@@ -70,15 +61,14 @@
                                                 </select>
                                             </div>
                                             @else
-                                            <div class="input-field col s12">
                                                 <select class="selectpicker" name="genre" >
                                                     <option SELECTED value="" >All Genres</option>
                                                     @foreach($genres as $genre )
                                                         <option value="{{$genre->id}}" {{$genre->id == $select_genre_id->genre_id ? 'selected' : ''}} >{{$genre->name_en}}</option>
                                                     @endforeach
                                                 </select>
-                                            </div>
                                             @endif
+                                           </div>
 
                                             <div class="input-field col s12">
                                                 <p for="category_image">Edit Homepage Selection </p>
