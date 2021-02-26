@@ -48,7 +48,7 @@ class UpdateUserRequest extends FormRequest
 
         $user->save();
 
-        Bouncer::sync($user)->roles([]);
+//        Bouncer::sync($user)->roles([]);
 
         $user->assign($params['roles']);
 
