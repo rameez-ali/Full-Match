@@ -105,10 +105,15 @@ class ProjectVideoViewController extends Controller
         $response = $client->request('/videos/'.$video_id, array(), 'GET');
         $durationseconds=$response['body']['duration'];
 
-        //Converting Seconds to HH:MM:SS
-        $seconds = round($durationseconds);
-        $video_duration = sprintf('%02d:%02d:%02d', ($seconds/ 3600),($seconds/ 60 % 60), $seconds% 60);
+        if(isset($durationseconds)){
+            //Converting Seconds to HH:MM:SS
+            $seconds = round($durationseconds);
+            $video_duration = sprintf('%02d:%02d:%02d', ($seconds/ 3600),($seconds/ 60 % 60), $seconds% 60);
 
+        }
+        else{
+            $video_duration=$request->duration;
+        }
 
 
         if($request->file('video_banner_img')==null) {
