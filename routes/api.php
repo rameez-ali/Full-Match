@@ -7,6 +7,7 @@ use App\Http\Controllers\Api\HomePageLayoutController;
 use App\Http\Controllers\Api\MyListController;
 use App\Http\Controllers\Api\PageController;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\CustomerController;
 use App\Http\Controllers\Api\ClubController;
@@ -34,6 +35,8 @@ use Laravel\Socialite\Facades\Socialite;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
+Auth::routes(['verify' => true]);
+
 
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();

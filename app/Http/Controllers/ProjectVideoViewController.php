@@ -283,7 +283,7 @@ class ProjectVideoViewController extends Controller
             Leaguecategory::create($league_category);
             //for Send new video notification to all users
             if ($request->notify_user == 1){
-                $tokenList = DeviceToken::pluck('token')->toArray();
+                $tokenList = DeviceToken::with('checknotify')->wherehas('checknotify', function($query){ $query->where('notify_status', 1); })->pluck('token')->toArray();
 
                 //         dd($tokenList);
                 $fcmUrl = 'https://fcm.googleapis.com/fcm/send';
