@@ -40,7 +40,7 @@ class ContinueWatchedController extends Controller
                 $getcontinuewatcharray[$k]['id'] = $v->video_id;
                 $getcontinuewatcharray[$k]['name'] = $v->name;
                 $getcontinuewatcharray[$k]['image'] = $video_img;
-                $getcontinuewatcharray[$k]['link'] = $v->link;
+                $getcontinuewatcharray[$k]['link'] = $v->video_link;
                 $getcontinuewatcharray[$k]['duration'] = $v->duration;
                 $getcontinuewatcharray[$k]['position'] = $v->position;
 
