@@ -9,7 +9,7 @@ class Continue_watch extends Model
 {
 
     protected $fillable = [
-        'user_id','video_id','name','image','duration','position',
+        'user_id','video_id','name','image','link','duration','position',
     ];
 
 }
