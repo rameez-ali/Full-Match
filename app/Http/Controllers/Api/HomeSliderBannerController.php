@@ -67,6 +67,7 @@ class HomeSliderBannerController extends Controller
             $home_slider_array[$k]['image'] = $video_img;
             $home_slider_array[$k]['duration'] = $v->duration;
             $home_slider_array[$k]['link'] = $v->video_link;
+            $home_slider_array[$k]['route'] = "video/".$v->id;
 
 
         }
@@ -89,6 +90,7 @@ class HomeSliderBannerController extends Controller
             $home_banner_array[$k]['name_ar'] = $v->title_en;
             $home_banner_array[$k]['image'] = $video_banner;
             $home_banner_array[$k]['link'] = $v->video_link;
+            $home_banner_array[$k]['route'] = "video/".$v->id;
 
            }
         }
@@ -112,6 +114,7 @@ class HomeSliderBannerController extends Controller
             $new_adding_video[$k]['image'] = $video_img;
             $new_adding_video[$k]['duration'] = $v->duration;
             $new_adding_video[$k]['link'] = $v->video_link;
+            $new_adding_video[$k]['route'] = "video/".$v->id;
 
 
         }
