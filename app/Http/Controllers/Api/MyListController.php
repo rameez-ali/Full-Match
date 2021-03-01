@@ -50,8 +50,8 @@ class MyListController extends Controller
                 $image = str_replace('\\', '/', asset('app-assets/images/video/' . $v->wishlistvideo->video_img));
                 $array[$k]['id'] = $v->id;
                 $array[$k]['video_id'] = $v->video_id;
-                $array[$k]['title_en'] = $v->wishlistvideo->title_en;
-                $array[$k]['title_ar'] = $v->wishlistvideo->title_ar;
+                $array[$k]['name'] = $v->wishlistvideo->title_en;
+                $array[$k]['name_ar'] = $v->wishlistvideo->title_ar;
                 $array[$k]['image'] = $image;
             }
             return response()->json(['success' => true, 'status' => $this->successStatus, 'message' => 'My Lists Found.', 'data' => $array]);

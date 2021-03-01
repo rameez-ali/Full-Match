@@ -64,7 +64,7 @@ class ClubController extends Controller
         $club_detail = array();
         $club_related_video = array();
 
-        $video_clubs=Videoclub::select('videos.id','videos.title_en','videos.title_ar','videos.video_img','videos.description_en','videos.description_ar','videos.video_banner_img','videos.duration')
+        $video_clubs=Videoclub::select('videos.id','videos.title_en','videos.title_ar','videos.video_img','videos.description_en','videos.description_ar','videos.video_banner_img','videos.duration','videos.video_link')
             ->join('videos','videoclubs.Video_id' , '=' ,'videos.id')
             ->where('Club_id','=', $id)
             ->orderBy('video_sorting')
@@ -104,6 +104,7 @@ class ClubController extends Controller
                 $club_related_video[$k]['description_en'] = $v->description_ar;
                 $club_related_video[$k]['image'] = $video_img;
                 $club_related_video[$k]['duration'] = $v->duration;
+                $club_related_video[$k]['link'] = $v->video_link;
 
             }
             $obj->related_video = $club_related_video;

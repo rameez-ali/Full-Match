@@ -66,6 +66,7 @@ class HomeSliderBannerController extends Controller
             $home_slider_array[$k]['promo'] = $v->promo_video;
             $home_slider_array[$k]['image'] = $video_img;
             $home_slider_array[$k]['duration'] = $v->duration;
+            $home_slider_array[$k]['link'] = $v->video_link;
 
 
         }
@@ -110,6 +111,7 @@ class HomeSliderBannerController extends Controller
             $new_adding_video[$k]['description_en'] = $v->description_ar;
             $new_adding_video[$k]['image'] = $video_img;
             $new_adding_video[$k]['duration'] = $v->duration;
+            $new_adding_video[$k]['link'] = $v->video_link;
 
 
         }
