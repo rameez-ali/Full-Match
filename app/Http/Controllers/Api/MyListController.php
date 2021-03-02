@@ -43,11 +43,13 @@ class MyListController extends Controller
 
         $allmywishlist = $request->handle();
 
+
         $array = array();
         if (!$allmywishlist->isEmpty()) {
             foreach ($allmywishlist as $k => $v) {
 
                 $image = str_replace('\\', '/', asset('app-assets/images/video/' . $v->wishlistvideo->video_img));
+
                 $array[$k]['id'] = $v->id;
                 $array[$k]['video_id'] = $v->video_id;
                 $array[$k]['name'] = $v->wishlistvideo->title_en;
