@@ -43,6 +43,7 @@ class LeagueController extends Controller
                 $array[$k]['image'] = $profile_image;
                 $array[$k]['description'] = $v->description_en;
                 $array[$k]['description_ar'] = $v->description_ar;
+                $array[$k]['route'] = "league/".$v->id;
 
             }
             $obj->Heading = "All Leagues";

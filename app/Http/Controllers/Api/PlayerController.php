@@ -42,6 +42,7 @@ class PlayerController extends Controller
                 $array[$k]['description'] = $v->description_en;
                 $array[$k]['description_ar'] = $v->description_ar;
                 $array[$k]['sorting'] = $v->player_sorting;
+                $array[$k]['route'] = "player/".$v->id;
 
             }
             $obj->Heading = "All Players";
@@ -103,6 +104,7 @@ class PlayerController extends Controller
                 $player_related_video[$k]['sorting'] = $v->video_sorting;
                 $player_related_video[$k]['duration'] = $v->duration;
                 $player_related_video[$k]['link'] = $v->video_link;
+                $player_related_video[$k]['route'] = "video/".$v->id;
 
             }
             $obj->related_video = $player_related_video;

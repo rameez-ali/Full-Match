@@ -52,6 +52,8 @@ class MyListController extends Controller
                 $array[$k]['video_id'] = $v->video_id;
                 $array[$k]['name'] = $v->wishlistvideo->title_en;
                 $array[$k]['name_ar'] = $v->wishlistvideo->title_ar;
+                $array[$k]['link'] = $v->wishlistvideo->video_link;
+                $array[$k]['route'] = $v->wishlistvideo->title_ar;
                 $array[$k]['image'] = $image;
             }
             return response()->json(['success' => true, 'status' => $this->successStatus, 'message' => 'My Lists Found.', 'data' => $array]);

@@ -51,6 +51,7 @@ class VideoController extends Controller
                 $all_videos_array[$k]['image'] = $video_img;
                 $all_videos_array[$k]['duration'] = $v->duration;
                 $all_videos_array[$k]['link'] = $v->video_link;
+                $all_videos_array[$k]['route'] = "video/".$v->id;
 
 
             }
@@ -138,6 +139,8 @@ class VideoController extends Controller
                 $category_array[$k]['image'] = $video_img;
                 $category_array[$k]['duration'] = $v->duration;
                 $category_array[$k]['link'] = $v->video_link;
+                $category_array[$k]['route'] = "video/".$v->id;
+
 
 
             }
