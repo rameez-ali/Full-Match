@@ -107,6 +107,8 @@ Route::post('email/resend', 'Auth\VerificationController@resend')->name('custome
 
 Route::get('passchanged', function () { return view('/pwdchange');})->name('passchanged');
 
+Route::get('emailvarify', function () { return view('/emailverify');})->name('emailvarify');
+
 //Route::get('blankpg', function () { return view('admin/blank/index');});
 //Route::get('blankform', function () { return view('admin/blank/form');});
 

@@ -104,6 +104,10 @@ class ApiAuthController extends Controller
                 'success' => false,
             ], 403);
         $user = $request->user();
+
+        if($user->email_verified_at == null){
+            return response()->json(['success' => false, 'status' => $this->HTTP_FORBIDDEN, 'message' => ' Email Is Not Verify .']);
+        }
         $tokenResult = $user->createToken('Personal Access Token');
         $token = $tokenResult->token;
 
