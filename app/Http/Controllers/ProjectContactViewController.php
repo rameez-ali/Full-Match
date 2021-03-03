@@ -94,10 +94,10 @@ class ProjectContactViewController extends Controller
 
         $user_email=$request->user_email;
 
-        $user=User::where('email',$user_email)->get();
+        $user=User::where('email',$user_email)->first();
 
         try {
-            Mail::to($user)->send(new EmailVerificationNotification($user));
+            Mail::to($user_email)->send(new EmailVerificationNotification($user));
         } catch (\Exception $e) {
             echo "some error !";
         }
