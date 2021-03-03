@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Model\Category;
 use App\Model\Contact;
+use App\User;
+use Mail;
+use App\Mail\Auth\EmailVerificationNotification;
 
 class ProjectContactViewController extends Controller
 {
@@ -80,6 +83,7 @@ class ProjectContactViewController extends Controller
      */
     public function update(Request $request, $id)
     {
+        
         $response=1;
         $form_data = array(
             'response'       =>   $response,
@@ -87,6 +91,16 @@ class ProjectContactViewController extends Controller
         );
 
         Contact::whereId($id)->update($form_data);
+
+        $user_email=$request->user_email;
+
+        $user=User::where('email',$user_email)->get();
+
+        try {
+            Mail::to($user)->send(new EmailVerificationNotification($user));
+        } catch (\Exception $e) {
+            echo "some error !";
+        }
 
         return redirect('contact-form')->with('success', 'Data is successfully deleted');
 

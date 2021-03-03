@@ -95,6 +95,16 @@ class ContactUSController extends Controller
 
         Fullmatchcontact::whereId($id)->update($form_data);
 
+        $this->validator($request->all())->validate();
+
+        $user = $this->create($request->all());
+
+        try {
+            Mail::to($user)->send(new EmailVerificationNotification($user));
+        } catch (\Exception $e) {
+            echo "some error !";
+        }
+
         return redirect('Contactus-form')->with('contactuseditsuccess','Contact Information Updated Successfully');
 
         //  return redirect('club-form')->with('clubeditsuccess','Club Updated Successfully');
