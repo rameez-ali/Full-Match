@@ -57,6 +57,8 @@ class LeagueSeasonController extends Controller
                 $season_videos_array[$k]['description_ar'] = $v->description_ar;
                 $season_videos_array[$k]['image'] = $video_img;
                 $season_videos_array[$k]['duration'] = $v->duration;
+                $season_videos_array[$k]['link'] = $v->video_link;
+                $season_videos_array[$k]['route'] = "video/".$v->id;
 
 
             }

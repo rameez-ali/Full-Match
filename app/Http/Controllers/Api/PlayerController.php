@@ -42,6 +42,7 @@ class PlayerController extends Controller
                 $array[$k]['description'] = $v->description_en;
                 $array[$k]['description_ar'] = $v->description_ar;
                 $array[$k]['sorting'] = $v->player_sorting;
+                $array[$k]['route'] = "player/".$v->id;
 
             }
             $obj->Heading = "All Players";
@@ -82,7 +83,7 @@ class PlayerController extends Controller
             $obj->detail = $player_detail;
         }
 
-        $video_players=Videoplayer::select('videos.id','videos.video_sorting','videos.title_en','videos.title_ar','videos.video_img','videos.description_en','videos.description_ar','videos.video_banner_img','videos.duration')
+        $video_players=Videoplayer::select('videos.id','videos.video_sorting','videos.title_en','videos.title_ar','videos.video_img','videos.description_en','videos.description_ar','videos.video_banner_img','videos.duration','videos.video_link')
             ->join('videos','videoplayers.Video_id' , '=' ,'videos.id')
             ->where('Player_id','=', $id)
             ->orderBy('video_sorting')
@@ -102,7 +103,8 @@ class PlayerController extends Controller
                 $player_related_video[$k]['image'] = $video_img;
                 $player_related_video[$k]['sorting'] = $v->video_sorting;
                 $player_related_video[$k]['duration'] = $v->duration;
-
+                $player_related_video[$k]['link'] = $v->video_link;
+                $player_related_video[$k]['route'] = "video/".$v->id;
 
             }
             $obj->related_video = $player_related_video;
