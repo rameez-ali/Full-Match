@@ -24,7 +24,7 @@
     <body>
         <h1>FullMatch</h1>
 
-        <h2>Your E-mail Has Been Verified. </h2>
+        <h2>Your email has been verified. </h2>
 
     </body>
 </html>

@@ -85,7 +85,7 @@ return [
         'all_user' => 'All Users',
         'guest_user' => 'Guest Users',
         'registered_user' => 'Registered Users',
-        'send_notifi' => 'Sent Notification',
+        'send_notifi' => 'Send Notification',
         'notifi_date_time' => 'Notification Date & Time',
         'notifi_show' => 'Notification Details',
 
