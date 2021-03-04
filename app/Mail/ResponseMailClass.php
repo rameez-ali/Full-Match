@@ -16,10 +16,10 @@ class ResponseMailClass extends Mailable
      *
      * @return void
      */
-    public function __construct($name,$message)
+    public function __construct($name,$contactmessages)
     {
         $this->name=$name;
-        $this->message=$message;
+        $this->contactmessages=$contactmessages;
     }
 
     /**
@@ -27,9 +27,9 @@ class ResponseMailClass extends Mailable
      *
      * @return $this
      */
-    public function build($name,$message)
+    public function build()
     {
         // dd($this->name,$this->message);
-        return $this->view('admin.responseemail.mail',compact('name'=>$this->name));
+        return $this->view('admin.responseemail.mail',['name' => $this->name,'contactmessages' => $this->contactmessages]);
     }
 }

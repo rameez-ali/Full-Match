@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Model\Videoclub;
 use App\Model\Club;
 use App\Model\Fullmatchcontact;
+use Illuminate\Support\Facades\Validator;
 
 class ContactUSController extends Controller
 {
@@ -30,10 +31,7 @@ class ContactUSController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
-    {
-        return view('admin.contactus.form');
-    }
+
 
     /**
      * Store a newly created resource in storage.
@@ -78,12 +76,12 @@ class ContactUSController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $request->validate([
+        $rules=[
                 'call_us'    =>  'required',
                 'email_us'    =>  'required',
                 'address_en'    =>  'required',
                 'address_ar'    =>  'required'
-            ]);
+            ];
 
 
         $form_data = array(
@@ -95,15 +93,11 @@ class ContactUSController extends Controller
 
         Fullmatchcontact::whereId($id)->update($form_data);
 
-        $this->validator($request->all())->validate();
-
-        $user = $this->create($request->all());
-
-        try {
-            Mail::to($user)->send(new EmailVerificationNotification($user));
-        } catch (\Exception $e) {
-            echo "some error !";
+        $validator = Validator::make($request->all(),$rules);
+        if ($validator->fails()) {
+            return $this->FailResponse("Validation error", $validator->getMessageBag(), 200);
         }
+
 
         return redirect('Contactus-form')->with('contactuseditsuccess','Contact Information Updated Successfully');
 

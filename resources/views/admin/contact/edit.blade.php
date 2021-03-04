@@ -21,21 +21,21 @@
                                         <div class="form-group">
                                        <label class="col-md-4 text-right">Name</label>
                                        <div class="col-md-8">
-                                       <input type="text" name="category_name" value="{{ $contact->name }}" class="form-control input-lg" readonly/>
+                                       <input type="text" name="user_name" value="{{ $contact->name }}" class="form-control input-lg" readonly/>
                                        </div>
                                        </div>
 
                                        <div class="form-group">
                                        <label class="col-md-4 text-right">Email</label>
                                        <div class="col-md-8">
-                                       <input type="text" name="category_name" value="{{ $contact->email }}" class="form-control input-lg" readonly/>
+                                       <input type="text" name="user_email" value="{{ $contact->email }}" class="form-control input-lg" readonly/>
                                        </div>
                                        </div>
 
                                        <div class="form-group">
                                        <label class="col-md-4 text-right">Message</label>
                                        <div class="col-md-8">
-                                       <input type="text" name="category_name" value="{{ $contact->message }}" class="form-control input-lg" readonly/>
+                                       <input type="text" name="user_message" value="{{ $contact->message }}" class="form-control input-lg" readonly/>
                                        </div>
                                        </div>
 
