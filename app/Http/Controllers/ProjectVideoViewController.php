@@ -440,11 +440,19 @@ class ProjectVideoViewController extends Controller
         //Getting Video duration in seconds
         $client = new Vimeo("24205e7ac91e486d8c2ef88490c4af32f9d9d67f", "zoUUWHOyoaI25PckaIq7s3D+1fzLAGh/81pxbAeI41LSCSFpHSRlL1s5Yc+K0ku1xfinHBmE3RfDqGUIvdTBqPzVAPAdZJd6Qe1tjN3q5INs5K7x7H5SeEeo4fhm7GGT", "fa0e6157d975fe04f800a8954ec2c2a0");
         $response = $client->request('/videos/'.$video_id, array(), 'GET');
+        
+        if($response['status']==200){
         $durationseconds=$response['body']['duration'];
 
         //Converting Seconds to HH:MM:SS
         $seconds = round($durationseconds);
         $video_duration = sprintf('%02d:%02d:%02d', ($seconds/ 3600),($seconds/ 60 % 60), $seconds% 60);
+        
+
+        }
+        else{
+            $video_duration=$request->duration;
+        }
 
 
         //when both field are empty

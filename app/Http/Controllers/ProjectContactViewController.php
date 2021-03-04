@@ -7,6 +7,7 @@ use App\Model\Category;
 use App\Model\Contact;
 use App\User;
 use Mail;
+use App\Mail\ResponseMailClass;
 use App\Mail\Auth\EmailVerificationNotification;
 
 class ProjectContactViewController extends Controller
@@ -94,12 +95,11 @@ class ProjectContactViewController extends Controller
 
         $user_email=$request->user_email;
 
-        $user=User::where('email',$user_email)->get();
-
         try {
-            Mail::to($user)->send(new EmailVerificationNotification($user));
+            Mail::to($user_email)->send(new ResponseMailClass($request->user_name,$request->response_message));
         } catch (\Exception $e) {
-            echo "some error !";
+           $hello="some error !";
+            dd($e);
         }
 
         return redirect('contact-form')->with('success', 'Data is successfully deleted');
