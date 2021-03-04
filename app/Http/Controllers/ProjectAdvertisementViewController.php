@@ -165,7 +165,7 @@ class ProjectAdvertisementViewController extends Controller
 
         $slider=Adv_banner::where('id',$id)->first();
 
-        return view('admin.advertisementbanner.edit', compact('videos','select_category_id','select_genre_id','select_homepage_id','select_genre_id','slider','category','genres','homepages'))
+        return view('admin.advertisementbanner.edit', compact('select_category_id','select_genre_id','select_homepage_id','select_genre_id','slider','category','genres','homepages'))
             ->with('i', (request()->input('page', 1) - 1) * 5);
 
 
