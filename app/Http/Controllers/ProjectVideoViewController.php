@@ -440,14 +440,14 @@ class ProjectVideoViewController extends Controller
         //Getting Video duration in seconds
         $client = new Vimeo("24205e7ac91e486d8c2ef88490c4af32f9d9d67f", "zoUUWHOyoaI25PckaIq7s3D+1fzLAGh/81pxbAeI41LSCSFpHSRlL1s5Yc+K0ku1xfinHBmE3RfDqGUIvdTBqPzVAPAdZJd6Qe1tjN3q5INs5K7x7H5SeEeo4fhm7GGT", "fa0e6157d975fe04f800a8954ec2c2a0");
         $response = $client->request('/videos/'.$video_id, array(), 'GET');
-        
+
         if($response['status']==200){
         $durationseconds=$response['body']['duration'];
 
         //Converting Seconds to HH:MM:SS
         $seconds = round($durationseconds);
         $video_duration = sprintf('%02d:%02d:%02d', ($seconds/ 3600),($seconds/ 60 % 60), $seconds% 60);
-        
+
 
         }
         else{
@@ -501,7 +501,6 @@ class ProjectVideoViewController extends Controller
 
         Video::whereId($id)->update($form_data3);
 
-
         if($request->club!=null){
             Videoclub::where('Video_id', $id)->forceDelete();
             foreach($request->club as $club){
@@ -512,7 +511,10 @@ class ProjectVideoViewController extends Controller
                     'category_id'  =>  $request->Category_id
                 );
 
-                Videoclub::create($form_data7);
+                
+
+                $videoclub=Videoclub::create($form_data7);
+
 
             }
         }
@@ -534,9 +536,9 @@ class ProjectVideoViewController extends Controller
         }
 
         if($request->genre!=null){
-            Videogenre::where('Video_id', $id)->forceDelete();
             foreach ($request->genre as $genre) {
                 $id = Video::orderBy('id', 'DESC')->value('id');
+                Videogenre::where('Video_id', $id)->forceDelete();
                 $form_data9 = array(
                     'video_id' => $id,
                     'genre_id' => $genre,
