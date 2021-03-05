@@ -53,6 +53,7 @@ class CategoryController extends Controller
             $home_slider_array[$k]['description'] = $v->description_en;
             $home_slider_array[$k]['description_ar'] = $v->description_ar;
             $home_slider_array[$k]['image'] = $video_img;
+            $home_slider_array[$k]['route'] = $video_img;
 
         }
 
@@ -115,6 +116,7 @@ class CategoryController extends Controller
                 $slider_array[$k]['promo'] = $v->video_promo;
                 $slider_array[$k]['image'] = $video_img;
                 $slider_array[$k]['duration'] = $v->duration;
+                $slider_array[$k]['route'] = "video/".$v->id;
 
 
             }
@@ -159,6 +161,7 @@ class CategoryController extends Controller
                 $latest_videos_array[$k]['description_ar'] = $v->description_ar;
                 $latest_videos_array[$k]['image'] = $video_img;
                 $latest_videos_array[$k]['duration'] = $v->duration;
+                $latest_videos_array[$k]['route'] = "video/".$v->id;
 
 
             }
@@ -181,6 +184,7 @@ class CategoryController extends Controller
                 $club_array[$k]['description'] = $v->description_en;
                 $club_array[$k]['description_ar'] = $v->description_ar;
                 $club_array[$k]['image'] = $club_logo;
+                $club_array[$k]['route'] = "club/".$v->id;
 
             }
             $obj->homelayout->clubs = $club_array;
@@ -202,6 +206,7 @@ class CategoryController extends Controller
                 $player_array[$k]['description'] = $v->description_en;
                 $player_array[$k]['description_ar'] = $v->description_ar;
                 $player_array[$k]['image'] = $player_profile_image;
+                $player_array[$k]['route'] = "player/".$v->id;
 
 
             }
@@ -224,6 +229,7 @@ class CategoryController extends Controller
                 $league_array[$k]['description'] = $v->description_en;
                 $league_array[$k]['description_ar'] = $v->description_ar;
                 $league_array[$k]['image'] = $league_profile_image;
+                $league_array[$k]['route'] = "league/".$v->id;
 
             }
             $obj->homelayout->leagues = $league_array;
@@ -290,7 +296,7 @@ class CategoryController extends Controller
                 $latest_videos_array[$k]['description_ar'] = $v->description_ar;
                 $latest_videos_array[$k]['image'] = $video_img;
                 $latest_videos_array[$k]['duration'] = $v->duration;
-
+                $latest_videos_array[$k]['route'] = "video/".$v->id;
 
             }
             $obj->homelayout->videos = $latest_videos_array;
@@ -316,6 +322,7 @@ class CategoryController extends Controller
                 $club_array[$k]['description'] = $v->description_en;
                 $club_array[$k]['description_ar'] = $v->description_ar;
                 $club_array[$k]['image'] = $club_logo;
+                $club_array[$k]['route'] = "club/".$v->id;
 
             }
             $obj->homelayout->clubs = $club_array;
@@ -339,6 +346,8 @@ class CategoryController extends Controller
                 $player_array[$k]['description'] = $v->description_en;
                 $player_array[$k]['description_ar'] = $v->description_ar;
                 $player_array[$k]['image'] = $player_profile_image;
+                $player_array[$k]['route'] = "player/".$v->id;
+
 
             }
             $obj->homelayout->players = $player_array;
@@ -374,6 +383,8 @@ class CategoryController extends Controller
                 $league_array[$k]['description'] = $v->description_en;
                 $league_array[$k]['description_ar'] = $v->description_ar;
                 $league_array[$k]['image'] = $league_profile_image;
+                $league_array[$k]['route'] = "league/".$v->id;
+
 
             }
             $obj->homelayout->leagues = $league_array;
