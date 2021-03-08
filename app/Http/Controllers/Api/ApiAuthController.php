@@ -281,13 +281,23 @@ class ApiAuthController extends Controller
 
     public function appleLogin(Request $request)
     {
-        $request->validate([
-            'email' => 'string|email',
+        $validator = Validator::make($request->all(), [
+            'email' => 'string|email|unique:users',
             'name' => 'string',
             'provider_id' => 'required',
             'device_type' => 'required',
             'token' => 'required',
         ]);
+
+        if ($validator->fails()) {
+            return response()->json([
+                'message' => $validator->errors()->messages()['email'][0],
+                'data' => $validator->errors()->messages(),
+                'success' => false,
+                'status' => $this->HTTP_FORBIDDEN,
+            ], 403);
+        }
+
         $array = array();
         if (User::where('provider_id', $request->provider_id)->first() != null) {
             $user = User::where('provider_id', $request->provider_id)->first();
