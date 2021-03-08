@@ -77,14 +77,14 @@
                                                         </select>
                                                     </div>
 
-                                                    @if($edit)
-                                                    <div class="input-field col s6">
-                                                        <label>
-                                                            <input type="checkbox" {{ $user->status == 1 ? 'checked' : '' }} name="status" id="customer-status" />
-                                                            <span for="customer-status" >{{ __('customer.customer.block_customer') }}</span>
-                                                        </label>
-                                                    </div>
-                                                    @endif
+{{--                                                    @if($edit)--}}
+{{--                                                    <div class="input-field col s6">--}}
+{{--                                                        <label>--}}
+{{--                                                            <input type="checkbox" {{ $user->status == 1 ? 'checked' : '' }} name="status" id="customer-status" />--}}
+{{--                                                            <span for="customer-status" >{{ __('customer.customer.block_customer') }}</span>--}}
+{{--                                                        </label>--}}
+{{--                                                    </div>--}}
+{{--                                                    @endif--}}
                                                     <div class="input-field col s12">
                                                         <button class="btn waves-effect waves-light right submit" type="submit" name="action">Submit
                                                             <i class="material-icons right">send</i>
