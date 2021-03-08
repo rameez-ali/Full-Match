@@ -232,7 +232,8 @@ class ApiAuthController extends Controller
             $user->provider_id = $request->provider_id;
             $user->save();
 
-            $deviceInfo = DeviceToken::where('user_id', $user->id)->first();
+            $deviceInfo = DeviceToken::where('token', $request->token)->first();
+            $deviceInfo->user_id = $user->id;
             $deviceInfo->device = $request->device_type;
             $deviceInfo->token = $request->token;
             $deviceInfo->save();
