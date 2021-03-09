@@ -39,7 +39,7 @@
                                                     </div>
                                                     <div class="input-field col s12">
                                                         <label for="cemail">{{ __('customer.customer.email') }}*</label>
-                                                        <input id="cemail" value="{{ old('email',$customer->email) }}" type="email" name="email" data-error=".errorTxt2">
+                                                        <input id="cemail" value="{{ old('email',$customer->email) }}" type="email" name="email" @if($edit) disabled @endif data-error=".errorTxt2">
                                                         <small class="errorTxt2"></small>
 
                                                             @error('cemail')

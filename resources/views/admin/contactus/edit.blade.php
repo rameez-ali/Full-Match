@@ -43,7 +43,7 @@
 
                                                 <div class="input-field col s12">
                                                     <p for="address_en"> Edit Address Details EN * </p>
-                                                    <input type="text" name="address_en" id="address_en"  value="{{ $fullmatchcontact->address_en }}" class="form-control input-lg" required />
+                                                    <input type="text" name="address_en" id="address_en"  value="{{ $fullmatchcontact->address_en }}" class="form-control input-lg" data-error=".errorTxt3" required minlength="5" />
                                                     <small class="errorTxt3"></small>
                                                     @error('address_en')
                                                     <span class="invalid-feedback" role="alert">
@@ -54,7 +54,7 @@
 
                                                 <div class="input-field col s12">
                                                     <p for="address_ar"> Edit Address Details AR * </p>
-                                                    <input type="text" name="address_ar" id="address_ar"  value="{{ $fullmatchcontact->address_ar }}" class="form-control input-lg" required />
+                                                    <input type="text" name="address_ar" id="address_ar"  value="{{ $fullmatchcontact->address_ar }}" class="form-control input-lg" data-error=".errorTxt4" required minlength="5" />
                                                     <small class="errorTxt4"></small>
                                                     @error('address_ar')
                                                     <span class="invalid-feedback" role="alert">
@@ -112,43 +112,25 @@
 
             $("#formValidate").validate({
                 rules: {
-                    uname: {
+                    address_en: {
                         required: true,
                         minlength: 5
                     },
-                    cemail: {
-                        required: true,
-                        email: true
-                    },
-                    password: {
+                    address_ar: {
                         required: true,
                         minlength: 5
                     },
-                    cpassword: {
-                        required: true,
-                        minlength: 5,
-                        equalTo: "#password"
-                    },
-                    crole: {
-                        required: true,
-                    },
-                    curl: {
-                        required: true,
-                        url: true
-                    },
-                    ccomment: {
-                        required: true,
-                        minlength: 15
-                    },
-                    tnc_select: "required",
                 },
                 //For custom messages
                 messages: {
-                    uname: {
-                        required: "Enter a username",
+                    address_en: {
+                        required: "Enter a address",
                         minlength: "Enter at least 5 characters"
                     },
-                    curl: "Enter your website",
+                    address_ar: {
+                        required: "Enter a address",
+                        minlength: "Enter at least 5 characters"
+                    },
                 },
                 errorElement: 'div',
                 errorPlacement: function (error, element) {
