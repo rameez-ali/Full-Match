@@ -60,7 +60,7 @@ Route::get('/customer/{id}', [CustomerController::class , 'show']);
 Route::get('/allsubsplans', [SubsPlanController::class , 'index']);
 
 Route::get('/videos', [VideoController::class , 'videos']);
-Route::get('/video/{id}', [VideoController::class , 'video_details']);
+//Route::get('/video/{id}', [VideoController::class , 'video_details']);
 
 Route::post('/contact', [ContactController::class , 'contact']);
 
@@ -109,6 +109,9 @@ Route::group(['middleware' => 'auth:api'], function(){
     Route::post('/customer-edit', [CustomerController::class , 'edit']);
     Route::post('/continuewatched', [ContinuewatchedController::class , 'continuewatch']);
     Route::post('/customer-update/{id}', [CustomerController::class , 'update'])->name('customer.profupdate');
+
+    Route::get('/video/{id}', [VideoController::class , 'video_details']);
+    Route::get('/homesliderbanner', [HomeSliderBannerController::class , 'getsliderbanner']);
 });
 Route::post('/initalToken', [CustomerController::class , 'initalToken']);
 
@@ -123,7 +126,7 @@ Route::get('/videouserid', [WishController::class , 'wishlist']);
 
 Route::get('/category/{id}', [CategoryController::class , 'getcategoryinfo']);
 Route::post('/categoryinfo/{category_id}/{genre_id}', [CategoryController::class , 'getcategorygenreinfo']);
-Route::get('/homesliderbanner', [HomeSliderBannerController::class , 'getsliderbanner']);
+//Route::get('/homesliderbanner', [HomeSliderBannerController::class , 'getsliderbanner']);
 
 Route::get('/searchclub/{string}', [SearchController::class , 'searchclub']);
 Route::get('/searchplayer/{string}', [SearchController::class , 'searchplayer']);

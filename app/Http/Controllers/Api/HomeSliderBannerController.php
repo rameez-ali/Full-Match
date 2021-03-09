@@ -35,7 +35,7 @@ class HomeSliderBannerController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function getsliderbanner()
+    public function getsliderbanner(Request $request)
     {
         $obj = new stdClass;
 
@@ -56,6 +56,8 @@ class HomeSliderBannerController extends Controller
 
         foreach ($videos as $k => $v) {
 
+            $myListUser = Video::with('mylist')->where('id', $v->id)->first();
+
             $video_img = str_replace('\\', '/', asset('app-assets/images/video/' . $v->video_img));
 
             $home_slider_array[$k]['id'] = $v->id;
@@ -69,6 +71,11 @@ class HomeSliderBannerController extends Controller
             $home_slider_array[$k]['link'] = $v->video_link;
             $home_slider_array[$k]['route'] = "video/".$v->id;
 
+            if ($myListUser->mylist->user_id == $request->user()->id ){
+                $home_slider_array[$k]['mylist'] = 1 ;
+            }else{
+                $home_slider_array[$k]['mylist'] = 0 ;
+            }
 
         }
       }
@@ -82,7 +89,7 @@ class HomeSliderBannerController extends Controller
 
         if($banner!=null){
         foreach ($banner as $k => $v) {
-           
+
             $video_banner = str_replace('\\', '/', asset('app-assets/images/advbanner/' . $v->video_banner));
 
             $home_banner_array[$k]['id'] = $v->id;

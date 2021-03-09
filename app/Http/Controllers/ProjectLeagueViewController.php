@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Model\Club;
+use App\Model\Leaguecategory;
 use App\Model\Slidervideo;
 use Illuminate\Http\Request;
 use App\Model\League;
