@@ -74,6 +74,7 @@ class SearchController extends Controller
                  $all_videos_array[$k]['description'] = $v->description_en;
                  $all_videos_array[$k]['description_ar'] = $v->description_ar;
                  $all_videos_array[$k]['logo'] = $banner;
+                 $all_videos_array[$k]['route'] = "video/".$v->id;
 
              }
 
@@ -98,6 +99,7 @@ class SearchController extends Controller
                  $club_search_video[$k]['description_ar'] = $v->description_ar;
                  $club_search_video[$k]['logo'] = $banner;
                  $club_search_video[$k]['image'] = $image;
+                 $club_search_video[$k]['route'] = "video/".$v->id;
 
              }
          }
@@ -120,6 +122,7 @@ class SearchController extends Controller
                 $player_search_video[$k]['description_ar'] = $v->description_ar;
                 $player_search_video[$k]['logo'] = $banner;
                 $player_search_video[$k]['image'] = $image;
+                $player_search_video[$k]['route'] = "video/".$v->id;
 
 
             }
@@ -141,6 +144,7 @@ class SearchController extends Controller
                 $popular_search_video[$k]['description'] = $v->description_ar;
                 $popular_search_video[$k]['logo'] = $banner;
                 $popular_search_video[$k]['image'] = $image;
+                $popular_search_video[$k]['route'] = "video/".$v->id;
 
             }
             $obj->PopularSearches = $popular_search_video;

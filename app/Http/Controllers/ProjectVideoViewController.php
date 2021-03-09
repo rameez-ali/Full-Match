@@ -416,7 +416,6 @@ class ProjectVideoViewController extends Controller
         $select_category_id = Video::select('category_id')->where('id', '=', $id )->first();
 
 
-
         return view('admin.video.edit',compact('all_genres','category','select_category_id','clubs','club','players','player','video','selected_ids','selected_ids1','selected_ids3','video_genres','selected_popular_search','popular_searches'));
     }
 
@@ -511,7 +510,7 @@ class ProjectVideoViewController extends Controller
                     'category_id'  =>  $request->Category_id
                 );
 
-                
+
 
                 $videoclub=Videoclub::create($form_data7);
 
