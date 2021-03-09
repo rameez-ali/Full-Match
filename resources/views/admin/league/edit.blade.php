@@ -101,8 +101,8 @@
                                                         <?php $i = 1; ?>
                                                         @foreach($season as $season)
                                                             <tr>
-                                                                <td><input type="text" name="addmore[{{$i}}][name_en]" Value="{{$season->name_en}}" class="form-control" /></td>
-                                                                <td><input type="url" name="addmore[{{$i}}][video_link]" Value="{{$season->video_link}}" class="form-control" /></td>
+                                                                <td><input type="text" name="addmore[{{$i}}][name_en]" Value="{{$season->name_en}}" class="form-control" required /></td>
+                                                                <td><input type="url" name="addmore[{{$i}}][video_link]" Value="{{$season->video_link}}" class="form-control" required/></td>
                                                                 @if($i==1) @else
                                                                     <td><button type="button" class="btn btn-danger remove-tr">Remove</button></td>
 

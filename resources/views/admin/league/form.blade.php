@@ -104,8 +104,8 @@
                                                         </tr>
 
                                                         <tr>
-                                                            <td><input type="text" name="addmore[0][name_en]" Value="Season1" class="form-control" /></td>
-                                                            <td><input type="url" name="addmore[0][video_link]" class="form-control" /></td>
+                                                            <td><input type="text" name="addmore[0][name_en]" Value="Season1" class="form-control" required/></td>
+                                                            <td><input type="url" name="addmore[0][video_link]" class="form-control" required/></td>
                                                             <td><button type="button" name="add" id="add" class="btn btn-success">Add More Season</button></td>
                                                         </tr>
                                                     </table>
