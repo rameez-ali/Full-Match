@@ -140,6 +140,43 @@ class HomeSliderBannerController extends Controller
 
     }
 
+    public function gethomebannerforguest()
+    {
+        $obj = new stdClass;
+
+        $category = array();
+        $home_slider_array = array();
+
+        $category=Category::select('id','name_en')->get();
+        $obj->Categories=$category;
+
+        $category_id=null;
+        $slider_id = Slider::select("id")->where('category_id',$category_id)->get();
+
+        if($slider_id!=null){
+            $video_id=Slidervideo::select("Video_id")->wherein('Slider_id',$slider_id)->get();
+            $videos=Video::wherein('id',$video_id)->get();
+
+            foreach ($videos as $k => $v) {
+
+                $video_img = str_replace('\\', '/', asset('app-assets/images/video/' . $v->video_img));
+
+                $home_slider_array[$k]['id'] = $v->id;
+                $home_slider_array[$k]['title'] = $v->title_en;
+                $home_slider_array[$k]['title_ar'] = $v->title_ar;
+                $home_slider_array[$k]['description'] = $v->description_en;
+                $home_slider_array[$k]['description_ar'] = $v->description_ar;
+                $home_slider_array[$k]['promo'] = $v->promo_video;
+                $home_slider_array[$k]['image'] = $video_img;
+                $home_slider_array[$k]['duration'] = $v->duration;
+                $home_slider_array[$k]['link'] = $v->video_link;
+                $home_slider_array[$k]['route'] = "video/".$v->id;
+
+            }
+            $obj->Homeslider=$home_slider_array;
+        }
+        return response()->json(['success' => true, 'status' => $this->successStatus, 'message' => 'Home Slider Banner found.', 'data'=>  $obj]);
+    }
 }
 
 
