@@ -79,6 +79,10 @@ class HomeSliderBannerController extends Controller
             }else {
                 $home_slider_array[$k]['mylist'] = 0;
             }
+            if (!isset($request->user()->id)) {
+                $home_slider_array[$k]['mylist'] = 0;
+            }
+
         }
       }
       $obj->Homeslider=$home_slider_array;

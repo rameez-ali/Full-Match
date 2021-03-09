@@ -99,6 +99,10 @@ class VideoController extends Controller
             $mylist = 0;
         }
 
+        if (!isset($request->user()->id)) {
+            $mylist = 0;
+        }
+
         //Getting Category_id of that specific video
         $category_id_collection = Video::select('category_id')->where('id', $id)->get()->first();
 
