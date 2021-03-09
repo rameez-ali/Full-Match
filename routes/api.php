@@ -61,6 +61,7 @@ Route::get('/allsubsplans', [SubsPlanController::class , 'index']);
 
 Route::get('/videos', [VideoController::class , 'videos']);
 //Route::get('/video/{id}', [VideoController::class , 'video_details']);
+Route::get('/guestvideo/{id}', [VideoController::class , 'guest_video_details']);
 
 Route::post('/contact', [ContactController::class , 'contact']);
 
