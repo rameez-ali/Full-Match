@@ -13,4 +13,9 @@ class Video extends Model
         'video_link','video_id','duration','notify_user','video_sorting','popular_searches','video_promo',
     ];
 //    protected $dates = ['deleted_at'];
+
+    public function mylist()
+    {
+        return $this->hasOne(My_wish_list::class , 'video_id');
+    }
 }

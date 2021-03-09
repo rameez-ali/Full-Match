@@ -60,7 +60,7 @@ Route::get('/customer/{id}', [CustomerController::class , 'show']);
 Route::get('/allsubsplans', [SubsPlanController::class , 'index']);
 
 Route::get('/videos', [VideoController::class , 'videos']);
-Route::get('/video/{id}', [VideoController::class , 'video_details']);
+//Route::get('/video/{id}', [VideoController::class , 'video_details']);
 
 Route::post('/contact', [ContactController::class , 'contact']);
 
@@ -109,6 +109,8 @@ Route::group(['middleware' => 'auth:api'], function(){
     Route::post('/customer-edit', [CustomerController::class , 'edit']);
     Route::post('/continuewatched', [ContinuewatchedController::class , 'continuewatch']);
     Route::post('/customer-update/{id}', [CustomerController::class , 'update'])->name('customer.profupdate');
+
+    Route::get('/video/{id}', [VideoController::class , 'video_details']);
 });
 Route::post('/initalToken', [CustomerController::class , 'initalToken']);
 

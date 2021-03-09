@@ -72,7 +72,7 @@ class VideoController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-    public function video_details($id)
+    public function video_details(Request $request,$id)
     {
         $obj = new stdClass;
 
@@ -82,6 +82,14 @@ class VideoController extends Controller
 
         //getting video details of that specific video
         $videos = Video::where('id', $id)->orderBy('video_sorting')->get();
+
+        $myListUser = Video::with('mylist')->where('id', $id)->first();
+
+        if ($myListUser->mylist->user_id == $request->user()->id ){
+            $mylist = 1 ;
+        }else{
+            $mylist = 0 ;
+        }
 
         //Getting Category_id of that specific video
         $category_id_collection = Video::select('category_id')->where('id', $id)->get()->first();
@@ -115,6 +123,7 @@ class VideoController extends Controller
                 $latest_videos_array[$k]['description_ar'] = $v->description_ar;
                 $latest_videos_array[$k]['image'] = $video_banner_img;
                 $latest_videos_array[$k]['duration'] = $v->duration;
+                $latest_videos_array[$k]['mylist'] = $mylist;
 
 
             }
