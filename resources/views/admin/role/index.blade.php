@@ -62,6 +62,7 @@
                                                 <tr>
                                                     <th>{{ __('customer.customer.sequence_no') }}</th>
                                                     <th>{{ __('customer.name') }}</th>
+                                                    <th>{{ __('customer.title') }}</th>
                                                     @can('assigned-permission')
                                                         <th>{{ __('customer.permission') }}</th>
                                                     @endcan
@@ -72,6 +73,7 @@
                                                 @foreach($roles as $role)
                                                     <tr>
                                                         <td>{{ $role->id }}</td>
+                                                        <td>{{ $role->name }}</td>
                                                         <td>{{ $role->title }}</td>
                                                         @can('assigned-permission')
                                                             <td>  <a class="mb-5 mr-2 btn waves-effect waves-light gradient-45deg-purple-deep-orange" href="{{ route('role.permission',['id' => $role->id ]) }}">{{ __('customer.permission') }}</a></td>
@@ -93,6 +95,7 @@
                                                 <tr>
                                                     <th>{{ __('customer.customer.sequence_no') }}</th>
                                                     <th>{{ __('customer.name') }}</th>
+                                                    <th>{{ __('customer.title') }}</th>
                                                     @can('assigned-permission')
                                                         <th>{{ __('customer.permission') }}</th>
                                                     @endcan

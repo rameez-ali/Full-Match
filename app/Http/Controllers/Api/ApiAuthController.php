@@ -232,7 +232,80 @@ class ApiAuthController extends Controller
             $user->provider_id = $request->provider_id;
             $user->save();
 
-            $deviceInfo = DeviceToken::where('user_id', $user->id)->first();
+            $deviceInfo = DeviceToken::where('token', $request->token)->first();
+            $deviceInfo->user_id = $user->id;
+            $deviceInfo->device = $request->device_type;
+            $deviceInfo->token = $request->token;
+            $deviceInfo->save();
+
+        } else {
+            $user = new User([
+                'name' => $request->name,
+                'phone' => 13245678,
+                'email' => $request->email,
+                'provider_id' => $request->provider_id,
+            ]);
+            $user->save();
+
+            $customer = new customer([
+                'user_id' => $user->id,
+                'name' => $request->name,
+                'email' => $request->email,
+            ]);
+            $customer->save();
+
+            $deviceInfo = new DeviceToken([
+                'user_id' => $user->id,
+                'device' => $request->device_type,
+                'token' => $request->token,
+            ]);
+            $deviceInfo->save();
+        }
+
+        $tokenResult = $user->createToken('Personal Access Token');
+//        $user = $request->user();
+
+        $array['token'] = $tokenResult->accessToken;
+        return response()->json([
+            'data' => $array,
+            'token_type' => 'Bearer',
+            'message' => 'User Login Successfully',
+            'status' => $this->successStatus,
+            'success' => true,
+            'expires_at' => Carbon::parse(
+                $tokenResult->token->expires_at
+            )->toDateTimeString()
+        ]);
+    }
+
+
+    public function appleLogin(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'email' => 'string|email|unique:users',
+            'name' => 'string',
+            'provider_id' => 'required',
+            'device_type' => 'required',
+            'token' => 'required',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json([
+                'message' => $validator->errors()->messages()['email'][0],
+                'data' => $validator->errors()->messages(),
+                'success' => false,
+                'status' => $this->HTTP_FORBIDDEN,
+            ], 403);
+        }
+
+        $array = array();
+        if (User::where('provider_id', $request->provider_id)->first() != null) {
+            $user = User::where('provider_id', $request->provider_id)->first();
+            $user->provider_id = $request->provider_id;
+            $user->save();
+
+            $deviceInfo = DeviceToken::where('token', $request->token)->first();
+            $deviceInfo->user_id = $user->id;
             $deviceInfo->device = $request->device_type;
             $deviceInfo->token = $request->token;
             $deviceInfo->save();

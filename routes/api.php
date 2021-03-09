@@ -83,6 +83,7 @@ Route::group([
 ], function () {
     Route::post('login', [ApiAuthController::class , 'login']);
     Route::post('socialLogin', [ApiAuthController::class , 'socialLogin']);
+    Route::post('applelogin', [ApiAuthController::class , 'appleLogin']);
     Route::post('signup', [ApiAuthController::class , 'signup']);
 
 //    Route::get('/google-redirect', [ApiAuthController::class , 'googleRedirect']);
