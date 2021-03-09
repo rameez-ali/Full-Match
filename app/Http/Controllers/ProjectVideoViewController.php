@@ -541,8 +541,7 @@ class ProjectVideoViewController extends Controller
                 $form_data9 = array(
                     'video_id' => $id,
                     'genre_id' => $genre,
-                    'category_id' => $request->Category_id,
-                    'player_id'    => $player
+                    'category_id' => $request->Category_id
                 );
                 Videogenre::create($form_data9);
             }
