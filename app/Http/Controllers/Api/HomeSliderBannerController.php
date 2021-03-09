@@ -146,6 +146,8 @@ class HomeSliderBannerController extends Controller
 
         $category = array();
         $home_slider_array = array();
+        $home_banner_array = array();
+        $new_adding_video = array();
 
         $category=Category::select('id','name_en')->get();
         $obj->Categories=$category;
@@ -173,9 +175,55 @@ class HomeSliderBannerController extends Controller
                 $home_slider_array[$k]['route'] = "video/".$v->id;
 
             }
-            $obj->Homeslider=$home_slider_array;
         }
+        $obj->Homeslider=$home_slider_array;
+
+        //getting video id of banner_id of home
+        $banner = Adv_banner::where('homepage',1)
+            ->orderBy('created_at','desc')
+            ->first()
+            ->get();
+
+        if($banner!=null){
+            foreach ($banner as $k => $v) {
+
+                $video_banner = str_replace('\\', '/', asset('app-assets/images/advbanner/' . $v->video_banner));
+
+                $home_banner_array[$k]['id'] = $v->id;
+                $home_banner_array[$k]['name'] = $v->title_en;
+                $home_banner_array[$k]['name_ar'] = $v->title_en;
+                $home_banner_array[$k]['image'] = $video_banner;
+                $home_banner_array[$k]['link'] = $v->video_link;
+                $home_banner_array[$k]['route'] = "video/".$v->id;
+
+            }
+        }
+        $obj->Homebanner=$home_banner_array;
+
+        $new_adding_videos=Video::orderBy('created_at','desc')
+            ->get();
+
+        foreach ($new_adding_videos as $k => $v) {
+
+            $video_img = str_replace('\\', '/', asset('app-assets/images/video/' . $v->video_img));
+
+            $new_adding_video[$k]['id'] = $v->id;
+            $new_adding_video[$k]['name'] = $v->title_en;
+            $new_adding_video[$k]['name_ar'] = $v->title_en;
+            $new_adding_video[$k]['description'] = $v->description_en;
+            $new_adding_video[$k]['description_en'] = $v->description_ar;
+            $new_adding_video[$k]['image'] = $video_img;
+            $new_adding_video[$k]['duration'] = $v->duration;
+            $new_adding_video[$k]['link'] = $v->video_link;
+            $new_adding_video[$k]['route'] = "video/".$v->id;
+
+        }
+
+        $obj->NewAdding=$new_adding_video;
+
         return response()->json(['success' => true, 'status' => $this->successStatus, 'message' => 'Home Slider Banner found.', 'data'=>  $obj]);
+
+
     }
 }
 
