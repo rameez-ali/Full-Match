@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 
 
+use App\Model\My_wish_list;
 use Illuminate\Http\Request;
 use App\Model\Category;
 use App\Model\Category_genre;
@@ -56,7 +57,7 @@ class HomeSliderBannerController extends Controller
 
         foreach ($videos as $k => $v) {
 
-            $myListUser = Video::with('mylist')->where('id', $v->id)->first();
+            $myListUser = My_wish_list::where('video_id', $v->id)->where('user_id', $request->user()->id)->first();
 
             $video_img = str_replace('\\', '/', asset('app-assets/images/video/' . $v->video_img));
 
@@ -71,12 +72,13 @@ class HomeSliderBannerController extends Controller
             $home_slider_array[$k]['link'] = $v->video_link;
             $home_slider_array[$k]['route'] = "video/".$v->id;
 
-            if ($myListUser->mylist->user_id == $request->user()->id ){
-                $home_slider_array[$k]['mylist'] = 1 ;
-            }else{
-                $home_slider_array[$k]['mylist'] = 0 ;
+            if (isset($myListUser)) {
+                if ($myListUser->video_id == $v->id) {
+                    $home_slider_array[$k]['mylist'] = 1;
+                }
+            }else {
+                $home_slider_array[$k]['mylist'] = 0;
             }
-
         }
       }
       $obj->Homeslider=$home_slider_array;

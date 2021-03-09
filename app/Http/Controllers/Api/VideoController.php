@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 
+use App\Model\My_wish_list;
 use Illuminate\Http\Request;
 use App\Model\Category;
 use App\Model\Video;
@@ -83,17 +84,19 @@ class VideoController extends Controller
 
         //getting video details of that specific video
         $videos = Video::where('id', $id)->orderBy('video_sorting')->get();
- 
+
         //getting genres of that specific video
         $genre_id = Videogenre::select('genre_id')->where('video_id', $id)->get();
         $genres=Video_genre::select('id','name_en')->wherein('id',$genre_id)->get();
 
-        $myListUser = Video::with('mylist')->where('id', $id)->first();
+        $myListUser = My_wish_list::where('video_id', $id)->where('user_id', $request->user()->id)->first();
 
-        if ($myListUser->mylist->user_id == $request->user()->id ){
-            $mylist = 1 ;
-        }else{
-            $mylist = 0 ;
+        if (isset($myListUser)) {
+            if ($myListUser->video_id == $id) {
+                $mylist = 1;
+            }
+        }else {
+            $mylist = 0;
         }
 
         //Getting Category_id of that specific video
