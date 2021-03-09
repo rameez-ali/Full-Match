@@ -79,9 +79,14 @@ class VideoController extends Controller
         $season_array = array();
         $category_array = array();
         $latest_videos_array=array();
+        $genre_array=array();
 
         //getting video details of that specific video
         $videos = Video::where('id', $id)->orderBy('video_sorting')->get();
+ 
+        //getting genres of that specific video
+        $genre_id = Videogenre::select('genre_id')->where('video_id', $id)->get();
+        $genres=Video_genre::select('id','name_en')->wherein('id',$genre_id)->get();
 
         $myListUser = Video::with('mylist')->where('id', $id)->first();
 
@@ -130,6 +135,17 @@ class VideoController extends Controller
 
         }
         $obj->detail = $latest_videos_array;
+
+
+        if($genres!=null)
+        {
+            foreach ($genres as $k => $v) {
+                $genre_array[$k]['id'] = $v->id;
+                $genre_array[$k]['name'] = $v->name_en;
+            }
+
+        }
+        $obj->genre = $genre_array;
 
 
         if(isset($category_id)) {

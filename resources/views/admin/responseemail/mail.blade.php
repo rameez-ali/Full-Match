@@ -1,6 +1,5 @@
 <html>
 <head>
-<title>Contact Info</title>
 </head>
 
 
