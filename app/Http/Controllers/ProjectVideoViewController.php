@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Model\DeviceToken;
+use App\Model\My_wish_list;
 use Illuminate\Http\Request;
 use App\Model\Category;
 use App\Model\Video;
@@ -583,6 +584,12 @@ class ProjectVideoViewController extends Controller
 
         //Delete Relation of Video with League
         Leaguecategory::where('video_id', $id)->delete();
+
+        //Delete Relation of Video with Continue Watches
+        Continue_watch::where('video_id', $id)->delete();
+
+        //Delete Relation of Video with My List
+        My_wish_list::where('video_id', $id)->delete();
 
         //Delete Video
         $data = Video::findOrFail($id);

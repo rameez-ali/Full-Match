@@ -76,12 +76,12 @@ class ContactUSController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $rules=[
-                'call_us'    =>  'required',
-                'email_us'    =>  'required',
-                'address_en'    =>  'required',
-                'address_ar'    =>  'required'
-            ];
+       $request->validate([
+            'call_us'     => 'required',
+            'email_us'     => 'required',
+            'address_en'     => 'required',
+            'address_ar'     =>  'required'
+        ]);
 
 
         $form_data = array(
@@ -92,11 +92,6 @@ class ContactUSController extends Controller
         );
 
         Fullmatchcontact::whereId($id)->update($form_data);
-
-        $validator = Validator::make($request->all(),$rules);
-        if ($validator->fails()) {
-            return $this->FailResponse("Validation error", $validator->getMessageBag(), 200);
-        }
 
 
         return redirect('Contactus-form')->with('contactuseditsuccess','Contact Information Updated Successfully');
