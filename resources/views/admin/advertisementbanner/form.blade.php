@@ -53,7 +53,7 @@
                                             @enderror
                                             </select>
                                             </div>
-                                          
+
                                             <div class="input-field col s12">
                                             <p for="genre">Add Video Genre </p>
                                             <select name="genre" class="form-control" style="width:250px">
@@ -68,7 +68,7 @@
 
 
                                              <div class="input-field col s12">
-                                             <p for="homepage">Home Page </p>
+                                             <p for="homepage">Show On Home Page </p>
                                             <select name="homepage" id="country" class="form-control" style="width:250px">
                                             <option value="1">Yes</option>
                                             <option value="0">No</option>
