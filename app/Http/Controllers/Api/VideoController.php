@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 
+use App\Model\My_wish_list;
 use Illuminate\Http\Request;
 use App\Model\Category;
 use App\Model\Video;
@@ -83,17 +84,23 @@ class VideoController extends Controller
 
         //getting video details of that specific video
         $videos = Video::where('id', $id)->orderBy('video_sorting')->get();
- 
+
         //getting genres of that specific video
         $genre_id = Videogenre::select('genre_id')->where('video_id', $id)->get();
-        $genres=Video_genre::select('id','name_en')->wherein('id',$genre_id)->get();
+        $genres=Video_genre::select('id','name_en','name_ar')->wherein('id',$genre_id)->get();
 
-        $myListUser = Video::with('mylist')->where('id', $id)->first();
+        $myListUser = My_wish_list::where('video_id', $id)->where('user_id', $request->user()->id)->first();
 
-        if ($myListUser->mylist->user_id == $request->user()->id ){
-            $mylist = 1 ;
-        }else{
-            $mylist = 0 ;
+        if (isset($myListUser)) {
+            if ($myListUser->video_id == $id) {
+                $mylist = 1;
+            }
+        }else {
+            $mylist = 0;
+        }
+
+        if (!isset($request->user()->id)) {
+            $mylist = 0;
         }
 
         //Getting Category_id of that specific video
@@ -142,6 +149,7 @@ class VideoController extends Controller
             foreach ($genres as $k => $v) {
                 $genre_array[$k]['id'] = $v->id;
                 $genre_array[$k]['name'] = $v->name_en;
+                $genre_array[$k]['name_ar'] = $v->name_ar;
             }
 
         }
@@ -175,6 +183,93 @@ class VideoController extends Controller
 
         return response()->json(['success' => true, 'status' => $this->successStatus, 'message' => 'Videos Data Found', 'data'=> $obj]);
 
+    }
+
+    public function guest_video_details($id)
+    {
+        $obj = new stdClass;
+
+        $season_array = array();
+        $category_array = array();
+        $latest_videos_array=array();
+        $genre_array=array();
+
+        //getting video details of that specific video
+        $videos = Video::where('id', $id)->orderBy('video_sorting')->get();
+
+        //getting genres of that specific video
+        $genre_id = Videogenre::select('genre_id')->where('video_id', $id)->get();
+        $genres=Video_genre::select('id','name_en','name_ar')->wherein('id',$genre_id)->get();
+
+        //Getting Category_id of that specific video
+        $category_id_collection = Video::select('category_id')->where('id', $id)->get()->first();
+
+        //Converting collection to string
+        if(isset($category_id_collection)){
+            $category_id=$category_id_collection->category_id;
+
+        }
+        if($videos!=null)
+        {
+
+            foreach ($videos as $k => $v) {
+
+                $video_banner_img = str_replace('\\', '/', asset('app-assets/images/video/' . $v->video_banner_img));
+
+                $latest_videos_array[$k]['id'] = $v->id;
+                $latest_videos_array[$k]['name'] = $v->title_en;
+                $latest_videos_array[$k]['name_ar'] = $v->title_ar;
+                if ($v->video_link == null) {
+                    $season_id = Video::select('season_id')->where('id', $v->id)->first();
+                    $league_id = Season::select('league_id')->where('id', $season_id)->first();
+                    $video_link = League::select('video_link')->where('id', $league_id)->first();
+                    $latest_videos_array[$k]['video_link'] = $video_link;
+                } else {
+                    $latest_videos_array[$k]['video_link'] = $v->video_link;
+                }
+                $latest_videos_array[$k]['description'] = $v->description_en;
+                $latest_videos_array[$k]['description_ar'] = $v->description_ar;
+                $latest_videos_array[$k]['image'] = $video_banner_img;
+                $latest_videos_array[$k]['duration'] = $v->duration;
+
+            }
+
+        }
+        $obj->detail = $latest_videos_array;
+
+        if($genres!=null)
+        {
+            foreach ($genres as $k => $v) {
+                $genre_array[$k]['id'] = $v->id;
+                $genre_array[$k]['name'] = $v->name_en;
+                $genre_array[$k]['name_ar'] = $v->name_ar;
+            }
+
+        }
+        $obj->genre = $genre_array;
+
+        if(isset($category_id)) {
+
+            $videos = Video::orderBy('video_sorting')->where('category_id', $category_id)->orderBy('video_sorting')->get();
+
+            foreach ($videos as $k => $v) {
+
+                $video_img = str_replace('\\', '/', asset('app-assets/images/video/' . $v->video_img));
+
+                $category_array[$k]['id'] = $v->id;
+                $category_array[$k]['name'] = $v->title_en;
+                $category_array[$k]['name_ar'] = $v->title_ar;
+                $category_array[$k]['description'] = $v->description_en;
+                $category_array[$k]['description_ar'] = $v->description_ar;
+                $category_array[$k]['image'] = $video_img;
+                $category_array[$k]['duration'] = $v->duration;
+                $category_array[$k]['link'] = $v->video_link;
+                $category_array[$k]['route'] = "video/".$v->id;
+
+            }
+            $obj->related_video = $category_array;
+        }
+        return response()->json(['success' => true, 'status' => $this->successStatus, 'message' => 'Videos Data Found', 'data'=> $obj]);
     }
 
 

@@ -30,6 +30,9 @@ class GetAllMyListRequest extends FormRequest
     }
     public function handle()
     {
-        return My_wish_list::with('wishlistvideo')->where('user_id' ,$this->custinfo)->get();
+        return My_wish_list::with('wishlistvideo')
+            ->whereHas('wishlistvideo', function($query){ $query->orWhere('deleted_at', '!=', null); })
+            ->where('user_id' ,$this->custinfo)
+            ->get();
     }
 }

@@ -244,6 +244,7 @@ class ApiAuthController extends Controller
                 'phone' => 13245678,
                 'email' => $request->email,
                 'provider_id' => $request->provider_id,
+                'email_verified_at' => Carbon::now(),
             ]);
             $user->save();
 
@@ -316,6 +317,7 @@ class ApiAuthController extends Controller
                 'phone' => 13245678,
                 'email' => $request->email,
                 'provider_id' => $request->provider_id,
+                'email_verified_at' => Carbon::now(),
             ]);
             $user->save();
 

@@ -61,6 +61,7 @@ Route::get('/allsubsplans', [SubsPlanController::class , 'index']);
 
 Route::get('/videos', [VideoController::class , 'videos']);
 //Route::get('/video/{id}', [VideoController::class , 'video_details']);
+Route::get('/guestvideo/{id}', [VideoController::class , 'guest_video_details']);
 
 Route::post('/contact', [ContactController::class , 'contact']);
 
@@ -127,6 +128,7 @@ Route::get('/videouserid', [WishController::class , 'wishlist']);
 Route::get('/category/{id}', [CategoryController::class , 'getcategoryinfo']);
 Route::post('/categoryinfo/{category_id}/{genre_id}', [CategoryController::class , 'getcategorygenreinfo']);
 //Route::get('/homesliderbanner', [HomeSliderBannerController::class , 'getsliderbanner']);
+Route::get('/guesthomebanner', [HomeSliderBannerController::class , 'gethomebannerforguest']);
 
 Route::get('/searchclub/{string}', [SearchController::class , 'searchclub']);
 Route::get('/searchplayer/{string}', [SearchController::class , 'searchplayer']);
