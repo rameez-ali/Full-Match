@@ -87,7 +87,7 @@ class VideoController extends Controller
 
         //getting genres of that specific video
         $genre_id = Videogenre::select('genre_id')->where('video_id', $id)->get();
-        $genres=Video_genre::select('id','name_en')->wherein('id',$genre_id)->get();
+        $genres=Video_genre::select('id','name_en','name_ar')->wherein('id',$genre_id)->get();
 
         $myListUser = My_wish_list::where('video_id', $id)->where('user_id', $request->user()->id)->first();
 
@@ -149,6 +149,7 @@ class VideoController extends Controller
             foreach ($genres as $k => $v) {
                 $genre_array[$k]['id'] = $v->id;
                 $genre_array[$k]['name'] = $v->name_en;
+                $genre_array[$k]['name_ar'] = $v->name_ar;
             }
 
         }
@@ -198,7 +199,7 @@ class VideoController extends Controller
 
         //getting genres of that specific video
         $genre_id = Videogenre::select('genre_id')->where('video_id', $id)->get();
-        $genres=Video_genre::select('id','name_en')->wherein('id',$genre_id)->get();
+        $genres=Video_genre::select('id','name_en','name_ar')->wherein('id',$genre_id)->get();
 
         //Getting Category_id of that specific video
         $category_id_collection = Video::select('category_id')->where('id', $id)->get()->first();
@@ -241,6 +242,7 @@ class VideoController extends Controller
             foreach ($genres as $k => $v) {
                 $genre_array[$k]['id'] = $v->id;
                 $genre_array[$k]['name'] = $v->name_en;
+                $genre_array[$k]['name_ar'] = $v->name_ar;
             }
 
         }
