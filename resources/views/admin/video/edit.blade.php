@@ -105,16 +105,28 @@
                                         @endif
 
 
-                                          @error('Category_id')
-                                          <small class="errorTxt7"></small>
-                                          <span class="invalid-feedback" role="alert">
-                                          <strong class="error">{{ $message }}</strong>
-                                          </span>
-                                          @enderror
-                                         </select>
-                                         </div>
 
-                                         <div name="hidden-panel1" id="hidden-panel1">
+                                         
+                                         <div class="input-field col s12">
+                                                    <p for="league_id"> Select League </p>
+                                                    <select name="league_id" id="league_id" class="form-control" style="width:250px" onclick="ShowHideDiv(this)">
+                                                        <option selected  value="{{$selected_league_name->id}}">{{$selected_league_name->name_en}}</option>
+                                                        @foreach ($leagues as $leagues)
+                                                            <option value="{{$leagues->id}}">{{ $leagues->name_en }}</option>
+                                                        @endforeach
+                                                    </select>
+                                                </div>
+                                
+                                                <div class="input-field col s12">
+                                                    <p for="season_id">Select Season:</p>
+                                                    <select name="season_id" class="select browser-default" style="width:250px">
+                                                      <option selected value="{{$selected_season_name->id}}"> {{$selected_season_name->name_en}}
+                                                      </option>
+                                                    </select>
+                                                </div>
+
+                                         
+                                         <div class="input-field col s12">
                                          <label><strong>Edit Genre * </strong></label><br/>
                                          <select class="form-control input-lg" multiple data-live-search="true" name="genre[]"  required>
                                          @foreach($all_genres as $videogenre )
@@ -130,7 +142,7 @@
                                           @enderror
                                          </div>
 
-                                            <div name="hidden-panel1" id="hidden-panel1">
+                                            <div class="input-field col s12">
                                                 <label><strong>Edit Popular Searches </strong></label><br/>
                                                 <select class="selectpicker" name="popularsearches">
                                                     @foreach($popular_searches as $popular_search )
@@ -140,7 +152,7 @@
                                             </div>
 
 
-                                         <div name="hidden-panel1" id="hidden-panel1">
+                                         <div class="input-field col s12">
                                          <label><strong>Edit club </strong></label><br/>
                                          <select class="selectpicker" multiple data-live-search="true" name="club[]">
                                          @foreach($club as $club)
@@ -149,7 +161,7 @@
                                          </select>
                                          </div>
 
-                                         <div name="hidden-panel1" id="hidden-panel1">
+                                         <div class="input-field col s12">
                                          <label><strong>Edit Player </strong></label><br/>
                                          <select class="selectpicker" multiple data-live-search="true" name="player[]">
                                          @foreach($player as $player )
@@ -180,6 +192,37 @@
     <script src={{ asset('app-assets/vendors/jquery-validation/jquery.validate.min.js') }}></script>
     <script src={{ asset('app-assets/js/scripts/form-file-uploads.js') }}></script>
     <script src={{ asset('app-assets/vendors/dropify/js/dropify.min.js') }}></script>
+
+     <script type="text/javascript">
+        jQuery(document).ready(function ()
+        {
+            jQuery('select[name="league_id"]').on('change',function(){
+                var league_id = jQuery(this).val();
+                console.log(league_id);
+                if(league_id == '0')
+                {
+
+                }
+                else
+                {
+                    jQuery.ajax({
+                        url :  '{{url("video-form")}}/seasons/'+league_id,
+                        type : "GET",
+                        dataType : "json",
+                        success:function(data)
+                        {
+                            console.log(data);
+                            jQuery('select[name="season_id"]').empty();
+                            jQuery.each(data, function(key,value){
+                                $('select[name="season_id"]').append('<option value="'+ key +'">'+ value +'</option>');
+                            });
+                        }
+                    });
+                }
+            });
+        });
+    </script>
+
 
     <script>
     /*

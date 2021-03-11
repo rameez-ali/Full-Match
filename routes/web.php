@@ -38,6 +38,7 @@ Route::group(['middleware' => ['auth']], function () {
 
     Route::resource('video-form','ProjectVideoViewController');
     Route::get('video-form/seasons/{id}','ProjectVideoViewController@getseasons');
+    // Route::get('video-form/{id}/seasons/{id}','ProjectVideoViewController@getseasonsedit');
 
     Route::post('video-form-search','VideoSearchController@search')->name('video-form-search.search');
     Route::get('video-form-search','ProjectVideoViewController@index')->name('video-form-search.search');
@@ -46,8 +47,8 @@ Route::group(['middleware' => ['auth']], function () {
 
 
     Route::resource('seasonpart-form','DropdownController');
-    Route::get('get-state-list','DropdownController@getStateList');
-    Route::get('get-city-list','DropdownController@getCityList');
+    // Route::get('get-state-list','DropdownController@getStateList');
+    // Route::get('get-city-list','DropdownController@getCityList');
 
     Route::resource('subscriptionplans','SubsPlanController');
     Route::resource('notification','NotificationController');
@@ -74,7 +75,6 @@ Route::group(['middleware' => ['auth']], function () {
 
 
     Route::post("addmore","SeasonPartSortingController@addMorePost");
-//    Route::resource("order","OrderController");
     Route::resource("home-page-manage","HomePageManageController");
     Route::post('discount/promo/verify','DiscountController@verify')->name('discount.promo.verify');
 
