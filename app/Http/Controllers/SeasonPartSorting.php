@@ -8,7 +8,7 @@ use App\Model\Video;
 use App\Model\League;
 use App\Model\Season;
 
-class DropdownController extends Controller
+class SeasonPartSorting extends Controller
 {
     function __construct() {
         $this->middleware('can:view-seasonpartsorting', ['only' => ['index', 'show']]);
@@ -17,28 +17,22 @@ class DropdownController extends Controller
     public function index()
         {
 
-          $countries=league::pluck('name_en','id');
-            return view('admin.seasonpart.index',compact('countries'));
+          $leagues=league::pluck('name_en','id');
+            return view('admin.seasonpart.index',compact('leagues'));
         }
 
-        public function getStateList(Request $request)
+        public function get_seasons(Request $request)
         {
 
-            $states=Season::select('name_en','id')->where("league_id",$request->country_id)->pluck("name_en","id");
-            return response()->json($states);
+            $seasons=Season::select('name_en','id')->where("league_id",$request->country_id)->pluck("name_en","id");
+            return response()->json($seasons);
         }
 
-        public function getCityList(Request $request)
-        {
+        public function get_leagues_seasons_videos(Request $request)
+        { 
 
-
-            // $cities=Video::select('video_title','id','video_sorting')->where("leagues_id",$request->state_id)->pluck("video_title","id","video_sorting");
-
-             $cities=Video::select('title_en','id','video_sorting')->where("leagues_id",$request->state_id)->get();
-            return response()->json($cities);
-
-
-            // return response()->json($cities);
+            $videos=Video::select('title_en','id','video_sorting')->where("season_id",$request->state_id)->get();
+            return response()->json($videos);
         }
 
 

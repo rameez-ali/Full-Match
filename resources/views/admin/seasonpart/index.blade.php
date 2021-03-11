@@ -16,42 +16,31 @@
                                         <div class="col s12">
                                             <h2></h2>
                                             <form method="post" action="{{route('video-form.store')}}" enctype="multipart/form-data">
-                            @csrf
+                                           
+                                           @csrf
 
+                                         <div class="form-group">
+                                         <select id="country" name="category_id"  >
+                                         <option value="" selected disabled>Select League</option>
+                                         @foreach($leagues as $key => $country)
+                                          <option value="{{$key}}"> {{$country}}</option>
+                                         @endforeach
+                                         </select>
+                                         </div>
+                                      
+                                         <div>
+                                         <label for="title">Select Season:</label>
+                                         <select name=state class="browser-default custom-select" id="state" >
+                                         </select>
+                                         </div>
 
-
-
-
-
-
-
-                              <div class="form-group">
-
-                              <div >
-        <select id="country" name="category_id"  >
-        <option value="" selected disabled>Select League</option>
-         @foreach($countries as $key => $country)
-         <option value="{{$key}}"> {{$country}}</option>
-         @endforeach
-         </select>
-      </div>
-      <div >
-        <label for="title">Select Season:</label>
-        <select name=state class="browser-default custom-select" id="state" >
-        </select>
-      </div>
-
-      <div >
-        <label for="title">Select Season:</label>
-         <table class="striped" name="state[]">
-
-        </table>
-      </div>
-   </div>
-
-
-
-                        </form>
+                                         <div >
+                                         <label for="title">Select Season:</label>
+                                         <table class="striped" name="state[]">
+                                         </table>
+                                         </div>
+                                         </div>
+                                         </form>
 
                                         </div>
                                     </div>

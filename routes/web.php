@@ -46,9 +46,9 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('exportcsv/{id}', 'ProjectVideoViewController@exportcsv');
 
 
-    Route::resource('seasonpart-form','DropdownController');
-    // Route::get('get-state-list','DropdownController@getStateList');
-    // Route::get('get-city-list','DropdownController@getCityList');
+    Route::resource('seasonpart-form','SeasonPartSorting');
+    Route::get('get-state-list','SeasonPartSorting@get_seasons');
+    Route::get('get-city-list','SeasonPartSorting@get_leagues_seasons_videos');
 
     Route::resource('subscriptionplans','SubsPlanController');
     Route::resource('notification','NotificationController');
@@ -69,12 +69,12 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('adv_banner/{id}','ProjectAdvertisementViewController@destroy1');
 
 
-    Route::resource('my-form','SeasonPartSortingController');
-    Route::get("addmore","SeasonPartSortingController@addMore");
-    Route::post("addmore","SeasonPartSortingController@addMorePost");
+    // Route::resource('my-form','SeasonPartSortingController');
+    // Route::get("addmore","SeasonPartSortingController@addMore");
+    // Route::post("addmore","SeasonPartSortingController@addMorePost");
 
 
-    Route::post("addmore","SeasonPartSortingController@addMorePost");
+    // Route::post("addmore","SeasonPartSortingController@addMorePost");
     Route::resource("home-page-manage","HomePageManageController");
     Route::post('discount/promo/verify','DiscountController@verify')->name('discount.promo.verify');
 
