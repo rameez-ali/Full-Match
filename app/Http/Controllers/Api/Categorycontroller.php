@@ -140,7 +140,7 @@ class CategoryController extends Controller
 
         if($genre_id!=null)
         {
-            $genres=Video_genre::select("id","name_en","name_ar")->get();
+            $genres=Video_genre::select("id","name_en","name_ar")->orderBy('genre_sorting')->get();
             $obj->category_genre = $genres;
 
         }

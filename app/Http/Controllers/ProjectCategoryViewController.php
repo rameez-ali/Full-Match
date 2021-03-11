@@ -6,6 +6,9 @@ use Illuminate\Http\Request;
 use App\Model\Category;
 use App\Model\Video_genre;
 use App\Model\Category_genre;
+use App\Model\Video;
+use App\Model\Slider;
+use App\Model\Adv_banner;
 use Bouncer;
 use DB;
 

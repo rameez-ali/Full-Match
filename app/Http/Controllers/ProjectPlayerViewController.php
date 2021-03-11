@@ -112,6 +112,13 @@ class ProjectPlayerViewController extends Controller
      */
     public function update(Request $request, $id)
     {
+         $request->validate([
+            'name_en'     => 'required',
+            'name_ar'     => 'required',
+            'description_en'     => 'required',
+            'description_ar'     => 'required'
+        ]);
+
         $image_name1 = $request->hidden_image1;
         $image_name2 = $request->hidden_image2;
 

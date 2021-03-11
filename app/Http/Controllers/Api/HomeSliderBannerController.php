@@ -149,7 +149,7 @@ class HomeSliderBannerController extends Controller
         $home_banner_array = array();
         $new_adding_video = array();
 
-        $category=Category::select('id','name_en' ,'name_ar')->get();
+        $category=Category::select('id','name_en' ,'name_ar')->orderBy('category_sorting')->get();
         $obj->Categories=$category;
 
         $category_id=null;

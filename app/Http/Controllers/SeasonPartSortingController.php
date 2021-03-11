@@ -15,6 +15,11 @@ use DB;
 
 class SeasonpartSortingController extends Controller
 {
+
+  function __construct() {
+        $this->middleware('can:view-seasonpartsorting', ['only' => ['index', 'show']]);
+    }
+
    public function index()
     {
        echo  $data['leagues'] = Leagues::get(["league_name","id"]);
