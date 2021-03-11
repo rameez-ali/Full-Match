@@ -18,7 +18,7 @@
                     [  'icon' => 'ondemand_video' , 'label'  => 'Video' , 'route' => 'video-form.index' , 'children' => [], 'permission' => 'view-video' ],
                     [  'icon' => 'slideshow' , 'label'  => 'Slider' , 'route' => 'slider-form.index' , 'children' => [], 'permission' => 'view-slider' ],
                     [  'icon' => 'announcement' , 'label'  => 'Advertisement Banner' , 'route' => 'banner-form.index' , 'children' => [], 'permission' => 'view-advbanner' ],
-                    [  'icon' => 'ac_unit' , 'label'  => 'Season Part Sorting' , 'route' => 'seasonpart-form.index' , 'children' => [], 'permission' => 'view-seasonpart' ],
+                    [  'icon' => 'ac_unit' , 'label'  => 'Season Part Sorting' , 'route' => 'seasonpart-form.index' , 'children' => [], 'permission' => 'view-seasonpartsorting' ],
                     [  'icon' => 'settings' , 'label'  => __('customer.homepgmanage.homepg') , 'route' => 'home-page-manage.index' , 'children' => [], 'permission' => 'view-homepg-manage' ],
                     [  'icon' => 'notifications_active' , 'label'  => __('customer.notification.notification') , 'route' => 'notification.index' , 'children' => [], 'permission' => 'view-notify' ],
                     [  'icon' => 'people' , 'label'  => __('customer.syst_users') , 'route' => 'user.index' , 'children' => [], 'permission' => 'view-system-user' ],

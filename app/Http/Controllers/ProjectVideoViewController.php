@@ -85,6 +85,12 @@ class ProjectVideoViewController extends Controller
         return json_encode($season);
     }
 
+    public function getseasonsedit($id)
+    {
+        $season=Season::select('name_en','id')->where("league_id",$id)->pluck("name_en","id");
+        return json_encode($season);
+    }
+
     /**
      * Store a newly created resource in storage.
      *
@@ -416,8 +422,19 @@ class ProjectVideoViewController extends Controller
         //Getting Category id assoicated with this video
         $select_category_id = Video::select('category_id')->where('id', '=', $id )->first();
 
+        //Getting League which is assocaited with video
+        $selected_league_id = Video::where('id', '=', $id )->first();
+        $selected_league_name = League::select('id','name_en')->where('id', '=', $selected_league_id->league_id )->first();
+   
+        //Getting Season of that league which is assocaited with video
+        $selected_season_id = Video::where('id', '=', $id )->first();
+        $selected_season_name = Season::select('id','name_en')->where('id', '=', $selected_season_id->season_id )->first();
 
-        return view('admin.video.edit',compact('all_genres','category','select_category_id','clubs','club','players','player','video','selected_ids','selected_ids1','selected_ids3','video_genres','selected_popular_search','popular_searches'));
+
+        $leagues=League::where('id','!=', $selected_league_id->league_id)->get();
+
+
+        return view('admin.video.edit',compact('all_genres','category','select_category_id','clubs','club','players','player','video','selected_ids','selected_ids1','selected_ids3','video_genres','selected_popular_search','popular_searches','leagues','selected_season_name','selected_league_name'));
     }
 
     /**
@@ -486,6 +503,8 @@ class ProjectVideoViewController extends Controller
 
         $form_data3 = array(
             'category_id'    =>   $request->Category_id,
+            'league_id'     =>   $request->league_id,
+            'season_id'     =>   $request->season_id,
             'title_en'    =>   $request->title_en,
             'title_ar'    =>   $request->title_ar,
             'description_en'     =>   $request->description_en,
