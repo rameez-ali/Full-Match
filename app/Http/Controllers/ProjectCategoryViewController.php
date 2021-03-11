@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Model\Adv_banner;
+use App\Model\Slider;
+use App\Model\Video;
 use Illuminate\Http\Request;
 use App\Model\Category;
 use App\Model\Video_genre;

@@ -71,7 +71,7 @@
                                            </div>
 
                                             <div class="input-field col s12">
-                                                <p for="category_image">Edit Homepage Selection </p>
+                                                <p for="category_image">Show On Home page </p>
                                                 <select class="homepage" name="homepage">
                                                     @foreach($homepages as $homepage )
                                                         <option value="{{$homepage->id}}" {{$homepage->id == $select_homepage_id->homepage ? 'selected' : ''}} >{{$homepage->status}}</option>
