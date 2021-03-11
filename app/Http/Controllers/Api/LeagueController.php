@@ -79,6 +79,7 @@ class LeagueController extends Controller
                 $league_detail[$k]['image'] = $banner;
                 $league_detail[$k]['description'] = $v->description_en;
                 $league_detail[$k]['description_ar'] = $v->description_ar;
+                $league_detail[$k]['promo_link'] = $v->league_promo_video;
 
             }
             $obj->detail = $league_detail;
