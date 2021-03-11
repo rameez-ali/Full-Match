@@ -104,26 +104,52 @@
                                             </div>
                                         @endif
 
+                                    
 
-
-                                         
+                                         @if($selected_league_name!=null)
                                          <div class="input-field col s12">
                                                     <p for="league_id"> Select League </p>
-                                                    <select name="league_id" id="league_id" class="form-control" style="width:250px" onclick="ShowHideDiv(this)">
-                                                        <option selected  value="{{$selected_league_name->id}}">{{$selected_league_name->name_en}}</option>
+                                                    <select name="league_id" id="league_id" class="select browser-default" style="width:250px" onclick="ShowHideDiv(this)">
+                                                        <option selected  value="{{$selected_league_name->id}}">
+                                                        {{$selected_league_name->name_en}}
+                                                        </option>
+                                                        <option value="00">---Select League---</option>
                                                         @foreach ($leagues as $leagues)
                                                             <option value="{{$leagues->id}}">{{ $leagues->name_en }}</option>
                                                         @endforeach
                                                     </select>
                                                 </div>
+
+                                                 <div class="input-field col s12">
+                                                    <p for="season_id">Select Season:</p>
+                                                    <select name="season_id" class="select browser-default" style="width:250px">
+                                                      @if($selected_season_name!=null)
+                                                      <option selected value="{{$selected_season_name->id}}"> {{$selected_season_name->name_en}}
+                                                        </option>
+                                                      @endif
+                                                    
+                                                    </select>
+                                                </div>
+                                                @endif
+                                              
+                                              @if($selected_league_name==null)
+                                                <div class="input-field col s12">
+                                                    <p for="league_id"> Select League </p>
+                                                    <select name="league_id" id="league_id" class="form-control" style="width:10px" onclick="ShowHideDiv(this)">
+                                                        <option>---Select League---</option>
+                                                        @foreach ($leagues as $leagues)
+                                                            <option value="{{$leagues->id}}">{{ $leagues->name_en }}</option>
+                                                        @endforeach
+                                                    </select>
+                                                </div>
+
                                 
                                                 <div class="input-field col s12">
                                                     <p for="season_id">Select Season:</p>
                                                     <select name="season_id" class="select browser-default" style="width:250px">
-                                                      <option selected value="{{$selected_season_name->id}}"> {{$selected_season_name->name_en}}
-                                                      </option>
                                                     </select>
                                                 </div>
+                                                @endif
 
                                          
                                          <div class="input-field col s12">
