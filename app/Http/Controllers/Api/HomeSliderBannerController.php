@@ -90,7 +90,6 @@ class HomeSliderBannerController extends Controller
         //getting video id of banner_id of home
         $banner = Adv_banner::where('homepage',1)
             ->orderBy('created_at','desc')
-            ->first()
             ->get();
 
         if($banner!=null){
@@ -181,7 +180,6 @@ class HomeSliderBannerController extends Controller
         //getting video id of banner_id of home
         $banner = Adv_banner::where('homepage',1)
             ->orderBy('created_at','desc')
-            ->first()
             ->get();
 
         if($banner!=null){

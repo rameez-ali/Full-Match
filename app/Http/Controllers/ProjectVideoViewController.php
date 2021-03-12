@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Model\Continue_watch;
 use App\Model\DeviceToken;
 use App\Model\My_wish_list;
 use Illuminate\Http\Request;
@@ -425,7 +426,7 @@ class ProjectVideoViewController extends Controller
         //Getting League which is assocaited with video
         $selected_league_id = Video::where('id', '=', $id )->first();
         $selected_league_name = League::select('id','name_en')->where('id', '=', $selected_league_id->league_id )->first();
-   
+
         //Getting Season of that league which is assocaited with video
         $selected_season_id = Video::where('id', '=', $id )->first();
         $selected_season_name = Season::select('id','name_en')->where('id', '=', $selected_season_id->season_id )->first();
