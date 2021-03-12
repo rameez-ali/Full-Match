@@ -520,17 +520,15 @@ class ProjectVideoViewController extends Controller
 
         Video::whereId($id)->update($form_data3);
 
+
         if($request->club!=null){
             Videoclub::where('Video_id', $id)->forceDelete();
             foreach($request->club as $club){
-                $id = Video::orderBy('id', 'DESC')->value('id');
                 $form_data7 = array(
                     'Club_id'     =>   $club,
                     'Video_id'     =>  $id,
                     'category_id'  =>  $request->Category_id
                 );
-
-
 
                 $videoclub=Videoclub::create($form_data7);
 
@@ -542,7 +540,6 @@ class ProjectVideoViewController extends Controller
         if($request->player!=null){
             Videoplayer::where('Video_id', $id)->forceDelete();
             foreach($request->player as $player){
-                $id = Video::orderBy('id', 'DESC')->value('id');
                 $form_data8 = array(
                     'Player_id'     =>   $player,
                     'Video_id'     =>  $id,
@@ -556,7 +553,6 @@ class ProjectVideoViewController extends Controller
 
         if($request->genre!=null){
             foreach ($request->genre as $genre) {
-                $id = Video::orderBy('id', 'DESC')->value('id');
                 Videogenre::where('Video_id', $id)->forceDelete();
                 $form_data9 = array(
                     'video_id' => $id,
