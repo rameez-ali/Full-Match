@@ -104,7 +104,7 @@
                                             </div>
                                         @endif
 
-                                    
+
 
                                          @if($selected_league_name!=null)
                                          <div class="input-field col s12">
@@ -127,23 +127,23 @@
                                                       <option selected value="{{$selected_season_name->id}}"> {{$selected_season_name->name_en}}
                                                         </option>
                                                       @endif
-                                                    
+
                                                     </select>
                                                 </div>
                                                 @endif
-                                              
+
                                               @if($selected_league_name==null)
                                                 <div class="input-field col s12">
                                                     <p for="league_id"> Select League </p>
                                                     <select name="league_id" id="league_id" class="form-control" style="width:10px" onclick="ShowHideDiv(this)">
-                                                        <option>---Select League---</option>
+                                                        <option value="" >---Select League---</option>
                                                         @foreach ($leagues as $leagues)
                                                             <option value="{{$leagues->id}}">{{ $leagues->name_en }}</option>
                                                         @endforeach
                                                     </select>
                                                 </div>
 
-                                
+
                                                 <div class="input-field col s12">
                                                     <p for="season_id">Select Season:</p>
                                                     <select name="season_id" class="select browser-default" style="width:250px">
@@ -151,7 +151,7 @@
                                                 </div>
                                                 @endif
 
-                                         
+
                                          <div class="input-field col s12">
                                          <label><strong>Edit Genre * </strong></label><br/>
                                          <select class="form-control input-lg" multiple data-live-search="true" name="genre[]"  required>
