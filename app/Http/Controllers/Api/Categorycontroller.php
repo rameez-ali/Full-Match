@@ -80,8 +80,9 @@ class CategoryController extends Controller
         $slider_id = Slider::select("id")->where('category_id',$id)->first();
 
         //getting banner of that specific category
+        $home="NULL";
         $banner = Adv_banner::where('category_id',$id)
-                    ->where('genre_id','=',0)
+                    ->where('genre_id','=',$home)
                     ->get();
 
         //getting genres id of that specific categories
