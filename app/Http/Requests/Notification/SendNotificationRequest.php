@@ -78,7 +78,6 @@ class SendNotificationRequest extends FormRequest
         $result = curl_exec($ch);
         curl_close($ch);
         // print_r($result);
-
         return true;
     }
 }
