@@ -27,7 +27,7 @@ class UpdatePageRequest extends FormRequest
     {
         return [
             'name' => ['required', 'string'],
-            'slug' => ['required', 'string'],
+//            'slug' => ['required', 'string'],
             'content' => ['required', 'string'],
         ];
     }
@@ -41,7 +41,7 @@ class UpdatePageRequest extends FormRequest
         $cmspage = Page::find($this->id);
 
         $cmspage->name = $params['name'];
-        $cmspage->slug = $params['slug'];
+//        $cmspage->slug = $params['slug'];
         $cmspage->content = $params['content'];
         $cmspage->content_ar = $params['content_ar'];
 
