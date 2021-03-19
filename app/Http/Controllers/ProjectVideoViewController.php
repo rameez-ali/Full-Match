@@ -300,7 +300,9 @@ class ProjectVideoViewController extends Controller
                 // $tokenList[] = 'f0xnoyCn90orlDK8SLGX8N:APA91bHl1l8tO_GClxgjtjsXHbO_5viCxCKJ3dmLcYbzcCcE82wxymm3IVJV9dc2OpIRkfTWBM3frUQ5Q2ZdPi6LVtSnbPSp0I7Rk4DmSaagRfmkhnQ_uwHBH3i8S8atdtk4TsTOSb5H';
                 $notification = [
                     'title' => $request->title_en,
+                    'title_ar' => $request->title_ar,
                     'text'  => $request->description_en,
+                    'text_ar'  => $request->description_ar,
                     'type'  => 1,
                     'sound' => true,
                 ];
