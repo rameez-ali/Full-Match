@@ -72,21 +72,36 @@ class ContinueWatchedController extends Controller
 
          $video_id=$request->video_id;
 
-         $videodetails = Video::where('id',$video_id)->get()->first();
+         $videodetails = Video::where('id',$video_id)->first();
 
-         $Continue_watch = new Continue_watch;
+         $watched_video = Continue_watch::where('video_id',$video_id)->where('user_id',$request->user_id)->first();
 
-         $Continue_watch->user_id=$request->user_id;
-         $Continue_watch->video_id=$request->video_id;
-         $Continue_watch->name=$videodetails->title_en;
-         $Continue_watch->image=$videodetails->video_img;
-         $Continue_watch->video_link=$videodetails->video_link;
-         $Continue_watch->duration=$request->duration;
-         $Continue_watch->position=$request->position;
+            if (isset($watched_video)){
 
+//                $watched_video->user_id=$request->user_id;
+//                $watched_video->video_id=$request->video_id;
+                $watched_video->name=$videodetails->title_en;
+                $watched_video->image=$videodetails->video_img;
+                $watched_video->video_link=$videodetails->video_link;
+                $watched_video->duration=$request->duration;
+                $watched_video->position=$request->position;
 
-         $result=$Continue_watch->save();
+                $result = $watched_video->save();
 
+            }else{
+
+                $Continue_watch = new Continue_watch;
+
+                $Continue_watch->user_id=$request->user_id;
+                $Continue_watch->video_id=$request->video_id;
+                $Continue_watch->name=$videodetails->title_en;
+                $Continue_watch->image=$videodetails->video_img;
+                $Continue_watch->video_link=$videodetails->video_link;
+                $Continue_watch->duration=$request->duration;
+                $Continue_watch->position=$request->position;
+
+                $result = $Continue_watch->save();
+            }
         }
 
          if($result){
