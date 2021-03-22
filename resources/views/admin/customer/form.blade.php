@@ -151,11 +151,11 @@
                     },
                     password: {
                         required: true,
-                        minlength: 8
+                        minlength: 6
                     },
                     cpassword: {
                         required: true,
-                        minlength: 8,
+                        minlength: 6,
                         equalTo: "#password"
                     },
                     phone: {
