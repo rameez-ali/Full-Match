@@ -37,25 +37,26 @@ class VideoSearchController extends Controller
             ->get();
 
 
-        $players = Player::where('name_en', $searchword->q)
+        $players = Player::select('id')->where('name_en', $searchword->q)
             ->orwhere('name_ar', $searchword->q)
             ->orWhere('name_en', 'like', '%' . $searchword->q. '%')
             ->orWhere('name_ar', 'like', '%' . $searchword->q. '%')
             ->get();
 
 
-        if(count($video)){
 
+
+        if(count($video) > 0){
             return view('admin.video.index', compact('video'));
-
         }
-        else if($clubs!=null){
-            $video_id = Videoclub::select('Video_id')->wherein('Club_id',$clubs)->get();
+        else if(count($players) > 0){
+            $video_id = Videoplayer::select('Video_id')->wherein('Player_id',$players)->get();
             $video=Video::wherein('id',$video_id)->get();
             return view('admin.video.index', compact('video'));
         }
-        else if($players!=null){
-            $video_id = Videoplayer::select('Video_id')->wherein('Player_id',$players)->get();
+
+        else if (count($clubs) > 0){
+            $video_id = Videoclub::select('Video_id')->wherein('Club_id',$clubs)->get();
             $video=Video::wherein('id',$video_id)->get();
             return view('admin.video.index', compact('video'));
         }
