@@ -95,6 +95,11 @@ class ApiAuthController extends Controller
         ]);
         $credentials = request(['email', 'password']);
 
+        $trashuser = user::where('email',$credentials['email'])->withTrashed()->first();
+        if (isset($trashuser) && $trashuser->deleted_at != null){
+            return response()->json(['success' => false, 'status' => $this->HTTP_FORBIDDEN, 'message' => ' User is not registered .']);
+        }
+
         $array = array();
 
         if(!Auth::attempt($credentials))
@@ -226,6 +231,11 @@ class ApiAuthController extends Controller
             'device_type' => 'required',
             'token' => 'required',
         ]);
+        $trashuser = user::where('email',$request->email)->withTrashed()->first();
+        if (isset($trashuser) && $trashuser->deleted_at != null){
+            return response()->json(['success' => false, 'status' => $this->HTTP_FORBIDDEN, 'message' => ' User is not registered .']);
+        }
+
         $array = array();
         if (User::where('email', $request->email)->first() != null) {
             $user = User::where('email', $request->email)->first();
@@ -299,6 +309,10 @@ class ApiAuthController extends Controller
             ], 403);
         }
 
+        $trashuser = user::where('email',$request->email)->withTrashed()->first();
+        if (isset($trashuser) && $trashuser->deleted_at != null){
+            return response()->json(['success' => false, 'status' => $this->HTTP_FORBIDDEN, 'message' => ' User is not registered .']);
+        }
         $array = array();
         if (User::where('provider_id', $request->provider_id)->first() != null) {
             $user = User::where('provider_id', $request->provider_id)->first();
