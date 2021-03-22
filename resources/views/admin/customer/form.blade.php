@@ -38,11 +38,11 @@
 
                                                     </div>
                                                     <div class="input-field col s12">
-                                                        <label for="cemail">{{ __('customer.customer.email') }}*</label>
-                                                        <input id="cemail" value="{{ old('email',$customer->email) }}" type="email" name="email" @if($edit) disabled @endif data-error=".errorTxt2">
+                                                        <label for="email">{{ __('customer.customer.email') }}*</label>
+                                                        <input id="email" value="{{ old('email',$customer->email) }}" type="email" name="email" @if($edit) disabled @endif data-error=".errorTxt2">
                                                         <small class="errorTxt2"></small>
 
-                                                            @error('cemail')
+                                                            @error('email')
                                                             <span class="invalid-feedback" role="alert">
                                                                 <strong>{{ $message }}</strong>
                                                             </span>
@@ -50,11 +50,11 @@
 
                                                     </div>
                                                     <div class="input-field col s12">
-                                                        <label for="uphone">{{ __('customer.customer.mobile') }}</label>
-                                                        <input id="uphone" value="{{ old('phone',$customer->user->phone) }}" name="phone" type="number" data-error=".errorTxt5">
+                                                        <label for="phone">{{ __('customer.customer.mobile') }}</label>
+                                                        <input id="phone" value="{{ old('phone',$customer->user->phone) }}" name="phone" type="number" data-error=".errorTxt5">
                                                         <small class="errorTxt5"></small>
 
-                                                            @error('uphone')
+                                                            @error('phone')
                                                             <span class="invalid-feedback" role="alert">
                                                                     <strong>{{ $message }}</strong>
                                                                 </span>
@@ -151,11 +151,11 @@
                     },
                     password: {
                         required: true,
-                        minlength: 8
+                        minlength: 6
                     },
                     cpassword: {
                         required: true,
-                        minlength: 8,
+                        minlength: 6,
                         equalTo: "#password"
                     },
                     phone: {

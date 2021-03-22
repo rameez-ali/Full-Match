@@ -141,7 +141,7 @@ class SearchController extends Controller
                 $popular_search_video[$k]['name'] = $v->title_en;
                 $popular_search_video[$k]['name_ar'] = $v->title_ar;
                 $popular_search_video[$k]['description'] = $v->description_en;
-                $popular_search_video[$k]['description'] = $v->description_ar;
+                $popular_search_video[$k]['description_ar'] = $v->description_ar;
                 $popular_search_video[$k]['logo'] = $banner;
                 $popular_search_video[$k]['image'] = $image;
                 $popular_search_video[$k]['route'] = "video/".$v->id;

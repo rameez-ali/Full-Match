@@ -80,9 +80,10 @@ class CategoryController extends Controller
         $slider_id = Slider::select("id")->where('category_id',$id)->first();
 
         //getting banner of that specific category
-       
+
         $banner = Adv_banner::where('category_id',$id)
                     ->where('genre_id','=',NULL)
+                    ->where('homepage',1)
                     ->get();
 
         //getting genres id of that specific categories
@@ -126,7 +127,7 @@ class CategoryController extends Controller
 
         if($banner!=null){
         foreach ($banner as $k => $v) {
-           
+
             $video_banner = str_replace('\\', '/', asset('app-assets/images/advbanner/' . $v->video_banner));
 
             $banner_array[$k]['id'] = $v->id;
@@ -257,11 +258,12 @@ class CategoryController extends Controller
         //getting banner of that specific category and genre both
         $banner = Adv_banner::where('category_id',$category_id)
             ->where('genre_id','=',$genre_ids)
+            ->where('homepage',1)
             ->get();
 
         if($banner!=null){
         foreach ($banner as $k => $v) {
-           
+
             $video_banner = str_replace('\\', '/', asset('app-assets/images/advbanner/' . $v->video_banner));
 
             $banner_array[$k]['id'] = $v->id;

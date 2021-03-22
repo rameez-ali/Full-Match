@@ -158,7 +158,7 @@ class VideoController extends Controller
 
         if(isset($category_id)) {
 
-            $videos = Video::orderBy('video_sorting')->where('category_id', $category_id)->orderBy('video_sorting')->get();
+            $videos = Video::orderBy('video_sorting')->where('category_id', $category_id)->where('id','!=', $id)->orderBy('video_sorting')->get();
 
             foreach ($videos as $k => $v) {
 
@@ -250,7 +250,7 @@ class VideoController extends Controller
 
         if(isset($category_id)) {
 
-            $videos = Video::orderBy('video_sorting')->where('category_id', $category_id)->orderBy('video_sorting')->get();
+            $videos = Video::orderBy('video_sorting')->where('category_id', $category_id)->where('id','!=', $id)->orderBy('video_sorting')->get();
 
             foreach ($videos as $k => $v) {
 
