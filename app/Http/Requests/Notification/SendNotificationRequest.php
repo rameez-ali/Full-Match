@@ -48,9 +48,7 @@ class SendNotificationRequest extends FormRequest
         // $tokenList[] = 'f0xnoyCn90orlDK8SLGX8N:APA91bHl1l8tO_GClxgjtjsXHbO_5viCxCKJ3dmLcYbzcCcE82wxymm3IVJV9dc2OpIRkfTWBM3frUQ5Q2ZdPi6LVtSnbPSp0I7Rk4DmSaagRfmkhnQ_uwHBH3i8S8atdtk4TsTOSb5H';
         $notification = [
             'title' => $notification->notify_title,
-            'title_ar' => $notification->notify_title_ar,
             'text'  => $notification->notify_text,
-            'text_ar'  => $notification->notify_text_ar,
             'type'  => $notification->notify_type,
             'sound' => true,
         ];
