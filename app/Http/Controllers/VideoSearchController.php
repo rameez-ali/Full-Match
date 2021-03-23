@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Model\Category;
 use App\Model\Video;
+use App\Model\Videocategory;
 use App\Model\League;
 use App\Model\Video_genre;
 use App\Model\Videogenre;
@@ -43,6 +44,12 @@ class VideoSearchController extends Controller
             ->orWhere('name_ar', 'like', '%' . $searchword->q. '%')
             ->get();
 
+        $categories = Category::select('id')->where('name_en', $searchword->q)
+            ->orwhere('name_ar', $searchword->q)
+            ->orWhere('name_en', 'like', '%' . $searchword->q. '%')
+            ->orWhere('name_ar', 'like', '%' . $searchword->q. '%')
+            ->get();
+
 
 
 
@@ -57,6 +64,12 @@ class VideoSearchController extends Controller
 
         else if (count($clubs) > 0){
             $video_id = Videoclub::select('Video_id')->wherein('Club_id',$clubs)->get();
+            $video=Video::wherein('id',$video_id)->get();
+            return view('admin.video.index', compact('video'));
+        }
+
+        else if (count($categories) > 0){
+            $video_id = Videocategory::select('video_id')->wherein('category_id',$categories)->get();
             $video=Video::wherein('id',$video_id)->get();
             return view('admin.video.index', compact('video'));
         }

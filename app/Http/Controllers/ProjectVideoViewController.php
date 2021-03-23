@@ -7,6 +7,7 @@ use App\Model\DeviceToken;
 use App\Model\My_wish_list;
 use Illuminate\Http\Request;
 use App\Model\Category;
+use App\Model\Videocategory;
 use App\Model\Video;
 use App\Model\League;
 use App\Model\Leaguecategory;
@@ -153,6 +154,16 @@ class ProjectVideoViewController extends Controller
             Video::create($form_data2);
 
 
+            $last_video_id = Video::orderBy('id', 'DESC')->value('id');
+
+            $video_categories = array(
+                'video_id'    =>   $last_video_id,
+                'category_id'     =>   $request->Category_id
+            );
+
+            Videocategory::create($video_categories);
+
+
             if($request->club!=null){
                 foreach($request->club as $club){
                     $id = Video::orderBy('id', 'DESC')->value('id');
@@ -239,6 +250,15 @@ class ProjectVideoViewController extends Controller
 
             );
             Video::create($form_data2);
+
+            $last_video_id = Video::orderBy('id', 'DESC')->value('id');
+
+            $video_categories = array(
+                'video_id'    =>   $last_video_id,
+                'category_id'     =>   $request->Category_id
+            );
+
+            Videocategory::create($video_categories);
 
 
             if($request->club!=null){
@@ -522,6 +542,15 @@ class ProjectVideoViewController extends Controller
         );
 
         Video::whereId($id)->update($form_data3);
+
+        $last_video_id = Video::orderBy('id', 'DESC')->value('id');
+
+        $video_categories = array(
+            'video_id'    =>   $last_video_id,
+            'category_id'     =>   $request->Category_id
+        );
+
+        Videocategory::where('video_id',$id)->update($video_categories);
 
 
         if($request->club!=null){
