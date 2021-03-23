@@ -99,7 +99,7 @@ class HomeSliderBannerController extends Controller
 
             $home_banner_array[$k]['id'] = $v->id;
             $home_banner_array[$k]['name'] = $v->title_en;
-            $home_banner_array[$k]['name_ar'] = $v->title_en;
+            $home_banner_array[$k]['name_ar'] = $v->title_ar;
             $home_banner_array[$k]['image'] = $video_banner;
             $home_banner_array[$k]['link'] = $v->video_link;
             $home_banner_array[$k]['route'] = "video/".$v->id;
@@ -189,7 +189,7 @@ class HomeSliderBannerController extends Controller
 
                 $home_banner_array[$k]['id'] = $v->id;
                 $home_banner_array[$k]['name'] = $v->title_en;
-                $home_banner_array[$k]['name_ar'] = $v->title_en;
+                $home_banner_array[$k]['name_ar'] = $v->title_ar;
                 $home_banner_array[$k]['image'] = $video_banner;
                 $home_banner_array[$k]['link'] = $v->video_link;
                 $home_banner_array[$k]['route'] = "video/".$v->id;
@@ -207,7 +207,7 @@ class HomeSliderBannerController extends Controller
 
             $new_adding_video[$k]['id'] = $v->id;
             $new_adding_video[$k]['name'] = $v->title_en;
-            $new_adding_video[$k]['name_ar'] = $v->title_en;
+            $new_adding_video[$k]['name_ar'] = $v->title_ar;
             $new_adding_video[$k]['description'] = $v->description_en;
             $new_adding_video[$k]['description_en'] = $v->description_ar;
             $new_adding_video[$k]['image'] = $video_img;
