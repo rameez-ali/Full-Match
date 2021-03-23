@@ -120,7 +120,7 @@ class HomeSliderBannerController extends Controller
 
             $new_adding_video[$k]['id'] = $v->id;
             $new_adding_video[$k]['name'] = $v->title_en;
-            $new_adding_video[$k]['name_ar'] = $v->title_en;
+            $new_adding_video[$k]['name_ar'] = $v->title_ar;
             $new_adding_video[$k]['description'] = $v->description_en;
             $new_adding_video[$k]['description_ar'] = $v->description_ar;
             $new_adding_video[$k]['image'] = $video_img;
