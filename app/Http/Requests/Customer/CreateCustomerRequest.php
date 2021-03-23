@@ -4,6 +4,7 @@ namespace App\Http\Requests\Customer;
 
 use App\customer;
 use App\User;
+use Carbon\Carbon;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Hash;
 
@@ -46,6 +47,7 @@ class CreateCustomerRequest extends FormRequest
         $user->email = $params['email'];
         $user->phone = $params['phone'];
         $user->password = Hash::make($params['password']);
+        $user->email_verified_at = Carbon::now();
         $user->is_customer = 1;
 
         $user->save();
