@@ -34,11 +34,11 @@ class SendNotificationRequest extends FormRequest
         $notification = Notification::find($this->id); // notify type 1 for all , 2 for guest , 3 for register
 
          if ($notification['notify_type'] == 1 ){
-             $tokenList = DeviceToken::with('checknotify')->wherehas('checknotify', function($query){ $query->where('notify_status', 1); })->pluck('token')->toArray();
+             $tokenList = DeviceToken::where('notify_status', 1)->pluck('token')->toArray();
          }elseif ($notification['notify_type'] == 2){
              $tokenList = DeviceToken::where('user_id' , null)->pluck('token')->toArray();
          }elseif ($notification['notify_type'] == 3){
-             $tokenList = DeviceToken::with('checknotify')->wherehas('checknotify', function($query){ $query->where('notify_status', 1); })->where('user_id' , '!=',null )->pluck('token')->toArray();
+             $tokenList = DeviceToken::where('notify_status', 1)->where('user_id' , '!=',null )->pluck('token')->toArray();
          }
 
 //        $tokenList = DeviceToken::pluck('token')->toArray();
