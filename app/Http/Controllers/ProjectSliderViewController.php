@@ -172,14 +172,14 @@ class ProjectSliderViewController extends Controller
             //Getting All Videos associated with slider when its a home slider
             if($videos1['category_id']==null)
             {
-                $video1 =  DB::table('videos')
-                    ->select('videos.id','videos.title_en')
+                $video1 =  Video::
+                      select('videos.id','videos.title_en')
                     ->get();
             }
             else{
                 //Getting All Videos associated with slider when its a category slider
-                $video1 =  DB::table('videos')
-                    ->where('category_id', '=', $videos1)
+                $video1 =  Video::
+                      where('category_id', '=', $videos1)
                     ->select('videos.id','videos.title_en')
                     ->get();
             }
