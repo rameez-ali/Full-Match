@@ -123,10 +123,9 @@
                                                  <div class="input-field col s12">
                                                     <p for="season_id">Select Season:</p>
                                                     <select name="season_id" class="select browser-default" style="width:250px">
-                                                      @if($selected_season_name!=null)
-                                                      <option selected value="{{$selected_season_name->id}}"> {{$selected_season_name->name_en}}
-                                                        </option>
-                                                      @endif
+                                                       @foreach($seasons as $season )
+                                                        <option value="{{$season->id}}" {{$season->id == $selected_season_id->season_id ? 'selected' : ''}} >{{$season->name_en}}</option>
+                                                       @endforeach
 
                                                     </select>
                                                 </div>

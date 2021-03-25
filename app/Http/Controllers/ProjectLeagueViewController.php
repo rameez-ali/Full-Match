@@ -210,15 +210,24 @@ class ProjectLeagueViewController extends Controller
 
 
         if($request->addmore!=null) {
-            Season::where('league_id', $id)->forceDelete();
             foreach ($request->addmore as $addmore) {
-                $newSeason = new Season();
-                $newSeason->league_id = $id;
-                $newSeason->name_en = $addmore['name_en'];
-                $newSeason->video_link = $addmore['video_link'];
-                $newSeason->save();
+            
+            $season_data = array(
+            'league_id'       =>   $id,
+            'name_en'       =>   $addmore['name_en'],
+            'video_link'       =>   $addmore['video_link'],
+            );
+
+            if(isset($addmore['id']))
+            {    
+            Season::whereId($addmore['id'])->update($season_data);
+            }
+            else{
+             Season::create($season_data);
+            }
             }
         }
+
 
         return redirect('league-form')->with('leagueeditsuccess','League Updated Successfully');
 

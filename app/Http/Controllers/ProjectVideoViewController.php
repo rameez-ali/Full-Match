@@ -450,14 +450,15 @@ class ProjectVideoViewController extends Controller
         $selected_league_name = League::select('id','name_en')->where('id', '=', $selected_league_id->league_id )->first();
 
         //Getting Season of that league which is assocaited with video
-        $selected_season_id = Video::where('id', '=', $id )->first();
+        $selected_season_id = Video::select('season_id')->where('id', '=', $id )->first();
+        $seasons=Season::select('id','name_en')->get();
         $selected_season_name = Season::select('id','name_en')->where('id', '=', $selected_season_id->season_id )->first();
 
 
         $leagues=League::where('id','!=', $selected_league_id->league_id)->get();
 
 
-        return view('admin.video.edit',compact('all_genres','category','select_category_id','clubs','club','players','player','video','selected_ids','selected_ids1','selected_ids3','video_genres','selected_popular_search','popular_searches','leagues','selected_season_name','selected_league_name'));
+        return view('admin.video.edit',compact('all_genres','category','select_category_id','clubs','club','players','player','video','selected_ids','selected_ids1','selected_ids3','video_genres','selected_popular_search','popular_searches','leagues','seasons','selected_season_id','selected_league_name'));
     }
 
     /**
