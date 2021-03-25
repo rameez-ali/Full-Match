@@ -65,17 +65,26 @@ class ContinueWatchedController extends Controller
             'position' => 'required',
         ]);
 
-
         if($validator->fails()){
             return response()->json(['error'=>$validator->errors()], 401);
         }
-        else{
 
-         $video_id=$request->video_id;
+        $video_id=$request->video_id;
 
-         $videodetails = Video::where('id',$video_id)->first();
+        $videodetails = Video::where('id',$video_id)->first();
 
-         $watched_video = Continue_watch::where('video_id',$video_id)->where('user_id',$request->user_id)->first();
+        $watched_video = Continue_watch::where('video_id',$video_id)->where('user_id',$request->user_id)->first();
+
+        if ($request->duration == $request->position){
+
+            if (isset($watched_video)) {
+                $watched_video->delete();
+            }
+
+            return response()->json(['success' => true, 'status' => $this->successStatus, 'message' => 'Video has been end .']);
+        }
+
+        if(!$validator->fails()){
 
             if (isset($watched_video)){
 
