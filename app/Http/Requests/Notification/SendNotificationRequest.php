@@ -34,11 +34,11 @@ class SendNotificationRequest extends FormRequest
         $notification = Notification::find($this->id); // notify type 1 for all , 2 for guest , 3 for register
 
          if ($notification['notify_type'] == 1 ){
-             $tokenList = DeviceToken::with('checknotify')->wherehas('checknotify', function($query){ $query->where('notify_status', 1); })->pluck('token')->toArray();
+             $tokenList = DeviceToken::where('notify_status', 1)->pluck('token')->toArray();
          }elseif ($notification['notify_type'] == 2){
              $tokenList = DeviceToken::where('user_id' , null)->pluck('token')->toArray();
          }elseif ($notification['notify_type'] == 3){
-             $tokenList = DeviceToken::with('checknotify')->wherehas('checknotify', function($query){ $query->where('notify_status', 1); })->where('user_id' , '!=',null )->pluck('token')->toArray();
+             $tokenList = DeviceToken::where('notify_status', 1)->where('user_id' , '!=',null )->pluck('token')->toArray();
          }
 
 //        $tokenList = DeviceToken::pluck('token')->toArray();
@@ -48,9 +48,7 @@ class SendNotificationRequest extends FormRequest
         // $tokenList[] = 'f0xnoyCn90orlDK8SLGX8N:APA91bHl1l8tO_GClxgjtjsXHbO_5viCxCKJ3dmLcYbzcCcE82wxymm3IVJV9dc2OpIRkfTWBM3frUQ5Q2ZdPi6LVtSnbPSp0I7Rk4DmSaagRfmkhnQ_uwHBH3i8S8atdtk4TsTOSb5H';
         $notification = [
             'title' => $notification->notify_title,
-            'title_ar' => $notification->notify_title_ar,
             'text'  => $notification->notify_text,
-            'text_ar'  => $notification->notify_text_ar,
             'type'  => $notification->notify_type,
             'sound' => true,
         ];
