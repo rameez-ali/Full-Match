@@ -100,9 +100,9 @@ class ClubController extends Controller
 
                 $club_related_video[$k]['id'] = $v->id;
                 $club_related_video[$k]['name'] = $v->title_en;
-                $club_related_video[$k]['name_ar'] = $v->title_en;
+                $club_related_video[$k]['name_ar'] = $v->title_ar;
                 $club_related_video[$k]['description'] = $v->description_en;
-                $club_related_video[$k]['description_en'] = $v->description_ar;
+                $club_related_video[$k]['description_ar'] = $v->description_ar;
                 $club_related_video[$k]['image'] = $video_img;
                 $club_related_video[$k]['duration'] = $v->duration;
                 $club_related_video[$k]['link'] = $v->video_link;
