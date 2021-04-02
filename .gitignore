@@ -3,6 +3,7 @@
 /public/storage
 /public/images
 /public/images/app-assets
+/public/app-assets
 /storage/*.key
 /vendor
 /bootstrap
