@@ -470,7 +470,24 @@ class ProjectVideoViewController extends Controller
      */
     public function update(Request $request, $id)
     {
-
+         
+        if($request->video_promo1!=null)
+        {
+           $video_promo=$request->video_promo1;
+        }
+        else if($request->video_promo2!=null)
+        {
+           $video_promo=$request->video_promo2;
+        }  
+        else if($request->video_promo3!=null)
+        {
+           $video_promo=$request->video_promo3;
+        }
+        else if($request->video_promo4!=null)
+        {
+           $video_promo=$request->video_promo4;
+        }
+        
         $request->validate([
             'genre'     => 'required'
         ]);
@@ -538,7 +555,7 @@ class ProjectVideoViewController extends Controller
             'duration'     =>   $video_duration,
             'video_sorting'       => $request->video_sorting,
             'popular_searches'       => $request->popularsearches,
-            'video_promo'       => $request->video_promo
+            'video_promo'       => $video_promo
 
         );
 
