@@ -200,7 +200,7 @@
                                          @if($selected_league_name!=null)
                                         <div class="input-field col s12" id="with_league">
                                                     <p for="promo_video">Promo Video URL  </p>
-                                                    <input type="url" name="video_promo" value="{{$video->video_promo}}" class="dimension" >       
+                                                    <input type="text" name="video_promo1" value="{{$video->video_promo}}" class="dimension" >       
                                         </div>
                                         @endif 
                                          
@@ -208,18 +208,18 @@
                                         @if($selected_league_name==null)
                                         <div class="input-field col s12" id="without_league">
                                                     <p for="promo_video">Promo Video URL *  </p>
-                                                    <input type="url" name="video_promo" value="{{$video->video_promo}}" class="dimension" required>
+                                                    <input type="text" name="video_promo2" value="{{$video->video_promo}}" class="dimension" required>
                                         </div>
                                         @endif
 
                                         <div class="input-field col s12" id="row_dim">
                                                     <p for="promo_video_url">Promo Video URL </p>
-                                                    <input type="url" name="video_promo" class="dimension" >
+                                                    <input type="text" name="video_promo3" class="dimension" >
                                                 </div>
 
                                         <div class="input-field col s12" id="row_dim_rquired">
                                                     <p for="promo_video_url">Promo Video URL *</p>
-                                                    <input type="url" name="video_promo" class="dimension" required>
+                                                    <input type="text" name="video_promo4" class="dimension" required>
                                                 </div>
                                         </div>
                                         
