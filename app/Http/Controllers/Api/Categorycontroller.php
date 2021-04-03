@@ -83,7 +83,6 @@ class CategoryController extends Controller
 
         $banner = Adv_banner::where('category_id',$id)
                     ->where('genre_id','=',NULL)
-                    ->where('homepage',1)
                     ->get();
 
         //getting genres id of that specific categories
@@ -258,7 +257,6 @@ class CategoryController extends Controller
         //getting banner of that specific category and genre both
         $banner = Adv_banner::where('category_id',$category_id)
             ->where('genre_id','=',$genre_ids)
-            ->where('homepage',1)
             ->get();
 
         if($banner!=null){

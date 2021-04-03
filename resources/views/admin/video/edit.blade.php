@@ -135,7 +135,7 @@
                                                 <div class="input-field col s12">
                                                     <p for="league_id"> Select League </p>
                                                     <select name="league_id" id="league_id" class="form-control" style="width:10px" onclick="ShowHideDiv(this)">
-                                                        <option value="" >---Select League---</option>
+                                                        <option value="00" >---Select League---</option>
                                                         @foreach ($leagues as $leagues)
                                                             <option value="{{$leagues->id}}">{{ $leagues->name_en }}</option>
                                                         @endforeach
@@ -194,6 +194,35 @@
                                          @endforeach
                                          </select>
                                          </div>
+                                         
+                                         
+                                        
+                                         @if($selected_league_name!=null)
+                                        <div class="input-field col s12" id="with_league">
+                                                    <p for="promo_video">Promo Video URL  </p>
+                                                    <input type="text" name="video_promo1" value="{{$video->video_promo}}" class="dimension" >       
+                                        </div>
+                                        @endif 
+                                         
+
+                                        @if($selected_league_name==null)
+                                        <div class="input-field col s12" id="without_league">
+                                                    <p for="promo_video">Promo Video URL *  </p>
+                                                    <input type="text" name="video_promo2" value="{{$video->video_promo}}" class="dimension" required>
+                                        </div>
+                                        @endif
+
+                                        <div class="input-field col s12" id="row_dim">
+                                                    <p for="promo_video_url">Promo Video URL </p>
+                                                    <input type="text" name="video_promo3" class="dimension" >
+                                                </div>
+
+                                        <div class="input-field col s12" id="row_dim_rquired">
+                                                    <p for="promo_video_url">Promo Video URL *</p>
+                                                    <input type="text" name="video_promo4" class="dimension" required>
+                                                </div>
+                                        </div>
+                                        
 
                                          <div class="input-field col s12">
                                              <button class="btn waves-effect waves-light right submit" type="submit" name="action">Submit
@@ -291,6 +320,33 @@
             }
         });
     });
+</script>
+    
+<script>
+        $(function() {
+            // $('#row_dim').show();
+            // $('#row_dim_required').show();
+            $('#row_dim').hide();
+            $('#row_dim_rquired').hide();
+            $('#league_id').change(function(){
+                // alert($('#country').val());
+                if($('#league_id').val() != '' && $('#league_id').val() != 00) {
+                    $('#row_dim').hide();
+                    $('#without_league').hide();
+                    $('#with_league').hide();
+                    $('#row_dim_rquired').hide();
+                    $('#row_dim').show();
+
+                } else {
+                    $('#row_dim').hide();
+                    $('#without_league').hide();
+                    $('#with_league').hide();
+                    $('#row_dim').hide();
+                    $('#row_dim_rquired').show();
+
+                }
+            });
+        });
 </script>
 
     <script>
