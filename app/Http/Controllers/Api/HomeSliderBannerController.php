@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 
 
+use App\Model\HomePageManagement;
 use App\Model\My_wish_list;
 use Illuminate\Http\Request;
 use App\Model\Category;
@@ -112,23 +113,24 @@ class HomeSliderBannerController extends Controller
         $new_adding_videos=Video::orderBy('created_at','desc')
             ->get();
 
+        $checkActiveNewadding = HomePageManagement::where('id',2)->where('status',1)->first();
+        if (isset($checkActiveNewadding)) {
+            foreach ($new_adding_videos as $k => $v) {
+
+                $video_img = str_replace('\\', '/', asset('app-assets/images/video/' . $v->video_img));
+
+                $new_adding_video[$k]['id'] = $v->id;
+                $new_adding_video[$k]['name'] = $v->title_en;
+                $new_adding_video[$k]['name_ar'] = $v->title_ar;
+                $new_adding_video[$k]['description'] = $v->description_en;
+                $new_adding_video[$k]['description_ar'] = $v->description_ar;
+                $new_adding_video[$k]['image'] = $video_img;
+                $new_adding_video[$k]['duration'] = $v->duration;
+                $new_adding_video[$k]['link'] = $v->video_link;
+                $new_adding_video[$k]['route'] = "video/" . $v->id;
 
 
-        foreach ($new_adding_videos as $k => $v) {
-
-            $video_img = str_replace('\\', '/', asset('app-assets/images/video/' . $v->video_img));
-
-            $new_adding_video[$k]['id'] = $v->id;
-            $new_adding_video[$k]['name'] = $v->title_en;
-            $new_adding_video[$k]['name_ar'] = $v->title_ar;
-            $new_adding_video[$k]['description'] = $v->description_en;
-            $new_adding_video[$k]['description_ar'] = $v->description_ar;
-            $new_adding_video[$k]['image'] = $video_img;
-            $new_adding_video[$k]['duration'] = $v->duration;
-            $new_adding_video[$k]['link'] = $v->video_link;
-            $new_adding_video[$k]['route'] = "video/".$v->id;
-
-
+            }
         }
 
         $obj->NewAdding=$new_adding_video;
@@ -201,22 +203,24 @@ class HomeSliderBannerController extends Controller
         $new_adding_videos=Video::orderBy('created_at','desc')
             ->get();
 
-        foreach ($new_adding_videos as $k => $v) {
+        $checkActiveNewadding = HomePageManagement::where('id',2)->where('status',1)->first();
+        if (isset($checkActiveNewadding)) {
+            foreach ($new_adding_videos as $k => $v) {
 
-            $video_img = str_replace('\\', '/', asset('app-assets/images/video/' . $v->video_img));
+                $video_img = str_replace('\\', '/', asset('app-assets/images/video/' . $v->video_img));
 
-            $new_adding_video[$k]['id'] = $v->id;
-            $new_adding_video[$k]['name'] = $v->title_en;
-            $new_adding_video[$k]['name_ar'] = $v->title_ar;
-            $new_adding_video[$k]['description'] = $v->description_en;
-            $new_adding_video[$k]['description_en'] = $v->description_ar;
-            $new_adding_video[$k]['image'] = $video_img;
-            $new_adding_video[$k]['duration'] = $v->duration;
-            $new_adding_video[$k]['link'] = $v->video_link;
-            $new_adding_video[$k]['route'] = "video/".$v->id;
+                $new_adding_video[$k]['id'] = $v->id;
+                $new_adding_video[$k]['name'] = $v->title_en;
+                $new_adding_video[$k]['name_ar'] = $v->title_ar;
+                $new_adding_video[$k]['description'] = $v->description_en;
+                $new_adding_video[$k]['description_en'] = $v->description_ar;
+                $new_adding_video[$k]['image'] = $video_img;
+                $new_adding_video[$k]['duration'] = $v->duration;
+                $new_adding_video[$k]['link'] = $v->video_link;
+                $new_adding_video[$k]['route'] = "video/" . $v->id;
 
+            }
         }
-
         $obj->NewAdding=$new_adding_video;
 
         return response()->json(['success' => true, 'status' => $this->successStatus, 'message' => 'Home Slider Banner found.', 'data'=>  $obj]);
