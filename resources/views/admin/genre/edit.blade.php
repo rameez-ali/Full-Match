@@ -14,7 +14,7 @@
                                     <div class="row">
                                         <div class="col s12">
                                             <h2></h2>
-                                        <form method="post" action="{{ route('genre-form.update', $genre->id) }}" enctype="multipart/form-data">
+                                        <form method="post" class="formValidate" id="formValidate"  action="{{ route('genre-form.update', $genre->id) }}" enctype="multipart/form-data">
                                         @csrf
                                         @method('PATCH')
 
@@ -65,12 +65,13 @@
     </div>
 @endsection
 @section('scripts')
-    <script src="app-assets/vendors/jquery-validation/jquery.validate.min.js"></script>
+    <script src={{ asset('app-assets/vendors/jquery-validation/jquery.validate.min.js') }}></script>
+    <script src={{ asset('app-assets/js/scripts/form-file-uploads.js') }}></script>
+    <script src={{ asset('app-assets/vendors/dropify/js/dropify.min.js') }}></script>
 <script>
     /*
  * Form Validation
  */
-
     $("#name_en").keyup(function(){
         $("#name_ar").val(this.value);
     });
@@ -91,40 +92,16 @@
 
         $("#formValidate").validate({
             rules: {
-                uname: {
+                genre_name: {
                     required: true,
-                    minlength: 5
-                },
-                cemail: {
-                    required: true,
-                    email: true
-                },
-                password: {
-                    required: true,
-                    minlength: 5
-                },
-                cpassword: {
-                    required: true,
-                    minlength: 5,
-                    equalTo: "#password"
-                },
-                crole: {
-                    required: true,
-                },
-                curl: {
-                    required: true,
-                    url: true
-                },
-                ccomment: {
-                    required: true,
-                    minlength: 15
+                    minlength: 5 ,
                 },
                 tnc_select: "required",
             },
             //For custom messages
             messages: {
-                uname: {
-                    required: "Enter a username",
+                genre_name: {
+                    required: "Enter Genre Name",
                     minlength: "Enter at least 5 characters"
                 },
                 curl: "Enter your website",
