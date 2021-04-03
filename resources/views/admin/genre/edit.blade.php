@@ -21,7 +21,7 @@
                                         <div class="row">
                                           <div class="input-field col s12">
                                           <label for="name_en">Edit Genre Name EN * </label>
-                                          <input type="text" name="name_en" id="name_en" value="{{ $genre->name_en }}" class="form-control input-lg" data-error=".errorTxt1" required />
+                                          <input type="text" name="name_en" id="name_en" max="16" value="{{ $genre->name_en }}" class="form-control input-lg" data-error=".errorTxt1" required />
                                           <small class="errorTxt1"></small>
                                           @error('name_en')
                                          <span class="invalid-feedback" role="alert">
@@ -32,7 +32,7 @@
 
                                             <div class="input-field col s12">
                                                 <label for="name_ar">Edit Genre Name AR * </label>
-                                                <input type="text" name="name_ar" id="name_ar" value="{{ $genre->name_ar }}" class="form-control input-lg" data-error=".errorTxt1" required />
+                                                <input type="text" name="name_ar" id="name_ar" max="16" value="{{ $genre->name_ar }}" class="form-control input-lg" data-error=".errorTxt1" required />
                                                 <small class="errorTxt1"></small>
                                                 @error('name_ar')
                                                 <span class="invalid-feedback" role="alert">
