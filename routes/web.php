@@ -76,6 +76,7 @@ Route::group(['middleware' => ['auth']], function () {
 
     // Route::post("addmore","SeasonPartSortingController@addMorePost");
     Route::resource("home-page-manage","HomePageManageController");
+    Route::get("new-adding-switch/{id}","HomePageManageController@newaddingtoggle");
     Route::post('discount/promo/verify','DiscountController@verify')->name('discount.promo.verify');
 
     Route::resource("user","UserRoleController");

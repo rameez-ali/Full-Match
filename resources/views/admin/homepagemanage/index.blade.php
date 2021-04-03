@@ -78,7 +78,18 @@
                                                     @endif
                                                     @can('edit-homepg-manage')
                                                     <td>
-                                                        <a class="mb-5 btn waves-effect waves-light gradient-45deg-purple-deep-orange" href="{{ route('home-page-manage.edit', $homepagemanage->id ) }}">{{ __('customer.customer.edit') }}</a>
+                                                        @if($homepagemanage->id != 1)
+                                                            <div class="switch">
+                                                                <label>
+                                                                    Off
+                                                                    <input data-id="{{$homepagemanage->id}}" {{ $homepagemanage->status == '1' ? 'checked' : ''  }} data-toggle="toggle" data-on="Active" data-off="InActive" type="checkbox" id="newaddingswitch" name="newaddingtoggle">
+                                                                    <span class="lever"></span>
+                                                                    On
+                                                                </label>
+                                                            </div>
+                                                        @else
+                                                            <a class="mb-5 btn waves-effect waves-light gradient-45deg-purple-deep-orange" href="{{ route('home-page-manage.edit', $homepagemanage->id ) }}">{{ __('customer.customer.edit') }}</a>
+                                                        @endif
 {{--                                                        <a class="mb-5 btn waves-effect waves-light gradient-45deg-amber-amber" onclick="deletePlan({{ $homepagemanage->id }})" href="#">{{ __('customer.delete') }}</a>--}}
                                                     </td>
                                                     @endcan
@@ -140,6 +151,23 @@
                 $('#delete-form').submit();
             }
         }
+        $(function() {
+            $('#newaddingswitch').change(function() {
+                var status = $(this).prop('checked') == true ? 1 : 0;
+                var status_id = $(this).data('id');
+                console.log(status)
+                console.log(status_id)
+                $.ajax({
+                    type: "GET",
+                    dataType: "json",
+                    url: '{!! url('new-adding-switch') !!}'+'/'+status_id,
+                    data: {'status': status, 'status_id': status_id},
+                    success: function(data){
+                        console.log(data)
+                    }
+                });
+            })
+        })
 
         $(document).ready(function(){
 

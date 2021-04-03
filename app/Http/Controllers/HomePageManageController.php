@@ -174,4 +174,13 @@ class HomePageManageController extends Controller
        HomePgItem::where('section_id',$id)->forceDelete();
        return redirect()->route('home-page-manage.index')->with('sectiondeletesuccess','Section delete Successfully');
     }
+    public function newaddingtoggle(Request $request ,$id)
+    {
+        $response = HomePageManagement::find($id);
+
+        $response->status = $request->status;
+        $response->save();
+
+        return true;
+    }
 }

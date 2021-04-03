@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\Customer;
 
+use App\customer;
 use App\User;
 use Illuminate\Foundation\Http\FormRequest;
 use Bouncer;
@@ -34,7 +35,9 @@ class DeleteCustomerRequest extends FormRequest
 
         $User = User::find($this->id);
 
-        $User->delete();
+        $User->forceDelete();
+
+        customer::where('user_id' , $User->id )->forceDelete();
 
         return true;
     }
