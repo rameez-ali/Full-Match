@@ -22,7 +22,7 @@
                                             <div class="row">
                                                 <div class="input-field col s12">
                                                     <p for="name_en">Add Category Name * </p>
-                                                    <input id="name_en" name="name_en" max="16" type="text" data-error=".errorTxt1" required>
+                                                    <input id="name_en" name="name_en" maxlength="16" type="text" data-error=".errorTxt1" required>
                                                     <small class="errorTxt1"></small>
                                                     @error('name_en')
                                                     <span class="invalid-feedback" role="alert">
@@ -33,7 +33,7 @@
 
                                                 <div class="input-field col s12">
                                                     <p for="name_ar">Add Category Name AR * </p>
-                                                    <input id="name_ar" name="name_ar" max="16" type="text" data-error=".errorTxt2" required>
+                                                    <input id="name_ar" name="name_ar" maxlength="16" type="text" data-error=".errorTxt2" required>
                                                     <small class="errorTxt2"></small>
                                                     @error('name_ar')
                                                     <span class="invalid-feedback" role="alert">
