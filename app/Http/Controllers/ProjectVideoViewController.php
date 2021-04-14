@@ -487,6 +487,10 @@ class ProjectVideoViewController extends Controller
         {
            $video_promo=$request->video_promo4;
         }
+        else
+        {
+           $video_promo="";
+        }
         
         $request->validate([
             'genre'     => 'required'
