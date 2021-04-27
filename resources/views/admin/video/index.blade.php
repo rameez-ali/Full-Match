@@ -12,6 +12,8 @@
                                     Videos
                                     @can('add-video')
                                     <a href="{{ URL::route('video-form.create') }}" class="waves-effect waves-light btn gradient-45deg-purple-deep-orange gradient-shadow right">Add</a>
+                                    <br>
+                                    <a href="{{ URL::route('update-category-genre.create') }}" class="waves-effect waves-light btn gradient-45deg-purple-deep-orange gradient-shadow right">Update Category Genre</a>
                                     @endcan
                                 </h4>
                                 <form action="{{route('video-form-search.search')}}" method="post" role="search">

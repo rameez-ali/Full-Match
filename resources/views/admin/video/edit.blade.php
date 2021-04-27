@@ -67,8 +67,6 @@
                                            </div>
 
 
-
-
                                            <div class="input-field col s12">
                                            <p for="category_image"> Edit Video Sorting </p>
                                            <input type="number" name="video_sorting" value="{{ old('video_sorting',$video->video_sorting) }}" min="1" class="form-control input-lg" />
@@ -78,7 +76,6 @@
                                           <div class="input-field col s12">
                                           <p for="category_image"> Edit Video Banner </p>
                                           <input type="file" name="video_banner_img" value="{{ old('video_banner_img',$video->video_banner_img) }}" class="dropify mt-3"  data-default-file="{{ asset('app-assets/images/video/'.$video->video_banner_img)}}" data-max-file-size="10M" data-allowed-file-extensions="png jpg jpeg" />
-
                                           </div>
 
                                           <div class="input-field col s12">
@@ -86,24 +83,35 @@
                                           <input type="file" name="video_img" value="{{ old('video_img',$video->video_img) }}" class="dropify mt-3" data-default-file="{{ asset('app-assets/images/video/'.$video->video_img)}}" data-max-file-size="10M" data-allowed-file-extensions="png jpg jpeg"/>
                                           </div>
 
-                                           @if($select_category_id!=null)
+                                           
                                             <div class="input-field col s12">
-                                                  <label><strong>Edit Category </strong></label><br/>
-                                                  <select class="selectpicker" name="Category_id" required>
+                                                  <p>Edit Category</p>
+                                                  <select class="form-control" name="category_id" id="category_id" required>
+                                                      @if($select_category_id)
+                                                          <option value="">--- Select Category ---</option>
                                                       @foreach($category as $category )
                                                           <option value="{{$category->id}}" {{$category->id == $select_category_id->category_id ? 'selected' : ''}} >{{$category->name_en}}</option>
                                                       @endforeach
+                                                      @else
+                                                      @foreach($category as $category )
+                                                          <option value="{{$category->id}}" {{$category->id == $select_category_id->category_id ? 'selected' : ''}} >{{$category->name_en}}</option>
+                                                      @endforeach
+                                                      @endif
                                                   </select>
                                               </div>
-                                        @else
-                                            <div class="input-field col s12">
-                                                <label><strong>Edit Category </strong></label><br/>
-                                                <select class="selectpicker" name="Category_id" required>
-                                                        <option SELECTED value="" >Home</option>
-                                                </select>
-                                            </div>
-                                        @endif
+                                    
 
+                                        <div class="input-field col s12">
+                                         <p>Edit Genre</p>
+                                         <select class="select2 browser-default" id="category_id"  multiple data-live-search="true" name="genre_id[]" >
+                                         @if($selected_ids3!=null)
+                                         @foreach($all_genres as $videogenre )
+                                         <option value="{{$videogenre->id}}" {{in_array($videogenre->id, $selected_ids3) ? 'selected' : ''}} >{{$videogenre->name_en}}</option>
+                                         @endforeach
+                                         @else
+                                         <select name="genre_id[]" id="category_id"  class="max-length browser-default" multiple="multiple" style="width:250px">
+                                         @endif
+                                         </select>
 
 
                                          @if($selected_league_name!=null)
@@ -150,22 +158,6 @@
                                                 </div>
                                                 @endif
 
-
-                                         <div class="input-field col s12">
-                                         <label><strong>Edit Genre * </strong></label><br/>
-                                         <select class="form-control input-lg" multiple data-live-search="true" name="genre[]"  required>
-                                         @foreach($all_genres as $videogenre )
-                                         <option value="{{$videogenre->id}}" {{in_array($videogenre->id, $selected_ids3) ? 'selected' : ''}} >{{$videogenre->name_en}}</option>
-                                         @endforeach
-                                         </select>
-
-                                         @error('genre')
-                                          <small class="errorTxt8"></small>
-                                          <span class="invalid-feedback" role="alert">
-                                          <strong class="error">{{ $message }}</strong>
-                                          </span>
-                                          @enderror
-                                         </div>
 
                                             <div class="input-field col s12">
                                                 <label><strong>Edit Popular Searches </strong></label><br/>
@@ -357,5 +349,30 @@
             $("#description_ar").val(this.value);
         });
     </script>
+
+<script type="text/javascript">
+
+jQuery(document).ready(function ()
+{
+        jQuery('select[name="category_id"]').on('change',function(){
+           var category_id = jQuery(this).val();
+           console.log(category_id);
+           jQuery('select[name="genre_id[]"]').empty();
+              jQuery.ajax({
+                 url : '{{url("video-form")}}/getgenres/'+category_id,
+                 type : "GET",
+                 dataType : "json",
+                 success:function(data) {
+                     console.log(data);
+                     jQuery('select[name="genre_id[]"]').empty();
+                     jQuery.each(data, function (key, value) {
+                         $('select[name="genre_id[]"]').append('<option value="' + key + '">' + value + '</option>');
+                     });
+                    
+                 }
+              });
+        });
+});
+ </script>
 
 @endsection

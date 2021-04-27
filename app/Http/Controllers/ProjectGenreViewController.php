@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Model\Video_genre;
 use App\Model\Videogenre;
+use App\Model\Category;
+use App\Model\Category_genre;
+use App\Model\Video;
 use DB;
 
 class ProjectGenreViewController extends Controller
@@ -35,7 +38,8 @@ class ProjectGenreViewController extends Controller
      */
     public function create()
     {
-        return view('admin.genre.form');
+        $category=Category::all();
+        return view('admin.genre.form',compact('category'));
     }
 
     /**
@@ -58,6 +62,21 @@ class ProjectGenreViewController extends Controller
         );
 
         Video_genre::create($form_data);
+
+        if($request->category_id!=null){
+            foreach($request->category_id as $category_id){
+                $genre_id = Video_genre::orderBy('id', 'DESC')->value('id');
+                $form_data4 = array(
+                    'category_id'     =>   $category_id,
+                    'genre_id'     =>  $genre_id
+                );
+
+                Category_genre::create($form_data4);
+
+            }
+        }
+
+
        return redirect('genre-form')->with('genreaddsuccess','Video Genre Added Successfully');
     }
 
@@ -80,9 +99,22 @@ class ProjectGenreViewController extends Controller
      */
     public function edit($id)
     {
-        $genre=video_genre::find($id);
+        $genre=Video_genre::find($id);
 
-        return view('admin.genre.edit',compact('genre'));
+        $categories=Category::all();
+
+        $category_genres =  Category_genre::
+        where('genre_id', '=', $id)
+            ->join('categories', 'categories.id', '=', 'category_genres.category_id')
+            ->select('categories.id')
+            ->get();
+
+        $selected_category_ids = [];
+        foreach ($category_genres as $key => $ply) {
+            array_push($selected_category_ids, $ply->id);
+        }
+
+        return view('admin.genre.edit',compact('genre','selected_category_ids','categories'));
     }
 
     /**
@@ -102,6 +134,20 @@ class ProjectGenreViewController extends Controller
         );
 
         Video_genre::whereId($id)->update($form_data);
+
+        if($request->category_id!=null){
+            Category_genre::where('genre_id', $id)->forceDelete();
+            foreach($request->category_id as $category_id){
+                $form_data7 = array(
+                    'category_id'     =>   $category_id,
+                    'genre_id'     =>  $id,
+                );
+
+                Category_genre::create($form_data7);
+
+
+            }
+        }
 
         return redirect('genre-form')->with('genreeditsuccess','Video Genre Updated Successfully');
     }

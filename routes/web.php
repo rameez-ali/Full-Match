@@ -22,8 +22,6 @@ Auth::routes(['verify' => true]);
 Route::group(['middleware' => ['auth']], function () {
     Route::get('dashboard', 'DashboardController@index')->name('dashboard');
     Route::resource('customer', 'CustomerController');
-//    Route::resource('subscriptionplans','SubsPlanController');
-//    Route::resource('discount','PromoCodeController');
     Route::resource('category-form','ProjectCategoryViewController');
     Route::resource('genre-form','ProjectGenreViewController');
 
@@ -37,14 +35,14 @@ Route::group(['middleware' => ['auth']], function () {
     Route::resource('Contactus-form','ContactUSController');
 
     Route::resource('video-form','ProjectVideoViewController');
+    Route::get('video-form/getgenres/{id}','ProjectVideoViewController@getgenres');
+
     Route::get('video-form/seasons/{id}','ProjectVideoViewController@getseasons');
-    // Route::get('video-form/{id}/seasons/{id}','ProjectVideoViewController@getseasonsedit');
 
     Route::post('video-form-search','VideoSearchController@search')->name('video-form-search.search');
     Route::get('video-form-search','ProjectVideoViewController@index')->name('video-form-search.search');
     Route::get('exportxls/{id}', 'ProjectVideoViewController@exportexcel');
     Route::get('exportcsv/{id}', 'ProjectVideoViewController@exportcsv');
-
 
     Route::resource('seasonpart-form','SeasonPartSorting');
     Route::get('get-state-list','SeasonPartSorting@get_seasons');
@@ -68,13 +66,25 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('banner-form/videos/{id}','ProjectAdvertisementViewController@getvideo');
     Route::get('adv_banner/{id}','ProjectAdvertisementViewController@destroy1');
 
+    Route::resource('update-category-genre','CategoryGenreUpdateController');
+    Route::get('update-category-genre/getgenres/{id}','CategoryGenreUpdateController@getgenres');
+    
+    Route::resource('videofilter','VideoFilterController');
+    Route::get('bycategory','VideoFilterController@get_category');
+    Route::get('bygenre','VideoFilterController@get_genre');
+    Route::get('byclub','VideoFilterController@get_club');
+    Route::get('byplayer','VideoFilterController@get_player');
+    Route::get('byleague','VideoFilterController@get_league');
+    Route::get('byseason','VideoFilterController@get_season');
+    Route::get('category_video','VideoFilterController@get_category_video');
+    Route::get('genre_video','VideoFilterController@get_genre_video');
+    Route::get('club_video','VideoFilterController@get_club_video');
+    Route::get('player_video','VideoFilterController@get_player_video');
+    Route::get('season_video','VideoFilterController@get_season_video');
 
-    // Route::resource('my-form','SeasonPartSortingController');
-    // Route::get("addmore","SeasonPartSortingController@addMore");
-    // Route::post("addmore","SeasonPartSortingController@addMorePost");
 
+    Route::get('slider/{id}','ProjectSliderViewController@slider_details');
 
-    // Route::post("addmore","SeasonPartSortingController@addMorePost");
     Route::resource("home-page-manage","HomePageManageController");
     Route::get("new-adding-switch/{id}","HomePageManageController@newaddingtoggle");
     Route::post('discount/promo/verify','DiscountController@verify')->name('discount.promo.verify');
@@ -84,8 +94,8 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('role/permissions/{id}', 'RoleController@permission')->name('role.permission');
     Route::post('role/permissions', 'RoleController@savePermissions')->name('save.role.permission');
     Route::get('/home', 'DashboardController@index')->name('home');
-// Route::get('dropdownlist','DataController@getCountries');
-// Route::get('dropdownlist/getstates/{id}','DataController@getStates');
+
+
 });
 
 

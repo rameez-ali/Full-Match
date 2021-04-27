@@ -94,27 +94,23 @@
                                                 <div class="input-field col s12">
                                                     <p for="video_img"> Add Video Image * </p>
                                                     <input type="file" name="video_img" id="video_img" class="dropify mt-3" data-default-file="" data-max-file-size="10M" data-allowed-file-extensions="png jpg jpeg" required data-error=".errorTxt4" />
-                                                    <small class="errorTxt4"></small>
-                                                    @error('video_img')
-                                                    <span class="invalid-feedback" role="alert">
-                                               <strong>{{ $message }}</strong>
-                                               </span>
-                                                    @enderror
+                                                </div>
+
+
+                                                <div class="input-field col s12">
+                                                    <p for="category_id"> Select Category </p>
+                                                    <select name="category_id" id="category_id" class="form-control" style="width:250px">
+                                                        <option value="">--- Select Category ---</option>
+                                                        @foreach ($category as $category)
+                                                            <option value="{{$category->id}}">{{ $category->name_en }}</option>
+                                                        @endforeach
+                                                    </select>
                                                 </div>
 
                                                 <div class="input-field col s12">
-                                                    <p for="Category_id"> Select Category * </p>
-                                                    <select  class="form-control" name="Category_id" required>
-                                                        <option selected> </option>
-                                                        @foreach($category as $category)
-                                                            <option value="{{$category->id}}">{{$category->name_en}}</option>
-                                                        @endforeach
-                                                        @error('Category_id')
-                                                        <span class="invalid-feedback" role="alert">
-                                               <strong class="error">{{ $message }}</strong>
-                                               </span>
-                                                        @enderror
-                                                    </select>
+                                                <p for="category_id">Select Genres </p>
+                                                <select name="genre_id[]" id="category_id"  class="max-length browser-default" multiple="multiple" style="width:250px">
+                                                </select>
                                                 </div>
 
 
@@ -134,19 +130,6 @@
                                                     </select>
                                                 </div>
 
-                                                <div class="input-field col s12">
-                                                    <p for="genre"> Select Video Genre *</p>
-                                                    <select class="selectpicker" multiple data-live-search="true" name="genre[]" required >
-                                                        @foreach($videogenres as $videogenre )
-                                                            <option value="{{$videogenre->id}}">{{$videogenre->name_en}}</option>
-                                                        @endforeach
-                                                    </select>
-                                                    @error('genre')
-                                                    <span class="invalid-feedback" role="alert">
-                                               <strong class="error">{{ $message }}</strong>
-                                               </span>
-                                                    @enderror
-                                                </div>
 
                                                 <div class="input-field col s12">
                                                     <p for="club"> Select Club </p>
@@ -319,6 +302,34 @@
             $("#description_ar").val(this.value);
         });
     </script>
+
+<script type="text/javascript">
+
+jQuery(document).ready(function ()
+{
+        jQuery('select[name="genre_id[]"]').empty();
+        jQuery('select[name="category_id"]').on('change',function(){
+            jQuery('select[name="genre_id[]"]').empty();
+           var category_id = jQuery(this).val();
+           console.log(category_id);
+           jQuery('select[name="genre_id[]"]').empty();
+              jQuery.ajax({
+                 url : 'getgenres/' +category_id,
+                 type : "GET",
+                 dataType : "json",
+                 success:function(data) {
+                     console.log(data);
+                     jQuery('select[name="genre_id[]"]').empty();
+                     jQuery.each(data, function (key, value) {
+                         $('select[name="genre_id[]"]').append('<option value="' + key + '">' + value + '</option>');
+                     });
+                    
+                 }
+              });
+        });
+});
+ </script>
+
 
 
 @endsection

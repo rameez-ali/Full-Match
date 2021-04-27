@@ -42,6 +42,15 @@
                                                     @enderror
                                                 </div>
 
+                                                <div class="input-field col s12">
+                                                    <p for="category_id"> Select Category </p>
+                                                    <select class="selectpicker" multiple data-live-search="true" name="category_id[]" required>
+                                                        @foreach($category as $category )
+                                                            <option value="{{$category->id}}">{{$category->name_en}}</option>
+                                                        @endforeach
+                                                    </select>
+                                                </div>
+
 
 
                                                 <div class="input-field col s12">

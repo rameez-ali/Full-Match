@@ -36,15 +36,24 @@
                                                 <small class="errorTxt1"></small>
                                                 @error('name_ar')
                                                 <span class="invalid-feedback" role="alert">
-                                         <strong>{{ $message }}</strong>
-                                         </span>
+                                                <strong>{{ $message }}</strong>
+                                                </span>
                                                 @enderror
                                             </div>
+
+                                            <div class="input-field col s12">
+                                            <label><strong>Edit Category * </strong></label><br/>
+                                            <select class="selectpicker" multiple data-live-search="true" name="category_id[]" required>
+                                            @foreach($categories as $category)
+                                            <option value="{{$category->id}}" {{in_array($category->id, $selected_category_ids) ? 'selected' : ''}} >{{$category->name_en}}</option>
+                                            @endforeach
+                                            </select>
+                                           </div>
 
                                            <div class="input-field col s12">
                                            <label for="category_name">Edit Genre Sorting </label>
                                            <input type="number" name="genre_sorting" value="{{ $genre->genre_sorting }}" min="1" class="form-control input-lg" />
-                                            </div>
+                                           </div>
 
                                             <div class="input-field col s12">
                                                 <button class="btn waves-effect waves-light right submit" type="submit" name="action">Submit
