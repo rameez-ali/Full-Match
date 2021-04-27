@@ -496,8 +496,14 @@ class ProjectVideoViewController extends Controller
         {
            $video_promo=$request->video_promo4;
         }
+<<<<<<< HEAD
         else{
             $video_promo="";
+=======
+        else
+        {
+           $video_promo="";
+>>>>>>> f910d0bfb51f0b7ceaae1cefc6066978f8ba403b
         }
         
 
