@@ -71,6 +71,10 @@ Route::group(['middleware' => ['auth']], function () {
     
     Route::resource('videofilter','VideoFilterController');
     Route::get('bycategory','VideoFilterController@get_category');
+    
+    Route::get('exportcsv','VideoFilterController@exportcsv');
+    Route::get('exportexcel','VideoFilterController@exportexcel');
+    
     Route::get('bygenre','VideoFilterController@get_genre');
     Route::get('byclub','VideoFilterController@get_club');
     Route::get('byplayer','VideoFilterController@get_player');

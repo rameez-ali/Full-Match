@@ -66,27 +66,30 @@ class VideoFilterController extends Controller
 
         public function get_category_video(Request $request)
         { 
-              $videos=Video::select('title_en','id','video_sorting')->where("category_id",$request->category_id)->get();
+            
+              $videos=Video::select('title_en','id','video_sorting','category_id')->whereIn("category_id",$request->category_ids)->get();
               return response()->json($videos);
         }
+        
 
         public function get_genre_video(Request $request)
         { 
-              $videogenres=Videogenre::select('video_id')->where("genre_id",$request->genre_id)->get();
-              $videos=Video::select('title_en','id','video_sorting')->wherein("id",$videogenres)->get();
+          
+          $videogenres=Videogenre::select('video_id')->wherein("genre_id",$request->genre_ids)->get();
+          $videos=Video::select('title_en','id','video_sorting')->wherein("id",$videogenres)->get();
               return response()->json($videos);
         }
 
         public function get_club_video(Request $request)
         { 
-              $videoclubs=Videoclub::select('video_id')->where("club_id",$request->club_id)->get();
+              $videoclubs=Videoclub::select('video_id')->wherein("club_id",$request->club_ids)->get();
               $videos=Video::select('title_en','id','video_sorting')->wherein("id",$videoclubs)->get();
               return response()->json($videos);
         }
 
         public function get_player_video(Request $request)
         { 
-              $videoplayers=Videoplayer::select('video_id')->where("player_id",$request->player_id)->get();
+              $videoplayers=Videoplayer::select('video_id')->wherein("player_id",$request->player_ids)->get();
               $videos=Video::select('title_en','id','video_sorting')->wherein("id",$videoplayers)->get();
               return response()->json($videos);
         }
@@ -97,6 +100,18 @@ class VideoFilterController extends Controller
 
             $videos=Video::select('title_en','id','video_sorting')->where("season_id",$request->season1_id)->get();
             return response()->json($videos);
+        }
+
+        public function exportexcel(Request $request)
+        {
+              $video=Video::wherein('category_id',$request->name)->get();
+              return Excel::download(new InvoicesExport, 'invoices.xlsx');
+        }
+
+        public function exportcsv(Request $request)
+        {
+              $video=Video::wherein('category_id',$request->name)->get();
+              dd($video);
         }
 
 

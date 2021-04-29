@@ -15,10 +15,6 @@
                                     <div class="row">
                                         <div class="col s12">
                                             <h2></h2>
-                                            <form method="post" action="{{route('video-form.store')}}" enctype="multipart/form-data">
-                                           
-                                           @csrf
-
                                          <div class="form-group">
                                          <select id="country" name="category_id"  >
                                          <option value="" selected>--Select Filter By--</option>
@@ -31,12 +27,13 @@
                                          </div>
                                       
                                          <div>
-                                         <select name="state" class="browser-default custom-select hide" id="category_video" >
+                                         <select name="state" class="select2 browser-default hide" id="category_video" multiple="multiple">
                                          </select>
+
                                          </div>
 
                                          <div>
-                                         <select name="state" class="browser-default custom-select hide" id="genre_video" >
+                                         <select name="state" class="select2 browser-default hide" id="genre_video" multiple="multiple">
                                          </select>
                                          </div>
 
@@ -60,12 +57,29 @@
                                          </select>
                                          </div>
 
+                                        
                                          <div >
+                                         <label for="title">Select Season:</label>
                                          <table class="striped" name="state[]">
                                          </table>
+                                         
+                                         <form id="exportcsv">
+                                         <div name="name" id="name1">
                                          </div>
+                                          <button class="btn btn-success" id="submit">CSV</button>
+                                          </form>
+
+                                          <form id="exportexcel">
+                                         <div name="name" id="name2">
                                          </div>
-                                         </form>
+                                          <button class="btn btn-success" id="submit">EXCEL</button>
+                                          </form>                                         
+                                         
+
+                                         </div>
+
+                                         </div>
+                                         
 
                                         </div>
                                     </div>
@@ -81,6 +95,42 @@
 
   <!----Start of logic to Get Category,Clubs,Player,Genre name------>
 
+
+<script type="text/javascript">
+    $('#exportexcel').on('submit',function(event){
+        event.preventDefault();
+        var name = $('#exportexcel').serializeArray();
+        $.ajax({
+          url: "{{url('exportexcel')}}",
+          type:"GET",
+          data:{
+            "name":name,
+          },
+          success:function(response){
+            console.log(response);
+          },
+         });
+        });
+</script>
+
+<script type="text/javascript">
+    $('#exportcsv').on('submit',function(event){
+        event.preventDefault();
+        var name = $('#exportcsv').serializeArray();
+        $.ajax({
+          url: "{{url('exportcsv')}}",
+          type:"GET",
+          data:{
+            "name":name,
+          },
+          success:function(response){
+            console.log(response);
+          },
+         });
+        });
+</script>
+
+
   <script type=text/javascript>
   $('#country').change(function(){
   var countryID = $(this).val();
@@ -91,6 +141,7 @@
       success:function(res){
       if(res){
         $("#category_video").removeClass('hide');
+        $("#category_video1").removeClass('hide');
         $("#genre").hide();
         $("#player").hide();
         $("#club").hide();
@@ -220,176 +271,73 @@
   
   <!----Start of logic to Get Videos, byCategory,byClubs,byPlayer,byGenre name------>
 
-  <script type=text/javascript>
-  $('#category_video').on('change',function(){
-  var categoryvideoID = $(this).val();
-  if(categoryvideoID){
-    $.ajax({
-      type:"GET",
-      url:"{{url('category_video')}}?category_id="+categoryvideoID,
-      success:function(res){
-      if(res){
-        console.log(res)
-        $(".striped").empty();
-        $.each(res,function(key,value){
-          $(".striped").append('<thead><tr><th>Video title</th><th>Video Sorting</th><th>Video Sorting Edit</th></tr></thread>','<tbody><tr><td value="'+ key +'">'+ value.title_en +'</td><td value="'+ key +'">'+ value.video_sorting +'</td><td> <a class="mb-5 mr-2 btn waves-effect waves-light gradient-45deg-purple-deep-orange" href="seasonpart-form/'+ value.id +'/edit">edit</a></td></tr></tbody>');
-        });
-
-      }else{
-        $("#city").empty();
-      }
-      }
-    });
-  }else{
-    $("#city").empty();
-  }
-
-  });
-</script>
-
-<script type=text/javascript>
-  $('#genre_video').on('change',function(){
-  var genrevideoID = $(this).val();
-  if(genrevideoID){
-    $.ajax({
-      type:"GET",
-      url:"{{url('genre_video')}}?genre_id="+genrevideoID,
-      success:function(res){
-      if(res){
-        console.log(res)
-        $(".striped").empty();
-        $.each(res,function(key,value){
-          $(".striped").append('<thead><tr><th>Video title</th><th>Video Sorting</th><th>Video Sorting Edit</th></tr></thread>','<tbody><tr><td value="'+ key +'">'+ value.title_en +'</td><td value="'+ key +'">'+ value.video_sorting +'</td><td> <a class="mb-5 mr-2 btn waves-effect waves-light gradient-45deg-purple-deep-orange" href="seasonpart-form/'+ value.id +'/edit">edit</a></td></tr></tbody>');
-        });
-
-      }else{
-        $("#city").empty();
-      }
-      }
-    });
-  }else{
-    $("#city").empty();
-  }
-
-  });
-</script>
-
-<script type=text/javascript>
-  $('#club_video').on('change',function(){
-  var clubvideoID = $(this).val();
-  if(clubvideoID){
-    $.ajax({
-      type:"GET",
-      url:"{{url('club_video')}}?club_id="+clubvideoID,
-      success:function(res){
-      if(res){
-        console.log(res)
-        $(".striped").empty();
-        $.each(res,function(key,value){
-          $(".striped").append('<thead><tr><th>Video title</th><th>Video Sorting</th><th>Video Sorting Edit</th></tr></thread>','<tbody><tr><td value="'+ key +'">'+ value.title_en +'</td><td value="'+ key +'">'+ value.video_sorting +'</td><td> <a class="mb-5 mr-2 btn waves-effect waves-light gradient-45deg-purple-deep-orange" href="seasonpart-form/'+ value.id +'/edit">edit</a></td></tr></tbody>');
-        });
-
-      }else{
-        $("#city").empty();
-      }
-      }
-    });
-  }else{
-    $("#city").empty();
-  }
-
-  });
-</script>
-
-<script type=text/javascript>
-  $('#player_video').on('change',function(){
-  var playervideoID = $(this).val();
-  if(playervideoID){
-    $.ajax({
-      type:"GET",
-      url:"{{url('player_video')}}?player_id="+playervideoID,
-      success:function(res){
-      if(res){
-        console.log(res)
-        $(".striped").empty();
-        $.each(res,function(key,value){
-          $(".striped").append('<thead><tr><th>Video title</th><th>Video Sorting</th><th>Video Sorting Edit</th></tr></thread>','<tbody><tr><td value="'+ key +'">'+ value.title_en +'</td><td value="'+ key +'">'+ value.video_sorting +'</td><td> <a class="mb-5 mr-2 btn waves-effect waves-light gradient-45deg-purple-deep-orange" href="seasonpart-form/'+ value.id +'/edit">edit</a></td></tr></tbody>');
-        });
-
-      }else{
-        $("#city").empty();
-      }
-      }
-    });
-  }else{
-    $("#city").empty();
-  }
-
-  });
-</script>
-
-<script type=text/javascript>
-  $('#season_video').on('change',function(){
-  var seasonvideoID = $(this).val();
-  if(seasonvideoID){
-    $.ajax({
-      type:"GET",
-      url:"{{url('season_video')}}?season1_id="+seasonvideoID,
-      success:function(res){
-      if(res){
-        console.log(res)
-        $(".striped").empty();
-        $.each(res,function(key,value){
-          $(".striped").append('<thead><tr><th>Video title</th><th>Video Sorting</th><th>Video Sorting Edit</th></tr></thread>','<tbody><tr><td value="'+ key +'">'+ value.title_en +'</td><td value="'+ key +'">'+ value.video_sorting +'</td><td> <a class="mb-5 mr-2 btn waves-effect waves-light gradient-45deg-purple-deep-orange" href="seasonpart-form/'+ value.id +'/edit">edit</a></td></tr></tbody>');
-        });
-
-      }else{
-        $("#city").empty();
-      }
-      }
-    });
-  }else{
-    $("#city").empty();
-  }
-
-  });
-</script>
-
 
   <!----End of login to Get Videos, byCategory,byClubs,byPlayer,byGenre name------>
-
-  <script type=text/javascript>
-  $('#league_video').on('change',function(){
-  var leaguevideoID = $(this).val();
-  if(leaguevideoID){
-    $.ajax({
-      type:"GET",
-      url:"{{url('byseason')}}?league_id="+leaguevideoID,
+<script type="text/javascript">
+    jQuery(function() {
+    jQuery("#category_video").change(function() {
+    var category_ids = $(this).val();
+    console.log(category_ids);
+    if(category_ids!=0){
+    jQuery.ajax({
+      url: "{{url('category_video')}}?category_ids=",
+      type: "GET",
+      data: {
+        "category_ids": category_ids
+      },
       success:function(res){
       if(res){
-        $("#season_video").removeClass('hide');
-        $("#category_video").hide();
-        $("#genre_video").hide();
-        $("#club_video").hide();
-        $("#season_video").show();
-        $("#season_video").empty();
-        $("#season_video").append('<option>Select season</option>');
+        console.log(res)      
         $.each(res,function(key,value){
-          $("#season_video").append('<option value="'+key+'">'+value+'</option>');
+          $(".striped").append('<thead><tr><th>Video title</th><th>Video Sorting</th><th>Video Sorting Edit</th></tr></thread>','<tbody><tr><td value="'+ key +'">'+ value.title_en +'</td><td value="'+ key +'">'+ value.video_sorting +'</td><td> <a class="mb-5 mr-2 btn waves-effect waves-light gradient-45deg-purple-deep-orange" href="seasonpart-form/'+ value.id +'/edit">edit</a></td></tr></tbody>');
+          $("#name1").append('<input type="hidden" name="name" id="name" value="'+ value.category_id +'"/>');
+          $("#name2").append('<input type="hidden" name="name" id="name" value="'+ value.category_id +'"/>');
+
         });
 
       }else{
-        $("#city").empty();
+        $(".striped").empty();
       }
       }
     });
-  }else{
-    $("#city").empty();
+    }else{
+    $(".striped").empty();
   }
-
   });
+});
 </script>
 
-  
-@endsection
+<script type="text/javascript">
+    jQuery(function() {
+    jQuery("#genre_video").change(function() {
+    var genre_ids = $(this).val();
+    console.log(genre_ids);
+    if(genre_ids!=0){
+    jQuery.ajax({
+      url: "{{url('genre_video')}}?genre_id=",
+      type: "GET",
+      data: {
+        "genre_ids": genre_ids
+      },
 
+      success:function(res){
+      if(res){
+        console.log(res)
+        $(".striped").empty();
+        $.each(res,function(key,value){
+          $(".striped").append('<thead><tr><th>Video title</th><th>Video Sorting</th><th>Video Sorting Edit</th></tr></thread>','<tbody><tr><td value="'+ key +'">'+ value.title_en +'</td><td value="'+ key +'">'+ value.video_sorting +'</td><td> <a class="mb-5 mr-2 btn waves-effect waves-light gradient-45deg-purple-deep-orange" href="seasonpart-form/'+ value.id +'/edit">edit</a></td></tr></tbody>');
+        });
+
+      }else{
+        $(".striped").empty();
+      }
+      }
+    });
+    }else{
+    $(".striped").empty();
+  }
+  });
+});
+</script>
+
+@endsection
