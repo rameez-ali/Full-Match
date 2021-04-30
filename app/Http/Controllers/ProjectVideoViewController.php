@@ -69,7 +69,7 @@ class ProjectVideoViewController extends Controller
         $club=Club::all();
         $player=Player::all();
         $leagues=League::all();
-        $videogenres=Video_genre::all();
+        $videogenres=Video_genre::all();;
         return view('admin.video.form',compact('category','club','player','leagues','videogenres'));
     }
 
@@ -84,7 +84,7 @@ class ProjectVideoViewController extends Controller
         $genre_id1=Category_genre::where("category_id",$id)->get();
         $genreid = $genre_id1->pluck('genre_id')->toArray();
         $genre=Video_genre::select('name_en')->whereIn("id",$genreid)->pluck('name_en');
-        return json_encode($genre);      
+        return json_encode($genre);
     }
 
     public function getallseasons($id)
@@ -177,13 +177,13 @@ class ProjectVideoViewController extends Controller
 
             $last_video_id = Video::orderBy('id', 'DESC')->value('id');
 
-           
+
             $video_categories = array(
                 'video_id'    =>   $last_video_id,
                 'category_id'     =>   $request->category_id
             );
             Videocategory::create($video_categories);
-           
+
 
 
             if($request->club!=null){
@@ -330,7 +330,7 @@ class ProjectVideoViewController extends Controller
             );
 
             Leaguecategory::create($league_category);
-            
+
             //for Send new video notification to all users
             if ($request->notify_user == 1){
                 $tokenList = DeviceToken::where('notify_status', 1)->pluck('token')->toArray();
@@ -491,7 +491,7 @@ class ProjectVideoViewController extends Controller
      */
     public function update(Request $request, $id)
     {
-         
+
         if($request->video_promo1!=null)
         {
            $video_promo=$request->video_promo1;
@@ -499,7 +499,7 @@ class ProjectVideoViewController extends Controller
         else if($request->video_promo2!=null)
         {
            $video_promo=$request->video_promo2;
-        }  
+        }
         else if($request->video_promo3!=null)
         {
            $video_promo=$request->video_promo3;
@@ -511,7 +511,7 @@ class ProjectVideoViewController extends Controller
         else{
             $video_promo="";
         }
-        
+
 
         //Getting Video id in seconds
         $video_id=$request->video_id;
@@ -744,7 +744,7 @@ class ProjectVideoViewController extends Controller
 
     }
 
-    
+
       public function get_category(Request $request)
         {
               $category=Category::select('name_en','id')->pluck("name_en","id");
@@ -784,16 +784,16 @@ class ProjectVideoViewController extends Controller
         }
 
         public function get_category_video(Request $request)
-        { 
-            
+        {
+
               $videos=Video::select('title_en','id','video_sorting','description_en','video_link','video_promo')->whereIn("category_id",$request->category_ids)->get();
               return response()->json($videos);
         }
-        
+
 
         public function get_genre_video(Request $request)
-        { 
-          
+        {
+
           $videogenres=Videogenre::select('video_id')->wherein("genre_id",$request->genre_ids)->get();
           $videos=Video::select('title_en','id','video_sorting','description_en','video_link','video_promo')
                   ->wherein("id",$videogenres)->get();
@@ -801,7 +801,7 @@ class ProjectVideoViewController extends Controller
         }
 
         public function get_club_video(Request $request)
-        { 
+        {
               $video = Video::
               leftjoin('video_clubs', 'videos.id', '=', 'videos.$request->category_ids')
             ->select('videos.*','videos.id','videos.title_en','videos.description_en','videos.video_link',
@@ -814,7 +814,7 @@ class ProjectVideoViewController extends Controller
         }
 
         public function get_player_video(Request $request)
-        { 
+        {
               $videoplayers=Videoplayer::select('video_id')->wherein("player_id",$request->player_ids)->get();
               $videos=Video::select('title_en','id','video_sorting','description_en','video_link','video_promo')->wherein("id",$videoplayers)->get();
               return response()->json($videos);
@@ -822,7 +822,7 @@ class ProjectVideoViewController extends Controller
 
 
         public function get_season_video(Request $request)
-        { 
+        {
 
             $videos=Video::select('title_en','id','video_sorting','description_en','video_link','video_promo')->where("season_id",$request->season1_id)->get();
             return response()->json($videos);
@@ -905,6 +905,6 @@ class ProjectVideoViewController extends Controller
 
             return view('admin.video.index', compact('video'));
         }
-    }    
+    }
 
 }
