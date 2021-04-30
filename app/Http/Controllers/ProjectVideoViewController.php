@@ -809,7 +809,7 @@ class ProjectVideoViewController extends Controller
                 'videos.title_en','categories.name_en','leagues.name_en as leaguename')
             ->get();
 
-              $videos=Video::where('')
+              $videos=Video::get();
               return response()->json($videos);
         }
 

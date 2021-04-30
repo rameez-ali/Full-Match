@@ -70,7 +70,6 @@ Route::group(['middleware' => ['auth']], function () {
     Route::resource('update-category-genre','CategoryGenreUpdateController');
     Route::get('update-category-genre/getgenres/{id}','CategoryGenreUpdateController@getgenres');
     
-<<<<<<< HEAD
 
     Route::post('video-form-search','ProjectVideoViewController@search')->name('video-form.search');
     Route::get('bycategory','ProjectVideoViewController@get_category');  
@@ -87,7 +86,6 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('exportcsv','VideoFilterController@exportcsv');
     Route::post('exportexcel','VideoFilterController@exportexcel')->name('exportexcel');
     
-=======
     Route::resource('videofilter','VideoFilterController');
     Route::get('bycategory','VideoFilterController@get_category');
     
@@ -104,7 +102,6 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('club_video','VideoFilterController@get_club_video');
     Route::get('player_video','VideoFilterController@get_player_video');
     Route::get('season_video','VideoFilterController@get_season_video');
->>>>>>> f12f47d2746fff926c3954fc3dc2543bfc03bfb3
 
 
     Route::get('slider/{id}','ProjectSliderViewController@slider_details');
