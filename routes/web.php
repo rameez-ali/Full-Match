@@ -70,6 +70,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::resource('update-category-genre','CategoryGenreUpdateController');
     Route::get('update-category-genre/getgenres/{id}','CategoryGenreUpdateController@getgenres');
     
+<<<<<<< HEAD
 
     Route::post('video-form-search','ProjectVideoViewController@search')->name('video-form.search');
     Route::get('bycategory','ProjectVideoViewController@get_category');  
@@ -86,6 +87,24 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('exportcsv','VideoFilterController@exportcsv');
     Route::post('exportexcel','VideoFilterController@exportexcel')->name('exportexcel');
     
+=======
+    Route::resource('videofilter','VideoFilterController');
+    Route::get('bycategory','VideoFilterController@get_category');
+    
+    Route::get('exportcsv','VideoFilterController@exportcsv');
+    Route::get('exportexcel','VideoFilterController@exportexcel');
+    
+    Route::get('bygenre','VideoFilterController@get_genre');
+    Route::get('byclub','VideoFilterController@get_club');
+    Route::get('byplayer','VideoFilterController@get_player');
+    Route::get('byleague','VideoFilterController@get_league');
+    Route::get('byseason','VideoFilterController@get_season');
+    Route::get('category_video','VideoFilterController@get_category_video');
+    Route::get('genre_video','VideoFilterController@get_genre_video');
+    Route::get('club_video','VideoFilterController@get_club_video');
+    Route::get('player_video','VideoFilterController@get_player_video');
+    Route::get('season_video','VideoFilterController@get_season_video');
+>>>>>>> f12f47d2746fff926c3954fc3dc2543bfc03bfb3
 
 
     Route::get('slider/{id}','ProjectSliderViewController@slider_details');

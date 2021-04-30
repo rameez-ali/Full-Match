@@ -71,7 +71,11 @@ class VideoFilterController extends Controller
         public function get_category_video(Request $request)
         { 
             
+<<<<<<< HEAD
               $videos=Video::select('title_en','id','video_sorting','description_en','video_link','video_promo')->whereIn("category_id",$request->category_ids)->get();
+=======
+              $videos=Video::select('title_en','id','video_sorting','category_id')->whereIn("category_id",$request->category_ids)->get();
+>>>>>>> f12f47d2746fff926c3954fc3dc2543bfc03bfb3
               return response()->json($videos);
         }
         
@@ -80,8 +84,12 @@ class VideoFilterController extends Controller
         { 
           
           $videogenres=Videogenre::select('video_id')->wherein("genre_id",$request->genre_ids)->get();
+<<<<<<< HEAD
           $videos=Video::select('title_en','id','video_sorting','description_en','video_link','video_promo')
                   ->wherein("id",$videogenres)->get();
+=======
+          $videos=Video::select('title_en','id','video_sorting')->wherein("id",$videogenres)->get();
+>>>>>>> f12f47d2746fff926c3954fc3dc2543bfc03bfb3
               return response()->json($videos);
         }
 
@@ -108,6 +116,22 @@ class VideoFilterController extends Controller
         }
 
         public function exportexcel(Request $request)
+<<<<<<< HEAD
+=======
+        {
+              $video=Video::wherein('category_id',$request->name)->get();
+              return Excel::download(new InvoicesExport, 'invoices.xlsx');
+        }
+
+        public function exportcsv(Request $request)
+        {
+              $video=Video::wherein('category_id',$request->name)->get();
+              dd($video);
+        }
+
+
+        public function edit($id)
+>>>>>>> f12f47d2746fff926c3954fc3dc2543bfc03bfb3
         {
               $video=Video::wherein('category_id',$request->name)->get();
               return Excel::download(new VideosExport($request->name), 'videos.xlsx');

@@ -82,6 +82,7 @@ table {
                                          <select name="state" class="browser-default custom-select hide" id="season_video" >
                                          </select>
                                          </div>
+<<<<<<< HEAD
                                           
                                           <form id="" action="{{ route('exportexcel') }}" method="POST" >
                                           @CSRF
@@ -149,6 +150,29 @@ table {
                                          </table>
 
                                          </div>
+=======
+
+                                        
+                                         <div >
+                                         <label for="title">Select Season:</label>
+                                         <table class="striped" name="state[]">
+                                         </table>
+                                         
+                                         <form id="exportcsv">
+                                         <div name="name" id="name1">
+                                         </div>
+                                          <button class="btn btn-success" id="submit">CSV</button>
+                                          </form>
+
+                                          <form id="exportexcel">
+                                         <div name="name" id="name2">
+                                         </div>
+                                          <button class="btn btn-success" id="submit">EXCEL</button>
+                                          </form>                                         
+                                         
+
+                                         </div>
+>>>>>>> f12f47d2746fff926c3954fc3dc2543bfc03bfb3
 
                                          </div>
                                          
@@ -168,7 +192,26 @@ table {
   <!----Start of logic to Get Category,Clubs,Player,Genre name------>
 
 
+<<<<<<< HEAD
 
+=======
+<script type="text/javascript">
+    $('#exportexcel').on('submit',function(event){
+        event.preventDefault();
+        var name = $('#exportexcel').serializeArray();
+        $.ajax({
+          url: "{{url('exportexcel')}}",
+          type:"GET",
+          data:{
+            "name":name,
+          },
+          success:function(response){
+            console.log(response);
+          },
+         });
+        });
+</script>
+>>>>>>> f12f47d2746fff926c3954fc3dc2543bfc03bfb3
 
 <script type="text/javascript">
     $('#exportcsv').on('submit',function(event){
@@ -339,6 +382,7 @@ table {
       },
       success:function(res){
       if(res){
+<<<<<<< HEAD
         $("#orignal_table").addClass('hide');
         $("#ajax_table").removeClass('hide');
         console.log(res)      
@@ -347,6 +391,14 @@ table {
 
           $("#name1").append('<input type="hidden" name="name" id="name" value="'+ value.category_id +'"/>');
           $("#name2").append('<input type="hidden" name="name[]" id="name" value="'+ value.category_id +'"/>');
+=======
+        console.log(res)      
+        $.each(res,function(key,value){
+          $(".striped").append('<thead><tr><th>Video title</th><th>Video Sorting</th><th>Video Sorting Edit</th></tr></thread>','<tbody><tr><td value="'+ key +'">'+ value.title_en +'</td><td value="'+ key +'">'+ value.video_sorting +'</td><td> <a class="mb-5 mr-2 btn waves-effect waves-light gradient-45deg-purple-deep-orange" href="seasonpart-form/'+ value.id +'/edit">edit</a></td></tr></tbody>');
+          $("#name1").append('<input type="hidden" name="name" id="name" value="'+ value.category_id +'"/>');
+          $("#name2").append('<input type="hidden" name="name" id="name" value="'+ value.category_id +'"/>');
+
+>>>>>>> f12f47d2746fff926c3954fc3dc2543bfc03bfb3
         });
       }else{
         $(".striped").empty();
@@ -372,6 +424,10 @@ table {
       data: {
         "genre_ids": genre_ids
       },
+<<<<<<< HEAD
+=======
+
+>>>>>>> f12f47d2746fff926c3954fc3dc2543bfc03bfb3
       success:function(res){
       if(res){
         console.log(res)
@@ -390,6 +446,7 @@ table {
   });
 });
 </script>
+<<<<<<< HEAD
 
 
 @endsection
@@ -428,3 +485,7 @@ table {
 @endsection
 
 
+=======
+
+@endsection
+>>>>>>> f12f47d2746fff926c3954fc3dc2543bfc03bfb3
