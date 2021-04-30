@@ -36,11 +36,12 @@ Route::group(['middleware' => ['auth']], function () {
 
     Route::resource('video-form','ProjectVideoViewController');
     Route::get('video-form/getgenres/{id}','ProjectVideoViewController@getgenres');
+    Route::get('video-form/checkvideoid/{id}','ProjectVideoViewController@checkvideoid');
+
+
 
     Route::get('video-form/seasons/{id}','ProjectVideoViewController@getseasons');
 
-    Route::post('video-form-search','VideoSearchController@search')->name('video-form-search.search');
-    Route::get('video-form-search','ProjectVideoViewController@index')->name('video-form-search.search');
     Route::get('exportxls/{id}', 'ProjectVideoViewController@exportexcel');
     Route::get('exportcsv/{id}', 'ProjectVideoViewController@exportcsv');
 
@@ -69,18 +70,22 @@ Route::group(['middleware' => ['auth']], function () {
     Route::resource('update-category-genre','CategoryGenreUpdateController');
     Route::get('update-category-genre/getgenres/{id}','CategoryGenreUpdateController@getgenres');
     
-    Route::resource('videofilter','VideoFilterController');
-    Route::get('bycategory','VideoFilterController@get_category');
-    Route::get('bygenre','VideoFilterController@get_genre');
-    Route::get('byclub','VideoFilterController@get_club');
-    Route::get('byplayer','VideoFilterController@get_player');
-    Route::get('byleague','VideoFilterController@get_league');
-    Route::get('byseason','VideoFilterController@get_season');
-    Route::get('category_video','VideoFilterController@get_category_video');
-    Route::get('genre_video','VideoFilterController@get_genre_video');
-    Route::get('club_video','VideoFilterController@get_club_video');
-    Route::get('player_video','VideoFilterController@get_player_video');
-    Route::get('season_video','VideoFilterController@get_season_video');
+
+    Route::post('video-form-search','ProjectVideoViewController@search')->name('video-form.search');
+    Route::get('bycategory','ProjectVideoViewController@get_category');  
+    Route::get('bygenre','ProjectVideoViewController@get_genre');
+    Route::get('byclub','ProjectVideoViewController@get_club');
+    Route::get('byplayer','ProjectVideoViewController@get_player');
+    Route::get('byleague','ProjectVideoViewController@get_league');
+    Route::get('byseason','ProjectVideoViewController@get_season');
+    Route::get('category_video','ProjectVideoViewController@get_category_video');
+    Route::get('genre_video','ProjectVideoViewController@get_genre_video');
+    Route::get('club_video','ProjectVideoViewController@get_club_video');
+    Route::get('player_video','ProjectVideoViewController@get_player_video');
+    Route::get('season_video','ProjectVideoViewController@get_season_video');
+    Route::get('exportcsv','VideoFilterController@exportcsv');
+    Route::post('exportexcel','VideoFilterController@exportexcel')->name('exportexcel');
+    
 
 
     Route::get('slider/{id}','ProjectSliderViewController@slider_details');
@@ -122,6 +127,4 @@ Route::get('emailvarify', function () { return view('/emailverify');})->name('em
 
 //Route::get('blankpg', function () { return view('admin/blank/index');});
 //Route::get('blankform', function () { return view('admin/blank/form');});
-
-
 

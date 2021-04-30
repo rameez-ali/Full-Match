@@ -1,6 +1,17 @@
 @extends('admin.layouts.app')
 
 @section('content')
+<style>
+table, th, td {
+  border-bottom: 1px solid ;
+  background-color: none;
+}
+
+table {
+  width: 100%;
+}
+</style>
+
     <div class="col s12">
         <div class="container">
             <div class="section">
@@ -12,13 +23,24 @@
                                         Video Filter
 
                                     </h4>
+
+                                     <form action="{{route('videofilter.search')}}" method="post" role="search">
+                                    {{ csrf_field() }}
+                                    <div class="input-field col s12">
+
+                                        <input type="text" class="form-control" name="q"
+                                               placeholder="Search Video by video title, player name or club name"> <span class="input-group-btn">
+                                                <button type="submit" class="dt-button buttons-excel buttons-html5 waves-effect waves-light btn gradient-45deg-purple-deep-orange gradient-shadow">Search Videos
+                                                   <span class="glyphicon glyphicon-search"></span>
+                                                </button>
+                                                  </span>
+
+                                    </div>
+                                </form>
+
                                     <div class="row">
                                         <div class="col s12">
                                             <h2></h2>
-                                            <form method="post" action="{{route('video-form.store')}}" enctype="multipart/form-data">
-                                           
-                                           @csrf
-
                                          <div class="form-group">
                                          <select id="country" name="category_id"  >
                                          <option value="" selected>--Select Filter By--</option>
@@ -31,12 +53,13 @@
                                          </div>
                                       
                                          <div>
-                                         <select name="state" class="browser-default custom-select hide" id="category_video" >
+                                         <select name="state" class="select2 browser-default hide" id="category_video" multiple="multiple">
                                          </select>
+
                                          </div>
 
                                          <div>
-                                         <select name="state" class="browser-default custom-select hide" id="genre_video" >
+                                         <select name="state" class="select2 browser-default hide" id="genre_video" multiple="multiple">
                                          </select>
                                          </div>
 
@@ -59,13 +82,76 @@
                                          <select name="state" class="browser-default custom-select hide" id="season_video" >
                                          </select>
                                          </div>
-
+                                          
+                                          <form id="" action="{{ route('exportexcel') }}" method="POST" >
+                                          @CSRF
+                                         <div name="name" id="name2">
+                                         </div>
+                                          <button class="btn btn-success" id="submit">EXCEL</button>
+                                          </form> 
+                                        
                                          <div >
-                                         <table class="striped" name="state[]">
+                                         
+
+                                         <table id="orignal_table" class="display">
+                                            <thead>
+                                            <tr>
+                                                <th width="20%">Title</th>
+                                                <th width="20%">Description</th>
+                                                <th width="20%">Link</th>
+                                                <th width="20%">Sorting</th>
+                                                <th width="20%">Action</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+
+                                            @foreach($video as $video)
+                                                @if($video!=null)
+                                                <tr>
+                                                    <td>{{ $video->title_en }}</td>
+                                                     <td>{{ substr_replace(strip_tags($video->description_en,'description'), "...", 20) }}</td>
+                                                    <td>{{ substr_replace(strip_tags($video->video_link,'link'), "...", 20) }}</td>
+                                                    <td>{{ $video->video_sorting}}</td>
+                                                    <td><form action="{{ route('video-form.destroy', $video->id)}}" method="post">
+                                                            @can('view-videodetail')
+                                                            <a href="{{ url('videodetails/'.$video->id)}}" class="dt-button buttons-excel buttons-html5 waves-effect waves-light btn gradient-45deg-purple-deep-orange gradient-shadow">Details</a>
+                                                            @endcan
+                                                                @can('edit-video')
+                                                                <a href="{{ route('video-form.edit',$video->id)}}" class="dt-button buttons-excel buttons-html5 waves-effect waves-light btn gradient-45deg-purple-deep-orange gradient-shadow">Edit</a>
+                                                                @endcan
+                                                                    {{ csrf_field() }}
+                                                                @can('delete-video')
+                                                            @method('DELETE')
+                                                            <button onclick="return window.confirm('Are you sure you want to delete this record?');" class="dt-button buttons-excel buttons-html5 waves-effect waves-light btn gradient-45deg-purple-deep-orange gradient-shadow" type="submit">Delete</button>
+                                                             @endcan
+                                                        </form>
+                                                    </td>
+
+                                                </tr>
+                                                @endif
+                                            @endforeach
+
+                                            </tbody>
+                                            </tbody>
+                                        </table>
+
+                                         <div>
+                                         <table  id="ajax_table" class="striped display hide">
+                                           <thead>
+                                            <tr>
+                                                <th width="20%">Title</th>
+                                                <th width="20%">Description </th>
+                                                <th width="20%">Link</th>
+                                                <th width="20%">Sorting</th>
+                                                <th width="50%">Action</th>
+                                            </tr>
+                                            </thead>
                                          </table>
+
                                          </div>
+
                                          </div>
-                                         </form>
+                                         
 
                                         </div>
                                     </div>
@@ -81,6 +167,27 @@
 
   <!----Start of logic to Get Category,Clubs,Player,Genre name------>
 
+
+
+
+<script type="text/javascript">
+    $('#exportcsv').on('submit',function(event){
+        event.preventDefault();
+        var name = $('#exportcsv').serializeArray();
+        $.ajax({
+          url: "{{url('exportcsv')}}",
+          type:"GET",
+          data:{
+            "name":name,
+          },
+          success:function(response){
+            console.log(response);
+          },
+         });
+        });
+</script>
+
+
   <script type=text/javascript>
   $('#country').change(function(){
   var countryID = $(this).val();
@@ -91,6 +198,7 @@
       success:function(res){
       if(res){
         $("#category_video").removeClass('hide');
+        $("#category_video1").removeClass('hide');
         $("#genre").hide();
         $("#player").hide();
         $("#club").hide();
@@ -100,7 +208,6 @@
         $.each(res,function(key,value){
           $("#category_video").append('<option value="'+key+'">'+value+'</option>');
         });
-
       }else{
         $("#category").empty();
       }
@@ -133,7 +240,6 @@
         $.each(res,function(key,value){
           $("#genre_video").append('<option value="'+key+'">'+value+'</option>');
         });
-
       }else{
         $("#genre").empty();
       }
@@ -156,7 +262,6 @@
         $.each(res,function(key,value){
           $("#club_video").append('<option value="'+key+'">'+value+'</option>');
         });
-
       }else{
         $("#state").empty();
       }
@@ -179,7 +284,6 @@
         $.each(res,function(key,value){
           $("#player_video").append('<option value="'+key+'">'+value+'</option>');
         });
-
       }else{
         $("#player").empty();
       }
@@ -202,7 +306,6 @@
         $.each(res,function(key,value){
           $("#league_video").append('<option value="'+key+'">'+value+'</option>');
         });
-
       }else{
         $("#state").empty();
       }
@@ -220,176 +323,108 @@
   
   <!----Start of logic to Get Videos, byCategory,byClubs,byPlayer,byGenre name------>
 
-  <script type=text/javascript>
-  $('#category_video').on('change',function(){
-  var categoryvideoID = $(this).val();
-  if(categoryvideoID){
-    $.ajax({
-      type:"GET",
-      url:"{{url('category_video')}}?category_id="+categoryvideoID,
-      success:function(res){
-      if(res){
-        console.log(res)
-        $(".striped").empty();
-        $.each(res,function(key,value){
-          $(".striped").append('<thead><tr><th>Video title</th><th>Video Sorting</th><th>Video Sorting Edit</th></tr></thread>','<tbody><tr><td value="'+ key +'">'+ value.title_en +'</td><td value="'+ key +'">'+ value.video_sorting +'</td><td> <a class="mb-5 mr-2 btn waves-effect waves-light gradient-45deg-purple-deep-orange" href="seasonpart-form/'+ value.id +'/edit">edit</a></td></tr></tbody>');
-        });
-
-      }else{
-        $("#city").empty();
-      }
-      }
-    });
-  }else{
-    $("#city").empty();
-  }
-
-  });
-</script>
-
-<script type=text/javascript>
-  $('#genre_video').on('change',function(){
-  var genrevideoID = $(this).val();
-  if(genrevideoID){
-    $.ajax({
-      type:"GET",
-      url:"{{url('genre_video')}}?genre_id="+genrevideoID,
-      success:function(res){
-      if(res){
-        console.log(res)
-        $(".striped").empty();
-        $.each(res,function(key,value){
-          $(".striped").append('<thead><tr><th>Video title</th><th>Video Sorting</th><th>Video Sorting Edit</th></tr></thread>','<tbody><tr><td value="'+ key +'">'+ value.title_en +'</td><td value="'+ key +'">'+ value.video_sorting +'</td><td> <a class="mb-5 mr-2 btn waves-effect waves-light gradient-45deg-purple-deep-orange" href="seasonpart-form/'+ value.id +'/edit">edit</a></td></tr></tbody>');
-        });
-
-      }else{
-        $("#city").empty();
-      }
-      }
-    });
-  }else{
-    $("#city").empty();
-  }
-
-  });
-</script>
-
-<script type=text/javascript>
-  $('#club_video').on('change',function(){
-  var clubvideoID = $(this).val();
-  if(clubvideoID){
-    $.ajax({
-      type:"GET",
-      url:"{{url('club_video')}}?club_id="+clubvideoID,
-      success:function(res){
-      if(res){
-        console.log(res)
-        $(".striped").empty();
-        $.each(res,function(key,value){
-          $(".striped").append('<thead><tr><th>Video title</th><th>Video Sorting</th><th>Video Sorting Edit</th></tr></thread>','<tbody><tr><td value="'+ key +'">'+ value.title_en +'</td><td value="'+ key +'">'+ value.video_sorting +'</td><td> <a class="mb-5 mr-2 btn waves-effect waves-light gradient-45deg-purple-deep-orange" href="seasonpart-form/'+ value.id +'/edit">edit</a></td></tr></tbody>');
-        });
-
-      }else{
-        $("#city").empty();
-      }
-      }
-    });
-  }else{
-    $("#city").empty();
-  }
-
-  });
-</script>
-
-<script type=text/javascript>
-  $('#player_video').on('change',function(){
-  var playervideoID = $(this).val();
-  if(playervideoID){
-    $.ajax({
-      type:"GET",
-      url:"{{url('player_video')}}?player_id="+playervideoID,
-      success:function(res){
-      if(res){
-        console.log(res)
-        $(".striped").empty();
-        $.each(res,function(key,value){
-          $(".striped").append('<thead><tr><th>Video title</th><th>Video Sorting</th><th>Video Sorting Edit</th></tr></thread>','<tbody><tr><td value="'+ key +'">'+ value.title_en +'</td><td value="'+ key +'">'+ value.video_sorting +'</td><td> <a class="mb-5 mr-2 btn waves-effect waves-light gradient-45deg-purple-deep-orange" href="seasonpart-form/'+ value.id +'/edit">edit</a></td></tr></tbody>');
-        });
-
-      }else{
-        $("#city").empty();
-      }
-      }
-    });
-  }else{
-    $("#city").empty();
-  }
-
-  });
-</script>
-
-<script type=text/javascript>
-  $('#season_video').on('change',function(){
-  var seasonvideoID = $(this).val();
-  if(seasonvideoID){
-    $.ajax({
-      type:"GET",
-      url:"{{url('season_video')}}?season1_id="+seasonvideoID,
-      success:function(res){
-      if(res){
-        console.log(res)
-        $(".striped").empty();
-        $.each(res,function(key,value){
-          $(".striped").append('<thead><tr><th>Video title</th><th>Video Sorting</th><th>Video Sorting Edit</th></tr></thread>','<tbody><tr><td value="'+ key +'">'+ value.title_en +'</td><td value="'+ key +'">'+ value.video_sorting +'</td><td> <a class="mb-5 mr-2 btn waves-effect waves-light gradient-45deg-purple-deep-orange" href="seasonpart-form/'+ value.id +'/edit">edit</a></td></tr></tbody>');
-        });
-
-      }else{
-        $("#city").empty();
-      }
-      }
-    });
-  }else{
-    $("#city").empty();
-  }
-
-  });
-</script>
-
 
   <!----End of login to Get Videos, byCategory,byClubs,byPlayer,byGenre name------>
-
-  <script type=text/javascript>
-  $('#league_video').on('change',function(){
-  var leaguevideoID = $(this).val();
-  if(leaguevideoID){
-    $.ajax({
-      type:"GET",
-      url:"{{url('byseason')}}?league_id="+leaguevideoID,
+<script type="text/javascript">
+    jQuery(function() {
+    jQuery("#category_video").change(function() {
+    var category_ids = $(this).val();
+    console.log(category_ids);
+    if(category_ids!=0){
+    jQuery.ajax({
+      url: "{{url('category_video')}}?category_ids=",
+      type: "GET",
+      data: {
+        "category_ids": category_ids
+      },
       success:function(res){
       if(res){
-        $("#season_video").removeClass('hide');
-        $("#category_video").hide();
-        $("#genre_video").hide();
-        $("#club_video").hide();
-        $("#season_video").show();
-        $("#season_video").empty();
-        $("#season_video").append('<option>Select season</option>');
+        $("#orignal_table").addClass('hide');
+        $("#ajax_table").removeClass('hide');
+        console.log(res)      
         $.each(res,function(key,value){
-          $("#season_video").append('<option value="'+key+'">'+value+'</option>');
-        });
+          $(".striped").append('<tbody><tr><td width="20%">'+ value.title_en +'</td><td width="20%">'+ value.description_en +'</td><td width="20%">'+ value.video_link.substr(0, 20) +'</td><td value="'+ key +'">'+ value.video_sorting +'</td><td> <a class="mb-5 mr-2 btn waves-effect waves-light gradient-45deg-purple-deep-orange" href="seasonpart-form/'+ value.id +'/edit">edit</a></td></tr></tbody>');
 
+          $("#name1").append('<input type="hidden" name="name" id="name" value="'+ value.category_id +'"/>');
+          $("#name2").append('<input type="hidden" name="name[]" id="name" value="'+ value.category_id +'"/>');
+        });
       }else{
-        $("#city").empty();
+        $(".striped").empty();
       }
       }
     });
-  }else{
-    $("#city").empty();
+    }else{
+    $(".striped").empty();
   }
-
   });
+});
 </script>
 
-  
+<script type="text/javascript">
+    jQuery(function() {
+    jQuery("#genre_video").change(function() {
+    var genre_ids = $(this).val();
+    console.log(genre_ids);
+    if(genre_ids!=0){
+    jQuery.ajax({
+      url: "{{url('genre_video')}}?genre_id=",
+      type: "GET",
+      data: {
+        "genre_ids": genre_ids
+      },
+      success:function(res){
+      if(res){
+        console.log(res)
+        $(".striped").empty();
+        $.each(res,function(key,value){
+          $(".striped").append('<thead><tr><th>Video title</th><th>Video Sorting</th><th>Video Sorting Edit</th></tr></thread>','<tbody><tr><td value="'+ key +'">'+ value.title_en +'</td><td value="'+ key +'">'+ value.video_sorting +'</td><td> <a class="mb-5 mr-2 btn waves-effect waves-light gradient-45deg-purple-deep-orange" href="seasonpart-form/'+ value.id +'/edit">edit</a></td></tr></tbody>');
+        });
+      }else{
+        $(".striped").empty();
+      }
+      }
+    });
+    }else{
+    $(".striped").empty();
+  }
+  });
+});
+</script>
+
+
 @endsection
+
+
+
+@section('scripts')
+    <script src={{ asset('app-assets/vendors/data-tables/js/jquery.dataTables.min.js') }}></script>
+    <script src={{ asset('app-assets/vendors/data-tables/extensions/responsive/js/dataTables.responsive.min.js') }}></script>
+    <script src={{ asset('app-assets/vendors/data-tables/js/dataTables.select.min.js') }}></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/buttons/1.6.1/js/dataTables.buttons.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/buttons/1.6.1/js/buttons.flash.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/buttons/1.6.1/js/buttons.html5.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/buttons/1.6.1/js/buttons.print.min.js"></script>
+    @section('scripts')
+    <script src={{ asset('app-assets/vendors/data-tables/js/jquery.dataTables.min.js') }}></script>
+    <script src={{ asset('app-assets/vendors/data-tables/extensions/responsive/js/dataTables.responsive.min.js') }}></script>
+    <script src={{ asset('app-assets/vendors/data-tables/js/dataTables.select.min.js') }}></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/buttons/1.6.1/js/dataTables.buttons.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/buttons/1.6.1/js/buttons.flash.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/buttons/1.6.1/js/buttons.html5.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/buttons/1.6.1/js/buttons.print.min.js"></script>
+    <style type="text/css">
+        div.dt-buttons {
+            margin-bottom:20px;
+        }
+
+    </style>
+    
+@endsection
+
 

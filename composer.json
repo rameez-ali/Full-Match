@@ -17,6 +17,7 @@
         "laravel/socialite": "^5.1",
         "laravel/tinker": "^2.0",
         "laravel/ui": "^2.0",
+        "maatwebsite/excel": "^3.1",
         "silber/bouncer": "v1.0.0-rc.10",
         "vimeo/vimeo-api": "^3.0"
     },

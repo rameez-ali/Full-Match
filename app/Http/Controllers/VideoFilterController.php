@@ -13,6 +13,9 @@ use App\Model\Player;
 use App\Model\Videogenre;
 use App\Model\Videoclub;
 use App\Model\Videoplayer;
+use App\Exports\VideosExport;
+
+use Maatwebsite\Excel\Facades\Excel;
 
 class VideoFilterController extends Controller
 {
@@ -22,8 +25,9 @@ class VideoFilterController extends Controller
 
         public function index()
         {
-          $leagues=league::pluck('name_en','id');
-            return view('admin.videofilter.index',compact('leagues'));
+           $leagues=league::pluck('name_en','id');
+           $video=Video::all();
+            return view('admin.videofilter.index',compact('leagues','video'));
         }
 
         public function get_category(Request $request)
@@ -66,27 +70,31 @@ class VideoFilterController extends Controller
 
         public function get_category_video(Request $request)
         { 
-              $videos=Video::select('title_en','id','video_sorting')->where("category_id",$request->category_id)->get();
+            
+              $videos=Video::select('title_en','id','video_sorting','description_en','video_link','video_promo')->whereIn("category_id",$request->category_ids)->get();
               return response()->json($videos);
         }
+        
 
         public function get_genre_video(Request $request)
         { 
-              $videogenres=Videogenre::select('video_id')->where("genre_id",$request->genre_id)->get();
-              $videos=Video::select('title_en','id','video_sorting')->wherein("id",$videogenres)->get();
+          
+          $videogenres=Videogenre::select('video_id')->wherein("genre_id",$request->genre_ids)->get();
+          $videos=Video::select('title_en','id','video_sorting','description_en','video_link','video_promo')
+                  ->wherein("id",$videogenres)->get();
               return response()->json($videos);
         }
 
         public function get_club_video(Request $request)
         { 
-              $videoclubs=Videoclub::select('video_id')->where("club_id",$request->club_id)->get();
+              $videoclubs=Videoclub::select('video_id')->wherein("club_id",$request->club_ids)->get();
               $videos=Video::select('title_en','id','video_sorting')->wherein("id",$videoclubs)->get();
               return response()->json($videos);
         }
 
         public function get_player_video(Request $request)
         { 
-              $videoplayers=Videoplayer::select('video_id')->where("player_id",$request->player_id)->get();
+              $videoplayers=Videoplayer::select('video_id')->wherein("player_id",$request->player_ids)->get();
               $videos=Video::select('title_en','id','video_sorting')->wherein("id",$videoplayers)->get();
               return response()->json($videos);
         }
@@ -99,23 +107,83 @@ class VideoFilterController extends Controller
             return response()->json($videos);
         }
 
-
-        public function edit($id)
+        public function exportexcel(Request $request)
         {
-          $video=Video::find($id);
-          return view('admin.seasonpart.edit',compact('video'));
+              $video=Video::wherein('category_id',$request->name)->get();
+              return Excel::download(new VideosExport($request->name), 'videos.xlsx');
+
+
         }
 
-        public function update(Request $request, $id)
+        public function exportcsv(Request $request)
         {
-
-         $form_data = array(
-            'video_sorting'         =>  $request->video_sorting
-        );
-
-        Video::whereId($id)->update($form_data);
-
-        return redirect('seasonpart-form')->with('success', 'Data is successfully Added');
+              $video=Video::wherein('category_id',$request->name)->get();
+              dd($video);
+              return Excel::download(new VideosExport($request->name), 'videos.xlsx');
 
         }
+
+        public function search(Request $searchword){
+
+
+        $video = Video::where('title_en', $searchword->q)
+            ->orwhere('title_ar', $searchword->q)
+            ->orWhere('title_en', 'like', '%' . $searchword->q. '%')
+            ->orWhere('title_ar', 'like', '%' . $searchword->q. '%')
+            ->get();
+
+
+        $clubs  = Club::select('id')->where('name_en', $searchword->q)
+            ->orwhere('name_ar', $searchword->q)
+            ->orWhere('name_en', 'like', '%' . $searchword->q. '%')
+            ->orWhere('name_ar', 'like', '%' . $searchword->q. '%')
+            ->get();
+
+
+        $players = Player::select('id')->where('name_en', $searchword->q)
+            ->orwhere('name_ar', $searchword->q)
+            ->orWhere('name_en', 'like', '%' . $searchword->q. '%')
+            ->orWhere('name_ar', 'like', '%' . $searchword->q. '%')
+            ->get();
+
+        $categories = Category::select('id')->where('name_en', $searchword->q)
+            ->orwhere('name_ar', $searchword->q)
+            ->orWhere('name_en', 'like', '%' . $searchword->q. '%')
+            ->orWhere('name_ar', 'like', '%' . $searchword->q. '%')
+            ->get();
+
+
+
+
+        if(count($video) > 0){
+            return view('admin.videofilter.index', compact('video'));
+        }
+        else if(count($players) > 0){
+            $video_id = Videoplayer::select('Video_id')->wherein('Player_id',$players)->get();
+            $video=Video::wherein('id',$video_id)->get();
+            $leagues=league::pluck('name_en','id');
+            return view('admin.videofilter.index', compact('video'));
+        }
+
+        else if (count($clubs) > 0){
+            $video_id = Videoclub::select('Video_id')->wherein('Club_id',$clubs)->get();
+            $video=Video::wherein('id',$video_id)->get();
+            $leagues=league::pluck('name_en','id');
+            return view('admin.videofilter.index', compact('video'));
+        }
+
+        else if (count($categories) > 0){
+            $video_id = Videocategory::select('video_id')->wherein('category_id',$categories)->get();
+            $video=Video::wherein('id',$video_id)->get();
+                       $leagues=league::pluck('name_en','id');
+
+            return view('admin.videofilter.index', compact('video'));
+        }
+
+        else {
+
+            return view('admin.videofilter.index', compact('video'));
+        }
+    }
+
 }

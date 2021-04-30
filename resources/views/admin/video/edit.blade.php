@@ -52,7 +52,7 @@
 
                                            <div class="input-field col s12">
                                            <p for="video_link">Edit Video Link on Vimeo * </p>
-                                           <input type="url" name="video_link" value="{{ old('video_link',$video->video_link) }}" required data-error=".errorTxt2" />
+                                           <input type="url" id="video_link"  name="video_link" value="{{ old('video_link',$video->video_link) }}" required data-error=".errorTxt2" />
                                            <small class="errorTxt2"></small>
                                            @error('video_link')
                                            <span class="invalid-feedback" role="alert">
@@ -63,7 +63,7 @@
 
                                            <div class="input-field col s12">
                                               <p for="video_id">Edit Video Id * </p>
-                                              <input type="number" id="video_id"  name="video_id" value="{{ old('video_id',$video->video_id) }}" class="form-control input-lg" required/>
+                                              <input type="number" id="video_id"  name="video_id" value="{{ old('video_id',$video->video_id) }}" class="form-control input-lg" required readonly/>
                                            </div>
 
 
@@ -347,6 +347,9 @@
         });
         $("#description_en").keyup(function(){
             $("#description_ar").val(this.value);
+        });
+        $("#video_link").keyup(function(){
+            $("#video_id").val(this.value.substr(34, 9));
         });
     </script>
 

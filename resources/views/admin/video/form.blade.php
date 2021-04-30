@@ -65,7 +65,7 @@
 
                                                 <div class="input-field col s12">
                                                     <p for="video_id">Video Id * </p>
-                                                        <input type="number" id="video_id" name="video_id"  class="form-control input-lg" required />
+                                                        <input type="number" id="video_id" name="video_id"  class="form-control input-lg" required  />
                                                 </div>
 
 
@@ -294,12 +294,15 @@
         });
     </script>
 
-    <script>
+    <script type="text/javascript">
         $("#title_en").keyup(function(){
             $("#title_ar").val(this.value);
         });
         $("#description_en").keyup(function(){
             $("#description_ar").val(this.value);
+        });
+        $("#video_link").keyup(function(){
+            $("#video_id").val(this.value.substr(34, 9));
         });
     </script>
 
@@ -329,6 +332,31 @@ jQuery(document).ready(function ()
         });
 });
  </script>
+
+ <script type="text/javascript">
+
+    jQuery(document).ready(function ()
+    {
+            $('#video_link').change(function(){
+                var videoID = $(this).val().substr(34, 9);
+                  jQuery.ajax({
+                     url : 'checkvideoid/' +videoID,
+                     type : "GET",
+                     dataType : "json",
+                     success:function(data) {
+                         console.log(data);
+                         if (data!="Yes") {
+                        $("#video_link").empty();                             
+                        alert("Video Id Already Exist");
+                             $("#video_link").$(this).removeAttr('value');
+
+                         } else {
+                         }
+                     }
+                  });
+            });
+    });
+     </script>
 
 
 
