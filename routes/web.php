@@ -42,7 +42,7 @@ Route::group(['middleware' => ['auth']], function () {
 
     Route::post('video-form-search','VideoSearchController@search')->name('video-form-search.search');
     Route::get('video-form-search','ProjectVideoViewController@index')->name('video-form-search.search');
-    
+
     Route::resource('seasonpart-form','SeasonPartSorting');
     Route::get('get-state-list','SeasonPartSorting@get_seasons');
     Route::get('get-city-list','SeasonPartSorting@get_leagues_seasons_videos');
@@ -52,7 +52,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('notification-send/{id}','NotificationController@sendNotification')->name('notification.send');
     Route::resource('page', 'PageController')->only(['index','edit','update']);
     Route::get('videoclub/{id}','ProjectVideoViewController@destroy1');
-    Route::get('video-form/videodetails/{id}','ProjectVideoViewController@video_details');
+    Route::get('videodetails/{id}','ProjectVideoViewController@video_details');
 
     Route::resource('slider-form','ProjectSliderViewController');
     Route::get('slider-form/allvideos/{id}','ProjectSliderViewController@getallvideos');

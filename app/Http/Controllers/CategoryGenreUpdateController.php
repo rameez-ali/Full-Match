@@ -62,7 +62,7 @@ class CategoryGenreUpdateController extends Controller
 
 
     public function getvideos($id)
-    {       
+    {
         $category_videos = Video::select('title_en', 'id')->where("category_id", $id)->pluck("title_en", "id");
         return json_encode($category_videos);
     }
@@ -71,8 +71,8 @@ class CategoryGenreUpdateController extends Controller
     {
         $genre_id1=Category_genre::where("category_id",$id)->get();
         $genreid = $genre_id1->pluck('genre_id')->toArray();
-        $genre=Video_genre::select('name_en')->whereIn("id",$genreid)->pluck('name_en');
-        return json_encode($genre);      
+        $genre=Video_genre::select('id','name_en')->whereIn("id",$genreid)->pluck("name_en","id");
+        return json_encode($genre);
     }
 
     /**
@@ -88,7 +88,7 @@ class CategoryGenreUpdateController extends Controller
             $video = array(
                 'category_id'    =>   $request->category_id
             );
-        
+
             DB::table('videos')->where('id', $request->video_id)->update($video);
             DB::table('videoclubs')->where('video_id', $request->video_id)->update($video);
             DB::table('videoplayers')->where('video_id', $request->video_id)->update($video);
@@ -106,13 +106,14 @@ class CategoryGenreUpdateController extends Controller
                     );
                       Videogenre::create($form_data9);
                 }
-    
+
             }
 
         }
     }
+        return redirect('video-form')->with('videoeditsuccess','Video Updated Successfully');
 
-}
+    }
 
     /**
      * Display the specified resource.

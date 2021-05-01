@@ -86,7 +86,7 @@ table {
                                          </select>
                                          </div>
 
-                                
+
                                           <div class="col s9">
 
                                           <div class="col s2">
@@ -109,17 +109,53 @@ table {
 
                                           </div>
 
+                                          <br>
+                                          <br>
 
+                                          @if ($videoaddsuccess = Session::get('videoaddsuccess'))
+                                            <div class="card-alert card gradient-45deg-green-teal">
+                                                <div class="card-content white-text">
+                                                    <p>
+                                                        <i class="material-icons"></i>{{ $videoaddsuccess }}</p>
+                                                </div>
+                                                <button type="button" class="close white-text" data-dismiss="alert" aria-label="Close">
+                                                    <span aria-hidden="true">×</span>
+                                                </button>
+                                            </div>
+                                        @endif
+                                        @if ($videoeditsuccess = Session::get('videoeditsuccess'))
+                                            <div class="card-alert card gradient-45deg-green-teal">
+                                                <div class="card-content white-text">
+                                                    <p>
+                                                        <i class="material-icons"></i>{{ $videoeditsuccess }}</p>
+                                                </div>
+                                                <button type="button" class="close white-text" data-dismiss="alert" aria-label="Close">
+                                                    <span aria-hidden="true">×</span>
+                                                </button>
+                                            </div>
+                                        @endif
+                                        @if ($videodelsuccess = Session::get('videodelsuccess'))
+                                            <div class="card-alert card gradient-45deg-green-teal">
+                                                <div class="card-content white-text">
+                                                    <p>
+                                                        <i class="material-icons"></i>{{ $videodelsuccess }}</p>
+                                                </div>
+                                                <button type="button" class="close white-text" data-dismiss="alert" aria-label="Close">
+                                                    <span aria-hidden="true">×</span>
+                                                </button>
+                                            </div>
+                                        @endif
 
+                                      </div>
 
                                          <table id="orignal_table" class="display">
                                             <thead>
                                             <tr>
-                                                <th width="20%">Title</th>
+                                                <th width="14%">Title</th>
                                                 <th width="20%">Description</th>
-                                                <th width="20%">Link</th>
-                                                <th width="20%">Sorting</th>
-                                                <th width="20%">Action</th>
+                                                <th width="15%">Link</th>
+                                                <th width="10%">Sorting</th>
+                                                <th  width="80%">Action</th>
                                             </tr>
                                             </thead>
                                             <tbody>
@@ -155,12 +191,12 @@ table {
                                         </table>
 
                                          <div>
-                                         <table  id="ajax_table">
+                                         <table  id="ajax_table" class="hide">
                                            <thead>
                                             <tr>
-                                                <th width="20%">Title</th>
+                                                <th width="14%">Title</th>
                                                 <th width="20%">Description </th>
-                                                <th width="20%">Link</th>
+                                                <th width="15%">Link</th>
                                                 <th width="20%">Sorting</th>
                                                 <th width="80%">Action</th>
                                             </tr>
@@ -168,7 +204,7 @@ table {
                                             </table>
 
                                             <div class="striped"></div>
-                                           
+
 
                                          </div>
 
@@ -410,10 +446,11 @@ table {
       success:function(res){
       if(res){
         $("#orignal_table").addClass('hide');
+        $("#ajax_table").removeClass('hide');
         $('.striped').empty();
         console.log(res)
         $.each(res,function(key,value){
-          $(".striped").append('<tbody><tr><td width="20%">'+ value.title_en +'</td><td width="20%">'+ value.description_en +'</td><td width="20%">'+ value.video_link.substr(0, 20) +'</td><td value="'+ key +'">'+ value.video_sorting +'</td><td> <a class="mb-5 mr-2 btn waves-effect waves-light gradient-45deg-purple-deep-orange" href="video-form/videodetails/'+ value.id +'">details</a></td><td> <a class="mb-5 mr-2 btn waves-effect waves-light gradient-45deg-purple-deep-orange" href="video-form/'+ value.id +'/edit">delete</a></td><td> <a class="mb-5 mr-2 btn waves-effect waves-light gradient-45deg-purple-deep-orange" href="video-form/'+ value.id +'/edit">delete</a></td></tr></tbody>');
+          $(".striped").append('<tbody><tr><td width="20%">'+ value.title_en +'</td><td width="20%">'+ value.description_en +'</td><td width="27%">'+ value.video_link.substr(0, 20) +'</td><td width="20%">'+ value.video_sorting +'</td><td> <a class="mb-5 mr-2 btn waves-effect waves-light gradient-45deg-purple-deep-orange" href="videodetails/'+ value.id +'">details</a></td><br><td> <a class="mb-5 mr-2 btn waves-effect waves-light gradient-45deg-purple-deep-orange" href="video-form/'+ value.id +'/edit">edit</a></td><td> <a class="mb-5 mr-2 btn waves-effect waves-light gradient-45deg-purple-deep-orange" href="video-form/'+ value.id +'/delete">delete</a></td></tr></tbody>');
 
           $("#name1").append('<input type="hidden" name="category_id[]" id="name" value="'+ value.category_id +'"/>');
           $("#name2").append('<input type="hidden" name="category_id[]" id="name" value="'+ value.category_id +'"/>');
@@ -445,10 +482,11 @@ table {
       success:function(res){
       if(res){
         $("#orignal_table").addClass('hide');
+        $("#ajax_table").removeClass('hide');
         $('.striped').empty();
         console.log(res)
         $.each(res,function(key,value){
-           $(".striped").append('<tbody><tr><td width="20%">'+ value.title_en +'</td><td width="20%">'+ value.description_en +'</td><td width="20%">'+ value.video_link.substr(0, 20) +'</td><td value="'+ key +'">'+ value.video_sorting +'</td><td> <a class="mb-5 mr-2 btn waves-effect waves-light gradient-45deg-purple-deep-orange" href="video-form/videodetails/'+ value.id +'">details</a></td><td> <a class="mb-5 mr-2 btn waves-effect waves-light gradient-45deg-purple-deep-orange" href="video-form/'+ value.id +'/edit">delete</a></td><td> <a class="mb-5 mr-2 btn waves-effect waves-light gradient-45deg-purple-deep-orange" href="video-form/'+ value.id +'/edit">delete</a></td></tr></tbody>');
+           $(".striped").append('<tbody><tr><td width="20%">'+ value.title_en +'</td><td width="20%">'+ value.description_en +'</td><td width="20%">'+ value.video_link.substr(0, 20) +'</td><td value="'+ key +'">'+ value.video_sorting +'</td><td> <a class="mb-5 mr-2 btn waves-effect waves-light gradient-45deg-purple-deep-orange" href="videodetails/'+ value.id +'">details</a></td><td> <a class="mb-5 mr-2 btn waves-effect waves-light gradient-45deg-purple-deep-orange" href="video-form/'+ value.id +'/edit">edit</a></td><td> <a class="mb-5 mr-2 btn waves-effect waves-light gradient-45deg-purple-deep-orange" href="video-form/'+ value.id +'/edit">delete</a></td></tr></tbody>');
 
           $("#name1").append('<input type="hidden" name="genre_id[]" id="name" value="'+ value.genre_id +'"/>');
           $("#name2").append('<input type="hidden" name="genre_id[]" id="name" value="'+ value.genre_id +'"/>');
@@ -482,10 +520,11 @@ table {
       success:function(res){
       if(res){
         $("#orignal_table").addClass('hide');
+        $("#ajax_table").removeClass('hide');
         $('.striped').empty();
         console.log(res)
         $.each(res,function(key,value){
-           $(".striped").append('<tbody><tr><td width="20%">'+ value.title_en +'</td><td width="20%">'+ value.description_en +'</td><td width="20%">'+ value.video_link.substr(0, 20) +'</td><td value="'+ key +'">'+ value.video_sorting +'</td><td> <a class="mb-5 mr-2 btn waves-effect waves-light gradient-45deg-purple-deep-orange" href="video-form/videodetails/'+ value.id +'">details</a></td><td> <a class="mb-5 mr-2 btn waves-effect waves-light gradient-45deg-purple-deep-orange" href="video-form/'+ value.id +'/edit">delete</a></td><td> <a class="mb-5 mr-2 btn waves-effect waves-light gradient-45deg-purple-deep-orange" href="video-form/'+ value.id +'/edit">delete</a></td></tr></tbody>');
+           $(".striped").append('<tbody><tr><td width="20%">'+ value.title_en +'</td><td width="20%">'+ value.description_en +'</td><td width="20%">'+ value.video_link.substr(0, 20) +'</td><td value="'+ key +'">'+ value.video_sorting +'</td><td> <a class="mb-5 mr-2 btn waves-effect waves-light gradient-45deg-purple-deep-orange" href="videodetails/'+ value.id +'">details</a></td><td> <a class="mb-5 mr-2 btn waves-effect waves-light gradient-45deg-purple-deep-orange" href="video-form/'+ value.id +'/edit">edit</a></td><td> <a class="mb-5 mr-2 btn waves-effect waves-light gradient-45deg-purple-deep-orange" href="video-form/'+ value.id +'/edit">delete</a></td></tr></tbody>');
 
           $("#name1").append('<input type="hidden" name="club_id[]" id="name" value="'+ value.Club_id +'"/>');
           $("#name2").append('<input type="hidden" name="club_id[]" id="name" value="'+ value.Club_id +'"/>');
@@ -517,10 +556,11 @@ table {
       success:function(res){
       if(res){
         $("#orignal_table").addClass('hide');
+        $("#ajax_table").removeClass('hide');
         $('.striped').empty();
         console.log(res)
         $.each(res,function(key,value){
-           $(".striped").append('<tbody><tr><td width="20%">'+ value.title_en +'</td><td width="20%">'+ value.description_en +'</td><td width="20%">'+ value.video_link.substr(0, 20) +'</td><td value="'+ key +'">'+ value.video_sorting +'</td><td> <a class="mb-5 mr-2 btn waves-effect waves-light gradient-45deg-purple-deep-orange" href="video-form/videodetails/'+ value.id +'">details</a></td><td> <a class="mb-5 mr-2 btn waves-effect waves-light gradient-45deg-purple-deep-orange" href="video-form/'+ value.id +'/edit">delete</a></td><td> <a class="mb-5 mr-2 btn waves-effect waves-light gradient-45deg-purple-deep-orange" href="video-form/'+ value.id +'/edit">delete</a></td></tr></tbody>');
+           $(".striped").append('<tbody><tr><td width="20%">'+ value.title_en +'</td><td width="20%">'+ value.description_en +'</td><td width="20%">'+ value.video_link.substr(0, 20) +'</td><td value="'+ key +'">'+ value.video_sorting +'</td><td> <a class="mb-5 mr-2 btn waves-effect waves-light gradient-45deg-purple-deep-orange" href="videodetails/'+ value.id +'">details</a></td><td> <a class="mb-5 mr-2 btn waves-effect waves-light gradient-45deg-purple-deep-orange" href="video-form/'+ value.id +'/edit">edit</a></td><td> <a class="mb-5 mr-2 btn waves-effect waves-light gradient-45deg-purple-deep-orange" href="video-form/'+ value.id +'/edit">delete</a></td></tr></tbody>');
 
           $("#name1").append('<input type="hidden" name="player_id[]" id="name" value="'+ value.Player_id +'"/>');
           $("#name2").append('<input type="hidden" name="player_id[]" id="name" value="'+ value.Player_id +'"/>');
@@ -552,10 +592,11 @@ table {
       success:function(res){
       if(res){
         $("#orignal_table").addClass('hide');
+        $("#ajax_table").removeClass('hide');
         $('.striped').empty();
         console.log(res)
         $.each(res,function(key,value){
-           $(".striped").append('<tbody><tr><td width="20%">'+ value.title_en +'</td><td width="20%">'+ value.description_en +'</td><td width="20%">'+ value.video_link.substr(0, 20) +'</td><td value="'+ key +'">'+ value.video_sorting +'</td><td> <a class="mb-5 mr-2 btn waves-effect waves-light gradient-45deg-purple-deep-orange" href="video-form/videodetails/'+ value.id +'">details</a></td><td> <a class="mb-5 mr-2 btn waves-effect waves-light gradient-45deg-purple-deep-orange" href="video-form/'+ value.id +'/edit">delete</a></td><td> <a class="mb-5 mr-2 btn waves-effect waves-light gradient-45deg-purple-deep-orange" href="video-form/'+ value.id +'/edit">delete</a></td></tr></tbody>');
+           $(".striped").append('<tbody><tr><td width="20%">'+ value.title_en +'</td><td width="20%">'+ value.description_en +'</td><td width="20%">'+ value.video_link.substr(0, 20) +'</td><td value="'+ key +'">'+ value.video_sorting +'</td><td> <a class="mb-5 mr-2 btn waves-effect waves-light gradient-45deg-purple-deep-orange" href="videodetails/'+ value.id +'">details</a></td><td> <a class="mb-5 mr-2 btn waves-effect waves-light gradient-45deg-purple-deep-orange" href="video-form/'+ value.id +'/edit">edit</a></td><td> <a class="mb-5 mr-2 btn waves-effect waves-light gradient-45deg-purple-deep-orange" href="video-form/'+ value.id +'/edit">delete</a></td></tr></tbody>');
 
           $("#name1").append('<input type="hidden" name="season_id[]" id="name" value="'+ value.season_id +'"/>');
           $("#name2").append('<input type="hidden" name="season_id[]" id="name" value="'+ value.season_id +'"/>');

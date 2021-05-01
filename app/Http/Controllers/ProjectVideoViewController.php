@@ -113,7 +113,7 @@ class ProjectVideoViewController extends Controller
         return json_encode($season);
     }
 
-   
+
 
     /**
      * Store a newly created resource in storage.
@@ -703,8 +703,8 @@ class ProjectVideoViewController extends Controller
         if($league_id->league_id!=null){
             //when video is assoicated with league
             $video = Video::
-            join('categories', 'categories.id', '=', 'videos.category_id')
-                ->join('leagues', 'leagues.id', '=', 'videos.league_id')
+            leftjoin('categories', 'categories.id', '=', 'videos.category_id')
+                ->leftjoin('leagues', 'leagues.id', '=', 'videos.league_id')
                 ->select('videos.*','videos.id','videos.title_en','videos.description_en','videos.video_link',
                     'videos.video_sorting','videos.video_banner_img','videos.video_img',
                     'videos.title_en','categories.name_en','leagues.name_en as leaguename')
@@ -714,7 +714,7 @@ class ProjectVideoViewController extends Controller
         else{
             //when video is not assoicated with league
             $video = Video::
-            join('categories', 'categories.id', '=', 'videos.category_id')
+            leftjoin('categories', 'categories.id', '=', 'videos.category_id')
                 ->select('videos.*','videos.id','videos.title_en','videos.description_en','videos.video_link',
                     'videos.video_sorting','videos.video_banner_img','videos.video_img',
                     'videos.title_en','categories.name_en')
