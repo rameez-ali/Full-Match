@@ -8,7 +8,7 @@ use Maatwebsite\Excel\Concerns\Exportable;
 use Maatwebsite\Excel\Concerns\WithHeadings;
 
 
-class VideosExport implements FromCollection, WithHeadings
+class SeasonVideosExport implements FromCollection, WithHeadings
 {
     /**
     * @return \Illuminate\Support\Collection
@@ -27,17 +27,16 @@ class VideosExport implements FromCollection, WithHeadings
 
     public function collection()
     {
-        return Video::wherein('category_id', $this->name)->get();
+        return Video::select('title_en','description_en','video_link','video_sorting')->wherein('season_id', $this->name)->get();
     }
 
      public function headings(): array
     {
         return [
-            '#',
-            'Name',
-            'Email',
-            'Created at',
-            'Updated at'
+            'Title',
+            'description',
+            'Link',
+            'Sorting',
         ];
     }
 }

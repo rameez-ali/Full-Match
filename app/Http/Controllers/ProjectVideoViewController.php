@@ -18,8 +18,15 @@ use App\Model\Videoclub;
 use App\Model\Videoplayer;
 use App\Model\Season;
 use App\Model\Popular_search;
+use App\Exports\CategoryVideosExport;
+use App\Exports\ClubVideosExport;
+use App\Exports\PlayerVideosExport;
+use App\Exports\GenreVideosExport;
+use App\Exports\SeasonVideosExport;
 use DB;
 use Vimeo\Vimeo;
+
+use Maatwebsite\Excel\Facades\Excel;
 
 
 class ProjectVideoViewController extends Controller
@@ -69,7 +76,7 @@ class ProjectVideoViewController extends Controller
         $club=Club::all();
         $player=Player::all();
         $leagues=League::all();
-        $videogenres=Video_genre::all();;
+        $videogenres=Video_genre::all();
         return view('admin.video.form',compact('category','club','player','leagues','videogenres'));
     }
 
@@ -106,19 +113,7 @@ class ProjectVideoViewController extends Controller
         return json_encode($season);
     }
 
-    public function checkvideoid($id)
-    {
-
-       $checkvideoid= Video::where("video_id",$id)->get()->first();
-        if(!isset($checkvideoid)) {
-            $checkvideoid = "Yes";
-            return json_encode($checkvideoid);
-        }
-        else{
-            $checkvideoid="No";
-            return json_encode($checkvideoid);
-        }
-    }
+   
 
     /**
      * Store a newly created resource in storage.
@@ -164,6 +159,9 @@ class ProjectVideoViewController extends Controller
                 'description_en'     =>   $request->description_en,
                 'description_ar'     =>   $request->description_ar,
                 'video_link'     =>   $request->video_link,
+                'video_link1'     =>   $request->video_link1,
+                'video_link2'     =>   $request->video_link2,
+                'video_link3'     =>   $request->video_link3,
                 'video_id'     => $request->video_id,
                 'duration'     =>   $video_duration,
                 'notify_user'       => $request->notify_user,
@@ -262,6 +260,9 @@ class ProjectVideoViewController extends Controller
                 'description_en'     =>   $request->description_en,
                 'description_ar'     =>   $request->description_ar,
                 'video_link'     =>   $request->video_link,
+                'video_link1'     =>   $request->video_link1,
+                'video_link2'     =>   $request->video_link2,
+                'video_link3'     =>   $request->video_link3,
                 'video_id'     => $request->video_id,
                 'duration'     =>   $video_duration,
                 'notify_user'       => $request->notify_user,
@@ -572,6 +573,9 @@ class ProjectVideoViewController extends Controller
             'description_en'     =>   $request->description_en,
             'description_ar'     =>   $request->description_ar,
             'video_link'     =>   $request->video_link,
+            'video_link1'     =>   $request->video_link1,
+            'video_link2'     =>   $request->video_link2,
+            'video_link3'     =>   $request->video_link3,
             'video_id'     => $request->video_id,
             'duration'     =>   $video_duration,
             'video_sorting'       => $request->video_sorting,
@@ -744,6 +748,19 @@ class ProjectVideoViewController extends Controller
 
     }
 
+    public function checkvideoid($id)
+    {
+
+       $checkvideoid= Video::where("video_id",$id)->get()->first();
+        if(!isset($checkvideoid)) {
+            $checkvideoid = "Yes";
+            return json_encode($checkvideoid);
+        }
+        else{
+            $checkvideoid="No";
+            return json_encode($checkvideoid);
+        }
+    }
 
       public function get_category(Request $request)
         {
@@ -785,64 +802,89 @@ class ProjectVideoViewController extends Controller
 
         public function get_category_video(Request $request)
         {
+              $videos=Video::select('title_en','id','video_sorting','description_en','video_link','video_promo','category_id')->whereIn("category_id",$request->category_ids)->distinct('id')->get();
 
-              $videos=Video::select('title_en','id','video_sorting','description_en','video_link','video_promo')->whereIn("category_id",$request->category_ids)->get();
               return response()->json($videos);
         }
 
 
         public function get_genre_video(Request $request)
         {
-
-          $videogenres=Videogenre::select('video_id')->wherein("genre_id",$request->genre_ids)->get();
-          $videos=Video::select('title_en','id','video_sorting','description_en','video_link','video_promo')
-                  ->wherein("id",$videogenres)->get();
-              return response()->json($videos);
+            $videos = Video::
+            leftjoin('videogenres', 'videos.id', '=', 'videogenres.video_id')
+                ->select('videos.*','videos.id','videos.title_en','videos.description_en','videogenres.genre_id')
+                ->wherein('videogenres.genre_id',$request->genre_ids)
+                ->get();
+            return response()->json($videos);
         }
 
         public function get_club_video(Request $request)
         {
-              $video = Video::
-              leftjoin('video_clubs', 'videos.id', '=', 'videos.$request->category_ids')
-            ->select('videos.*','videos.id','videos.title_en','videos.description_en','videos.video_link',
-                'videos.video_sorting','videos.video_banner_img','videos.video_img',
-                'videos.title_en','categories.name_en','leagues.name_en as leaguename')
+              $videos = Video::
+              leftjoin('videoclubs', 'videos.id', '=', 'videoclubs.Video_id')
+               ->select('videos.*','videos.id','videos.title_en','videos.description_en','videoclubs.Club_id')
+               ->wherein('videoclubs.Club_id',$request->club_ids)
             ->get();
-
-              $videos=Video::get();
               return response()->json($videos);
         }
 
         public function get_player_video(Request $request)
         {
-              $videoplayers=Videoplayer::select('video_id')->wherein("player_id",$request->player_ids)->get();
-              $videos=Video::select('title_en','id','video_sorting','description_en','video_link','video_promo')->wherein("id",$videoplayers)->get();
-              return response()->json($videos);
+            $videos = Video::
+            leftjoin('videoplayers', 'videos.id', '=', 'videoplayers.Video_id')
+                ->select('videos.*','videos.id','videos.title_en','videos.description_en','videoplayers.Player_id')
+                ->wherein('videoplayers.Player_id',$request->player_ids)
+                ->get();
+            return response()->json($videos);
         }
 
 
         public function get_season_video(Request $request)
         {
 
-            $videos=Video::select('title_en','id','video_sorting','description_en','video_link','video_promo')->where("season_id",$request->season1_id)->get();
+            $videos=Video::select('title_en','id','video_sorting','description_en','video_link','video_promo','season_id')->where("season_id",$request->season_ids)->get();
             return response()->json($videos);
         }
 
         public function exportexcel(Request $request)
         {
-              $video=Video::wherein('category_id',$request->name)->get();
-              return Excel::download(new VideosExport($request->name), 'videos.xlsx');
-
-
+              if($request->category_id!=null){
+              return Excel::download(new CategoryVideosExport($request->category_id), 'videos.xlsx');
+              }
+              else if($request->genre_id!=null){
+              return Excel::download(new GenreVideosExport($request->genre_id), 'videos.xlsx');
+              }
+              else if($request->club_id!=null){
+              return Excel::download(new ClubVideosExport($request->club_id), 'videos.xlsx');
+              }
+              else if($request->player_id!=null){
+              return Excel::download(new PlayerVideosExport($request->player_id), 'videos.xlsx');
+              }
+              else if($request->season_id!=null){
+              return Excel::download(new SeasonVideosExport($request->season_id), 'videos.xlsx');
+              }
         }
 
         public function exportcsv(Request $request)
         {
-              $video=Video::wherein('category_id',$request->name)->get();
-              dd($video);
-              return Excel::download(new VideosExport($request->name), 'videos.xlsx');
-
+            if ($request->category_id != null) {
+                return Excel::download(new CategoryVideosExport($request->category_id), 'videos.csv');
+            } else if ($request->genre_id != null) {
+                return Excel::download(new GenreVideosExport($request->genre_id), 'videos.csv');
+            } else if ($request->club_id != null) {
+                return Excel::download(new ClubVideosExport($request->club_id), 'videos.csv');
+            } else if ($request->player_id != null) {
+                return Excel::download(new PlayerVideosExport($request->player_id), 'videos.csv');
+            } else if ($request->season_id != null) {
+                return Excel::download(new SeasonVideosExport($request->season_id), 'videos.csv');
+            }
         }
+
+      public function exportexcelseason(Request $request)
+      {
+        $video=Video::wherein('category_id',$request->name)->get();
+        return Excel::download(new VideosExport($request->name), 'videos.xlsx');
+      }
 
         public function search(Request $searchword){
 

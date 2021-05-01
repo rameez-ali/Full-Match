@@ -53,19 +53,24 @@
                                                 </div>
 
                                                 <div class="input-field col s12">
-                                                    <p for="video_link">Video Link on Vimeo * </p>
-                                                    <input id="video_link" name="video_link" type="url"  required data-error=".errorTxt2">
-                                                    <small class="errorTxt2"></small>
-                                                    @error('video_link')
-                                                    <span class="invalid-feedback" role="alert">
-                                              <strong>{{ $message }}</strong>
-                                              </span>
-                                                    @enderror
+                                                    <p for="video_link">High Def Link (1920x1080p) * </p>
+
+                                                    <input id="video_link" name="video_link" type="url"  required>
+
+                                                    <p for="video_link1">High Def Link (1280x720p) * </p>
+                                                    <input id="video_link1" name="video_link1" type="url"  required>
+
+                                                    <p for="video_link2">Standard Def Link (950x540p) * </p>
+                                                    <input id="video_link2" name="video_link2" type="url"  required>
+                                                     
+                                                    <p for="video_link3">Standard Link (640x360p) * </p>
+                                                    <input id="video_link3" name="video_link3" type="url"  required>
                                                 </div>
+
 
                                                 <div class="input-field col s12">
                                                     <p for="video_id">Video Id * </p>
-                                                        <input type="number" id="video_id" name="video_id"  class="form-control input-lg" required  />
+                                                        <input type="number" id="video_id" name="video_id"  class="form-control input-lg" required readonly />
                                                 </div>
 
 
@@ -294,7 +299,7 @@
         });
     </script>
 
-    <script type="text/javascript">
+    <script>
         $("#title_en").keyup(function(){
             $("#title_ar").val(this.value);
         });
@@ -333,7 +338,7 @@ jQuery(document).ready(function ()
 });
  </script>
 
- <script type="text/javascript">
+  <script type="text/javascript">
 
     jQuery(document).ready(function ()
     {
@@ -356,8 +361,7 @@ jQuery(document).ready(function ()
                   });
             });
     });
-     </script>
-
+</script>
 
 
 @endsection

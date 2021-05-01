@@ -51,14 +51,19 @@
                                             </div>
 
                                            <div class="input-field col s12">
-                                           <p for="video_link">Edit Video Link on Vimeo * </p>
-                                           <input type="url" id="video_link"  name="video_link" value="{{ old('video_link',$video->video_link) }}" required data-error=".errorTxt2" />
-                                           <small class="errorTxt2"></small>
-                                           @error('video_link')
-                                           <span class="invalid-feedback" role="alert">
-                                           <strong>{{ $message }}</strong>
-                                           </span>
-                                           @enderror
+                                           
+                                              <p for="video_link">Edit High Def Link (1920x1080p) * </p>
+                                              <input id="video_link" name="video_link" type="url" value="{{ old('video_link',$video->video_link) }}" required>
+
+                                               <p for="video_link1">Edit High Def Link (1280x720p) * </p>
+                                                <input id="video_link1" name="video_link1" type="url" value="{{ old('video_link1',$video->video_link1) }}" required>
+
+                                                <p for="video_link2">Edit Standard Def Link (950x540p) * </p>
+                                                <input id="video_link2" name="video_link2" type="url" value="{{ old('video_link2',$video->video_link2) }}"  required>
+                                                     
+                                                <p for="video_link3">Edit Standard Link (640x360p) * </p>
+                                                <input id="video_link3" name="video_link3" type="url" value="{{ old('video_link3',$video->video_link3) }}"  required>
+
                                            </div>
 
                                            <div class="input-field col s12">
@@ -86,7 +91,7 @@
                                            
                                             <div class="input-field col s12">
                                                   <p>Edit Category</p>
-                                                  <select class="form-control" name="category_id" id="category_id" required>
+                                                  <select class="form-control" name="category_id" id="category_id" >
                                                       @if($select_category_id)
                                                           <option value="">--- Select Category ---</option>
                                                       @foreach($category as $category )
@@ -348,7 +353,7 @@
         $("#description_en").keyup(function(){
             $("#description_ar").val(this.value);
         });
-        $("#video_link").keyup(function(){
+         $("#video_link").keyup(function(){
             $("#video_id").val(this.value.substr(34, 9));
         });
     </script>
@@ -377,5 +382,30 @@ jQuery(document).ready(function ()
         });
 });
  </script>
+
+   <script type="text/javascript">
+
+    jQuery(document).ready(function ()
+    {
+            $('#video_link').change(function(){
+                var videoID = $(this).val().substr(34, 9);
+                  jQuery.ajax({
+                     url : 'checkvideoid/' +videoID,
+                     type : "GET",
+                     dataType : "json",
+                     success:function(data) {
+                         console.log(data);
+                         if (data!="Yes") {
+                        $("#video_link").empty();                             
+                        alert("Video Id Already Exist");
+                             $("#video_link").$(this).removeAttr('value');
+
+                         } else {
+                         }
+                     }
+                  });
+            });
+    });
+</script>
 
 @endsection

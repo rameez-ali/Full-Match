@@ -55,14 +55,14 @@ table {
                                          <option value="4">By League</option>
                                          </select>
                                          </div>
-                                      
+
                                          <div id="category_video_hide" class="hide">
                                          <select name="state0" class="select2 browser-default " id="category_video" multiple="multiple">
                                          </select>
                                          </div>
 
                                          <div id="genre_video_hide" class="hide">
-                                         <select name="state1" class="select2 browser-default " id="genre_video hide" multiple="multiple">
+                                         <select name="state1" class="select2 browser-default " id="genre_video" multiple="multiple">
                                          </select>
                                          </div>
 
@@ -85,16 +85,32 @@ table {
                                          <select name="state4" class="select2 browser-default" id="season_video" multiple="multiple">
                                          </select>
                                          </div>
-                                          
+
+                                
+                                          <div class="col s9">
+
+                                          <div class="col s2">
                                           <form id="" action="{{ route('exportexcel') }}" method="POST" >
                                           @CSRF
-                                         <div name="name" id="name2">
-                                         </div>
-                                          <button class="btn btn-success" id="submit">EXCEL</button>
-                                          </form> 
-                                        
-                                         <div >
-                                         
+                                          <div id="name1">
+                                          </div>
+                                          <button class="waves-effect waves-light btn gradient-45deg-purple-deep-orange gradient-shadow right" id="submit">EXCEL</button>
+                                          </form>
+                                          </div>
+
+                                          <div class="col s2">
+                                          <form id="" action="{{ route('exportcsv') }}" method="POST" >
+                                          @CSRF
+                                          <div id="name2">
+                                          </div>
+                                          <button class="waves-effect waves-light btn gradient-45deg-purple-deep-orange gradient-shadow right" id="submit">CSV</button>
+                                          </form>
+                                          </div>
+
+                                          </div>
+
+
+
 
                                          <table id="orignal_table" class="display">
                                             <thead>
@@ -139,7 +155,7 @@ table {
                                         </table>
 
                                          <div>
-                                         <table  id="ajax_table" class="striped display hide">
+                                         <table  id="ajax_table">
                                            <thead>
                                             <tr>
                                                 <th width="20%">Title</th>
@@ -149,12 +165,15 @@ table {
                                                 <th width="80%">Action</th>
                                             </tr>
                                             </thead>
-                                         </table>
+                                            </table>
+
+                                            <div class="striped"></div>
+                                           
 
                                          </div>
 
                                          </div>
-                                         
+
 
                                         </div>
                                     </div>
@@ -176,6 +195,24 @@ table {
     $('#exportcsv').on('submit',function(event){
         event.preventDefault();
         var name = $('#exportcsv').serializeArray();
+        $.ajax({
+          url: "{{url('exportexcel')}}",
+          type:"GET",
+          data:{
+            "name":name,
+          },
+          success:function(response){
+            console.log(response);
+          },
+         });
+        });
+</script>
+
+<script type="text/javascript">
+  jQuery("#state").select2().next().hide();
+    $('#exportexcel').on('submit',function(event){
+        event.preventDefault();
+        var name = $('#exportexcel').serializeArray();
         $.ajax({
           url: "{{url('exportcsv')}}",
           type:"GET",
@@ -199,7 +236,13 @@ table {
       url:"{{url('bycategory')}}?country_id="+countryID,
       success:function(res){
       if(res){
+        $("#genre_video_hide").addClass('hide');
+        $("#club_video_hide").addClass('hide');
+        $("#player_video_hide").addClass('hide');
+        $("#league_video_hide").addClass('hide');
+        $("#season_video_hide").addClass('hide');
         $("#category_video_hide").removeClass('hide');
+        $("#category_video").empty();
         $("#category_video").append('<option>Select Category</option>');
         $.each(res,function(key,value){
           $("#category_video").append('<option value="'+key+'">'+value+'</option>');
@@ -218,7 +261,7 @@ table {
 
 <script type=text/javascript>
   $('#country').change(function(){
-  
+
   var countryID = $(this).val();
   if(countryID=="1"){
     $.ajax({
@@ -226,7 +269,13 @@ table {
       url:"{{url('bygenre')}}?country_id="+countryID,
       success:function(res){
       if(res){
+        $("#category_video_hide").addClass('hide');
+        $("#club_video_hide").addClass('hide');
+        $("#player_video_hide").addClass('hide');
+        $("#league_video_hide").addClass('hide');
+        $("#season_video_hide").addClass('hide');
         $("#genre_video_hide").removeClass('hide');
+        $("#genre_video").empty();
         $("#genre_video").append('<option>Select Genre</option>');
         $.each(res,function(key,value){
           $("#genre_video").append('<option value="'+key+'">'+value+'</option>');
@@ -243,7 +292,13 @@ table {
       url:"{{url('byclub')}}?country_id="+countryID,
       success:function(res){
       if(res){
+        $("#genre_video_hide").addClass('hide');
+        $("#category_video_hide").addClass('hide');
+        $("#player_video_hide").addClass('hide');
+        $("#league_video_hide").addClass('hide');
+        $("#season_video_hide").addClass('hide');
         $("#club_video_hide").removeClass('hide');
+        $("#club_video").empty();
         $("#club_video").append('<option>Select Club</option>');
         $.each(res,function(key,value){
           $("#club_video").append('<option value="'+key+'">'+value+'</option>');
@@ -260,7 +315,13 @@ table {
       url:"{{url('byplayer')}}?country_id="+countryID,
       success:function(res){
       if(res){
+        $("#genre_video_hide").addClass('hide');
+        $("#club_video_hide").addClass('hide');
+        $("#category_video_hide").addClass('hide');
+        $("#league_video_hide").addClass('hide');
+        $("#season_video_hide").addClass('hide');
         $("#player_video_hide").removeClass('hide');
+        $("#player_video").empty();
         $("#player_video").append('<option>Select Player</option>');
         $.each(res,function(key,value){
           $("#player_video").append('<option value="'+key+'">'+value+'</option>');
@@ -277,7 +338,13 @@ table {
       url:"{{url('byleague')}}?league_id="+countryID,
       success:function(res){
       if(res){
+        $("#category_video_hide").addClass('hide');
+        $("#genre_video_hide").addClass('hide');
+        $("#club_video_hide").addClass('hide');
+        $("#player_video_hide").addClass('hide');
+        $("#season_video_hide").addClass('hide');
         $("#league_video_hide").removeClass('hide');
+        $("#league_video").empty();
         $("#league_video").append('<option>Select League</option>');
         $.each(res,function(key,value){
           $("#league_video").append('<option value="'+key+'">'+value+'</option>');
@@ -303,9 +370,15 @@ table {
       url:"{{url('byseason')}}?league_id="+seasonID,
       success:function(res){
       if(res){
+        $("#category_video_hide").addClass('hide');
+        $("#genre_video_hide").addClass('hide');
+        $("#club_video_hide").addClass('hide');
+        $("#player_video_hide").addClass('hide');
         $("#season_video_hide").removeClass('hide');
+        $("#season_video").empty();
         $("#season_video").append('<option>Select Season</option>');
         $.each(res,function(key,value){
+
           $("#season_video").append('<option value="'+key+'">'+value+'</option>');
         });
       }else{
@@ -317,7 +390,7 @@ table {
 </script>
   <!----End of logic to Get Category,Clubs,Player,Genre name------>
 
-  
+
   <!----Start of logic to Get Videos, byCategory,byClubs,byPlayer,byGenre name------>
 
 
@@ -337,13 +410,13 @@ table {
       success:function(res){
       if(res){
         $("#orignal_table").addClass('hide');
-        $("#ajax_table").removeClass('hide');
-        console.log(res)      
+        $('.striped').empty();
+        console.log(res)
         $.each(res,function(key,value){
           $(".striped").append('<tbody><tr><td width="20%">'+ value.title_en +'</td><td width="20%">'+ value.description_en +'</td><td width="20%">'+ value.video_link.substr(0, 20) +'</td><td value="'+ key +'">'+ value.video_sorting +'</td><td> <a class="mb-5 mr-2 btn waves-effect waves-light gradient-45deg-purple-deep-orange" href="video-form/videodetails/'+ value.id +'">details</a></td><td> <a class="mb-5 mr-2 btn waves-effect waves-light gradient-45deg-purple-deep-orange" href="video-form/'+ value.id +'/edit">delete</a></td><td> <a class="mb-5 mr-2 btn waves-effect waves-light gradient-45deg-purple-deep-orange" href="video-form/'+ value.id +'/edit">delete</a></td></tr></tbody>');
 
-          $("#name1").append('<input type="hidden" name="name" id="name" value="'+ value.category_id +'"/>');
-          $("#name2").append('<input type="hidden" name="name[]" id="name" value="'+ value.category_id +'"/>');
+          $("#name1").append('<input type="hidden" name="category_id[]" id="name" value="'+ value.category_id +'"/>');
+          $("#name2").append('<input type="hidden" name="category_id[]" id="name" value="'+ value.category_id +'"/>');
         });
       }else{
         $(".striped").empty();
@@ -372,13 +445,14 @@ table {
       success:function(res){
       if(res){
         $("#orignal_table").addClass('hide');
-        $("#ajax_table").removeClass('hide');
+        $('.striped').empty();
         console.log(res)
         $.each(res,function(key,value){
            $(".striped").append('<tbody><tr><td width="20%">'+ value.title_en +'</td><td width="20%">'+ value.description_en +'</td><td width="20%">'+ value.video_link.substr(0, 20) +'</td><td value="'+ key +'">'+ value.video_sorting +'</td><td> <a class="mb-5 mr-2 btn waves-effect waves-light gradient-45deg-purple-deep-orange" href="video-form/videodetails/'+ value.id +'">details</a></td><td> <a class="mb-5 mr-2 btn waves-effect waves-light gradient-45deg-purple-deep-orange" href="video-form/'+ value.id +'/edit">delete</a></td><td> <a class="mb-5 mr-2 btn waves-effect waves-light gradient-45deg-purple-deep-orange" href="video-form/'+ value.id +'/edit">delete</a></td></tr></tbody>');
 
-          $("#name1").append('<input type="hidden" name="name" id="name" value="'+ value.category_id +'"/>');
-          $("#name2").append('<input type="hidden" name="name[]" id="name" value="'+ value.category_id +'"/>');
+          $("#name1").append('<input type="hidden" name="genre_id[]" id="name" value="'+ value.genre_id +'"/>');
+          $("#name2").append('<input type="hidden" name="genre_id[]" id="name" value="'+ value.genre_id +'"/>');
+
         });
       }else{
         $(".striped").empty();
@@ -408,13 +482,13 @@ table {
       success:function(res){
       if(res){
         $("#orignal_table").addClass('hide');
-        $("#ajax_table").removeClass('hide');
+        $('.striped').empty();
         console.log(res)
         $.each(res,function(key,value){
            $(".striped").append('<tbody><tr><td width="20%">'+ value.title_en +'</td><td width="20%">'+ value.description_en +'</td><td width="20%">'+ value.video_link.substr(0, 20) +'</td><td value="'+ key +'">'+ value.video_sorting +'</td><td> <a class="mb-5 mr-2 btn waves-effect waves-light gradient-45deg-purple-deep-orange" href="video-form/videodetails/'+ value.id +'">details</a></td><td> <a class="mb-5 mr-2 btn waves-effect waves-light gradient-45deg-purple-deep-orange" href="video-form/'+ value.id +'/edit">delete</a></td><td> <a class="mb-5 mr-2 btn waves-effect waves-light gradient-45deg-purple-deep-orange" href="video-form/'+ value.id +'/edit">delete</a></td></tr></tbody>');
 
-          $("#name1").append('<input type="hidden" name="name" id="name" value="'+ value.id +'"/>');
-          $("#name2").append('<input type="hidden" name="name[]" id="name" value="'+ value.id +'"/>');
+          $("#name1").append('<input type="hidden" name="club_id[]" id="name" value="'+ value.Club_id +'"/>');
+          $("#name2").append('<input type="hidden" name="club_id[]" id="name" value="'+ value.Club_id +'"/>');
         });
       }else{
         $(".striped").empty();
@@ -443,13 +517,13 @@ table {
       success:function(res){
       if(res){
         $("#orignal_table").addClass('hide');
-        $("#ajax_table").removeClass('hide');
+        $('.striped').empty();
         console.log(res)
         $.each(res,function(key,value){
            $(".striped").append('<tbody><tr><td width="20%">'+ value.title_en +'</td><td width="20%">'+ value.description_en +'</td><td width="20%">'+ value.video_link.substr(0, 20) +'</td><td value="'+ key +'">'+ value.video_sorting +'</td><td> <a class="mb-5 mr-2 btn waves-effect waves-light gradient-45deg-purple-deep-orange" href="video-form/videodetails/'+ value.id +'">details</a></td><td> <a class="mb-5 mr-2 btn waves-effect waves-light gradient-45deg-purple-deep-orange" href="video-form/'+ value.id +'/edit">delete</a></td><td> <a class="mb-5 mr-2 btn waves-effect waves-light gradient-45deg-purple-deep-orange" href="video-form/'+ value.id +'/edit">delete</a></td></tr></tbody>');
 
-          $("#name1").append('<input type="hidden" name="name" id="name" value="'+ value.category_id +'"/>');
-          $("#name2").append('<input type="hidden" name="name[]" id="name" value="'+ value.category_id +'"/>');
+          $("#name1").append('<input type="hidden" name="player_id[]" id="name" value="'+ value.Player_id +'"/>');
+          $("#name2").append('<input type="hidden" name="player_id[]" id="name" value="'+ value.Player_id +'"/>');
         });
       }else{
         $(".striped").empty();
@@ -478,13 +552,13 @@ table {
       success:function(res){
       if(res){
         $("#orignal_table").addClass('hide');
-        $("#ajax_table").removeClass('hide');
+        $('.striped').empty();
         console.log(res)
         $.each(res,function(key,value){
            $(".striped").append('<tbody><tr><td width="20%">'+ value.title_en +'</td><td width="20%">'+ value.description_en +'</td><td width="20%">'+ value.video_link.substr(0, 20) +'</td><td value="'+ key +'">'+ value.video_sorting +'</td><td> <a class="mb-5 mr-2 btn waves-effect waves-light gradient-45deg-purple-deep-orange" href="video-form/videodetails/'+ value.id +'">details</a></td><td> <a class="mb-5 mr-2 btn waves-effect waves-light gradient-45deg-purple-deep-orange" href="video-form/'+ value.id +'/edit">delete</a></td><td> <a class="mb-5 mr-2 btn waves-effect waves-light gradient-45deg-purple-deep-orange" href="video-form/'+ value.id +'/edit">delete</a></td></tr></tbody>');
 
-          $("#name1").append('<input type="hidden" name="name" id="name" value="'+ value.category_id +'"/>');
-          $("#name2").append('<input type="hidden" name="name[]" id="name" value="'+ value.category_id +'"/>');
+          $("#name1").append('<input type="hidden" name="season_id[]" id="name" value="'+ value.season_id +'"/>');
+          $("#name2").append('<input type="hidden" name="season_id[]" id="name" value="'+ value.season_id +'"/>');
         });
       }else{
         $(".striped").empty();
@@ -531,7 +605,7 @@ table {
         }
 
     </style>
-    
+
 @endsection
 
 
