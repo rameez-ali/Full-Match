@@ -123,7 +123,7 @@ class NotificationController extends Controller
      */
     public function sendNotification($id)
     {
-
+        
         $request = new SendNotificationRequest();
 
         $request->id = $id;

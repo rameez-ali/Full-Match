@@ -21,6 +21,7 @@ use App\Http\Controllers\Api\SearchController;
 use App\Http\Controllers\Api\SearchSuggestionController;
 use App\Http\Controllers\Api\CategoryController;
 use App\Http\Controllers\Api\LeagueSeasonController;
+use App\Http\Controllers\Api\LanguageUpdateController;
 use App\Http\Controllers\Api\ContinueWatchedController;
 use App\Http\Controllers\Api\WishController;
 use Laravel\Socialite\Facades\Socialite;
@@ -67,6 +68,8 @@ Route::post('/contact', [ContactController::class , 'contact']);
 
 Route::get('/contact', [ContactController::class , 'contact']);
 Route::post('/query', [ContactController::class , 'query']);
+
+Route::post('/languageupdate', [LanguageUpdateController::class , 'languageupdate']);
 
 Route::post('/leagueseason/{league_id}/{season_id}', [LeagueSeasonController::class , 'season']);
 

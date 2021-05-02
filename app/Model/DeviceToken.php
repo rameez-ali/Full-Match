@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class DeviceToken extends Model
 {
     protected $fillable = [
-        'device','token','user_id',
+        'device','token','user_id','lang',
     ];
 
     public function checknotify()

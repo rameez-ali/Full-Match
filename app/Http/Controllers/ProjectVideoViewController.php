@@ -123,6 +123,7 @@ class ProjectVideoViewController extends Controller
      */
     public function store(Request $request)
     {
+
         //Getting Video id in seconds
         $video_id=$request->video_id;
 
@@ -141,6 +142,12 @@ class ProjectVideoViewController extends Controller
         else{
             $video_duration=$request->duration;
         }
+
+
+
+       
+                            
+
 
 
         if($request->file('video_banner_img')==null) {
@@ -231,6 +238,67 @@ class ProjectVideoViewController extends Controller
             );
 
             Leaguecategory::create($league_category);
+
+
+         //for Send new video notification to all users
+            if ($request->notify_user == 1){
+                $tokenList_en = DeviceToken::where('notify_status', 1)->where('lang', 1)->pluck('token')->toArray();
+                $tokenList_ar = DeviceToken::where('notify_status', 1)->where('lang', 2)->pluck('token')->toArray();
+
+                //         dd($tokenList);
+                $fcmUrl = 'https://fcm.googleapis.com/fcm/send';
+                // $tokenList[] = 'eCcZ-L2K49w:APA91bHyArn9JrTqLWl1vmd_3IgE-XIDEwKAFL5B5g3RVBrSfacFfvQrXuywNXZuE2WlplXBxkFxmHoZb5oSc1hZayy8XGght7j6AyC4cS7661ck9UHseayLNPcxopCX2nWdKSXKwB8D';
+                // $tokenList[] = 'f0xnoyCn90orlDK8SLGX8N:APA91bHl1l8tO_GClxgjtjsXHbO_5viCxCKJ3dmLcYbzcCcE82wxymm3IVJV9dc2OpIRkfTWBM3frUQ5Q2ZdPi6LVtSnbPSp0I7Rk4DmSaagRfmkhnQ_uwHBH3i8S8atdtk4TsTOSb5H';
+                $notification_en = [
+                    'title' => $request->title_en,
+                    'text'  => $request->description_en,
+                    'type'  => 1,
+                    'sound' => true,
+                ];
+
+                $notification_ar = [
+                    'title' => $request->title_ar,
+                    'text'  => $request->description_ar,
+                    'type'  => 1,
+                    'sound' => true,
+                ];
+
+
+                $extraNotificationData = ["message" => $notification_en,"moredata" =>'dd'];
+
+                $fcmNotification_en = [
+                    'registration_ids' => $tokenList_en, //multple token array
+                    // 'to' => $token, //single token
+                    'notification' => $notification_en,
+                    'data' => $extraNotificationData
+                ];
+
+                $fcmNotification_ar = [
+                    'registration_ids' => $tokenList_ar, //multple token array
+                    // 'to' => $token, //single token
+                    'notification' => $notification_ar,
+                    'data' => $extraNotificationData
+                ];
+
+                $headers = [
+                    'Authorization: key='.'AAAAmTF75NM:APA91bG_ohKx-gMv_t6COCCjY2BOXDbN6jHrEG9SJBlcTLVWuBuBNfIoZJznuAT2FIbOji6HVduclLhHre8oilhZQp1LwMKqQZYzL_tmNJXJ7Ph6NwhlonUnrCWZprAFkj8YUUxw_Lfx',
+                    'Content-Type: application/json'
+                ];
+
+                $ch = curl_init();
+                curl_setopt($ch, CURLOPT_URL,$fcmUrl);
+                curl_setopt($ch, CURLOPT_POST, true);
+                curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+                curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+                curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+                curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($fcmNotification_en));
+                curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($fcmNotification_ar));
+                $result = curl_exec($ch);
+                curl_close($ch);
+                // print_r($result);
+
+            }
+
 
             return redirect('video-form')->with('videoaddsuccess','Video Added Successfully');
 
@@ -332,29 +400,47 @@ class ProjectVideoViewController extends Controller
 
             Leaguecategory::create($league_category);
 
-            //for Send new video notification to all users
+
+           
+         //for Send new video notification to all users
             if ($request->notify_user == 1){
-                $tokenList = DeviceToken::where('notify_status', 1)->pluck('token')->toArray();
+                $tokenList_en = DeviceToken::where('notify_status', 1)->where('lang', 1)->pluck('token')->toArray();
+                $tokenList_ar = DeviceToken::where('notify_status', 1)->where('lang', 2)->pluck('token')->toArray();
 
                 //         dd($tokenList);
                 $fcmUrl = 'https://fcm.googleapis.com/fcm/send';
                 // $tokenList[] = 'eCcZ-L2K49w:APA91bHyArn9JrTqLWl1vmd_3IgE-XIDEwKAFL5B5g3RVBrSfacFfvQrXuywNXZuE2WlplXBxkFxmHoZb5oSc1hZayy8XGght7j6AyC4cS7661ck9UHseayLNPcxopCX2nWdKSXKwB8D';
                 // $tokenList[] = 'f0xnoyCn90orlDK8SLGX8N:APA91bHl1l8tO_GClxgjtjsXHbO_5viCxCKJ3dmLcYbzcCcE82wxymm3IVJV9dc2OpIRkfTWBM3frUQ5Q2ZdPi6LVtSnbPSp0I7Rk4DmSaagRfmkhnQ_uwHBH3i8S8atdtk4TsTOSb5H';
-                $notification = [
+                $notification_en = [
                     'title' => $request->title_en,
-                    'title_ar' => $request->title_ar,
                     'text'  => $request->description_en,
-                    'text_ar'  => $request->description_ar,
                     'type'  => 1,
                     'sound' => true,
                 ];
 
-                $extraNotificationData = ["message" => $notification,"moredata" =>'dd'];
+                $notification_ar = [
+                    'title' => $request->title_ar,
+                    'text'  => $request->description_ar,
+                    'type'  => 1,
+                    'sound' => true,
+                ];
 
-                $fcmNotification = [
-                    'registration_ids' => $tokenList, //multple token array
+                
+
+
+                $extraNotificationData = ["message" => $notification_en,"moredata" =>'dd'];
+
+                $fcmNotification_en = [
+                    'registration_ids' => $tokenList_en, //multple token array
                     // 'to' => $token, //single token
-                    'notification' => $notification,
+                    'notification' => $notification_en,
+                    'data' => $extraNotificationData
+                ];
+
+                $fcmNotification_ar = [
+                    'registration_ids' => $tokenList_ar, //multple token array
+                    // 'to' => $token, //single token
+                    'notification' => $notification_ar,
                     'data' => $extraNotificationData
                 ];
 
@@ -362,22 +448,31 @@ class ProjectVideoViewController extends Controller
                     'Authorization: key='.'AAAAmTF75NM:APA91bG_ohKx-gMv_t6COCCjY2BOXDbN6jHrEG9SJBlcTLVWuBuBNfIoZJznuAT2FIbOji6HVduclLhHre8oilhZQp1LwMKqQZYzL_tmNJXJ7Ph6NwhlonUnrCWZprAFkj8YUUxw_Lfx',
                     'Content-Type: application/json'
                 ];
+
                 $ch = curl_init();
                 curl_setopt($ch, CURLOPT_URL,$fcmUrl);
                 curl_setopt($ch, CURLOPT_POST, true);
                 curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
                 curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
                 curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-                curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($fcmNotification));
+                curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($fcmNotification_en));
+                curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($fcmNotification_ar));
                 $result = curl_exec($ch);
                 curl_close($ch);
                 // print_r($result);
 
             }
 
+            
+            
             return redirect('video-form')->with('videoaddsuccess','Video Added Successfully');
 
         }
+
+        
+
+
+
 
 
 
