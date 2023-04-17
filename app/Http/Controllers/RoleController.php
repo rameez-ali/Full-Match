@@ -130,6 +130,7 @@ class RoleController extends Controller
 
         $assigned_permissions = $response->getAbilities()->pluck('name')->toArray();
 
+
         return view('admin.role.permission',[ 'role' => $response, 'permissions' => $permissions, 'assigned_permissions' => $assigned_permissions ]);
     }
 
